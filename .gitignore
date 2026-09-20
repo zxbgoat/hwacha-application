@@ -11,3 +11,4 @@ __pycache__/
 # local torch-mlir venv and its wheel
 .tmenv/
 .wheels/
+.logs_vision_readme.out
