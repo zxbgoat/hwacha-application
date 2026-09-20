@@ -7,7 +7,8 @@ data) that builds with the RISC-V GNU toolchain and runs on Spike.
 | directory | what | cases |
 |---|---|---|
 | `torch-module/` | single `torch.nn` layers | 121 |
-| `torch-vision/` | torchvision classification models | 80 |
+| `torch-function/` | `torch.nn.functional` functions | 111 |
+| `torch-vision/` | torchvision models (classification, segmentation, detection, video, optical flow) | 107 |
 
 Each directory has its own Makefile and README (`make run` builds and runs everything on Spike).
 Toolchain paths default to `/home/tesla/hwacha-compiler` (`ROOT=` overrides).
