@@ -22,11 +22,17 @@ try() {  # $1 = hwacha-mlir flags
   T hwacha-mlir $HWMLIR ${M}_tv_memref.mlir -o ${M}_tv.ll --host ${M}_tv.host.ll --weights-bin ${M}_tv_weights.bin $1
   T hwacha-cc $HWCC ${M}_tv.ll --host ${M}_tv.host.ll --assume-noalias -o ${M}_tv.s
 }
+# retry chain when hwacha-cc runs out of registers: --collapse-all (maps every parallel dim to lanes),
+# then --unroll-small=2 (3-D convs: the fully unrolled 3x3x3 / 3x7x7 taps need too many vs registers)
 if ! try "$FLAGS" 2>hwcc.err; then
-  if grep -q "out of Hwacha" hwcc.err && [[ "$FLAGS" != *collapse-all* ]]; then
-    echo "$M: $(grep -o 'out of Hwacha[^"]*' hwcc.err | head -1) -> retry --collapse-all"
-    try "$FLAGS --collapse-all"; echo "--collapse-all" > "$HERE/$M/HWMLIRFLAGS"
-  else cat hwcc.err; exit 1; fi
+  ok=0
+  for extra in "--collapse-all" "--unroll-small=2" "--collapse-all --unroll-small=2"; do
+    grep -q "out of Hwacha" hwcc.err || break
+    [[ " $FLAGS " == *" $extra "* ]] && continue
+    echo "$M: $(grep -o 'out of Hwacha[^"]*' hwcc.err | head -1) -> retry $extra"
+    if try "$FLAGS $extra" 2>hwcc.err; then echo "$FLAGS $extra" | sed 's/^ *//' > "$HERE/$M/HWMLIRFLAGS"; ok=1; break; fi
+  done
+  [ $ok = 1 ] || { cat hwcc.err; exit 1; }
 fi
 grep -h 'maxrss' hwcc.err || true
 mv ${M}_tv.s ${M}_tv_check.bin ${M}_tv_weights.bin ${M}_tv_weights.bin.S "$HERE/$M/"

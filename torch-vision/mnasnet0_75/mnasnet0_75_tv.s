@@ -66565,8 +66565,8 @@ net:                                    # @net
 	mv	a1, s2
 	mv	a3, s3
 	mv	a4, s4
-	li	s3, 4
-	sd	s3, 24(sp)
+	li	t0, 2
+	sd	t0, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 1152
 	li	a3, 36
@@ -66595,7 +66595,8 @@ net:                                    # @net
 	sd	s10, 856(sp)                    # 8-byte Folded Spill
 	call	net_kernel_143_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	li	s2, 4
+	sd	s2, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2338:
 	auipc	a2, %pcrel_hi(__constant_72xf32_159)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2338)
@@ -66603,13 +66604,13 @@ net:                                    # @net
 	mv	a1, s0
 	call	net_kernel_144_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	s2, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 4
 	mv	a1, s0
 	mv	a2, s10
 	call	net_kernel_145_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	s2, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2339:
 	auipc	a2, %pcrel_hi(__constant_72xf32_157)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2339)
@@ -66617,7 +66618,7 @@ net:                                    # @net
 	mv	a1, s0
 	call	net_kernel_146_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	s2, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2340:
 	auipc	a2, %pcrel_hi(__constant_72xf32_156)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2340)
@@ -66625,7 +66626,7 @@ net:                                    # @net
 	mv	a1, s0
 	call	net_kernel_147_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	s2, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	s3, 4
 	li	a0, 4
 	mv	a1, s0
@@ -67862,7 +67863,7 @@ net:                                    # @net
 	call	net_kernel_225_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
 	sd	s1, %pcrel_lo(.Lpcrel_hi2284)(s8)
-	li	s5, 192
+	li	s6, 192
 	li	a0, 192
 	mv	a1, s2
 	call	net_kernel_226_ct
@@ -67916,6 +67917,7 @@ net:                                    # @net
 	call	net_kernel_232_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
 	sd	s1, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	li	s5, 4
 	li	a0, 4
 	mv	a1, s0
 	mv	a2, s3
@@ -67936,7 +67938,7 @@ net:                                    # @net
 	call	malloc
 	mv	s1, a0
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
 	mv	a1, s1
 	call	net_kernel_235_ct
@@ -67948,8 +67950,7 @@ net:                                    # @net
 	auipc	a0, %pcrel_hi(__constant_192x1x5x5xf32)
 	li	a1, 16
 	sd	a1, 0(sp)
-	li	t0, 4
-	sd	t0, 8(sp)
+	sd	s5, 8(sp)
 	addi	a2, a0, %pcrel_lo(.Lpcrel_hi2373)
 	li	a0, 16
 	li	a5, 192
@@ -67958,9 +67959,10 @@ net:                                    # @net
 	mv	a1, s3
 	mv	a3, s1
 	mv	a4, s4
-	li	t1, 5
-	sd	t1, 16(sp)
-	sd	t0, 24(sp)
+	li	t0, 5
+	sd	t0, 16(sp)
+	li	s1, 2
+	sd	s1, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 768
 	li	a3, 16
@@ -67972,22 +67974,21 @@ net:                                    # @net
 	mv	a2, s0
 	call	unpad_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
 	mv	a1, s2
 	call	net_kernel_236_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
 	mv	a1, s2
 	call	net_kernel_237_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
 	mv	a1, s2
 	call	net_kernel_238_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s9)
-	li	s1, 2
 	sd	s1, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2374:
 	auipc	a2, %pcrel_hi(__constant_192xf32_122)
@@ -71976,6 +71977,7 @@ net:                                    # @net
 	call	net_kernel_390_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s11)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s5)
+	li	s4, 2
 	li	a0, 2
 	mv	a1, s3
 	mv	a2, s1
@@ -72018,8 +72020,7 @@ net:                                    # @net
 	mv	a4, s3
 	li	t0, 5
 	sd	t0, 16(sp)
-	li	t0, 4
-	sd	t0, 24(sp)
+	sd	s4, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 432
 	li	a3, 9

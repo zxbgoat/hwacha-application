@@ -81,3 +81,38 @@ vit_l_32 64 {"image_size": 64}
 vit_h_14 56 {"image_size": 56}
 wide_resnet50_2 32 {}
 wide_resnet101_2 32 {}
+#
+# --- other families of the same docs page (export_tv.py picks the wrapper by family) ---
+# semantic segmentation: output = logits 'out' (1x21xHxW)
+deeplabv3_mobilenet_v3_large 32 {}
+deeplabv3_resnet50 32 {}
+deeplabv3_resnet101 32 {}
+fcn_resnet50 32 {}
+fcn_resnet101 32 {}
+lraspp_mobilenet_v3_large 32 {}
+# detection: the network part (backbone + FPN + prediction heads over every anchor; two-stage models
+# up to the RPN head) -- the post-processing (score threshold, NMS) has data-dependent shapes
+fasterrcnn_mobilenet_v3_large_320_fpn 64 {}
+fasterrcnn_mobilenet_v3_large_fpn 64 {}
+fasterrcnn_resnet50_fpn 64 {}
+fasterrcnn_resnet50_fpn_v2 64 {}
+fcos_resnet50_fpn 64 {}
+keypointrcnn_resnet50_fpn 64 {}
+maskrcnn_resnet50_fpn 64 {}
+maskrcnn_resnet50_fpn_v2 64 {}
+retinanet_resnet50_fpn 64 {}
+retinanet_resnet50_fpn_v2 64 {}
+ssd300_vgg16 300 {}
+ssdlite320_mobilenet_v3_large 64 {}
+# video classification: input 1x3xTxHxW (_T frames); mvit_v1_b / mvit_v2_s need a grouped 3-D conv
+# that torch-mlir cannot lower (aten.convolution marked illegal) and are left out
+mc3_18 32 {"_T": 8}
+r2plus1d_18 32 {"_T": 8}
+r3d_18 32 {"_T": 8}
+s3d 64 {"_T": 16}
+swin3d_t 32 {"_T": 16}
+swin3d_s 32 {"_T": 16}
+swin3d_b 32 {"_T": 16}
+# optical flow: input = both frames stacked (2x3xHxW), output = the last of _iters refined flows
+raft_small 128 {"_iters": 4}
+raft_large 128 {"_iters": 4}

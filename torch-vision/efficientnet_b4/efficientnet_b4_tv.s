@@ -172302,8 +172302,8 @@ net:                                    # @net
 	mv	a4, s7
 	li	t0, 5
 	sd	t0, 16(sp)
-	li	s2, 4
-	sd	s2, 24(sp)
+	li	t0, 2
+	sd	t0, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 3
 	slli	a0, a0, 10
@@ -172316,23 +172316,24 @@ net:                                    # @net
 	mv	a2, s1
 	call	unpad_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	li	s4, 192
-	sd	s4, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	li	s2, 192
+	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 192
 	mv	a1, s9
 	call	net_kernel_261_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s4, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 192
 	mv	a1, s9
 	call	net_kernel_262_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s4, %pcrel_lo(.Lpcrel_hi5441)(s6)
-	li	s7, 192
+	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	li	s11, 192
 	li	a0, 192
 	mv	a1, s9
 	call	net_kernel_263_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
+	li	s2, 4
 	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
 .Lpcrel_hi5527:
 	auipc	a2, %pcrel_hi(__constant_192xf32_439)
@@ -172348,6 +172349,7 @@ net:                                    # @net
 	call	net_kernel_265_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
 	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	li	s7, 4
 .Lpcrel_hi5528:
 	auipc	a2, %pcrel_hi(__constant_192xf32_437)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5528)
@@ -172362,7 +172364,7 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
 	addi	a1, a0, 63
 	andi	s0, a1, -64
-	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 .Lpcrel_hi5529:
 	auipc	a2, %pcrel_hi(__constant_192xf32_436)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5529)
@@ -172371,14 +172373,13 @@ net:                                    # @net
 	mv	a3, s0
 	call	net_kernel_267_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
-	li	s2, 4
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 4
 	mv	a1, s0
 	mv	a2, s1
 	call	net_kernel_268_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 4
 	mv	a1, s0
 	mv	a2, s1
@@ -172393,7 +172394,7 @@ net:                                    # @net
 	mv	a2, s0
 	call	chansum_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s11, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 192
 	mv	a1, s0
 	mv	a2, s3
@@ -172444,7 +172445,7 @@ net:                                    # @net
 	mv	a2, s5
 	call	net_kernel_274_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s11, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 192
 	mv	a1, s3
 	call	net_kernel_275_ct
@@ -172452,7 +172453,7 @@ net:                                    # @net
 	call	malloc
 	mv	s0, a0
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s11, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 192
 	mv	a1, s0
 	call	net_kernel_276_ct
@@ -172676,13 +172677,12 @@ net:                                    # @net
 	mv	a4, s3
 	call	conv1x1_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s11, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 192
 	mv	a1, s3
 	call	net_kernel_277_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	li	s2, 4
-	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 4
 	mv	a1, s3
 	mv	a2, s1
@@ -172703,14 +172703,13 @@ net:                                    # @net
 	sd	a0, -1400(a1)                   # 8-byte Folded Spill
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
 	addi	a1, a0, 63
-	andi	s4, a1, -64
-	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s6)
-	li	s3, 4
+	andi	s3, a1, -64
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 4
-	mv	a1, s4
+	mv	a1, s3
 	lui	a2, 1
 	add	a2, sp, a2
-	sd	s4, -736(a2)                    # 8-byte Folded Spill
+	sd	s3, -736(a2)                    # 8-byte Folded Spill
 	call	net_kernel_279_ct
 	mv	a0, s5
 	lui	a1, 1
@@ -172723,9 +172722,9 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
 	addi	a1, a0, 63
 	andi	s2, a1, -64
-	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 4
-	mv	a1, s4
+	mv	a1, s3
 	mv	a2, s2
 	call	net_kernel_280_ct
 	li	a0, 224
@@ -172830,8 +172829,7 @@ net:                                    # @net
 	sd	s3, -744(a2)                    # 8-byte Folded Spill
 	call	net_kernel_284_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	li	s1, 4
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 .Lpcrel_hi5533:
 	auipc	a2, %pcrel_hi(.L__constant_56xf32_435)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5533)
@@ -172840,14 +172838,13 @@ net:                                    # @net
 	mv	a3, s0
 	call	net_kernel_285_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 4
 	mv	a1, s0
 	mv	a2, s3
 	call	net_kernel_286_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s6)
-	li	s3, 4
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 .Lpcrel_hi5534:
 	auipc	a2, %pcrel_hi(.L__constant_56xf32_433)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5534)
@@ -172865,7 +172862,7 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
 	addi	a1, a0, 63
 	andi	s9, a1, -64
-	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 .Lpcrel_hi5535:
 	auipc	a2, %pcrel_hi(.L__constant_56xf32_432)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5535)
@@ -172890,7 +172887,7 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
 	addi	a1, a0, 63
 	andi	s4, a1, -64
-	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 4
 	mv	a1, s4
 	call	net_kernel_289_ct
@@ -172902,7 +172899,7 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s8)
 	addi	a1, a0, 63
 	andi	s1, a1, -64
-	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s6)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s6)
 	li	a0, 4
 	mv	a1, s4
 	lui	a2, 1
@@ -203595,22 +203592,22 @@ net:                                    # @net
 	li	a0, 960
 	lui	a1, 1
 	add	a1, sp, a1
-	ld	s9, -744(a1)                    # 8-byte Folded Reload
-	mv	a1, s9
+	ld	s7, -744(a1)                    # 8-byte Folded Reload
+	mv	a1, s7
 	call	net_kernel_893_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s5)
 	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s11)
 	li	a0, 960
-	mv	a1, s9
+	mv	a1, s7
 	call	net_kernel_894_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s5)
 	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s11)
 	li	a0, 960
-	mv	a1, s9
+	mv	a1, s7
 	call	net_kernel_895_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s5)
 	sd	s4, %pcrel_lo(.Lpcrel_hi5441)(s11)
-	mv	s7, s11
+	mv	s4, s11
 .Lpcrel_hi5733:
 	auipc	a2, %pcrel_hi(__constant_960xf32_183)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5733)
@@ -203619,15 +203616,15 @@ net:                                    # @net
 	mv	s2, s1
 	mv	a3, s1
 	call	net_kernel_896_ct
-	mv	s4, s5
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s5)
 	li	s3, 2
 	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s11)
 	li	a0, 2
 	mv	a1, s1
-	mv	a2, s9
+	mv	a2, s7
 	call	net_kernel_897_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s5)
+	mv	s7, s5
 	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s11)
 	li	s1, 2
 .Lpcrel_hi5734:
@@ -203661,6 +203658,7 @@ net:                                    # @net
 	call	net_kernel_900_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s5)
 	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s11)
+	li	s11, 2
 	li	a0, 2
 	mv	a1, s3
 	mv	a2, s2
@@ -203674,23 +203672,24 @@ net:                                    # @net
 	addi	a1, a0, 63
 	andi	s5, a1, -64
 	li	a0, 6
-	sd	a0, %pcrel_lo(.Lpcrel_hi5441)(s11)
+	sd	a0, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 6
 	mv	a1, s5
 	call	net_kernel_902_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s11)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s11, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 2
 	mv	a1, s2
 	mv	a2, s5
 	call	net_kernel_903_ct
 	mv	a0, s9
+	mv	s1, s9
 	call	malloc
 	sd	a0, 1496(sp)                    # 8-byte Folded Spill
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
 	addi	a1, a0, 63
 	andi	s3, a1, -64
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s11)
+	sd	s11, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 2
 	mv	a1, s8
 	mv	a2, s3
@@ -203701,9 +203700,9 @@ net:                                    # @net
 	mv	a0, s11
 	call	malloc
 	mv	s8, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
 	li	a0, 960
-	sd	a0, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	a0, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	mv	a1, s8
 	call	net_kernel_905_ct
@@ -203724,7 +203723,8 @@ net:                                    # @net
 	mv	a4, s9
 	li	t0, 5
 	sd	t0, 0(sp)
-	sd	s1, 8(sp)
+	li	t0, 2
+	sd	t0, 8(sp)
 	call	dwconvKxK_ct
 	li	a3, 36
 	li	a4, 6
@@ -203735,28 +203735,29 @@ net:                                    # @net
 	mv	a1, s9
 	mv	a2, s3
 	call	unpad_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
 	li	s5, 960
-	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	lui	a1, 1
 	add	a1, sp, a1
 	ld	s8, -744(a1)                    # 8-byte Folded Reload
 	mv	a1, s8
 	call	net_kernel_906_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	mv	a1, s8
 	call	net_kernel_907_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s7)
-	li	s5, 960
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s4)
+	li	s9, 960
 	li	a0, 960
 	mv	a1, s8
 	call	net_kernel_908_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	li	s5, 2
+	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s4)
 .Lpcrel_hi5737:
 	auipc	a2, %pcrel_hi(__constant_960xf32_178)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5737)
@@ -203764,33 +203765,31 @@ net:                                    # @net
 	mv	a1, s3
 	mv	a3, s2
 	call	net_kernel_909_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 2
 	mv	a1, s2
 	mv	s11, s2
 	mv	a2, s8
 	call	net_kernel_910_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	s2, 2
-	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s7)
 .Lpcrel_hi5738:
 	auipc	a2, %pcrel_hi(__constant_960xf32_176)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5738)
 	li	a0, 2
 	mv	a1, s11
 	call	net_kernel_911_ct
-	lui	a0, 1
-	add	a0, sp, a0
-	ld	a0, -736(a0)                    # 8-byte Folded Reload
+	mv	a0, s1
 	call	malloc
 	lui	a1, 1
 	add	a1, sp, a1
 	sd	a0, -816(a1)                    # 8-byte Folded Spill
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
 	addi	a1, a0, 63
 	andi	s3, a1, -64
-	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s4)
 .Lpcrel_hi5739:
 	auipc	a2, %pcrel_hi(__constant_960xf32_175)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5739)
@@ -203798,14 +203797,14 @@ net:                                    # @net
 	mv	a1, s11
 	mv	a3, s3
 	call	net_kernel_912_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 2
 	mv	a1, s3
 	mv	a2, s11
 	call	net_kernel_913_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 2
 	mv	a1, s3
 	mv	a2, s11
@@ -203823,8 +203822,8 @@ net:                                    # @net
 	mv	a1, s11
 	mv	a2, s3
 	call	chansum_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s9, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	mv	a1, s3
 	mv	a2, s0
@@ -203832,19 +203831,19 @@ net:                                    # @net
 	li	a0, 224
 	call	malloc
 	sd	a0, 1480(sp)                    # 8-byte Folded Spill
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
 	addi	a1, a0, 63
 	andi	s3, a1, -64
 	li	s1, 40
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 40
 	mv	a1, s3
 	call	net_kernel_916_ct
 	li	a0, 160
 	call	malloc
 	mv	s5, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 40
 	mv	a1, s5
 	call	net_kernel_917_ct
@@ -203896,23 +203895,23 @@ net:                                    # @net
 	mv	a3, s5
 	mv	a4, s3
 	call	conv1x1_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
 	li	s1, 40
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 40
 	mv	a1, s3
 	mv	a2, s6
 	call	net_kernel_918_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 40
 	mv	a1, s3
 	mv	a2, s6
 	call	net_kernel_919_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	li	s1, 960
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s7)
-	mv	s2, s7
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	mv	s1, s7
+	li	s5, 960
+	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	mv	a1, s0
 	call	net_kernel_920_ct
@@ -203921,8 +203920,8 @@ net:                                    # @net
 	ld	a0, -720(a0)                    # 8-byte Folded Reload
 	call	malloc
 	mv	s3, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
+	sd	s5, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	mv	a1, s3
 	call	net_kernel_921_ct
@@ -205009,15 +205008,15 @@ net:                                    # @net
 	mv	a3, s3
 	mv	a4, s0
 	call	conv1x1_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
 	li	s8, 960
-	sd	s8, %pcrel_lo(.Lpcrel_hi5441)(s7)
+	sd	s8, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	mv	a1, s0
 	call	net_kernel_922_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s7)
 	li	s7, 2
-	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 2
 	mv	a1, s0
 	mv	a2, s11
@@ -205025,9 +205024,9 @@ net:                                    # @net
 	li	a0, 640
 	call	malloc
 	mv	s3, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s1)
 	li	a0, 160
-	sd	a0, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	a0, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 160
 	mv	a1, s3
 	call	net_kernel_924_ct
@@ -205218,30 +205217,29 @@ net:                                    # @net
 	mv	a3, s3
 	mv	a4, s9
 	call	conv1x1_ct
-	mv	s11, s4
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
+	mv	s11, s1
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s1)
 	li	s1, 160
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 160
 	lui	a1, 1
 	add	a1, sp, a1
 	ld	s3, -800(a1)                    # 8-byte Folded Reload
 	mv	a1, s3
 	call	net_kernel_925_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	s1, 160
 	li	a0, 160
 	mv	a1, s3
 	call	net_kernel_926_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 160
 	mv	a1, s3
 	call	net_kernel_927_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s4)
-	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s2)
-	mv	s4, s2
+	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s4)
 .Lpcrel_hi5743:
 	auipc	a2, %pcrel_hi(__constant_160xf32_170)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5743)
@@ -205254,13 +205252,13 @@ net:                                    # @net
 	call	net_kernel_928_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
 	li	s1, 2
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 2
 	mv	a1, s7
 	mv	a2, s3
 	call	net_kernel_929_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	s1, 2
 .Lpcrel_hi5744:
 	auipc	a2, %pcrel_hi(__constant_160xf32_168)
@@ -205269,7 +205267,7 @@ net:                                    # @net
 	mv	a1, s7
 	call	net_kernel_930_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 .Lpcrel_hi5745:
 	auipc	a2, %pcrel_hi(__constant_160xf32)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5745)
@@ -205277,7 +205275,7 @@ net:                                    # @net
 	mv	a1, s7
 	call	net_kernel_931_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	s1, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 2
 	mv	a1, s7
 	mv	a2, s10
@@ -205288,7 +205286,7 @@ net:                                    # @net
 	call	malloc
 	mv	s3, a0
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s8, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	s8, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	mv	a1, s3
 	call	net_kernel_933_ct
@@ -206380,23 +206378,23 @@ net:                                    # @net
 	call	conv1x1_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
 	li	s3, 960
-	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	lui	a1, 1
 	add	a1, sp, a1
-	ld	s9, -744(a1)                    # 8-byte Folded Reload
-	mv	a1, s9
+	ld	s10, -744(a1)                   # 8-byte Folded Reload
+	mv	a1, s10
 	call	net_kernel_934_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s2)
+	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
-	mv	a1, s9
+	mv	a1, s10
 	call	net_kernel_935_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s2)
-	li	s10, 960
+	sd	s3, %pcrel_lo(.Lpcrel_hi5441)(s4)
+	li	s7, 960
 	li	a0, 960
-	mv	a1, s9
+	mv	a1, s10
 	call	net_kernel_936_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
 	li	s2, 2
@@ -206414,7 +206412,7 @@ net:                                    # @net
 	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 2
 	mv	a1, s1
-	mv	a2, s9
+	mv	a2, s10
 	call	net_kernel_938_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
 	sd	s2, %pcrel_lo(.Lpcrel_hi5441)(s4)
@@ -206475,14 +206473,14 @@ net:                                    # @net
 	call	net_kernel_944_ct
 	lui	a0, 1
 	add	a0, sp, a0
-	ld	s7, -768(a0)                    # 8-byte Folded Reload
-	mv	a0, s7
+	ld	s9, -768(a0)                    # 8-byte Folded Reload
+	mv	a0, s9
 	call	malloc
 	sd	a0, 1456(sp)                    # 8-byte Folded Spill
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
 	addi	a1, a0, 63
 	andi	s2, a1, -64
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s4)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s4)
 	li	a0, 960
 	ld	s1, 1424(sp)                    # 8-byte Folded Reload
 	mv	a1, s1
@@ -206494,7 +206492,7 @@ net:                                    # @net
 	call	malloc
 	mv	s4, a0
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 	li	a0, 960
 	mv	a1, s4
 	call	net_kernel_946_ct
@@ -206518,7 +206516,7 @@ net:                                    # @net
 	mv	a4, s5
 	li	t0, 5
 	sd	t0, 16(sp)
-	li	t0, 4
+	li	t0, 2
 	sd	t0, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 960
@@ -206531,22 +206529,22 @@ net:                                    # @net
 	mv	a2, s2
 	call	unpad_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 	li	a0, 960
-	mv	a1, s9
+	mv	a1, s10
 	call	net_kernel_947_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 	li	a0, 960
-	mv	a1, s9
+	mv	a1, s10
 	call	net_kernel_948_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 	li	a0, 960
-	mv	a1, s9
+	mv	a1, s10
 	call	net_kernel_949_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 .Lpcrel_hi5751:
 	auipc	a2, %pcrel_hi(__constant_960xf32_163)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5751)
@@ -206555,26 +206553,26 @@ net:                                    # @net
 	mv	a3, s0
 	call	net_kernel_950_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 	li	a0, 960
 	mv	a1, s0
-	mv	a2, s9
+	mv	a2, s10
 	call	net_kernel_951_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 .Lpcrel_hi5752:
 	auipc	a2, %pcrel_hi(__constant_960xf32_161)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5752)
 	li	a0, 960
 	mv	a1, s0
 	call	net_kernel_952_ct
-	mv	a0, s7
+	mv	a0, s9
 	call	malloc
 	sd	a0, 1448(sp)                    # 8-byte Folded Spill
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
 	addi	a1, a0, 63
 	andi	s3, a1, -64
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 .Lpcrel_hi5753:
 	auipc	a2, %pcrel_hi(__constant_960xf32_160)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi5753)
@@ -206583,25 +206581,25 @@ net:                                    # @net
 	mv	a3, s3
 	call	net_kernel_953_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 	li	a0, 960
 	mv	a1, s3
 	mv	a2, s0
 	call	net_kernel_954_ct
-	mv	a0, s7
+	mv	a0, s9
 	call	malloc
 	sd	a0, 1440(sp)                    # 8-byte Folded Spill
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
 	addi	a1, a0, 63
 	andi	s2, a1, -64
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 	li	a0, 960
 	mv	a1, s3
 	mv	a2, s0
 	mv	a3, s2
 	call	net_kernel_955_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi5440)(s11)
-	sd	s10, %pcrel_lo(.Lpcrel_hi5441)(s8)
+	sd	s7, %pcrel_lo(.Lpcrel_hi5441)(s8)
 	li	a0, 960
 	mv	a1, s2
 	mv	a2, s1

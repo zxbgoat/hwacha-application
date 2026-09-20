@@ -66613,8 +66613,8 @@ net:                                    # @net
 	mv	a3, s2
 	mv	a4, s4
 	sd	t0, 16(sp)
-	li	s0, 4
-	sd	s0, 24(sp)
+	li	t0, 2
+	sd	t0, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 1152
 	li	a3, 36
@@ -66641,6 +66641,7 @@ net:                                    # @net
 	mv	a1, s9
 	call	net_kernel_143_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	li	s0, 4
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s3)
 .Lpcrel_hi2338:
 	auipc	a2, %pcrel_hi(__constant_72xf32_158)
@@ -67533,12 +67534,12 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s11)
 	addi	a1, a0, 63
 	andi	s7, a1, -64
-	li	s11, 8
-	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s5)
+	li	a0, 8
+	sd	a0, %pcrel_lo(.Lpcrel_hi2284)(s5)
 	li	a0, 8
 	mv	a1, s7
 	call	net_kernel_202_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s11)
 	sd	s8, %pcrel_lo(.Lpcrel_hi2284)(s5)
 	li	a0, 4
 	mv	a1, s4
@@ -67547,7 +67548,7 @@ net:                                    # @net
 	li	a0, 480
 	call	malloc
 	mv	s8, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s11)
 	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s5)
 	li	a0, 120
 	mv	a1, s8
@@ -67567,8 +67568,8 @@ net:                                    # @net
 	mv	a4, s9
 	li	s7, 5
 	sd	s7, 0(sp)
-	li	s8, 2
-	sd	s8, 8(sp)
+	li	s11, 2
+	sd	s11, 8(sp)
 	call	dwconvKxK_ct
 	li	a0, 1920
 	li	a3, 64
@@ -67577,7 +67578,7 @@ net:                                    # @net
 	li	a6, 4
 	li	a7, 2
 	mv	a1, s9
-	mv	s9, s6
+	mv	s8, s6
 	mv	a2, s6
 	call	unpad_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
@@ -67602,7 +67603,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_120xf32_132)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2362)
 	li	a0, 4
-	mv	a1, s9
+	mv	a1, s8
 	mv	a3, s4
 	call	net_kernel_208_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
@@ -67650,8 +67651,8 @@ net:                                    # @net
 	mv	a1, s4
 	mv	a2, s6
 	mv	a3, s1
-	ld	s9, 904(sp)                     # 8-byte Folded Reload
-	mv	a4, s9
+	ld	s8, 904(sp)                     # 8-byte Folded Reload
+	mv	a4, s8
 	li	a7, 0
 	call	conv1x1_ct
 	li	a0, 16
@@ -67661,7 +67662,7 @@ net:                                    # @net
 	mv	a1, s4
 	mv	a2, s6
 	mv	a3, s1
-	mv	a4, s9
+	mv	a4, s8
 	call	conv1x1_ct
 	li	a0, 16
 	li	a5, 120
@@ -67670,7 +67671,7 @@ net:                                    # @net
 	mv	a1, s4
 	mv	a2, s6
 	mv	a3, s1
-	mv	a4, s9
+	mv	a4, s8
 	call	conv1x1_ct
 	li	a0, 16
 	li	a5, 120
@@ -67679,7 +67680,7 @@ net:                                    # @net
 	mv	a1, s4
 	mv	a2, s6
 	mv	a3, s1
-	mv	a4, s9
+	mv	a4, s8
 	call	conv1x1_ct
 	li	a0, 16
 	li	a5, 120
@@ -67688,7 +67689,7 @@ net:                                    # @net
 	mv	a1, s4
 	mv	a2, s6
 	mv	a3, s1
-	mv	a4, s9
+	mv	a4, s8
 	call	conv1x1_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
 	li	s3, 40
@@ -67716,7 +67717,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(.L__constant_40xf32_129)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2366)
 	li	a0, 4
-	mv	a1, s9
+	mv	a1, s8
 	mv	a3, s2
 	call	net_kernel_217_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
@@ -68105,12 +68106,14 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
 	addi	a1, a0, 63
 	andi	s2, a1, -64
-	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s5)
+	li	a0, 8
+	sd	a0, %pcrel_lo(.Lpcrel_hi2284)(s5)
 	li	a0, 8
 	mv	a1, s2
 	call	net_kernel_232_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
 	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s5)
+	li	s8, 4
 	li	a0, 4
 	mv	a1, s0
 	mv	a2, s2
@@ -68122,7 +68125,7 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
 	addi	a1, a0, 63
 	andi	s0, a1, -64
-	sd	s8, %pcrel_lo(.Lpcrel_hi2284)(s5)
+	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s5)
 	li	a0, 2
 	mv	a1, s0
 	call	net_kernel_234_ct
@@ -68141,8 +68144,7 @@ net:                                    # @net
 	auipc	a0, %pcrel_hi(__constant_240x1x5x5xf32)
 	li	a1, 16
 	sd	a1, 0(sp)
-	li	t0, 4
-	sd	t0, 8(sp)
+	sd	s8, 8(sp)
 	addi	a2, a0, %pcrel_lo(.Lpcrel_hi2373)
 	li	a0, 16
 	li	a5, 240
@@ -68152,7 +68154,8 @@ net:                                    # @net
 	mv	a3, s3
 	mv	a4, s4
 	sd	s7, 16(sp)
-	sd	t0, 24(sp)
+	li	s2, 2
+	sd	s2, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 960
 	li	a3, 16
@@ -68179,7 +68182,6 @@ net:                                    # @net
 	mv	a1, s1
 	call	net_kernel_238_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	li	s2, 2
 	sd	s2, %pcrel_lo(.Lpcrel_hi2284)(s5)
 .Lpcrel_hi2374:
 	auipc	a2, %pcrel_hi(__constant_240xf32_122)
@@ -72869,7 +72871,7 @@ net:                                    # @net
 	mv	a3, s4
 	mv	a4, s3
 	call	conv1x1_ct
-	mv	s6, s10
+	mv	s7, s10
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
 	li	s0, 576
 	mv	s8, s9
@@ -72884,7 +72886,7 @@ net:                                    # @net
 	call	net_kernel_383_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s9)
-	li	s4, 576
+	li	s6, 576
 	li	a0, 576
 	mv	a1, s5
 	call	net_kernel_384_ct
@@ -72940,6 +72942,7 @@ net:                                    # @net
 	call	net_kernel_390_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	li	s4, 2
 	li	a0, 2
 	mv	a1, s1
 	mv	a2, s3
@@ -72950,7 +72953,7 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
 	addi	a1, a0, 63
 	andi	s0, a1, -64
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 	li	a0, 576
 	mv	a1, s0
 	call	net_kernel_392_ct
@@ -72958,7 +72961,7 @@ net:                                    # @net
 	call	malloc
 	mv	s1, a0
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 	li	a0, 576
 	mv	a1, s1
 	call	net_kernel_393_ct
@@ -72982,8 +72985,7 @@ net:                                    # @net
 	mv	a4, s2
 	li	t0, 5
 	sd	t0, 16(sp)
-	li	t0, 4
-	sd	t0, 24(sp)
+	sd	s4, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 576
 	li	a3, 9
@@ -72995,22 +72997,22 @@ net:                                    # @net
 	mv	a2, s0
 	call	unpad_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 	li	a0, 576
 	mv	a1, s5
 	call	net_kernel_394_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 	li	a0, 576
 	mv	a1, s5
 	call	net_kernel_395_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 	li	a0, 576
 	mv	a1, s5
 	call	net_kernel_396_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 .Lpcrel_hi2434:
 	auipc	a2, %pcrel_hi(__constant_576xf32_61)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2434)
@@ -73018,13 +73020,13 @@ net:                                    # @net
 	mv	a1, s0
 	call	net_kernel_397_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 	li	a0, 576
 	mv	a1, s0
 	mv	a2, s5
 	call	net_kernel_398_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 .Lpcrel_hi2435:
 	auipc	a2, %pcrel_hi(__constant_576xf32_59)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2435)
@@ -73032,7 +73034,7 @@ net:                                    # @net
 	mv	a1, s0
 	call	net_kernel_399_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 .Lpcrel_hi2436:
 	auipc	a2, %pcrel_hi(__constant_576xf32)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2436)
@@ -73040,7 +73042,7 @@ net:                                    # @net
 	mv	a1, s0
 	call	net_kernel_400_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s10)
-	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s9)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s9)
 	li	a0, 576
 	mv	a1, s0
 	call	net_kernel_401_ct
@@ -73396,7 +73398,7 @@ net:                                    # @net
 	mv	a0, s10
 	call	malloc
 	mv	s3, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s4, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s3
@@ -74703,7 +74705,7 @@ net:                                    # @net
 	mv	a0, s11
 	call	malloc
 	sd	a0, 144(sp)                     # 8-byte Folded Spill
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	addi	a1, a0, 63
 	andi	s1, a1, -64
 	li	s3, 1152
@@ -74711,19 +74713,19 @@ net:                                    # @net
 	li	a0, 1152
 	mv	a1, s1
 	call	net_kernel_415_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s1
 	call	net_kernel_416_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s1
 	call	net_kernel_417_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s3, %pcrel_lo(.Lpcrel_hi2284)(s8)
-	li	s7, 1152
+	li	s6, 1152
 .Lpcrel_hi2442:
 	auipc	a2, %pcrel_hi(__constant_1152xf32_53)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2442)
@@ -74731,30 +74733,30 @@ net:                                    # @net
 	mv	a1, s0
 	mv	a3, s9
 	call	net_kernel_418_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s9
 	mv	a2, s1
 	call	net_kernel_419_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2443:
 	auipc	a2, %pcrel_hi(__constant_1152xf32_51)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2443)
 	li	a0, 1152
 	mv	a1, s9
 	call	net_kernel_420_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2444:
 	auipc	a2, %pcrel_hi(__constant_1152xf32_50)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2444)
 	li	a0, 1152
 	mv	a1, s9
 	call	net_kernel_421_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s9
 	call	net_kernel_422_ct
@@ -74763,7 +74765,7 @@ net:                                    # @net
 	sd	a0, 864(sp)                     # 8-byte Folded Spill
 	call	malloc
 	sd	a0, 136(sp)                     # 8-byte Folded Spill
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	addi	a1, a0, 63
 	andi	s4, a1, -64
 	li	s5, 5
@@ -74771,8 +74773,8 @@ net:                                    # @net
 	li	a0, 5
 	mv	a1, s4
 	call	net_kernel_423_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s9
 	mv	a2, s4
@@ -74780,10 +74782,10 @@ net:                                    # @net
 	mv	a0, s11
 	call	malloc
 	sd	a0, 128(sp)                     # 8-byte Folded Spill
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	addi	a1, a0, 63
 	andi	s3, a1, -64
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	ld	a1, 904(sp)                     # 8-byte Folded Reload
 	mv	a2, s3
@@ -74791,8 +74793,8 @@ net:                                    # @net
 	mv	a0, s10
 	call	malloc
 	mv	s11, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s11
 	call	net_kernel_426_ct
@@ -74823,23 +74825,23 @@ net:                                    # @net
 	mv	a1, s10
 	mv	a2, s3
 	call	unpad_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s1
 	call	net_kernel_427_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s1
 	call	net_kernel_428_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	sd	s7, %pcrel_lo(.Lpcrel_hi2284)(s8)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	sd	s6, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s1
 	sd	s1, 48(sp)                      # 8-byte Folded Spill
 	call	net_kernel_429_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	li	s0, 1152
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2446:
@@ -74849,13 +74851,13 @@ net:                                    # @net
 	mv	a1, s3
 	mv	a3, s9
 	call	net_kernel_430_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s9
 	mv	a2, s1
 	call	net_kernel_431_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2447:
 	auipc	a2, %pcrel_hi(__constant_1152xf32_46)
@@ -74863,7 +74865,7 @@ net:                                    # @net
 	li	a0, 1152
 	mv	a1, s9
 	call	net_kernel_432_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2448:
 	auipc	a2, %pcrel_hi(__constant_1152xf32_45)
@@ -74871,7 +74873,7 @@ net:                                    # @net
 	li	a0, 1152
 	mv	a1, s9
 	call	net_kernel_433_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	s1, 1152
 	li	a0, 1152
@@ -74880,7 +74882,7 @@ net:                                    # @net
 	li	a0, 832
 	call	malloc
 	sd	a0, 120(sp)                     # 8-byte Folded Spill
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	addi	a1, a0, 63
 	andi	s3, a1, -64
 	li	s0, 192
@@ -74892,7 +74894,7 @@ net:                                    # @net
 	li	a0, 768
 	call	malloc
 	mv	s4, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
 	mv	a1, s4
@@ -75116,67 +75118,67 @@ net:                                    # @net
 	mv	a3, s4
 	mv	a4, s3
 	call	conv1x1_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	li	s0, 192
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
 	ld	s4, 880(sp)                     # 8-byte Folded Reload
 	mv	a1, s4
 	call	net_kernel_437_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
 	mv	a1, s4
 	call	net_kernel_438_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
 	mv	a1, s4
 	call	net_kernel_439_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 .Lpcrel_hi2450:
 	auipc	a2, %pcrel_hi(__constant_192xf32_43)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2450)
 	li	a0, 192
 	mv	a1, s3
-	ld	s7, 40(sp)                      # 8-byte Folded Reload
-	mv	a3, s7
+	ld	s6, 40(sp)                      # 8-byte Folded Reload
+	mv	a3, s6
 	call	net_kernel_440_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	li	s0, 192
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s4
 	call	net_kernel_441_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	s0, 192
 .Lpcrel_hi2451:
 	auipc	a2, %pcrel_hi(__constant_192xf32_41)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2451)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	call	net_kernel_442_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	s0, 192
 .Lpcrel_hi2452:
 	auipc	a2, %pcrel_hi(__constant_192xf32_40)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2452)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	call	net_kernel_443_ct
 	li	a0, 832
 	call	malloc
 	sd	a0, 112(sp)                     # 8-byte Folded Spill
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	addi	a1, a0, 63
 	andi	s3, a1, -64
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s2
 	mv	a3, s3
 	call	net_kernel_444_ct
@@ -75184,7 +75186,7 @@ net:                                    # @net
 	mv	a0, s10
 	call	malloc
 	sd	a0, 104(sp)                     # 8-byte Folded Spill
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	addi	a1, a0, 63
 	andi	s2, a1, -64
 	sd	s1, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -75195,7 +75197,7 @@ net:                                    # @net
 	ld	a0, 912(sp)                     # 8-byte Folded Reload
 	call	malloc
 	mv	s11, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s1, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s11
@@ -76499,25 +76501,25 @@ net:                                    # @net
 	mv	a3, s11
 	mv	a4, s2
 	call	conv1x1_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	li	s0, 1152
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	ld	s1, 48(sp)                      # 8-byte Folded Reload
 	mv	a1, s1
 	call	net_kernel_447_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s1
 	call	net_kernel_448_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s1
 	call	net_kernel_449_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
-	mv	s5, s6
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
+	mv	s5, s7
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	s0, 1152
 .Lpcrel_hi2454:
@@ -76527,11 +76529,11 @@ net:                                    # @net
 	mv	a1, s2
 	mv	a3, s9
 	call	net_kernel_450_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s6)
+	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s7)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s9
-	mv	s6, s9
+	mv	s7, s9
 	mv	a2, s1
 	call	net_kernel_451_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s5)
@@ -76569,7 +76571,7 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s5)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s4
 	call	net_kernel_456_ct
 	mv	a0, s10
@@ -76640,12 +76642,12 @@ net:                                    # @net
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2458)
 	li	a0, 1152
 	mv	a1, s2
-	mv	a3, s6
+	mv	a3, s7
 	call	net_kernel_462_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s5)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s1
 	call	net_kernel_463_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s5)
@@ -76654,7 +76656,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32_31)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2459)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	call	net_kernel_464_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s5)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -76662,12 +76664,12 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32_30)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2460)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	call	net_kernel_465_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s5)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	call	net_kernel_466_ct
 	li	a0, 832
 	call	malloc
@@ -76695,7 +76697,7 @@ net:                                    # @net
 	li	a5, 1152
 	addi	s11, a1, %pcrel_lo(.Lpcrel_hi2461)
 	li	a6, 1
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76705,7 +76707,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 8
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76714,7 +76716,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 16
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76723,7 +76725,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 24
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76732,7 +76734,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 32
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76741,7 +76743,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 40
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76750,7 +76752,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 48
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76759,7 +76761,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 56
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76768,7 +76770,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 64
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76777,7 +76779,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 72
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76786,7 +76788,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 80
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76795,7 +76797,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 88
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76804,7 +76806,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 96
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76813,7 +76815,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 104
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76822,7 +76824,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 112
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76831,7 +76833,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 120
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76840,7 +76842,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 128
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76849,7 +76851,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 136
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76858,7 +76860,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 144
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76867,7 +76869,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 152
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76876,7 +76878,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 160
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76885,7 +76887,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 168
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76894,7 +76896,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 176
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76903,7 +76905,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 184
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s11
 	mv	a3, s4
 	mv	a4, s2
@@ -76933,12 +76935,12 @@ net:                                    # @net
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2462)
 	li	a0, 192
 	mv	a1, s2
-	mv	a3, s7
+	mv	a3, s6
 	call	net_kernel_472_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s5)
 	sd	s1, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s4
 	call	net_kernel_473_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s5)
@@ -76947,7 +76949,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_192xf32_26)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2463)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	call	net_kernel_474_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s5)
 	sd	s1, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -76956,7 +76958,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_192xf32_25)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2464)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	call	net_kernel_475_ct
 	li	a0, 832
 	call	malloc
@@ -76966,7 +76968,7 @@ net:                                    # @net
 	andi	s2, a1, -64
 	sd	s1, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	call	net_kernel_476_ct
@@ -78315,12 +78317,12 @@ net:                                    # @net
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2466)
 	li	a0, 1152
 	mv	a1, s3
-	mv	a3, s6
+	mv	a3, s7
 	call	net_kernel_482_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s9
 	call	net_kernel_483_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
@@ -78329,7 +78331,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32_21)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2467)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	call	net_kernel_484_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -78337,12 +78339,12 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32_20)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2468)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	call	net_kernel_485_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	call	net_kernel_486_ct
 	ld	a0, 864(sp)                     # 8-byte Folded Reload
 	call	malloc
@@ -78358,7 +78360,7 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s4
 	call	net_kernel_488_ct
 	mv	a0, s10
@@ -78428,12 +78430,13 @@ net:                                    # @net
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2470)
 	li	a0, 1152
 	mv	a1, s3
-	mv	a3, s6
+	mv	a3, s7
 	call	net_kernel_494_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
+	mv	s10, s7
 	mv	a2, s5
 	call	net_kernel_495_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
@@ -78442,7 +78445,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32_17)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2471)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	call	net_kernel_496_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -78450,12 +78453,12 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32_16)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2472)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	call	net_kernel_497_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s11, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s7
 	call	net_kernel_498_ct
 	li	a0, 768
 	call	malloc
@@ -78472,7 +78475,7 @@ net:                                    # @net
 	li	a5, 1152
 	addi	s3, a1, %pcrel_lo(.Lpcrel_hi2473)
 	li	a6, 1
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	ld	s4, 888(sp)                     # 8-byte Folded Reload
@@ -78483,7 +78486,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 8
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78492,7 +78495,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 16
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78501,7 +78504,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 24
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78510,7 +78513,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 32
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78519,7 +78522,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 40
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78528,7 +78531,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 48
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78537,7 +78540,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 56
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78546,7 +78549,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 64
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78555,7 +78558,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 72
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78564,7 +78567,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 80
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78573,7 +78576,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 88
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78582,7 +78585,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 96
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78591,7 +78594,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 104
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78600,7 +78603,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 112
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78609,7 +78612,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 120
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78618,7 +78621,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 128
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78627,7 +78630,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 136
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78636,7 +78639,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 144
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78645,7 +78648,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 152
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78654,7 +78657,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 160
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78663,7 +78666,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 168
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78672,7 +78675,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 176
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78681,7 +78684,7 @@ net:                                    # @net
 	li	a5, 1152
 	li	a6, 1
 	li	a7, 184
-	mv	a1, s6
+	mv	a1, s7
 	mv	a2, s3
 	mv	a3, s0
 	mv	a4, s4
@@ -78711,12 +78714,12 @@ net:                                    # @net
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2474)
 	li	a0, 192
 	mv	a1, s4
-	mv	a3, s7
+	mv	a3, s6
 	call	net_kernel_503_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	call	net_kernel_504_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
@@ -78725,7 +78728,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_192xf32_13)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2475)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	call	net_kernel_505_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -78733,12 +78736,12 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_192xf32)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2476)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	call	net_kernel_506_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 192
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s2
 	call	net_kernel_507_ct
 	ld	a0, 896(sp)                     # 8-byte Folded Reload
@@ -78768,7 +78771,7 @@ net:                                    # @net
 	li	a5, 192
 	addi	s3, a1, %pcrel_lo(.Lpcrel_hi2477)
 	li	a6, 1
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78778,7 +78781,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 8
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78787,7 +78790,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 16
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78796,7 +78799,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 24
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78805,7 +78808,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 32
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78814,7 +78817,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 40
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78823,7 +78826,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 48
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78832,7 +78835,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 56
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78841,7 +78844,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 64
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78850,7 +78853,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 72
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78859,7 +78862,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 80
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78868,7 +78871,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 88
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78877,7 +78880,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 96
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78886,7 +78889,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 104
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78895,7 +78898,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 112
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78904,7 +78907,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 120
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78913,7 +78916,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 128
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78922,7 +78925,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 136
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78931,7 +78934,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 144
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78940,7 +78943,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 152
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78949,7 +78952,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 160
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78958,7 +78961,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 168
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78967,7 +78970,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 176
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78976,7 +78979,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 184
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78985,7 +78988,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 192
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -78994,7 +78997,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 200
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79003,7 +79006,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 208
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79012,7 +79015,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 216
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79021,7 +79024,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 224
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79030,7 +79033,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 232
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79039,7 +79042,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 240
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79048,7 +79051,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 248
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79057,7 +79060,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 256
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79066,7 +79069,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 264
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79075,7 +79078,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 272
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79084,7 +79087,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 280
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79093,7 +79096,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 288
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79102,7 +79105,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 296
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79111,7 +79114,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 304
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79120,7 +79123,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 312
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79129,7 +79132,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 320
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79138,7 +79141,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 328
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79147,7 +79150,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 336
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79156,7 +79159,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 344
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79165,7 +79168,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 352
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79174,7 +79177,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 360
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79183,7 +79186,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 368
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79192,7 +79195,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 376
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79201,7 +79204,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 384
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79210,7 +79213,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 392
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79219,7 +79222,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 400
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79228,7 +79231,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 408
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79237,7 +79240,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 416
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79246,7 +79249,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 424
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79255,7 +79258,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 432
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79264,7 +79267,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 440
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79273,7 +79276,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 448
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79282,7 +79285,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 456
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79291,7 +79294,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 464
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79300,7 +79303,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 472
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79309,7 +79312,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 480
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79318,7 +79321,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 488
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79327,7 +79330,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 496
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79336,7 +79339,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 504
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79345,7 +79348,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 512
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79354,7 +79357,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 520
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79363,7 +79366,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 528
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79372,7 +79375,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 536
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79381,7 +79384,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 544
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79390,7 +79393,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 552
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79399,7 +79402,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 560
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79408,7 +79411,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 568
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79417,7 +79420,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 576
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79426,7 +79429,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 584
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79435,7 +79438,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 592
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79444,7 +79447,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 600
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79453,7 +79456,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 608
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79462,7 +79465,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 616
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79471,7 +79474,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 624
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79480,7 +79483,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 632
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79489,7 +79492,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 640
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79498,7 +79501,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 648
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79507,7 +79510,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 656
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79516,7 +79519,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 664
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79525,7 +79528,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 672
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79534,7 +79537,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 680
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79543,7 +79546,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 688
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79552,7 +79555,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 696
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79561,7 +79564,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 704
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79570,7 +79573,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 712
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79579,7 +79582,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 720
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79588,7 +79591,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 728
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79597,7 +79600,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 736
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79606,7 +79609,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 744
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79615,7 +79618,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 752
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79624,7 +79627,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 760
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79633,7 +79636,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 768
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79642,7 +79645,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 776
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79651,7 +79654,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 784
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79660,7 +79663,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 792
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79669,7 +79672,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 800
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79678,7 +79681,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 808
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79687,7 +79690,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 816
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79696,7 +79699,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 824
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79705,7 +79708,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 832
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79714,7 +79717,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 840
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79723,7 +79726,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 848
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79732,7 +79735,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 856
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79741,7 +79744,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 864
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79750,7 +79753,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 872
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79759,7 +79762,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 880
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79768,7 +79771,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 888
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79777,7 +79780,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 896
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79786,7 +79789,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 904
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79795,7 +79798,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 912
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79804,7 +79807,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 920
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79813,7 +79816,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 928
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79822,7 +79825,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 936
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79831,7 +79834,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 944
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79840,7 +79843,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 952
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79849,7 +79852,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 960
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79858,7 +79861,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 968
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79867,7 +79870,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 976
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79876,7 +79879,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 984
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79885,7 +79888,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 992
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79894,7 +79897,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1000
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79903,7 +79906,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1008
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79912,7 +79915,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1016
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79921,7 +79924,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1024
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79930,7 +79933,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1032
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79939,7 +79942,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1040
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79948,7 +79951,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1048
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79957,7 +79960,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1056
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79966,7 +79969,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1064
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79975,7 +79978,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1072
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79984,7 +79987,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1080
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -79993,7 +79996,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1088
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -80002,7 +80005,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1096
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -80011,7 +80014,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1104
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -80020,7 +80023,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1112
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -80029,7 +80032,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1120
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -80038,7 +80041,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1128
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -80047,7 +80050,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1136
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -80056,7 +80059,7 @@ net:                                    # @net
 	li	a5, 192
 	li	a6, 1
 	li	a7, 1144
-	mv	a1, s7
+	mv	a1, s6
 	mv	a2, s3
 	mv	a3, s2
 	mv	a4, s0
@@ -80076,7 +80079,7 @@ net:                                    # @net
 	sd	s2, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
 	mv	a1, s5
-	mv	s10, s5
+	mv	s7, s5
 	call	net_kernel_512_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s2, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -80086,13 +80089,14 @@ net:                                    # @net
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2478)
 	li	a0, 1152
 	mv	a1, s0
-	mv	a3, s6
+	mv	a3, s10
 	call	net_kernel_513_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
-	mv	a2, s10
+	mv	a1, s10
+	mv	s6, s10
+	mv	a2, s7
 	call	net_kernel_514_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -80100,7 +80104,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32_10)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2479)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s10
 	call	net_kernel_515_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -80108,12 +80112,12 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32_9)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2480)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s10
 	call	net_kernel_516_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s10
 	call	net_kernel_517_ct
 	ld	a0, 872(sp)                     # 8-byte Folded Reload
 	call	malloc
@@ -80129,7 +80133,7 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s10
 	mv	a2, s2
 	call	net_kernel_519_ct
 	mv	a0, s4
@@ -80170,17 +80174,17 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s10
+	mv	a1, s7
 	call	net_kernel_521_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s10
+	mv	a1, s7
 	call	net_kernel_522_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s10
+	mv	a1, s7
 	call	net_kernel_523_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -80189,13 +80193,13 @@ net:                                    # @net
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2482)
 	li	a0, 1152
 	mv	a1, s9
-	mv	a3, s6
+	mv	a3, s10
 	call	net_kernel_524_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
-	mv	a2, s10
+	mv	a1, s10
+	mv	a2, s7
 	call	net_kernel_525_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -80203,7 +80207,7 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32_6)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2483)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s10
 	call	net_kernel_526_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
@@ -80211,12 +80215,12 @@ net:                                    # @net
 	auipc	a2, %pcrel_hi(__constant_1152xf32)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2484)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s10
 	call	net_kernel_527_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2283)(s1)
 	sd	s5, %pcrel_lo(.Lpcrel_hi2284)(s8)
 	li	a0, 1152
-	mv	a1, s6
+	mv	a1, s10
 	call	net_kernel_528_ct
 	li	a0, 1344
 	call	malloc

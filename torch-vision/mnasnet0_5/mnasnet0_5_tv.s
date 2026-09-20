@@ -67719,8 +67719,8 @@ net:                                    # @net
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
 	addi	a1, a0, 63
 	andi	s1, a1, -64
-	li	s5, 4
-	sd	s5, %pcrel_lo(.Lpcrel_hi2344)(s2)
+	li	a0, 4
+	sd	a0, %pcrel_lo(.Lpcrel_hi2344)(s2)
 	li	a0, 4
 	mv	a1, s1
 	call	net_kernel_139_ct
@@ -67752,7 +67752,8 @@ net:                                    # @net
 	mv	a1, s3
 	mv	a3, s0
 	mv	a4, s4
-	sd	s5, 24(sp)
+	li	t0, 2
+	sd	t0, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 768
 	li	a3, 36
@@ -67781,7 +67782,8 @@ net:                                    # @net
 	sd	s6, 848(sp)                     # 8-byte Folded Spill
 	call	net_kernel_143_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	sd	s5, %pcrel_lo(.Lpcrel_hi2344)(s2)
+	li	s0, 4
+	sd	s0, %pcrel_lo(.Lpcrel_hi2344)(s2)
 .Lpcrel_hi2398:
 	auipc	a2, %pcrel_hi(.L__constant_48xf32_159)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2398)
@@ -67789,13 +67791,13 @@ net:                                    # @net
 	mv	a1, s1
 	call	net_kernel_144_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	sd	s5, %pcrel_lo(.Lpcrel_hi2344)(s2)
+	sd	s0, %pcrel_lo(.Lpcrel_hi2344)(s2)
 	li	a0, 4
 	mv	a1, s1
 	mv	a2, s6
 	call	net_kernel_145_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	sd	s5, %pcrel_lo(.Lpcrel_hi2344)(s2)
+	sd	s0, %pcrel_lo(.Lpcrel_hi2344)(s2)
 .Lpcrel_hi2399:
 	auipc	a2, %pcrel_hi(.L__constant_48xf32_157)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2399)
@@ -67803,7 +67805,7 @@ net:                                    # @net
 	mv	a1, s1
 	call	net_kernel_146_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	sd	s5, %pcrel_lo(.Lpcrel_hi2344)(s2)
+	sd	s0, %pcrel_lo(.Lpcrel_hi2344)(s2)
 .Lpcrel_hi2400:
 	auipc	a2, %pcrel_hi(.L__constant_48xf32_156)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2400)
@@ -67811,7 +67813,7 @@ net:                                    # @net
 	mv	a1, s1
 	call	net_kernel_147_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	sd	s5, %pcrel_lo(.Lpcrel_hi2344)(s2)
+	sd	s0, %pcrel_lo(.Lpcrel_hi2344)(s2)
 	li	s0, 4
 	li	a0, 4
 	mv	a1, s1
@@ -68710,8 +68712,8 @@ net:                                    # @net
 	mv	a1, s4
 	mv	a2, s9
 	call	net_kernel_221_ct
-	lui	s6, 2
-	addi	a0, s6, 1088
+	lui	s9, 2
+	addi	a0, s9, 1088
 	call	malloc
 	sd	a0, 464(sp)                     # 8-byte Folded Spill
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
@@ -68913,7 +68915,7 @@ net:                                    # @net
 	call	net_kernel_225_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2344)(s5)
-	li	s9, 144
+	li	s11, 144
 	li	a0, 144
 	mv	a1, s2
 	call	net_kernel_226_ct
@@ -68968,6 +68970,7 @@ net:                                    # @net
 	call	net_kernel_232_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2344)(s5)
+	li	s6, 4
 	li	a0, 4
 	mv	a1, s1
 	mv	a2, s3
@@ -68988,19 +68991,18 @@ net:                                    # @net
 	call	malloc
 	mv	s0, a0
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	sd	s9, %pcrel_lo(.Lpcrel_hi2344)(s5)
+	sd	s11, %pcrel_lo(.Lpcrel_hi2344)(s5)
 	li	a0, 144
 	mv	a1, s0
 	call	net_kernel_235_ct
-	addi	a0, s6, 1152
+	addi	a0, s9, 1152
 	call	malloc
 	addi	s4, a0, 64
 .Lpcrel_hi2433:
 	auipc	a0, %pcrel_hi(__constant_144x1x5x5xf32)
 	li	a1, 16
 	sd	a1, 0(sp)
-	li	t0, 4
-	sd	t0, 8(sp)
+	sd	s6, 8(sp)
 	addi	a2, a0, %pcrel_lo(.Lpcrel_hi2433)
 	li	a0, 16
 	li	a5, 144
@@ -69009,9 +69011,10 @@ net:                                    # @net
 	mv	a1, s3
 	mv	a3, s0
 	mv	a4, s4
-	li	t1, 5
-	sd	t1, 16(sp)
-	sd	t0, 24(sp)
+	li	t0, 5
+	sd	t0, 16(sp)
+	li	s0, 2
+	sd	s0, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 576
 	li	a3, 16
@@ -69023,22 +69026,21 @@ net:                                    # @net
 	mv	a2, s1
 	call	unpad_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	sd	s9, %pcrel_lo(.Lpcrel_hi2344)(s5)
+	sd	s11, %pcrel_lo(.Lpcrel_hi2344)(s5)
 	li	a0, 144
 	mv	a1, s2
 	call	net_kernel_236_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	sd	s9, %pcrel_lo(.Lpcrel_hi2344)(s5)
+	sd	s11, %pcrel_lo(.Lpcrel_hi2344)(s5)
 	li	a0, 144
 	mv	a1, s2
 	call	net_kernel_237_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	sd	s9, %pcrel_lo(.Lpcrel_hi2344)(s5)
+	sd	s11, %pcrel_lo(.Lpcrel_hi2344)(s5)
 	li	a0, 144
 	mv	a1, s2
 	call	net_kernel_238_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s8)
-	li	s0, 2
 	sd	s0, %pcrel_lo(.Lpcrel_hi2344)(s5)
 .Lpcrel_hi2434:
 	auipc	a2, %pcrel_hi(__constant_144xf32_122)
@@ -72081,6 +72083,7 @@ net:                                    # @net
 	call	net_kernel_390_ct
 	sd	zero, %pcrel_lo(.Lpcrel_hi2343)(s11)
 	sd	s0, %pcrel_lo(.Lpcrel_hi2344)(s7)
+	li	s5, 2
 	li	a0, 2
 	mv	a1, s4
 	mv	a2, s1
@@ -72123,8 +72126,7 @@ net:                                    # @net
 	mv	a4, s3
 	li	t0, 5
 	sd	t0, 16(sp)
-	li	t0, 4
-	sd	t0, 24(sp)
+	sd	s5, 24(sp)
 	call	dwconvKxK_s2_ct
 	li	a0, 288
 	li	a3, 9

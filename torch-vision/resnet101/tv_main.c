@@ -31,7 +31,7 @@ void free(void*p){(void)p;}
 void *aligned_alloc(size_t a,size_t n){(void)a;return malloc(n);}
 static const char *ff(float v){static char b[8][32];static int k;char*o=b[k++&7],*q=o;long m=(long)(fabsf(v)*1e6f+0.5f),ip=m/1000000,fp=m%1000000;if(v<0)*q++='-';char t[24];int n=0;do{t[n++]='0'+ip%10;ip/=10;}while(ip);while(n)*q++=t[--n];*q++='.';for(long d=100000;d;d/=10)*q++='0'+(fp/d)%10;*q=0;return o;}
 float *net(float *);
-static float in[3*256*256];  // inputs up to 256x256
+static float in[3*320*320];  // 3x300x300 (ssd300), 2x3x128x128 frame pairs, 3x16x64x64 clips
 int main(void){
   const unsigned char *p=check_bin; int nin=*(const int*)p; p+=4;
   int isz=*(const int*)p; p+=4; memcpy(in,p,isz*sizeof(float)); p+=isz*sizeof(float);
@@ -43,8 +43,11 @@ int main(void){
   // PyTorch's own forward on random weights: certify Hwacha reproduces it (numeric agreement). argmax
   // is reported for information -- with random (untrained) weights the logits can be near-degenerate,
   // so an argmax tie is not a computation error as long as the outputs match numerically.
-  int ok = (md <= 1e-3f + 1e-2f * mx) && (am == ra);
-  printf("%s: %d classes, %ld cycles; max|diff|=%s max|ref|=%s; argmax hw=%d ref=%d%s; %s\n", MODEL, nout, c1-c0, ff(md), ff(mx), am, ra, am==ra?" (match)":"", ok?"ok":"FAIL");
+  // the argmax test is for class-score outputs; dense outputs (segmentation maps, flow fields,
+  // per-anchor detection heads) are certified by the numeric agreement alone
+  int cls = nout <= 1000;
+  int ok = (md <= 1e-4f + 1e-2f * mx) && (!cls || am == ra);   // 1e-3 absolute hid a 2-pixel conv bug on ~1e-2 logits
+  printf("%s: %d outputs, %ld cycles; max|diff|=%s max|ref|=%s; argmax hw=%d ref=%d%s; %s\n", MODEL, nout, c1-c0, ff(md), ff(mx), am, ra, am==ra?" (match)":"", ok?"ok":"FAIL");
   printf(ok?"tv PASS\n":"tv FAIL\n");
   return !ok;
 }
