@@ -1,0 +1,13 @@
+# build outputs (rebuilt by make)
+*.riscv
+*.o
+# model weight blobs: 100 MB - 2.5 GB each, 21 GB in total; `make gen-<model>` in torch-vision
+# regenerates them bit-for-bit (fixed seed) together with the assembly
+*_weights.bin
+# generation scratch and logs
+.build/
+.logs/
+__pycache__/
+# local torch-mlir venv and its wheel
+.tmenv/
+.wheels/

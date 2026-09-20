@@ -1,0 +1,83 @@
+# torchvision classification models (docs.pytorch.org/vision/stable/models.html), one per line:
+#   <name> <input HW> <constructor kwargs as JSON>
+# HW=32 unless the architecture needs more (stride-32 trunks with fixed-size pools / patch grids).
+alexnet 64 {}
+convnext_tiny 32 {}
+convnext_small 32 {}
+convnext_base 32 {}
+convnext_large 32 {}
+densenet121 32 {}
+densenet161 32 {}
+densenet169 32 {}
+densenet201 32 {}
+efficientnet_b0 32 {}
+efficientnet_b1 32 {}
+efficientnet_b2 32 {}
+efficientnet_b3 32 {}
+efficientnet_b4 32 {}
+efficientnet_b5 32 {}
+efficientnet_b6 32 {}
+efficientnet_b7 32 {}
+efficientnet_v2_s 32 {}
+efficientnet_v2_m 32 {}
+efficientnet_v2_l 32 {}
+googlenet 32 {}
+inception_v3 80 {}
+maxvit_t 64 {"partition_size": 2}
+mnasnet0_5 32 {}
+mnasnet0_75 32 {}
+mnasnet1_0 32 {}
+mnasnet1_3 32 {}
+mobilenet_v2 32 {}
+mobilenet_v3_large 32 {}
+mobilenet_v3_small 32 {}
+regnet_x_400mf 32 {}
+regnet_x_800mf 32 {}
+regnet_x_1_6gf 32 {}
+regnet_x_3_2gf 32 {}
+regnet_x_8gf 32 {}
+regnet_x_16gf 32 {}
+regnet_x_32gf 32 {}
+regnet_y_400mf 32 {}
+regnet_y_800mf 32 {}
+regnet_y_1_6gf 32 {}
+regnet_y_3_2gf 32 {}
+regnet_y_8gf 32 {}
+regnet_y_16gf 32 {}
+regnet_y_32gf 32 {}
+regnet_y_128gf 32 {}
+resnet18 32 {}
+resnet34 32 {}
+resnet50 32 {}
+resnet101 32 {}
+resnet152 32 {}
+resnext50_32x4d 32 {}
+resnext101_32x8d 32 {}
+resnext101_64x4d 32 {}
+shufflenet_v2_x0_5 32 {}
+shufflenet_v2_x1_0 32 {}
+shufflenet_v2_x1_5 32 {}
+shufflenet_v2_x2_0 32 {}
+squeezenet1_0 32 {}
+squeezenet1_1 32 {}
+swin_t 32 {}
+swin_s 32 {}
+swin_b 32 {}
+swin_v2_t 32 {}
+swin_v2_s 32 {}
+swin_v2_b 32 {}
+vgg11 32 {}
+vgg11_bn 32 {}
+vgg13 32 {}
+vgg13_bn 32 {}
+vgg16 32 {}
+vgg16_bn 32 {}
+vgg19 32 {}
+vgg19_bn 32 {}
+vit_b_16 64 {"image_size": 64}
+vit_b_32 64 {"image_size": 64}
+vit_l_16 64 {"image_size": 64}
+vit_l_32 64 {"image_size": 64}
+vit_h_14 56 {"image_size": 56}
+wide_resnet50_2 32 {}
+wide_resnet101_2 32 {}
