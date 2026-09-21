@@ -39,7 +39,7 @@ BFS_1_wt:
     vsll vs3, vs2, vs58
     vadd vs3, vs57, vs3
     @vp1 vlxw vv8, vs3, vv1
-    @vp1 vlxb vv9, vs61, vv8
+    @vp1 vlxb vv9, vs60, vv8
     vcmpeq vp2, vv9, vs0
     vpop vp7, vp1, vp2, vp2, 0x80
     vpop vp8, vp1, vp2, vp2, 0x02
@@ -47,9 +47,9 @@ BFS_1_wt:
     @vp7 vlw vv9, va3
     @vp7 vaddw vv9, vv9, vs56
     @vp7 vsll vv3, vv8, vs58
-    @vp7 vsxw vv9, vs60, vv3
+    @vp7 vsxw vv9, vs62, vv3
     vaddw vv9, vs55, vs0
-    @vp7 vsxb vv9, vs62, vv8
+    @vp7 vsxb vv9, vs61, vv8
     @vp7 vlstw vv8, va1, va4
     @vp7 vlstw vv9, va2, va5
 .LBFS_1_skip4:
@@ -127,13 +127,13 @@ BFS_1_ct:                               # @BFS_1_ct
 	vsetcfg t0
 	#NO_APP
 	#APP
-	vmcs vs62, a4
+	vmcs vs62, a6
 	#NO_APP
 	#APP
-	vmcs vs61, a5
+	vmcs vs61, a4
 	#NO_APP
 	#APP
-	vmcs vs60, a6
+	vmcs vs60, a5
 	#NO_APP
 	sext.w	a7, a7
 	li	a4, 2

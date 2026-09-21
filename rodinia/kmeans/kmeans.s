@@ -12,59 +12,55 @@ kmeans_kernel_c_wt:
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lkmeans_kernel_c_skip0
-    vaddw vv3, vs0, vs0
-    vcmplt vp1, vv3, vs60
+    vaddw vv2, vs0, vs0
+    vcmplt vp1, vv2, vs60
 .Lkmeans_kernel_c_skip0:
     vpop vp4, vp2, vp1, vp1, 0x80
     vpop vp5, vp2, vp1, vp1, 0x02
     @!vp4 vcjal 0, vs1, .Lkmeans_kernel_c_skip1
-    vaddw vv3, vs0, vs0
-    vcmplt vp1, vv3, vs59
+    vaddw vv2, vs0, vs0
+    vcmplt vp1, vv2, vs59
     vsll vs2, vs59, vs54
     vsrl vs2, vs2, vs54
     vsll vs3, vs60, vs54
     vsrl vs3, vs3, vs54
-    vsll vs4, vs61, vs54
-    vsrl vs4, vs4, vs54
 .Lkmeans_kernel_c_skip1:
-    @vp4 vaddw vv3, vs58, vs0
-    @vp4 vaddw vv4, vs0, vs0
+    @vp4 vaddw vv2, vs58, vs0
+    @vp4 vaddw vv3, vs0, vs0
     vstop
     .globl kmeans_kernel_c_wt_r0_b0
 kmeans_kernel_c_wt_r0_b0:
-    vaddw vv6, vs0, vs0
+    vaddw vv5, vs0, vs0
     vstop
     .globl kmeans_kernel_c_wt_r0_b1
 kmeans_kernel_c_wt_r0_b1:
-    vaddw vv5, vs0, vs0
+    vaddw vv4, vs0, vs0
     vstop
     .globl kmeans_kernel_c_wt_r0_b2
 kmeans_kernel_c_wt_r0_b2:
-    @vp4 vadd vv1, vv0, vs5
-    vsll vv2, vv1, vs54
-    vsrl vv2, vv2, vs54
-    @vp4 vsll vv2, vv2, vs55
-    @vp4 vlxw vv7, vs62, vv2
-    @vp4 vfsub.s vv7, vv7, vs6
-    @vp4 vfmadd.s vv5, vv7, vv7, vv5
+    @vp4 vadd vv1, vv0, vs4
+    @vp4 vsll vv1, vv1, vs55
+    @vp4 vlxw vv6, vs62, vv1
+    @vp4 vfsub.s vv6, vv6, vs5
+    @vp4 vfmadd.s vv4, vv6, vv6, vv4
     vstop
     .globl kmeans_kernel_c_wt_r0_b3
 kmeans_kernel_c_wt_r0_b3:
-    vaddw vv6, vv5, vs0
+    vaddw vv5, vv4, vs0
     vstop
     .globl kmeans_kernel_c_wt_r0_b4
 kmeans_kernel_c_wt_r0_b4:
-    vcmpflt.s vp2, vv6, vv3
-    @vp2 vaddw vv4, vs7, vs0
-    @vp2 vaddw vv3, vv6, vs0
+    vcmpflt.s vp2, vv5, vv2
+    @vp2 vaddw vv3, vs6, vs0
+    @vp2 vaddw vv2, vv5, vs0
     vstop
     .globl kmeans_kernel_c_wt_a0
 kmeans_kernel_c_wt_a0:
     vpop vp1, vp4, vp4, vp4, 0xAA
     vpop vp1, vp1, vp5, vp5, 0xEE
-    @vp5 vaddw vv3, vs0, vs0
-    @vp4 vaddw vv3, vv4, vs0
-    @vp1 vsw vv3, va0
+    @vp5 vaddw vv2, vs0, vs0
+    @vp4 vaddw vv2, vv3, vs0
+    @vp1 vsw vv2, va0
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp3, vp3, 0xEE
     vstop
@@ -77,33 +73,25 @@ kmeans_swap_wt:
     veidx vv0
     vadd vv0, vv0, vs63
     vcmpltu vp1, vv0, vs60
-    vaddw vv5, vs0, vs0
-    vcmplt vp2, vv5, vs59
+    vaddw vv3, vs0, vs0
+    vcmplt vp2, vv3, vs59
     vpop vp1, vp1, vp2, vp1, 136
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lkmeans_swap_skip0
-    @vp2 vmulw vv5, vs59, vv0
+    @vp2 vmulw vv3, vs59, vv0
     vsll vs2, vs59, vs56
     vsrl vs2, vs2, vs56
-    vsll vv1, vv5, vs56
-    vsrl vv1, vv1, vs56
-    vsll vs3, vs60, vs56
-    vsrl vs3, vs3, vs56
 .Lkmeans_swap_skip0:
     vstop
     .globl kmeans_swap_wt_r0_b0
 kmeans_swap_wt_r0_b0:
-    @vp2 vadd vv2, vv1, vs4
-    vsll vv3, vv2, vs56
-    vsrl vv3, vv3, vs56
-    @vp2 vsll vv3, vv3, vs58
-    @vp2 vadd vv2, vv0, vs5
-    vsll vv4, vv2, vs56
-    vsrl vv4, vv4, vs56
-    @vp2 vsll vv4, vv4, vs58
-    @vp2 vlxw vv6, vs61, vv3
-    @vp2 vsxw vv6, vs62, vv4
+    @vp2 vadd vv1, vv3, vs3
+    @vp2 vsll vv1, vv1, vs58
+    @vp2 vadd vv2, vv0, vs4
+    @vp2 vsll vv2, vv2, vs58
+    @vp2 vlxw vv4, vs61, vv1
+    @vp2 vsxw vv4, vs62, vv2
     vstop
     .globl kmeans_swap_wt_a0
 kmeans_swap_wt_a0:
@@ -121,7 +109,7 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a7, 1048534
-	addi	a7, a7, 2041
+	addi	a7, a7, 2043
 	srli	a7, a7, 1
 	not	a7, a7
 	#APP
@@ -130,10 +118,10 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
 	#APP
 	vmcs vs62, a1
 	#NO_APP
-	sext.w	a1, a4
+	sext.w	a4, a4
 	sext.w	a5, a5
 	#APP
-	vmcs vs61, a1
+	vmcs vs61, a4
 	#NO_APP
 	#APP
 	vmcs vs60, a5
@@ -173,12 +161,10 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
 	.cfi_offset s1, -16
 	.cfi_offset s2, -24
 	li	a7, 0
-	slli	a6, a6, 32
-	slli	t0, a4, 32
-	srli	a4, a6, 30
-	srli	a6, t0, 32
+	slli	t0, a6, 32
 .Lpcrel_hi0:
-	auipc	t0, %pcrel_hi(hwacha_group_size)
+	auipc	a6, %pcrel_hi(hwacha_group_size)
+	srli	t0, t0, 30
 .Lpcrel_hi2:
 	auipc	t2, %pcrel_hi(kmeans_kernel_c_wt)
 .Lpcrel_hi1:
@@ -202,7 +188,7 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
                                         # =>This Loop Header: Depth=1
                                         #     Child Loop BB0_10 Depth 2
                                         #       Child Loop BB0_12 Depth 3
-	ld	t4, %pcrel_lo(.Lpcrel_hi0)(t0)
+	ld	t4, %pcrel_lo(.Lpcrel_hi0)(a6)
 	mv	t3, a0
 	beqz	t4, .LBB0_5
 # %bb.4:                                # %stripmine
@@ -242,7 +228,7 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
 .LBB0_9:                                # %ct_3
                                         #   in Loop: Header=BB0_10 Depth=2
 	#APP
-	vmcs vs7, t4
+	vmcs vs6, t4
 	#NO_APP
 .Lpcrel_hi8:
 	auipc	t6, %pcrel_hi(kmeans_kernel_c_wt_r0_b4)
@@ -251,7 +237,7 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
 	#APP
 	vf 0(t6)
 	#NO_APP
-	add	t5, t5, a4
+	add	t5, t5, t0
 	beq	t4, a5, .LBB0_2
 .LBB0_10:                               # %ct_
                                         #   Parent Loop BB0_3 Depth=1
@@ -267,8 +253,8 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
 # %bb.11:                               # %ct_1
                                         #   in Loop: Header=BB0_10 Depth=2
 	li	t6, 0
-	mul	s0, a4, t4
-	add	s1, a2, a4
+	mul	s0, t0, t4
+	add	s1, a2, t0
 .Lpcrel_hi5:
 	auipc	s2, %pcrel_hi(kmeans_kernel_c_wt_r0_b1)
 	add	s0, s1, s0
@@ -282,11 +268,11 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
                                         #     Parent Loop BB0_10 Depth=2
                                         # =>    This Inner Loop Header: Depth=3
 	#APP
-	vmcs vs5, t6
+	vmcs vs4, t6
 	#NO_APP
 	lwu	s2, 0(s1)
 	#APP
-	vmcs vs6, s2
+	vmcs vs5, s2
 	#NO_APP
 .Lpcrel_hi6:
 	auipc	s2, %pcrel_hi(kmeans_kernel_c_wt_r0_b2)
@@ -295,7 +281,7 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
 	#APP
 	vf 0(s2)
 	#NO_APP
-	add	t6, t6, a6
+	add	t6, t6, a4
 	bne	s1, s0, .LBB0_12
 # %bb.13:                               # %ct_.loopexit
                                         #   in Loop: Header=BB0_10 Depth=2
@@ -331,7 +317,7 @@ kmeans_swap_ct:                         # @kmeans_swap_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a5, 1048559
-	addi	a5, a5, -11
+	addi	a5, a5, -7
 	srli	a5, a5, 1
 	not	a5, a5
 	#APP
@@ -340,12 +326,12 @@ kmeans_swap_ct:                         # @kmeans_swap_ct
 	#APP
 	vmcs vs62, a2
 	#NO_APP
-	sext.w	a2, a3
+	sext.w	a3, a3
 	#APP
 	vmcs vs61, a1
 	#NO_APP
 	#APP
-	vmcs vs60, a2
+	vmcs vs60, a3
 	#NO_APP
 	sext.w	a1, a4
 	li	a2, 2
@@ -366,12 +352,10 @@ kmeans_swap_ct:                         # @kmeans_swap_ct
 	beqz	a0, .LBB1_9
 # %bb.1:                                # %stripmine.preheader
 	li	a1, 0
-	slli	a2, a4, 32
-	slli	a3, a3, 32
-	srli	a2, a2, 32
-	srli	a3, a3, 32
+	slli	a4, a4, 32
 .Lpcrel_hi9:
-	auipc	a4, %pcrel_hi(hwacha_group_size)
+	auipc	a2, %pcrel_hi(hwacha_group_size)
+	srli	a4, a4, 32
 .Lpcrel_hi11:
 	auipc	a6, %pcrel_hi(kmeans_swap_wt)
 .Lpcrel_hi10:
@@ -386,7 +370,7 @@ kmeans_swap_ct:                         # @kmeans_swap_ct
 .LBB1_2:                                # %stripmine
                                         # =>This Loop Header: Depth=1
                                         #     Child Loop BB1_7 Depth 2
-	ld	t2, %pcrel_lo(.Lpcrel_hi9)(a4)
+	ld	t2, %pcrel_lo(.Lpcrel_hi9)(a2)
 	mv	t1, a0
 	beqz	t2, .LBB1_4
 # %bb.3:                                # %stripmine
@@ -420,17 +404,17 @@ kmeans_swap_ct:                         # @kmeans_swap_ct
                                         #   Parent Loop BB1_2 Depth=1
                                         # =>  This Inner Loop Header: Depth=2
 	#APP
-	vmcs vs4, t3
+	vmcs vs3, t3
 	#NO_APP
 	#APP
-	vmcs vs5, t2
+	vmcs vs4, t2
 	#NO_APP
 	addi	t3, t3, 1
 	#APP
 	vf 0(a7)
 	#NO_APP
 	add	t2, t2, a3
-	bne	a2, t3, .LBB1_7
+	bne	a4, t3, .LBB1_7
 # %bb.8:                                # %ct_after
                                         #   in Loop: Header=BB1_2 Depth=1
 	sub	a0, a0, t1

@@ -39,6 +39,7 @@ pgain_kernel_wt:
     @vp5 vadd vs4, vs0, vs0
     vpclear vp2
 .Lpgain_kernel_loop2:
+    @!vp1 vcjal 0, vs1, .Lpgain_kernel_skip3
     vmul vs5, vs4, vs60
     vmul vs6, vs5, vs48
     vadd vs5, vs2, vs6
@@ -49,6 +50,7 @@ pgain_kernel_wt:
     vadd vs4, vs4, vs55
     vadd vv2, vs4, vs0
     vcmpeq vp5, vv2, vs3
+.Lpgain_kernel_skip3:
     vpop vp7, vp1, vp5, vp5, 0x80
     vpop vp8, vp1, vp5, vp5, 0x02
     vpop vp2, vp2, vp7, vp7, 0xEE
@@ -59,10 +61,10 @@ pgain_kernel_wt:
     vfence
     vpop vp2, vp1, vp4, vp4, 0x80
     vpop vp5, vp1, vp4, vp4, 0x02
-    @!vp2 vcjal 0, vs1, .Lpgain_kernel_skip3
+    @!vp2 vcjal 0, vs1, .Lpgain_kernel_skip4
     vsll vs2, vs59, vs51
     vsrl vs2, vs2, vs51
-.Lpgain_kernel_skip3:
+.Lpgain_kernel_skip4:
     @vp2 vaddw vv4, vs0, vs0
     vstop
     .globl pgain_kernel_wt_r0_b0
@@ -77,23 +79,23 @@ pgain_kernel_wt_a0:
     vpop vp1, vp1, vp5, vp5, 0xEE
     @vp5 vaddw vv5, vs0, vs0
     @vp2 vaddw vv5, vv4, vs0
-    @!vp1 vcjal 0, vs1, .Lpgain_kernel_skip4
+    @!vp1 vcjal 0, vs1, .Lpgain_kernel_skip5
     @vp1 vlstw vv4, va0, va6
     @vp1 vfmul.s vv5, vv5, vv4
     @vp1 vlstw vv4, va1, va7
     vaddw vs2, vs53, vs54
     @vp1 vmul vv2, vs2, vv0
     vcmpflt.s vp2, vv5, vv4
-.Lpgain_kernel_skip4:
+.Lpgain_kernel_skip5:
     vpop vp4, vp1, vp2, vp2, 0x80
     vpop vp5, vp1, vp2, vp2, 0x02
-    @!vp4 vcjal 0, vs1, .Lpgain_kernel_skip5
+    @!vp4 vcjal 0, vs1, .Lpgain_kernel_skip6
     vaddw vv6, vs52, vs0
     @vp4 vsb vv6, va3
     @vp4 vfsub.s vv6, vv5, vv4
     @vp4 vsstw vv6, va4, va8
-.Lpgain_kernel_skip5:
-    @!vp5 vcjal 0, vs1, .Lpgain_kernel_skip6
+.Lpgain_kernel_skip6:
+    @!vp5 vcjal 0, vs1, .Lpgain_kernel_skip7
     @vp5 vlstd vv3, va5, va9
     @vp5 vsll vv3, vv3, vs51
     @vp5 vsra vv3, vv3, vs50
@@ -104,7 +106,7 @@ pgain_kernel_wt_a0:
     @vp5 vlxw vv4, vs62, vv2
     @vp5 vfadd.s vv5, vv5, vv4
     @vp5 vsxw vv5, vs62, vv2
-.Lpgain_kernel_skip6:
+.Lpgain_kernel_skip7:
     vpop vp1, vp5, vp5, vp5, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
     vpop vp1, vp1, vp3, vp3, 0xEE

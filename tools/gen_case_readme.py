@@ -198,7 +198,24 @@ elif d == 'rodinia':
             'kmeans': ('kmeans', 'kmeans_swap（特征矩阵转置）+ kmeans_kernel_c（一步成员分配：每个点找最近的聚类中心）', '1024 个点 x 8 个特征，5 个聚类', 'NP=1024 NF=8 NC=5'),
             'bfs': ('bfs', 'BFS_1 + BFS_2，逐层同步的广度优先搜索，host 像原 OpenCL host 一样迭代到没有新节点', '2048 个节点、出度 4 的随机图，从节点 0 出发', 'NN=2048 DEG=4'),
             'pgain': ('streamcluster', 'memset_kernel + pgain_kernel（对每个点计算打开中心 x 的代价）', '1024 个点 x 8 维，4 个中心', 'NUM=1024 DIM=8 K=4 GROUP=256'),
-            'pathfinder': ('pathfinder', 'dynproc_kernel（逐行动态规划，按原 OpenCL host 的方式以 pyramid 高度分块驱动）', '8 行 x 1024 列，pyramid 2，halo 1', 'ROWS=8 COLS=1024 PYRAMID=2 HALO=1 BLOCK=128')}
+            'pathfinder': ('pathfinder', 'dynproc_kernel（逐行动态规划，按原 OpenCL host 的方式以 pyramid 高度分块驱动）', '8 行 x 1024 列，pyramid 2，halo 1', 'ROWS=8 COLS=1024 PYRAMID=2 HALO=1 BLOCK=128'),
+            'gaussian': ('gaussian', 'Fan1（每个 pivot 的乘子，1-D）+ Fan2（行更新，2-D NDRange），逐 pivot 从 host 驱动，如 gaussianElim.cpp', '64x64 对角占优线性系统', 'N=64 LS=8'),
+            'hotspot': ('hotspot', 'hotspot（2-D 热传导 stencil，BLOCK_SIZE x BLOCK_SIZE 分块，每次启动做 pyramid 高度步；hotspot.c 的 compute_tran_temp）', '64x64 网格，4 步，每次启动 2 步；块 8x8（Rodinia 用 16，16x16=256 lane 超过 Hwacha 给这个内核的 maxvl）', 'BS=8 ROWS=64 COLS=64 PYR=2 TOTAL=4'),
+            'hotspot3d': ('hotspot3D', 'hotspotOpt1（3-D 热传导 stencil，每个 work-item 负责一根 (x,y) 列并沿 z 扫描；2-D NDRange，如 3D.c）', '32x32x8，2 步，ping-pong', 'NX=32 NY=32 NZ=8 LS=8 ITER=2'),
+            'lud': ('lud', 'lud_diagonal + lud_perimeter + lud_internal（分块原地 LU 分解，无 pivoting；每步对角块、周边块、剩余子矩阵，如 lud.cpp）', '64x64 对角占优矩阵，块 8', 'BS=8 DIM=64'),
+            'nw': ('nw', 'nw_kernel1 + nw_kernel2（Needleman-Wunsch 动态规划，按 BLOCK_SIZE 块的反对角线推进，如 nw.c）', '64x64 得分矩阵（65x65 含边界），块 16，罚分 10', 'BS=16 N=64 PEN=10'),
+            'cfd': ('cfd (euler3d)', 'memset_kernel、initialize_variables、compute_step_factor、compute_flux、time_step：3 阶 RK 的欧拉方程求解，如 euler3d.cpp 的主循环', '256 个单元的合成网格（环形邻接 + 随机邻居，含 wing / far-field 面），2 次迭代', 'NEL=256 ITER=2'),
+            'lavamd': ('lavaMD', 'kernel_gpu_opencl（相邻 box 粒子间的 N 体作用力，粒子经 __local 暂存；每个 box 一个 work-group）', '2x2x2=8 个 box，每个 100 个粒子；work-group 64（Rodinia 用 128，超过 maxvl 88）', 'B1D=2 PPB=100 NT=64'),
+            'btree': ('b+tree', 'findK（点查询）+ findRangeK（范围查询），B+ 树展平成 knode 数组，每个查询一个 work-group、每个 key 槽一个 lane', 'order 63（Rodinia 256 超过 maxvl），512 个 key，32 个查询', 'ORDER=63 NKEYS=512 NQ=32'),
+            'particlefilter': ('particlefilter (naive)', 'particle_kernel（重采样：每个粒子线性扫描 CDF 找第一个 >= u[i] 的项并复制该粒子状态；double）', '512 个粒子，work-group 128', 'NP=512'),
+            'leukocyte': ('leukocyte（检测阶段）', 'GICOV_kernel（每个像素在 NCIRCLES 个圆、每圆 NPOINTS 个采样点上计算梯度投影的方差归一化均值的最大值）+ dilate_kernel（strel 窗口内取最大）；buffer 版本', '24x24 像素（梯度图带 MAX_RAD+2 边界），7 圆 x 150 点，strel 25x25', 'W=24 H=24 NPOINTS=150 NCIRCLES=7 MAX_RAD=20 STREL=25'),
+            'hybridsort': ('hybridsort（桶排序阶段）', 'histogram1024Kernel（warp-tag 的 __local 原子直方图）、bucketcount（每个元素的桶号与槽位）、bucketprefixoffset、bucketsort（散射）；pivot 与桶起点在 host 上算，如 bucketsort.c', '2048 个 float，1024 个桶；直方图 6144/96、count 与 sort 32-lane 组、prefix 1024/128', 'N=2048 DIVISIONS=1024'),
+            'srad': ('srad', 'extract、prepare + reduce（均值 / 方差）、srad_kernel、srad2_kernel、compress，如 kernel_gpu_opencl_wrapper.c', '32x32 图像，2 次迭代；NUMBER_THREADS 64', 'NR=32 NC=32 NITER=2'),
+            'backprop': ('backprop', 'bpnn_layerforward_ocl（16x16 work-group，乘积 + 组内树形归约得部分和）+ bpnn_adjust_weights_ocl（权重更新），如 backprop_ocl.cpp', '64 输入单元 -> 16 隐层单元', 'IN=64 HID=16'),
+            'myocyte': ('myocyte', 'kernel_gpu_opencl（group 0 / lane 0 跑 ECC 模型，group 1 / lane 0 跑三次 CaM 模型：一次 ODE 右端项求值）', '91 个方程，18 个参数', 'EQUATIONS=91 PARAMETERS=18')}
+    issues = {'srad': 'srad_kernel 的最终 store 用一个已被复用的寄存器做索引（hwacha-cc 寄存器分配问题），Spike 上 STORE ACCESS FAULT；见 `../known-issues/README.md`。',
+              'backprop': '16x16 的 work-group（256 个 work-item）超过 Hwacha 给这个内核的 maxvl（184），组被拆成两个 stripmine，组内 barrier 分隔的树形归约失效；见 `../known-issues/README.md`。',
+              'myocyte': 'kernel 只是分发器，两个约千行的被调函数不内联时 hwacha-cc 不生成其代码，强制内联后又超出 64 个 vs 寄存器；见 `../known-issues/README.md`。'}
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
         app, kern, size, defs = info.get(case, (case, '', '', ''))
@@ -207,9 +224,13 @@ elif d == 'rodinia':
         entries = sorted(set(re.findall(r'^\s*([A-Za-z_0-9]+_ct):', open(os.path.join(D, case, f'{case}.s')).read(), re.M)))
         t = f'# {case}\n\n'
         t += f'Rodinia `{app}` 的 OpenCL 内核在 Hwacha 上运行：**{kern}**。\n\n'
-        t += f'内核文件 `{case}.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `{"`, `".join(entries)}`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。\n\n'
+        mod = {'lavamd': '`NUMBER_THREADS` 的 #define 加了 #ifndef 以便由 Makefile 的 -D 覆盖', 'btree': 'kernel_gpu_opencl.cl 与 kernel_gpu_opencl_2.cl 合并为一个文件，第二个文件重复的结构体定义去掉、DEFAULT_ORDER_2 统一为 DEFAULT_ORDER', 'hybridsort': 'histogram1024.cl 与 bucketsort_kernels.cl 合并为一个文件', 'myocyte': 'kernel_ecc / kernel_cam 加了 __attribute__((always_inline))'}.get(case)
+        t += f'内核文件 `{case}.cl` 是 Rodinia 3.1 的原版' + (f'，唯一改动：{mod}' if mod else '，未做修改') + f'；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `{"`, `".join(entries)}`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。\n\n'
         t += f'问题规模：{size}（`{case}_main.c` 中 `{defs}`）。输入由固定种子的伪随机数生成；host 先在 Rocket 标量核上跑一个参考实现，再跑 Hwacha 内核，逐元素比对并打印两者的周期数。\n\n'
-        t += '## 文件\n\n' + files_table(case, f'{case}.s', [(f'`{case}.cl`', 'Rodinia 原版 OpenCL 内核'), (f'`{case}_main.c`', '裸机 host：构造输入、标量参考、调用 Hwacha 内核、比对并打印 PASS/FAIL 与周期数'), ('`common.h`', '伪随机数、rdcycle、REPORT 宏与 newlib 的 __errno 桩')])
+        extra = [(f'`{case}.cl`', 'Rodinia 原版 OpenCL 内核' + ('（lavaMD 的 NUMBER_THREADS 改为可由 -D 覆盖）' if case == 'lavamd' else '（两个 .cl 合并为一个文件）' if case in ('btree', 'hybridsort') else '（两个辅助函数加了 always_inline）' if case == 'myocyte' else '')), (f'`{case}_main.c`', '裸机 host：构造输入、标量参考、调用 Hwacha 内核、比对并打印 PASS/FAIL 与周期数'), ('`common.h`', '伪随机数、rdcycle、REPORT、NDRANGE1/2 启动宏、check_f、__errno 与陷阱桩')]
+        if os.path.exists(os.path.join(D, case, f'{case}_ref.c')): extra.append((f'`{case}_ref.c`', '标量参考：同一 .cl 以 C 编译（OpenCL 限定符定义为空）'))
+        if os.path.exists(os.path.join(D, case, 'main.h')): extra.append(('`main.h`', '内核 #include 的 Rodinia host 头文件的替身（fp、NUMBER_THREADS）'))
+        t += '## 文件\n\n' + files_table(case, f'{case}.s', extra)
         t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 .cl 重新生成汇编（clang -> hwacha-cc）\n```\n\n'
         t += '## Spike 结果\n\n'
         if cyc:
@@ -219,6 +240,7 @@ elif d == 'rodinia':
                 if w == 'hwacha-cc': t += f'| {k} | {sref:,} | {int(c):,} | {sref / int(c):.0f}x |\n' if sref else f'| {k} | | {int(c):,} | |\n'
             t += '\n'
         if verdicts: t += '结果：' + '，'.join(f'{k} **{v}**' for k, v in verdicts) + '。\n'
+        if case in issues: t += '\n## 已知问题\n\n' + issues[case] + '\n'
         write(case, t)
 
 elif d == 'deformable':

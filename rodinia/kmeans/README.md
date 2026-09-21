@@ -13,7 +13,7 @@ Rodinia `kmeans` 的 OpenCL 内核在 Hwacha 上运行：**kmeans_swap（特征�
 | `kmeans.s` | hwacha-cc 生成的汇编，入口 `net` |
 | `kmeans.cl` | Rodinia 原版 OpenCL 内核 |
 | `kmeans_main.c` | 裸机 host：构造输入、标量参考、调用 Hwacha 内核、比对并打印 PASS/FAIL 与周期数 |
-| `common.h` | 伪随机数、rdcycle、REPORT 宏与 newlib 的 __errno 桩 |
+| `common.h` | 伪随机数、rdcycle、REPORT、NDRANGE1/2 启动宏、check_f、__errno 与陷阱桩 |
 | `README.md` | 本文件 |
 
 ## 编译与运行
@@ -28,7 +28,7 @@ make gen-kmeans      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
-| kmeans_swap | 390,024 | 310 | 1258x |
-| kmeans_c | 390,024 | 2,061 | 189x |
+| kmeans_swap | 390,024 | 241 | 1618x |
+| kmeans_c | 390,024 | 2,059 | 189x |
 
 结果：kmeans_swap **PASS**，kmeans_c **PASS**。

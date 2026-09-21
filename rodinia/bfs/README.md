@@ -13,7 +13,7 @@ Rodinia `bfs` 的 OpenCL 内核在 Hwacha 上运行：**BFS_1 + BFS_2，逐层�
 | `bfs.s` | hwacha-cc 生成的汇编，入口 `net` |
 | `bfs.cl` | Rodinia 原版 OpenCL 内核 |
 | `bfs_main.c` | 裸机 host：构造输入、标量参考、调用 Hwacha 内核、比对并打印 PASS/FAIL 与周期数 |
-| `common.h` | 伪随机数、rdcycle、REPORT 宏与 newlib 的 __errno 桩 |
+| `common.h` | 伪随机数、rdcycle、REPORT、NDRANGE1/2 启动宏、check_f、__errno 与陷阱桩 |
 | `README.md` | 本文件 |
 
 ## 编译与运行
