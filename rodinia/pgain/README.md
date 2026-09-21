@@ -2,7 +2,7 @@
 
 Rodinia `streamcluster` 的 OpenCL 内核在 Hwacha 上运行：**memset_kernel + pgain_kernel（对每个点计算打开中心 x 的代价）**。
 
-内核文件 `pgain.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 ``，host 以 OpenCL host 传给 kernel 的同样参数调用它们。
+内核文件 `pgain.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `memset_kernel_ct`, `pgain_kernel_ct`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。
 
 问题规模：1024 个点 x 8 维，4 个中心（`pgain_main.c` 中 `NUM=1024 DIM=8 K=4 GROUP=256`）。输入由固定种子的伪随机数生成；host 先在 Rocket 标量核上跑一个参考实现，再跑 Hwacha 内核，逐元素比对并打印两者的周期数。
 

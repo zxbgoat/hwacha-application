@@ -2,7 +2,7 @@
 
 Rodinia `nearestNeighbor` 的 OpenCL 内核在 Hwacha 上运行：**NearestNeighbor**。
 
-内核文件 `nn.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 ``，host 以 OpenCL host 传给 kernel 的同样参数调用它们。
+内核文件 `nn.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `NearestNeighbor_ct`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。
 
 问题规模：2048 条记录，每条一个 (纬度, 经度)，计算到查询点的距离（`nn_main.c` 中 `N=2048`）。输入由固定种子的伪随机数生成；host 先在 Rocket 标量核上跑一个参考实现，再跑 Hwacha 内核，逐元素比对并打印两者的周期数。
 

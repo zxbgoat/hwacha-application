@@ -204,7 +204,7 @@ elif d == 'rodinia':
         app, kern, size, defs = info.get(case, (case, '', '', ''))
         line = R.get(case, '')
         cyc = re.findall(r'([a-z_]+) (scalar|hwacha-cc): (\d+) cycles', line); verdicts = re.findall(r'([a-z_]+) (PASS|FAIL)', line)
-        entries = [l.strip(':') for l in open(os.path.join(D, case, f'{case}.s')) if re.match(r'^[A-Za-z_0-9]+_ct:$', l.strip())]
+        entries = sorted(set(re.findall(r'^\s*([A-Za-z_0-9]+_ct):', open(os.path.join(D, case, f'{case}.s')).read(), re.M)))
         t = f'# {case}\n\n'
         t += f'Rodinia `{app}` 的 OpenCL 内核在 Hwacha 上运行：**{kern}**。\n\n'
         t += f'内核文件 `{case}.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `{"`, `".join(entries)}`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。\n\n'

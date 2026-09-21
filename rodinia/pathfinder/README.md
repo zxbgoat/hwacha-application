@@ -2,7 +2,7 @@
 
 Rodinia `pathfinder` 的 OpenCL 内核在 Hwacha 上运行：**dynproc_kernel（逐行动态规划，按原 OpenCL host 的方式以 pyramid 高度分块驱动）**。
 
-内核文件 `pathfinder.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 ``，host 以 OpenCL host 传给 kernel 的同样参数调用它们。
+内核文件 `pathfinder.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `dynproc_kernel_ct`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。
 
 问题规模：8 行 x 1024 列，pyramid 2，halo 1（`pathfinder_main.c` 中 `ROWS=8 COLS=1024 PYRAMID=2 HALO=1 BLOCK=128`）。输入由固定种子的伪随机数生成；host 先在 Rocket 标量核上跑一个参考实现，再跑 Hwacha 内核，逐元素比对并打印两者的周期数。
 

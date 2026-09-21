@@ -2,7 +2,7 @@
 
 Rodinia `bfs` 的 OpenCL 内核在 Hwacha 上运行：**BFS_1 + BFS_2，逐层同步的广度优先搜索，host 像原 OpenCL host 一样迭代到没有新节点**。
 
-内核文件 `bfs.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 ``，host 以 OpenCL host 传给 kernel 的同样参数调用它们。
+内核文件 `bfs.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `BFS_1_ct`, `BFS_2_ct`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。
 
 问题规模：2048 个节点、出度 4 的随机图，从节点 0 出发（`bfs_main.c` 中 `NN=2048 DEG=4`）。输入由固定种子的伪随机数生成；host 先在 Rocket 标量核上跑一个参考实现，再跑 Hwacha 内核，逐元素比对并打印两者的周期数。
 
