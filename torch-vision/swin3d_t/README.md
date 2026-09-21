@@ -1,0 +1,55 @@
+# swin3d_t
+
+torchvision `swin3d_t`（视频分类）在 Hwacha 上的一次前向，与 PyTorch 比对。文档：https://docs.pytorch.org/vision/stable/models.html#video-classification
+
+比对内容：400 类 logits，逐元素比对并要求 argmax 一致。
+
+权重随机（固定种子，BatchNorm 给随机的 running 统计量使前向非退化），输入随机；同一组权重同时用于 PyTorch 参考与 Hwacha 构建。
+
+## 本 case 的特殊处理
+
+- `torch.roll` 在时间维上位移为 0（时间窗覆盖整段 clip），会 lower 成 0 长度 slice + concat 并在 bufferize 后越界；导出时去掉零位移维度。
+
+## 形状与规模
+
+| | 值 |
+|---|---|
+| 输入 | 1x3x16x32x32（49,152 个 float）|
+| 输出元素数 | 400 |
+| 参数量 | 28.2M |
+| 权重 blob | 122 MB |
+| 帧数 | 16 |
+
+## 文件
+
+| 文件 | 内容 |
+|---|---|
+| `swin3d_t_tv.s` | hwacha-cc 生成的汇编，入口 `net` |
+| `swin3d_t_tv_weights.bin.S` | 权重的 `.incbin` 桩，按符号切分 blob；前半段放 `.weights_lo`、后半段放 `.weights_hi`（`split_weights.py`） |
+| `swin3d_t_tv_weights.bin` | 权重 blob（不入 git，`make gen-swin3d_t` 按固定种子逐字节重建） |
+| `swin3d_t_tv_check.bin` | 输入与 PyTorch 参考输出，host 用 `.incbin` 内嵌 |
+| `tv_main.c` | 通用 host：调用 `net`，比对 max\|diff\|（容差 1e-4 + 1e-2·max\|ref\|）与 argmax（分类输出） |
+| `hwlib.s` | 卷积 / 池化库内核 |
+| `HWMLIRFLAGS` | 本 case 需要的 hwacha-mlir 映射选项 |
+| `README.md` | 本文件 |
+
+## 编译与运行
+
+```
+make swin3d_t          # 编译 -> swin3d_t/swin3d_t_tv.riscv
+make swin3d_t.spike    # 在 Spike 上运行（内存按权重大小自动确定）
+make gen-swin3d_t      # 从 PyTorch 重新生成汇编、权重与参考
+```
+
+hwacha-mlir 映射：`--unroll-small=2`。
+
+## Spike 结果
+
+| 项目 | 值 |
+|---|---|
+| 结果 | PASS |
+| 周期数（rdcycle） | 78,159,714 |
+| max\|diff\| | 1e-06 |
+| max\|ref\| | 0.849447 |
+| argmax（硬件 / 参考） | 353 / 353 |
+
