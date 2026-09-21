@@ -193,6 +193,34 @@ elif d == 'torch-function':
         t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
         write(case, t)
 
+elif d == 'rodinia':
+    info = {'nn': ('nearestNeighbor', 'NearestNeighbor', '2048 条记录，每条一个 (纬度, 经度)，计算到查询点的距离', 'N=2048'),
+            'kmeans': ('kmeans', 'kmeans_swap（特征矩阵转置）+ kmeans_kernel_c（一步成员分配：每个点找最近的聚类中心）', '1024 个点 x 8 个特征，5 个聚类', 'NP=1024 NF=8 NC=5'),
+            'bfs': ('bfs', 'BFS_1 + BFS_2，逐层同步的广度优先搜索，host 像原 OpenCL host 一样迭代到没有新节点', '2048 个节点、出度 4 的随机图，从节点 0 出发', 'NN=2048 DEG=4'),
+            'pgain': ('streamcluster', 'memset_kernel + pgain_kernel（对每个点计算打开中心 x 的代价）', '1024 个点 x 8 维，4 个中心', 'NUM=1024 DIM=8 K=4 GROUP=256'),
+            'pathfinder': ('pathfinder', 'dynproc_kernel（逐行动态规划，按原 OpenCL host 的方式以 pyramid 高度分块驱动）', '8 行 x 1024 列，pyramid 2，halo 1', 'ROWS=8 COLS=1024 PYRAMID=2 HALO=1 BLOCK=128')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        app, kern, size, defs = info.get(case, (case, '', '', ''))
+        line = R.get(case, '')
+        cyc = re.findall(r'([a-z_]+) (scalar|hwacha-cc): (\d+) cycles', line); verdicts = re.findall(r'([a-z_]+) (PASS|FAIL)', line)
+        entries = [l.strip(':') for l in open(os.path.join(D, case, f'{case}.s')) if re.match(r'^[A-Za-z_0-9]+_ct:$', l.strip())]
+        t = f'# {case}\n\n'
+        t += f'Rodinia `{app}` 的 OpenCL 内核在 Hwacha 上运行：**{kern}**。\n\n'
+        t += f'内核文件 `{case}.cl` 是 Rodinia 3.1 的原版，未做修改；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `{"`, `".join(entries)}`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。\n\n'
+        t += f'问题规模：{size}（`{case}_main.c` 中 `{defs}`）。输入由固定种子的伪随机数生成；host 先在 Rocket 标量核上跑一个参考实现，再跑 Hwacha 内核，逐元素比对并打印两者的周期数。\n\n'
+        t += '## 文件\n\n' + files_table(case, f'{case}.s', [(f'`{case}.cl`', 'Rodinia 原版 OpenCL 内核'), (f'`{case}_main.c`', '裸机 host：构造输入、标量参考、调用 Hwacha 内核、比对并打印 PASS/FAIL 与周期数'), ('`common.h`', '伪随机数、rdcycle、REPORT 宏与 newlib 的 __errno 桩')])
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 .cl 重新生成汇编（clang -> hwacha-cc）\n```\n\n'
+        t += '## Spike 结果\n\n'
+        if cyc:
+            t += '| 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |\n|---|---|---|---|\n'
+            sc = {k: int(c) for k, w, c in cyc if w == 'scalar'}; sref = next(iter(sc.values()), None)
+            for k, w, c in cyc:
+                if w == 'hwacha-cc': t += f'| {k} | {sref:,} | {int(c):,} | {sref / int(c):.0f}x |\n' if sref else f'| {k} | | {int(c):,} | |\n'
+            t += '\n'
+        if verdicts: t += '结果：' + '，'.join(f'{k} **{v}**' for k, v in verdicts) + '。\n'
+        write(case, t)
+
 elif d == 'deformable':
     sys.path.insert(0, D); import export_dcn as E
     desc = {'deform_conv': ('一个 3x3 可变形卷积（DCN v1）：偏移量由同一输入上的 3x3 卷积预测，每个采样点双线性插值后做 im2col 矩阵乘', '输出特征图 1x64x16x16'),
