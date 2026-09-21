@@ -193,6 +193,47 @@ elif d == 'torch-function':
         t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
         write(case, t)
 
+elif d == 'deformable':
+    sys.path.insert(0, D); import export_dcn as E
+    desc = {'deform_conv': ('一个 3x3 可变形卷积（DCN v1）：偏移量由同一输入上的 3x3 卷积预测，每个采样点双线性插值后做 im2col 矩阵乘', '输出特征图 1x64x16x16'),
+            'deform_conv_v2': ('一个 3x3 可变形卷积（DCN v2）：偏移量加 sigmoid 调制掩码', '输出特征图 1x64x16x16'),
+            'psroi_pool': ('位置敏感 RoI 池化（R-FCN），k=7，3 个固定 RoI；bin 规则与 torchvision.ops.ps_roi_pool 完全一致', '池化结果 (3, 4, 7, 7)'),
+            'deform_psroi': ('可变形位置敏感 RoI 池化：先做一次常规 PS-RoI 池化，3x3 卷积预测每个 bin 的 (dy, dx)，再按偏移双线性采样', '池化结果 (3, 4, 7, 7)'),
+            'deeplab': ('DeepLab（仓库 deeplab/ 的形式）：ResNet-101 conv5 空洞化（输出 stride 16）+ 1x1 分类器 + 双线性上采样到输入尺寸，Cityscapes 19 类', 'logits 图 1x19x64x64'),
+            'rfcn': ('R-FCN：ResNet-101 conv5 空洞化 -> 1x1 降维到 1024 -> 位置敏感的类别得分图（k*k*C）与 bbox 图（k*k*4）-> 3 个固定 RoI 的 PS-RoI 池化 -> 各 bin 平均投票；conv5 上另有 RPN 头', 'RPN 的 cls/box 图、类别投票、bbox 投票拼接成一行'),
+            'rcnn': ('Faster R-CNN（2fc 头）：ResNet-101 conv5 空洞化 -> 1x1 降维到 256 -> 3 个固定 RoI 的 7x7 平均 RoI 池化 -> fc1024 x2 -> cls / box；conv5 上另有 RPN 头', 'RPN 的 cls/box 图、cls 与 box 得分拼接成一行'),
+            'fpn': ('FPN：ResNet-101 的 C2-C5 经 1x1 侧向连接 + 自顶向下 + 3x3 平滑得到 P2-P5，P6 为 P5 的 stride-2 池化；共享 RPN 头作用于每一级', '各级 RPN 头输出拼接成一行')}
+    dcn_note = '`_dcn` 变体：conv5 阶段（res5a-c）的 3x3 卷积换成可变形卷积（论文的做法）'
+    extra = {'rfcn': '，RoI 池化换成可变形 PS-RoI 池化（每个 bin 的偏移由第一次池化的特征经 3x3 卷积预测，gamma=0.1）', 'rcnn': '，RoI 池化换成可变形 RoI 池化（每个 bin 的偏移由 fc 预测）', 'fpn': '', 'deeplab': ''}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}_tv.s')): continue
+        base = re.sub(r'_(dcn|voc|coco|v2)', '', case) if case not in desc else case
+        if case in ('deform_conv_v2', 'deform_psroi'): base = case
+        d0, out = desc.get(base, ('', ''))
+        ncls = {'_voc': 'VOC 21 类', '_coco': 'COCO 81 类'}
+        cls_note = next((v for k, v in ncls.items() if case.endswith(k)), '')
+        if base == 'deeplab' and case.endswith('_voc'): d0 = d0.replace('Cityscapes 19 类', 'VOC 21 类'); out = out.replace('19', '21')
+        ctor, shape = E.MODELS[case]; torch.manual_seed(0); m = ctor().eval()
+        nparam = sum(p.numel() for p in m.parameters()) / 1e6
+        cb = os.path.join(D, case, f'{case}_tv_check.bin'); nin = nout = None
+        if os.path.exists(cb):
+            with open(cb, 'rb') as f: f.read(4); nin = struct.unpack('i', f.read(4))[0]; f.seek(8 + nin * 4); nout = struct.unpack('i', f.read(4))[0]
+        wpath = os.path.join(D, case, f'{case}_tv_weights.bin'); wsz = os.path.getsize(wpath) if os.path.exists(wpath) else None
+        t = f'# {case}\n\n'
+        t += f'Deformable ConvNets（github.com/msracver/Deformable-ConvNets）的 **{case}** 在 Hwacha 上的一次前向，与 PyTorch 比对。\n\n'
+        t += f'模型：{d0}' + (f'（{cls_note}）' if cls_note and base != 'deeplab' else '') + '。\n\n'
+        if '_dcn' in case: t += f'{dcn_note}{extra.get(base, "")}。\n\n'
+        t += f'比对内容：{out}，逐元素比对（容差 1e-4 + 1e-2·max\\|ref\\|）。\n\n'
+        t += '权重随机（固定种子，未加载 MXNet 的 .params；BatchNorm 给随机 running 统计量），输入随机，64x64 图像；检测模型的 RoI 固定、RPN 头输出计入比对，proposal 选择 / NMS 因形状数据相关未导出。可变形卷积与 PS-RoI 池化是 `../dcn_ops.py` 中的纯张量实现（torch-mlir 无法 lower torchvision 的自定义算子），与 torchvision.ops 数值一致到 1e-7。\n\n'
+        t += '## 形状与规模\n\n| | 值 |\n|---|---|\n' + f'| 输入 | {"x".join(map(str, shape))}' + (f'（{nin:,} 个 float）' if nin else '') + ' |\n'
+        if nout: t += f'| 输出元素数 | {nout:,} |\n'
+        t += f'| 参数量 | {nparam:.1f}M |\n'
+        if wsz: t += f'| 权重 blob | {wsz / 1048576:.0f} MB |\n'
+        t += '\n## 文件\n\n' + files_table(case, f'{case}_tv.s', [(f'`{case}_tv_weights.bin.S`', '权重的 `.incbin` 桩（`split_weights.py` 分成 `.weights_lo` / `.weights_hi` 两段）'), (f'`{case}_tv_weights.bin`', f'权重 blob（不入 git，`make gen-{case}` 按固定种子重建）'), (f'`{case}_tv_check.bin`', '输入与 PyTorch 参考输出，host 用 `.incbin` 内嵌'), ('`tv_main.c`', '通用 host：调用 `net`，比对 max\\|diff\\|（分类型输出还比对 argmax）'), ('`hwlib.s`', '卷积 / 池化库内核')] + ([('`HWMLIRFLAGS`', '本 case 需要的 hwacha-mlir 映射选项')] if flags(case) else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '_tv.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认（最内维为 lane）"}`。\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
 elif d == 'torch-vision':
     import torchvision, torchvision.models as M
     models = {}
