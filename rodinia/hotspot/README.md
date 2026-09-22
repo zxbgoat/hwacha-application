@@ -28,6 +28,6 @@ make gen-hotspot      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
-| hotspot | 596,028 | 11,494 | 52x |
+| hotspot | 596,028 | 11,496 | 52x |
 
 结果：hotspot **PASS**。

@@ -49,7 +49,7 @@ hotspot_wt:
     vpop vp6, vp3, vp5, vp5, 0x02
     @!vp2 vcjal 0, vs1, .Lhotspot_skip1
     @vp2 vsll vv4, vv25, vs38
-    @vp2 vlxw vv23, vs57, vv4
+    @vp2 vlxw vv23, vs58, vv4
     @vp2 vmul vv4, vs3, vv2
     @vp2 vsub vv4, vs0, vv4
     @vp2 vsub vv4, vv4, vv1
@@ -61,7 +61,7 @@ hotspot_wt:
     @vp2 vadd vv4, vv4, vv5
     @vp2 vsxw vv23, vs62, vv4
     @vp2 vsll vv4, vv25, vs38
-    @vp2 vlxw vv23, vs58, vv4
+    @vp2 vlxw vv23, vs57, vv4
     @vp2 vmul vv4, vs3, vv2
     @vp2 vsub vv4, vs0, vv4
     @vp2 vsub vv4, vv4, vv1
@@ -71,7 +71,7 @@ hotspot_wt:
     @vp2 vadd vv4, vv4, vv5
     @vp2 vsll vv5, vv0, vs38
     @vp2 vadd vv4, vv4, vv5
-    @vp2 vsxw vv23, vs61, vv4
+    @vp2 vsxw vv23, vs59, vv4
 .Lhotspot_skip1:
     vpop vp3, vp2, vp2, vp2, 0xAA
     vpop vp3, vp3, vp6, vp6, 0xEE
@@ -120,10 +120,14 @@ hotspot_wt:
     vcmplt vp3, vv24, vv3
     vcmplt vp6, vv1, vv19
     vcmplt vp7, vv27, vv1
-    vsll vv4, vv21, vs33
-    vsrl vv4, vv4, vs33
-    vsll vv5, vv22, vs33
-    vsrl vv5, vv5, vs33
+    vaddi vs4, vs33, 0
+    vlsd vs4, vs4
+    vsll vv4, vv21, vs4
+    vsrl vv4, vv4, vs4
+    vaddi vs4, vs33, 0
+    vlsd vs4, vs4
+    vsll vv5, vv22, vs4
+    vsrl vv5, vv5, vs4
     vaddw vs4, vs47, vs40
     @vp4 vmul vv6, vs3, vv2
     @vp4 vsub vv6, vs0, vv6
@@ -190,7 +194,7 @@ hotspot_wt:
     @vp4 vadd vv13, vv13, vv7
 .Lhotspot_skip3:
     vpop vp8, vp4, vp4, vp4, 0xAA
-    @vp4 vadd vs5, vs0, vs0
+    @vp4 vaddw vs5, vs0, vs0
     vpclear vp9
 .Lhotspot_loop4:
     vaddw vs6, vs5, vs46
@@ -214,7 +218,7 @@ hotspot_wt:
     vpop vp13, vp10, vp4, vp4, 0x02
     @!vp13 vcjal 0, vs1, .Lhotspot_skip6
     @vp13 vlxw vv19, vs62, vv6
-    @vp13 vlxw vv20, vs61, vv8
+    @vp13 vlxw vv20, vs59, vv8
     @vp13 vlxw vv21, vs62, vv9
     @vp13 vlxw vv22, vs62, vv10
     @vp13 vfadd.s vv21, vv21, vv22
@@ -228,7 +232,7 @@ hotspot_wt:
     @vp13 vfsub.s vv21, vs34, vv19
     @vp13 vfmadd.s vv21, vv21, vv18, vv20
     @vp13 vfmadd.s vv21, vv15, vv21, vv19
-    @vp13 vsxw vv21, vs60, vv5
+    @vp13 vsxw vv21, vs61, vv5
 .Lhotspot_skip6:
     vpop vp4, vp13, vp13, vp13, 0xAA
     vpop vp4, vp4, vp12, vp12, 0xEE
@@ -249,13 +253,13 @@ hotspot_wt:
     vpop vp4, vp13, vp10, vp10, 0x80
     vpop vp11, vp13, vp10, vp10, 0x02
     @!vp4 vcjal 0, vs1, .Lhotspot_skip8
-    @vp4 vlxw vv19, vs60, vv12
+    @vp4 vlxw vv19, vs61, vv12
     @vp4 vsxw vv19, vs62, vv13
 .Lhotspot_skip8:
     vpop vp10, vp4, vp4, vp4, 0xAA
     vpop vp10, vp10, vp11, vp11, 0xEE
     vfence
-    @vp10 vadd vs5, vs6, vs0
+    @vp10 vaddw vs5, vs6, vs0
     @vp10 vcjal 1, vs1, .Lhotspot_loop4
     vpop vp2, vp12, vp12, vp12, 0xAA
     vpop vp2, vp2, vp9, vp9, 0xEE
@@ -273,9 +277,9 @@ hotspot_wt:
     @vp2 vadd vv2, vv2, vv4
     @vp2 vsll vv1, vv0, vs38
     @vp2 vadd vv2, vv2, vv1
-    @vp2 vlxw vv15, vs60, vv2
+    @vp2 vlxw vv15, vs61, vv2
     @vp2 vsll vv1, vv25, vs38
-    @vp2 vsxw vv15, vs59, vv1
+    @vp2 vsxw vv15, vs60, vv1
 .Lhotspot_skip9:
     vpop vp3, vp2, vp2, vp2, 0xAA
     vpop vp3, vp3, vp4, vp4, 0xEE
@@ -290,54 +294,60 @@ hotspot_wt:
 hotspot_ct:                             # @hotspot_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	t1, 1048468
+	lui	t0, 1048468
+	addi	t0, t0, 993
+	srli	t0, t0, 1
+	not	t1, t0
 	lw	t0, 0(sp)
-	addi	t1, t1, 993
-	srli	t1, t1, 1
-.Lpcrel_hi0:
-	auipc	t2, %pcrel_hi(.L_MergedGlobals)
-	not	t1, t1
-	addi	t2, t2, %pcrel_lo(.Lpcrel_hi0)
 	#APP
 	vsetcfg t1
 	#NO_APP
+.Lpcrel_hi0:
+	auipc	t1, %pcrel_hi(.Lhotspot_cpool)
+.Lpcrel_hi1:
+	auipc	t2, %pcrel_hi(.L_MergedGlobals)
+	addi	t1, t1, %pcrel_lo(.Lpcrel_hi0)
+	addi	t2, t2, %pcrel_lo(.Lpcrel_hi1)
+	#APP
+	vmcs vs33, t1
+	#NO_APP
+	addi	t1, t2, 256
 	#APP
 	vmcs vs62, t2
 	#NO_APP
-	addi	t1, t2, 256
-	addi	t2, t2, 512
 	#APP
 	vmcs vs61, t1
 	#NO_APP
 	#APP
-	vmcs vs60, t2
+	vmcs vs60, a4
 	#NO_APP
+	addi	a4, t2, 512
 	#APP
 	vmcs vs59, a4
 	#NO_APP
 	#APP
-	vmcs vs58, a2
+	vmcs vs58, a3
 	#NO_APP
-.Lpcrel_hi1:
-	auipc	a2, %pcrel_hi(hwacha_ls0)
+.Lpcrel_hi2:
+	auipc	a3, %pcrel_hi(hwacha_ls0)
 	fmv.x.s	a4, fa4
 	#APP
-	vmcs vs57, a3
+	vmcs vs57, a2
 	#NO_APP
-	addi	a2, a2, %pcrel_lo(.Lpcrel_hi1)
-.Lpcrel_hi2:
+	addi	a2, a3, %pcrel_lo(.Lpcrel_hi2)
+.Lpcrel_hi3:
 	auipc	a3, %pcrel_hi(hwacha_ls1)
 	fmv.x.s	t1, fa0
 	#APP
 	vmcs vs56, a2
 	#NO_APP
-	addi	a2, a3, %pcrel_lo(.Lpcrel_hi2)
+	addi	a2, a3, %pcrel_lo(.Lpcrel_hi3)
 	#APP
 	vmcs vs55, a2
 	#NO_APP
-.Lpcrel_hi3:
+.Lpcrel_hi4:
 	auipc	a2, %pcrel_hi(hwacha_ng0)
-	addi	a2, a2, %pcrel_lo(.Lpcrel_hi3)
+	addi	a2, a2, %pcrel_lo(.Lpcrel_hi4)
 	fmv.x.s	a3, fa1
 	slli	a4, a4, 32
 	fmv.x.s	t2, fa2
@@ -416,22 +426,18 @@ hotspot_ct:                             # @hotspot_ct
 	#APP
 	vmcs vs37, a1
 	#NO_APP
-	li	a1, 3
-	li	a2, 6
-	slli	a1, a1, 30
+	li	a1, 6
 	#APP
-	vmcs vs36, a2
+	vmcs vs36, a1
 	#NO_APP
+	li	a1, 3
+	slli	a1, a1, 30
+	lui	a2, 272896
 	#APP
 	vmcs vs35, a1
 	#NO_APP
-	lui	a1, 272896
-	li	a2, 32
 	#APP
-	vmcs vs34, a1
-	#NO_APP
-	#APP
-	vmcs vs33, a2
+	vmcs vs34, a2
 	#NO_APP
 	beqz	a0, .LBB0_7
 # %bb.1:                                # %stripmine.preheader
@@ -439,19 +445,19 @@ hotspot_ct:                             # @hotspot_ct
 	j	.LBB0_3
 .LBB0_2:                                # %stripmine
                                         #   in Loop: Header=BB0_3 Depth=1
-.Lpcrel_hi5:
+.Lpcrel_hi6:
 	auipc	a3, %pcrel_hi(hwacha_vl_short)
 	#APP
 	vsetvl a4, a2
 	#NO_APP
-	ld	a5, %pcrel_lo(.Lpcrel_hi5)(a3)
+	ld	a5, %pcrel_lo(.Lpcrel_hi6)(a3)
 	sltu	a2, a4, a2
 	or	a2, a5, a2
-.Lpcrel_hi6:
+.Lpcrel_hi7:
 	auipc	a5, %pcrel_hi(hotspot_wt)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi6)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi7)
 	sub	a0, a0, a4
-	sd	a2, %pcrel_lo(.Lpcrel_hi5)(a3)
+	sd	a2, %pcrel_lo(.Lpcrel_hi6)(a3)
 	#APP
 	vmcs vs63, a1
 	#NO_APP
@@ -462,9 +468,9 @@ hotspot_ct:                             # @hotspot_ct
 	beqz	a0, .LBB0_7
 .LBB0_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-.Lpcrel_hi4:
+.Lpcrel_hi5:
 	auipc	a2, %pcrel_hi(hwacha_group_size)
-	ld	a2, %pcrel_lo(.Lpcrel_hi4)(a2)
+	ld	a2, %pcrel_lo(.Lpcrel_hi5)(a2)
 	mv	a3, a0
 	beqz	a2, .LBB0_5
 # %bb.4:                                # %stripmine
@@ -487,6 +493,13 @@ hotspot_ct:                             # @hotspot_ct
 	.size	hotspot_ct, .Lfunc_end0-hotspot_ct
 	.cfi_endproc
                                         # -- End function
+	.type	.Lhotspot_cpool,@object         # @hotspot_cpool
+	.section	.rodata,"a",@progbits
+	.p2align	3, 0x0
+.Lhotspot_cpool:
+	.quad	32                              # 0x20
+	.size	.Lhotspot_cpool, 8
+
 	.type	hwacha_ls0,@object              # @hwacha_ls0
 	.bss
 	.weak	hwacha_ls0
@@ -528,8 +541,8 @@ hwacha_vl_short:
 	.comm	.L_MergedGlobals,768,4
 hotspot.temp_on_cuda = .L_MergedGlobals
 	.size	hotspot.temp_on_cuda, 256
-hotspot.power_on_cuda = .L_MergedGlobals+256
-	.size	hotspot.power_on_cuda, 256
-hotspot.temp_t = .L_MergedGlobals+512
+hotspot.temp_t = .L_MergedGlobals+256
 	.size	hotspot.temp_t, 256
+hotspot.power_on_cuda = .L_MergedGlobals+512
+	.size	hotspot.power_on_cuda, 256
 	.section	".note.GNU-stack","",@progbits

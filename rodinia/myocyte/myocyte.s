@@ -8,25 +8,10442 @@ kernel_gpu_opencl_wt:
     vpset vp0
     veidx vv0
     vpclear vp1
-    vaddw vv1, vs63, vs0
-    vcmpeq vp2, vv1, vs0
+    vaddw vv3, vs60, vs0
+    vcmpeq vp2, vv3, vs0
     vpop vp3, vp0, vp2, vp2, 0x80
     vpop vp4, vp0, vp2, vp2, 0x02
     vcmpeq vp2, vv0, vs0
     vpop vp5, vp3, vp2, vp2, 0x80
     vpop vp6, vp3, vp2, vp2, 0x02
     @!vp4 vcjal 0, vs1, .Lkernel_gpu_opencl_skip0
-    vaddw vv1, vs63, vs0
-    vcmpeq vp2, vv1, vs62
+    vaddw vv3, vs60, vs0
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 56
+    vlsd vs2, vs2
+    vcmpeq vp2, vv3, vs2
     vcmpeq vp3, vv0, vs0
     vpop vp3, vp2, vp3, vp1, 0xD8
 .Lkernel_gpu_opencl_skip0:
     vpop vp2, vp4, vp3, vp3, 0x80
     vpop vp7, vp4, vp3, vp3, 0x02
-    vpop vp3, vp2, vp2, vp2, 0xAA
-    vpop vp3, vp3, vp7, vp7, 0xEE
-    vpop vp3, vp3, vp5, vp5, 0xEE
-    vpop vp3, vp3, vp6, vp6, 0xEE
+    @!vp5 vcjal 0, vs1, .Lkernel_gpu_opencl_skip1
+    vfcvt.s.w vv3, vs59
+    vadd vs2, vs58, vs57
+    vlsw vs2, vs2
+    vaddi vs62, vs63, 136
+    vssd vs62, vs2
+    vlsw vs3, vs56
+    vadd vs4, vs56, vs55
+    vlsw vs4, vs4
+    vadd vs5, vs56, vs54
+    vlsw vs5, vs5
+    vadd vs6, vs56, vs53
+    vlsw vs6, vs6
+    vaddi vs62, vs63, 8
+    vssd vs62, vs6
+    vadd vs7, vs56, vs52
+    vlsw vs7, vs7
+    vaddi vs62, vs63, 0
+    vssd vs62, vs7
+    vadd vs8, vs56, vs51
+    vlsw vs8, vs8
+    vadd vs9, vs56, vs50
+    vlsw vs9, vs9
+    vadd vs10, vs56, vs49
+    vlsw vs10, vs10
+    vaddi vs62, vs63, 72
+    vssd vs62, vs10
+    vadd vs11, vs56, vs48
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 40
+    vssd vs62, vs11
+    vadd vs12, vs56, vs47
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 32
+    vssd vs62, vs12
+    vadd vs13, vs56, vs46
+    vlsw vs13, vs13
+    vaddi vs62, vs63, 24
+    vssd vs62, vs13
+    vadd vs14, vs56, vs45
+    vlsw vs14, vs14
+    vaddi vs62, vs63, 16
+    vssd vs62, vs14
+    vadd vs15, vs56, vs44
+    vlsw vs15, vs15
+    vadd vs16, vs56, vs43
+    vlsw vs16, vs16
+    vadd vs17, vs56, vs42
+    vlsw vs17, vs17
+    vadd vs18, vs56, vs57
+    vlsw vs18, vs18
+    vadd vs19, vs56, vs41
+    vlsw vs19, vs19
+    vadd vs20, vs56, vs40
+    vlsw vs20, vs20
+    vadd vs21, vs56, vs39
+    vlsw vs21, vs21
+    vadd vs22, vs56, vs38
+    vlsw vs22, vs22
+    vadd vs23, vs56, vs37
+    vlsw vs23, vs23
+    vadd vs24, vs56, vs36
+    vlsw vs24, vs24
+    vadd vs25, vs56, vs35
+    vlsw vs25, vs25
+    vadd vs26, vs56, vs34
+    vlsw vs26, vs26
+    vadd vs27, vs56, vs33
+    vlsw vs27, vs27
+    vaddi vs29, vs32, 0
+    vlsd vs29, vs29
+    vadd vs28, vs56, vs29
+    vlsw vs28, vs28
+    vaddi vs30, vs32, 8
+    vlsd vs30, vs30
+    vadd vs29, vs56, vs30
+    vlsw vs29, vs29
+    vaddi vs31, vs32, 16
+    vlsd vs31, vs31
+    vadd vs30, vs56, vs31
+    vlsw vs30, vs30
+    vaddi vs7, vs32, 24
+    vlsd vs7, vs7
+    vadd vs31, vs56, vs7
+    vlsw vs31, vs31
+    vaddi vs6, vs32, 32
+    vlsd vs6, vs6
+    vadd vs7, vs56, vs6
+    vlsw vs7, vs7
+    vaddi vs14, vs32, 40
+    vlsd vs14, vs14
+    vadd vs6, vs56, vs14
+    vlsw vs6, vs6
+    vaddi vs13, vs32, 48
+    vlsd vs13, vs13
+    vadd vs14, vs56, vs13
+    vlsw vs14, vs14
+    vaddi vs12, vs32, 56
+    vlsd vs12, vs12
+    vadd vs13, vs56, vs12
+    vlsw vs13, vs13
+    vaddi vs11, vs32, 64
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 48
+    vssd vs62, vs12
+    vaddi vs12, vs32, 72
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 56
+    vssd vs62, vs11
+    vaddi vs11, vs32, 80
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 64
+    vssd vs62, vs12
+    vaddi vs12, vs32, 88
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 152
+    vssd vs62, vs11
+    vaddi vs10, vs32, 96
+    vlsd vs10, vs10
+    vadd vs12, vs56, vs10
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 80
+    vssd vs62, vs12
+    vaddi vs12, vs32, 104
+    vlsd vs12, vs12
+    vadd vs10, vs56, vs12
+    vlsw vs10, vs10
+    vaddi vs62, vs63, 88
+    vssd vs62, vs10
+    vaddi vs12, vs32, 112
+    vlsd vs12, vs12
+    @vp5 vfdiv.s vv4, vs12, vs6
+    vaddi vs12, vs32, 120
+    vlsd vs12, vs12
+    @vp5 vsrlw vv5, vv4, vs12
+    vaddi vs12, vs32, 128
+    vlsd vs12, vs12
+    @vp5 vand vv5, vv5, vs12
+    vaddi vs12, vs32, 136
+    vlsd vs12, vs12
+    @vp5 vand vv6, vv4, vs12
+    vaddi vs12, vs32, 144
+    vlsd vs12, vs12
+    @vp5 vor vv6, vv6, vs12
+    vaddi vs12, vs32, 152
+    vlsd vs12, vs12
+    vcmpflt.s vp3, vv6, vs12
+    vaddi vs12, vs32, 160
+    vlsd vs12, vs12
+    vaddi vs10, vs32, 168
+    vlsd vs10, vs10
+    @vp3 vaddw vv4, vs12, vs0
+    @!vp3 vaddw vv4, vs10, vs0
+    @vp5 vaddw vv5, vv5, vv4
+    vfcvt.s.w vv5, vv5
+    vaddi vs10, vs32, 176
+    vlsd vs10, vs10
+    @vp3 vaddw vv4, vv6, vs0
+    @!vp3 vaddw vv4, vs10, vs0
+    @vp5 vfadd.s vv4, vv4, vv6
+    vaddi vs10, vs32, 184
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv4, vv4, vs10
+    @vp5 vfmul.s vv6, vv4, vv4
+    vaddi vs10, vs32, 192
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv7, vv4, vs10
+    vaddi vs10, vs32, 200
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv7, vv7, vs10
+    @vp5 vfmul.s vv7, vv7, vv4
+    vaddi vs10, vs32, 208
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv7, vv7, vs10
+    @vp5 vfmul.s vv7, vv7, vv4
+    vaddi vs10, vs32, 216
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv7, vv7, vs10
+    @vp5 vfmul.s vv7, vv7, vv4
+    vaddi vs10, vs32, 224
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv7, vv7, vs10
+    @vp5 vfmul.s vv7, vv7, vv4
+    vaddi vs10, vs32, 232
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv7, vv7, vs10
+    @vp5 vfmul.s vv7, vv7, vv4
+    vaddi vs10, vs32, 240
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv7, vv7, vs10
+    @vp5 vfmul.s vv7, vv7, vv4
+    vaddi vs10, vs32, 248
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv7, vv7, vs10
+    @vp5 vfmul.s vv7, vv7, vv4
+    vaddi vs10, vs32, 256
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv7, vv7, vs10
+    @vp5 vfmul.s vv7, vv7, vv4
+    @vp5 vfmul.s vv7, vv7, vv6
+    vaddi vs10, vs32, 264
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv8, vv5, vs10
+    @vp5 vfadd.s vv7, vv7, vv8
+    vaddi vs10, vs32, 272
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv6, vv6, vs10
+    @vp5 vfsub.s vv7, vv7, vv6
+    @vp5 vfadd.s vv4, vv4, vv7
+    vaddi vs10, vs32, 280
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv5, vv5, vs10
+    @vp5 vfadd.s vv4, vv4, vv5
+    vaddi vs10, vs32, 288
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv4, vv4, vs10
+    vaddi vs10, vs32, 112
+    vlsd vs10, vs10
+    @vp5 vfdiv.s vv5, vs10, vs14
+    vaddi vs10, vs32, 120
+    vlsd vs10, vs10
+    @vp5 vsrlw vv6, vv5, vs10
+    vaddi vs10, vs32, 128
+    vlsd vs10, vs10
+    @vp5 vand vv6, vv6, vs10
+    vaddi vs10, vs32, 136
+    vlsd vs10, vs10
+    @vp5 vand vv7, vv5, vs10
+    vaddi vs10, vs32, 144
+    vlsd vs10, vs10
+    @vp5 vor vv7, vv7, vs10
+    vaddi vs10, vs32, 152
+    vlsd vs10, vs10
+    vcmpflt.s vp3, vv7, vs10
+    vaddi vs10, vs32, 160
+    vlsd vs10, vs10
+    vaddi vs12, vs32, 168
+    vlsd vs12, vs12
+    @vp3 vaddw vv5, vs10, vs0
+    @!vp3 vaddw vv5, vs12, vs0
+    @vp5 vaddw vv6, vv6, vv5
+    vfcvt.s.w vv6, vv6
+    vaddi vs10, vs32, 176
+    vlsd vs10, vs10
+    @vp3 vaddw vv5, vv7, vs0
+    @!vp3 vaddw vv5, vs10, vs0
+    @vp5 vfadd.s vv5, vv5, vv7
+    vaddi vs10, vs32, 184
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv5, vv5, vs10
+    @vp5 vfmul.s vv7, vv5, vv5
+    vaddi vs10, vs32, 192
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv8, vv5, vs10
+    vaddi vs10, vs32, 200
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv8, vv8, vs10
+    @vp5 vfmul.s vv8, vv8, vv5
+    vaddi vs10, vs32, 208
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv8, vv8, vs10
+    @vp5 vfmul.s vv8, vv8, vv5
+    vaddi vs10, vs32, 216
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv8, vv8, vs10
+    @vp5 vfmul.s vv8, vv8, vv5
+    vaddi vs10, vs32, 224
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv8, vv8, vs10
+    @vp5 vfmul.s vv8, vv8, vv5
+    vaddi vs10, vs32, 232
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv8, vv8, vs10
+    @vp5 vfmul.s vv8, vv8, vv5
+    vaddi vs10, vs32, 240
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv8, vv8, vs10
+    @vp5 vfmul.s vv8, vv8, vv5
+    vaddi vs10, vs32, 248
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv8, vv8, vs10
+    @vp5 vfmul.s vv8, vv8, vv5
+    vaddi vs10, vs32, 256
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv8, vv8, vs10
+    @vp5 vfmul.s vv8, vv8, vv5
+    @vp5 vfmul.s vv8, vv8, vv7
+    vaddi vs10, vs32, 264
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv9, vv6, vs10
+    @vp5 vfadd.s vv8, vv8, vv9
+    vaddi vs10, vs32, 272
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv7, vv7, vs10
+    @vp5 vfsub.s vv8, vv8, vv7
+    @vp5 vfadd.s vv5, vv5, vv8
+    vaddi vs10, vs32, 280
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv6, vv6, vs10
+    @vp5 vfadd.s vv5, vv5, vv6
+    vaddi vs10, vs32, 288
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv5, vv5, vs10
+    vaddi vs10, vs32, 296
+    vlsd vs10, vs10
+    vaddi vs12, vs63, 48
+    vlsd vs12, vs12
+    @vp5 vfdiv.s vv6, vs10, vs12
+    vaddi vs10, vs32, 120
+    vlsd vs10, vs10
+    @vp5 vsrlw vv7, vv6, vs10
+    vaddi vs10, vs32, 128
+    vlsd vs10, vs10
+    @vp5 vand vv7, vv7, vs10
+    vaddi vs10, vs32, 136
+    vlsd vs10, vs10
+    @vp5 vand vv8, vv6, vs10
+    vaddi vs10, vs32, 144
+    vlsd vs10, vs10
+    @vp5 vor vv8, vv8, vs10
+    vaddi vs10, vs32, 152
+    vlsd vs10, vs10
+    vcmpflt.s vp3, vv8, vs10
+    vaddi vs10, vs32, 160
+    vlsd vs10, vs10
+    vaddi vs12, vs32, 168
+    vlsd vs12, vs12
+    @vp3 vaddw vv6, vs10, vs0
+    @!vp3 vaddw vv6, vs12, vs0
+    @vp5 vaddw vv7, vv7, vv6
+    vfcvt.s.w vv7, vv7
+    vaddi vs10, vs32, 176
+    vlsd vs10, vs10
+    @vp3 vaddw vv6, vv8, vs0
+    @!vp3 vaddw vv6, vs10, vs0
+    @vp5 vfadd.s vv6, vv6, vv8
+    vaddi vs10, vs32, 184
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv6, vv6, vs10
+    @vp5 vfmul.s vv8, vv6, vv6
+    vaddi vs10, vs32, 192
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv9, vv6, vs10
+    vaddi vs10, vs32, 200
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv9, vv9, vs10
+    @vp5 vfmul.s vv9, vv9, vv6
+    vaddi vs10, vs32, 208
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv9, vv9, vs10
+    @vp5 vfmul.s vv9, vv9, vv6
+    vaddi vs10, vs32, 216
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv9, vv9, vs10
+    @vp5 vfmul.s vv9, vv9, vv6
+    vaddi vs10, vs32, 224
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv9, vv9, vs10
+    @vp5 vfmul.s vv9, vv9, vv6
+    vaddi vs10, vs32, 232
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv9, vv9, vs10
+    @vp5 vfmul.s vv9, vv9, vv6
+    vaddi vs10, vs32, 240
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv9, vv9, vs10
+    @vp5 vfmul.s vv9, vv9, vv6
+    vaddi vs10, vs32, 248
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv9, vv9, vs10
+    @vp5 vfmul.s vv9, vv9, vv6
+    vaddi vs10, vs32, 256
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv9, vv9, vs10
+    @vp5 vfmul.s vv9, vv9, vv6
+    @vp5 vfmul.s vv9, vv9, vv8
+    vaddi vs10, vs32, 264
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv10, vv7, vs10
+    @vp5 vfadd.s vv9, vv9, vv10
+    vaddi vs10, vs32, 272
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv8, vv8, vs10
+    @vp5 vfsub.s vv9, vv9, vv8
+    @vp5 vfadd.s vv6, vv6, vv9
+    vaddi vs10, vs32, 280
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv7, vv7, vs10
+    @vp5 vfadd.s vv6, vv6, vv7
+    vaddi vs10, vs32, 288
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv6, vv6, vs10
+    vaddi vs10, vs32, 304
+    vlsd vs10, vs10
+    vaddi vs12, vs63, 56
+    vlsd vs12, vs12
+    @vp5 vfdiv.s vv7, vs10, vs12
+    vaddi vs10, vs32, 120
+    vlsd vs10, vs10
+    @vp5 vsrlw vv8, vv7, vs10
+    vaddi vs10, vs32, 128
+    vlsd vs10, vs10
+    @vp5 vand vv8, vv8, vs10
+    vaddi vs10, vs32, 136
+    vlsd vs10, vs10
+    @vp5 vand vv9, vv7, vs10
+    vaddi vs10, vs32, 144
+    vlsd vs10, vs10
+    @vp5 vor vv9, vv9, vs10
+    vaddi vs10, vs32, 152
+    vlsd vs10, vs10
+    vcmpflt.s vp3, vv9, vs10
+    vaddi vs10, vs32, 160
+    vlsd vs10, vs10
+    vaddi vs12, vs32, 168
+    vlsd vs12, vs12
+    @vp3 vaddw vv7, vs10, vs0
+    @!vp3 vaddw vv7, vs12, vs0
+    @vp5 vaddw vv8, vv8, vv7
+    vfcvt.s.w vv8, vv8
+    vaddi vs10, vs32, 176
+    vlsd vs10, vs10
+    @vp3 vaddw vv7, vv9, vs0
+    @!vp3 vaddw vv7, vs10, vs0
+    @vp5 vfadd.s vv7, vv7, vv9
+    vaddi vs10, vs32, 184
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv7, vv7, vs10
+    @vp5 vfmul.s vv9, vv7, vv7
+    vaddi vs10, vs32, 192
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv10, vv7, vs10
+    vaddi vs10, vs32, 200
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv10, vv10, vs10
+    @vp5 vfmul.s vv10, vv10, vv7
+    vaddi vs10, vs32, 208
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv10, vv10, vs10
+    @vp5 vfmul.s vv10, vv10, vv7
+    vaddi vs10, vs32, 216
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv10, vv10, vs10
+    @vp5 vfmul.s vv10, vv10, vv7
+    vaddi vs10, vs32, 224
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv10, vv10, vs10
+    @vp5 vfmul.s vv10, vv10, vv7
+    vaddi vs10, vs32, 232
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv10, vv10, vs10
+    @vp5 vfmul.s vv10, vv10, vv7
+    vaddi vs10, vs32, 240
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv10, vv10, vs10
+    @vp5 vfmul.s vv10, vv10, vv7
+    vaddi vs10, vs32, 248
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv10, vv10, vs10
+    @vp5 vfmul.s vv10, vv10, vv7
+    vaddi vs10, vs32, 256
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv10, vv10, vs10
+    @vp5 vfmul.s vv10, vv10, vv7
+    @vp5 vfmul.s vv10, vv10, vv9
+    vaddi vs10, vs32, 264
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv11, vv8, vs10
+    @vp5 vfadd.s vv10, vv10, vv11
+    vaddi vs10, vs32, 272
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv9, vv9, vs10
+    @vp5 vfsub.s vv10, vv10, vv9
+    @vp5 vfadd.s vv7, vv7, vv10
+    vaddi vs10, vs32, 280
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv8, vv8, vs10
+    @vp5 vfadd.s vv7, vv7, vv8
+    vaddi vs10, vs32, 312
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv7, vv7, vs10
+    vaddi vs10, vs32, 304
+    vlsd vs10, vs10
+    vaddi vs12, vs63, 64
+    vlsd vs12, vs12
+    @vp5 vfdiv.s vv8, vs10, vs12
+    vaddi vs10, vs32, 120
+    vlsd vs10, vs10
+    @vp5 vsrlw vv9, vv8, vs10
+    vaddi vs10, vs32, 128
+    vlsd vs10, vs10
+    @vp5 vand vv9, vv9, vs10
+    vaddi vs10, vs32, 136
+    vlsd vs10, vs10
+    @vp5 vand vv10, vv8, vs10
+    vaddi vs10, vs32, 144
+    vlsd vs10, vs10
+    @vp5 vor vv10, vv10, vs10
+    vaddi vs10, vs32, 152
+    vlsd vs10, vs10
+    vcmpflt.s vp3, vv10, vs10
+    vaddi vs10, vs32, 160
+    vlsd vs10, vs10
+    vaddi vs12, vs32, 168
+    vlsd vs12, vs12
+    @vp3 vaddw vv8, vs10, vs0
+    @!vp3 vaddw vv8, vs12, vs0
+    @vp5 vaddw vv9, vv9, vv8
+    vfcvt.s.w vv9, vv9
+    vaddi vs10, vs32, 176
+    vlsd vs10, vs10
+    @vp3 vaddw vv8, vv10, vs0
+    @!vp3 vaddw vv8, vs10, vs0
+    @vp5 vfadd.s vv8, vv8, vv10
+    vaddi vs10, vs32, 184
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv8, vv8, vs10
+    @vp5 vfmul.s vv10, vv8, vv8
+    vaddi vs10, vs32, 192
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv11, vv8, vs10
+    vaddi vs10, vs32, 200
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv11, vv11, vs10
+    @vp5 vfmul.s vv11, vv11, vv8
+    vaddi vs10, vs32, 208
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv11, vv11, vs10
+    @vp5 vfmul.s vv11, vv11, vv8
+    vaddi vs10, vs32, 216
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv11, vv11, vs10
+    @vp5 vfmul.s vv11, vv11, vv8
+    vaddi vs10, vs32, 224
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv11, vv11, vs10
+    @vp5 vfmul.s vv11, vv11, vv8
+    vaddi vs10, vs32, 232
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv11, vv11, vs10
+    @vp5 vfmul.s vv11, vv11, vv8
+    vaddi vs10, vs32, 240
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv11, vv11, vs10
+    @vp5 vfmul.s vv11, vv11, vv8
+    vaddi vs10, vs32, 248
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv11, vv11, vs10
+    @vp5 vfmul.s vv11, vv11, vv8
+    vaddi vs10, vs32, 256
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv11, vv11, vs10
+    @vp5 vfmul.s vv11, vv11, vv8
+    @vp5 vfmul.s vv11, vv11, vv10
+    vaddi vs10, vs32, 264
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv12, vv9, vs10
+    @vp5 vfadd.s vv11, vv11, vv12
+    vaddi vs10, vs32, 272
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv10, vv10, vs10
+    @vp5 vfsub.s vv11, vv11, vv10
+    @vp5 vfadd.s vv8, vv8, vv11
+    vaddi vs10, vs32, 280
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv9, vv9, vs10
+    @vp5 vfadd.s vv8, vv8, vv9
+    vaddi vs10, vs32, 312
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv8, vv8, vs10
+    vaddi vs10, vs63, 80
+    vlsd vs10, vs10
+    vaddi vs12, vs32, 320
+    vlsd vs12, vs12
+    @vp5 vfadd.s vv9, vs10, vs12
+    vaddi vs10, vs32, 328
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv10, vv9, vs10
+    vaddi vs10, vs32, 336
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv9, vv9, vs10
+    vaddi vs10, vs32, 344
+    vlsd vs10, vs10
+    @vp5 vfmax.s vv9, vv9, vs10
+    vaddi vs10, vs32, 352
+    vlsd vs10, vs10
+    @vp5 vfmin.s vv9, vv9, vs10
+    vaddi vs10, vs32, 360
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv11, vv9, vs10
+    vaddi vs10, vs32, 368
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv11, vv11, vs10
+    vaddi vs10, vs32, 376
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv12, vv11, vs10
+    vaddi vs10, vs32, 384
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv13, vv12, vs10
+    @vp5 vfsub.s vv9, vv9, vv13
+    vaddi vs10, vs32, 392
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv12, vv12, vs10
+    @vp5 vfsub.s vv9, vv9, vv12
+    vaddi vs10, vs32, 400
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv12, vv9, vs10
+    vaddi vs10, vs32, 408
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv12, vv12, vs10
+    @vp5 vfmul.s vv12, vv12, vv9
+    vaddi vs10, vs32, 416
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv12, vv12, vs10
+    @vp5 vfmul.s vv12, vv12, vv9
+    vaddi vs10, vs32, 424
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv12, vv12, vs10
+    @vp5 vfmul.s vv12, vv12, vv9
+    vaddi vs10, vs32, 432
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv12, vv12, vs10
+    @vp5 vfmul.s vv12, vv12, vv9
+    vaddi vs10, vs32, 272
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv12, vv12, vs10
+    @vp5 vfmul.s vv13, vv9, vv9
+    @vp5 vfmul.s vv12, vv12, vv13
+    @vp5 vfadd.s vv12, vv12, vv9
+    vaddi vs10, vs32, 440
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv12, vv12, vs10
+    vaddi vs10, vs32, 120
+    vlsd vs10, vs10
+    @vp5 vsllw vv9, vv11, vs10
+    @vp5 vaddw vv9, vv9, vv12
+    vaddi vs10, vs32, 440
+    vlsd vs10, vs10
+    @vp5 vfsub.s vv11, vs10, vv9
+    @vp5 vfdiv.s vv10, vv10, vv11
+    vaddi vs10, vs63, 80
+    vlsd vs10, vs10
+    @vp5 vfsgnjn.s vv9, vs10, vs10
+    vaddi vs10, vs63, 80
+    vlsd vs10, vs10
+    vaddi vs12, vs32, 448
+    vlsd vs12, vs12
+    @vp5 vfdiv.s vv11, vs10, vs12
+    vaddi vs10, vs32, 344
+    vlsd vs10, vs10
+    @vp5 vfmax.s vv11, vv11, vs10
+    vaddi vs10, vs32, 352
+    vlsd vs10, vs10
+    @vp5 vfmin.s vv11, vv11, vs10
+    vaddi vs10, vs32, 360
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv12, vv11, vs10
+    vaddi vs10, vs32, 368
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv12, vv12, vs10
+    vaddi vs10, vs32, 376
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv13, vv12, vs10
+    vaddi vs10, vs32, 384
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv14, vv13, vs10
+    @vp5 vfsub.s vv11, vv11, vv14
+    vaddi vs10, vs32, 392
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv13, vv13, vs10
+    @vp5 vfsub.s vv11, vv11, vv13
+    vaddi vs10, vs32, 400
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv13, vv11, vs10
+    vaddi vs10, vs32, 408
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv13, vv13, vs10
+    @vp5 vfmul.s vv13, vv13, vv11
+    vaddi vs10, vs32, 416
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv13, vv13, vs10
+    @vp5 vfmul.s vv13, vv13, vv11
+    vaddi vs10, vs32, 424
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv13, vv13, vs10
+    @vp5 vfmul.s vv13, vv13, vv11
+    vaddi vs10, vs32, 432
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv13, vv13, vs10
+    @vp5 vfmul.s vv13, vv13, vv11
+    vaddi vs10, vs32, 272
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv13, vv13, vs10
+    @vp5 vfmul.s vv14, vv11, vv11
+    @vp5 vfmul.s vv13, vv13, vv14
+    @vp5 vfadd.s vv13, vv13, vv11
+    vaddi vs10, vs32, 440
+    vlsd vs10, vs10
+    @vp5 vfadd.s vv13, vv13, vs10
+    vaddi vs10, vs32, 120
+    vlsd vs10, vs10
+    @vp5 vsllw vv11, vv12, vs10
+    @vp5 vaddw vv11, vv11, vv13
+    vaddi vs10, vs32, 456
+    vlsd vs10, vs10
+    @vp5 vfmul.s vv12, vv11, vs10
+    vaddi vs10, vs32, 464
+    vlsd vs10, vs10
+    vaddw vv11, vs10, vs0
+    vaddi vs12, vs63, 80
+    vlsd vs12, vs12
+    vcmpfle.s vp3, vv11, vs12
+    vpop vp3, vp3, vp3, vp3, 0x55
+.Lkernel_gpu_opencl_skip1:
+    vpop vp4, vp5, vp3, vp3, 0x80
+    vpop vp8, vp5, vp3, vp3, 0x02
+    @!vp2 vcjal 0, vs1, .Lkernel_gpu_opencl_skip2
+    vaddi vs12, vs32, 72
+    vlsd vs12, vs12
+    vadd vs10, vs56, vs12
+    vlsw vs10, vs10
+    vaddi vs12, vs32, 1312
+    vlsd vs12, vs12
+    @vp2 vfmul.s vv11, vs10, vs12
+    vadd vs10, vs58, vs55
+    vlsw vs10, vs10
+    vaddi vs62, vs63, 120
+    vssd vs62, vs10
+    vadd vs12, vs58, vs54
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 96
+    vssd vs62, vs12
+    vadd vs12, vs58, vs53
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 104
+    vssd vs62, vs12
+    vadd vs12, vs58, vs52
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 112
+    vssd vs62, vs12
+    vadd vs12, vs58, vs41
+    vaddi vs62, vs63, 128
+    vssd vs62, vs12
+    vlsw vs10, vs12
+    vadd vs12, vs58, vs40
+    vaddi vs62, vs63, 144
+    vssd vs62, vs12
+    vlsw vs2, vs12
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 64
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 160
+    vssd vs62, vs12
+    vaddi vs12, vs32, 2040
+    vaddi vs12, vs12, 72
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 168
+    vssd vs62, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 80
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 176
+    vssd vs62, vs12
+    vaddi vs12, vs32, 2040
+    vaddi vs12, vs12, 88
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 184
+    vssd vs62, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 96
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 192
+    vssd vs62, vs12
+    vaddi vs12, vs32, 2040
+    vaddi vs12, vs12, 104
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 200
+    vssd vs62, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 112
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 208
+    vssd vs62, vs12
+    vaddi vs12, vs32, 2040
+    vaddi vs12, vs12, 120
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 216
+    vssd vs62, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 128
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 224
+    vssd vs62, vs12
+    vaddi vs12, vs32, 2040
+    vaddi vs12, vs12, 136
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 232
+    vssd vs62, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 144
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 240
+    vssd vs62, vs12
+    vaddi vs12, vs32, 2040
+    vaddi vs12, vs12, 152
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 248
+    vssd vs62, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 160
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 256
+    vssd vs62, vs12
+    vaddi vs12, vs32, 2040
+    vaddi vs12, vs12, 168
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs62, vs63, 264
+    vssd vs62, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 176
+    vlsd vs11, vs11
+    vadd vs12, vs56, vs11
+    vlsw vs12, vs12
+    vaddi vs62, vs63, 272
+    vssd vs62, vs12
+    vaddw vv13, vs2, vs0
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    vcmpfle.s vp3, vv13, vs11
+    vpop vp3, vp3, vp3, vp3, 0x55
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 184
+    vlsd vs11, vs11
+    @vp2 vfdiv.s vv13, vs10, vs11
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp2 vfadd.s vv13, vv13, vs11
+.Lkernel_gpu_opencl_skip2:
+    vpop vp5, vp2, vp3, vp3, 0x80
+    vpop vp9, vp2, vp3, vp3, 0x02
+    @!vp4 vcjal 0, vs1, .Lkernel_gpu_opencl_skip3
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 528
+    vlsd vs12, vs12
+    @vp4 vfadd.s vv14, vs11, vs12
+    vaddi vs11, vs32, 536
+    vlsd vs11, vs11
+    @vp4 vfdiv.s vv14, vv14, vs11
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp4 vfmax.s vv14, vv14, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp4 vfmin.s vv14, vv14, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv15, vv14, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv15, vv15, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv16, vv15, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv17, vv16, vs11
+    @vp4 vfsub.s vv14, vv14, vv17
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv16, vv16, vs11
+    @vp4 vfsub.s vv14, vv14, vv16
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv16, vv14, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv16, vv16, vs11
+    @vp4 vfmul.s vv16, vv16, vv14
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv16, vv16, vs11
+    @vp4 vfmul.s vv16, vv16, vv14
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv16, vv16, vs11
+    @vp4 vfmul.s vv16, vv16, vv14
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv16, vv16, vs11
+    @vp4 vfmul.s vv16, vv16, vv14
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv16, vv16, vs11
+    @vp4 vfmul.s vv17, vv14, vv14
+    @vp4 vfmul.s vv16, vv16, vv17
+    @vp4 vfadd.s vv16, vv16, vv14
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv16, vv16, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp4 vsllw vv14, vv15, vs11
+    @vp4 vaddw vv14, vv14, vv16
+    vaddi vs11, vs32, 544
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv15, vv14, vs11
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 552
+    vlsd vs12, vs12
+    @vp4 vfmul.s vv14, vs11, vs12
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp4 vfmax.s vv14, vv14, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp4 vfmin.s vv16, vv14, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv14, vv14, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv14, vv14, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv17, vv14, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv18, vv17, vs11
+    @vp4 vfsub.s vv16, vv16, vv18
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv17, vv17, vs11
+    @vp4 vfsub.s vv16, vv16, vv17
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv17, vv16, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv17, vv17, vs11
+    @vp4 vfmul.s vv17, vv17, vv16
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv17, vv17, vs11
+    @vp4 vfmul.s vv17, vv17, vv16
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv17, vv17, vs11
+    @vp4 vfmul.s vv17, vv17, vv16
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv17, vv17, vs11
+    @vp4 vfmul.s vv17, vv17, vv16
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv17, vv17, vs11
+    @vp4 vfmul.s vv18, vv16, vv16
+    @vp4 vfmul.s vv17, vv17, vv18
+    @vp4 vfadd.s vv17, vv17, vv16
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv17, vv17, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp4 vsllw vv16, vv14, vs11
+    @vp4 vaddw vv16, vv16, vv17
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 520
+    vlsd vs12, vs12
+    @vp4 vfmul.s vv14, vs11, vs12
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp4 vfmax.s vv17, vv14, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp4 vfmin.s vv18, vv17, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv17, vv17, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv17, vv17, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv17, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv20, vv19, vs11
+    @vp4 vfsub.s vv18, vv18, vv20
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv19, vv19, vs11
+    @vp4 vfsub.s vv18, vv18, vv19
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv19, vv18, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv19, vv19, vv18
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv19, vv19, vv18
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv19, vv19, vv18
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv19, vv19, vv18
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv20, vv18, vv18
+    @vp4 vfmul.s vv19, vv19, vv20
+    @vp4 vfadd.s vv19, vv19, vv18
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp4 vsllw vv18, vv17, vs11
+    @vp4 vaddw vv18, vv18, vv19
+    vaddi vs11, vs32, 560
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv17, vv18, vs11
+    vaddi vs11, vs32, 568
+    vlsd vs11, vs11
+    @vp4 vfmadd.s vv17, vv16, vs11, vv17
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 576
+    vlsd vs12, vs12
+    @vp4 vfmul.s vv16, vs11, vs12
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp4 vfmax.s vv16, vv16, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp4 vfmin.s vv18, vv16, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv16, vv16, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv16, vv16, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv16, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv20, vv19, vs11
+    @vp4 vfsub.s vv18, vv18, vv20
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv19, vv19, vs11
+    @vp4 vfsub.s vv18, vv18, vv19
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv19, vv18, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv19, vv19, vv18
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv19, vv19, vv18
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv19, vv19, vv18
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv19, vv19, vv18
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    @vp4 vfmul.s vv20, vv18, vv18
+    @vp4 vfmul.s vv19, vv19, vv20
+    @vp4 vfadd.s vv19, vv19, vv18
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp4 vsllw vv18, vv16, vs11
+    @vp4 vaddw vv18, vv18, vv19
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 584
+    vlsd vs12, vs12
+    @vp4 vfmul.s vv16, vs11, vs12
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp4 vfmax.s vv16, vv16, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp4 vfmin.s vv16, vv16, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv19, vv16, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv19, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv21, vv20, vs11
+    @vp4 vfsub.s vv16, vv16, vv21
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv20, vv20, vs11
+    @vp4 vfsub.s vv16, vv16, vv20
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv20, vv16, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv16
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv16
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv16
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv16
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv21, vv16, vv16
+    @vp4 vfmul.s vv20, vv20, vv21
+    @vp4 vfadd.s vv20, vv20, vv16
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp4 vsllw vv16, vv19, vs11
+    @vp4 vaddw vv16, vv16, vv20
+    vaddi vs11, vs32, 592
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv19, vv16, vs11
+    vaddi vs11, vs32, 600
+    vlsd vs11, vs11
+    @vp4 vfmadd.s vv19, vv18, vs11, vv19
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 608
+    vlsd vs12, vs12
+    @vp4 vfadd.s vv16, vs11, vs12
+    @vp4 vfmul.s vv16, vv16, vv19
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 616
+    vlsd vs12, vs12
+    @vp4 vfadd.s vv18, vs11, vs12
+    vaddi vs11, vs32, 624
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv18, vv18, vs11
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp4 vfmax.s vv18, vv18, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp4 vfmin.s vv18, vv18, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv19, vv18, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv19, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv21, vv20, vs11
+    @vp4 vfsub.s vv18, vv18, vv21
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv20, vv20, vs11
+    @vp4 vfsub.s vv18, vv18, vv20
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv20, vv18, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv18
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv18
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv18
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv18
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv21, vv18, vv18
+    @vp4 vfmul.s vv20, vv20, vv21
+    @vp4 vfadd.s vv20, vv20, vv18
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp4 vsllw vv18, vv19, vs11
+    @vp4 vaddw vv18, vv18, vv20
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv18, vs11
+    @vp4 vfdiv.s vv16, vv16, vv19
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 632
+    vlsd vs12, vs12
+    @vp4 vfmul.s vv18, vs11, vs12
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp4 vfmax.s vv18, vv18, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp4 vfmin.s vv18, vv18, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv19, vv18, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv19, vv19, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv19, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv21, vv20, vs11
+    @vp4 vfsub.s vv18, vv18, vv21
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv20, vv20, vs11
+    @vp4 vfsub.s vv18, vv18, vv20
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv20, vv18, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv18
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv18
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv18
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv20, vv20, vv18
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    @vp4 vfmul.s vv21, vv18, vv18
+    @vp4 vfmul.s vv20, vv20, vv21
+    @vp4 vfadd.s vv20, vv20, vv18
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp4 vsllw vv18, vv19, vs11
+    @vp4 vaddw vv18, vv18, vv20
+    vaddi vs11, vs32, 640
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv19, vv18, vs11
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 648
+    vlsd vs12, vs12
+    @vp4 vfadd.s vv18, vs11, vs12
+    vaddi vs11, vs32, 656
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv18, vv18, vs11
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp4 vfmax.s vv18, vv18, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp4 vfmin.s vv18, vv18, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv20, vv18, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv20, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv21, vv20, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv22, vv21, vs11
+    @vp4 vfsub.s vv18, vv18, vv22
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv21, vv21, vs11
+    @vp4 vfsub.s vv18, vv18, vv21
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp4 vfmul.s vv21, vv18, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv21, vv21, vs11
+    @vp4 vfmul.s vv21, vv21, vv18
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv21, vv21, vs11
+    @vp4 vfmul.s vv21, vv21, vv18
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv21, vv21, vs11
+    @vp4 vfmul.s vv21, vv21, vv18
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv21, vv21, vs11
+    @vp4 vfmul.s vv21, vv21, vv18
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv21, vv21, vs11
+    @vp4 vfmul.s vv22, vv18, vv18
+    @vp4 vfmul.s vv21, vv21, vv22
+    @vp4 vfadd.s vv21, vv21, vv18
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv21, vv21, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp4 vsllw vv18, vv20, vs11
+    @vp4 vaddw vv18, vv18, vv21
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp4 vfadd.s vv20, vv18, vs11
+    @vp4 vfdiv.s vv19, vv19, vv20
+.Lkernel_gpu_opencl_skip3:
+    @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip4
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 472
+    vlsd vs12, vs12
+    @vp8 vfadd.s vv18, vs11, vs12
+    vaddi vs11, vs32, 480
+    vlsd vs11, vs11
+    @vp8 vfdiv.s vv18, vv18, vs11
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp8 vfmax.s vv18, vv18, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp8 vfmin.s vv18, vv18, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv20, vv18, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv20, vv20, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv21, vv20, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv22, vv21, vs11
+    @vp8 vfsub.s vv18, vv18, vv22
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv21, vv21, vs11
+    @vp8 vfsub.s vv18, vv18, vv21
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv21, vv18, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv21, vv21, vs11
+    @vp8 vfmul.s vv21, vv21, vv18
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv21, vv21, vs11
+    @vp8 vfmul.s vv21, vv21, vv18
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv21, vv21, vs11
+    @vp8 vfmul.s vv21, vv21, vv18
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv21, vv21, vs11
+    @vp8 vfmul.s vv21, vv21, vv18
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv21, vv21, vs11
+    @vp8 vfmul.s vv22, vv18, vv18
+    @vp8 vfmul.s vv21, vv21, vv22
+    @vp8 vfadd.s vv21, vv21, vv18
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv21, vv21, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp8 vsllw vv18, vv20, vs11
+    @vp8 vaddw vv18, vv18, vv21
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv20, vv18, vs11
+    vaddi vs11, vs32, 488
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv20, vv20, vs11
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp8 vfdiv.s vv20, vs11, vv20
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 496
+    vlsd vs12, vs12
+    @vp8 vfmul.s vv18, vs11, vs12
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp8 vfmax.s vv18, vv18, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp8 vfmin.s vv18, vv18, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv21, vv18, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv21, vv21, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv22, vv21, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv23, vv22, vs11
+    @vp8 vfsub.s vv18, vv18, vv23
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv22, vv22, vs11
+    @vp8 vfsub.s vv18, vv18, vv22
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv22, vv18, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv22, vv22, vs11
+    @vp8 vfmul.s vv22, vv22, vv18
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv22, vv22, vs11
+    @vp8 vfmul.s vv22, vv22, vv18
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv22, vv22, vs11
+    @vp8 vfmul.s vv22, vv22, vv18
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv22, vv22, vs11
+    @vp8 vfmul.s vv22, vv22, vv18
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv22, vv22, vs11
+    @vp8 vfmul.s vv23, vv18, vv18
+    @vp8 vfmul.s vv22, vv22, vv23
+    @vp8 vfadd.s vv22, vv22, vv18
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv22, vv22, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp8 vsllw vv18, vv21, vs11
+    @vp8 vaddw vv18, vv18, vv22
+    vaddi vs11, vs32, 504
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv21, vv18, vs11
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 512
+    vlsd vs12, vs12
+    @vp8 vfadd.s vv18, vs11, vs12
+    vaddi vs11, vs32, 336
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv18, vv18, vs11
+    vaddi vs11, vs32, 344
+    vlsd vs11, vs11
+    @vp8 vfmax.s vv18, vv18, vs11
+    vaddi vs11, vs32, 352
+    vlsd vs11, vs11
+    @vp8 vfmin.s vv18, vv18, vs11
+    vaddi vs11, vs32, 360
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv22, vv18, vs11
+    vaddi vs11, vs32, 368
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv22, vv22, vs11
+    vaddi vs11, vs32, 376
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv23, vv22, vs11
+    vaddi vs11, vs32, 384
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv24, vv23, vs11
+    @vp8 vfsub.s vv18, vv18, vv24
+    vaddi vs11, vs32, 392
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv23, vv23, vs11
+    @vp8 vfsub.s vv18, vv18, vv23
+    vaddi vs11, vs32, 400
+    vlsd vs11, vs11
+    @vp8 vfmul.s vv23, vv18, vs11
+    vaddi vs11, vs32, 408
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv23, vv23, vs11
+    @vp8 vfmul.s vv23, vv23, vv18
+    vaddi vs11, vs32, 416
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv23, vv23, vs11
+    @vp8 vfmul.s vv23, vv23, vv18
+    vaddi vs11, vs32, 424
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv23, vv23, vs11
+    @vp8 vfmul.s vv23, vv23, vv18
+    vaddi vs11, vs32, 432
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv23, vv23, vs11
+    @vp8 vfmul.s vv23, vv23, vv18
+    vaddi vs11, vs32, 272
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv23, vv23, vs11
+    @vp8 vfmul.s vv24, vv18, vv18
+    @vp8 vfmul.s vv23, vv23, vv24
+    @vp8 vfadd.s vv23, vv23, vv18
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv23, vv23, vs11
+    vaddi vs11, vs32, 120
+    vlsd vs11, vs11
+    @vp8 vsllw vv18, vv22, vs11
+    @vp8 vaddw vv18, vv18, vv23
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp8 vfadd.s vv22, vv18, vs11
+    @vp8 vfdiv.s vv21, vv21, vv22
+    vaddi vs11, vs63, 80
+    vlsd vs11, vs11
+    vaddi vs12, vs32, 520
+    vlsd vs12, vs12
+    @vp8 vfmul.s vv18, vs11, vs12
+.Lkernel_gpu_opencl_skip4:
+    @!vp5 vcjal 0, vs1, .Lkernel_gpu_opencl_skip5
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 264
+    vlsd vs11, vs11
+    @vp5 vfadd.s vv22, vv13, vs11
+    vaddi vs11, vs32, 184
+    vlsd vs11, vs11
+    @vp5 vfadd.s vv23, vs2, vs11
+    vaddi vs11, vs32, 1544
+    vlsd vs11, vs11
+    @vp5 vfdiv.s vv24, vv23, vs11
+    @vp5 vfadd.s vv22, vv22, vv24
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 200
+    vlsd vs11, vs11
+    @vp5 vfmul.s vv22, vv22, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 208
+    vlsd vs11, vs11
+    @vp5 vfdiv.s vv24, vs10, vs11
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp5 vfadd.s vv24, vv24, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 272
+    vlsd vs11, vs11
+    @vp5 vfadd.s vv24, vv24, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 280
+    vlsd vs11, vs11
+    @vp5 vfdiv.s vv25, vv23, vs11
+    @vp5 vfadd.s vv24, vv24, vv25
+    @vp5 vfmul.s vv24, vv24, vv22
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 224
+    vlsd vs11, vs11
+    @vp5 vfdiv.s vv22, vs10, vs11
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp5 vfadd.s vv22, vv22, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 288
+    vlsd vs11, vs11
+    @vp5 vfadd.s vv22, vv22, vs11
+    vaddi vs11, vs32, 1520
+    vlsd vs11, vs11
+    @vp5 vfdiv.s vv25, vv23, vs11
+    @vp5 vfadd.s vv22, vv22, vv25
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 240
+    vlsd vs11, vs11
+    @vp5 vfmul.s vv22, vv22, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 248
+    vlsd vs11, vs11
+    @vp5 vfdiv.s vv25, vs10, vs11
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp5 vfadd.s vv25, vv25, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 296
+    vlsd vs11, vs11
+    @vp5 vfadd.s vv25, vv25, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 304
+    vlsd vs11, vs11
+    @vp5 vfdiv.s vv23, vv23, vs11
+    @vp5 vfadd.s vv25, vv25, vv23
+    @vp5 vfmul.s vv25, vv25, vv22
+.Lkernel_gpu_opencl_skip5:
+    @!vp9 vcjal 0, vs1, .Lkernel_gpu_opencl_skip6
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 192
+    vlsd vs11, vs11
+    @vp9 vfdiv.s vv22, vs2, vs11
+    @vp9 vfsub.s vv13, vv13, vv22
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 200
+    vlsd vs11, vs11
+    @vp9 vfmul.s vv13, vv13, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 208
+    vlsd vs11, vs11
+    @vp9 vfdiv.s vv22, vs10, vs11
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp9 vfadd.s vv22, vv22, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 216
+    vlsd vs11, vs11
+    @vp9 vfdiv.s vv23, vs2, vs11
+    @vp9 vfadd.s vv22, vv22, vv23
+    @vp9 vfmul.s vv22, vv22, vv13
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 224
+    vlsd vs11, vs11
+    @vp9 vfdiv.s vv13, vs10, vs11
+    vaddi vs11, vs32, 440
+    vlsd vs11, vs11
+    @vp9 vfadd.s vv13, vv13, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 232
+    vlsd vs11, vs11
+    @vp9 vfdiv.s vv23, vs2, vs11
+    @vp9 vfadd.s vv13, vv13, vv23
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 240
+    vlsd vs11, vs11
+    @vp9 vfmul.s vv13, vv13, vs11
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 248
+    vlsd vs11, vs11
+    @vp9 vfdiv.s vv23, vs10, vs11
+    vaddi vs10, vs32, 440
+    vlsd vs10, vs10
+    @vp9 vfadd.s vv23, vv23, vs10
+    vaddi vs10, vs32, 2040
+    vaddi vs10, vs10, 256
+    vlsd vs10, vs10
+    @vp9 vfdiv.s vv26, vs2, vs10
+    @vp9 vfsub.s vv23, vv23, vv26
+    @vp9 vfmul.s vv23, vv23, vv13
+.Lkernel_gpu_opencl_skip6:
+    vpop vp2, vp4, vp4, vp4, 0xAA
+    vpop vp2, vp2, vp8, vp8, 0xEE
+    @vp4 vaddw vv13, vv14, vs0
+    @vp8 vaddw vv13, vv18, vs0
+    @vp4 vaddw vv26, vv19, vs0
+    @vp8 vaddw vv26, vv21, vs0
+    @vp4 vaddw vv27, vv16, vs0
+    @vp8 vaddw vv27, vs0, vs0
+    @vp4 vaddw vv28, vv17, vs0
+    @vp8 vaddw vv28, vv20, vs0
+    @vp4 vaddw vv29, vv15, vs0
+    @vp8 vaddw vv29, vs0, vs0
+    @!vp2 vcjal 0, vs1, .Lkernel_gpu_opencl_skip7
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv14, vs2, vs3
+    @vp2 vfsgnjn.s vv15, vs3, vs3
+    @vp2 vfmul.s vv12, vv12, vv15
+    @vp2 vfmadd.s vv10, vv10, vv14, vv12
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vv1, vs2, vs0
+    @vp2 vsxw vv10, vs0, vv1
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv10, vs2, vs4
+    @vp2 vfsgnjn.s vv12, vs4, vs4
+    @vp2 vfmul.s vv28, vv28, vv12
+    @vp2 vfmadd.s vv29, vv29, vv10, vv28
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs10, vs2, vs55
+    vadd vv1, vs10, vs0
+    @vp2 vsxw vv29, vs0, vv1
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv10, vs2, vs5
+    @vp2 vfsgnjn.s vv12, vs5, vs5
+    @vp2 vfmul.s vv26, vv26, vv12
+    @vp2 vfmadd.s vv27, vv27, vv10, vv26
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs10, vs2, vs54
+    vadd vv1, vs10, vs0
+    @vp2 vsxw vv27, vs0, vv1
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv10, vs3, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv10, vv10, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv12, vs3, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv12, vv12, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv12, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv14, vs2, vs0
+    @!vp3 vaddw vv14, vs3, vs0
+    @vp2 vaddw vv10, vv10, vv14
+    vfcvt.s.w vv10, vv10
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv14, vv12, vs0
+    @!vp3 vaddw vv14, vs2, vs0
+    @vp2 vfadd.s vv14, vv14, vv12
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv14, vv14, vs2
+    @vp2 vfmul.s vv12, vv14, vv14
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv15, vv14, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv15, vv15, vs2
+    @vp2 vfmul.s vv15, vv15, vv14
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv15, vv15, vs2
+    @vp2 vfmul.s vv15, vv15, vv14
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv15, vv15, vs2
+    @vp2 vfmul.s vv15, vv15, vv14
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv15, vv15, vs2
+    @vp2 vfmul.s vv15, vv15, vv14
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv15, vv15, vs2
+    @vp2 vfmul.s vv15, vv15, vv14
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv15, vv15, vs2
+    @vp2 vfmul.s vv15, vv15, vv14
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv15, vv15, vs2
+    @vp2 vfmul.s vv15, vv15, vv14
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv15, vv15, vs2
+    @vp2 vfmul.s vv15, vv15, vv14
+    @vp2 vfmul.s vv15, vv15, vv12
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv16, vv10, vs2
+    @vp2 vfadd.s vv15, vv15, vv16
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv12, vv12, vs2
+    @vp2 vfsub.s vv15, vv15, vv12
+    @vp2 vfadd.s vv14, vv14, vv15
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv10, vv10, vs2
+    @vp2 vfadd.s vv14, vv14, vv10
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv14, vv14, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv14, vv14, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv14, vv14, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv10, vv14, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv10, vv10, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv12, vv10, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv15, vv12, vs2
+    @vp2 vfsub.s vv14, vv14, vv15
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv12, vv12, vs2
+    @vp2 vfsub.s vv14, vv14, vv12
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv12, vv14, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv12, vv12, vs2
+    @vp2 vfmul.s vv12, vv12, vv14
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv12, vv12, vs2
+    @vp2 vfmul.s vv12, vv12, vv14
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv12, vv12, vs2
+    @vp2 vfmul.s vv12, vv12, vv14
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv12, vv12, vs2
+    @vp2 vfmul.s vv12, vv12, vv14
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv12, vv12, vs2
+    @vp2 vfmul.s vv15, vv14, vv14
+    @vp2 vfmul.s vv12, vv12, vv15
+    @vp2 vfadd.s vv12, vv12, vv14
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv12, vv12, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv14, vv10, vs2
+    @vp2 vaddw vv14, vv14, vv12
+    vaddi vs2, vs32, 680
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv10, vv14, vs2
+    @vp2 vfmul.s vv10, vs4, vv10
+    @vp2 vfmul.s vv10, vs5, vv10
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv4, vs2, vv4
+    @vp2 vfmul.s vv10, vv4, vv10
+    vaddi vs2, vs32, 688
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv12, vv14, vs2
+    @vp2 vfmul.s vv12, vs4, vv12
+    @vp2 vfmul.s vv12, vs5, vv12
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv5, vs2, vv5
+    @vp2 vfmul.s vv12, vv5, vv12
+    vaddi vs2, vs32, 696
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv4, vv4, vs2
+    vaddi vs2, vs32, 704
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv5, vv5, vs2
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 336
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv14, vs2, vs3
+    vaddi vs2, vs32, 712
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv14, vv14, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv14, vv14, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv14, vv14, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv15, vv14, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv15, vv15, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv15, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv17, vv16, vs2
+    @vp2 vfsub.s vv14, vv14, vv17
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv16, vv16, vs2
+    @vp2 vfsub.s vv14, vv14, vv16
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv16, vv14, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv16, vs2
+    @vp2 vfmul.s vv16, vv16, vv14
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv16, vs2
+    @vp2 vfmul.s vv16, vv16, vv14
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv16, vs2
+    @vp2 vfmul.s vv16, vv16, vv14
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv16, vs2
+    @vp2 vfmul.s vv16, vv16, vv14
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv16, vs2
+    @vp2 vfmul.s vv17, vv14, vv14
+    @vp2 vfmul.s vv16, vv16, vv17
+    @vp2 vfadd.s vv16, vv16, vv14
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv16, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv14, vv15, vs2
+    @vp2 vaddw vv14, vv14, vv16
+    vaddi vs2, vs32, 720
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 440
+    vlsd vs3, vs3
+    @vp2 vfmadd.s vv15, vv14, vs2, vs3
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 728
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv14, vs2, vs3
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv14, vv14, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv14, vv14, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv16, vv14, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv16, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv16, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv18, vv17, vs2
+    @vp2 vfsub.s vv14, vv14, vv18
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv17, vv17, vs2
+    @vp2 vfsub.s vv14, vv14, vv17
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv17, vv14, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv17, vs2
+    @vp2 vfmul.s vv17, vv17, vv14
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv17, vs2
+    @vp2 vfmul.s vv17, vv17, vv14
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv17, vs2
+    @vp2 vfmul.s vv17, vv17, vv14
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv17, vs2
+    @vp2 vfmul.s vv17, vv17, vv14
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv17, vs2
+    @vp2 vfmul.s vv18, vv14, vv14
+    @vp2 vfmul.s vv17, vv17, vv18
+    @vp2 vfadd.s vv17, vv17, vv14
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv17, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv14, vv16, vs2
+    @vp2 vaddw vv14, vv14, vv17
+    vaddi vs2, vs32, 736
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv15, vv14, vs2, vv15
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv15, vs2, vv15
+    vaddi vs2, vs32, 744
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv14, vv15, vs2
+    vaddi vs2, vs32, 296
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv14, vv14, vs2
+    vaddi vs2, vs32, 752
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv16, vs2, vs6
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv17, vv16, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv17, vv17, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv18, vv16, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv18, vv18, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv18, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv16, vs2, vs0
+    @!vp3 vaddw vv16, vs3, vs0
+    @vp2 vaddw vv17, vv17, vv16
+    vfcvt.s.w vv17, vv17
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv16, vv18, vs0
+    @!vp3 vaddw vv16, vs2, vs0
+    @vp2 vfadd.s vv16, vv16, vv18
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv16, vs2
+    @vp2 vfmul.s vv18, vv16, vv16
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv16, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    @vp2 vfmul.s vv19, vv19, vv18
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv20, vv17, vs2
+    @vp2 vfadd.s vv19, vv19, vv20
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv18, vv18, vs2
+    @vp2 vfsub.s vv19, vv19, vv18
+    @vp2 vfadd.s vv16, vv16, vv19
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv17, vv17, vs2
+    @vp2 vfadd.s vv16, vv16, vv17
+    vaddi vs2, vs32, 760
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv16, vv16, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv16, vv16, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv16, vv16, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv17, vv16, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv17, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv17, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv18, vs2
+    @vp2 vfsub.s vv16, vv16, vv19
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv18, vv18, vs2
+    @vp2 vfsub.s vv16, vv16, vv18
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv18, vv16, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv18, vv18, vv16
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv18, vv18, vv16
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv18, vv18, vv16
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv18, vv18, vv16
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv19, vv16, vv16
+    @vp2 vfmul.s vv18, vv18, vv19
+    @vp2 vfadd.s vv18, vv18, vv16
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv16, vv17, vs2
+    @vp2 vaddw vv16, vv16, vv18
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv16, vs2
+    @vp2 vfdiv.s vv14, vv14, vv17
+    vaddi vs2, vs32, 768
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv14, vv14, vs2
+    vaddi vs2, vs32, 776
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv15, vv15, vs2
+    vaddi vs2, vs32, 296
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv15, vv15, vs2
+    vaddi vs2, vs32, 752
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv16, vs2, vs14
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv17, vv16, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv17, vv17, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv18, vv16, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv18, vv18, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv18, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv16, vs2, vs0
+    @!vp3 vaddw vv16, vs3, vs0
+    @vp2 vaddw vv17, vv17, vv16
+    vfcvt.s.w vv17, vv17
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv16, vv18, vs0
+    @!vp3 vaddw vv16, vs2, vs0
+    @vp2 vfadd.s vv16, vv16, vv18
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv16, vv16, vs2
+    @vp2 vfmul.s vv18, vv16, vv16
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv16, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv16
+    @vp2 vfmul.s vv19, vv19, vv18
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv20, vv17, vs2
+    @vp2 vfadd.s vv19, vv19, vv20
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv18, vv18, vs2
+    @vp2 vfsub.s vv19, vv19, vv18
+    @vp2 vfadd.s vv16, vv16, vv19
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv17, vv17, vs2
+    @vp2 vfadd.s vv16, vv16, vv17
+    vaddi vs2, vs32, 760
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv16, vv16, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv16, vv16, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv16, vv16, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv17, vv16, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv17, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv17, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv18, vs2
+    @vp2 vfsub.s vv16, vv16, vv19
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv18, vv18, vs2
+    @vp2 vfsub.s vv16, vv16, vv18
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv18, vv16, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv18, vv18, vv16
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv18, vv18, vv16
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv18, vv18, vv16
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv18, vv18, vv16
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    @vp2 vfmul.s vv19, vv16, vv16
+    @vp2 vfmul.s vv18, vv18, vv19
+    @vp2 vfadd.s vv18, vv18, vv16
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv16, vv17, vs2
+    @vp2 vaddw vv16, vv16, vv18
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv17, vv16, vs2
+    @vp2 vfdiv.s vv15, vv15, vv17
+    vaddi vs2, vs32, 768
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv15, vv15, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsqrt.s vv16, vs2
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 784
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv17, vs2, vs3
+    vaddi vs2, vs32, 792
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv17, vv17, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv17, vv17, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv17, vv17, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv18, vv17, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv18, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv20, vv19, vs2
+    @vp2 vfsub.s vv17, vv17, vv20
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv19, vs2
+    @vp2 vfsub.s vv17, vv17, vv19
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv17, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv17
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv17
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv17
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv17
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv20, vv17, vv17
+    @vp2 vfmul.s vv19, vv19, vv20
+    @vp2 vfadd.s vv19, vv19, vv17
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv17, vv18, vs2
+    @vp2 vaddw vv17, vv17, vv19
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv17, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv18, vs2, vv18
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 800
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv17, vs2, vs3
+    vaddi vs2, vs32, 808
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv17, vs2
+    vaddi vs2, vs32, 816
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv17, vv17, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv17, vv17, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv17, vv17, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv20, vv17, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv20, vv20, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv20, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv26, vv21, vs2
+    @vp2 vfsub.s vv17, vv17, vv26
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv21, vv21, vs2
+    @vp2 vfsub.s vv17, vv17, vv21
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv21, vv17, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv21, vs2
+    @vp2 vfmul.s vv21, vv21, vv17
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv21, vs2
+    @vp2 vfmul.s vv21, vv21, vv17
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv21, vs2
+    @vp2 vfmul.s vv21, vv21, vv17
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv21, vs2
+    @vp2 vfmul.s vv21, vv21, vv17
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv21, vs2
+    @vp2 vfmul.s vv26, vv17, vv17
+    @vp2 vfmul.s vv21, vv21, vv26
+    @vp2 vfadd.s vv21, vv21, vv17
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv21, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv17, vv20, vs2
+    @vp2 vaddw vv17, vv17, vv21
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv20, vs2, vv17
+    @vp2 vfdiv.s vv19, vv19, vv20
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 824
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv17, vs2, vs3
+    vaddi vs2, vs32, 832
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv20, vv17, vs2
+    vaddi vs2, vs32, 840
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv17, vv17, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv17, vv17, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv17, vv17, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv21, vv17, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv21, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv21, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv26, vs2
+    @vp2 vfsub.s vv17, vv17, vv27
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv26, vv26, vs2
+    @vp2 vfsub.s vv17, vv17, vv26
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv26, vv17, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv17
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv17
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv17
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv17
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv27, vv17, vv17
+    @vp2 vfmul.s vv26, vv26, vv27
+    @vp2 vfadd.s vv26, vv26, vv17
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv17, vv21, vs2
+    @vp2 vaddw vv17, vv17, vv26
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv17, vs2
+    @vp2 vfdiv.s vv20, vv20, vv21
+    @vp2 vfadd.s vv19, vv19, vv20
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv19, vs2, vv19
+    vaddi vs2, vs63, 16
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv18, vv18, vs2
+    @vp2 vfdiv.s vv18, vv18, vv19
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs45
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv18, vs0, vv1
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 848
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv17, vs2, vs3
+    vaddi vs2, vs32, 856
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv17, vv17, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv17, vv17, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv17, vv17, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv18, vv17, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv18, vv18, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv18, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv20, vv19, vs2
+    @vp2 vfsub.s vv17, vv17, vv20
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv19, vs2
+    @vp2 vfsub.s vv17, vv17, vv19
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv17, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv17
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv17
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv17
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv19, vv19, vv17
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    @vp2 vfmul.s vv20, vv17, vv17
+    @vp2 vfmul.s vv19, vv19, vv20
+    @vp2 vfadd.s vv19, vv19, vv17
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv17, vv18, vs2
+    @vp2 vaddw vv17, vv17, vv19
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv18, vs2, vv6
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 120
+    vlsd vs3, vs3
+    @vp2 vsrlw vv19, vs2, vs3
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv19, vv19, vs2
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 136
+    vlsd vs3, vs3
+    @vp2 vand vv20, vs2, vs3
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv20, vv20, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv20, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv21, vs2, vs0
+    @!vp3 vaddw vv21, vs3, vs0
+    @vp2 vaddw vv19, vv19, vv21
+    vfcvt.s.w vv19, vv19
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv21, vv20, vs0
+    @!vp3 vaddw vv21, vs2, vs0
+    @vp2 vfadd.s vv21, vv21, vv20
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv21, vv21, vs2
+    @vp2 vfmul.s vv20, vv21, vv21
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv26, vv21, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv21
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv21
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv21
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv21
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv21
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv21
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv21
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv26, vv26, vv21
+    @vp2 vfmul.s vv26, vv26, vv20
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv19, vs2
+    @vp2 vfadd.s vv26, vv26, vv27
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv20, vv20, vs2
+    @vp2 vfsub.s vv26, vv26, vv20
+    @vp2 vfadd.s vv21, vv21, vv26
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv19, vs2
+    @vp2 vfadd.s vv21, vv21, vv19
+    vaddi vs2, vs32, 864
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv19, vv21, vs2
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv19, vs2, vv19
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 120
+    vlsd vs3, vs3
+    @vp2 vsrlw vv20, vs2, vs3
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv20, vv20, vs2
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 136
+    vlsd vs3, vs3
+    @vp2 vand vv26, vs2, vs3
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv26, vv26, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv26, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv27, vs2, vs0
+    @!vp3 vaddw vv27, vs3, vs0
+    @vp2 vaddw vv20, vv20, vv27
+    vfcvt.s.w vv20, vv20
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv27, vv26, vs0
+    @!vp3 vaddw vv27, vs2, vs0
+    @vp2 vfadd.s vv27, vv27, vv26
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv27, vv27, vs2
+    @vp2 vfmul.s vv26, vv27, vv27
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv27, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv27
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv27
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv27
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv27
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv27
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv27
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv27
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv27
+    @vp2 vfmul.s vv28, vv28, vv26
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv20, vs2
+    @vp2 vfadd.s vv28, vv28, vv29
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv26, vv26, vs2
+    @vp2 vfsub.s vv28, vv28, vv26
+    @vp2 vfadd.s vv27, vv27, vv28
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv20, vv20, vs2
+    @vp2 vfadd.s vv27, vv27, vv20
+    vaddi vs2, vs32, 864
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv20, vv27, vs2
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv20, vs2, vv20
+    vaddi vs2, vs32, 872
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv19, vv19, vs2
+    vaddi vs2, vs32, 880
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv19, vv19, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv19, vv19, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv19, vv19, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv26, vv19, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv26, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv28, vs2
+    @vp2 vfsub.s vv19, vv19, vv29
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv28, vs2
+    @vp2 vfsub.s vv19, vv19, vv28
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv19, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv19
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv19
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv19
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv19
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv29, vv19, vv19
+    @vp2 vfmul.s vv28, vv28, vv29
+    @vp2 vfadd.s vv28, vv28, vv19
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv19, vv26, vs2
+    @vp2 vaddw vv19, vv19, vv28
+    vaddi vs2, vs32, 872
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv20, vv20, vs2
+    vaddi vs2, vs32, 880
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv20, vv20, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv20, vv20, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv20, vv20, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv26, vv20, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv26, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv28, vs2
+    @vp2 vfsub.s vv20, vv20, vv29
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv28, vs2
+    @vp2 vfsub.s vv20, vv20, vv28
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv20, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv20
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv20
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv20
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv28, vv28, vv20
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    @vp2 vfmul.s vv29, vv20, vv20
+    @vp2 vfmul.s vv28, vv28, vv29
+    @vp2 vfadd.s vv28, vv28, vv20
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv20, vv26, vs2
+    @vp2 vaddw vv20, vv20, vv28
+    vaddi vs2, vs32, 888
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 48
+    vlsd vs3, vs3
+    @vp2 vfmadd.s vv26, vs13, vs2, vs3
+    vaddi vs2, vs32, 896
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv26, vs2, vv26
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv28, vv26, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv28, vv28, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv29, vv26, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv29, vv29, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv29, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv26, vs2, vs0
+    @!vp3 vaddw vv26, vs3, vs0
+    @vp2 vaddw vv28, vv28, vv26
+    vfcvt.s.w vv28, vv28
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv26, vv29, vs0
+    @!vp3 vaddw vv26, vs2, vs0
+    @vp2 vfadd.s vv26, vv26, vv29
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv26, vv26, vs2
+    @vp2 vfmul.s vv29, vv26, vv26
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv30, vv26, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv26
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv26
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv26
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv26
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv26
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv26
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv26
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv26
+    @vp2 vfmul.s vv30, vv30, vv29
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv31, vv28, vs2
+    @vp2 vfadd.s vv30, vv30, vv31
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv29, vs2
+    @vp2 vfsub.s vv30, vv30, vv29
+    @vp2 vfadd.s vv26, vv26, vv30
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv28, vs2
+    @vp2 vfadd.s vv26, vv26, vv28
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 904
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv28, vs2, vs3
+    vaddi vs2, vs32, 912
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv28, vv28, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv28, vv28, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv28, vv28, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv28, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv29, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv31, vv30, vs2
+    @vp2 vfsub.s vv28, vv28, vv31
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv30, vv30, vs2
+    @vp2 vfsub.s vv28, vv28, vv30
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv30, vv28, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv28
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv28
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv28
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv30, vv30, vv28
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv31, vv28, vv28
+    @vp2 vfmul.s vv30, vv30, vv31
+    @vp2 vfadd.s vv30, vv30, vv28
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv28, vv29, vs2
+    @vp2 vaddw vv28, vv28, vv30
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv28, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv29, vs2, vv29
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 920
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv28, vs2, vs3
+    vaddi vs2, vs32, 928
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv30, vv28, vs2
+    vaddi vs2, vs32, 936
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv31, vv28, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv31, vv31, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv31, vv31, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv31, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv32, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv33, vs2
+    @vp2 vfsub.s vv31, vv31, vv34
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv33, vs2
+    @vp2 vfsub.s vv31, vv31, vv33
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv31, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv31
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv31
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv31
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv31
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv34, vv31, vv31
+    @vp2 vfmul.s vv33, vv33, vv34
+    @vp2 vfadd.s vv33, vv33, vv31
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv31, vv32, vs2
+    @vp2 vaddw vv31, vv31, vv33
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv32, vs2, vv31
+    @vp2 vfdiv.s vv30, vv30, vv32
+    vaddi vs2, vs32, 944
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv31, vv28, vs2
+    vaddi vs2, vs32, 952
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv28, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv28, vv28, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv28, vv28, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv28, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv32, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv33, vs2
+    @vp2 vfsub.s vv28, vv28, vv34
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv33, vs2
+    @vp2 vfsub.s vv28, vv28, vv33
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv28, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv28
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv28
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv28
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv28
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv34, vv28, vv28
+    @vp2 vfmul.s vv33, vv33, vv34
+    @vp2 vfadd.s vv33, vv33, vv28
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv28, vv32, vs2
+    @vp2 vaddw vv28, vv28, vv33
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv28, vs2
+    @vp2 vfdiv.s vv31, vv31, vv32
+    @vp2 vfadd.s vv30, vv30, vv31
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv30, vs2, vv30
+    @vp2 vfsub.s vv29, vv29, vs15
+    @vp2 vfdiv.s vv29, vv29, vv30
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs44
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv29, vs0, vv1
+    vaddi vs2, vs63, 16
+    vlsd vs2, vs2
+    vaddi vs2, vs63, 16
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 120
+    vlsd vs3, vs3
+    @vp2 vsrlw vv28, vs2, vs3
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv28, vv28, vs2
+    vaddi vs2, vs63, 16
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 136
+    vlsd vs3, vs3
+    @vp2 vand vv29, vs2, vs3
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv29, vv29, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv29, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv30, vs2, vs0
+    @!vp3 vaddw vv30, vs3, vs0
+    @vp2 vaddw vv28, vv28, vv30
+    vfcvt.s.w vv28, vv28
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv30, vv29, vs0
+    @!vp3 vaddw vv30, vs2, vs0
+    @vp2 vfadd.s vv30, vv30, vv29
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv30, vv30, vs2
+    @vp2 vfmul.s vv29, vv30, vv30
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv31, vv30, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv31, vv31, vs2
+    @vp2 vfmul.s vv31, vv31, vv30
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv31, vv31, vs2
+    @vp2 vfmul.s vv31, vv31, vv30
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv31, vv31, vs2
+    @vp2 vfmul.s vv31, vv31, vv30
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv31, vv31, vs2
+    @vp2 vfmul.s vv31, vv31, vv30
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv31, vv31, vs2
+    @vp2 vfmul.s vv31, vv31, vv30
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv31, vv31, vs2
+    @vp2 vfmul.s vv31, vv31, vv30
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv31, vv31, vs2
+    @vp2 vfmul.s vv31, vv31, vv30
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv31, vv31, vs2
+    @vp2 vfmul.s vv31, vv31, vv30
+    @vp2 vfmul.s vv31, vv31, vv29
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv28, vs2
+    @vp2 vfadd.s vv31, vv31, vv32
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv29, vs2
+    @vp2 vfsub.s vv31, vv31, vv29
+    @vp2 vfadd.s vv30, vv30, vv31
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv28, vs2
+    @vp2 vfadd.s vv30, vv30, vv28
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv30, vv30, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv30, vv30, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv30, vv30, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv30, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv28, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv31, vv29, vs2
+    @vp2 vfsub.s vv30, vv30, vv31
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv29, vs2
+    @vp2 vfsub.s vv30, vv30, vv29
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv30, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv29, vv29, vv30
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv29, vv29, vv30
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv29, vv29, vv30
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv29, vv29, vv30
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv31, vv30, vv30
+    @vp2 vfmul.s vv29, vv29, vv31
+    @vp2 vfadd.s vv29, vv29, vv30
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv30, vv28, vs2
+    @vp2 vaddw vv30, vv30, vv29
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv28, vs15, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv28, vv28, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv29, vs15, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv29, vv29, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv29, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv31, vs2, vs0
+    @!vp3 vaddw vv31, vs3, vs0
+    @vp2 vaddw vv28, vv28, vv31
+    vfcvt.s.w vv28, vv28
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv31, vv29, vs0
+    @!vp3 vaddw vv31, vs2, vs0
+    @vp2 vfadd.s vv31, vv31, vv29
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv31, vv31, vs2
+    @vp2 vfmul.s vv29, vv31, vv31
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv31, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv31
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv31
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv31
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv31
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv31
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv31
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv31
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv31
+    @vp2 vfmul.s vv32, vv32, vv29
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv28, vs2
+    @vp2 vfadd.s vv32, vv32, vv33
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv29, vs2
+    @vp2 vfsub.s vv32, vv32, vv29
+    @vp2 vfadd.s vv31, vv31, vv32
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv28, vs2
+    @vp2 vfadd.s vv31, vv31, vv28
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv31, vv31, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv31, vv31, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv31, vv31, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv28, vv31, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv28, vv28, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv28, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv29, vs2
+    @vp2 vfsub.s vv31, vv31, vv32
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv29, vs2
+    @vp2 vfsub.s vv31, vv31, vv29
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv31, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv29, vv29, vv31
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv29, vv29, vv31
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv29, vv29, vv31
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv29, vv29, vv31
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    @vp2 vfmul.s vv32, vv31, vv31
+    @vp2 vfmul.s vv29, vv29, vv32
+    @vp2 vfadd.s vv29, vv29, vv31
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv31, vv28, vs2
+    @vp2 vaddw vv31, vv31, vv29
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 968
+    vlsd vs3, vs3
+    @vp2 vfdiv.s vv28, vs2, vs3
+    vaddi vs2, vs32, 976
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv28, vs2, vv28
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv28, vv28, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv28, vv28, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv28, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv29, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv32, vs2
+    @vp2 vfsub.s vv28, vv28, vv33
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv32, vs2
+    @vp2 vfsub.s vv28, vv28, vv32
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv28, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv28
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv28
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv28
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv28
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv33, vv28, vv28
+    @vp2 vfmul.s vv32, vv32, vv33
+    @vp2 vfadd.s vv32, vv32, vv28
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv28, vv29, vs2
+    @vp2 vaddw vv28, vv28, vv32
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 672
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv29, vs2, vs3
+    vaddi vs2, vs32, 984
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv32, vv29, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv32, vv32, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv32, vv32, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv32, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv33, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vv34, vs2
+    @vp2 vfsub.s vv32, vv32, vv35
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv34, vs2
+    @vp2 vfsub.s vv32, vv32, vv34
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv32, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv34, vv34, vv32
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv34, vv34, vv32
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv34, vv34, vv32
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv34, vv34, vv32
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv35, vv32, vv32
+    @vp2 vfmul.s vv34, vv34, vv35
+    @vp2 vfadd.s vv34, vv34, vv32
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv32, vv33, vs2
+    @vp2 vaddw vv32, vv32, vv34
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv32, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv33, vs2, vv33
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 992
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv32, vs2, vs3
+    vaddi vs2, vs32, 824
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv32, vv32, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv32, vv32, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv32, vv32, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv32, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv34, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv35, vs2
+    @vp2 vfsub.s vv32, vv32, vv36
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vv35, vs2
+    @vp2 vfsub.s vv32, vv32, vv35
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vv32, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv35, vv35, vv32
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv35, vv35, vv32
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv35, vv35, vv32
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv35, vv35, vv32
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv36, vv32, vv32
+    @vp2 vfmul.s vv35, vv35, vv36
+    @vp2 vfadd.s vv35, vv35, vv32
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv32, vv34, vs2
+    @vp2 vaddw vv32, vv32, vv35
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv32, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv32, vs2, vv34
+    vaddi vs2, vs32, 1000
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv29, vv29, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv29, vv29, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv29, vv29, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vv29, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv35, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv37, vv36, vs2
+    @vp2 vfsub.s vv29, vv29, vv37
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv36, vs2
+    @vp2 vfsub.s vv29, vv29, vv36
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv29, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv36, vv36, vv29
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv36, vv36, vv29
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv36, vv36, vv29
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv36, vv36, vv29
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv37, vv29, vv29
+    @vp2 vfmul.s vv36, vv36, vv37
+    @vp2 vfadd.s vv36, vv36, vv29
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv29, vv35, vs2
+    @vp2 vaddw vv29, vv29, vv36
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv29, vs2
+    vaddi vs2, vs32, 1008
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv35, vs2, vv35
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1016
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv29, vs2, vs3
+    vaddi vs2, vs32, 824
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv29, vv29, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv29, vv29, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv29, vv29, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv29, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv37, vv36, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv37, vs2
+    @vp2 vfsub.s vv29, vv29, vv38
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv37, vv37, vs2
+    @vp2 vfsub.s vv29, vv29, vv37
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv37, vv29, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv37, vv37, vs2
+    @vp2 vfmul.s vv37, vv37, vv29
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv37, vv37, vs2
+    @vp2 vfmul.s vv37, vv37, vv29
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv37, vv37, vs2
+    @vp2 vfmul.s vv37, vv37, vv29
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv37, vv37, vs2
+    @vp2 vfmul.s vv37, vv37, vv29
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv37, vv37, vs2
+    @vp2 vfmul.s vv38, vv29, vv29
+    @vp2 vfmul.s vv37, vv37, vv38
+    @vp2 vfadd.s vv37, vv37, vv29
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv37, vv37, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv29, vv36, vs2
+    @vp2 vaddw vv29, vv29, vv37
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv29, vs2
+    vaddi vs2, vs32, 1024
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv29, vs2, vv36
+    vaddi vs2, vs32, 920
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    vaddi vs2, vs32, 1032
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv36, vs2, vv36
+    vaddi vs2, vs32, 1040
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    vaddi vs2, vs63, 72
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv37, vv33, vs2
+    @vp2 vfdiv.s vv37, vv37, vv35
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs49
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv37, vs0, vv1
+    vaddi vs2, vs63, 40
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv35, vv32, vs2
+    @vp2 vfdiv.s vv35, vv35, vv29
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs48
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv35, vs0, vv1
+    vaddi vs2, vs63, 88
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv29, vv32, vs2
+    @vp2 vfdiv.s vv29, vv29, vv36
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 104
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv29, vs0, vv1
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv9, vs2, vv9
+    vaddi vs2, vs32, 920
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv9, vv9, vs2
+    vaddi vs2, vs32, 920
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv9, vv9, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv9, vv9, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv9, vv9, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv9, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv29, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv35, vs2
+    @vp2 vfsub.s vv9, vv9, vv36
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vv35, vs2
+    @vp2 vfsub.s vv9, vv9, vv35
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vv9, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv35, vv35, vv9
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv35, vv35, vv9
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv35, vv35, vv9
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv35, vv35, vv9
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    @vp2 vfmul.s vv36, vv9, vv9
+    @vp2 vfmul.s vv35, vv35, vv36
+    @vp2 vfadd.s vv35, vv35, vv9
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv9, vv29, vs2
+    @vp2 vaddw vv9, vv9, vv35
+    vaddi vs2, vs32, 1048
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1056
+    vlsd vs3, vs3
+    @vp2 vfmadd.s vv29, vv9, vs2, vs3
+    vaddi vs2, vs32, 1064
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv34, vs2, vv34
+    vaddi vs2, vs32, 1064
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    vaddi vs2, vs63, 32
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv33, vv33, vs2
+    @vp2 vfdiv.s vv33, vv33, vv29
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs47
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv33, vs0, vv1
+    vaddi vs2, vs63, 24
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv32, vv32, vs2
+    @vp2 vfdiv.s vv32, vv32, vv34
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs46
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv32, vs0, vv1
+    vaddi vs2, vs32, 1072
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv9, vv18, vs2
+    vaddi vs2, vs32, 1080
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv9, vv9, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv9, vv9, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv9, vv9, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv9, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv29, vv29, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv29, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv32, vs2
+    @vp2 vfsub.s vv9, vv9, vv33
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv32, vs2
+    @vp2 vfsub.s vv9, vv9, vv32
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv9, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv9
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv9
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv9
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv9
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv33, vv9, vv9
+    @vp2 vfmul.s vv32, vv32, vv33
+    @vp2 vfadd.s vv32, vv32, vv9
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv9, vv29, vs2
+    @vp2 vaddw vv9, vv9, vv32
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1088
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv29, vs2, vs3
+    @vp2 vfsub.s vv29, vv29, vv6
+    vaddi vs2, vs32, 1096
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv29, vv29, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv29, vv29, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv29, vv29, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv6, vv29, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv6, vv6, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv6, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv32, vs2
+    @vp2 vfsub.s vv29, vv29, vv33
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv32, vs2
+    @vp2 vfsub.s vv29, vv29, vv32
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv29, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv29
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv29
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv29
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv32, vv32, vv29
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    @vp2 vfmul.s vv33, vv29, vv29
+    @vp2 vfmul.s vv32, vv32, vv33
+    @vp2 vfadd.s vv32, vv32, vv29
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv29, vv6, vs2
+    @vp2 vaddw vv29, vv29, vv32
+    vaddi vs2, vs32, 1104
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv6, vv18, vs2
+    vaddi vs2, vs32, 1112
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv6, vv6, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv6, vv6, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv6, vv6, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv6, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv32, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv32, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv33, vs2
+    @vp2 vfsub.s vv6, vv6, vv34
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv33, vs2
+    @vp2 vfsub.s vv6, vv6, vv33
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv6, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv6
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv6
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv6
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv33, vv33, vv6
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv34, vv6, vv6
+    @vp2 vfmul.s vv33, vv33, vv34
+    @vp2 vfadd.s vv33, vv33, vv6
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv6, vv32, vs2
+    @vp2 vaddw vv6, vv6, vv33
+    vaddi vs2, vs32, 1120
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv32, vv18, vs2
+    vaddi vs2, vs32, 1128
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv32, vv32, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv32, vv32, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv32, vv32, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv32, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv33, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vv34, vs2
+    @vp2 vfsub.s vv32, vv32, vv35
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv34, vs2
+    @vp2 vfsub.s vv32, vv32, vv34
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv32, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv34, vv34, vv32
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv34, vv34, vv32
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv34, vv34, vv32
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv34, vv34, vv32
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    @vp2 vfmul.s vv35, vv32, vv32
+    @vp2 vfmul.s vv34, vv34, vv35
+    @vp2 vfadd.s vv34, vv34, vv32
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv32, vv33, vs2
+    @vp2 vaddw vv32, vv32, vv34
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1136
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv33, vs2, vs3
+    vaddi vs2, vs32, 1144
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv34, vv33, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv34, vv34, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv34, vv34, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vv34, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv35, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv35, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv37, vv36, vs2
+    @vp2 vfsub.s vv34, vv34, vv37
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv36, vs2
+    @vp2 vfsub.s vv34, vv34, vv36
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv34, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv36, vv36, vv34
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv36, vv36, vv34
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv36, vv36, vv34
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv36, vv36, vv34
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    @vp2 vfmul.s vv37, vv34, vv34
+    @vp2 vfmul.s vv36, vv36, vv37
+    @vp2 vfadd.s vv36, vv36, vv34
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv36, vv36, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv34, vv35, vs2
+    @vp2 vaddw vv34, vv34, vv36
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv35, vv34, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv35, vs2, vv35
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv36, vs2, vv34
+    @vp2 vfmul.s vv36, vv36, vv35
+    vaddi vs2, vs32, 1152
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv33, vs2
+    @vp2 vfdiv.s vv36, vv36, vv34
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1160
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv34, vs2, vs3
+    vaddi vs2, vs32, 1168
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv34, vv34, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv34, vv34, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv34, vv34, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv37, vv34, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv37, vv37, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv37, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv39, vv38, vs2
+    @vp2 vfsub.s vv34, vv34, vv39
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv38, vs2
+    @vp2 vfsub.s vv34, vv34, vv38
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv34, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv34
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv34
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv34
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv34
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv39, vv34, vv34
+    @vp2 vfmul.s vv38, vv38, vv39
+    @vp2 vfadd.s vv38, vv38, vv34
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv34, vv37, vs2
+    @vp2 vaddw vv34, vv34, vv38
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv37, vv34, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv37, vs2, vv37
+    vaddi vs2, vs32, 784
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 80
+    vlsd vs3, vs3
+    @vp2 vfsub.s vv34, vs2, vs3
+    vaddi vs2, vs32, 1064
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv34, vv34, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv34, vv34, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv34, vv34, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv34, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv38, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vv39, vs2
+    @vp2 vfsub.s vv34, vv34, vv40
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv39, vv39, vs2
+    @vp2 vfsub.s vv34, vv34, vv39
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv39, vv34, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv34
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv34
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv34
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv34
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv40, vv34, vv34
+    @vp2 vfmul.s vv39, vv39, vv40
+    @vp2 vfadd.s vv39, vv39, vv34
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv34, vv38, vs2
+    @vp2 vaddw vv34, vv34, vv39
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv34, vs2
+    vaddi vs2, vs32, 880
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv38, vs2, vv38
+    @vp2 vfadd.s vv37, vv37, vv38
+    vaddi vs2, vs32, 1176
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv33, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv34, vv33, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv34, vv34, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv38, vv33, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv38, vv38, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv38, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv33, vs2, vs0
+    @!vp3 vaddw vv33, vs3, vs0
+    @vp2 vaddw vv34, vv34, vv33
+    vfcvt.s.w vv34, vv34
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv33, vv38, vs0
+    @!vp3 vaddw vv33, vs2, vs0
+    @vp2 vfadd.s vv33, vv33, vv38
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    @vp2 vfmul.s vv38, vv33, vv33
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv39, vv33, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv33
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv33
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv33
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv33
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv33
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv33
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv33
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    @vp2 vfmul.s vv39, vv39, vv33
+    @vp2 vfmul.s vv39, vv39, vv38
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vv34, vs2
+    @vp2 vfadd.s vv39, vv39, vv40
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv38, vs2
+    @vp2 vfsub.s vv39, vv39, vv38
+    @vp2 vfadd.s vv33, vv33, vv39
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv34, vs2
+    @vp2 vfadd.s vv33, vv33, vv34
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv33, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv33, vv33, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv33, vv33, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv33, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv34, vv34, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv34, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv39, vv38, vs2
+    @vp2 vfsub.s vv33, vv33, vv39
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv38, vs2
+    @vp2 vfsub.s vv33, vv33, vv38
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv33, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv33
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv33
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv33
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv33
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv39, vv33, vv33
+    @vp2 vfmul.s vv38, vv38, vv39
+    @vp2 vfadd.s vv38, vv38, vv33
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv33, vv34, vs2
+    @vp2 vaddw vv33, vv33, vv38
+    @vp2 vfsgnjn.s vv34, vv33, vv33
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv34, vv34, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv34, vv34, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv34, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv33, vv33, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv33, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv39, vv38, vs2
+    @vp2 vfsub.s vv34, vv34, vv39
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv38, vs2
+    @vp2 vfsub.s vv34, vv34, vv38
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv34, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv34
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv34
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv34
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv38, vv38, vv34
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    @vp2 vfmul.s vv39, vv34, vv34
+    @vp2 vfmul.s vv38, vv38, vv39
+    @vp2 vfadd.s vv38, vv38, vv34
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv38, vv38, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv34, vv33, vs2
+    @vp2 vaddw vv34, vv34, vv38
+    vaddi vs2, vs32, 1184
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1192
+    vlsd vs3, vs3
+    @vp2 vfmadd.s vv33, vv34, vs2, vs3
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv33, vs2, vv33
+    vaddi vs2, vs63, 8
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv35, vv35, vs2
+    @vp2 vfdiv.s vv35, vv35, vv36
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs53
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv35, vs0, vv1
+    vaddi vs2, vs63, 0
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv37, vv37, vs2
+    @vp2 vfdiv.s vv37, vv37, vv33
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs52
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv37, vs0, vv1
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1200
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv33, vs2, vs3
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv34, vs2, vs8
+    vaddi vs2, vs32, 1208
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vs8, vs2
+    @vp2 vfmadd.s vv33, vv33, vv34, vv35
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs51
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv33, vs0, vv1
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1200
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv33, vs2, vs3
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv35, vs2, vs9
+    vaddi vs2, vs32, 1208
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vs9, vs2
+    @vp2 vfmadd.s vv33, vv33, vv35, vv36
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs50
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv33, vs0, vv1
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1216
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv33, vs2, vs3
+    vaddi vs2, vs32, 712
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv33, vs2
+    vaddi vs2, vs32, 1224
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv33, vs2
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1232
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv37, vs2, vs3
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 960
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv38, vs2, vs3
+    vaddi vs2, vs32, 712
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv38, vv38, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv38, vv38, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv38, vv38, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv39, vv38, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv39, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv41, vv40, vs2
+    @vp2 vfsub.s vv38, vv38, vv41
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vv40, vs2
+    @vp2 vfsub.s vv38, vv38, vv40
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vv38, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv40, vv40, vv38
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv40, vv40, vv38
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv40, vv40, vv38
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv40, vv40, vv38
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv41, vv38, vv38
+    @vp2 vfmul.s vv40, vv40, vv41
+    @vp2 vfadd.s vv40, vv40, vv38
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv38, vv39, vs2
+    @vp2 vaddw vv38, vv38, vv40
+    vaddi vs2, vs32, 1240
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv37, vv37, vv38, vs2
+    @vp2 vfmul.s vv37, vv36, vv37
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv38, vs2
+    @vp2 vfdiv.s vv37, vv37, vv39
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1232
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv40, vs2, vs3
+    vaddi vs2, vs32, 1240
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv40, vv40, vv38, vs2
+    @vp2 vfmul.s vv36, vv36, vv40
+    @vp2 vfdiv.s vv36, vv36, vv39
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 712
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv38, vs2, vs3
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv38, vv38, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv38, vv38, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv39, vv38, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv39, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv39, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv41, vv40, vs2
+    @vp2 vfsub.s vv38, vv38, vv41
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vv40, vs2
+    @vp2 vfsub.s vv38, vv38, vv40
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vv38, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv40, vv40, vv38
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv40, vv40, vv38
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv40, vv40, vv38
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv40, vv40, vv38
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    @vp2 vfmul.s vv41, vv38, vv38
+    @vp2 vfmul.s vv40, vv40, vv41
+    @vp2 vfadd.s vv40, vv40, vv38
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv40, vv40, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv38, vv39, vs2
+    @vp2 vaddw vv38, vv38, vv40
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv39, vv38, vs2
+    vaddi vs2, vs32, 1248
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vv33, vs2
+    vaddi vs2, vs32, 1256
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv41, vs6, vs2
+    vaddi vs2, vs32, 1264
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv41, vv41, vv38, vs2
+    @vp2 vfmul.s vv41, vv40, vv41
+    @vp2 vfdiv.s vv41, vv41, vv39
+    vaddi vs2, vs32, 1256
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv42, vs14, vs2
+    vaddi vs2, vs32, 1264
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv42, vv42, vv38, vs2
+    @vp2 vfmul.s vv40, vv40, vv42
+    @vp2 vfdiv.s vv40, vv40, vv39
+    vaddi vs2, vs32, 1272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv37, vv37, vs2
+    vaddi vs2, vs63, 8
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv37, vs2, vv37
+    vaddi vs2, vs63, 0
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv37, vs2, vv37
+    @vp2 vfmul.s vv37, vv34, vv37
+    vaddi vs2, vs32, 1280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv37, vv37, vs2
+    vaddi vs2, vs32, 1288
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv36, vs2
+    vaddi vs2, vs63, 8
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vs2, vv36
+    vaddi vs2, vs63, 0
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vs2, vv36
+    @vp2 vfmul.s vv36, vv35, vv36
+    vaddi vs2, vs32, 1280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv36, vv36, vs2
+    @vp2 vfadd.s vv42, vv37, vv36
+    vaddi vs2, vs32, 1296
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv42, vv42, vs2
+    vaddi vs2, vs32, 1304
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv42, vv42, vs2
+    vaddi vs2, vs32, 1312
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv42, vv42, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 1320
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv42, vs0, vv1
+    vaddi vs2, vs32, 1272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv41, vv41, vs2
+    vaddi vs2, vs63, 8
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv41, vs2, vv41
+    vaddi vs2, vs63, 0
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv41, vs2, vv41
+    @vp2 vfmul.s vv41, vv34, vv41
+    vaddi vs2, vs32, 1280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv41, vv41, vs2
+    vaddi vs2, vs32, 1288
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vv40, vs2
+    vaddi vs2, vs63, 8
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vs2, vv40
+    vaddi vs2, vs63, 0
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vs2, vv40
+    @vp2 vfmul.s vv40, vv35, vv40
+    vaddi vs2, vs32, 1280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv40, vv40, vs2
+    vaddi vs2, vs32, 1328
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 56
+    vlsd vs3, vs3
+    @vp2 vfdiv.s vv42, vs2, vs3
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv43, vv42, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv43, vv43, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv44, vv42, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv44, vv44, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv44, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv42, vs2, vs0
+    @!vp3 vaddw vv42, vs3, vs0
+    @vp2 vaddw vv43, vv43, vv42
+    vfcvt.s.w vv43, vv43
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv42, vv44, vs0
+    @!vp3 vaddw vv42, vs2, vs0
+    @vp2 vfadd.s vv42, vv42, vv44
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv42, vv42, vs2
+    @vp2 vfmul.s vv44, vv42, vv42
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv42, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    @vp2 vfmul.s vv45, vv45, vv44
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv43, vs2
+    @vp2 vfadd.s vv45, vv45, vv46
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv44, vs2
+    @vp2 vfsub.s vv45, vv45, vv44
+    @vp2 vfadd.s vv42, vv42, vv45
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv43, vv43, vs2
+    @vp2 vfadd.s vv42, vv42, vv43
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv42, vv42, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv42, vv42, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv42, vv42, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv43, vv42, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv43, vv43, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv43, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv44, vs2
+    @vp2 vfsub.s vv42, vv42, vv45
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv44, vs2
+    @vp2 vfsub.s vv42, vv42, vv44
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv42, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv42
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv42
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv42
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv42
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv45, vv42, vv42
+    @vp2 vfmul.s vv44, vv44, vv45
+    @vp2 vfadd.s vv44, vv44, vv42
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv42, vv43, vs2
+    @vp2 vaddw vv42, vv42, vv44
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv43, vv42, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv43, vs2, vv43
+    vaddi vs2, vs32, 1328
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 64
+    vlsd vs3, vs3
+    @vp2 vfdiv.s vv42, vs2, vs3
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv44, vv42, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv44, vv44, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv45, vv42, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv45, vv45, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv45, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv42, vs2, vs0
+    @!vp3 vaddw vv42, vs3, vs0
+    @vp2 vaddw vv44, vv44, vv42
+    vfcvt.s.w vv44, vv44
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv42, vv45, vs0
+    @!vp3 vaddw vv42, vs2, vs0
+    @vp2 vfadd.s vv42, vv42, vv45
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv42, vv42, vs2
+    @vp2 vfmul.s vv45, vv42, vv42
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv42, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv42
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv42
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv42
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv42
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv42
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv42
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv42
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv42
+    @vp2 vfmul.s vv46, vv46, vv45
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv44, vs2
+    @vp2 vfadd.s vv46, vv46, vv47
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv45, vs2
+    @vp2 vfsub.s vv46, vv46, vv45
+    @vp2 vfadd.s vv42, vv42, vv46
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv44, vs2
+    @vp2 vfadd.s vv42, vv42, vv44
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv42, vv42, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv42, vv42, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv42, vv42, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv42, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv44, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv45, vs2
+    @vp2 vfsub.s vv42, vv42, vv46
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv45, vs2
+    @vp2 vfsub.s vv42, vv42, vv45
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv42, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv42
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv46, vv42, vv42
+    @vp2 vfmul.s vv45, vv45, vv46
+    @vp2 vfadd.s vv45, vv45, vv42
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv42, vv44, vs2
+    @vp2 vaddw vv42, vv42, vv45
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv42, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv44, vs2, vv44
+    vaddi vs2, vs32, 712
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv13, vv13, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv13, vv13, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv13, vv13, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv42, vv13, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv42, vv42, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv42, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv45, vs2
+    @vp2 vfsub.s vv13, vv13, vv46
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv45, vs2
+    @vp2 vfsub.s vv13, vv13, vv45
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv13, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv13
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv13
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv13
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv13
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv46, vv13, vv13
+    @vp2 vfmul.s vv45, vv45, vv46
+    @vp2 vfadd.s vv45, vv45, vv13
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv13, vv42, vs2
+    @vp2 vaddw vv13, vv13, vv45
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv42, vs6, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv42, vv42, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv45, vs6, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv45, vv45, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv45, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv46, vs2, vs0
+    @!vp3 vaddw vv46, vs3, vs0
+    @vp2 vaddw vv42, vv42, vv46
+    vfcvt.s.w vv42, vv42
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv46, vv45, vs0
+    @!vp3 vaddw vv46, vs2, vs0
+    @vp2 vfadd.s vv46, vv46, vv45
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv45, vv46, vv46
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv46, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv46
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv46
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv46
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv46
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv46
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv46
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv46
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv46
+    @vp2 vfmul.s vv47, vv47, vv45
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vv42, vs2
+    @vp2 vfadd.s vv47, vv47, vv48
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv45, vs2
+    @vp2 vfsub.s vv47, vv47, vv45
+    @vp2 vfadd.s vv46, vv46, vv47
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv42, vv42, vs2
+    @vp2 vfadd.s vv46, vv46, vv42
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv46, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv46, vv46, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv46, vv46, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv42, vv46, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv42, vv42, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv42, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv45, vs2
+    @vp2 vfsub.s vv46, vv46, vv47
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv45, vs2
+    @vp2 vfsub.s vv46, vv46, vv45
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv46, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv46
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv46
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv46
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv45, vv45, vv46
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    @vp2 vfmul.s vv47, vv46, vv46
+    @vp2 vfmul.s vv45, vv45, vv47
+    @vp2 vfadd.s vv45, vv45, vv46
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv46, vv42, vs2
+    @vp2 vaddw vv46, vv46, vv45
+    @vp2 vfmul.s vv42, vv13, vv46
+    vaddi vs2, vs32, 304
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv42, vv42, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv45, vs14, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv45, vv45, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv47, vs14, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv47, vv47, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv47, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv48, vs2, vs0
+    @!vp3 vaddw vv48, vs3, vs0
+    @vp2 vaddw vv45, vv45, vv48
+    vfcvt.s.w vv45, vv45
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv48, vv47, vs0
+    @!vp3 vaddw vv48, vs2, vs0
+    @vp2 vfadd.s vv48, vv48, vv47
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv47, vv48, vv48
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vv48, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv48
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv48
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv48
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv48
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv48
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv48
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv48
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv48
+    @vp2 vfmul.s vv49, vv49, vv47
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv50, vv45, vs2
+    @vp2 vfadd.s vv49, vv49, vv50
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv47, vs2
+    @vp2 vfsub.s vv49, vv49, vv47
+    @vp2 vfadd.s vv48, vv48, vv49
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv45, vs2
+    @vp2 vfadd.s vv48, vv48, vv45
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vv48, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv48, vv48, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv48, vv48, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv48, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv45, vv45, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv45, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vv47, vs2
+    @vp2 vfsub.s vv48, vv48, vv49
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv47, vs2
+    @vp2 vfsub.s vv48, vv48, vv47
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv48, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv48
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv48
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv48
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv48
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv49, vv48, vv48
+    @vp2 vfmul.s vv47, vv47, vv49
+    @vp2 vfadd.s vv47, vv47, vv48
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv48, vv45, vs2
+    @vp2 vaddw vv48, vv48, vv47
+    @vp2 vfmul.s vv45, vv13, vv48
+    vaddi vs2, vs32, 304
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv45, vv45, vs2
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1336
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv13, vs2, vs3
+    vaddi vs2, vs32, 712
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv13, vv13, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv13, vv13, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv13, vv13, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv13, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv47, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv50, vv49, vs2
+    @vp2 vfsub.s vv13, vv13, vv50
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vv49, vs2
+    @vp2 vfsub.s vv13, vv13, vv49
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vv13, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv13
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv13
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv13
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv13
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv50, vv13, vv13
+    @vp2 vfmul.s vv49, vv49, vv50
+    @vp2 vfadd.s vv49, vv49, vv13
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv13, vv47, vs2
+    @vp2 vaddw vv13, vv13, vv49
+    vaddi vs2, vs32, 1344
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv13, vs2
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vs2, vv47
+    vaddi vs2, vs32, 1352
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv50, vs6, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv51, vv50, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv51, vv51, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv52, vv50, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv52, vv52, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv52, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv50, vs2, vs0
+    @!vp3 vaddw vv50, vs3, vs0
+    @vp2 vaddw vv51, vv51, vv50
+    vfcvt.s.w vv51, vv51
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv50, vv52, vs0
+    @!vp3 vaddw vv50, vs2, vs0
+    @vp2 vfadd.s vv50, vv50, vv52
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv50, vv50, vs2
+    @vp2 vfmul.s vv52, vv50, vv50
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv53, vv50, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv50
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv50
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv50
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv50
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv50
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv50
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv50
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv50
+    @vp2 vfmul.s vv53, vv53, vv52
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv54, vv51, vs2
+    @vp2 vfadd.s vv53, vv53, vv54
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv52, vv52, vs2
+    @vp2 vfsub.s vv53, vv53, vv52
+    @vp2 vfadd.s vv50, vv50, vv53
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv51, vv51, vs2
+    @vp2 vfadd.s vv50, vv50, vv51
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv50, vv50, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv50, vv50, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv50, vv50, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv51, vv50, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv51, vv51, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv51, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv53, vv52, vs2
+    @vp2 vfsub.s vv50, vv50, vv53
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv52, vv52, vs2
+    @vp2 vfsub.s vv50, vv50, vv52
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv52, vv50, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv52, vv52, vv50
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv52, vv52, vv50
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv52, vv52, vv50
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv52, vv52, vv50
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv53, vv50, vv50
+    @vp2 vfmul.s vv52, vv52, vv53
+    @vp2 vfadd.s vv52, vv52, vv50
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv50, vv51, vs2
+    @vp2 vaddw vv50, vv50, vv52
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv51, vv50, vs2
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1360
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv50, vs2, vs3
+    vaddi vs2, vs32, 1368
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv51, vv51, vs2, vv50
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1376
+    vlsd vs3, vs3
+    @vp2 vfdiv.s vv50, vs2, vs3
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv50, vv50, vs2
+    vaddi vs2, vs32, 1384
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv50, vv50, vs2, vv51
+    vaddi vs2, vs32, 1392
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv50, vv46, vs2, vv50
+    vaddi vs2, vs32, 304
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv50, vv46, vs2, vv50
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1344
+    vlsd vs3, vs3
+    @vp2 vfmadd.s vv50, vs2, vs3, vv50
+    vaddi vs2, vs32, 1400
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 440
+    vlsd vs3, vs3
+    @vp2 vfmadd.s vv46, vv13, vs2, vs3
+    @vp2 vfmul.s vv50, vv46, vv50
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vs2, vv47
+    vaddi vs2, vs32, 1352
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv13, vs14, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv51, vv13, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv51, vv51, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv52, vv13, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv52, vv52, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv52, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv13, vs2, vs0
+    @!vp3 vaddw vv13, vs3, vs0
+    @vp2 vaddw vv51, vv51, vv13
+    vfcvt.s.w vv51, vv51
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv13, vv52, vs0
+    @!vp3 vaddw vv13, vs2, vs0
+    @vp2 vfadd.s vv13, vv13, vv52
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv13, vv13, vs2
+    @vp2 vfmul.s vv52, vv13, vv13
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv53, vv13, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv13
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv13
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv13
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv13
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv13
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv13
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv13
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv53, vv53, vs2
+    @vp2 vfmul.s vv53, vv53, vv13
+    @vp2 vfmul.s vv53, vv53, vv52
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv54, vv51, vs2
+    @vp2 vfadd.s vv53, vv53, vv54
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv52, vv52, vs2
+    @vp2 vfsub.s vv53, vv53, vv52
+    @vp2 vfadd.s vv13, vv13, vv53
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv51, vv51, vs2
+    @vp2 vfadd.s vv13, vv13, vv51
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv13, vv13, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv13, vv13, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv13, vv13, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv51, vv13, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv51, vv51, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv51, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv53, vv52, vs2
+    @vp2 vfsub.s vv13, vv13, vv53
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv52, vv52, vs2
+    @vp2 vfsub.s vv13, vv13, vv52
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv52, vv13, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv52, vv52, vv13
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv52, vv52, vv13
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv52, vv52, vv13
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv52, vv52, vv13
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    @vp2 vfmul.s vv53, vv13, vv13
+    @vp2 vfmul.s vv52, vv52, vv53
+    @vp2 vfadd.s vv52, vv52, vv13
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv52, vv52, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv13, vv51, vs2
+    @vp2 vaddw vv13, vv13, vv52
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv51, vv13, vs2
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1360
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv13, vs2, vs3
+    vaddi vs2, vs32, 1368
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv51, vv51, vs2, vv13
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1376
+    vlsd vs3, vs3
+    @vp2 vfdiv.s vv13, vs2, vs3
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv13, vv13, vs2
+    vaddi vs2, vs32, 1384
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv13, vv13, vs2, vv51
+    vaddi vs2, vs32, 1392
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv13, vv48, vs2, vv13
+    vaddi vs2, vs32, 304
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv13, vv48, vs2, vv13
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1344
+    vlsd vs3, vs3
+    @vp2 vfmadd.s vv13, vs2, vs3, vv13
+    @vp2 vfmul.s vv46, vv46, vv13
+    vaddi vs2, vs32, 1408
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv43, vv43, vs2
+    @vp2 vfsub.s vv42, vv42, vv49
+    @vp2 vfmul.s vv42, vv42, vv43
+    @vp2 vfdiv.s vv42, vv42, vv50
+    vaddi vs2, vs32, 1416
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv44, vs2
+    @vp2 vfsub.s vv45, vv45, vv47
+    @vp2 vfmul.s vv45, vv45, vv44
+    @vp2 vfdiv.s vv45, vv45, vv46
+    @vp2 vfadd.s vv13, vv42, vv45
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv13, vv13, vs2
+    vaddi vs2, vs32, 1424
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv13, vv13, vs2
+    vaddi vs2, vs32, 1304
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv13, vv13, vs2
+    vaddi vs2, vs32, 1312
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv13, vv13, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 1432
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv13, vs0, vv1
+    vaddi vs2, vs32, 1440
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv13, vv21, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv13, vv13, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv13, vv13, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv43, vv13, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv43, vv43, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv43, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv44, vs2
+    @vp2 vfsub.s vv13, vv13, vv46
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv44, vs2
+    @vp2 vfsub.s vv13, vv13, vv44
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv13, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv13
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv13
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv13
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv13
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv46, vv13, vv13
+    @vp2 vfmul.s vv44, vv44, vv46
+    @vp2 vfadd.s vv44, vv44, vv13
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv13, vv43, vs2
+    @vp2 vaddw vv13, vv13, vv44
+    vaddi vs2, vs32, 1448
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv43, vv13, vs2
+    vaddi vs2, vs32, 1456
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv13, vs2
+    @vp2 vfdiv.s vv43, vv43, vv44
+    vaddi vs2, vs32, 1440
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv27, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv27, vv27, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv27, vv27, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv13, vv27, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv13, vv13, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv13, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv44, vs2
+    @vp2 vfsub.s vv27, vv27, vv46
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv44, vs2
+    @vp2 vfsub.s vv27, vv27, vv44
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv27, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv27
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv27
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv27
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv44, vv44, vv27
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv46, vv27, vv27
+    @vp2 vfmul.s vv44, vv44, vv46
+    @vp2 vfadd.s vv44, vv44, vv27
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv27, vv13, vs2
+    @vp2 vaddw vv27, vv27, vv44
+    vaddi vs2, vs32, 1464
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv13, vv27, vs2
+    vaddi vs2, vs32, 1456
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv27, vs2
+    @vp2 vfdiv.s vv13, vv13, vv44
+    @vp2 vfadd.s vv27, vv43, vv13
+    vaddi vs2, vs32, 1296
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv27, vs2
+    vaddi vs2, vs32, 1304
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv27, vv27, vs2
+    vaddi vs2, vs32, 1312
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv27, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 1472
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv27, vs0, vv1
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv7, vs2, vv7
+    vaddi vs2, vs32, 1480
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv7, vv7, vs2
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv8, vs2, vv8
+    vaddi vs2, vs32, 1488
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv8, vv8, vs2
+    @vp2 vfadd.s vv27, vv7, vv8
+    vaddi vs2, vs32, 1296
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv27, vs2
+    vaddi vs2, vs32, 1304
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv27, vv27, vs2
+    vaddi vs2, vs32, 1312
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv27, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 1496
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv27, vs0, vv1
+    vaddi vs2, vs32, 1280
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv27, vs2, vs7
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv44, vv27, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv44, vv44, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv46, vv27, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv46, vv46, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv46, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv27, vs2, vs0
+    @!vp3 vaddw vv27, vs3, vs0
+    @vp2 vaddw vv44, vv44, vv27
+    vfcvt.s.w vv44, vv44
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv27, vv46, vs0
+    @!vp3 vaddw vv27, vs2, vs0
+    @vp2 vfadd.s vv27, vv27, vv46
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv27, vv27, vs2
+    @vp2 vfmul.s vv46, vv27, vv27
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv27, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv27
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv27
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv27
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv27
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv27
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv27
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv27
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv27
+    @vp2 vfmul.s vv47, vv47, vv46
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vv44, vs2
+    @vp2 vfadd.s vv47, vv47, vv48
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv46, vs2
+    @vp2 vfsub.s vv47, vv47, vv46
+    @vp2 vfadd.s vv27, vv27, vv47
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv44, vs2
+    @vp2 vfadd.s vv27, vv27, vv44
+    vaddi vs2, vs32, 1504
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv27, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv27, vv27, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv27, vv27, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv27, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv44, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv46, vs2
+    @vp2 vfsub.s vv27, vv27, vv47
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv46, vs2
+    @vp2 vfsub.s vv27, vv27, vv46
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv27, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv27
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv27
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv27
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv46, vv46, vv27
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv47, vv27, vv27
+    @vp2 vfmul.s vv46, vv46, vv47
+    @vp2 vfadd.s vv46, vv46, vv27
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv27, vv44, vs2
+    @vp2 vaddw vv27, vv27, vv46
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv27, vs2
+    vaddi vs2, vs32, 1512
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv44, vs2, vv44
+    vaddi vs2, vs32, 1000
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv44, vs2, vv44
+    vaddi vs2, vs32, 824
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv27, vs2, vv44
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv44, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv46, vs2, vs16
+    @vp2 vfsub.s vv46, vv46, vs17
+    @vp2 vfsub.s vv46, vv46, vs18
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vs2, vv44
+    @vp2 vfsgnjn.s vv47, vs16, vs16
+    @vp2 vfmul.s vv47, vv44, vv47
+    vaddi vs2, vs32, 1520
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv47, vv46, vs2, vv47
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv21, vv21, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv21, vv21, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv21, vv21, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vv21, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv48, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv50, vv49, vs2
+    @vp2 vfsub.s vv21, vv21, vv50
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vv49, vs2
+    @vp2 vfsub.s vv21, vv21, vv49
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vv21, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv21
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv21
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv21
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv21
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv50, vv21, vv21
+    @vp2 vfmul.s vv49, vv49, vv50
+    @vp2 vfadd.s vv49, vv49, vv21
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv21, vv48, vs2
+    @vp2 vaddw vv21, vv21, vv49
+    @vp2 vfmul.s vv27, vv27, vv21
+    vaddi vs2, vs32, 1528
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv21, vs17, vs2
+    @vp2 vfmadd.s vv21, vv27, vs16, vv21
+    @vp2 vfsub.s vv47, vv47, vv21
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs43
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv47, vs0, vv1
+    vaddi vs2, vs32, 1536
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vs18, vs2
+    @vp2 vfmadd.s vv44, vv44, vs17, vv47
+    @vp2 vfsub.s vv21, vv21, vv44
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs42
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv21, vs0, vv1
+    @vp2 vfsgnjn.s vv46, vv46, vv46
+    @vp2 vfmul.s vv27, vv27, vv46
+    vaddi vs2, vs32, 1544
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv27, vs18, vs2, vv27
+    @vp2 vfsub.s vv44, vv44, vv27
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs57
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv44, vs0, vv1
+    vaddi vs2, vs32, 1552
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv21, vs17, vs2
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv27, vs7, vs2
+    @vp2 vfmul.s vv21, vv21, vv27
+    vaddi vs2, vs63, 152
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1560
+    vlsd vs3, vs3
+    @vp2 vfdiv.s vv44, vs2, vs3
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv46, vv44, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv46, vv46, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv47, vv44, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv47, vv47, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv47, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv44, vs2, vs0
+    @!vp3 vaddw vv44, vs3, vs0
+    @vp2 vaddw vv46, vv46, vv44
+    vfcvt.s.w vv46, vv46
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv44, vv47, vs0
+    @!vp3 vaddw vv44, vs2, vs0
+    @vp2 vfadd.s vv44, vv44, vv47
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv44, vv44, vs2
+    @vp2 vfmul.s vv47, vv44, vv44
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vv44, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv44
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv44
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv44
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv44
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv44
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv44
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv44
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv44
+    @vp2 vfmul.s vv48, vv48, vv47
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vv46, vs2
+    @vp2 vfadd.s vv48, vv48, vv49
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv47, vs2
+    @vp2 vfsub.s vv48, vv48, vv47
+    @vp2 vfadd.s vv44, vv44, vv48
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv46, vs2
+    @vp2 vfadd.s vv44, vv44, vv46
+    vaddi vs2, vs32, 1568
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vv44, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv44, vv44, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv44, vv44, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv44, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv46, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vv47, vs2
+    @vp2 vfsub.s vv44, vv44, vv48
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv47, vs2
+    @vp2 vfsub.s vv44, vv44, vv47
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv44, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv44
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv44
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv44
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv47, vv47, vv44
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    @vp2 vfmul.s vv48, vv44, vv44
+    @vp2 vfmul.s vv47, vv47, vv48
+    @vp2 vfadd.s vv47, vv47, vv44
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv44, vv46, vs2
+    @vp2 vaddw vv44, vv44, vv47
+    vaddi vs2, vs32, 1200
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv46, vs7, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsrlw vv47, vv46, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp2 vand vv47, vv47, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp2 vand vv48, vv46, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp2 vor vv48, vv48, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp3, vv48, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp3 vaddw vv46, vs2, vs0
+    @!vp3 vaddw vv46, vs3, vs0
+    @vp2 vaddw vv47, vv47, vv46
+    vfcvt.s.w vv47, vv47
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp3 vaddw vv46, vv48, vs0
+    @!vp3 vaddw vv46, vs2, vs0
+    @vp2 vfadd.s vv46, vv46, vv48
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv46, vv46, vs2
+    @vp2 vfmul.s vv48, vv46, vv46
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vv46, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv46
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv46
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv46
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv46
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv46
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv46
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv46
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv49, vv49, vs2
+    @vp2 vfmul.s vv49, vv49, vv46
+    @vp2 vfmul.s vv49, vv49, vv48
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv50, vv47, vs2
+    @vp2 vfadd.s vv49, vv49, vv50
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vv48, vs2
+    @vp2 vfsub.s vv49, vv49, vv48
+    @vp2 vfadd.s vv46, vv46, vv49
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv47, vs2
+    @vp2 vfadd.s vv46, vv46, vv47
+    vaddi vs2, vs32, 1568
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vv46, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp2 vfmax.s vv46, vv46, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp2 vfmin.s vv46, vv46, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv46, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv47, vv47, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv47, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vv48, vs2
+    @vp2 vfsub.s vv46, vv46, vv49
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vv48, vs2
+    @vp2 vfsub.s vv46, vv46, vv48
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vv46, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv46
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv46
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv46
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv48, vv48, vv46
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    @vp2 vfmul.s vv49, vv46, vv46
+    @vp2 vfmul.s vv48, vv48, vv49
+    @vp2 vfadd.s vv48, vv48, vv46
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv48, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp2 vsllw vv46, vv47, vs2
+    @vp2 vaddw vv46, vv46, vv48
+    @vp2 vfsub.s vv47, vv44, vv46
+    vaddi vs2, vs32, 1576
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv47, vv47, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv48, vv44, vs2
+    @vp2 vfadd.s vv48, vv48, vv46
+    @vp2 vfdiv.s vv47, vv47, vv48
+    vaddi vs2, vs32, 1584
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv27, vs2
+    vaddi vs2, vs32, 1592
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv44, vs6, vs2
+    vaddi vs2, vs32, 1600
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv46, vs2, vs19
+    vaddi vs2, vs32, 1608
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vs19, vs2
+    @vp2 vfmadd.s vv44, vv44, vv46, vv48
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs41
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv44, vs0, vv1
+    vaddi vs2, vs32, 1592
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv46, vs14, vs2
+    vaddi vs2, vs32, 1616
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv48, vs2, vs20
+    vaddi vs2, vs32, 1608
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv49, vs20, vs2
+    @vp2 vfmadd.s vv46, vv46, vv48, vv49
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs40
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv46, vs0, vv1
+    vaddi vs2, vs63, 152
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1624
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv48, vs2, vs3
+    vaddi vs2, vs32, 1632
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv49, vs2, vs21
+    vaddi vs2, vs32, 1640
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv50, vs21, vs2
+    @vp2 vfmadd.s vv48, vv48, vv49, vv50
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs39
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv48, vs0, vv1
+    vaddi vs2, vs63, 152
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1648
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv49, vs2, vs3
+    vaddi vs2, vs32, 1656
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv50, vs2, vs22
+    @vp2 vfsub.s vv50, vv50, vs23
+    vaddi vs2, vs32, 1664
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv51, vs22, vs2
+    @vp2 vfmadd.s vv49, vv49, vv50, vv51
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs38
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv49, vs0, vv1
+    vaddi vs2, vs32, 1672
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv51, vs23, vs2
+    vaddi vs2, vs32, 1680
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv50, vv50, vs2, vv51
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs37
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv50, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 1688
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vssw vs3, vs0
+    vaddi vs2, vs63, 152
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1696
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv51, vs2, vs3
+    vaddi vs2, vs32, 1656
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv52, vs2, vs24
+    @vp2 vfsub.s vv52, vv52, vs25
+    vaddi vs2, vs32, 1704
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv53, vs24, vs2
+    @vp2 vfmadd.s vv51, vv51, vv52, vv53
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs36
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv51, vs0, vv1
+    vaddi vs2, vs32, 1712
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv53, vs25, vs2
+    vaddi vs2, vs32, 1720
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv52, vv52, vs2, vv53
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs35
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv52, vs0, vv1
+    vaddi vs2, vs63, 152
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1728
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv53, vs2, vs3
+    vaddi vs2, vs32, 1736
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv54, vs2, vs26
+    vaddi vs2, vs32, 1528
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv55, vs26, vs2
+    @vp2 vfmadd.s vv53, vv53, vv54, vv55
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs34
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv53, vs0, vv1
+    @vp2 vfadd.s vv48, vv48, vv49
+    @vp2 vfadd.s vv50, vv50, vv48
+    @vp2 vfadd.s vv50, vv50, vs0
+    @vp2 vfadd.s vv51, vv51, vv50
+    @vp2 vfadd.s vv52, vv52, vv51
+    @vp2 vfadd.s vv53, vv53, vv52
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1728
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv48, vs2, vs3
+    vaddi vs2, vs32, 1744
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv49, vs2, vs27
+    vaddi vs2, vs32, 1752
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv50, vs27, vs2
+    @vp2 vfmadd.s vv49, vv48, vv49, vv50
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs33
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv49, vs0, vv1
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1728
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv50, vs2, vs3
+    vaddi vs2, vs32, 1760
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv51, vs2, vs28
+    vaddi vs2, vs32, 1752
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv52, vs28, vs2
+    @vp2 vfmadd.s vv51, vv50, vv51, vv52
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 0
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv51, vs0, vv1
+    vaddi vs2, vs32, 1768
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv52, vs2, vs29
+    vaddi vs2, vs32, 1776
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv54, vs29, vs2
+    @vp2 vfmadd.s vv48, vv48, vv52, vv54
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 8
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv48, vs0, vv1
+    vaddi vs2, vs32, 1784
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv52, vs2, vs30
+    vaddi vs2, vs32, 1776
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv54, vs30, vs2
+    @vp2 vfmadd.s vv50, vv50, vv52, vv54
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 16
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv50, vs0, vv1
+    @vp2 vfadd.s vv49, vv49, vv48
+    @vp2 vfadd.s vv51, vv51, vv50
+    vaddi vs2, vs32, 1728
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv48, vs7, vs2
+    vaddi vs2, vs32, 1792
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv50, vs2, vs31
+    vaddi vs2, vs32, 1800
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv52, vs31, vs2
+    @vp2 vfmadd.s vv48, vv48, vv50, vv52
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 24
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv48, vs0, vv1
+    vaddi vs2, vs32, 1808
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv50, vv47, vs2
+    vaddi vs2, vs32, 1808
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv27, vv27, vs2
+    vaddi vs2, vs32, 1816
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv52, vv27, vs2, vv21
+    @vp2 vfsgnjn.s vv52, vv52, vv52
+    vaddi vs2, vs32, 1816
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv50, vv50, vs2, vv52
+    @vp2 vfsub.s vv50, vv50, vv48
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 32
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv50, vs0, vv1
+    @vp2 vfadd.s vv4, vv4, vv10
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv4, vv42, vs2, vv4
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv4, vv14, vs2, vv4
+    @vp2 vfadd.s vv41, vv41, vv4
+    @vp2 vfadd.s vv5, vv5, vv12
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv5, vv45, vs2, vv5
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv5, vv15, vs2, vv5
+    @vp2 vfadd.s vv40, vv40, vv5
+    vaddi vs2, vs32, 1296
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv4, vv41, vs2
+    vaddi vs2, vs32, 1824
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv4, vv4, vs2
+    @vp2 vfsub.s vv5, vs14, vs6
+    vaddi vs2, vs32, 1832
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv5, vv5, vs2, vv4
+    @vp2 vfsub.s vv5, vv5, vv44
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 40
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv5, vs0, vv1
+    vaddi vs2, vs32, 1296
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv4, vv40, vs2
+    vaddi vs2, vs32, 1840
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv4, vv4, vs2
+    vaddi vs2, vs32, 1216
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv4, vv4, vs2
+    @vp2 vfsub.s vv5, vs6, vs14
+    vaddi vs2, vs32, 1848
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv5, vv5, vs2, vv4
+    @vp2 vfsub.s vv4, vs13, vs14
+    vaddi vs2, vs32, 1856
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv4, vv4, vs2, vv5
+    @vp2 vfsub.s vv4, vv4, vv46
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 48
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv4, vs0, vv1
+    @vp2 vfsub.s vv4, vs14, vs13
+    vaddi vs2, vs32, 1864
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv4, vv4, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 56
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv4, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 64
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vssw vs3, vs0
+    @vp2 vfadd.s vv7, vv7, vv37
+    @vp2 vfadd.s vv7, vv7, vv43
+    vaddi vs2, vs32, 1872
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv42, vv42, vs2, vv7
+    @vp2 vfadd.s vv8, vv8, vv36
+    @vp2 vfadd.s vv8, vv8, vv13
+    vaddi vs2, vs32, 1872
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv45, vv45, vs2, vv8
+    vaddi vs2, vs32, 1296
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv4, vv42, vs2
+    vaddi vs2, vs32, 1880
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv4, vv4, vs2
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 56
+    vlsd vs3, vs3
+    @vp2 vfsub.s vv5, vs2, vs3
+    vaddi vs2, vs32, 1888
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv5, vv5, vs2, vv4
+    @vp2 vfsub.s vv5, vv5, vv49
+    vaddi vs2, vs32, 1896
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv21, vv21, vs2
+    vaddi vs2, vs32, 1904
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv21, vv21, vs2
+    @vp2 vfadd.s vv21, vv21, vv5
+    vaddi vs2, vs32, 1904
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv27, vv27, vs2
+    @vp2 vfadd.s vv27, vv27, vv21
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 72
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv27, vs0, vv1
+    vaddi vs2, vs32, 1296
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv4, vv45, vs2
+    vaddi vs2, vs32, 1912
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv4, vv4, vs2
+    vaddi vs2, vs63, 56
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 64
+    vlsd vs3, vs3
+    @vp2 vfsub.s vv5, vs2, vs3
+    vaddi vs2, vs32, 1920
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv5, vv5, vs2, vv4
+    vaddi vs2, vs63, 152
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 64
+    vlsd vs3, vs3
+    @vp2 vfsub.s vv4, vs2, vs3
+    vaddi vs2, vs32, 1928
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv4, vv4, vs2, vv5
+    @vp2 vfsub.s vv4, vv4, vv51
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 80
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv4, vs0, vv1
+    @vp2 vfsgnjn.s vv47, vv47, vv47
+    @vp2 vfsub.s vv47, vv47, vv53
+    vaddi vs2, vs63, 64
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 152
+    vlsd vs3, vs3
+    @vp2 vfsub.s vv4, vs2, vs3
+    vaddi vs2, vs32, 1936
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv4, vv4, vs2, vv47
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 88
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv4, vs0, vv1
+    vaddi vs2, vs63, 136
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv4, vv3, vs2
+    vfcvt.w.s vv4, vv4, rtz
+    vfcvt.s.w vv4, vv4
+    vaddi vs2, vs63, 136
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv4, vs2, vv4
+    @vp2 vfsub.s vv4, vv3, vv4
+    vaddi vs2, vs32, 1944
+    vlsd vs2, vs2
+    vcmpfle.s vp3, vv4, vs2
+    vpop vp3, vp3, vp3, vp3, 0x55
+    vaddi vs2, vs32, 1952
+    vlsd vs2, vs2
+    @vp3 vaddw vv3, vs0, vs0
+    @!vp3 vaddw vv3, vs2, vs0
+    @vp2 vfadd.s vv14, vv14, vv15
+    vaddi vs2, vs63, 72
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1544
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv4, vs2, vs3
+    vaddi vs2, vs63, 88
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 272
+    vlsd vs3, vs3
+    vaddi vs4, vs63, 40
+    vlsd vs4, vs4
+    @vp2 vfmadd.s vv5, vs2, vs3, vs4
+    @vp2 vfmul.s vv4, vv4, vv5
+    @vp2 vfmul.s vv4, vv4, vv18
+    vaddi vs2, vs63, 32
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1192
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv5, vs2, vs3
+    vaddi vs2, vs63, 24
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv5, vv5, vs2
+    @vp2 vfmul.s vv5, vv5, vv18
+    @vp2 vfadd.s vv4, vv4, vv5
+    vaddi vs2, vs32, 1960
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv5, vv16, vs2
+    vaddi vs2, vs63, 16
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv5, vs2, vv5
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv7, vv17, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv7, vs2, vv7
+    @vp2 vfmul.s vv5, vv5, vv7
+    @vp2 vfmul.s vv5, vv18, vv5
+    @vp2 vfadd.s vv4, vv4, vv5
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv5, vv19, vs2
+    vaddi vs2, vs32, 1968
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv5, vs2, vv5
+    vaddi vs2, vs32, 1976
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv5, vv5, vs2
+    vaddi vs2, vs32, 1632
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv5, vv5, vs2
+    vaddi vs2, vs32, 1984
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv5, vv5, vs2
+    @vp2 vfmul.s vv5, vv5, vv30
+    vaddi vs2, vs32, 288
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv26, vv26, vs2
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    @vp2 vfsub.s vv26, vs2, vv26
+    @vp2 vfmul.s vv5, vv26, vv5
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv7, vv20, vs2
+    vaddi vs2, vs32, 1968
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv7, vs2, vv7
+    vaddi vs2, vs32, 1976
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv7, vv7, vs2
+    vaddi vs2, vs32, 1632
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv7, vv7, vs2
+    vaddi vs2, vs32, 1992
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv7, vv7, vs2
+    @vp2 vfmul.s vv7, vv7, vv31
+    @vp2 vfmul.s vv26, vv26, vv7
+    @vp2 vfadd.s vv5, vv5, vv26
+    @vp2 vfadd.s vv4, vv4, vv5
+    vaddi vs2, vs32, 1272
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv16, vv16, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv5, vv9, vs2
+    vaddi vs2, vs32, 2000
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv5, vs2, vv5
+    vaddi vs2, vs32, 2008
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv7, vv29, vs2, vv6
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv6, vv32, vs2
+    @vp2 vfdiv.s vv7, vv7, vv6
+    @vp2 vfadd.s vv7, vv5, vv7
+    @vp2 vfdiv.s vv5, vv5, vv7
+    @vp2 vfmul.s vv16, vv16, vv5
+    @vp2 vfmul.s vv16, vv18, vv16
+    @vp2 vfadd.s vv4, vv4, vv16
+    vaddi vs2, vs32, 1872
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv14, vv14, vs2, vv4
+    vaddi vs2, vs32, 2016
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vv33, vs2
+    vaddi vs2, vs63, 48
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 1256
+    vlsd vs3, vs3
+    @vp2 vfmul.s vv4, vs2, vs3
+    vaddi vs2, vs32, 2024
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv4, vv4, vv38, vs2
+    @vp2 vfmul.s vv33, vv33, vv4
+    @vp2 vfdiv.s vv33, vv33, vv39
+    vaddi vs2, vs63, 8
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vs2, vv33
+    vaddi vs2, vs63, 0
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv33, vs2, vv33
+    vaddi vs2, vs32, 1288
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv35, vv35, vs2
+    vaddi vs2, vs32, 1272
+    vlsd vs2, vs2
+    @vp2 vfmadd.s vv34, vv34, vs2, vv35
+    @vp2 vfmul.s vv34, vv34, vv33
+    vaddi vs2, vs32, 1280
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv34, vv34, vs2
+    @vp2 vfadd.s vv14, vv14, vv34
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv4, vv28, vs2
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv4, vs2, vv4
+    vaddi vs2, vs32, 2032
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv5, vv4, vs2
+    @vp2 vfmul.s vv5, vv18, vv5
+    vaddi vs2, vs32, 2040
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv4, vv4, vs2
+    @vp2 vfmul.s vv18, vv18, vv4
+    @vp2 vfadd.s vv5, vv5, vv18
+    @vp2 vfadd.s vv5, vv5, vv14
+    vaddi vs2, vs63, 80
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 8
+    vlsd vs3, vs3
+    @vp2 vfadd.s vv4, vs2, vs3
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 16
+    vlsd vs2, vs2
+    @vp2 vfmul.s vv6, vv4, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 24
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 56
+    vlsd vs3, vs3
+    @vp2 vfdiv.s vv7, vs2, vs3
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv7, vv7, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 32
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv7, vs2, vv7
+    @vp2 vfmul.s vv7, vv7, vv4
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 24
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 64
+    vlsd vs3, vs3
+    @vp2 vfdiv.s vv8, vs2, vs3
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp2 vfadd.s vv8, vv8, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 40
+    vlsd vs2, vs2
+    @vp2 vfdiv.s vv8, vs2, vv8
+    @vp2 vfmul.s vv8, vv8, vv4
+    @vp2 vfadd.s vv7, vv7, vv8
+    @vp2 vfadd.s vv41, vv41, vv40
+    @vp2 vfadd.s vv6, vv6, vv7
+    @vp2 vfadd.s vv42, vv42, vv45
+    @vp2 vfadd.s vv6, vv6, vv41
+    @vp2 vfadd.s vv42, vv42, vv6
+    @vp2 vfadd.s vv5, vv5, vv42
+    @vp2 vfsub.s vv5, vv5, vv3
+    @vp2 vfsgnjn.s vv5, vv5, vv5
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 96
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp2 vsxw vv5, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 48
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vssw vs3, vs0
+.Lkernel_gpu_opencl_skip7:
+    vpop vp3, vp5, vp5, vp5, 0xAA
+    vpop vp3, vp3, vp9, vp9, 0xEE
+    @vp9 vaddw vv3, vv23, vs0
+    @vp5 vaddw vv3, vv25, vs0
+    @vp9 vaddw vv4, vv22, vs0
+    @vp5 vaddw vv4, vv24, vs0
+    @!vp3 vcjal 0, vs1, .Lkernel_gpu_opencl_skip8
+    vaddi vs2, vs32, 824
+    vlsd vs2, vs2
+    @vp3 vfdiv.s vv4, vs2, vv4
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 312
+    vlsd vs2, vs2
+    @vp3 vfdiv.s vv5, vs2, vv3
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsrlw vv3, vv11, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp3 vand vv6, vv3, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp3 vand vv3, vv11, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp3 vor vv7, vv3, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp4, vv7, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp4 vaddw vv3, vs2, vs0
+    @!vp4 vaddw vv3, vs3, vs0
+    @vp3 vaddw vv6, vv6, vv3
+    vfcvt.s.w vv6, vv6
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp4 vaddw vv3, vv7, vs0
+    @!vp4 vaddw vv3, vs2, vs0
+    @vp3 vfadd.s vv8, vv3, vv7
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv8, vv8, vs2
+    @vp3 vfmul.s vv3, vv8, vv8
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv7, vv8, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    @vp3 vfmul.s vv7, vv7, vv3
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv9, vv6, vs2
+    @vp3 vfadd.s vv7, vv7, vv9
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv9, vv3, vs2
+    @vp3 vfsub.s vv7, vv7, vv9
+    @vp3 vfadd.s vv8, vv8, vv7
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv6, vv6, vs2
+    @vp3 vfadd.s vv8, vv8, vv6
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv8, vv8, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp3 vfmax.s vv8, vv8, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp3 vfmin.s vv8, vv8, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vv8, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv6, vv3, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv3, vv6, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv7, vv3, vs2
+    @vp3 vfsub.s vv8, vv8, vv7
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv7, vv3, vs2
+    @vp3 vfsub.s vv8, vv8, vv7
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vv8, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv3, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv7, vv7, vv8
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    @vp3 vfmul.s vv3, vv8, vv8
+    @vp3 vfmul.s vv7, vv7, vv3
+    @vp3 vfadd.s vv7, vv7, vv8
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv7, vv7, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsllw vv3, vv6, vs2
+    @vp3 vaddw vv6, vv3, vv7
+    @vp3 vfmul.s vv4, vv4, vv6
+    vaddi vs2, vs63, 168
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 320
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 160
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv7, vv4, vs2, vv3
+    @vp3 vfmul.s vv5, vv5, vv6
+    vaddi vs2, vs63, 176
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 328
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 168
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv8, vv5, vs2, vv3
+    vaddi vs2, vs63, 120
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 184
+    vlsd vs3, vs3
+    @vp3 vfsub.s vv3, vs2, vs3
+    vaddi vs2, vs63, 192
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv9, vv3, vs2
+    vaddi vs2, vs63, 200
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv9, vv9, vs2
+    vaddi vs2, vs63, 192
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 336
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 184
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv10, vv4, vs2, vv3
+    vaddi vs2, vs63, 200
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 328
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 192
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv11, vv5, vs2, vv3
+    vaddi vs2, vs63, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 336
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 184
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 344
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv12, vs2, vs3
+    @vp3 vfmadd.s vv12, vv3, vv9, vv12
+    vaddi vs2, vs63, 168
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 336
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 192
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 352
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv13, vs2, vs3
+    @vp3 vfmadd.s vv13, vv3, vv9, vv13
+    vaddi vs2, vs63, 176
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 336
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 200
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 352
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv14, vs2, vs3
+    @vp3 vfmadd.s vv9, vv3, vv9, vv14
+    vaddi vs2, vs63, 104
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 248
+    vlsd vs3, vs3
+    @vp3 vfsub.s vv3, vs2, vs3
+    vaddi vs2, vs63, 256
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv14, vv3, vs2
+    vaddi vs2, vs63, 264
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv14, vv14, vs2
+    vaddi vs2, vs63, 272
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv14, vv14, vs2
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vv6, vs2
+    vaddi vs2, vs63, 248
+    vlsd vs2, vs2
+    @vp3 vfsgnjn.s vv6, vs2, vs2
+    @vp3 vfmadd.s vv14, vv3, vv14, vv6
+    vaddi vs2, vs63, 264
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 360
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 256
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv4, vv4, vs2, vv3
+    vaddi vs2, vs63, 272
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 368
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 264
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv6, vv5, vs2, vv3
+    vaddi vs2, vs63, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 376
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 256
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 384
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv15, vs2, vs3
+    vaddi vs2, vs63, 248
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv15, vv3, vs2, vv15
+    vaddi vs2, vs63, 168
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 376
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 264
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 392
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv16, vs2, vs3
+    vaddi vs2, vs63, 248
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv16, vv3, vs2, vv16
+    vaddi vs2, vs63, 176
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 376
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 272
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 400
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv17, vs2, vs3
+    vaddi vs2, vs63, 248
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv17, vv3, vs2, vv17
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 208
+    vlsd vs3, vs3
+    @vp3 vfsub.s vv3, vs2, vs3
+    vaddi vs2, vs63, 216
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv18, vv3, vs2
+    vaddi vs2, vs63, 224
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv18, vv18, vs2
+    vaddi vs2, vs63, 232
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv18, vv18, vs2
+    vaddi vs2, vs63, 240
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv18, vv18, vs2
+    vaddi vs2, vs63, 168
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 408
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vaddi vs2, vs63, 208
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 416
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv19, vs2, vs3
+    @vp3 vfmadd.s vv19, vv3, vv18, vv19
+    vaddi vs2, vs63, 216
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 424
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv20, vs2, vs3
+    vaddi vs2, vs63, 208
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv20, vv5, vs2, vv20
+    vaddi vs2, vs63, 176
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 408
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv21, vs2, vs3
+    vaddi vs2, vs63, 216
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 432
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv22, vs2, vs3
+    @vp3 vfmadd.s vv18, vv21, vv18, vv22
+    vaddi vs2, vs63, 216
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 224
+    vlsd vs3, vs3
+    @vp3 vfadd.s vv22, vs2, vs3
+    vaddi vs2, vs63, 232
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv22, vv22, vs2
+    vaddi vs2, vs63, 240
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv22, vv22, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsrlw vv23, vv22, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp3 vand vv23, vv23, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp3 vand vv24, vv22, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp3 vor vv24, vv24, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp4, vv24, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    @vp4 vaddw vv25, vs2, vs0
+    @!vp4 vaddw vv25, vs3, vs0
+    @vp3 vaddw vv23, vv23, vv25
+    vfcvt.s.w vv23, vv23
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp4 vaddw vv25, vv24, vs0
+    @!vp4 vaddw vv25, vs2, vs0
+    @vp3 vfadd.s vv25, vv25, vv24
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv25, vv25, vs2
+    @vp3 vfmul.s vv24, vv25, vv25
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv25, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    @vp3 vfmul.s vv26, vv26, vv24
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv27, vv23, vs2
+    @vp3 vfadd.s vv26, vv26, vv27
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv24, vs2
+    @vp3 vfsub.s vv26, vv26, vv24
+    @vp3 vfadd.s vv25, vv25, vv26
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv23, vs2
+    @vp3 vfadd.s vv25, vv25, vv23
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv25, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp3 vfmax.s vv23, vv23, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp3 vfmin.s vv23, vv23, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv23, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv24, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv27, vv26, vs2
+    @vp3 vfsub.s vv23, vv23, vv27
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv26, vs2
+    @vp3 vfsub.s vv23, vv23, vv26
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv23, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv27, vv23, vv23
+    @vp3 vfmul.s vv26, vv26, vv27
+    @vp3 vfadd.s vv26, vv26, vv23
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsllw vv23, vv24, vs2
+    @vp3 vaddw vv23, vv23, vv26
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 440
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv23, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 448
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv22, vv22, vs2, vv24
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv25, vv25, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp3 vfmax.s vv25, vv25, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp3 vfmin.s vv25, vv25, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv25, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv23, vv23, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv23, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv24, vs2
+    @vp3 vfsub.s vv25, vv25, vv26
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv24, vs2
+    @vp3 vfsub.s vv25, vv25, vv24
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv25, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv26, vv25, vv25
+    @vp3 vfmul.s vv24, vv24, vv26
+    @vp3 vfadd.s vv24, vv24, vv25
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsllw vv25, vv23, vs2
+    @vp3 vaddw vv25, vv25, vv24
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 456
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv22, vv25, vs2, vv22
+    vaddi vs2, vs63, 112
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 464
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv23, vs2, vs3
+    vaddi vs2, vs63, 96
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 224
+    vlsd vs3, vs3
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 472
+    vlsd vs4, vs4
+    @vp3 vfmadd.s vv24, vs2, vs3, vs4
+    vaddi vs2, vs63, 224
+    vlsd vs2, vs2
+    @vp3 vfsgnjn.s vv25, vs2, vs2
+    @vp3 vfmul.s vv25, vv23, vv25
+    @vp3 vfdiv.s vv25, vv25, vv24
+    vaddi vs2, vs63, 216
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv22, vv22, vs2, vv25
+    vaddi vs2, vs63, 232
+    vlsd vs2, vs2
+    @vp3 vfsgnjn.s vv24, vs2, vs2
+    @vp3 vfmul.s vv5, vv5, vv24
+    vaddi vs2, vs63, 224
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 480
+    vlsd vs3, vs3
+    @vp3 vfmadd.s vv5, vs2, vs3, vv5
+    vaddi vs2, vs63, 240
+    vlsd vs2, vs2
+    @vp3 vfsgnjn.s vv24, vs2, vs2
+    @vp3 vfmul.s vv21, vv21, vv24
+    vaddi vs2, vs63, 224
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 488
+    vlsd vs3, vs3
+    @vp3 vfmadd.s vv21, vs2, vs3, vv21
+    @vp3 vfmul.s vv24, vv3, vv24
+    vaddi vs2, vs63, 232
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 2040
+    vaddi vs3, vs3, 496
+    vlsd vs3, vs3
+    @vp3 vfmadd.s vv24, vs2, vs3, vv24
+    vaddi vs2, vs63, 232
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vv23, vs2
+    vaddi vs2, vs63, 96
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 232
+    vlsd vs3, vs3
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 472
+    vlsd vs4, vs4
+    @vp3 vfmadd.s vv25, vs2, vs3, vs4
+    @vp3 vfdiv.s vv25, vv3, vv25
+    vaddi vs2, vs63, 240
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv23, vs2
+    vaddi vs2, vs63, 96
+    vlsd vs2, vs2
+    vaddi vs3, vs63, 240
+    vlsd vs3, vs3
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 472
+    vlsd vs4, vs4
+    @vp3 vfmadd.s vv3, vs2, vs3, vs4
+    @vp3 vfdiv.s vv23, vv23, vv3
+    @vp3 vfsgnjn.s vv3, vv7, vv7
+    @vp3 vfsub.s vv26, vv3, vv12
+    @vp3 vfsub.s vv26, vv26, vv15
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv26, vs2
+    @vp3 vfsub.s vv3, vv7, vv8
+    @vp3 vfsub.s vv27, vv3, vv13
+    @vp3 vfsub.s vv27, vv27, vv16
+    @vp3 vfsub.s vv3, vv24, vv19
+    vaddi vs2, vs63, 96
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv27, vs2, vv3, vv27
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv27, vv27, vs2
+    @vp3 vfsub.s vv3, vv8, vv9
+    @vp3 vfsub.s vv28, vv3, vv17
+    @vp3 vfsub.s vv3, vv21, vv18
+    vaddi vs2, vs63, 96
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv28, vs2, vv3, vv28
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv28, vv28, vs2
+    @vp3 vfsub.s vv12, vv12, vv10
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv12, vv12, vs2
+    @vp3 vfadd.s vv13, vv13, vv10
+    @vp3 vfsub.s vv13, vv13, vv11
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv13, vv13, vs2
+    @vp3 vfadd.s vv9, vv9, vv11
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv9, vv9, vs2
+    @vp3 vfsub.s vv19, vv19, vv20
+    @vp3 vfadd.s vv19, vv25, vv19
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv19, vv19, vs2
+    @vp3 vfadd.s vv18, vv18, vv20
+    @vp3 vfsub.s vv18, vv18, vv22
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv18, vv18, vs2
+    @vp3 vfsub.s vv22, vv22, vv21
+    @vp3 vfsub.s vv22, vv22, vv5
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv22, vv22, vs2
+    @vp3 vfsub.s vv3, vv5, vv24
+    @vp3 vfsub.s vv25, vv3, vv25
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv25, vv25, vs2
+    @vp3 vfadd.s vv21, vv21, vv24
+    @vp3 vfsub.s vv21, vv21, vv23
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv21, vv21, vs2
+    @vp3 vfsub.s vv3, vv14, vv15
+    @vp3 vfsub.s vv23, vv3, vv16
+    @vp3 vfsub.s vv23, vv23, vv17
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv23, vs2
+    @vp3 vfsub.s vv15, vv15, vv4
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv15, vv15, vs2
+    @vp3 vfadd.s vv16, vv16, vv4
+    @vp3 vfsub.s vv16, vv16, vv6
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv16, vv16, vs2
+    @vp3 vfadd.s vv17, vv17, vv6
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv17, vv17, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 64
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv26, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 72
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv27, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 80
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv28, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 88
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv12, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 96
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv13, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 104
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv9, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 112
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv19, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 120
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv18, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 128
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv22, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 136
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv25, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 144
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv21, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 152
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv23, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 160
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv15, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 168
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv16, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 2040
+    vaddi vs4, vs4, 176
+    vlsd vs4, vs4
+    vadd vs3, vs2, vs4
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv17, vs0, vv1
+    vaddi vs2, vs63, 96
+    vlsd vs2, vs2
+    vaddi vs3, vs32, 960
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    @vp3 vfsub.s vv5, vv5, vv20
+    @vp3 vfadd.s vv7, vv7, vv8
+    @vp3 vfadd.s vv10, vv10, vv7
+    @vp3 vfadd.s vv11, vv11, vv10
+    @vp3 vfadd.s vv14, vv14, vv11
+    @vp3 vfadd.s vv4, vv4, vv14
+    @vp3 vfadd.s vv6, vv6, vv4
+    vaddi vs2, vs32, 1872
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv6, vv6, vs2
+    @vp3 vfmadd.s vv5, vv3, vv5, vv6
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv5, vv5, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vv1, vs2, vs0
+    @vp3 vsxw vv5, vs0, vv1
+    vaddi vs3, vs32, 80
+    vlsd vs3, vs3
+    vadd vs2, vs56, vs3
+    vlsw vs2, vs2
+    vaddi vs3, vs32, 1312
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vadd vs2, vs58, vs50
+    vlsw vs2, vs2
+    vadd vs3, vs58, vs49
+    vlsw vs3, vs3
+    vadd vs4, vs58, vs48
+    vlsw vs4, vs4
+    vadd vs5, vs58, vs47
+    vlsw vs5, vs5
+    vaddi vs7, vs63, 128
+    vlsd vs7, vs7
+    vlsw vs6, vs7
+    vaddi vs8, vs63, 144
+    vlsd vs8, vs8
+    vlsw vs7, vs8
+    vaddi vs9, vs32, 2040
+    vaddi vs9, vs9, 512
+    vlsd vs9, vs9
+    vadd vs8, vs56, vs9
+    vlsw vs8, vs8
+    vaddi vs10, vs32, 2040
+    vaddi vs10, vs10, 520
+    vlsd vs10, vs10
+    vadd vs9, vs56, vs10
+    vlsw vs9, vs9
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 528
+    vlsd vs11, vs11
+    vadd vs10, vs56, vs11
+    vlsw vs10, vs10
+    vaddi vs12, vs32, 2040
+    vaddi vs12, vs12, 536
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs13, vs32, 2040
+    vaddi vs13, vs13, 544
+    vlsd vs13, vs13
+    vadd vs12, vs56, vs13
+    vlsw vs12, vs12
+    vaddi vs14, vs32, 2040
+    vaddi vs14, vs14, 552
+    vlsd vs14, vs14
+    vadd vs13, vs56, vs14
+    vlsw vs13, vs13
+    vaddi vs15, vs32, 2040
+    vaddi vs15, vs15, 560
+    vlsd vs15, vs15
+    vadd vs14, vs56, vs15
+    vlsw vs14, vs14
+    vaddi vs16, vs32, 2040
+    vaddi vs16, vs16, 568
+    vlsd vs16, vs16
+    vadd vs15, vs56, vs16
+    vlsw vs15, vs15
+    vaddi vs17, vs32, 2040
+    vaddi vs17, vs17, 576
+    vlsd vs17, vs17
+    vadd vs16, vs56, vs17
+    vlsw vs16, vs16
+    vaddi vs18, vs32, 2040
+    vaddi vs18, vs18, 584
+    vlsd vs18, vs18
+    vadd vs17, vs56, vs18
+    vlsw vs17, vs17
+    vaddi vs19, vs32, 2040
+    vaddi vs19, vs19, 592
+    vlsd vs19, vs19
+    vadd vs18, vs56, vs19
+    vlsw vs18, vs18
+    vaddi vs20, vs32, 2040
+    vaddi vs20, vs20, 600
+    vlsd vs20, vs20
+    vadd vs19, vs56, vs20
+    vlsw vs19, vs19
+    vaddi vs21, vs32, 2040
+    vaddi vs21, vs21, 608
+    vlsd vs21, vs21
+    vadd vs20, vs56, vs21
+    vlsw vs20, vs20
+    vaddi vs22, vs32, 2040
+    vaddi vs22, vs22, 616
+    vlsd vs22, vs22
+    vadd vs21, vs56, vs22
+    vlsw vs21, vs21
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 624
+    vlsd vs23, vs23
+    vadd vs22, vs56, vs23
+    vlsw vs22, vs22
+    vaddw vv4, vs7, vs0
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    vcmpfle.s vp4, vv4, vs23
+    vpop vp4, vp4, vp4, vp4, 0x55
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 184
+    vlsd vs23, vs23
+    @vp3 vfdiv.s vv4, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp3 vfadd.s vv4, vv4, vs23
+.Lkernel_gpu_opencl_skip8:
+    vpop vp5, vp3, vp4, vp4, 0x80
+    vpop vp8, vp3, vp4, vp4, 0x02
+    @!vp5 vcjal 0, vs1, .Lkernel_gpu_opencl_skip9
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 264
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv5, vv4, vs23
+    vaddi vs23, vs32, 184
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv6, vs7, vs23
+    vaddi vs23, vs32, 1544
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv7, vv6, vs23
+    @vp5 vfadd.s vv5, vv5, vv7
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 200
+    vlsd vs23, vs23
+    @vp5 vfmul.s vv5, vv5, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 208
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv7, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv7, vv7, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 272
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv7, vv7, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 280
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv8, vv6, vs23
+    @vp5 vfadd.s vv7, vv7, vv8
+    @vp5 vfmul.s vv7, vv7, vv5
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 224
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv5, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv5, vv5, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 288
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv5, vv5, vs23
+    vaddi vs23, vs32, 1520
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv8, vv6, vs23
+    @vp5 vfadd.s vv5, vv5, vv8
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 240
+    vlsd vs23, vs23
+    @vp5 vfmul.s vv5, vv5, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 248
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv8, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv8, vv8, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 296
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv8, vv8, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 304
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv6, vv6, vs23
+    @vp5 vfadd.s vv8, vv8, vv6
+    @vp5 vfmul.s vv8, vv8, vv5
+.Lkernel_gpu_opencl_skip9:
+    @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip10
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 192
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv5, vs7, vs23
+    @vp8 vfsub.s vv4, vv4, vv5
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 200
+    vlsd vs23, vs23
+    @vp8 vfmul.s vv4, vv4, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 208
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv5, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp8 vfadd.s vv5, vv5, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 216
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv6, vs7, vs23
+    @vp8 vfadd.s vv5, vv5, vv6
+    @vp8 vfmul.s vv5, vv5, vv4
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 224
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv4, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp8 vfadd.s vv4, vv4, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 232
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv6, vs7, vs23
+    @vp8 vfadd.s vv4, vv4, vv6
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 240
+    vlsd vs23, vs23
+    @vp8 vfmul.s vv4, vv4, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 248
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv6, vs6, vs23
+    vaddi vs6, vs32, 440
+    vlsd vs6, vs6
+    @vp8 vfadd.s vv6, vv6, vs6
+    vaddi vs6, vs32, 2040
+    vaddi vs6, vs6, 256
+    vlsd vs6, vs6
+    @vp8 vfdiv.s vv9, vs7, vs6
+    @vp8 vfsub.s vv6, vv6, vv9
+    @vp8 vfmul.s vv6, vv6, vv4
+.Lkernel_gpu_opencl_skip10:
+    vpop vp3, vp5, vp5, vp5, 0xAA
+    vpop vp3, vp3, vp8, vp8, 0xEE
+    @vp8 vaddw vv4, vv6, vs0
+    @vp5 vaddw vv4, vv8, vs0
+    @vp8 vaddw vv9, vv5, vs0
+    @vp5 vaddw vv9, vv7, vs0
+    @!vp3 vcjal 0, vs1, .Lkernel_gpu_opencl_skip11
+    vaddi vs6, vs32, 824
+    vlsd vs6, vs6
+    @vp3 vfdiv.s vv9, vs6, vv9
+    vaddi vs6, vs32, 2040
+    vaddi vs6, vs6, 312
+    vlsd vs6, vs6
+    @vp3 vfdiv.s vv4, vs6, vv4
+    vaddi vs6, vs32, 120
+    vlsd vs6, vs6
+    @vp3 vsrlw vv5, vv3, vs6
+    vaddi vs6, vs32, 128
+    vlsd vs6, vs6
+    @vp3 vand vv5, vv5, vs6
+    vaddi vs6, vs32, 136
+    vlsd vs6, vs6
+    @vp3 vand vv6, vv3, vs6
+    vaddi vs6, vs32, 144
+    vlsd vs6, vs6
+    @vp3 vor vv6, vv6, vs6
+    vaddi vs6, vs32, 152
+    vlsd vs6, vs6
+    vcmpflt.s vp4, vv6, vs6
+    vaddi vs6, vs32, 160
+    vlsd vs6, vs6
+    vaddi vs7, vs32, 168
+    vlsd vs7, vs7
+    @vp4 vaddw vv3, vs6, vs0
+    @!vp4 vaddw vv3, vs7, vs0
+    @vp3 vaddw vv5, vv5, vv3
+    vfcvt.s.w vv5, vv5
+    vaddi vs6, vs32, 176
+    vlsd vs6, vs6
+    @vp4 vaddw vv3, vv6, vs0
+    @!vp4 vaddw vv3, vs6, vs0
+    @vp3 vfadd.s vv7, vv3, vv6
+    vaddi vs6, vs32, 184
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv7, vv7, vs6
+    @vp3 vfmul.s vv3, vv7, vv7
+    vaddi vs6, vs32, 192
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv6, vv7, vs6
+    vaddi vs6, vs32, 200
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 208
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 216
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 224
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 232
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 240
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 248
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 256
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    @vp3 vfmul.s vv6, vv6, vv3
+    vaddi vs6, vs32, 264
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv8, vv5, vs6
+    @vp3 vfadd.s vv6, vv6, vv8
+    vaddi vs6, vs32, 272
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv8, vv3, vs6
+    @vp3 vfsub.s vv6, vv6, vv8
+    @vp3 vfadd.s vv7, vv7, vv6
+    vaddi vs6, vs32, 280
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv5, vv5, vs6
+    @vp3 vfadd.s vv7, vv7, vv5
+    vaddi vs6, vs32, 960
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv7, vv7, vs6
+    vaddi vs6, vs32, 344
+    vlsd vs6, vs6
+    @vp3 vfmax.s vv7, vv7, vs6
+    vaddi vs6, vs32, 352
+    vlsd vs6, vs6
+    @vp3 vfmin.s vv7, vv7, vs6
+    vaddi vs6, vs32, 360
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv3, vv7, vs6
+    vaddi vs6, vs32, 368
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv5, vv3, vs6
+    vaddi vs6, vs32, 376
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv3, vv5, vs6
+    vaddi vs6, vs32, 384
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv6, vv3, vs6
+    @vp3 vfsub.s vv7, vv7, vv6
+    vaddi vs6, vs32, 392
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv6, vv3, vs6
+    @vp3 vfsub.s vv7, vv7, vv6
+    vaddi vs6, vs32, 400
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv3, vv7, vs6
+    vaddi vs6, vs32, 408
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv3, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 416
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 424
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 432
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 272
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv3, vv7, vv7
+    @vp3 vfmul.s vv6, vv6, vv3
+    @vp3 vfadd.s vv6, vv6, vv7
+    vaddi vs6, vs32, 440
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    vaddi vs6, vs32, 120
+    vlsd vs6, vs6
+    @vp3 vsllw vv3, vv5, vs6
+    @vp3 vaddw vv5, vv3, vv6
+    @vp3 vfmul.s vv9, vv9, vv5
+    vaddi vs6, vs32, 2040
+    vaddi vs6, vs6, 320
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv3, vs9, vs6
+    @vp3 vfmadd.s vv6, vv9, vs8, vv3
+    @vp3 vfmul.s vv4, vv4, vv5
+    vaddi vs6, vs32, 2040
+    vaddi vs6, vs6, 328
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv3, vs10, vs6
+    @vp3 vfmadd.s vv7, vv4, vs9, vv3
+    @vp3 vfsub.s vv3, vs2, vs11
+    @vp3 vfsub.s vv8, vv3, vs12
+    @vp3 vfsub.s vv8, vv8, vs13
+    vaddi vs2, vs32, 336
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs12, vs2
+    @vp3 vfmadd.s vv10, vv9, vs11, vv3
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 328
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs13, vs2
+    @vp3 vfmadd.s vv11, vv4, vs12, vv3
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 336
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs8, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 344
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv12, vs11, vs2
+    @vp3 vfmadd.s vv12, vv3, vv8, vv12
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 336
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs9, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 352
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv13, vs12, vs2
+    @vp3 vfmadd.s vv13, vv3, vv8, vv13
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 336
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs10, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 352
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv14, vs13, vs2
+    @vp3 vfmadd.s vv8, vv3, vv8, vv14
+    @vp3 vfsub.s vv3, vs4, vs19
+    @vp3 vfsub.s vv14, vv3, vs20
+    @vp3 vfsub.s vv14, vv14, vs21
+    @vp3 vfsub.s vv14, vv14, vs22
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vv5, vs2
+    @vp3 vfsgnjn.s vv5, vs19, vs19
+    @vp3 vfmadd.s vv14, vv3, vv14, vv5
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 360
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs21, vs2
+    @vp3 vfmadd.s vv9, vv9, vs20, vv3
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 368
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs22, vs2
+    @vp3 vfmadd.s vv5, vv4, vs21, vv3
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 376
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs8, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 384
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv15, vs20, vs2
+    @vp3 vfmadd.s vv15, vv3, vs19, vv15
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 376
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs9, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 392
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv16, vs21, vs2
+    @vp3 vfmadd.s vv16, vv3, vs19, vv16
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 376
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs10, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 400
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv17, vs22, vs2
+    @vp3 vfmadd.s vv17, vv3, vs19, vv17
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv3, vs2, vs14
+    @vp3 vfsub.s vv18, vv3, vs15
+    @vp3 vfsub.s vv18, vv18, vs16
+    @vp3 vfsub.s vv18, vv18, vs17
+    @vp3 vfsub.s vv18, vv18, vs18
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 408
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs9, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 416
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv19, vs14, vs2
+    @vp3 vfmadd.s vv19, vv3, vv18, vv19
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 424
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv20, vs15, vs2
+    @vp3 vfmadd.s vv20, vv4, vs14, vv20
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 408
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv21, vs10, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 432
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv22, vs15, vs2
+    @vp3 vfmadd.s vv18, vv21, vv18, vv22
+    @vp3 vfadd.s vv22, vs15, vs16
+    @vp3 vfadd.s vv22, vv22, vs17
+    @vp3 vfadd.s vv22, vv22, vs18
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsrlw vv23, vv22, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp3 vand vv23, vv23, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp3 vand vv24, vv22, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp3 vor vv24, vv24, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp4, vv24, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 168
+    vlsd vs4, vs4
+    @vp4 vaddw vv25, vs2, vs0
+    @!vp4 vaddw vv25, vs4, vs0
+    @vp3 vaddw vv23, vv23, vv25
+    vfcvt.s.w vv23, vv23
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp4 vaddw vv25, vv24, vs0
+    @!vp4 vaddw vv25, vs2, vs0
+    @vp3 vfadd.s vv25, vv25, vv24
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv25, vv25, vs2
+    @vp3 vfmul.s vv24, vv25, vv25
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv25, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    @vp3 vfmul.s vv26, vv26, vv24
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv27, vv23, vs2
+    @vp3 vfadd.s vv26, vv26, vv27
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv24, vs2
+    @vp3 vfsub.s vv26, vv26, vv24
+    @vp3 vfadd.s vv25, vv25, vv26
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv23, vs2
+    @vp3 vfadd.s vv25, vv25, vv23
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv25, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp3 vfmax.s vv23, vv23, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp3 vfmin.s vv23, vv23, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv23, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv24, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv27, vv26, vs2
+    @vp3 vfsub.s vv23, vv23, vv27
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv26, vs2
+    @vp3 vfsub.s vv23, vv23, vv26
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv23, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv27, vv23, vv23
+    @vp3 vfmul.s vv26, vv26, vv27
+    @vp3 vfadd.s vv26, vv26, vv23
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsllw vv23, vv24, vs2
+    @vp3 vaddw vv23, vv23, vv26
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 440
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv23, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 448
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv22, vv22, vs2, vv24
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv25, vv25, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp3 vfmax.s vv25, vv25, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp3 vfmin.s vv25, vv25, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv25, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv23, vv23, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv23, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv24, vs2
+    @vp3 vfsub.s vv25, vv25, vv26
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv24, vs2
+    @vp3 vfsub.s vv25, vv25, vv24
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv25, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv26, vv25, vv25
+    @vp3 vfmul.s vv24, vv24, vv26
+    @vp3 vfadd.s vv24, vv24, vv25
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsllw vv25, vv23, vs2
+    @vp3 vaddw vv25, vv25, vv24
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 456
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv22, vv25, vs2, vv22
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 464
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vs5, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 472
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv24, vs3, vs16, vs2
+    @vp3 vfsgnjn.s vv25, vs16, vs16
+    @vp3 vfmul.s vv25, vv23, vv25
+    @vp3 vfdiv.s vv25, vv25, vv24
+    @vp3 vfmadd.s vv22, vv22, vs15, vv25
+    @vp3 vfsgnjn.s vv24, vs17, vs17
+    @vp3 vfmul.s vv4, vv4, vv24
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 480
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv4, vs16, vs2, vv4
+    @vp3 vfsgnjn.s vv24, vs18, vs18
+    @vp3 vfmul.s vv21, vv21, vv24
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 488
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv21, vs16, vs2, vv21
+    @vp3 vfmul.s vv24, vv3, vv24
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 496
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv24, vs17, vs2, vv24
+    @vp3 vfmul.s vv3, vv23, vs17
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 472
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv25, vs3, vs17, vs2
+    @vp3 vfdiv.s vv25, vv3, vv25
+    @vp3 vfmul.s vv23, vv23, vs18
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 472
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv3, vs3, vs18, vs2
+    @vp3 vfdiv.s vv23, vv23, vv3
+    @vp3 vfsgnjn.s vv3, vv6, vv6
+    @vp3 vfsub.s vv26, vv3, vv12
+    @vp3 vfsub.s vv26, vv26, vv15
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv26, vs2
+    @vp3 vfsub.s vv3, vv6, vv7
+    @vp3 vfsub.s vv27, vv3, vv13
+    @vp3 vfsub.s vv27, vv27, vv16
+    @vp3 vfsub.s vv3, vv24, vv19
+    @vp3 vfmadd.s vv27, vs3, vv3, vv27
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv27, vv27, vs2
+    @vp3 vfsub.s vv3, vv7, vv8
+    @vp3 vfsub.s vv28, vv3, vv17
+    @vp3 vfsub.s vv3, vv21, vv18
+    @vp3 vfmadd.s vv28, vs3, vv3, vv28
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv28, vv28, vs2
+    @vp3 vfsub.s vv12, vv12, vv10
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv12, vv12, vs2
+    @vp3 vfadd.s vv13, vv13, vv10
+    @vp3 vfsub.s vv13, vv13, vv11
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv13, vv13, vs2
+    @vp3 vfadd.s vv8, vv8, vv11
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv8, vv8, vs2
+    @vp3 vfsub.s vv19, vv19, vv20
+    @vp3 vfadd.s vv19, vv25, vv19
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv19, vv19, vs2
+    @vp3 vfadd.s vv18, vv18, vv20
+    @vp3 vfsub.s vv18, vv18, vv22
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv18, vv18, vs2
+    @vp3 vfsub.s vv22, vv22, vv21
+    @vp3 vfsub.s vv22, vv22, vv4
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv22, vv22, vs2
+    @vp3 vfsub.s vv3, vv4, vv24
+    @vp3 vfsub.s vv25, vv3, vv25
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv25, vv25, vs2
+    @vp3 vfadd.s vv21, vv21, vv24
+    @vp3 vfsub.s vv21, vv21, vv23
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv21, vv21, vs2
+    @vp3 vfsub.s vv3, vv14, vv15
+    @vp3 vfsub.s vv23, vv3, vv16
+    @vp3 vfsub.s vv23, vv23, vv17
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv23, vs2
+    @vp3 vfsub.s vv15, vv15, vv9
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv15, vv15, vs2
+    @vp3 vfadd.s vv16, vv16, vv9
+    @vp3 vfsub.s vv16, vv16, vv5
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv16, vv16, vs2
+    @vp3 vfadd.s vv17, vv17, vv5
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv17, vv17, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 512
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv26, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 520
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv27, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 528
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv28, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 536
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv12, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 544
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv13, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 552
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv8, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 560
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv19, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 568
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv18, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 576
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv22, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 584
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv25, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 592
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv21, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 600
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv23, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 608
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv15, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 616
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv16, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 624
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv17, vs0, vv1
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs3, vs2
+    @vp3 vfsub.s vv4, vv4, vv20
+    @vp3 vfadd.s vv6, vv6, vv7
+    @vp3 vfadd.s vv10, vv10, vv6
+    @vp3 vfadd.s vv11, vv11, vv10
+    @vp3 vfadd.s vv14, vv14, vv11
+    @vp3 vfadd.s vv9, vv9, vv14
+    @vp3 vfadd.s vv5, vv5, vv9
+    vaddi vs2, vs32, 1872
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv5, vv5, vs2
+    @vp3 vfmadd.s vv4, vv3, vv4, vv5
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv4, vv4, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vs3, vs2, vs55
+    vadd vv1, vs3, vs0
+    @vp3 vsxw vv4, vs0, vv1
+    vaddi vs3, vs32, 88
+    vlsd vs3, vs3
+    vadd vs2, vs56, vs3
+    vlsw vs2, vs2
+    vaddi vs3, vs32, 1312
+    vlsd vs3, vs3
+    @vp3 vfmul.s vv3, vs2, vs3
+    vadd vs2, vs58, vs45
+    vlsw vs2, vs2
+    vadd vs3, vs58, vs44
+    vlsw vs3, vs3
+    vadd vs4, vs58, vs43
+    vlsw vs4, vs4
+    vadd vs5, vs58, vs42
+    vlsw vs5, vs5
+    vaddi vs7, vs63, 128
+    vlsd vs7, vs7
+    vlsw vs6, vs7
+    vaddi vs8, vs63, 144
+    vlsd vs8, vs8
+    vlsw vs7, vs8
+    vaddi vs9, vs32, 2040
+    vaddi vs9, vs9, 632
+    vlsd vs9, vs9
+    vadd vs8, vs56, vs9
+    vlsw vs8, vs8
+    vaddi vs10, vs32, 2040
+    vaddi vs10, vs10, 640
+    vlsd vs10, vs10
+    vadd vs9, vs56, vs10
+    vlsw vs9, vs9
+    vaddi vs11, vs32, 2040
+    vaddi vs11, vs11, 648
+    vlsd vs11, vs11
+    vadd vs10, vs56, vs11
+    vlsw vs10, vs10
+    vaddi vs12, vs32, 2040
+    vaddi vs12, vs12, 656
+    vlsd vs12, vs12
+    vadd vs11, vs56, vs12
+    vlsw vs11, vs11
+    vaddi vs13, vs32, 2040
+    vaddi vs13, vs13, 664
+    vlsd vs13, vs13
+    vadd vs12, vs56, vs13
+    vlsw vs12, vs12
+    vaddi vs14, vs32, 2040
+    vaddi vs14, vs14, 672
+    vlsd vs14, vs14
+    vadd vs13, vs56, vs14
+    vlsw vs13, vs13
+    vaddi vs15, vs32, 2040
+    vaddi vs15, vs15, 680
+    vlsd vs15, vs15
+    vadd vs14, vs56, vs15
+    vlsw vs14, vs14
+    vaddi vs16, vs32, 2040
+    vaddi vs16, vs16, 688
+    vlsd vs16, vs16
+    vadd vs15, vs56, vs16
+    vlsw vs15, vs15
+    vaddi vs17, vs32, 2040
+    vaddi vs17, vs17, 696
+    vlsd vs17, vs17
+    vadd vs16, vs56, vs17
+    vlsw vs16, vs16
+    vaddi vs18, vs32, 2040
+    vaddi vs18, vs18, 704
+    vlsd vs18, vs18
+    vadd vs17, vs56, vs18
+    vlsw vs17, vs17
+    vaddi vs19, vs32, 2040
+    vaddi vs19, vs19, 712
+    vlsd vs19, vs19
+    vadd vs18, vs56, vs19
+    vlsw vs18, vs18
+    vaddi vs20, vs32, 2040
+    vaddi vs20, vs20, 720
+    vlsd vs20, vs20
+    vadd vs19, vs56, vs20
+    vlsw vs19, vs19
+    vaddi vs21, vs32, 2040
+    vaddi vs21, vs21, 728
+    vlsd vs21, vs21
+    vadd vs20, vs56, vs21
+    vlsw vs20, vs20
+    vaddi vs22, vs32, 2040
+    vaddi vs22, vs22, 736
+    vlsd vs22, vs22
+    vadd vs21, vs56, vs22
+    vlsw vs21, vs21
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 744
+    vlsd vs23, vs23
+    vadd vs22, vs56, vs23
+    vlsw vs22, vs22
+    vaddw vv4, vs7, vs0
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    vcmpfle.s vp4, vv4, vs23
+    vpop vp4, vp4, vp4, vp4, 0x55
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 184
+    vlsd vs23, vs23
+    @vp3 vfdiv.s vv4, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp3 vfadd.s vv4, vv4, vs23
+.Lkernel_gpu_opencl_skip11:
+    vpop vp5, vp3, vp4, vp4, 0x80
+    vpop vp8, vp3, vp4, vp4, 0x02
+    @!vp5 vcjal 0, vs1, .Lkernel_gpu_opencl_skip12
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 264
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv5, vv4, vs23
+    vaddi vs23, vs32, 184
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv6, vs7, vs23
+    vaddi vs23, vs32, 1544
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv7, vv6, vs23
+    @vp5 vfadd.s vv5, vv5, vv7
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 200
+    vlsd vs23, vs23
+    @vp5 vfmul.s vv5, vv5, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 208
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv7, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv7, vv7, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 272
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv7, vv7, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 280
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv8, vv6, vs23
+    @vp5 vfadd.s vv7, vv7, vv8
+    @vp5 vfmul.s vv7, vv7, vv5
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 224
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv5, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv5, vv5, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 288
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv5, vv5, vs23
+    vaddi vs23, vs32, 1520
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv8, vv6, vs23
+    @vp5 vfadd.s vv5, vv5, vv8
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 240
+    vlsd vs23, vs23
+    @vp5 vfmul.s vv5, vv5, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 248
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv8, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv8, vv8, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 296
+    vlsd vs23, vs23
+    @vp5 vfadd.s vv8, vv8, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 304
+    vlsd vs23, vs23
+    @vp5 vfdiv.s vv6, vv6, vs23
+    @vp5 vfadd.s vv8, vv8, vv6
+    @vp5 vfmul.s vv8, vv8, vv5
+.Lkernel_gpu_opencl_skip12:
+    @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip13
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 192
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv5, vs7, vs23
+    @vp8 vfsub.s vv4, vv4, vv5
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 200
+    vlsd vs23, vs23
+    @vp8 vfmul.s vv4, vv4, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 208
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv5, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp8 vfadd.s vv5, vv5, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 216
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv6, vs7, vs23
+    @vp8 vfadd.s vv5, vv5, vv6
+    @vp8 vfmul.s vv5, vv5, vv4
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 224
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv4, vs6, vs23
+    vaddi vs23, vs32, 440
+    vlsd vs23, vs23
+    @vp8 vfadd.s vv4, vv4, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 232
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv6, vs7, vs23
+    @vp8 vfadd.s vv4, vv4, vv6
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 240
+    vlsd vs23, vs23
+    @vp8 vfmul.s vv4, vv4, vs23
+    vaddi vs23, vs32, 2040
+    vaddi vs23, vs23, 248
+    vlsd vs23, vs23
+    @vp8 vfdiv.s vv6, vs6, vs23
+    vaddi vs6, vs32, 440
+    vlsd vs6, vs6
+    @vp8 vfadd.s vv6, vv6, vs6
+    vaddi vs6, vs32, 2040
+    vaddi vs6, vs6, 256
+    vlsd vs6, vs6
+    @vp8 vfdiv.s vv9, vs7, vs6
+    @vp8 vfsub.s vv6, vv6, vv9
+    @vp8 vfmul.s vv6, vv6, vv4
+.Lkernel_gpu_opencl_skip13:
+    vpop vp3, vp5, vp5, vp5, 0xAA
+    vpop vp3, vp3, vp8, vp8, 0xEE
+    @vp8 vaddw vv4, vv6, vs0
+    @vp5 vaddw vv4, vv8, vs0
+    @vp8 vaddw vv9, vv5, vs0
+    @vp5 vaddw vv9, vv7, vs0
+    @!vp3 vcjal 0, vs1, .Lkernel_gpu_opencl_skip14
+    vaddi vs6, vs32, 824
+    vlsd vs6, vs6
+    @vp3 vfdiv.s vv9, vs6, vv9
+    vaddi vs6, vs32, 2040
+    vaddi vs6, vs6, 312
+    vlsd vs6, vs6
+    @vp3 vfdiv.s vv4, vs6, vv4
+    vaddi vs6, vs32, 120
+    vlsd vs6, vs6
+    @vp3 vsrlw vv5, vv3, vs6
+    vaddi vs6, vs32, 128
+    vlsd vs6, vs6
+    @vp3 vand vv5, vv5, vs6
+    vaddi vs6, vs32, 136
+    vlsd vs6, vs6
+    @vp3 vand vv6, vv3, vs6
+    vaddi vs6, vs32, 144
+    vlsd vs6, vs6
+    @vp3 vor vv6, vv6, vs6
+    vaddi vs6, vs32, 152
+    vlsd vs6, vs6
+    vcmpflt.s vp4, vv6, vs6
+    vaddi vs6, vs32, 160
+    vlsd vs6, vs6
+    vaddi vs7, vs32, 168
+    vlsd vs7, vs7
+    @vp4 vaddw vv3, vs6, vs0
+    @!vp4 vaddw vv3, vs7, vs0
+    @vp3 vaddw vv5, vv5, vv3
+    vfcvt.s.w vv5, vv5
+    vaddi vs6, vs32, 176
+    vlsd vs6, vs6
+    @vp4 vaddw vv3, vv6, vs0
+    @!vp4 vaddw vv3, vs6, vs0
+    @vp3 vfadd.s vv7, vv3, vv6
+    vaddi vs6, vs32, 184
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv7, vv7, vs6
+    @vp3 vfmul.s vv3, vv7, vv7
+    vaddi vs6, vs32, 192
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv6, vv7, vs6
+    vaddi vs6, vs32, 200
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 208
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 216
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 224
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 232
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 240
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 248
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 256
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    @vp3 vfmul.s vv6, vv6, vv3
+    vaddi vs6, vs32, 264
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv8, vv5, vs6
+    @vp3 vfadd.s vv6, vv6, vv8
+    vaddi vs6, vs32, 272
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv8, vv3, vs6
+    @vp3 vfsub.s vv6, vv6, vv8
+    @vp3 vfadd.s vv7, vv7, vv6
+    vaddi vs6, vs32, 280
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv5, vv5, vs6
+    @vp3 vfadd.s vv7, vv7, vv5
+    vaddi vs6, vs32, 960
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv7, vv7, vs6
+    vaddi vs6, vs32, 344
+    vlsd vs6, vs6
+    @vp3 vfmax.s vv7, vv7, vs6
+    vaddi vs6, vs32, 352
+    vlsd vs6, vs6
+    @vp3 vfmin.s vv7, vv7, vs6
+    vaddi vs6, vs32, 360
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv3, vv7, vs6
+    vaddi vs6, vs32, 368
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv5, vv3, vs6
+    vaddi vs6, vs32, 376
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv3, vv5, vs6
+    vaddi vs6, vs32, 384
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv6, vv3, vs6
+    @vp3 vfsub.s vv7, vv7, vv6
+    vaddi vs6, vs32, 392
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv6, vv3, vs6
+    @vp3 vfsub.s vv7, vv7, vv6
+    vaddi vs6, vs32, 400
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv3, vv7, vs6
+    vaddi vs6, vs32, 408
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv3, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 416
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 424
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 432
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv6, vv6, vv7
+    vaddi vs6, vs32, 272
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    @vp3 vfmul.s vv3, vv7, vv7
+    @vp3 vfmul.s vv6, vv6, vv3
+    @vp3 vfadd.s vv6, vv6, vv7
+    vaddi vs6, vs32, 440
+    vlsd vs6, vs6
+    @vp3 vfadd.s vv6, vv6, vs6
+    vaddi vs6, vs32, 120
+    vlsd vs6, vs6
+    @vp3 vsllw vv3, vv5, vs6
+    @vp3 vaddw vv5, vv3, vv6
+    @vp3 vfmul.s vv9, vv9, vv5
+    vaddi vs6, vs32, 2040
+    vaddi vs6, vs6, 320
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv3, vs9, vs6
+    @vp3 vfmadd.s vv6, vv9, vs8, vv3
+    @vp3 vfmul.s vv4, vv4, vv5
+    vaddi vs6, vs32, 2040
+    vaddi vs6, vs6, 328
+    vlsd vs6, vs6
+    @vp3 vfmul.s vv3, vs10, vs6
+    @vp3 vfmadd.s vv7, vv4, vs9, vv3
+    @vp3 vfsub.s vv3, vs2, vs11
+    @vp3 vfsub.s vv8, vv3, vs12
+    @vp3 vfsub.s vv8, vv8, vs13
+    vaddi vs2, vs32, 336
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs12, vs2
+    @vp3 vfmadd.s vv10, vv9, vs11, vv3
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 328
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs13, vs2
+    @vp3 vfmadd.s vv11, vv4, vs12, vv3
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 336
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs8, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 344
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv12, vs11, vs2
+    @vp3 vfmadd.s vv12, vv3, vv8, vv12
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 336
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs9, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 352
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv13, vs12, vs2
+    @vp3 vfmadd.s vv13, vv3, vv8, vv13
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 336
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs10, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 352
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv14, vs13, vs2
+    @vp3 vfmadd.s vv8, vv3, vv8, vv14
+    @vp3 vfsub.s vv3, vs4, vs19
+    @vp3 vfsub.s vv14, vv3, vs20
+    @vp3 vfsub.s vv14, vv14, vs21
+    @vp3 vfsub.s vv14, vv14, vs22
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vv5, vs2
+    @vp3 vfsgnjn.s vv5, vs19, vs19
+    @vp3 vfmadd.s vv14, vv3, vv14, vv5
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 360
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs21, vs2
+    @vp3 vfmadd.s vv9, vv9, vs20, vv3
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 368
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs22, vs2
+    @vp3 vfmadd.s vv5, vv4, vs21, vv3
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 376
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs8, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 384
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv15, vs20, vs2
+    @vp3 vfmadd.s vv15, vv3, vs19, vv15
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 376
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs9, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 392
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv16, vs21, vs2
+    @vp3 vfmadd.s vv16, vv3, vs19, vv16
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 376
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs10, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 400
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv17, vs22, vs2
+    @vp3 vfmadd.s vv17, vv3, vs19, vv17
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp3 vfsub.s vv3, vs2, vs14
+    @vp3 vfsub.s vv18, vv3, vs15
+    @vp3 vfsub.s vv18, vv18, vs16
+    @vp3 vfsub.s vv18, vv18, vs17
+    @vp3 vfsub.s vv18, vv18, vs18
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 408
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs9, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 416
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv19, vs14, vs2
+    @vp3 vfmadd.s vv19, vv3, vv18, vv19
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 424
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv20, vs15, vs2
+    @vp3 vfmadd.s vv20, vv4, vs14, vv20
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 408
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv21, vs10, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 432
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv22, vs15, vs2
+    @vp3 vfmadd.s vv18, vv21, vv18, vv22
+    @vp3 vfadd.s vv22, vs15, vs16
+    @vp3 vfadd.s vv22, vv22, vs17
+    @vp3 vfadd.s vv22, vv22, vs18
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsrlw vv23, vv22, vs2
+    vaddi vs2, vs32, 128
+    vlsd vs2, vs2
+    @vp3 vand vv23, vv23, vs2
+    vaddi vs2, vs32, 136
+    vlsd vs2, vs2
+    @vp3 vand vv24, vv22, vs2
+    vaddi vs2, vs32, 144
+    vlsd vs2, vs2
+    @vp3 vor vv24, vv24, vs2
+    vaddi vs2, vs32, 152
+    vlsd vs2, vs2
+    vcmpflt.s vp4, vv24, vs2
+    vaddi vs2, vs32, 160
+    vlsd vs2, vs2
+    vaddi vs4, vs32, 168
+    vlsd vs4, vs4
+    @vp4 vaddw vv25, vs2, vs0
+    @!vp4 vaddw vv25, vs4, vs0
+    @vp3 vaddw vv23, vv23, vv25
+    vfcvt.s.w vv23, vv23
+    vaddi vs2, vs32, 176
+    vlsd vs2, vs2
+    @vp4 vaddw vv25, vv24, vs0
+    @!vp4 vaddw vv25, vs2, vs0
+    @vp3 vfadd.s vv25, vv25, vv24
+    vaddi vs2, vs32, 184
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv25, vv25, vs2
+    @vp3 vfmul.s vv24, vv25, vv25
+    vaddi vs2, vs32, 192
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv25, vs2
+    vaddi vs2, vs32, 200
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 208
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 216
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 224
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 232
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 240
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 248
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    vaddi vs2, vs32, 256
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv25
+    @vp3 vfmul.s vv26, vv26, vv24
+    vaddi vs2, vs32, 264
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv27, vv23, vs2
+    @vp3 vfadd.s vv26, vv26, vv27
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv24, vs2
+    @vp3 vfsub.s vv26, vv26, vv24
+    @vp3 vfadd.s vv25, vv25, vv26
+    vaddi vs2, vs32, 280
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv23, vs2
+    @vp3 vfadd.s vv25, vv25, vv23
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv25, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp3 vfmax.s vv23, vv23, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp3 vfmin.s vv23, vv23, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv23, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv24, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv27, vv26, vs2
+    @vp3 vfsub.s vv23, vv23, vv27
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv26, vs2
+    @vp3 vfsub.s vv23, vv23, vv26
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv23, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv26, vv26, vv23
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    @vp3 vfmul.s vv27, vv23, vv23
+    @vp3 vfmul.s vv26, vv26, vv27
+    @vp3 vfadd.s vv26, vv26, vv23
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv26, vv26, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsllw vv23, vv24, vs2
+    @vp3 vaddw vv23, vv23, vv26
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 440
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv23, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 448
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv22, vv22, vs2, vv24
+    vaddi vs2, vs32, 672
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv25, vv25, vs2
+    vaddi vs2, vs32, 344
+    vlsd vs2, vs2
+    @vp3 vfmax.s vv25, vv25, vs2
+    vaddi vs2, vs32, 352
+    vlsd vs2, vs2
+    @vp3 vfmin.s vv25, vv25, vs2
+    vaddi vs2, vs32, 360
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv25, vs2
+    vaddi vs2, vs32, 368
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv23, vv23, vs2
+    vaddi vs2, vs32, 376
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv23, vs2
+    vaddi vs2, vs32, 384
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv24, vs2
+    @vp3 vfsub.s vv25, vv25, vv26
+    vaddi vs2, vs32, 392
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv24, vs2
+    @vp3 vfsub.s vv25, vv25, vv24
+    vaddi vs2, vs32, 400
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv24, vv25, vs2
+    vaddi vs2, vs32, 408
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 416
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 424
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 432
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv24, vv24, vv25
+    vaddi vs2, vs32, 272
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    @vp3 vfmul.s vv26, vv25, vv25
+    @vp3 vfmul.s vv24, vv24, vv26
+    @vp3 vfadd.s vv24, vv24, vv25
+    vaddi vs2, vs32, 440
+    vlsd vs2, vs2
+    @vp3 vfadd.s vv24, vv24, vs2
+    vaddi vs2, vs32, 120
+    vlsd vs2, vs2
+    @vp3 vsllw vv25, vv23, vs2
+    @vp3 vaddw vv25, vv25, vv24
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 456
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv22, vv25, vs2, vv22
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 464
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vs5, vs2
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 472
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv24, vs3, vs16, vs2
+    @vp3 vfsgnjn.s vv25, vs16, vs16
+    @vp3 vfmul.s vv25, vv23, vv25
+    @vp3 vfdiv.s vv25, vv25, vv24
+    @vp3 vfmadd.s vv22, vv22, vs15, vv25
+    @vp3 vfsgnjn.s vv24, vs17, vs17
+    @vp3 vfmul.s vv4, vv4, vv24
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 480
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv4, vs16, vs2, vv4
+    @vp3 vfsgnjn.s vv24, vs18, vs18
+    @vp3 vfmul.s vv21, vv21, vv24
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 488
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv21, vs16, vs2, vv21
+    @vp3 vfmul.s vv24, vv3, vv24
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 496
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv24, vs17, vs2, vv24
+    @vp3 vfmul.s vv3, vv23, vs17
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 472
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv25, vs3, vs17, vs2
+    @vp3 vfdiv.s vv25, vv3, vv25
+    @vp3 vfmul.s vv23, vv23, vs18
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 472
+    vlsd vs2, vs2
+    @vp3 vfmadd.s vv3, vs3, vs18, vs2
+    @vp3 vfdiv.s vv23, vv23, vv3
+    @vp3 vfsgnjn.s vv3, vv6, vv6
+    @vp3 vfsub.s vv26, vv3, vv12
+    @vp3 vfsub.s vv26, vv26, vv15
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv26, vv26, vs2
+    @vp3 vfsub.s vv3, vv6, vv7
+    @vp3 vfsub.s vv27, vv3, vv13
+    @vp3 vfsub.s vv27, vv27, vv16
+    @vp3 vfsub.s vv3, vv24, vv19
+    @vp3 vfmadd.s vv27, vs3, vv3, vv27
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv27, vv27, vs2
+    @vp3 vfsub.s vv3, vv7, vv8
+    @vp3 vfsub.s vv28, vv3, vv17
+    @vp3 vfsub.s vv3, vv21, vv18
+    @vp3 vfmadd.s vv28, vs3, vv3, vv28
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv28, vv28, vs2
+    @vp3 vfsub.s vv12, vv12, vv10
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv12, vv12, vs2
+    @vp3 vfadd.s vv13, vv13, vv10
+    @vp3 vfsub.s vv13, vv13, vv11
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv13, vv13, vs2
+    @vp3 vfadd.s vv8, vv8, vv11
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv8, vv8, vs2
+    @vp3 vfsub.s vv19, vv19, vv20
+    @vp3 vfadd.s vv19, vv25, vv19
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv19, vv19, vs2
+    @vp3 vfadd.s vv18, vv18, vv20
+    @vp3 vfsub.s vv18, vv18, vv22
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv18, vv18, vs2
+    @vp3 vfsub.s vv22, vv22, vv21
+    @vp3 vfsub.s vv22, vv22, vv4
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv22, vv22, vs2
+    @vp3 vfsub.s vv3, vv4, vv24
+    @vp3 vfsub.s vv25, vv3, vv25
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv25, vv25, vs2
+    @vp3 vfadd.s vv21, vv21, vv24
+    @vp3 vfsub.s vv21, vv21, vv23
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv21, vv21, vs2
+    @vp3 vfsub.s vv3, vv14, vv15
+    @vp3 vfsub.s vv23, vv3, vv16
+    @vp3 vfsub.s vv23, vv23, vv17
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv23, vv23, vs2
+    @vp3 vfsub.s vv15, vv15, vv9
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv15, vv15, vs2
+    @vp3 vfadd.s vv16, vv16, vv9
+    @vp3 vfsub.s vv16, vv16, vv5
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv16, vv16, vs2
+    @vp3 vfadd.s vv17, vv17, vv5
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv17, vv17, vs2
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 632
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv26, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 640
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv27, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 648
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv28, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 656
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv12, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 664
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv13, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 672
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv8, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 680
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv19, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 688
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv18, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 696
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv22, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 704
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv25, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 712
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv21, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 720
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv23, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 728
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv15, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 736
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv16, vs0, vv1
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vaddi vs5, vs32, 2040
+    vaddi vs5, vs5, 744
+    vlsd vs5, vs5
+    vadd vs4, vs2, vs5
+    vadd vv1, vs4, vs0
+    @vp3 vsxw vv17, vs0, vv1
+    vaddi vs2, vs32, 960
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv3, vs3, vs2
+    @vp3 vfsub.s vv4, vv4, vv20
+    @vp3 vfadd.s vv6, vv6, vv7
+    @vp3 vfadd.s vv10, vv10, vv6
+    @vp3 vfadd.s vv11, vv11, vv10
+    @vp3 vfadd.s vv14, vv14, vv11
+    @vp3 vfadd.s vv9, vv9, vv14
+    @vp3 vfadd.s vv5, vv5, vv9
+    vaddi vs2, vs32, 1872
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv5, vv5, vs2
+    @vp3 vfmadd.s vv4, vv3, vv4, vv5
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 504
+    vlsd vs2, vs2
+    @vp3 vfmul.s vv4, vv4, vs2
+.Lkernel_gpu_opencl_skip14:
+    vpop vp4, vp3, vp3, vp3, 0xAA
+    vpop vp4, vp4, vp2, vp2, 0xEE
+    vaddi vs2, vs32, 2040
+    vaddi vs2, vs2, 752
+    vlsd vs2, vs2
+    @vp2 vadd vv1, vs2, vs0
+    @vp3 vadd vv1, vs54, vs0
+    @vp2 vaddw vv3, vs0, vs0
+    @vp3 vaddw vv3, vv4, vs0
+    @!vp4 vcjal 0, vs1, .Lkernel_gpu_opencl_skip15
+    vaddi vs2, vs32, 664
+    vlsd vs2, vs2
+    vadd vv1, vs2, vv1
+    @vp4 vsxw vv3, vs0, vv1
+.Lkernel_gpu_opencl_skip15:
+    vpop vp2, vp4, vp4, vp4, 0xAA
+    vpop vp2, vp2, vp7, vp7, 0xEE
+    vpop vp2, vp2, vp6, vp6, 0xEE
     vstop
 
 # ---- control threads (from llc) ----
@@ -38,40 +10455,157 @@ kernel_gpu_opencl_wt:
 kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a1, 1048566
-	addi	a1, a1, -3
-	srli	a1, a1, 1
-	not	a1, a1
-	li	a2, 1
+	lui	a5, 1048149
+	addi	a5, a5, 2041
+	srli	a5, a5, 1
+	not	a5, a5
 	#APP
-	vsetcfg a1
+	vsetcfg a5
+	#NO_APP
+.Lpcrel_hi0:
+	auipc	a5, %pcrel_hi(.Lkernel_gpu_opencl_cpool)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi0)
+.Lpcrel_hi1:
+	auipc	a6, %pcrel_hi(.Lkernel_gpu_opencl_spill)
+	sd	a3, 664(a5)
+	addi	a3, a6, %pcrel_lo(.Lpcrel_hi1)
+	#APP
+	vmcs vs32, a5
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs63, a3
+	#NO_APP
+	li	a3, 1
+	sext.w	a1, a1
+	#APP
+	vmcs vs61, a3
+	#NO_APP
+	#APP
+	vmcs vs59, a1
+	#NO_APP
+	#APP
+	vmcs vs58, a4
+	#NO_APP
+	li	a1, 60
+	#APP
+	vmcs vs57, a1
+	#NO_APP
+	li	a1, 4
+	#APP
+	vmcs vs56, a2
+	#NO_APP
+	#APP
+	vmcs vs55, a1
+	#NO_APP
+	li	a1, 8
+	li	a2, 12
+	#APP
+	vmcs vs54, a1
+	#NO_APP
+	#APP
+	vmcs vs53, a2
+	#NO_APP
+	li	a1, 16
+	li	a2, 20
+	#APP
+	vmcs vs52, a1
+	#NO_APP
+	#APP
+	vmcs vs51, a2
+	#NO_APP
+	li	a1, 24
+	li	a2, 28
+	#APP
+	vmcs vs50, a1
+	#NO_APP
+	#APP
+	vmcs vs49, a2
+	#NO_APP
+	li	a1, 32
+	li	a2, 36
+	#APP
+	vmcs vs48, a1
+	#NO_APP
+	#APP
+	vmcs vs47, a2
+	#NO_APP
+	li	a1, 40
+	li	a2, 44
+	#APP
+	vmcs vs46, a1
+	#NO_APP
+	#APP
+	vmcs vs45, a2
+	#NO_APP
+	li	a1, 48
+	li	a2, 52
+	#APP
+	vmcs vs44, a1
+	#NO_APP
+	#APP
+	vmcs vs43, a2
+	#NO_APP
+	li	a1, 56
+	li	a2, 64
+	#APP
+	vmcs vs42, a1
+	#NO_APP
+	#APP
+	vmcs vs41, a2
+	#NO_APP
+	li	a1, 68
+	li	a2, 72
+	#APP
+	vmcs vs40, a1
+	#NO_APP
+	#APP
+	vmcs vs39, a2
+	#NO_APP
+	li	a1, 76
+	li	a2, 80
+	#APP
+	vmcs vs38, a1
+	#NO_APP
+	#APP
+	vmcs vs37, a2
+	#NO_APP
+	li	a1, 88
+	li	a2, 92
+	#APP
+	vmcs vs36, a1
+	#NO_APP
+	#APP
+	vmcs vs35, a2
+	#NO_APP
+	li	a1, 96
+	li	a2, 100
+	#APP
+	vmcs vs34, a1
+	#NO_APP
+	#APP
+	vmcs vs33, a2
 	#NO_APP
 	beqz	a0, .LBB0_7
 # %bb.1:                                # %stripmine.preheader
 	li	a1, 0
-.Lpcrel_hi0:
-	auipc	a2, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi2:
-	auipc	a4, %pcrel_hi(kernel_gpu_opencl_wt)
-.Lpcrel_hi1:
-	auipc	a3, %pcrel_hi(hwacha_vl_short)
-	addi	a4, a4, %pcrel_lo(.Lpcrel_hi2)
 	j	.LBB0_3
 .LBB0_2:                                # %stripmine
                                         #   in Loop: Header=BB0_3 Depth=1
+.Lpcrel_hi3:
+	auipc	a3, %pcrel_hi(hwacha_vl_short)
 	#APP
-	vsetvl a5, a6
+	vsetvl a4, a2
 	#NO_APP
-	ld	a7, %pcrel_lo(.Lpcrel_hi1)(a3)
-	sltu	a6, a5, a6
-	sub	a0, a0, a5
-	or	a5, a7, a6
-	sd	a5, %pcrel_lo(.Lpcrel_hi1)(a3)
+	ld	a5, %pcrel_lo(.Lpcrel_hi3)(a3)
+	sltu	a2, a4, a2
+	sub	a0, a0, a4
+.Lpcrel_hi4:
+	auipc	a4, %pcrel_hi(kernel_gpu_opencl_wt)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi4)
+	or	a2, a5, a2
+	sd	a2, %pcrel_lo(.Lpcrel_hi3)(a3)
 	#APP
-	vmcs vs63, a1
+	vmcs vs60, a1
 	#NO_APP
 	#APP
 	vf 0(a4)
@@ -80,19 +10614,21 @@ kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	beqz	a0, .LBB0_7
 .LBB0_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a6, %pcrel_lo(.Lpcrel_hi0)(a2)
-	mv	a5, a0
-	beqz	a6, .LBB0_5
+.Lpcrel_hi2:
+	auipc	a2, %pcrel_hi(hwacha_group_size)
+	ld	a2, %pcrel_lo(.Lpcrel_hi2)(a2)
+	mv	a3, a0
+	beqz	a2, .LBB0_5
 # %bb.4:                                # %stripmine
                                         #   in Loop: Header=BB0_3 Depth=1
-	mv	a5, a6
+	mv	a3, a2
 .LBB0_5:                                # %stripmine
                                         #   in Loop: Header=BB0_3 Depth=1
-	mv	a6, a0
-	bltu	a0, a5, .LBB0_2
+	mv	a2, a0
+	bltu	a0, a3, .LBB0_2
 # %bb.6:                                # %stripmine
                                         #   in Loop: Header=BB0_3 Depth=1
-	mv	a6, a5
+	mv	a2, a3
 	j	.LBB0_2
 .LBB0_7:                                # %done
 	#APP
@@ -103,6 +10639,365 @@ kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	.size	kernel_gpu_opencl_ct, .Lfunc_end0-kernel_gpu_opencl_ct
 	.cfi_endproc
                                         # -- End function
+	.type	.Lkernel_gpu_opencl_cpool,@object # @kernel_gpu_opencl_cpool
+	.data
+	.p2align	3, 0x0
+.Lkernel_gpu_opencl_cpool:
+	.quad	104                             # 0x68
+	.quad	108                             # 0x6c
+	.quad	112                             # 0x70
+	.quad	116                             # 0x74
+	.quad	120                             # 0x78
+	.quad	124                             # 0x7c
+	.quad	128                             # 0x80
+	.quad	132                             # 0x84
+	.quad	136                             # 0x88
+	.quad	140                             # 0x8c
+	.quad	144                             # 0x90
+	.quad	148                             # 0x94
+	.quad	152                             # 0x98
+	.quad	156                             # 0x9c
+	.quad	1124859904                      # 0x430c0000
+	.quad	23                              # 0x17
+	.quad	255                             # 0xff
+	.quad	-2139095041                     # 0xffffffff807fffff
+	.quad	1056964608                      # 0x3f000000
+	.quad	1060439283                      # 0x3f3504f3
+	.quad	-127                            # 0xffffffffffffff81
+	.quad	-126                            # 0xffffffffffffff82
+	.quad	2147483648                      # 0x80000000
+	.quad	3212836864                      # 0xbf800000
+	.quad	1032855995                      # 0x3d9021bb
+	.quad	3186348472                      # 0xbdebd1b8
+	.quad	1039082778                      # 0x3def251a
+	.quad	3187563855                      # 0xbdfe5d4f
+	.quad	1041361343                      # 0x3e11e9bf
+	.quad	3190468176                      # 0xbe2aae50
+	.quad	1045221036                      # 0x3e4cceac
+	.quad	3196059644                      # 0xbe7ffffc
+	.quad	1051372202                      # 0x3eaaaaaa
+	.quad	3109978243                      # 0xb95e8083
+	.quad	1056964608                      # 0x3f000000
+	.quad	1060208640                      # 0x3f318000
+	.quad	1104523999                      # 0x41d5b2df
+	.quad	1085066445                      # 0x40accccd
+	.quad	1072064102                      # 0x3fe66666
+	.quad	1096135391                      # 0x4155b2df
+	.quad	1111262495                      # 0x423c851f
+	.quad	1050924810                      # 0x3ea3d70a
+	.quad	3184315597                      # 0xbdcccccd
+	.quad	3266183168                      # 0xc2ae0000
+	.quad	1118830592                      # 0x42b00000
+	.quad	1069066811                      # 0x3fb8aa3b
+	.quad	1262485504                      # 0x4b400000
+	.quad	3409969152                      # 0xcb400000
+	.quad	1060205056                      # 0x3f317200
+	.quad	901758606                       # 0x35bfbe8e
+	.quad	961571175                       # 0x39506967
+	.quad	985088974                       # 0x3ab743ce
+	.quad	1007192328                      # 0x3c088908
+	.quad	1026206145                      # 0x3d2aa9c1
+	.quad	1042983594                      # 0x3e2aaaaa
+	.quad	1065353216                      # 0x3f800000
+	.quad	3241148416                      # 0xc1300000
+	.quad	1034147594                      # 0x3da3d70a
+	.quad	3256877056                      # 0xc2200000
+	.quad	1093308252                      # 0x412a8f5c
+	.quad	3241253274                      # 0xc131999a
+	.quad	1040522936                      # 0x3e051eb8
+	.quad	3028818118                      # 0xb48818c6
+	.quad	1050253722                      # 0x3e99999a
+	.quad	1107296256                      # 0x42000000
+	.quad	1051931443                      # 0x3eb33333
+	.quad	1117782016                      # 0x42a00000
+	.quad	3235486106                      # 0xc0d9999a
+	.quad	1040858481                      # 0x3e0a3d71
+	.quad	1034013377                      # 0x3da1cac1
+	.quad	1217879552                      # 0x48975e00
+	.quad	1080284938                      # 0x4063d70a
+	.quad	1048200190                      # 0x3e7a43fe
+	.quad	3174292217                      # 0xbd33daf9
+	.quad	3088168394                      # 0xb811b5ca
+	.quad	3354939904                      # 0xc7f85200
+	.quad	1108811448                      # 0x42171eb8
+	.quad	1117681091                      # 0x429e75c3
+	.quad	1050622820                      # 0x3e9f3b64
+	.quad	3157023764                      # 0xbc2c5c14
+	.quad	1039677365                      # 0x3df837b5
+	.quad	1109430108                      # 0x42208f5c
+	.quad	3188530033                      # 0xbe0d1b71
+	.quad	0                               # 0x0
+	.quad	1077936128                      # 0x40400000
+	.quad	1071728558                      # 0x3fe147ae
+	.quad	1097062154                      # 0x4163d70a
+	.quad	940115749                       # 0x38090725
+	.quad	965383621                       # 0x398a95c5
+	.quad	1025070686                      # 0x3d19565e
+	.quad	1040120283                      # 0x3dfef9db
+	.quad	3172554334                      # 0xbd19565e
+	.quad	1024828380                      # 0x3d15a3dc
+	.quad	1045877613                      # 0x3e56d36d
+	.quad	1093664768                      # 0x41300000
+	.quad	1082130432                      # 0x40800000
+	.quad	1088212173                      # 0x40dccccd
+	.quad	1071203423                      # 0x3fd9445f
+	.quad	1112014848                      # 0x42480000
+	.quad	3236954112                      # 0xc0f00000
+	.quad	1088421888                      # 0x40e00000
+	.quad	984932638                       # 0x3ab4e11e
+	.quad	3187402605                      # 0xbdfbe76d
+	.quad	1092616192                      # 0x41200000
+	.quad	975169640                       # 0x3a1fe868
+	.quad	1041529569                      # 0x3e147ae1
+	.quad	1107558400                      # 0x42040000
+	.quad	1102263091                      # 0x41b33333
+	.quad	1054759897                      # 0x3ede5bd9
+	.quad	3236324966                      # 0xc0e66666
+	.quad	1058642330                      # 0x3f19999a
+	.quad	1016473804                      # 0x3c9628cc
+	.quad	1090448157                      # 0x40feeb1d
+	.quad	3217031168                      # 0xbfc00000
+	.quad	3246758298                      # 0xc185999a
+	.quad	1106247680                      # 0x41f00000
+	.quad	949405957                       # 0x3896c905
+	.quad	3189214544                      # 0xbe178d50
+	.quad	956914955                       # 0x39095d0b
+	.quad	1032630934                      # 0x3d8cb296
+	.quad	1073741824                      # 0x40000000
+	.quad	1086282793                      # 0x40bf5c29
+	.quad	1089445298                      # 0x40ef9db2
+	.quad	3245342720                      # 0xc1700000
+	.quad	1107689472                      # 0x42060000
+	.quad	1097859072                      # 0x41700000
+	.quad	1091567616                      # 0x41100000
+	.quad	1114636288                      # 0x42700000
+	.quad	1161527296                      # 0x453b8000
+	.quad	1160708096                      # 0x452f0000
+	.quad	1130102784                      # 0x435c0000
+	.quad	1080033280                      # 0x40600000
+	.quad	1069547520                      # 0x3fc00000
+	.quad	1101004800                      # 0x41a00000
+	.quad	3261914153                      # 0xc26cdc29
+	.quad	1047804248                      # 0x3e743958
+	.quad	1085225828                      # 0x40af3b64
+	.quad	1034190544                      # 0x3da47ed0
+	.quad	3289682903                      # 0xc41493d7
+	.quad	1031597457                      # 0x3d7ced91
+	.quad	1083709587                      # 0x40981893
+	.quad	3204688170                      # 0xbf03a92a
+	.quad	1097334784                      # 0x41680000
+	.quad	3233808384                      # 0xc0c00000
+	.quad	1024416809                      # 0x3d0f5c29
+	.quad	1108098417                      # 0x420c3d71
+	.quad	1080452710                      # 0x40666666
+	.quad	1024067843                      # 0x3d0a0903
+	.quad	1017209317                      # 0x3ca161e5
+	.quad	1017370378                      # 0x3ca3d70a
+	.quad	1071225242                      # 0x3fd9999a
+	.quad	3158505528                      # 0xbc42f838
+	.quad	1203532416                      # 0x47bc7280
+	.quad	990744265                       # 0x3b0d8ec9
+	.quad	1051629453                      # 0x3eae978d
+	.quad	3206357503                      # 0xbf1d21ff
+	.quad	847305049                       # 0x3280d959
+	.quad	1061158912                      # 0x3f400000
+	.quad	3268542464                      # 0xc2d20000
+	.quad	1063675494                      # 0x3f666666
+	.quad	1055286886                      # 0x3ee66666
+	.quad	1036831952                      # 0x3dccccd0
+	.quad	2937575346                      # 0xaf17d7b2
+	.quad	915073649                       # 0x368aea71
+	.quad	1148846080                      # 0x447a0000
+	.quad	168                             # 0xa8
+	.quad	965097405                       # 0x398637bd
+	.quad	3206964838                      # 0xbf266666
+	.quad	1244101366                      # 0x4a277af6
+	.quad	1095017431                      # 0x4144a3d7
+	.quad	1227066906                      # 0x49238e1a
+	.quad	1176103886                      # 0x4619ebce
+	.quad	996886069                       # 0x3b6b4635
+	.quad	1162925659                      # 0x4550d65b
+	.quad	1067869798                      # 0x3fa66666
+	.quad	1049247089                      # 0x3e8a3d71
+	.quad	1065185444                      # 0x3f7d70a4
+	.quad	1090529526                      # 0x410028f6
+	.quad	790091698                       # 0x2f17d7b2
+	.quad	176                             # 0xb0
+	.quad	1070386381                      # 0x3fcccccd
+	.quad	1005753565                      # 0x3bf294dd
+	.quad	917466584                       # 0x36af6dd8
+	.quad	1031100046                      # 0x3d75568e
+	.quad	172                             # 0xac
+	.quad	937943779                       # 0x37e7e2e3
+	.quad	963282295                       # 0x396a8577
+	.quad	180                             # 0xb4
+	.quad	1075838976                      # 0x40200000
+	.quad	1096810496                      # 0x41600000
+	.quad	1000593162                      # 0x3ba3d70a
+	.quad	3178611343                      # 0xbd75c28f
+	.quad	3148076810                      # 0xbba3d70a
+	.quad	1031127695                      # 0x3d75c28f
+	.quad	1103626240                      # 0x41c80000
+	.quad	964753808                       # 0x3980f990
+	.quad	1071955050                      # 0x3fe4bc6a
+	.quad	966128197                       # 0x3995f245
+	.quad	917730040                       # 0x36b372f8
+	.quad	953267991                       # 0x38d1b717
+	.quad	1089598390                      # 0x40f1f3b6
+	.quad	3129152111                      # 0xba83126f
+	.quad	1070805811                      # 0x3fd33333
+	.quad	1107479757                      # 0x4202cccd
+	.quad	1032805417                      # 0x3d8f5c29
+	.quad	3164639278                      # 0xbca0902e
+	.quad	1075293716                      # 0x4017ae14
+	.quad	1041194025                      # 0x3e0f5c29
+	.quad	3087415229                      # 0xb80637bd
+	.quad	3143253025                      # 0xbb5a3c21
+	.quad	994352038                       # 0x3b449ba6
+	.quad	84                              # 0x54
+	.quad	1096600781                      # 0x415ccccd
+	.quad	3119590440                      # 0xb9f12c28
+	.quad	3094287177                      # 0xb86f1349
+	.quad	1015061833                      # 0x3c809d49
+	.quad	1120403456                      # 0x42c80000
+	.quad	1015813452                      # 0x3c8c154c
+	.quad	1057923306                      # 0x3f0ea0ea
+	.quad	3215353446                      # 0xbfa66666
+	.quad	1067155508                      # 0x3f9b8034
+	.quad	1045152079                      # 0x3e4bc14f
+	.quad	3170222735                      # 0xbcf5c28f
+	.quad	1054745821                      # 0x3ede24dd
+	.quad	1076677837                      # 0x402ccccd
+	.quad	3263299584                      # 0xc2820000
+	.quad	767342212                       # 0x2dbcb684
+	.quad	1397328818                      # 0x53498bb2
+	.quad	820767343                       # 0x30ebea6f
+	.quad	1065599501                      # 0x3f83c20d
+	.quad	1404066365                      # 0x53b05a3d
+	.quad	1021526423                      # 0x3ce34197
+	.quad	1075764679                      # 0x401eddc7
+	.quad	1033661462                      # 0x3d9c6c16
+	.quad	3221225472                      # 0xc0000000
+	.quad	829155951                       # 0x316bea6f
+	.quad	1111051282                      # 0x42394c12
+	.quad	732075359                       # 0x2ba2955f
+	.quad	681590277                       # 0x28a03e05
+	.quad	872990547                       # 0x3408c753
+	.quad	1067437277                      # 0x3f9fccdd
+	.quad	1085573354                      # 0x40b488ea
+	.quad	1043448291                      # 0x3e31c1e3
+	.quad	1084227584                      # 0x40a00000
+	.quad	1092091904                      # 0x41180000
+	.quad	1022739087                      # 0x3cf5c28f
+	.quad	1044549468                      # 0x3e428f5c
+	.quad	1030322389                      # 0x3d6978d5
+	.quad	1038174126                      # 0x3de147ae
+	.quad	1063507722                      # 0x3f63d70a
+	.quad	1065520988                      # 0x3f828f5c
+	.quad	1056670671                      # 0x3efb83cf
+	.quad	881915012                       # 0x3490f484
+	.quad	3229718938                      # 0xc081999a
+	.quad	954642382                       # 0x38e6afce
+	.quad	979980004                       # 0x3a694ee4
+	.quad	1115031453                      # 0x4276079d
+	.quad	1007908028                      # 0x3c1374bc
+	.quad	1036831949                      # 0x3dcccccd
+	.quad	1011192336                      # 0x3c459210
+	.quad	1036505296                      # 0x3dc7d0d0
+	.quad	160                             # 0xa0
+	.quad	1                               # 0x1
+	.quad	184                             # 0xb8
+	.quad	188                             # 0xbc
+	.quad	192                             # 0xc0
+	.quad	196                             # 0xc4
+	.quad	200                             # 0xc8
+	.quad	204                             # 0xcc
+	.quad	208                             # 0xd0
+	.quad	212                             # 0xd4
+	.quad	216                             # 0xd8
+	.quad	220                             # 0xdc
+	.quad	224                             # 0xe0
+	.quad	228                             # 0xe4
+	.quad	232                             # 0xe8
+	.quad	236                             # 0xec
+	.quad	240                             # 0xf0
+	.quad	1064346583                      # 0x3f70a3d7
+	.quad	1011129254                      # 0x3c449ba6
+	.quad	992204554                       # 0x3b23d70a
+	.quad	1090623898                      # 0x4101999a
+	.quad	1018444120                      # 0x3cb43958
+	.quad	1059313418                      # 0x3f23d70a
+	.quad	985104436                       # 0x3ab78034
+	.quad	1040388719                      # 0x3e03126f
+	.quad	1095761920                      # 0x41500000
+	.quad	1042066440                      # 0x3e1cac08
+	.quad	3265702571                      # 0xc2a6aaab
+	.quad	1110823284                      # 0x4235d174
+	.quad	1032536982                      # 0x3d8b4396
+	.quad	1144164938                      # 0x4432924a
+	.quad	3234932348                      # 0xc0d1267c
+	.quad	1041865114                      # 0x3e19999a
+	.quad	1140457472                      # 0x43fa0000
+	.quad	3240099840                      # 0xc1200000
+	.quad	3287941120                      # 0xc3fa0000
+	.quad	1004888129                      # 0x3be56041
+	.quad	3132588084                      # 0xbab78034
+	.quad	3077235082                      # 0xb76ae18a
+	.quad	3178774032                      # 0xbd783e10
+	.quad	3145901926                      # 0xbb82a766
+	.quad	1110966272                      # 0x42380000
+	.quad	3288759763                      # 0xc4067dd3
+	.quad	3226511973                      # 0xc050aa65
+	.quad	3131729091                      # 0xbaaa64c3
+	.quad	1115903969                      # 0x428357e1
+	.quad	3282316761                      # 0xc3a42dd9
+	.quad	3226887782                      # 0xc0566666
+	.quad	3222064333                      # 0xc00ccccd
+	.quad	1005747123                      # 0x3bf27bb3
+	.quad	1029785518                      # 0x3d6147ae
+	.quad	1014350479                      # 0x3c75c28f
+	.quad	1071393014                      # 0x3fdc28f6
+	.quad	1094189056                      # 0x41380000
+	.quad	995855277                       # 0x3b5b8bad
+	.quad	990916064                       # 0x3b102de0
+	.quad	1134833113                      # 0x43a42dd9
+	.quad	981668463                       # 0x3a83126f
+	.quad	244                             # 0xf4
+	.quad	248                             # 0xf8
+	.quad	252                             # 0xfc
+	.quad	256                             # 0x100
+	.quad	260                             # 0x104
+	.quad	264                             # 0x108
+	.quad	268                             # 0x10c
+	.quad	272                             # 0x110
+	.quad	276                             # 0x114
+	.quad	280                             # 0x118
+	.quad	284                             # 0x11c
+	.quad	288                             # 0x120
+	.quad	292                             # 0x124
+	.quad	296                             # 0x128
+	.quad	300                             # 0x12c
+	.quad	304                             # 0x130
+	.quad	308                             # 0x134
+	.quad	312                             # 0x138
+	.quad	316                             # 0x13c
+	.quad	320                             # 0x140
+	.quad	324                             # 0x144
+	.quad	328                             # 0x148
+	.quad	332                             # 0x14c
+	.quad	336                             # 0x150
+	.quad	340                             # 0x154
+	.quad	344                             # 0x158
+	.quad	348                             # 0x15c
+	.quad	352                             # 0x160
+	.quad	356                             # 0x164
+	.quad	360                             # 0x168
+	.quad	164                             # 0xa4
+	.size	.Lkernel_gpu_opencl_cpool, 2800
+
+	.type	.Lkernel_gpu_opencl_spill,@object # @kernel_gpu_opencl_spill
+	.local	.Lkernel_gpu_opencl_spill
+	.comm	.Lkernel_gpu_opencl_spill,280,8
 	.type	hwacha_group_size,@object       # @hwacha_group_size
 	.bss
 	.weak	hwacha_group_size

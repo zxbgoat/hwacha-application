@@ -28,10 +28,6 @@ make gen-backprop      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
-| backprop | 54,716 | 365 | 150x |
+| backprop | 54,716 | 291 | 188x |
 
-结果：backprop **FAIL**。
-
-## 已知问题
-
-16x16 的 work-group（256 个 work-item）超过 Hwacha 给这个内核的 maxvl（184），组被拆成两个 stripmine，组内 barrier 分隔的树形归约失效；见 `../known-issues/README.md`。
+结果：backprop **PASS**。

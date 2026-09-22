@@ -7,109 +7,157 @@
 bpnn_layerforward_ocl_wt:
     vpset vp0
     veidx vv0
-    vadd vv0, vv0, vs63
-    vlsd vs2, vs58
-    vlsd vs3, vs57
-    vlsd vs4, vs56
+    vmul vv0, vv0, vs62
+    veidx vv1
+    vadd vv1, vv1, vs60
+    vlsd vs2, vs55
+    vlsd vs3, vs54
+    vlsd vs4, vs53
     vmul vs3, vs2, vs3
-    vremu vv1, vv0, vs3
-    vdivu vv2, vv0, vs3
-    vremu vv3, vv1, vs2
-    vdivu vv1, vv1, vs2
-    vdivu vv2, vv2, vs4
-    vaddw vs2, vs55, vs54
-    vsllw vv9, vv2, vs53
-    vaddw vv10, vv9, vv1
-    vmulw vv9, vv10, vs2
-    vaddw vs2, vs55, vs52
-    vaddw vv11, vs2, vv3
-    vaddw vv11, vv11, vv9
-    vcmpeq vp1, vv3, vs0
+    vremu vv2, vv1, vs3
+    vdivu vv3, vv1, vs3
+    vremu vv4, vv2, vs2
+    vaddi vs61, vs63, 16
+    vsxd vv4, vs61, vv0
+    vdivu vv2, vv2, vs2
+    vaddi vs61, vs63, 0
+    vsxd vv2, vs61, vv0
+    vdivu vv3, vv3, vs4
+    vaddi vs61, vs63, 16
+    vsxd vv4, vs61, vv0
+    vaddi vs61, vs63, 8
+    vsxd vv3, vs61, vv0
+    vaddi vs61, vs63, 8
+    vsxd vv3, vs61, vv0
+    vaddi vs61, vs63, 0
+    vsxd vv2, vs61, vv0
+    vaddw vs2, vs52, vs51
+    vsllw vv5, vv3, vs50
+    vaddw vv6, vv5, vv2
+    vmulw vv5, vv6, vs2
+    vaddw vs2, vs52, vs49
+    vaddw vv7, vs2, vv4
+    vaddw vv7, vv7, vv5
+    vaddi vs61, vs63, 32
+    vsxw vv7, vs61, vv0
+    vcmpeq vp1, vv4, vs0
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip0
-    vadd vs2, vs50, vs49
-    @vp2 vsll vv4, vv10, vs51
-    @vp2 vlxw vv9, vs2, vv4
-    @vp2 vsll vv4, vv1, vs51
-    @vp2 vsxw vv9, vs61, vv4
+    vadd vs2, vs47, vs46
+    @vp2 vsll vv2, vv6, vs48
+    @vp2 vlxw vv5, vs2, vv2
+    vaddi vs61, vs63, 0
+    vlxd vv2, vs61, vv0
+    @vp2 vsll vv3, vv2, vs48
+    @vp2 vsxw vv5, vs59, vv3
 .Lbpnn_layerforward_ocl_skip0:
-    @vp3 vsll vv5, vv1, vs51
+    @!vp3 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip1
+    vaddi vs61, vs63, 0
+    vlxd vv2, vs61, vv0
+    @vp3 vsll vv4, vv2, vs48
+.Lbpnn_layerforward_ocl_skip1:
     vpop vp4, vp2, vp2, vp2, 0xAA
     vpop vp4, vp4, vp3, vp3, 0xEE
-    @vp3 vadd vv6, vv5, vs0
-    @vp2 vadd vv6, vv4, vs0
-    @!vp4 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip1
+    @vp3 vadd vv2, vv4, vs0
+    @vp2 vadd vv2, vv3, vs0
+    vaddi vs61, vs63, 24
+    vsxd vv2, vs61, vv0
+    @!vp4 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip2
     vfence
-    @vp4 vsll vv4, vv11, vs51
-    @vp4 vlxw vv9, vs60, vv4
-    @vp4 vsll vv4, vv1, vs49
+    vaddi vs61, vs63, 32
+    vsxw vv7, vs61, vv0
+    @vp4 vsll vv3, vv7, vs48
+    @vp4 vlxw vv5, vs56, vv3
+    vaddi vs61, vs63, 0
+    vlxd vv3, vs61, vv0
+    @vp4 vsll vv4, vv3, vs46
+    vaddi vs61, vs63, 16
+    vlxd vv3, vs61, vv0
     @vp4 vadd vv4, vv4, vv3
-    @vp4 vand vv4, vv4, vs48
-    @vp4 vsll vv5, vv4, vs51
-    @vp4 vsxw vv9, vs62, vv5
+    @vp4 vand vv4, vv4, vs45
+    @vp4 vsll vv3, vv4, vs48
+    @vp4 vsxw vv5, vs58, vv3
     vfence
-    @vp4 vlxw vv9, vs62, vv5
-    @vp4 vlxw vv10, vs61, vv6
-    @vp4 vfmul.s vv10, vv9, vv10
-    @vp4 vsll vv5, vv4, vs51
-    @vp4 vsxw vv10, vs62, vv5
+    @vp4 vlxw vv5, vs58, vv3
+    @vp4 vlxw vv6, vs59, vv2
+    @vp4 vfmul.s vv6, vv5, vv6
+    @vp4 vsll vv3, vv4, vs48
+    @vp4 vsxw vv6, vs58, vv3
     vfence
-    @vp4 vsll vv5, vv4, vs51
-    @vp4 vsll vv7, vv4, vs51
-.Lbpnn_layerforward_ocl_skip1:
+    @vp4 vsll vv3, vv4, vs48
+    vaddi vs61, vs63, 40
+    vsxd vv3, vs61, vv0
+    @vp4 vsll vv2, vv4, vs48
+.Lbpnn_layerforward_ocl_skip2:
     vpop vp2, vp4, vp4, vp4, 0xAA
-    @vp4 vadd vs2, vs54, vs0
+    @vp4 vaddw vs2, vs51, vs0
     vpclear vp3
-.Lbpnn_layerforward_ocl_loop2:
-    vaddw vs3, vs2, vs47
-    @vp2 vand vv9, vs3, vv1
-    vcmpeq vp4, vv9, vs0
+.Lbpnn_layerforward_ocl_loop3:
+    vaddw vs3, vs2, vs44
+    vaddi vs61, vs63, 0
+    vlxw vv5, vs61, vv0
+    @vp2 vand vv6, vs3, vv5
+    vcmpeq vp4, vv6, vs0
     vpop vp5, vp2, vp4, vp4, 0x80
     vpop vp6, vp2, vp4, vp4, 0x02
-    @!vp5 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip3
-    @vp5 vlxw vv9, vs62, vv5
-    vsrlw vs3, vs2, vs54
-    @vp5 vaddw vv10, vs3, vv1
-    @vp5 vsllw vv10, vv10, vs53
-    @vp5 vaddw vv10, vv10, vv3
-    @vp5 vsll vv8, vv10, vs51
-    @vp5 vlxw vv10, vs62, vv8
-    @vp5 vfadd.s vv10, vv9, vv10
-    @vp5 vsxw vv10, vs62, vv7
-.Lbpnn_layerforward_ocl_skip3:
+    @!vp5 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip4
+    vaddi vs61, vs63, 40
+    vlxd vv3, vs61, vv0
+    @vp5 vlxw vv5, vs58, vv3
+    vsrlw vs3, vs2, vs51
+    vaddi vs61, vs63, 0
+    vlxw vv6, vs61, vv0
+    @vp5 vaddw vv7, vs3, vv6
+    @vp5 vsllw vv7, vv7, vs50
+    vaddi vs61, vs63, 16
+    vlxw vv6, vs61, vv0
+    @vp5 vaddw vv7, vv7, vv6
+    @vp5 vsll vv3, vv7, vs48
+    @vp5 vlxw vv6, vs58, vv3
+    @vp5 vfadd.s vv6, vv5, vv6
+    @vp5 vsxw vv6, vs58, vv2
+.Lbpnn_layerforward_ocl_skip4:
     vpop vp4, vp5, vp5, vp5, 0xAA
     vpop vp4, vp4, vp6, vp6, 0xEE
-    @!vp4 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip4
+    @!vp4 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip5
     vfence
-    vsllw vs3, vs2, vs54
-    vaddw vv9, vs2, vs0
-    vcmpltu vp5, vv9, vs46
-.Lbpnn_layerforward_ocl_skip4:
+    vsllw vs3, vs2, vs51
+    vaddw vv5, vs2, vs0
+    vcmpltu vp5, vv5, vs43
+.Lbpnn_layerforward_ocl_skip5:
     vpop vp6, vp4, vp5, vp5, 0x80
     vpop vp7, vp4, vp5, vp5, 0x02
     vpop vp3, vp3, vp7, vp7, 0xEE
     vpop vp2, vp2, vp7, vp7, 0x02
-    @vp6 vadd vs2, vs3, vs0
-    @vp6 vcjal 1, vs1, .Lbpnn_layerforward_ocl_loop2
+    @vp6 vaddw vs2, vs3, vs0
+    @vp6 vcjal 1, vs1, .Lbpnn_layerforward_ocl_loop3
     vpop vp2, vp7, vp7, vp7, 0xAA
     vpop vp2, vp2, vp3, vp3, 0xEE
-    @!vp2 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip5
-    @vp2 vsll vv4, vv4, vs51
-    @vp2 vlxw vv9, vs62, vv4
-    @vp2 vsll vv3, vv11, vs51
-    @vp2 vsxw vv9, vs60, vv3
+    @!vp2 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip6
+    @vp2 vsll vv4, vv4, vs48
+    @vp2 vlxw vv5, vs58, vv4
+    vaddi vs61, vs63, 32
+    vlxd vv2, vs61, vv0
+    @vp2 vsll vv3, vv2, vs48
+    @vp2 vsxw vv5, vs56, vv3
     vfence
-.Lbpnn_layerforward_ocl_skip5:
+.Lbpnn_layerforward_ocl_skip6:
     vpop vp3, vp2, vp1, vp1, 0x80
     vpop vp4, vp2, vp1, vp1, 0x02
-    @!vp3 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip6
-    @vp3 vlxw vv9, vs62, vv6
-    @vp3 vmulw vv10, vs55, vv2
-    @vp3 vaddw vv10, vv10, vv1
-    @vp3 vsll vv1, vv10, vs51
-    @vp3 vsxw vv9, vs59, vv1
-.Lbpnn_layerforward_ocl_skip6:
+    @!vp3 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip7
+    vaddi vs61, vs63, 24
+    vlxd vv2, vs61, vv0
+    @vp3 vlxw vv5, vs58, vv2
+    vaddi vs61, vs63, 8
+    vlxw vv6, vs61, vv0
+    @vp3 vmulw vv7, vs52, vv6
+    vaddi vs61, vs63, 0
+    vlxw vv6, vs61, vv0
+    @vp3 vaddw vv7, vv7, vv6
+    @vp3 vsll vv2, vv7, vs48
+    @vp3 vsxw vv5, vs57, vv2
+.Lbpnn_layerforward_ocl_skip7:
     vpop vp1, vp3, vp3, vp3, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
     vstop
@@ -120,136 +168,192 @@ bpnn_layerforward_ocl_wt:
 bpnn_adjust_weights_ocl_wt:
     vpset vp0
     veidx vv0
-    vadd vv0, vv0, vs63
-    vlsd vs2, vs60
-    vlsd vs3, vs59
-    vlsd vs4, vs58
+    vmul vv0, vv0, vs62
+    veidx vv1
+    vadd vv1, vv1, vs60
+    vlsd vs2, vs57
+    vlsd vs3, vs56
+    vlsd vs4, vs55
     vmul vs5, vs2, vs3
-    vremu vv1, vv0, vs5
-    vdivu vv2, vv0, vs5
-    vremu vv3, vv1, vs2
-    vdivu vv1, vv1, vs2
-    vdivu vv4, vv2, vs4
-    vaddw vs4, vs57, vs56
-    vsllw vv6, vv4, vs55
-    vaddw vv7, vv6, vv1
+    vremu vv2, vv1, vs5
+    vdivu vv3, vv1, vs5
+    vremu vv4, vv2, vs2
+    vdivu vv2, vv2, vs2
+    vaddi vs61, vs63, 8
+    vsxd vv2, vs61, vv0
+    vdivu vv5, vv3, vs4
+    vaddw vs4, vs54, vs53
+    vsllw vv6, vv5, vs52
+    vaddw vv7, vv6, vv2
+    vaddi vs61, vs63, 0
+    vsxw vv7, vs61, vv0
     vmulw vv6, vv7, vs4
-    vaddw vs4, vs57, vs54
-    vaddw vv8, vs4, vv3
-    vaddw vv8, vv8, vv6
-    vadd vs4, vs53, vs52
-    vmul vv3, vs3, vv2
-    vsub vv3, vs0, vv3
-    vsub vv3, vv3, vv1
-    vmul vv3, vs2, vv3
-    vsll vv3, vv3, vs51
-    vsll vv5, vv0, vs51
-    vadd vv3, vv3, vv5
-    vlxw vv6, vs4, vv3
-    vfmul.s vv9, vv6, vs50
-    vadd vs4, vs49, vs52
-    vsll vv3, vv7, vs51
-    vlxw vv6, vs4, vv3
-    vsll vv3, vv8, vs51
-    vlxw vv10, vs62, vv3
-    vfmul.s vv10, vv10, vs50
-    vfmadd.s vv9, vv9, vv6, vv10
-    vlxw vv6, vs61, vv3
-    vfadd.s vv9, vv6, vv9
-    vsll vv3, vv8, vs51
-    vsxw vv9, vs61, vv3
-    vadd vs4, vs53, vs52
-    vmul vv3, vs3, vv2
-    vsub vv3, vs0, vv3
-    vsub vv3, vv3, vv1
-    vmul vv3, vs2, vv3
-    vsll vv3, vv3, vs51
-    vsll vv5, vv0, vs51
-    vadd vv3, vv3, vv5
-    vlxw vv6, vs4, vv3
-    vfmul.s vv9, vv6, vs50
-    vadd vs4, vs49, vs52
-    vsll vv3, vv7, vs51
-    vlxw vv6, vs4, vv3
-    vsll vv3, vv8, vs51
-    vlxw vv7, vs62, vv3
-    vfmul.s vv7, vv7, vs50
-    vfmadd.s vv9, vv9, vv6, vv7
-    vsxw vv9, vs62, vv3
+    vaddw vs4, vs54, vs51
+    vaddw vv7, vs4, vv4
+    vaddw vv7, vv7, vv6
+    vaddi vs61, vs63, 16
+    vsxw vv7, vs61, vv0
+    vadd vs4, vs50, vs49
+    vmul vv4, vs3, vv3
+    vsub vv4, vs0, vv4
+    vsub vv4, vv4, vv2
+    vmul vv4, vs2, vv4
+    vsll vv4, vv4, vs48
+    vsll vv2, vv1, vs48
+    vadd vv4, vv4, vv2
+    vlxw vv6, vs4, vv4
+    vfmul.s vv7, vv6, vs47
+    vaddi vs61, vs63, 32
+    vsxw vv7, vs61, vv0
+    vaddi vs61, vs63, 0
+    vlxw vv6, vs61, vv0
+    vadd vs4, vs46, vs49
+    vaddi vs61, vs63, 0
+    vlxw vv6, vs61, vv0
+    vsll vv2, vv6, vs48
+    vlxw vv6, vs4, vv2
+    vaddi vs61, vs63, 24
+    vsxw vv6, vs61, vv0
+    vaddi vs61, vs63, 16
+    vlxw vv6, vs61, vv0
+    vaddi vs61, vs63, 16
+    vlxw vv6, vs61, vv0
+    vsll vv2, vv6, vs48
+    vlxw vv6, vs58, vv2
+    vfmul.s vv7, vv6, vs47
+    vaddi vs61, vs63, 32
+    vlxw vv6, vs61, vv0
+    vaddi vs61, vs63, 24
+    vlxw vv4, vs61, vv0
+    vfmadd.s vv7, vv6, vv4, vv7
+    vlxw vv6, vs59, vv2
+    vfadd.s vv7, vv6, vv7
+    vaddi vs61, vs63, 16
+    vlxw vv6, vs61, vv0
+    vsll vv2, vv6, vs48
+    vsxw vv7, vs59, vv2
+    vadd vs4, vs50, vs49
+    vmul vv2, vs3, vv3
+    vsub vv2, vs0, vv2
+    vaddi vs61, vs63, 8
+    vlxd vv4, vs61, vv0
+    vsub vv2, vv2, vv4
+    vmul vv2, vs2, vv2
+    vsll vv2, vv2, vs48
+    vsll vv4, vv1, vs48
+    vadd vv2, vv2, vv4
+    vlxw vv6, vs4, vv2
+    vfmul.s vv7, vv6, vs47
+    vaddi vs61, vs63, 48
+    vsxw vv7, vs61, vv0
+    vadd vs4, vs46, vs49
+    vaddi vs61, vs63, 0
+    vlxw vv6, vs61, vv0
+    vsll vv2, vv6, vs48
+    vlxw vv6, vs4, vv2
+    vaddi vs61, vs63, 40
+    vsxw vv6, vs61, vv0
+    vaddi vs61, vs63, 16
+    vlxw vv6, vs61, vv0
+    vsll vv2, vv6, vs48
+    vlxw vv6, vs58, vv2
+    vfmul.s vv7, vv6, vs47
+    vaddi vs61, vs63, 48
+    vlxw vv6, vs61, vv0
+    vaddi vs61, vs63, 40
+    vlxw vv4, vs61, vv0
+    vfmadd.s vv7, vv6, vv4, vv7
+    vsxw vv7, vs58, vv2
     vfence
-    vor vv4, vv1, vv4
-    vcmpeq vp1, vv4, vs0
+    vaddi vs61, vs63, 8
+    vlxd vv2, vs61, vv0
+    vor vv5, vv2, vv5
+    vcmpeq vp1, vv5, vs0
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lbpnn_adjust_weights_ocl_skip0
-    vadd vs4, vs53, vs52
-    @vp2 vmul vv3, vs3, vv2
-    @vp2 vsub vv3, vs0, vv3
-    @vp2 vsub vv3, vv3, vv1
-    @vp2 vmul vv3, vs2, vv3
-    @vp2 vsll vv3, vv3, vs51
-    @vp2 vsll vv4, vv0, vs51
-    @vp2 vadd vv3, vv3, vv4
-    @vp2 vlxw vv6, vs4, vv3
-    vadd vs4, vs62, vs52
-    @vp2 vmul vv3, vs3, vv2
-    @vp2 vsub vv3, vs0, vv3
-    @vp2 vsub vv3, vv3, vv1
-    @vp2 vmul vv3, vs2, vv3
-    @vp2 vsll vv3, vv3, vs51
-    @vp2 vsll vv4, vv0, vs51
-    @vp2 vadd vv3, vv3, vv4
-    @vp2 vlxw vv7, vs4, vv3
-    @vp2 vfmul.s vv7, vv7, vs50
-    @vp2 vfmadd.s vv7, vv6, vs50, vv7
-    vadd vs4, vs61, vs52
-    @vp2 vmul vv3, vs3, vv2
-    @vp2 vsub vv3, vs0, vv3
-    @vp2 vsub vv3, vv3, vv1
-    @vp2 vmul vv3, vs2, vv3
-    @vp2 vsll vv3, vv3, vs51
-    @vp2 vsll vv4, vv0, vs51
-    @vp2 vadd vv3, vv3, vv4
-    @vp2 vlxw vv6, vs4, vv3
-    @vp2 vfadd.s vv7, vv6, vv7
-    vadd vs4, vs61, vs52
-    @vp2 vmul vv3, vs3, vv2
-    @vp2 vsub vv3, vs0, vv3
-    @vp2 vsub vv3, vv3, vv1
-    @vp2 vmul vv3, vs2, vv3
-    @vp2 vsll vv3, vv3, vs51
-    @vp2 vsll vv4, vv0, vs51
-    @vp2 vadd vv3, vv3, vv4
-    @vp2 vsxw vv7, vs4, vv3
-    vadd vs4, vs53, vs52
-    @vp2 vmul vv3, vs3, vv2
-    @vp2 vsub vv3, vs0, vv3
-    @vp2 vsub vv3, vv3, vv1
-    @vp2 vmul vv3, vs2, vv3
-    @vp2 vsll vv3, vv3, vs51
-    @vp2 vsll vv4, vv0, vs51
-    @vp2 vadd vv3, vv3, vv4
-    @vp2 vlxw vv6, vs4, vv3
-    vadd vs4, vs62, vs52
-    @vp2 vmul vv3, vs3, vv2
-    @vp2 vsub vv3, vs0, vv3
-    @vp2 vsub vv3, vv3, vv1
-    @vp2 vmul vv3, vs2, vv3
-    @vp2 vsll vv3, vv3, vs51
-    @vp2 vsll vv4, vv0, vs51
-    @vp2 vadd vv3, vv3, vv4
-    @vp2 vlxw vv7, vs4, vv3
-    @vp2 vfmul.s vv7, vv7, vs50
-    @vp2 vfmadd.s vv7, vv6, vs50, vv7
-    vadd vs4, vs62, vs52
-    @vp2 vmul vv2, vs3, vv2
+    vadd vs4, vs50, vs49
+    @vp2 vmul vv2, vs3, vv3
     @vp2 vsub vv2, vs0, vv2
-    @vp2 vsub vv2, vv2, vv1
+    vaddi vs61, vs63, 8
+    vlxd vv4, vs61, vv0
+    @vp2 vsub vv2, vv2, vv4
     @vp2 vmul vv2, vs2, vv2
-    @vp2 vsll vv2, vv2, vs51
-    @vp2 vsll vv1, vv0, vs51
-    @vp2 vadd vv2, vv2, vv1
+    @vp2 vsll vv2, vv2, vs48
+    @vp2 vsll vv4, vv1, vs48
+    @vp2 vadd vv2, vv2, vv4
+    @vp2 vlxw vv6, vs4, vv2
+    vadd vs4, vs58, vs49
+    @vp2 vmul vv2, vs3, vv3
+    @vp2 vsub vv2, vs0, vv2
+    vaddi vs61, vs63, 8
+    vlxd vv4, vs61, vv0
+    @vp2 vsub vv2, vv2, vv4
+    @vp2 vmul vv2, vs2, vv2
+    @vp2 vsll vv2, vv2, vs48
+    @vp2 vsll vv4, vv1, vs48
+    @vp2 vadd vv2, vv2, vv4
+    @vp2 vlxw vv7, vs4, vv2
+    @vp2 vfmul.s vv7, vv7, vs47
+    @vp2 vfmadd.s vv7, vv6, vs47, vv7
+    vadd vs4, vs59, vs49
+    @vp2 vmul vv2, vs3, vv3
+    @vp2 vsub vv2, vs0, vv2
+    vaddi vs61, vs63, 8
+    vlxd vv4, vs61, vv0
+    @vp2 vsub vv2, vv2, vv4
+    @vp2 vmul vv2, vs2, vv2
+    @vp2 vsll vv2, vv2, vs48
+    @vp2 vsll vv4, vv1, vs48
+    @vp2 vadd vv2, vv2, vv4
+    @vp2 vlxw vv6, vs4, vv2
+    @vp2 vfadd.s vv7, vv6, vv7
+    vadd vs4, vs59, vs49
+    @vp2 vmul vv2, vs3, vv3
+    @vp2 vsub vv2, vs0, vv2
+    vaddi vs61, vs63, 8
+    vlxd vv4, vs61, vv0
+    @vp2 vsub vv2, vv2, vv4
+    @vp2 vmul vv2, vs2, vv2
+    @vp2 vsll vv2, vv2, vs48
+    @vp2 vsll vv4, vv1, vs48
+    @vp2 vadd vv2, vv2, vv4
     @vp2 vsxw vv7, vs4, vv2
+    vadd vs4, vs50, vs49
+    @vp2 vmul vv2, vs3, vv3
+    @vp2 vsub vv2, vs0, vv2
+    vaddi vs61, vs63, 8
+    vlxd vv4, vs61, vv0
+    @vp2 vsub vv2, vv2, vv4
+    @vp2 vmul vv2, vs2, vv2
+    @vp2 vsll vv2, vv2, vs48
+    @vp2 vsll vv4, vv1, vs48
+    @vp2 vadd vv2, vv2, vv4
+    @vp2 vlxw vv6, vs4, vv2
+    vadd vs4, vs58, vs49
+    @vp2 vmul vv2, vs3, vv3
+    @vp2 vsub vv2, vs0, vv2
+    vaddi vs61, vs63, 8
+    vlxd vv4, vs61, vv0
+    @vp2 vsub vv2, vv2, vv4
+    @vp2 vmul vv2, vs2, vv2
+    @vp2 vsll vv2, vv2, vs48
+    @vp2 vsll vv4, vv1, vs48
+    @vp2 vadd vv2, vv2, vv4
+    @vp2 vlxw vv7, vs4, vv2
+    @vp2 vfmul.s vv7, vv7, vs47
+    @vp2 vfmadd.s vv7, vv6, vs47, vv7
+    vadd vs4, vs58, vs49
+    @vp2 vmul vv3, vs3, vv3
+    @vp2 vsub vv3, vs0, vv3
+    vaddi vs61, vs63, 8
+    vlxd vv2, vs61, vv0
+    @vp2 vsub vv3, vv3, vv2
+    @vp2 vmul vv3, vs2, vv3
+    @vp2 vsll vv3, vv3, vs48
+    @vp2 vsll vv2, vv1, vs48
+    @vp2 vadd vv3, vv3, vv2
+    @vp2 vsxw vv7, vs4, vv3
 .Lbpnn_adjust_weights_ocl_skip0:
     vpop vp1, vp2, vp2, vp2, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
@@ -265,104 +369,114 @@ bpnn_layerforward_ocl_ct:               # @bpnn_layerforward_ocl_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a2, 1048550
-	addi	a2, a2, -19
+	addi	a2, a2, -11
 	srli	a2, a2, 1
-	lw	a7, 0(sp)
 	not	a2, a2
 	#APP
 	vsetcfg a2
 	#NO_APP
-	#APP
-	vmcs vs62, a6
-	#NO_APP
-	#APP
-	vmcs vs61, a5
-	#NO_APP
 .Lpcrel_hi0:
-	auipc	a2, %pcrel_hi(hwacha_ls0)
-	#APP
-	vmcs vs60, a3
-	#NO_APP
+	auipc	a2, %pcrel_hi(.Lbpnn_layerforward_ocl_vspill)
+	lw	a7, 0(sp)
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi0)
 	#APP
-	vmcs vs59, a4
+	vmcs vs63, a2
+	#NO_APP
+	li	a2, 48
+	#APP
+	vmcs vs62, a2
 	#NO_APP
 	#APP
-	vmcs vs58, a2
+	vmcs vs59, a5
+	#NO_APP
+	#APP
+	vmcs vs58, a6
 	#NO_APP
 .Lpcrel_hi1:
-	auipc	a2, %pcrel_hi(hwacha_ls1)
-.Lpcrel_hi2:
-	auipc	a3, %pcrel_hi(hwacha_ng0)
-	addi	a2, a2, %pcrel_lo(.Lpcrel_hi1)
-	addi	a3, a3, %pcrel_lo(.Lpcrel_hi2)
+	auipc	a2, %pcrel_hi(hwacha_ls0)
 	#APP
-	vmcs vs57, a2
+	vmcs vs57, a4
 	#NO_APP
+	addi	a2, a2, %pcrel_lo(.Lpcrel_hi1)
 	#APP
 	vmcs vs56, a3
 	#NO_APP
 	#APP
-	vmcs vs55, a7
+	vmcs vs55, a2
 	#NO_APP
-	li	a2, 1
+.Lpcrel_hi2:
+	auipc	a2, %pcrel_hi(hwacha_ls1)
+.Lpcrel_hi3:
+	auipc	a3, %pcrel_hi(hwacha_ng0)
+	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2)
+	addi	a3, a3, %pcrel_lo(.Lpcrel_hi3)
 	#APP
 	vmcs vs54, a2
 	#NO_APP
+	#APP
+	vmcs vs53, a3
+	#NO_APP
+	#APP
+	vmcs vs52, a7
+	#NO_APP
+	li	a2, 1
+	#APP
+	vmcs vs51, a2
+	#NO_APP
 	li	a2, 4
 	#APP
-	vmcs vs53, a2
+	vmcs vs50, a2
 	#NO_APP
 	li	a3, 2
 	#APP
-	vmcs vs52, a3
+	vmcs vs49, a3
 	#NO_APP
 	#APP
-	vmcs vs51, a3
+	vmcs vs48, a3
 	#NO_APP
 	#APP
-	vmcs vs50, a1
+	vmcs vs47, a1
 	#NO_APP
 	li	a1, -1
 	#APP
-	vmcs vs49, a2
+	vmcs vs46, a2
 	#NO_APP
 	srli	a1, a1, 32
 	#APP
-	vmcs vs48, a1
+	vmcs vs45, a1
 	#NO_APP
 	lui	a1, 262144
 	addi	a1, a1, -1
 	li	a2, 9
 	#APP
-	vmcs vs47, a1
+	vmcs vs44, a1
 	#NO_APP
 	#APP
-	vmcs vs46, a2
+	vmcs vs43, a2
 	#NO_APP
 	beqz	a0, .LBB0_7
 # %bb.1:                                # %stripmine.preheader
 	li	a1, 0
-.Lpcrel_hi3:
-	auipc	a2, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi5:
-	auipc	a4, %pcrel_hi(bpnn_layerforward_ocl_wt)
 .Lpcrel_hi4:
+	auipc	a2, %pcrel_hi(hwacha_group_size)
+.Lpcrel_hi6:
+	auipc	a4, %pcrel_hi(bpnn_layerforward_ocl_wt)
+.Lpcrel_hi5:
 	auipc	a3, %pcrel_hi(hwacha_vl_short)
-	addi	a4, a4, %pcrel_lo(.Lpcrel_hi5)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi6)
 	j	.LBB0_3
 .LBB0_2:                                # %stripmine
                                         #   in Loop: Header=BB0_3 Depth=1
 	#APP
 	vsetvl a5, a6
 	#NO_APP
-	ld	a7, %pcrel_lo(.Lpcrel_hi4)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi5)(a3)
 	sltu	a6, a5, a6
 	sub	a0, a0, a5
 	or	a6, a7, a6
-	sd	a6, %pcrel_lo(.Lpcrel_hi4)(a3)
+	sd	a6, %pcrel_lo(.Lpcrel_hi5)(a3)
 	#APP
-	vmcs vs63, a1
+	vmcs vs60, a1
 	#NO_APP
 	#APP
 	vf 0(a4)
@@ -371,7 +485,7 @@ bpnn_layerforward_ocl_ct:               # @bpnn_layerforward_ocl_ct
 	beqz	a0, .LBB0_7
 .LBB0_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a6, %pcrel_lo(.Lpcrel_hi3)(a2)
+	ld	a6, %pcrel_lo(.Lpcrel_hi4)(a2)
 	mv	a5, a0
 	beqz	a6, .LBB0_5
 # %bb.4:                                # %stripmine
@@ -400,93 +514,103 @@ bpnn_layerforward_ocl_ct:               # @bpnn_layerforward_ocl_ct
 bpnn_adjust_weights_ocl_ct:             # @bpnn_adjust_weights_ocl_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a4, 1048535
+	lui	a4, 1048559
 	addi	a4, a4, -13
 	srli	a4, a4, 1
 	not	a4, a4
 	#APP
 	vsetcfg a4
 	#NO_APP
+.Lpcrel_hi7:
+	auipc	a4, %pcrel_hi(.Lbpnn_adjust_weights_ocl_vspill)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi7)
+	li	a7, 56
 	#APP
-	vmcs vs62, a6
+	vmcs vs63, a4
 	#NO_APP
-.Lpcrel_hi6:
+	#APP
+	vmcs vs62, a7
+	#NO_APP
+	#APP
+	vmcs vs59, a5
+	#NO_APP
+.Lpcrel_hi8:
 	auipc	a4, %pcrel_hi(hwacha_ls0)
 	#APP
-	vmcs vs61, a5
+	vmcs vs58, a6
 	#NO_APP
-	addi	a4, a4, %pcrel_lo(.Lpcrel_hi6)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi8)
 	#APP
-	vmcs vs60, a4
+	vmcs vs57, a4
 	#NO_APP
-.Lpcrel_hi7:
+.Lpcrel_hi9:
 	auipc	a4, %pcrel_hi(hwacha_ls1)
-	addi	a4, a4, %pcrel_lo(.Lpcrel_hi7)
-.Lpcrel_hi8:
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi9)
+.Lpcrel_hi10:
 	auipc	a5, %pcrel_hi(hwacha_ng0)
 	#APP
-	vmcs vs59, a4
+	vmcs vs56, a4
 	#NO_APP
-	addi	a4, a5, %pcrel_lo(.Lpcrel_hi8)
+	addi	a4, a5, %pcrel_lo(.Lpcrel_hi10)
 	#APP
-	vmcs vs58, a4
+	vmcs vs55, a4
 	#NO_APP
 	sext.w	a2, a2
 	#APP
-	vmcs vs57, a2
+	vmcs vs54, a2
 	#NO_APP
 	li	a2, 1
 	#APP
-	vmcs vs56, a2
+	vmcs vs53, a2
 	#NO_APP
 	li	a2, 4
 	#APP
-	vmcs vs55, a2
+	vmcs vs52, a2
 	#NO_APP
 	li	a4, 2
 	#APP
-	vmcs vs54, a4
-	#NO_APP
-	#APP
-	vmcs vs53, a1
-	#NO_APP
-	#APP
-	vmcs vs52, a2
-	#NO_APP
-	lui	a1, 256410
-	#APP
 	vmcs vs51, a4
 	#NO_APP
-	addi	a1, a1, -1638
 	#APP
 	vmcs vs50, a1
 	#NO_APP
 	#APP
-	vmcs vs49, a3
+	vmcs vs49, a2
+	#NO_APP
+	lui	a1, 256410
+	#APP
+	vmcs vs48, a4
+	#NO_APP
+	addi	a1, a1, -1638
+	#APP
+	vmcs vs47, a1
+	#NO_APP
+	#APP
+	vmcs vs46, a3
 	#NO_APP
 	beqz	a0, .LBB1_7
 # %bb.1:                                # %stripmine.preheader
 	li	a1, 0
-.Lpcrel_hi9:
-	auipc	a2, %pcrel_hi(hwacha_group_size)
 .Lpcrel_hi11:
+	auipc	a2, %pcrel_hi(hwacha_group_size)
+.Lpcrel_hi13:
 	auipc	a4, %pcrel_hi(bpnn_adjust_weights_ocl_wt)
-.Lpcrel_hi10:
+.Lpcrel_hi12:
 	auipc	a3, %pcrel_hi(hwacha_vl_short)
-	addi	a4, a4, %pcrel_lo(.Lpcrel_hi11)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi13)
 	j	.LBB1_3
 .LBB1_2:                                # %stripmine
                                         #   in Loop: Header=BB1_3 Depth=1
 	#APP
 	vsetvl a5, a6
 	#NO_APP
-	ld	a7, %pcrel_lo(.Lpcrel_hi10)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi12)(a3)
 	sltu	a6, a5, a6
 	sub	a0, a0, a5
 	or	a6, a7, a6
-	sd	a6, %pcrel_lo(.Lpcrel_hi10)(a3)
+	sd	a6, %pcrel_lo(.Lpcrel_hi12)(a3)
 	#APP
-	vmcs vs63, a1
+	vmcs vs60, a1
 	#NO_APP
 	#APP
 	vf 0(a4)
@@ -495,7 +619,7 @@ bpnn_adjust_weights_ocl_ct:             # @bpnn_adjust_weights_ocl_ct
 	beqz	a0, .LBB1_7
 .LBB1_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a6, %pcrel_lo(.Lpcrel_hi9)(a2)
+	ld	a6, %pcrel_lo(.Lpcrel_hi11)(a2)
 	mv	a5, a0
 	beqz	a6, .LBB1_5
 # %bb.4:                                # %stripmine
@@ -518,6 +642,9 @@ bpnn_adjust_weights_ocl_ct:             # @bpnn_adjust_weights_ocl_ct
 	.size	bpnn_adjust_weights_ocl_ct, .Lfunc_end1-bpnn_adjust_weights_ocl_ct
 	.cfi_endproc
                                         # -- End function
+	.type	.Lbpnn_layerforward_ocl_vspill,@object # @bpnn_layerforward_ocl_vspill
+	.local	.Lbpnn_layerforward_ocl_vspill
+	.comm	.Lbpnn_layerforward_ocl_vspill,12288,8
 	.type	hwacha_ls0,@object              # @hwacha_ls0
 	.bss
 	.weak	hwacha_ls0
@@ -554,4 +681,7 @@ hwacha_vl_short:
 	.quad	0                               # 0x0
 	.size	hwacha_vl_short, 8
 
+	.type	.Lbpnn_adjust_weights_ocl_vspill,@object # @bpnn_adjust_weights_ocl_vspill
+	.local	.Lbpnn_adjust_weights_ocl_vspill
+	.comm	.Lbpnn_adjust_weights_ocl_vspill,14336,8
 	.section	".note.GNU-stack","",@progbits

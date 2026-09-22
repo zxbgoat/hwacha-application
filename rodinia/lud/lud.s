@@ -16,7 +16,9 @@ lud_diagonal_wt_r0_b0:
     .globl lud_diagonal_wt_a0
 lud_diagonal_wt_a0:
     vfence
-    vsll vv1, vv0, vs60
+    vsll vv1, vv0, vs53
+    vsrl vv1, vv1, vs53
+    vsll vv1, vv1, vs60
     vsll vv2, vv0, vs59
     vpset vp1
     vadd vs2, vs0, vs0
@@ -39,7 +41,7 @@ lud_diagonal_wt_a0:
     vpop vp8, vp4, vp6, vp6, 0x02
     @!vp8 vcjal 0, vs1, .Llud_diagonal_skip2
     @vp8 vlxw vv4, vs4, vv1
-    vmul vs7, vs2, vs53
+    vmul vs7, vs2, vs52
     vadd vs6, vs58, vs7
 .Llud_diagonal_skip2:
     vpop vp4, vp8, vp8, vp8, 0xAA
@@ -85,7 +87,7 @@ lud_diagonal_wt_a0:
     vsll vs4, vs2, vs55
     vadd vs4, vs4, vs62
     @vp4 vlxw vv4, vs5, vv2
-    vmul vs6, vs4, vs53
+    vmul vs6, vs4, vs52
     vadd vs4, vs58, vs6
 .Llud_diagonal_skip6:
     vpop vp3, vp4, vp4, vp4, 0xAA
@@ -96,7 +98,7 @@ lud_diagonal_wt_a0:
     @!vp3 vcjal 0, vs1, .Llud_diagonal_skip8
     vsll vs7, vs6, vs60
     vadd vs7, vs58, vs7
-    vmul vs9, vs6, vs53
+    vmul vs9, vs6, vs52
     vadd vs8, vs4, vs9
     vlsw vs8, vs8
     @vp3 vlxw vv6, vs7, vv2
@@ -179,26 +181,26 @@ lud_perimeter_wt_r0_b0:
 lud_perimeter_wt_a0:
     @!vp2 vcjal 0, vs1, .Llud_perimeter_skip2
     vsllw vs3, vs63, vs57
-    vaddw vs2, vs2, vs3
-    @vp2 vaddw vv4, vs2, vv0
+    vaddw vs3, vs2, vs3
+    @vp2 vaddw vv4, vs3, vv0
     @vp2 vaddw vv5, vv4, vs56
 .Llud_perimeter_skip2:
     @!vp3 vcjal 0, vs1, .Llud_perimeter_skip3
-    vsllw vs2, vs63, vs57
-    vaddw vs3, vs58, vs56
-    vaddw vs3, vs3, vs2
-    vmulw vs3, vs3, vs60
-    vaddw vs3, vs3, vs58
-    vsll vs2, vs3, vs53
-    vsll vs4, vs60, vs53
+    vsllw vs3, vs63, vs57
+    vaddw vs4, vs58, vs56
+    vaddw vs4, vs4, vs3
+    vmulw vs4, vs4, vs60
+    vaddw vs4, vs4, vs58
+    vsll vs3, vs4, vs53
+    vsll vs5, vs60, vs53
     @vp3 vsll vv1, vv1, vs53
 .Llud_perimeter_skip3:
     vstop
     .globl lud_perimeter_wt_r3_b0
 lud_perimeter_wt_r3_b0:
-    @vp2 vadd vv2, vv5, vs5
-    @vp2 vsll vv2, vv2, vs53
-    @vp2 vlxw vv4, vs62, vv2
+    @vp2 vadd vv2, vv5, vs6
+    @vp2 vsll vv3, vv2, vs53
+    @vp2 vlxw vv4, vs62, vv3
     @vp2 vsw vv4, va2
     vstop
     .globl lud_perimeter_wt_a3
@@ -206,7 +208,7 @@ lud_perimeter_wt_a3:
     vstop
     .globl lud_perimeter_wt_r1_b0
 lud_perimeter_wt_r1_b0:
-    @vp3 vlxw vv4, vs5, vv1
+    @vp3 vlxw vv4, vs2, vv1
     @vp3 vsxw vv4, vs6, vv1
     vstop
     .globl lud_perimeter_wt_a1
@@ -219,7 +221,9 @@ lud_perimeter_wt_a1:
     @vp2 vsll vv1, vv0, vs53
     @!vp3 vcjal 0, vs1, .Llud_perimeter_skip4
     @vp3 vadd vv4, vv0, vs42
-    @vp3 vsll vv2, vv4, vs49
+    vsll vv2, vv4, vs40
+    vsrl vv2, vv2, vs40
+    @vp3 vsll vv2, vv2, vs49
 .Llud_perimeter_skip4:
     vpop vp4, vp2, vp2, vp2, 0xAA
     @vp2 vadd vs2, vs0, vs0
@@ -264,10 +268,10 @@ lud_perimeter_wt_a1:
     vadd vs2, vs2, vs55
 .Llud_perimeter_skip8:
     vpop vp7, vp6, vp2, vp2, 0x80
-    vpop vp9, vp6, vp2, vp2, 0x02
+    vpop vp8, vp6, vp2, vp2, 0x02
     vpop vp5, vp5, vp7, vp7, 0xEE
     vpop vp4, vp4, vp7, vp7, 0x02
-    @vp9 vcjal 1, vs1, .Llud_perimeter_loop5
+    @vp8 vcjal 1, vs1, .Llud_perimeter_loop5
     vpop vp2, vp3, vp3, vp3, 0xAA
     @vp3 vadd vs2, vs0, vs0
     vpclear vp4
@@ -277,16 +281,16 @@ lud_perimeter_wt_a1:
     vadd vv1, vs2, vs0
     vcmpeq vp3, vv1, vs0
     vpop vp6, vp2, vp3, vp3, 0x80
-    vpop vp9, vp2, vp3, vp3, 0x02
-    @!vp9 vcjal 0, vs1, .Llud_perimeter_skip10
-    @vp9 vlxw vv4, vs3, vv2
+    vpop vp8, vp2, vp3, vp3, 0x02
+    @!vp8 vcjal 0, vs1, .Llud_perimeter_skip10
+    @vp8 vlxw vv4, vs3, vv2
     vmul vs5, vs2, vs54
     vadd vs4, vs47, vs5
 .Llud_perimeter_skip10:
-    vpop vp3, vp9, vp9, vp9, 0xAA
-    @vp9 vadd vs5, vs0, vs0
-    @vp9 vaddw vv5, vv4, vs0
-    vpclear vp10
+    vpop vp3, vp8, vp8, vp8, 0xAA
+    @vp8 vadd vs5, vs0, vs0
+    @vp8 vaddw vv5, vv4, vs0
+    vpclear vp9
 .Llud_perimeter_loop11:
     @!vp3 vcjal 0, vs1, .Llud_perimeter_skip12
     vsll vs6, vs5, vs53
@@ -300,14 +304,14 @@ lud_perimeter_wt_a1:
     @vp3 vsxw vv5, vs3, vv2
     vadd vs5, vs5, vs55
     vadd vv1, vs5, vs0
-    vcmpeq vp9, vv1, vs2
+    vcmpeq vp8, vv1, vs2
 .Llud_perimeter_skip12:
-    vpop vp11, vp3, vp9, vp9, 0x80
-    vpop vp12, vp3, vp9, vp9, 0x02
-    vpop vp10, vp10, vp11, vp11, 0xEE
-    vpop vp3, vp3, vp11, vp11, 0x02
-    @vp12 vcjal 1, vs1, .Llud_perimeter_loop11
-    vpop vp3, vp10, vp10, vp10, 0xAA
+    vpop vp10, vp3, vp8, vp8, 0x80
+    vpop vp11, vp3, vp8, vp8, 0x02
+    vpop vp9, vp9, vp10, vp10, 0xEE
+    vpop vp3, vp3, vp10, vp10, 0x02
+    @vp11 vcjal 1, vs1, .Llud_perimeter_loop11
+    vpop vp3, vp9, vp9, vp9, 0xAA
     vpop vp3, vp3, vp6, vp6, 0xEE
     @!vp3 vcjal 0, vs1, .Llud_perimeter_skip13
     vmul vs4, vs2, vs41
@@ -320,14 +324,14 @@ lud_perimeter_wt_a1:
     vadd vv1, vs2, vs0
     vcmpeq vp6, vv1, vs61
 .Llud_perimeter_skip13:
-    vpop vp9, vp3, vp6, vp6, 0x80
-    vpop vp10, vp3, vp6, vp6, 0x02
-    vpop vp4, vp4, vp9, vp9, 0xEE
-    vpop vp2, vp2, vp9, vp9, 0x02
-    @vp10 vcjal 1, vs1, .Llud_perimeter_loop9
+    vpop vp8, vp3, vp6, vp6, 0x80
+    vpop vp9, vp3, vp6, vp6, 0x02
+    vpop vp4, vp4, vp8, vp8, 0xEE
+    vpop vp2, vp2, vp8, vp8, 0x02
+    @vp9 vcjal 1, vs1, .Llud_perimeter_loop9
     vpop vp2, vp7, vp7, vp7, 0xAA
     vpop vp2, vp2, vp5, vp5, 0xEE
-    vpop vp3, vp9, vp9, vp9, 0xAA
+    vpop vp3, vp8, vp8, vp8, 0xAA
     vpop vp3, vp3, vp4, vp4, 0xEE
     vpop vp4, vp3, vp3, vp3, 0xAA
     vpop vp4, vp4, vp2, vp2, 0xEE
@@ -361,9 +365,9 @@ lud_perimeter_wt_a1:
     .globl lud_perimeter_wt_r5_b0
 lud_perimeter_wt_r5_b0:
     @vp2 vadd vv2, vv5, vs6
-    @vp2 vsll vv2, vv2, vs53
+    @vp2 vsll vv3, vv2, vs53
     @vp2 vlw vv4, va3
-    @vp2 vsxw vv4, vs62, vv2
+    @vp2 vsxw vv4, vs62, vv3
     vstop
     .globl lud_perimeter_wt_a5
 lud_perimeter_wt_a5:
@@ -405,29 +409,31 @@ lud_internal_wt:
     vaddw vv6, vv6, vv3
     vaddw vv7, vv6, vv7
     vsll vv2, vv7, vs52
-    vlxw vv7, vs61, vv2
+    vlxw vv7, vs62, vv2
     vsllw vv8, vv1, vs56
     vaddw vv9, vv8, vv3
     vsll vv2, vv9, vs47
     vsrl vv2, vv2, vs47
     vsll vv4, vv2, vs52
-    vsxw vv7, vs62, vv4
+    vsxw vv7, vs60, vv4
     vaddw vv7, vs2, vv5
     vaddw vv7, vv7, vv1
     vmulw vv7, vv7, vs53
     vaddw vv5, vv7, vv3
     vaddw vv9, vv5, vs55
     vsll vv4, vv9, vs52
-    vlxw vv5, vs61, vv4
+    vlxw vv5, vs62, vv4
     vsll vv2, vv2, vs52
-    vsxw vv5, vs60, vv2
+    vsxw vv5, vs61, vv2
     vfence
     vsll vv3, vv3, vs52
     vaddw vv5, vs0, vs0
     vstop
     .globl lud_internal_wt_r0_b0
 lud_internal_wt_r0_b0:
-    vsll vv2, vv1, vs50
+    vsll vv2, vv1, vs46
+    vsrl vv2, vv2, vs46
+    vsll vv2, vv2, vs50
     vlxw vv8, vs3, vv2
     vlxw vv9, vs4, vv3
     vfmadd.s vv5, vv8, vv9, vv5
@@ -436,9 +442,9 @@ lud_internal_wt_r0_b0:
 lud_internal_wt_a0:
     vaddw vv6, vv6, vv7
     vsll vv1, vv6, vs52
-    vlxw vv6, vs61, vv1
+    vlxw vv6, vs62, vv1
     vfsub.s vv6, vv6, vv5
-    vsxw vv6, vs61, vv1
+    vsxw vv6, vs62, vv1
     vstop
 
 # ---- control threads (from llc) ----
@@ -476,139 +482,143 @@ lud_diagonal_ct:                        # @lud_diagonal_ct
 	#APP
 	vmcs vs59, a5
 	#NO_APP
-	li	a5, 32
 	#APP
 	vmcs vs58, a2
 	#NO_APP
+	li	a5, 32
+	li	a6, 36
 	#APP
 	vmcs vs57, a5
 	#NO_APP
-	li	a5, 36
-	li	a6, 3
 	#APP
-	vmcs vs56, a5
+	vmcs vs56, a6
+	#NO_APP
+	li	a5, 3
+	li	a6, 7
+	#APP
+	vmcs vs55, a5
 	#NO_APP
 	#APP
-	vmcs vs55, a6
+	vmcs vs54, a6
 	#NO_APP
-	li	a5, 7
+	li	a5, 35
 	li	a6, 4
 	#APP
-	vmcs vs54, a5
+	vmcs vs53, a5
 	#NO_APP
 	#APP
-	vmcs vs53, a6
+	vmcs vs52, a6
 	#NO_APP
 	beqz	a0, .LBB0_11
 # %bb.1:                                # %stripmine.preheader
 	addi	a5, a4, 1
-	mul	a7, a3, a5
+	mul	a6, a3, a5
 	addi	a5, a3, 1
-	sext.w	t0, a3
+	sext.w	a7, a3
 	addi	a3, a2, 32
-	mulw	t1, a4, a5
+	mulw	t0, a4, a5
 .Lpcrel_hi0:
 	auipc	a5, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi1:
-	auipc	a6, %pcrel_hi(hwacha_vl_short)
-	addw	a4, a4, a7
+	addw	a6, a4, a6
 .Lpcrel_hi2:
-	auipc	t2, %pcrel_hi(lud_diagonal_wt)
-	slli	t1, t1, 2
-	slli	a7, a4, 2
-	add	a4, a1, t1
+	auipc	t1, %pcrel_hi(lud_diagonal_wt)
+	slli	a4, a7, 2
+	slli	t0, t0, 2
+	slli	a7, a6, 2
+	add	a6, a1, t0
 	add	a1, a1, a7
-.Lpcrel_hi3:
-	auipc	t1, %pcrel_hi(lud_diagonal_wt_r0_b0)
-	slli	a7, t0, 2
-	addi	t0, t2, %pcrel_lo(.Lpcrel_hi2)
-	addi	t1, t1, %pcrel_lo(.Lpcrel_hi3)
+.Lpcrel_hi1:
+	auipc	a7, %pcrel_hi(hwacha_vl_short)
+	addi	t0, t1, %pcrel_lo(.Lpcrel_hi2)
 .LBB0_2:                                # %stripmine
                                         # =>This Loop Header: Depth=1
                                         #     Child Loop BB0_7 Depth 2
                                         #     Child Loop BB0_9 Depth 2
-	ld	t3, %pcrel_lo(.Lpcrel_hi0)(a5)
-	mv	t2, a0
-	beqz	t3, .LBB0_4
+	ld	t2, %pcrel_lo(.Lpcrel_hi0)(a5)
+	mv	t1, a0
+	beqz	t2, .LBB0_4
 # %bb.3:                                # %stripmine
                                         #   in Loop: Header=BB0_2 Depth=1
-	mv	t2, t3
+	mv	t1, t2
 .LBB0_4:                                # %stripmine
                                         #   in Loop: Header=BB0_2 Depth=1
-	mv	t3, a0
-	bltu	a0, t2, .LBB0_6
+	mv	t2, a0
+	bltu	a0, t1, .LBB0_6
 # %bb.5:                                # %stripmine
                                         #   in Loop: Header=BB0_2 Depth=1
-	mv	t3, t2
+	mv	t2, t1
 .LBB0_6:                                # %stripmine
                                         #   in Loop: Header=BB0_2 Depth=1
 	#APP
-	vsetvl t2, t3
+	vsetvl t1, t2
 	#NO_APP
-	ld	t4, %pcrel_lo(.Lpcrel_hi1)(a6)
-	sltu	t5, t2, t3
-	li	t3, 8
-	or	t4, t4, t5
-	sd	t4, %pcrel_lo(.Lpcrel_hi1)(a6)
+	ld	t3, %pcrel_lo(.Lpcrel_hi1)(a7)
+	sltu	t4, t1, t2
+	li	t2, 8
+	or	t3, t3, t4
+	sd	t3, %pcrel_lo(.Lpcrel_hi1)(a7)
 	#APP
 	vf 0(t0)
 	#NO_APP
-	mv	t4, a4
-	mv	t5, a2
+	mv	t3, a6
+	mv	t4, a2
 .LBB0_7:                                # %ct_
                                         #   Parent Loop BB0_2 Depth=1
                                         # =>  This Inner Loop Header: Depth=2
 	#APP
-	vmca va0, t4
+	vmca va0, t3
 	#NO_APP
+.Lpcrel_hi4:
+	auipc	t5, %pcrel_hi(lud_diagonal_wt_r0_b0)
 	#APP
-	vmca va1, t5
+	vmca va1, t4
 	#NO_APP
+	addi	t5, t5, %pcrel_lo(.Lpcrel_hi4)
+	addi	t2, t2, -1
 	#APP
-	vf 0(t1)
+	vf 0(t5)
 	#NO_APP
-	addi	t3, t3, -1
-	addi	t5, t5, 32
-	add	t4, t4, a7
-	bnez	t3, .LBB0_7
+	addi	t4, t4, 32
+	add	t3, t3, a4
+	bnez	t2, .LBB0_7
 # %bb.8:                                # %ct_after
                                         #   in Loop: Header=BB0_2 Depth=1
-.Lpcrel_hi4:
-	auipc	t3, %pcrel_hi(lud_diagonal_wt_a0)
-	addi	t4, t3, %pcrel_lo(.Lpcrel_hi4)
-	li	t3, 7
+.Lpcrel_hi3:
+	auipc	t2, %pcrel_hi(lud_diagonal_wt_a0)
+	addi	t3, t2, %pcrel_lo(.Lpcrel_hi3)
+	li	t2, 7
 	#APP
-	vf 0(t4)
+	vf 0(t3)
 	#NO_APP
-	mv	t4, a3
-	mv	t5, a1
+	mv	t3, a3
+	mv	t4, a1
 .LBB0_9:                                # %ct_2
                                         #   Parent Loop BB0_2 Depth=1
                                         # =>  This Inner Loop Header: Depth=2
 	#APP
-	vmca va2, t4
+	vmca va2, t3
 	#NO_APP
 .Lpcrel_hi6:
-	auipc	t6, %pcrel_hi(lud_diagonal_wt_r1_b0)
+	auipc	t5, %pcrel_hi(lud_diagonal_wt_r1_b0)
 	#APP
-	vmca va3, t5
+	vmca va3, t4
 	#NO_APP
-	addi	t6, t6, %pcrel_lo(.Lpcrel_hi6)
-	addi	t3, t3, -1
+	addi	t5, t5, %pcrel_lo(.Lpcrel_hi6)
+	addi	t2, t2, -1
 	#APP
-	vf 0(t6)
+	vf 0(t5)
 	#NO_APP
-	add	t5, t5, a7
-	addi	t4, t4, 32
-	bnez	t3, .LBB0_9
+	add	t4, t4, a4
+	addi	t3, t3, 32
+	bnez	t2, .LBB0_9
 # %bb.10:                               # %ct_after1
                                         #   in Loop: Header=BB0_2 Depth=1
 .Lpcrel_hi5:
-	auipc	t3, %pcrel_hi(lud_diagonal_wt_a1)
-	addi	t3, t3, %pcrel_lo(.Lpcrel_hi5)
-	sub	a0, a0, t2
+	auipc	t2, %pcrel_hi(lud_diagonal_wt_a1)
+	addi	t2, t2, %pcrel_lo(.Lpcrel_hi5)
+	sub	a0, a0, t1
 	#APP
-	vf 0(t3)
+	vf 0(t2)
 	#NO_APP
 	bnez	a0, .LBB0_2
 .LBB0_11:                               # %done
@@ -627,7 +637,7 @@ lud_perimeter_ct:                       # @lud_perimeter_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a7, 1048541
-	addi	a7, a7, -1033
+	addi	a7, a7, -9
 	srli	a7, a7, 1
 	not	a7, a7
 	#APP
@@ -704,16 +714,20 @@ lud_perimeter_ct:                       # @lud_perimeter_ct
 	#APP
 	vmcs vs44, a3
 	#NO_APP
+	li	t0, -8
 	#APP
 	vmcs vs43, t2
 	#NO_APP
-	li	t0, -8
-	li	t1, 36
 	#APP
 	vmcs vs42, t0
 	#NO_APP
+	li	t0, 36
+	li	t1, 35
 	#APP
-	vmcs vs41, t1
+	vmcs vs41, t0
+	#NO_APP
+	#APP
+	vmcs vs40, t1
 	#NO_APP
 	beqz	a0, .LBB1_20
 # %bb.1:                                # %stripmine.preheader
@@ -861,7 +875,7 @@ lud_perimeter_ct:                       # @lud_perimeter_ct
                                         #   Parent Loop BB1_2 Depth=1
                                         # =>  This Inner Loop Header: Depth=2
 	#APP
-	vmcs vs5, s2
+	vmcs vs6, s2
 	#NO_APP
 .Lpcrel_hi15:
 	auipc	s5, %pcrel_hi(lud_perimeter_wt_r3_b0)
@@ -891,7 +905,7 @@ lud_perimeter_ct:                       # @lud_perimeter_ct
                                         #   Parent Loop BB1_2 Depth=1
                                         # =>  This Inner Loop Header: Depth=2
 	#APP
-	vmcs vs5, s3
+	vmcs vs2, s3
 	#NO_APP
 .Lpcrel_hi17:
 	auipc	s5, %pcrel_hi(lud_perimeter_wt_r1_b0)
@@ -1014,13 +1028,13 @@ lud_internal_ct:                        # @lud_internal_ct
 	vsetcfg a6
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a1
 	#NO_APP
 	#APP
-	vmcs vs61, a1
+	vmcs vs61, a3
 	#NO_APP
 	#APP
-	vmcs vs60, a3
+	vmcs vs60, a2
 	#NO_APP
 .Lpcrel_hi22:
 	auipc	a1, %pcrel_hi(hwacha_ls0)
@@ -1071,12 +1085,16 @@ lud_internal_ct:                        # @lud_internal_ct
 	#APP
 	vmcs vs49, a4
 	#NO_APP
-	li	a4, 32
 	#APP
 	vmcs vs48, a1
 	#NO_APP
+	li	a4, 32
+	li	a5, 35
 	#APP
 	vmcs vs47, a4
+	#NO_APP
+	#APP
+	vmcs vs46, a5
 	#NO_APP
 	beqz	a0, .LBB2_9
 # %bb.1:                                # %stripmine.preheader

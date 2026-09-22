@@ -36,17 +36,20 @@ work is not in them (RTL numbers for the first five are in hwacha-compiler's NOT
 | particlefilter | `particle_kernel` (naive resampling, double) | 512 particles | PASS |
 | leukocyte | `GICOV_kernel` + `dilate_kernel` (detection stage) | 24 x 24 pixels, 7 circles x 150 points | PASS |
 | hybridsort | `histogram1024Kernel`, `bucketcount`, `bucketprefixoffset`, `bucketsort` (bucket stage, warp-tagged `__local` atomics) | 2048 floats, 1024 buckets | PASS |
-| srad | 6 kernels, `srad_kernel` first | 32 x 32 | FAIL (compiler, known-issues) |
-| backprop | `bpnn_layerforward_ocl` + `bpnn_adjust_weights_ocl` (16x16 groups) | 64 -> 16 units | FAIL (group > maxvl, known-issues) |
-| myocyte | `kernel_gpu_opencl` (ECC + 3x CaM, scalar per group) | 91 equations | FAIL (out of vs registers, known-issues) |
-| dwt2d | `cl_fdwt53Kernel` | 64 x 64 | no .s (out of vs registers, known-issues) |
-| heartwall | `kernel_gpu_opencl` | -- | no host (out of vs registers, known-issues) |
+| srad | `extract`, `prepare`, `reduce`, `srad`, `srad2`, `compress` | 32 x 32, 2 iterations | PASS |
+| backprop | `bpnn_layerforward_ocl` + `bpnn_adjust_weights_ocl` (16x16 groups, `-vregs 8`) | 64 -> 16 units | PASS |
+| myocyte | `kernel_gpu_opencl` (ECC + 3x CaM, scalar per group, callees inlined) | 91 equations | PASS |
+| dwt2d | `cl_fdwt53Kernel` (5/3 lifting, 32 x 8 windows, `-vregs 64`) | 64 x 64 | PASS |
+| heartwall | `kernel_gpu_opencl` (template matching, 64 lanes per point, `-vregs 32`) | 51 points, 3 frames of 560 x 480, tSize 5 / sSize 8 | PASS |
 
 Not attempted: hybridsort's `mergesort.cl` (float4 vector ops), leukocyte's `track_ellipse_kernel`
 (`atan()`, no hwacha-cc expansion), particlefilter's `particle_single.cl` (`image2d_t`) and
 `particle_double.cl` (`ceil(double)`), and the `image2d_t` variants of leukocyte's kernels.
 
-`known-issues/README.md` has the diagnosis of each failure. The compiler changes this directory
-needed (switch lowering, 2-D NDRanges, ceil / mul24 / abs / usub.sat, get_global_size, a loop-header
-skip jump, a SCEV zext hazard, constant-size memcpy expansion) are hwacha-compiler commit ea483c6;
-the earlier changes of `../torch-*` (5b1dec2 .. 76ad080) are needed too.
+All 21 cases pass. `known-issues/README.md` keeps the diagnosis of the five that first failed (srad,
+myocyte, dwt2d, heartwall, backprop) and what changed in hwacha-cc for them: register spilling
+(shared, predicate and vector files, `-vregs` cap per kernel in `Makefile`), callee inlining, a
+uniform pool, and three codegen fixes -- hwacha-compiler commit 15ffe64. The earlier compiler changes
+this directory needed (switch lowering, 2-D NDRanges, ceil / mul24 / abs / usub.sat,
+get_global_size, a loop-header skip jump, a SCEV zext hazard, constant-size memcpy expansion) are
+ea483c6; the changes of `../torch-*` (5b1dec2 .. 76ad080) are needed too.

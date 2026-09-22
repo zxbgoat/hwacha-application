@@ -12,55 +12,55 @@ kmeans_kernel_c_wt:
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lkmeans_kernel_c_skip0
-    vaddw vv2, vs0, vs0
-    vcmplt vp1, vv2, vs60
+    vaddw vv3, vs0, vs0
+    vcmplt vp1, vv3, vs60
 .Lkmeans_kernel_c_skip0:
     vpop vp4, vp2, vp1, vp1, 0x80
     vpop vp5, vp2, vp1, vp1, 0x02
     @!vp4 vcjal 0, vs1, .Lkmeans_kernel_c_skip1
-    vaddw vv2, vs0, vs0
-    vcmplt vp1, vv2, vs59
+    vaddw vv3, vs0, vs0
+    vcmplt vp1, vv3, vs59
     vsll vs2, vs59, vs54
     vsrl vs2, vs2, vs54
     vsll vs3, vs60, vs54
     vsrl vs3, vs3, vs54
 .Lkmeans_kernel_c_skip1:
-    @vp4 vaddw vv2, vs58, vs0
-    @vp4 vaddw vv3, vs0, vs0
+    @vp4 vaddw vv3, vs58, vs0
+    @vp4 vaddw vv4, vs0, vs0
     vstop
     .globl kmeans_kernel_c_wt_r0_b0
 kmeans_kernel_c_wt_r0_b0:
-    vaddw vv5, vs0, vs0
+    vaddw vv6, vs0, vs0
     vstop
     .globl kmeans_kernel_c_wt_r0_b1
 kmeans_kernel_c_wt_r0_b1:
-    vaddw vv4, vs0, vs0
+    vaddw vv5, vs0, vs0
     vstop
     .globl kmeans_kernel_c_wt_r0_b2
 kmeans_kernel_c_wt_r0_b2:
     @vp4 vadd vv1, vv0, vs4
-    @vp4 vsll vv1, vv1, vs55
-    @vp4 vlxw vv6, vs62, vv1
-    @vp4 vfsub.s vv6, vv6, vs5
-    @vp4 vfmadd.s vv4, vv6, vv6, vv4
+    @vp4 vsll vv2, vv1, vs55
+    @vp4 vlxw vv7, vs62, vv2
+    @vp4 vfsub.s vv7, vv7, vs5
+    @vp4 vfmadd.s vv5, vv7, vv7, vv5
     vstop
     .globl kmeans_kernel_c_wt_r0_b3
 kmeans_kernel_c_wt_r0_b3:
-    vaddw vv5, vv4, vs0
+    vaddw vv6, vv5, vs0
     vstop
     .globl kmeans_kernel_c_wt_r0_b4
 kmeans_kernel_c_wt_r0_b4:
-    vcmpflt.s vp2, vv5, vv2
-    @vp2 vaddw vv3, vs6, vs0
-    @vp2 vaddw vv2, vv5, vs0
+    vcmpflt.s vp2, vv6, vv3
+    @vp2 vaddw vv4, vs6, vs0
+    @vp2 vaddw vv3, vv6, vs0
     vstop
     .globl kmeans_kernel_c_wt_a0
 kmeans_kernel_c_wt_a0:
     vpop vp1, vp4, vp4, vp4, 0xAA
     vpop vp1, vp1, vp5, vp5, 0xEE
-    @vp5 vaddw vv2, vs0, vs0
-    @vp4 vaddw vv2, vv3, vs0
-    @vp1 vsw vv2, va0
+    @vp5 vaddw vv3, vs0, vs0
+    @vp4 vaddw vv3, vv4, vs0
+    @vp1 vsw vv3, va0
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp3, vp3, 0xEE
     vstop
@@ -73,25 +73,25 @@ kmeans_swap_wt:
     veidx vv0
     vadd vv0, vv0, vs63
     vcmpltu vp1, vv0, vs60
-    vaddw vv3, vs0, vs0
-    vcmplt vp2, vv3, vs59
+    vaddw vv4, vs0, vs0
+    vcmplt vp2, vv4, vs59
     vpop vp1, vp1, vp2, vp1, 136
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lkmeans_swap_skip0
-    @vp2 vmulw vv3, vs59, vv0
+    @vp2 vmulw vv4, vs59, vv0
     vsll vs2, vs59, vs56
     vsrl vs2, vs2, vs56
 .Lkmeans_swap_skip0:
     vstop
     .globl kmeans_swap_wt_r0_b0
 kmeans_swap_wt_r0_b0:
-    @vp2 vadd vv1, vv3, vs3
-    @vp2 vsll vv1, vv1, vs58
-    @vp2 vadd vv2, vv0, vs4
-    @vp2 vsll vv2, vv2, vs58
-    @vp2 vlxw vv4, vs61, vv1
-    @vp2 vsxw vv4, vs62, vv2
+    @vp2 vadd vv1, vv4, vs3
+    @vp2 vsll vv2, vv1, vs58
+    @vp2 vadd vv1, vv0, vs4
+    @vp2 vsll vv3, vv1, vs58
+    @vp2 vlxw vv5, vs62, vv2
+    @vp2 vsxw vv5, vs61, vv3
     vstop
     .globl kmeans_swap_wt_a0
 kmeans_swap_wt_a0:
@@ -109,7 +109,7 @@ kmeans_kernel_c_ct:                     # @kmeans_kernel_c_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a7, 1048534
-	addi	a7, a7, 2043
+	addi	a7, a7, 2041
 	srli	a7, a7, 1
 	not	a7, a7
 	#APP
@@ -317,18 +317,18 @@ kmeans_swap_ct:                         # @kmeans_swap_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a5, 1048559
-	addi	a5, a5, -7
+	addi	a5, a5, -9
 	srli	a5, a5, 1
 	not	a5, a5
 	#APP
 	vsetcfg a5
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a1
 	#NO_APP
 	sext.w	a3, a3
 	#APP
-	vmcs vs61, a1
+	vmcs vs61, a2
 	#NO_APP
 	#APP
 	vmcs vs60, a3

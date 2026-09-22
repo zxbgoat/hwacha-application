@@ -29,8 +29,6 @@ make gen-srad      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
+| srad | 496,854 | 5,035 | 99x |
 
-
-## 已知问题
-
-srad_kernel 的最终 store 用一个已被复用的寄存器做索引（hwacha-cc 寄存器分配问题），Spike 上 STORE ACCESS FAULT；见 `../known-issues/README.md`。
+结果：srad **PASS**。

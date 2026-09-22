@@ -23,6 +23,10 @@ CFLAGS  := -DPREALLOCATE=1 -mcmodel=medany -static -std=gnu99 -O2 -fno-common -f
 LDFLAGS := -static -nostdlib -nostartfiles -lm -lgcc -T $(COMMON)/test.ld
 # per-case defines the kernels take from their host (block sizes etc.)
 CLDEFS_hotspot  := -DBLOCK_SIZE=8
+HWCCFLAGS_dwt2d := -vregs 64   # WIN_SX = 32 lanes per group: 2048/32 vector registers keep a group in one stripmine
+HWCCFLAGS_backprop := -vregs 8   # 256 lanes per group: 2048/256 vector registers, the rest spill
+CLDEFS_heartwall := -DRD_WG_SIZE=64 -Iheartwall   # the kernel #includes main.h (params_common, NUMBER_THREADS)
+HWCCFLAGS_heartwall := -vregs 32   # 64 lanes per group (one point): 2048/64 vector registers
 CLDEFS_lud      := -DBLOCK_SIZE=8
 CLDEFS_cfd      :=
 CLDEFS_particlefilter :=
@@ -53,7 +57,7 @@ $(1)/$(1).riscv: $(1)/$(1)_main.c $(1)/$(1).s $(1)/common.h $(wildcard $(1)/$(1)
 $(1).spike: $(1)/$(1).riscv
 	$(SPIKE) $(1)/$(1).riscv
 gen-$(1): $(1)/$(1).cl
-	$(CLANG) $(CLFLAGS) $(CLDEFS_$(1)) $(1)/$(1).cl -o $(1)/$(1).ll && $(HWCC) $(1)/$(1).ll -o $(1)/$(1).s && rm -f $(1)/$(1).ll
+	$(CLANG) $(CLFLAGS) $(CLDEFS_$(1)) $(1)/$(1).cl -o $(1)/$(1).ll && $(HWCC) $(HWCCFLAGS_$(1)) $(1)/$(1).ll -o $(1)/$(1).s && rm -f $(1)/$(1).ll
 endef
 $(foreach c,$(ALLCASES),$(eval $(call CASE_RULE,$(c))))
 

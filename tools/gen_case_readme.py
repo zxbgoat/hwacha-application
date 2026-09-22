@@ -212,15 +212,15 @@ elif d == 'rodinia':
             'hybridsort': ('hybridsort（桶排序阶段）', 'histogram1024Kernel（warp-tag 的 __local 原子直方图）、bucketcount（每个元素的桶号与槽位）、bucketprefixoffset、bucketsort（散射）；pivot 与桶起点在 host 上算，如 bucketsort.c', '2048 个 float，1024 个桶；直方图 6144/96、count 与 sort 32-lane 组、prefix 1024/128', 'N=2048 DIVISIONS=1024'),
             'srad': ('srad', 'extract、prepare + reduce（均值 / 方差）、srad_kernel、srad2_kernel、compress，如 kernel_gpu_opencl_wrapper.c', '32x32 图像，2 次迭代；NUMBER_THREADS 64', 'NR=32 NC=32 NITER=2'),
             'backprop': ('backprop', 'bpnn_layerforward_ocl（16x16 work-group，乘积 + 组内树形归约得部分和）+ bpnn_adjust_weights_ocl（权重更新），如 backprop_ocl.cpp', '64 输入单元 -> 16 隐层单元', 'IN=64 HID=16'),
-            'myocyte': ('myocyte', 'kernel_gpu_opencl（group 0 / lane 0 跑 ECC 模型，group 1 / lane 0 跑三次 CaM 模型：一次 ODE 右端项求值）', '91 个方程，18 个参数', 'EQUATIONS=91 PARAMETERS=18')}
-    issues = {'srad': 'srad_kernel 的最终 store 用一个已被复用的寄存器做索引（hwacha-cc 寄存器分配问题），Spike 上 STORE ACCESS FAULT；见 `../known-issues/README.md`。',
-              'backprop': '16x16 的 work-group（256 个 work-item）超过 Hwacha 给这个内核的 maxvl（184），组被拆成两个 stripmine，组内 barrier 分隔的树形归约失效；见 `../known-issues/README.md`。',
-              'myocyte': 'kernel 只是分发器，两个约千行的被调函数不内联时 hwacha-cc 不生成其代码，强制内联后又超出 64 个 vs 寄存器；见 `../known-issues/README.md`。'}
+            'myocyte': ('myocyte', 'kernel_gpu_opencl（group 0 / lane 0 跑 ECC 模型，group 1 / lane 0 跑三次 CaM 模型：一次 ODE 右端项求值；两个被调函数标为 always_inline）', '91 个方程，18 个参数', 'EQUATIONS=91 PARAMETERS=18'),
+            'dwt2d': ('dwt2d', 'cl_fdwt53Kernel：一级正向 5/3 整数提升小波变换，每个 work-group 处理一个 32x8 的滑动窗口（先列后行，四个象限带输出）；hwacha-cc 以 `-vregs 64` 编译使 32 个 lane 的组落在一个 stripmine 内', '64x64 整数图像', 'SX=64 SY=64 WIN_SX=32 WIN_SY=8'),
+            'heartwall': ('heartwall', 'kernel_gpu_opencl：每个 work-group（64 个 lane）跟踪超声心动视频中的一个采样点，第 0 帧提取模板，之后每帧在搜索窗内做归一化互相关（累积和实现）并施加位移掩码；hwacha-cc 以 `-vregs 32` 编译', '51 个点（20 心内膜 + 31 心外膜），3 帧 560x480 合成纹理（每帧平移 1 行 1 列），tSize 5 / sSize 8', 'FRAMES=3 ROWS=560 COLS=480 T_SIZE=5 S_SIZE=8')}
+    issues = {}   # the five first-round failures are fixed (../known-issues/README.md keeps the diagnoses)
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
         app, kern, size, defs = info.get(case, (case, '', '', ''))
         line = R.get(case, '')
-        cyc = re.findall(r'([a-z_]+) (scalar|hwacha-cc): (\d+) cycles', line); verdicts = re.findall(r'([a-z_]+) (PASS|FAIL)', line)
+        cyc = re.findall(r'([a-z_0-9]+) (scalar|hwacha-cc): (\d+) cycles', line); verdicts = re.findall(r'([a-z_0-9]+) (PASS|FAIL)', line)
         entries = sorted(set(re.findall(r'^\s*([A-Za-z_0-9]+_ct):', open(os.path.join(D, case, f'{case}.s')).read(), re.M)))
         t = f'# {case}\n\n'
         t += f'Rodinia `{app}` 的 OpenCL 内核在 Hwacha 上运行：**{kern}**。\n\n'
@@ -228,8 +228,9 @@ elif d == 'rodinia':
         t += f'内核文件 `{case}.cl` 是 Rodinia 3.1 的原版' + (f'，唯一改动：{mod}' if mod else '，未做修改') + f'；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `{"`, `".join(entries)}`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。\n\n'
         t += f'问题规模：{size}（`{case}_main.c` 中 `{defs}`）。输入由固定种子的伪随机数生成；host 先在 Rocket 标量核上跑一个参考实现，再跑 Hwacha 内核，逐元素比对并打印两者的周期数。\n\n'
         extra = [(f'`{case}.cl`', 'Rodinia 原版 OpenCL 内核' + ('（lavaMD 的 NUMBER_THREADS 改为可由 -D 覆盖）' if case == 'lavamd' else '（两个 .cl 合并为一个文件）' if case in ('btree', 'hybridsort') else '（两个辅助函数加了 always_inline）' if case == 'myocyte' else '')), (f'`{case}_main.c`', '裸机 host：构造输入、标量参考、调用 Hwacha 内核、比对并打印 PASS/FAIL 与周期数'), ('`common.h`', '伪随机数、rdcycle、REPORT、NDRANGE1/2 启动宏、check_f、__errno 与陷阱桩')]
-        if os.path.exists(os.path.join(D, case, f'{case}_ref.c')): extra.append((f'`{case}_ref.c`', '标量参考：同一 .cl 以 C 编译（OpenCL 限定符定义为空）'))
-        if os.path.exists(os.path.join(D, case, 'main.h')): extra.append(('`main.h`', '内核 #include 的 Rodinia host 头文件的替身（fp、NUMBER_THREADS）'))
+        if os.path.exists(os.path.join(D, case, f'{case}_ref.c')): extra.append((f'`{case}_ref.c`', 'Rodinia OpenMP 版的 kernel.c + define.c（仅改函数名）作为标量参考' if case == 'heartwall' else '标量参考：同一 .cl 以 C 编译（OpenCL 限定符定义为空）'))
+        if os.path.exists(os.path.join(D, case, f'{case}_ref.h')): extra.append((f'`{case}_ref.h`', '参考实现的 public_struct / private_struct 与入口声明'))
+        if os.path.exists(os.path.join(D, case, 'main.h')): extra.append(('`main.h`', 'Rodinia OpenCL 版的 main.h（params_common、NUMBER_THREADS = RD_WG_SIZE）' if case == 'heartwall' else '内核 #include 的 Rodinia host 头文件的替身（fp、NUMBER_THREADS）'))
         t += '## 文件\n\n' + files_table(case, f'{case}.s', extra)
         t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 .cl 重新生成汇编（clang -> hwacha-cc）\n```\n\n'
         t += '## Spike 结果\n\n'

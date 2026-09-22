@@ -104,18 +104,18 @@ compute_step_factor_wt:
 compute_flux_wt:
     vpset vp0
     veidx vv0
-    vadd vv0, vv0, vs63
-    vcmplt vp1, vv0, vs61
+    vadd vv0, vv0, vs60
+    vcmplt vp1, vv0, vs58
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lcompute_flux_skip0
     @vp2 vlw vv2, va0
     @vp2 vlw vv3, va1
-    vsllw vs2, vs61, vs60
+    vsllw vs2, vs58, vs57
     @vp2 vlw vv4, va2
-    vmulw vs3, vs61, vs59
+    vmulw vs3, vs58, vs56
     @vp2 vlw vv5, va3
-    vsllw vs4, vs61, vs58
+    vsllw vs4, vs58, vs55
     @vp2 vlw vv6, va4
     @vp2 vfdiv.s vv7, vv3, vv2
     @vp2 vfdiv.s vv8, vv4, vv2
@@ -124,10 +124,10 @@ compute_flux_wt:
     @vp2 vfmadd.s vv10, vv7, vv7, vv10
     @vp2 vfmadd.s vv10, vv9, vv9, vv10
     @vp2 vfsqrt.s vv11, vv10
-    @vp2 vfmul.s vv12, vv2, vs57
+    @vp2 vfmul.s vv12, vv2, vs54
     @vp2 vfmadd.s vv12, vv12, vv10, vv6
-    @vp2 vfmul.s vv12, vv12, vs56
-    @vp2 vfmul.s vv10, vv12, vs55
+    @vp2 vfmul.s vv12, vv12, vs53
+    @vp2 vfmul.s vv10, vv12, vs52
     @vp2 vfdiv.s vv10, vv10, vv2
     @vp2 vfsqrt.s vv10, vv10
     @vp2 vfmadd.s vv13, vv7, vv3, vv12
@@ -140,17 +140,17 @@ compute_flux_wt:
     @vp2 vfmul.s vv7, vv7, vv19
     @vp2 vfmul.s vv8, vv8, vv19
     @vp2 vfmul.s vv9, vv9, vv19
-    vadd vs5, vs54, vs53
-    vadd vs6, vs54, vs52
-    vadd vs7, vs51, vs53
-    vadd vs8, vs50, vs53
-    vadd vs9, vs49, vs53
-    vadd vs10, vs48, vs53
-    vadd vs11, vs54, vs47
-    vadd vs12, vs51, vs52
-    vadd vs13, vs50, vs52
-    vadd vs14, vs49, vs52
-    vadd vs15, vs48, vs52
+    vadd vs5, vs51, vs50
+    vadd vs6, vs51, vs49
+    vadd vs7, vs48, vs50
+    vadd vs8, vs47, vs50
+    vadd vs9, vs46, vs50
+    vadd vs10, vs45, vs50
+    vadd vs11, vs51, vs44
+    vadd vs12, vs48, vs49
+    vadd vs13, vs47, vs49
+    vadd vs14, vs46, vs49
+    vadd vs15, vs45, vs49
     @vp2 vlw vv19, va5
     @vp2 vlw vv20, va6
     @vp2 vlw vv21, va7
@@ -159,37 +159,39 @@ compute_flux_wt:
     @vp2 vfmadd.s vv23, vv20, vv20, vv23
     @vp2 vfmadd.s vv23, vv22, vv22, vv23
     @vp2 vfsqrt.s vv23, vv23
-    vcmplt vp1, vs46, vv19
+    vcmplt vp1, vs43, vv19
 .Lcompute_flux_skip0:
     vpop vp4, vp2, vp1, vp1, 0x80
     vpop vp5, vp2, vp1, vp1, 0x02
     @!vp4 vcjal 0, vs1, .Lcompute_flux_skip1
-    vsll vv1, vv19, vs41
-    vsrl vv1, vv1, vs41
-    @vp4 vsll vv1, vv1, vs45
-    @vp4 vlxw vv24, vs62, vv1
-    @vp4 vaddw vv25, vv19, vs61
-    @vp4 vsll vv1, vv25, vs45
-    @vp4 vlxw vv25, vs62, vv1
+    vaddi vs16, vs38, 0
+    vlsd vs16, vs16
+    vsll vv1, vv19, vs16
+    vsrl vv1, vv1, vs16
+    @vp4 vsll vv1, vv1, vs42
+    @vp4 vlxw vv24, vs59, vv1
+    @vp4 vaddw vv25, vv19, vs58
+    @vp4 vsll vv1, vv25, vs42
+    @vp4 vlxw vv25, vs59, vv1
     @vp4 vaddw vv26, vv19, vs2
-    @vp4 vsll vv1, vv26, vs45
-    @vp4 vlxw vv26, vs62, vv1
+    @vp4 vsll vv1, vv26, vs42
+    @vp4 vlxw vv26, vs59, vv1
     @vp4 vaddw vv27, vv19, vs3
-    @vp4 vsll vv1, vv27, vs45
-    @vp4 vlxw vv27, vs62, vv1
+    @vp4 vsll vv1, vv27, vs42
+    @vp4 vlxw vv27, vs59, vv1
     @vp4 vaddw vv28, vv19, vs4
-    @vp4 vsll vv1, vv28, vs45
-    @vp4 vlxw vv28, vs62, vv1
+    @vp4 vsll vv1, vv28, vs42
+    @vp4 vlxw vv28, vs59, vv1
     @vp4 vfdiv.s vv29, vv25, vv24
     @vp4 vfdiv.s vv30, vv26, vv24
     @vp4 vfdiv.s vv31, vv27, vv24
     @vp4 vfmul.s vv32, vv30, vv30
     @vp4 vfmadd.s vv32, vv29, vv29, vv32
     @vp4 vfmadd.s vv32, vv31, vv31, vv32
-    @vp4 vfmul.s vv33, vv24, vs57
+    @vp4 vfmul.s vv33, vv24, vs54
     @vp4 vfmadd.s vv33, vv33, vv32, vv28
-    @vp4 vfmul.s vv33, vv33, vs56
-    @vp4 vfmul.s vv34, vv33, vs55
+    @vp4 vfmul.s vv33, vv33, vs53
+    @vp4 vfmul.s vv34, vv33, vs52
     @vp4 vfdiv.s vv34, vv34, vv24
     @vp4 vfsqrt.s vv34, vv34
     @vp4 vfmadd.s vv35, vv29, vv25, vv33
@@ -202,8 +204,8 @@ compute_flux_wt:
     @vp4 vfmul.s vv29, vv29, vv33
     @vp4 vfmul.s vv30, vv30, vv33
     @vp4 vfmul.s vv31, vv31, vv33
-    @vp4 vfmul.s vv23, vv23, vs44
-    @vp4 vfmul.s vv23, vv23, vs43
+    @vp4 vfmul.s vv23, vv23, vs41
+    @vp4 vfmul.s vv23, vv23, vs40
     @vp4 vfsqrt.s vv32, vv32
     @vp4 vfadd.s vv32, vv11, vv32
     @vp4 vfadd.s vv32, vv10, vv32
@@ -219,7 +221,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv33, vv23, vv33, vs0
     @vp4 vfsub.s vv34, vv5, vv27
     @vp4 vfmadd.s vv23, vv23, vv34, vs0
-    @vp4 vfmul.s vv34, vv20, vs43
+    @vp4 vfmul.s vv34, vv20, vs40
     @vp4 vfadd.s vv25, vv3, vv25
     @vp4 vfmadd.s vv25, vv34, vv25, vv24
     @vp4 vfadd.s vv29, vv7, vv29
@@ -230,7 +232,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv33, vv34, vv36, vv33
     @vp4 vfadd.s vv37, vv15, vv37
     @vp4 vfmadd.s vv34, vv34, vv37, vv23
-    @vp4 vfmul.s vv23, vv21, vs43
+    @vp4 vfmul.s vv23, vv21, vs40
     @vp4 vfadd.s vv26, vv4, vv26
     @vp4 vfmadd.s vv26, vv23, vv26, vv25
     @vp4 vfadd.s vv30, vv8, vv30
@@ -240,7 +242,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv38, vv23, vv38, vv33
     @vp4 vfadd.s vv39, vv17, vv39
     @vp4 vfmadd.s vv23, vv23, vv39, vv34
-    @vp4 vfmul.s vv24, vv22, vs43
+    @vp4 vfmul.s vv24, vv22, vs40
     @vp4 vfadd.s vv27, vv5, vv27
     @vp4 vfmadd.s vv27, vv24, vv27, vv26
     @vp4 vfadd.s vv31, vv9, vv31
@@ -250,10 +252,10 @@ compute_flux_wt:
     @vp4 vfadd.s vv40, vv18, vv40
     @vp4 vfmadd.s vv24, vv24, vv40, vv23
 .Lcompute_flux_skip1:
-    vcmplt vp1, vv19, vs46
+    vcmplt vp1, vv19, vs43
     vpop vp2, vp5, vp1, vp1, 0x80
     vpop vp6, vp5, vp1, vp1, 0x02
-    vcmpeq vp1, vv19, vs42
+    vcmpeq vp1, vv19, vs39
     vpop vp5, vp2, vp1, vp1, 0x80
     vpop vp7, vp2, vp1, vp1, 0x02
     @!vp6 vcjal 0, vs1, .Lcompute_flux_skip2
@@ -262,23 +264,23 @@ compute_flux_wt:
     @vp6 vfmadd.s vv25, vv22, vv12, vs0
 .Lcompute_flux_skip2:
     @!vp5 vcjal 0, vs1, .Lcompute_flux_skip3
-    @vp5 vfmul.s vv20, vv20, vs43
+    @vp5 vfmul.s vv20, vv20, vs40
     vlsw vs16, vs5
     @vp5 vfadd.s vv26, vv3, vs16
     @vp5 vfmadd.s vv26, vv20, vv26, vs0
-    vlsw vs16, vs51
+    vlsw vs16, vs48
     @vp5 vfadd.s vv28, vv7, vs16
     @vp5 vfmadd.s vv28, vv20, vv28, vs0
-    vlsw vs16, vs50
+    vlsw vs16, vs47
     @vp5 vfadd.s vv29, vv13, vs16
     @vp5 vfmadd.s vv29, vv20, vv29, vs0
-    vlsw vs16, vs49
+    vlsw vs16, vs46
     @vp5 vfadd.s vv30, vv14, vs16
     @vp5 vfmadd.s vv30, vv20, vv30, vs0
-    vlsw vs16, vs48
+    vlsw vs16, vs45
     @vp5 vfadd.s vv32, vv15, vs16
     @vp5 vfmadd.s vv20, vv20, vv32, vs0
-    @vp5 vfmul.s vv21, vv21, vs43
+    @vp5 vfmul.s vv21, vv21, vs40
     vlsw vs16, vs6
     @vp5 vfadd.s vv32, vv4, vs16
     @vp5 vfmadd.s vv32, vv21, vv32, vv26
@@ -294,7 +296,7 @@ compute_flux_wt:
     vlsw vs16, vs10
     @vp5 vfadd.s vv30, vv17, vs16
     @vp5 vfmadd.s vv21, vv21, vv30, vv20
-    @vp5 vfmul.s vv22, vv22, vs43
+    @vp5 vfmul.s vv22, vv22, vs40
     vlsw vs16, vs11
     @vp5 vfadd.s vv20, vv5, vs16
     @vp5 vfmadd.s vv20, vv22, vv20, vv32
@@ -344,37 +346,39 @@ compute_flux_wt:
     @vp1 vfmadd.s vv24, vv20, vv20, vv24
     @vp1 vfmadd.s vv24, vv23, vv23, vv24
     @vp1 vfsqrt.s vv24, vv24
-    vcmplt vp2, vs46, vv19
+    vcmplt vp2, vs43, vv19
 .Lcompute_flux_skip4:
     vpop vp4, vp1, vp2, vp2, 0x80
     vpop vp5, vp1, vp2, vp2, 0x02
     @!vp4 vcjal 0, vs1, .Lcompute_flux_skip5
-    vsll vv1, vv19, vs41
-    vsrl vv1, vv1, vs41
-    @vp4 vsll vv1, vv1, vs45
-    @vp4 vlxw vv25, vs62, vv1
-    @vp4 vaddw vv26, vv19, vs61
-    @vp4 vsll vv1, vv26, vs45
-    @vp4 vlxw vv26, vs62, vv1
+    vaddi vs16, vs38, 0
+    vlsd vs16, vs16
+    vsll vv1, vv19, vs16
+    vsrl vv1, vv1, vs16
+    @vp4 vsll vv1, vv1, vs42
+    @vp4 vlxw vv25, vs59, vv1
+    @vp4 vaddw vv26, vv19, vs58
+    @vp4 vsll vv1, vv26, vs42
+    @vp4 vlxw vv26, vs59, vv1
     @vp4 vaddw vv27, vv19, vs2
-    @vp4 vsll vv1, vv27, vs45
-    @vp4 vlxw vv27, vs62, vv1
+    @vp4 vsll vv1, vv27, vs42
+    @vp4 vlxw vv27, vs59, vv1
     @vp4 vaddw vv28, vv19, vs3
-    @vp4 vsll vv1, vv28, vs45
-    @vp4 vlxw vv28, vs62, vv1
+    @vp4 vsll vv1, vv28, vs42
+    @vp4 vlxw vv28, vs59, vv1
     @vp4 vaddw vv30, vv19, vs4
-    @vp4 vsll vv1, vv30, vs45
-    @vp4 vlxw vv30, vs62, vv1
+    @vp4 vsll vv1, vv30, vs42
+    @vp4 vlxw vv30, vs59, vv1
     @vp4 vfdiv.s vv31, vv26, vv25
     @vp4 vfdiv.s vv35, vv27, vv25
     @vp4 vfdiv.s vv36, vv28, vv25
     @vp4 vfmul.s vv37, vv35, vv35
     @vp4 vfmadd.s vv37, vv31, vv31, vv37
     @vp4 vfmadd.s vv37, vv36, vv36, vv37
-    @vp4 vfmul.s vv38, vv25, vs57
+    @vp4 vfmul.s vv38, vv25, vs54
     @vp4 vfmadd.s vv38, vv38, vv37, vv30
-    @vp4 vfmul.s vv38, vv38, vs56
-    @vp4 vfmul.s vv39, vv38, vs55
+    @vp4 vfmul.s vv38, vv38, vs53
+    @vp4 vfmul.s vv39, vv38, vs52
     @vp4 vfdiv.s vv39, vv39, vv25
     @vp4 vfsqrt.s vv39, vv39
     @vp4 vfmadd.s vv40, vv31, vv26, vv38
@@ -387,8 +391,8 @@ compute_flux_wt:
     @vp4 vfmul.s vv31, vv31, vv38
     @vp4 vfmul.s vv35, vv35, vv38
     @vp4 vfmul.s vv36, vv36, vv38
-    @vp4 vfmul.s vv24, vv24, vs44
-    @vp4 vfmul.s vv24, vv24, vs43
+    @vp4 vfmul.s vv24, vv24, vs41
+    @vp4 vfmul.s vv24, vv24, vs40
     @vp4 vfsqrt.s vv37, vv37
     @vp4 vfadd.s vv37, vv11, vv37
     @vp4 vfadd.s vv37, vv10, vv37
@@ -404,7 +408,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv38, vv24, vv38, vv32
     @vp4 vfsub.s vv39, vv5, vv28
     @vp4 vfmadd.s vv24, vv24, vv39, vv33
-    @vp4 vfmul.s vv39, vv20, vs43
+    @vp4 vfmul.s vv39, vv20, vs40
     @vp4 vfadd.s vv26, vv3, vv26
     @vp4 vfmadd.s vv26, vv39, vv26, vv25
     @vp4 vfadd.s vv31, vv7, vv31
@@ -415,7 +419,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv38, vv39, vv41, vv38
     @vp4 vfadd.s vv42, vv15, vv42
     @vp4 vfmadd.s vv39, vv39, vv42, vv24
-    @vp4 vfmul.s vv24, vv22, vs43
+    @vp4 vfmul.s vv24, vv22, vs40
     @vp4 vfadd.s vv27, vv4, vv27
     @vp4 vfmadd.s vv27, vv24, vv27, vv26
     @vp4 vfadd.s vv35, vv8, vv35
@@ -425,7 +429,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv43, vv24, vv43, vv38
     @vp4 vfadd.s vv44, vv17, vv44
     @vp4 vfmadd.s vv24, vv24, vv44, vv39
-    @vp4 vfmul.s vv25, vv23, vs43
+    @vp4 vfmul.s vv25, vv23, vs40
     @vp4 vfadd.s vv28, vv5, vv28
     @vp4 vfmadd.s vv28, vv25, vv28, vv27
     @vp4 vfadd.s vv36, vv9, vv36
@@ -435,10 +439,10 @@ compute_flux_wt:
     @vp4 vfadd.s vv45, vv18, vv45
     @vp4 vfmadd.s vv25, vv25, vv45, vv24
 .Lcompute_flux_skip5:
-    vcmplt vp1, vv19, vs46
+    vcmplt vp1, vv19, vs43
     vpop vp2, vp5, vp1, vp1, 0x80
     vpop vp6, vp5, vp1, vp1, 0x02
-    vcmpeq vp1, vv19, vs42
+    vcmpeq vp1, vv19, vs39
     vpop vp5, vp2, vp1, vp1, 0x80
     vpop vp7, vp2, vp1, vp1, 0x02
     @!vp6 vcjal 0, vs1, .Lcompute_flux_skip6
@@ -447,23 +451,23 @@ compute_flux_wt:
     @vp6 vfmadd.s vv26, vv23, vv12, vv33
 .Lcompute_flux_skip6:
     @!vp5 vcjal 0, vs1, .Lcompute_flux_skip7
-    @vp5 vfmul.s vv20, vv20, vs43
+    @vp5 vfmul.s vv20, vv20, vs40
     vlsw vs16, vs5
     @vp5 vfadd.s vv27, vv3, vs16
     @vp5 vfmadd.s vv27, vv20, vv27, vv34
-    vlsw vs16, vs51
+    vlsw vs16, vs48
     @vp5 vfadd.s vv30, vv7, vs16
     @vp5 vfmadd.s vv30, vv20, vv30, vv21
-    vlsw vs16, vs50
+    vlsw vs16, vs47
     @vp5 vfadd.s vv31, vv13, vs16
     @vp5 vfmadd.s vv31, vv20, vv31, vv29
-    vlsw vs16, vs49
+    vlsw vs16, vs46
     @vp5 vfadd.s vv35, vv14, vs16
     @vp5 vfmadd.s vv35, vv20, vv35, vv32
-    vlsw vs16, vs48
+    vlsw vs16, vs45
     @vp5 vfadd.s vv37, vv15, vs16
     @vp5 vfmadd.s vv20, vv20, vv37, vv33
-    @vp5 vfmul.s vv22, vv22, vs43
+    @vp5 vfmul.s vv22, vv22, vs40
     vlsw vs16, vs6
     @vp5 vfadd.s vv37, vv4, vs16
     @vp5 vfmadd.s vv37, vv22, vv37, vv27
@@ -479,7 +483,7 @@ compute_flux_wt:
     vlsw vs16, vs10
     @vp5 vfadd.s vv35, vv17, vs16
     @vp5 vfmadd.s vv22, vv22, vv35, vv20
-    @vp5 vfmul.s vv23, vv23, vs43
+    @vp5 vfmul.s vv23, vv23, vs40
     vlsw vs16, vs11
     @vp5 vfadd.s vv20, vv5, vs16
     @vp5 vfmadd.s vv20, vv23, vv20, vv37
@@ -529,37 +533,39 @@ compute_flux_wt:
     @vp1 vfmadd.s vv24, vv20, vv20, vv24
     @vp1 vfmadd.s vv24, vv23, vv23, vv24
     @vp1 vfsqrt.s vv24, vv24
-    vcmplt vp2, vs46, vv19
+    vcmplt vp2, vs43, vv19
 .Lcompute_flux_skip8:
     vpop vp4, vp1, vp2, vp2, 0x80
     vpop vp5, vp1, vp2, vp2, 0x02
     @!vp4 vcjal 0, vs1, .Lcompute_flux_skip9
-    vsll vv1, vv19, vs41
-    vsrl vv1, vv1, vs41
-    @vp4 vsll vv1, vv1, vs45
-    @vp4 vlxw vv25, vs62, vv1
-    @vp4 vaddw vv26, vv19, vs61
-    @vp4 vsll vv1, vv26, vs45
-    @vp4 vlxw vv26, vs62, vv1
+    vaddi vs16, vs38, 0
+    vlsd vs16, vs16
+    vsll vv1, vv19, vs16
+    vsrl vv1, vv1, vs16
+    @vp4 vsll vv1, vv1, vs42
+    @vp4 vlxw vv25, vs59, vv1
+    @vp4 vaddw vv26, vv19, vs58
+    @vp4 vsll vv1, vv26, vs42
+    @vp4 vlxw vv26, vs59, vv1
     @vp4 vaddw vv27, vv19, vs2
-    @vp4 vsll vv1, vv27, vs45
-    @vp4 vlxw vv27, vs62, vv1
+    @vp4 vsll vv1, vv27, vs42
+    @vp4 vlxw vv27, vs59, vv1
     @vp4 vaddw vv28, vv19, vs3
-    @vp4 vsll vv1, vv28, vs45
-    @vp4 vlxw vv28, vs62, vv1
+    @vp4 vsll vv1, vv28, vs42
+    @vp4 vlxw vv28, vs59, vv1
     @vp4 vaddw vv29, vv19, vs4
-    @vp4 vsll vv1, vv29, vs45
-    @vp4 vlxw vv29, vs62, vv1
+    @vp4 vsll vv1, vv29, vs42
+    @vp4 vlxw vv29, vs59, vv1
     @vp4 vfdiv.s vv30, vv26, vv25
     @vp4 vfdiv.s vv32, vv27, vv25
     @vp4 vfdiv.s vv33, vv28, vv25
     @vp4 vfmul.s vv34, vv32, vv32
     @vp4 vfmadd.s vv34, vv30, vv30, vv34
     @vp4 vfmadd.s vv34, vv33, vv33, vv34
-    @vp4 vfmul.s vv35, vv25, vs57
+    @vp4 vfmul.s vv35, vv25, vs54
     @vp4 vfmadd.s vv35, vv35, vv34, vv29
-    @vp4 vfmul.s vv35, vv35, vs56
-    @vp4 vfmul.s vv36, vv35, vs55
+    @vp4 vfmul.s vv35, vv35, vs53
+    @vp4 vfmul.s vv36, vv35, vs52
     @vp4 vfdiv.s vv36, vv36, vv25
     @vp4 vfsqrt.s vv36, vv36
     @vp4 vfmadd.s vv40, vv30, vv26, vv35
@@ -572,8 +578,8 @@ compute_flux_wt:
     @vp4 vfmul.s vv30, vv30, vv35
     @vp4 vfmul.s vv32, vv32, vv35
     @vp4 vfmul.s vv33, vv33, vv35
-    @vp4 vfmul.s vv24, vv24, vs44
-    @vp4 vfmul.s vv24, vv24, vs43
+    @vp4 vfmul.s vv24, vv24, vs41
+    @vp4 vfmul.s vv24, vv24, vs40
     @vp4 vfsqrt.s vv34, vv34
     @vp4 vfadd.s vv34, vv11, vv34
     @vp4 vfadd.s vv34, vv10, vv34
@@ -589,7 +595,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv35, vv24, vv35, vv37
     @vp4 vfsub.s vv36, vv5, vv28
     @vp4 vfmadd.s vv24, vv24, vv36, vv38
-    @vp4 vfmul.s vv36, vv20, vs43
+    @vp4 vfmul.s vv36, vv20, vs40
     @vp4 vfadd.s vv26, vv3, vv26
     @vp4 vfmadd.s vv26, vv36, vv26, vv25
     @vp4 vfadd.s vv30, vv7, vv30
@@ -600,7 +606,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv35, vv36, vv41, vv35
     @vp4 vfadd.s vv42, vv15, vv42
     @vp4 vfmadd.s vv36, vv36, vv42, vv24
-    @vp4 vfmul.s vv24, vv21, vs43
+    @vp4 vfmul.s vv24, vv21, vs40
     @vp4 vfadd.s vv27, vv4, vv27
     @vp4 vfmadd.s vv27, vv24, vv27, vv26
     @vp4 vfadd.s vv32, vv8, vv32
@@ -610,7 +616,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv43, vv24, vv43, vv35
     @vp4 vfadd.s vv44, vv17, vv44
     @vp4 vfmadd.s vv24, vv24, vv44, vv36
-    @vp4 vfmul.s vv25, vv23, vs43
+    @vp4 vfmul.s vv25, vv23, vs40
     @vp4 vfadd.s vv28, vv5, vv28
     @vp4 vfmadd.s vv28, vv25, vv28, vv27
     @vp4 vfadd.s vv33, vv9, vv33
@@ -620,10 +626,10 @@ compute_flux_wt:
     @vp4 vfadd.s vv45, vv18, vv45
     @vp4 vfmadd.s vv25, vv25, vv45, vv24
 .Lcompute_flux_skip9:
-    vcmplt vp1, vv19, vs46
+    vcmplt vp1, vv19, vs43
     vpop vp2, vp5, vp1, vp1, 0x80
     vpop vp6, vp5, vp1, vp1, 0x02
-    vcmpeq vp1, vv19, vs42
+    vcmpeq vp1, vv19, vs39
     vpop vp5, vp2, vp1, vp1, 0x80
     vpop vp7, vp2, vp1, vp1, 0x02
     @!vp6 vcjal 0, vs1, .Lcompute_flux_skip10
@@ -632,23 +638,23 @@ compute_flux_wt:
     @vp6 vfmadd.s vv26, vv23, vv12, vv38
 .Lcompute_flux_skip10:
     @!vp5 vcjal 0, vs1, .Lcompute_flux_skip11
-    @vp5 vfmul.s vv20, vv20, vs43
+    @vp5 vfmul.s vv20, vv20, vs40
     vlsw vs16, vs5
     @vp5 vfadd.s vv27, vv3, vs16
     @vp5 vfmadd.s vv27, vv20, vv27, vv39
-    vlsw vs16, vs51
+    vlsw vs16, vs48
     @vp5 vfadd.s vv29, vv7, vs16
     @vp5 vfmadd.s vv29, vv20, vv29, vv22
-    vlsw vs16, vs50
+    vlsw vs16, vs47
     @vp5 vfadd.s vv30, vv13, vs16
     @vp5 vfmadd.s vv30, vv20, vv30, vv31
-    vlsw vs16, vs49
+    vlsw vs16, vs46
     @vp5 vfadd.s vv32, vv14, vs16
     @vp5 vfmadd.s vv32, vv20, vv32, vv37
-    vlsw vs16, vs48
+    vlsw vs16, vs45
     @vp5 vfadd.s vv34, vv15, vs16
     @vp5 vfmadd.s vv20, vv20, vv34, vv38
-    @vp5 vfmul.s vv21, vv21, vs43
+    @vp5 vfmul.s vv21, vv21, vs40
     vlsw vs16, vs6
     @vp5 vfadd.s vv34, vv4, vs16
     @vp5 vfmadd.s vv34, vv21, vv34, vv27
@@ -664,7 +670,7 @@ compute_flux_wt:
     vlsw vs16, vs10
     @vp5 vfadd.s vv32, vv17, vs16
     @vp5 vfmadd.s vv21, vv21, vv32, vv20
-    @vp5 vfmul.s vv23, vv23, vs43
+    @vp5 vfmul.s vv23, vv23, vs40
     vlsw vs16, vs11
     @vp5 vfadd.s vv20, vv5, vs16
     @vp5 vfmadd.s vv20, vv23, vv20, vv34
@@ -714,37 +720,39 @@ compute_flux_wt:
     @vp1 vfmadd.s vv24, vv20, vv20, vv24
     @vp1 vfmadd.s vv24, vv23, vv23, vv24
     @vp1 vfsqrt.s vv24, vv24
-    vcmplt vp2, vs46, vv19
+    vcmplt vp2, vs43, vv19
 .Lcompute_flux_skip12:
     vpop vp4, vp1, vp2, vp2, 0x80
     vpop vp5, vp1, vp2, vp2, 0x02
     @!vp4 vcjal 0, vs1, .Lcompute_flux_skip13
-    vsll vv1, vv19, vs41
-    vsrl vv1, vv1, vs41
-    @vp4 vsll vv1, vv1, vs45
-    @vp4 vlxw vv25, vs62, vv1
-    @vp4 vaddw vv26, vv19, vs61
-    @vp4 vsll vv1, vv26, vs45
-    @vp4 vlxw vv26, vs62, vv1
+    vaddi vs16, vs38, 0
+    vlsd vs16, vs16
+    vsll vv1, vv19, vs16
+    vsrl vv1, vv1, vs16
+    @vp4 vsll vv1, vv1, vs42
+    @vp4 vlxw vv25, vs59, vv1
+    @vp4 vaddw vv26, vv19, vs58
+    @vp4 vsll vv1, vv26, vs42
+    @vp4 vlxw vv26, vs59, vv1
     @vp4 vaddw vv27, vv19, vs2
-    @vp4 vsll vv1, vv27, vs45
-    @vp4 vlxw vv27, vs62, vv1
+    @vp4 vsll vv1, vv27, vs42
+    @vp4 vlxw vv27, vs59, vv1
     @vp4 vaddw vv28, vv19, vs3
-    @vp4 vsll vv1, vv28, vs45
-    @vp4 vlxw vv28, vs62, vv1
+    @vp4 vsll vv1, vv28, vs42
+    @vp4 vlxw vv28, vs59, vv1
     @vp4 vaddw vv29, vv19, vs4
-    @vp4 vsll vv1, vv29, vs45
-    @vp4 vlxw vv29, vs62, vv1
+    @vp4 vsll vv1, vv29, vs42
+    @vp4 vlxw vv29, vs59, vv1
     @vp4 vfdiv.s vv31, vv26, vv25
     @vp4 vfdiv.s vv32, vv27, vv25
     @vp4 vfdiv.s vv33, vv28, vv25
     @vp4 vfmul.s vv37, vv32, vv32
     @vp4 vfmadd.s vv37, vv31, vv31, vv37
     @vp4 vfmadd.s vv37, vv33, vv33, vv37
-    @vp4 vfmul.s vv38, vv25, vs57
+    @vp4 vfmul.s vv38, vv25, vs54
     @vp4 vfmadd.s vv38, vv38, vv37, vv29
-    @vp4 vfmul.s vv38, vv38, vs56
-    @vp4 vfmul.s vv39, vv38, vs55
+    @vp4 vfmul.s vv38, vv38, vs53
+    @vp4 vfmul.s vv39, vv38, vs52
     @vp4 vfdiv.s vv39, vv39, vv25
     @vp4 vfsqrt.s vv39, vv39
     @vp4 vfmadd.s vv40, vv31, vv26, vv38
@@ -757,8 +765,8 @@ compute_flux_wt:
     @vp4 vfmul.s vv31, vv31, vv38
     @vp4 vfmul.s vv32, vv32, vv38
     @vp4 vfmul.s vv33, vv33, vv38
-    @vp4 vfmul.s vv24, vv24, vs44
-    @vp4 vfmul.s vv24, vv24, vs43
+    @vp4 vfmul.s vv24, vv24, vs41
+    @vp4 vfmul.s vv24, vv24, vs40
     @vp4 vfsqrt.s vv37, vv37
     @vp4 vfadd.s vv11, vv11, vv37
     @vp4 vfadd.s vv10, vv10, vv11
@@ -774,7 +782,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv11, vv24, vv2, vv34
     @vp4 vfsub.s vv2, vv5, vv28
     @vp4 vfmadd.s vv24, vv24, vv2, vv35
-    @vp4 vfmul.s vv2, vv20, vs43
+    @vp4 vfmul.s vv2, vv20, vs40
     @vp4 vfadd.s vv26, vv3, vv26
     @vp4 vfmadd.s vv26, vv2, vv26, vv25
     @vp4 vfadd.s vv31, vv7, vv31
@@ -785,7 +793,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv11, vv2, vv41, vv11
     @vp4 vfadd.s vv42, vv15, vv42
     @vp4 vfmadd.s vv24, vv2, vv42, vv24
-    @vp4 vfmul.s vv2, vv22, vs43
+    @vp4 vfmul.s vv2, vv22, vs40
     @vp4 vfadd.s vv27, vv4, vv27
     @vp4 vfmadd.s vv27, vv2, vv27, vv26
     @vp4 vfadd.s vv32, vv8, vv32
@@ -795,7 +803,7 @@ compute_flux_wt:
     @vp4 vfmadd.s vv43, vv2, vv43, vv11
     @vp4 vfadd.s vv44, vv17, vv44
     @vp4 vfmadd.s vv24, vv2, vv44, vv24
-    @vp4 vfmul.s vv2, vv23, vs43
+    @vp4 vfmul.s vv2, vv23, vs40
     @vp4 vfadd.s vv28, vv5, vv28
     @vp4 vfmadd.s vv28, vv2, vv28, vv27
     @vp4 vfadd.s vv33, vv9, vv33
@@ -805,10 +813,10 @@ compute_flux_wt:
     @vp4 vfadd.s vv45, vv18, vv45
     @vp4 vfmadd.s vv45, vv2, vv45, vv24
 .Lcompute_flux_skip13:
-    vcmplt vp1, vv19, vs46
+    vcmplt vp1, vv19, vs43
     vpop vp2, vp5, vp1, vp1, 0x80
     vpop vp6, vp5, vp1, vp1, 0x02
-    vcmpeq vp1, vv19, vs42
+    vcmpeq vp1, vv19, vs39
     vpop vp5, vp2, vp1, vp1, 0x80
     vpop vp7, vp2, vp1, vp1, 0x02
     @!vp6 vcjal 0, vs1, .Lcompute_flux_skip14
@@ -817,23 +825,23 @@ compute_flux_wt:
     @vp6 vfmadd.s vv12, vv23, vv12, vv35
 .Lcompute_flux_skip14:
     @!vp5 vcjal 0, vs1, .Lcompute_flux_skip15
-    @vp5 vfmul.s vv20, vv20, vs43
+    @vp5 vfmul.s vv20, vv20, vs40
     vlsw vs5, vs5
     @vp5 vfadd.s vv3, vv3, vs5
     @vp5 vfmadd.s vv3, vv20, vv3, vv36
-    vlsw vs2, vs51
+    vlsw vs2, vs48
     @vp5 vfadd.s vv7, vv7, vs2
     @vp5 vfmadd.s vv7, vv20, vv7, vv21
-    vlsw vs2, vs50
+    vlsw vs2, vs47
     @vp5 vfadd.s vv13, vv13, vs2
     @vp5 vfmadd.s vv13, vv20, vv13, vv30
-    vlsw vs2, vs49
+    vlsw vs2, vs46
     @vp5 vfadd.s vv10, vv14, vs2
     @vp5 vfmadd.s vv10, vv20, vv10, vv34
-    vlsw vs2, vs48
+    vlsw vs2, vs45
     @vp5 vfadd.s vv11, vv15, vs2
     @vp5 vfmadd.s vv20, vv20, vv11, vv35
-    @vp5 vfmul.s vv22, vv22, vs43
+    @vp5 vfmul.s vv22, vv22, vs40
     vlsw vs6, vs6
     @vp5 vfadd.s vv4, vv4, vs6
     @vp5 vfmadd.s vv4, vv22, vv4, vv3
@@ -849,7 +857,7 @@ compute_flux_wt:
     vlsw vs10, vs10
     @vp5 vfadd.s vv3, vv17, vs10
     @vp5 vfmadd.s vv22, vv22, vv3, vv20
-    @vp5 vfmul.s vv23, vv23, vs43
+    @vp5 vfmul.s vv23, vv23, vs40
     vlsw vs11, vs11
     @vp5 vfadd.s vv5, vv5, vs11
     @vp5 vfmadd.s vv5, vv23, vv5, vv4
@@ -1281,168 +1289,175 @@ compute_flux_ct:                        # @compute_flux_ct
 	.cfi_offset s9, -88
 	.cfi_offset s10, -96
 	.cfi_offset s11, -104
-	sd	a5, 56(sp)                      # 8-byte Folded Spill
-	mv	t4, a2
-	sd	a1, 48(sp)                      # 8-byte Folded Spill
+	sd	a5, 48(sp)                      # 8-byte Folded Spill
+	mv	a5, a2
+	sd	a1, 40(sp)                      # 8-byte Folded Spill
 	lui	a1, 1048222
-	lw	s1, 192(sp)
+	ld	a2, 184(sp)
 	addi	a1, a1, -5
-	srli	a2, a1, 1
-	ld	a1, 184(sp)
-	not	a2, a2
+	lw	s1, 192(sp)
+	srli	a1, a1, 1
+	not	a1, a1
+.Lpcrel_hi9:
+	auipc	t0, %pcrel_hi(.Lcompute_flux_cpool)
 	#APP
-	vsetcfg a2
+	vsetcfg a1
 	#NO_APP
-	sd	a3, 40(sp)                      # 8-byte Folded Spill
+	addi	a1, t0, %pcrel_lo(.Lpcrel_hi9)
 	#APP
-	vmcs vs62, a3
+	vmcs vs38, a1
+	#NO_APP
+.Lpcrel_hi10:
+	auipc	a1, %pcrel_hi(.Lcompute_flux_spill)
+	addi	a1, a1, %pcrel_lo(.Lpcrel_hi10)
+	li	t0, 1
+	#APP
+	vmcs vs63, a1
 	#NO_APP
 	#APP
-	vmcs vs61, s1
+	vmcs vs61, t0
 	#NO_APP
-	li	a2, 1
+	mv	t4, a3
 	#APP
-	vmcs vs60, a2
+	vmcs vs59, a3
 	#NO_APP
-	li	a2, 3
 	#APP
-	vmcs vs59, a2
+	vmcs vs58, s1
 	#NO_APP
-	li	a5, 2
 	#APP
-	vmcs vs58, a5
+	vmcs vs57, t0
+	#NO_APP
+	li	a1, 3
+	#APP
+	vmcs vs56, a1
+	#NO_APP
+	li	a1, 2
+	#APP
+	vmcs vs55, a1
 	#NO_APP
 	li	t0, 191
 	slli	t0, t0, 24
 	lui	a3, 257229
 	#APP
-	vmcs vs57, t0
+	vmcs vs54, t0
 	#NO_APP
 	addi	t0, a3, -820
 	#APP
-	vmcs vs56, t0
+	vmcs vs53, t0
 	#NO_APP
 	lui	t0, 260915
 	ld	a3, 176(sp)
 	addi	t0, t0, 819
 	#APP
-	vmcs vs55, t0
+	vmcs vs52, t0
 	#NO_APP
 	#APP
-	vmcs vs54, a4
+	vmcs vs51, a4
 	#NO_APP
 	li	a4, 4
 	li	t0, 8
 	#APP
-	vmcs vs53, a4
+	vmcs vs50, a4
 	#NO_APP
 	#APP
-	vmcs vs52, t0
+	vmcs vs49, t0
 	#NO_APP
 	#APP
-	vmcs vs51, a6
+	vmcs vs48, a6
 	#NO_APP
 	#APP
-	vmcs vs50, a7
+	vmcs vs47, a7
 	#NO_APP
 	#APP
-	vmcs vs49, a3
-	#NO_APP
-	li	a4, 12
-	#APP
-	vmcs vs48, a1
+	vmcs vs46, a3
 	#NO_APP
 	#APP
-	vmcs vs47, a4
+	vmcs vs45, a2
 	#NO_APP
-	li	a1, -1
+	li	a3, 12
 	lui	a4, 190
 	#APP
-	vmcs vs46, a1
+	vmcs vs44, a3
 	#NO_APP
-	addi	a1, a4, 1229
-	mv	a2, a0
+	addi	a3, a4, 1229
+	li	a4, -1
+	slli	a3, a3, 12
 	#APP
-	vmcs vs45, a5
+	vmcs vs43, a4
 	#NO_APP
-	slli	a1, a1, 12
-	addi	a0, a1, -819
-	lui	a1, 258048
+	addi	a3, a3, -819
 	#APP
-	vmcs vs44, a0
-	#NO_APP
-	#APP
-	vmcs vs43, a1
-	#NO_APP
-	li	a0, -2
-	li	a1, 32
-	#APP
-	vmcs vs42, a0
+	vmcs vs42, a1
 	#NO_APP
 	#APP
-	vmcs vs41, a1
+	vmcs vs41, a3
 	#NO_APP
-	beqz	a2, .LBB3_7
+	lui	a3, 258048
+	li	a1, -2
+	#APP
+	vmcs vs40, a3
+	#NO_APP
+	#APP
+	vmcs vs39, a1
+	#NO_APP
+	beqz	a0, .LBB3_7
 # %bb.1:                                # %stripmine.preheader
-	li	s8, 0
-	slli	a1, s1, 2
+	mv	ra, a0
+	li	a7, 0
+	slli	s8, s1, 2
 	slliw	a0, s1, 1
-	ld	t2, 40(sp)                      # 8-byte Folded Reload
-	add	t3, t2, a1
-	slli	s11, a0, 2
-	add	t1, t2, s11
+	add	a3, t4, s8
+	slli	s10, a0, 2
+	add	t1, t4, s10
 	addw	a0, a0, s1
 	slli	a0, a0, 2
-	sd	a2, 32(sp)                      # 8-byte Folded Spill
 	slliw	a4, s1, 2
-	add	a3, t2, a0
+	add	t2, t4, a0
 	slli	a4, a4, 2
-	add	t2, t2, a4
+	add	t3, t4, a4
 	slli	s2, s1, 4
-	add	t0, t4, s2
+	add	t0, a5, s2
 	slli	s7, s1, 5
-	add	t5, t4, s7
-	ld	a2, 48(sp)                      # 8-byte Folded Reload
-	add	a6, a2, a1
-	add	s9, t4, a1
-	add	t6, s2, a1
-	add	a7, t4, t6
-	add	s0, s7, a1
-	add	s0, t4, s0
+	add	t5, a5, s7
+	ld	a1, 40(sp)                      # 8-byte Folded Reload
+	add	a6, a1, s8
+	add	s9, a5, s8
+	add	t6, s2, s8
+	add	t6, a5, t6
+	add	s0, s7, s8
+	add	s0, a5, s0
 	li	s3, 44
-	slli	ra, s1, 3
-	mul	s1, s1, s3
-	add	s4, a2, ra
-	add	s3, s2, ra
-	add	s6, t4, ra
-	add	s3, t4, s3
-	add	s5, s7, ra
-	add	ra, ra, a1
-	add	s5, t4, s5
-	add	s2, a2, ra
-	add	ra, t4, ra
-	sub	s7, s7, a1
-	add	a2, t4, s7
-	add	s1, t4, s1
-	ld	a5, 56(sp)                      # 8-byte Folded Reload
-	add	s10, a5, a1
-	add	s7, a5, s11
-	add	s11, a5, a0
-	add	a5, a5, a4
-	ld	a4, 32(sp)                      # 8-byte Folded Reload
+	slli	s6, s1, 3
+	mul	a2, s1, s3
+	add	s1, a1, s6
+	add	s3, s2, s6
+	add	s4, a5, s6
+	add	s3, a5, s3
+	add	s5, s7, s6
+	add	s2, s6, s8
+	add	s5, a5, s5
+	add	s6, a1, s2
+	add	s2, a5, s2
+	sub	s7, s7, s8
+	add	s7, a5, s7
+	add	a2, a5, a2
+	ld	s11, 48(sp)                     # 8-byte Folded Reload
+	add	s8, s11, s8
+	add	s10, s11, s10
+	add	a0, s11, a0
+	add	s11, s11, a4
 	j	.LBB3_3
 .LBB3_2:                                # %stripmine
                                         #   in Loop: Header=BB3_3 Depth=1
-.Lpcrel_hi10:
+.Lpcrel_hi12:
 	auipc	a1, %pcrel_hi(hwacha_vl_short)
 	#APP
 	vsetvl a4, a0
 	#NO_APP
-	ld	a3, %pcrel_lo(.Lpcrel_hi10)(a1)
+	ld	a3, %pcrel_lo(.Lpcrel_hi12)(a1)
 	sltu	a0, a4, a0
 	or	a0, a3, a0
-	sd	a0, %pcrel_lo(.Lpcrel_hi10)(a1)
-	mv	a3, t4
+	sd	a0, %pcrel_lo(.Lpcrel_hi12)(a1)
 	#APP
 	vmca va0, t4
 	#NO_APP
@@ -1452,22 +1467,21 @@ compute_flux_ct:                        # @compute_flux_ct
 	#APP
 	vmca va2, t1
 	#NO_APP
-	sd	t3, 0(sp)                       # 8-byte Folded Spill
 	#APP
-	vmca va3, t3
+	vmca va3, t2
 	#NO_APP
 	#APP
-	vmca va4, t2
+	vmca va4, t3
 	#NO_APP
-	mv	t3, a6
-	ld	a6, 48(sp)                      # 8-byte Folded Reload
+	mv	a3, a6
+	ld	a6, 40(sp)                      # 8-byte Folded Reload
 	#APP
 	vmca va5, a6
 	#NO_APP
 	sd	t1, 64(sp)                      # 8-byte Folded Spill
-	ld	t1, 24(sp)                      # 8-byte Folded Reload
+	ld	a0, 56(sp)                      # 8-byte Folded Reload
 	#APP
-	vmca va6, t1
+	vmca va6, a0
 	#NO_APP
 	#APP
 	vmca va7, t0
@@ -1475,24 +1489,25 @@ compute_flux_ct:                        # @compute_flux_ct
 	#APP
 	vmca va8, t5
 	#NO_APP
-	mv	t4, s8
+	mv	t1, s1
 	#APP
-	vmca va9, s8
+	vmca va9, s1
 	#NO_APP
 	#APP
 	vmca va10, s9
 	#NO_APP
 	#APP
-	vmca va11, a7
+	vmca va11, t6
 	#NO_APP
 	#APP
 	vmca va12, s0
 	#NO_APP
+	ld	s1, 8(sp)                       # 8-byte Folded Reload
 	#APP
-	vmca va13, s4
+	vmca va13, s1
 	#NO_APP
 	#APP
-	vmca va14, s6
+	vmca va14, s4
 	#NO_APP
 	#APP
 	vmca va15, s3
@@ -1501,114 +1516,111 @@ compute_flux_ct:                        # @compute_flux_ct
 	vmca va16, s5
 	#NO_APP
 	#APP
-	vmca va17, s2
+	vmca va17, s6
 	#NO_APP
 	#APP
-	vmca va18, ra
+	vmca va18, s2
 	#NO_APP
 	#APP
-	vmca va19, a2
+	vmca va19, s7
 	#NO_APP
 	#APP
-	vmca va20, s1
+	vmca va20, a2
 	#NO_APP
-	ld	t6, 56(sp)                      # 8-byte Folded Reload
+	ld	ra, 48(sp)                      # 8-byte Folded Reload
 	#APP
-	vmca va21, t6
-	#NO_APP
-	#APP
-	vmca va22, s10
+	vmca va21, ra
 	#NO_APP
 	#APP
-	vmca va23, s7
+	vmca va22, s8
 	#NO_APP
 	#APP
-	vmca va24, s11
+	vmca va23, s10
 	#NO_APP
-	ld	a5, 16(sp)                      # 8-byte Folded Reload
 	#APP
-	vmca va25, a5
+	vmca va24, a5
 	#NO_APP
-.Lpcrel_hi11:
+	#APP
+	vmca va25, s11
+	#NO_APP
+.Lpcrel_hi13:
 	auipc	a0, %pcrel_hi(compute_flux_wt)
-	ld	s8, 8(sp)                       # 8-byte Folded Reload
+	ld	a7, 0(sp)                       # 8-byte Folded Reload
 	#APP
-	vmcs vs63, s8
+	vmcs vs60, a7
 	#NO_APP
-	addi	a0, a0, %pcrel_lo(.Lpcrel_hi11)
+	addi	a0, a0, %pcrel_lo(.Lpcrel_hi13)
 	#APP
 	vf 0(a0)
 	#NO_APP
 	ld	a0, 32(sp)                      # 8-byte Folded Reload
 	sub	a0, a0, a4
-	add	s8, s8, a4
+	add	a7, a7, a4
 	slli	a1, a4, 2
+	add	t4, t4, a1
 	add	a3, a3, a1
-	sd	a3, 40(sp)                      # 8-byte Folded Spill
-	ld	a3, 0(sp)                       # 8-byte Folded Reload
-	add	t3, t3, a1
 	ld	a4, 64(sp)                      # 8-byte Folded Reload
 	add	a4, a4, a1
 	sd	a4, 64(sp)                      # 8-byte Folded Spill
-	add	a3, a3, a1
 	add	t2, t2, a1
+	add	t3, t3, a1
 	add	a6, a6, a1
-	sd	a6, 48(sp)                      # 8-byte Folded Spill
-	add	t1, t1, a1
+	sd	a6, 40(sp)                      # 8-byte Folded Spill
+	ld	a4, 56(sp)                      # 8-byte Folded Reload
+	add	a4, a4, a1
 	add	t0, t0, a1
 	add	t5, t5, a1
-	add	a6, t4, a1
+	add	a6, t1, a1
 	add	s9, s9, a1
-	add	a7, a7, a1
+	add	t6, t6, a1
 	add	s0, s0, a1
+	add	s1, s1, a1
 	add	s4, s4, a1
-	add	s6, s6, a1
 	add	s3, s3, a1
 	add	s5, s5, a1
+	add	s6, s6, a1
 	add	s2, s2, a1
-	add	ra, ra, a1
-	add	a2, a2, a1
-	add	s1, s1, a1
-	add	t6, t6, a1
-	sd	t6, 56(sp)                      # 8-byte Folded Spill
-	add	s10, s10, a1
 	add	s7, s7, a1
+	add	a2, a2, a1
+	add	ra, ra, a1
+	sd	ra, 48(sp)                      # 8-byte Folded Spill
+	mv	ra, a0
+	add	s8, s8, a1
+	add	s10, s10, a1
+	add	a0, a5, a1
 	add	s11, s11, a1
-	add	a5, a5, a1
-	mv	t4, t1
+	mv	a5, a4
 	ld	t1, 64(sp)                      # 8-byte Folded Reload
-	mv	a4, a0
-	beqz	a0, .LBB3_7
+	beqz	ra, .LBB3_7
 .LBB3_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	sd	a5, 16(sp)                      # 8-byte Folded Spill
-	mv	a1, a7
-	mv	t6, a6
-	mv	a7, t2
-	mv	t2, a3
-	mv	a6, s8
-	sd	t4, 24(sp)                      # 8-byte Folded Spill
-.Lpcrel_hi9:
+	sd	s11, 16(sp)                     # 8-byte Folded Spill
+	mv	s11, a0
+	sd	s3, 24(sp)                      # 8-byte Folded Spill
+	mv	s3, s1
+	mv	a1, t6
+	mv	s1, a6
+	sd	a5, 56(sp)                      # 8-byte Folded Spill
+.Lpcrel_hi11:
 	auipc	a0, %pcrel_hi(hwacha_group_size)
-	ld	a0, %pcrel_lo(.Lpcrel_hi9)(a0)
-	mv	s8, a4
+	ld	a0, %pcrel_lo(.Lpcrel_hi11)(a0)
+	mv	a4, ra
 	beqz	a0, .LBB3_5
 # %bb.4:                                # %stripmine
                                         #   in Loop: Header=BB3_3 Depth=1
 	mv	a4, a0
 .LBB3_5:                                # %stripmine
                                         #   in Loop: Header=BB3_3 Depth=1
-	ld	t4, 40(sp)                      # 8-byte Folded Reload
-	mv	a0, s8
-	sd	a6, 8(sp)                       # 8-byte Folded Spill
-	mv	a6, t3
-	mv	t3, t2
-	mv	t2, a7
-	mv	a3, s8
-	mv	s8, t6
-	mv	a7, a1
-	sd	a3, 32(sp)                      # 8-byte Folded Spill
-	bltu	a3, a4, .LBB3_2
+	mv	a0, ra
+	sd	a7, 0(sp)                       # 8-byte Folded Spill
+	mv	a6, a3
+	sd	ra, 32(sp)                      # 8-byte Folded Spill
+	mv	t6, a1
+	sd	s3, 8(sp)                       # 8-byte Folded Spill
+	ld	s3, 24(sp)                      # 8-byte Folded Reload
+	mv	a5, s11
+	ld	s11, 16(sp)                     # 8-byte Folded Reload
+	bltu	ra, a4, .LBB3_2
 # %bb.6:                                # %stripmine
                                         #   in Loop: Header=BB3_3 Depth=1
 	mv	a0, a4
@@ -1715,20 +1727,20 @@ time_step_ct:                           # @time_step_ct
 	add	s0, a3, s2
 	add	s1, a6, s2
 	add	s2, a4, s2
-.Lpcrel_hi12:
+.Lpcrel_hi14:
 	auipc	s3, %pcrel_hi(hwacha_group_size)
 	j	.LBB4_3
 .LBB4_2:                                # %stripmine
                                         #   in Loop: Header=BB4_3 Depth=1
-.Lpcrel_hi13:
+.Lpcrel_hi15:
 	auipc	s5, %pcrel_hi(hwacha_vl_short)
 	#APP
 	vsetvl s6, s4
 	#NO_APP
-	ld	s7, %pcrel_lo(.Lpcrel_hi13)(s5)
+	ld	s7, %pcrel_lo(.Lpcrel_hi15)(s5)
 	sltu	s4, s6, s4
 	or	s4, s7, s4
-	sd	s4, %pcrel_lo(.Lpcrel_hi13)(s5)
+	sd	s4, %pcrel_lo(.Lpcrel_hi15)(s5)
 	#APP
 	vmca va0, a5
 	#NO_APP
@@ -1777,12 +1789,12 @@ time_step_ct:                           # @time_step_ct
 	#APP
 	vmca va15, s2
 	#NO_APP
-.Lpcrel_hi14:
+.Lpcrel_hi16:
 	auipc	s4, %pcrel_hi(time_step_wt)
 	#APP
 	vmcs vs63, a1
 	#NO_APP
-	addi	s4, s4, %pcrel_lo(.Lpcrel_hi14)
+	addi	s4, s4, %pcrel_lo(.Lpcrel_hi16)
 	#APP
 	vf 0(s4)
 	#NO_APP
@@ -1808,7 +1820,7 @@ time_step_ct:                           # @time_step_ct
 	beqz	a0, .LBB4_7
 .LBB4_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	s4, %pcrel_lo(.Lpcrel_hi12)(s3)
+	ld	s4, %pcrel_lo(.Lpcrel_hi14)(s3)
 	mv	s5, a0
 	beqz	s4, .LBB4_5
 # %bb.4:                                # %stripmine
@@ -1865,4 +1877,14 @@ hwacha_vl_short:
 	.quad	0                               # 0x0
 	.size	hwacha_vl_short, 8
 
+	.type	.Lcompute_flux_cpool,@object    # @compute_flux_cpool
+	.section	.rodata,"a",@progbits
+	.p2align	3, 0x0
+.Lcompute_flux_cpool:
+	.quad	32                              # 0x20
+	.size	.Lcompute_flux_cpool, 8
+
+	.type	.Lcompute_flux_spill,@object    # @compute_flux_spill
+	.local	.Lcompute_flux_spill
+	.comm	.Lcompute_flux_spill,8,8
 	.section	".note.GNU-stack","",@progbits

@@ -28,6 +28,6 @@ make gen-lud      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
-| lud | 824,927 | 28,651 | 29x |
+| lud | 824,927 | 28,807 | 29x |
 
 结果：lud **PASS**。

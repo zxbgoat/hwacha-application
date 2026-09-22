@@ -43,22 +43,22 @@ hotspotOpt1_wt:
     @!vp1 vaddw vv19, vs56, vs0
     vaddw vv19, vv16, vv19
     vsll vv1, vv16, vs53
-    vlxw vv20, vs62, vv1
+    vlxw vv20, vs61, vv1
     vaddw vv21, vv16, vs2
     vsll vv1, vv21, vs53
-    vlxw vv22, vs62, vv1
+    vlxw vv22, vs61, vv1
     vsll vv1, vv17, vs53
-    vlxw vv23, vs62, vv1
+    vlxw vv23, vs61, vv1
     vfmul.s vv23, vs52, vv23
     vfmadd.s vv23, vs51, vv20, vv23
     vsll vv1, vv18, vs53
-    vlxw vv24, vs62, vv1
+    vlxw vv24, vs61, vv1
     vfmadd.s vv24, vs50, vv24, vv23
     vsll vv1, vv19, vs53
-    vlxw vv23, vs62, vv1
+    vlxw vv23, vs61, vv1
     vfmadd.s vv23, vs49, vv23, vv24
     vsll vv1, vv15, vs53
-    vlxw vv24, vs62, vv1
+    vlxw vv24, vs61, vv1
     vfmadd.s vv24, vs48, vv24, vv23
     vfmadd.s vv24, vs47, vv20, vv24
     vfmadd.s vv24, vs46, vv22, vv24
@@ -66,7 +66,7 @@ hotspotOpt1_wt:
     vlxw vv23, vs60, vv1
     vfmadd.s vv23, vs45, vv23, vv24
     vfmadd.s vv23, vs46, vs44, vv23
-    vsxw vv23, vs61, vv1
+    vsxw vv23, vs62, vv1
     vaddw vv19, vv19, vs2
     vaddw vv16, vv15, vs2
     vaddw vv18, vv18, vs2
@@ -145,17 +145,17 @@ hotspotOpt1_wt_a0:
     @vp3 vaddw vv31, vv17, vs0
     @!vp1 vcjal 0, vs1, .LhotspotOpt1_skip1
     @vp1 vsll vv2, vv31, vs53
-    @vp1 vlxw vv15, vs62, vv2
+    @vp1 vlxw vv15, vs61, vv2
     @vp1 vfmul.s vv16, vs52, vv15
     @vp1 vfmadd.s vv16, vs51, vv27, vv16
     @vp1 vsll vv2, vv30, vs53
-    @vp1 vlxw vv15, vs62, vv2
+    @vp1 vlxw vv15, vs61, vv2
     @vp1 vfmadd.s vv16, vs50, vv15, vv16
     @vp1 vsll vv2, vv28, vs53
-    @vp1 vlxw vv15, vs62, vv2
+    @vp1 vlxw vv15, vs61, vv2
     @vp1 vfmadd.s vv16, vs49, vv15, vv16
     @vp1 vsll vv2, vv29, vs53
-    @vp1 vlxw vv15, vs62, vv2
+    @vp1 vlxw vv15, vs61, vv2
     @vp1 vfmadd.s vv16, vs48, vv15, vv16
     @vp1 vfmadd.s vv23, vs47, vv23, vv16
     @vp1 vfmadd.s vv27, vs46, vv27, vv23
@@ -163,7 +163,7 @@ hotspotOpt1_wt_a0:
     @vp1 vlxw vv15, vs60, vv2
     @vp1 vfmadd.s vv27, vs45, vv15, vv27
     @vp1 vfmadd.s vv27, vs46, vs44, vv27
-    @vp1 vsxw vv27, vs61, vv2
+    @vp1 vsxw vv27, vs62, vv2
 .LhotspotOpt1_skip1:
     vstop
 
@@ -184,12 +184,12 @@ hotspotOpt1_ct:                         # @hotspotOpt1_ct
 	vsetcfg a7
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a3
 	#NO_APP
 .Lpcrel_hi0:
 	auipc	a7, %pcrel_hi(hwacha_ls0)
 	#APP
-	vmcs vs61, a3
+	vmcs vs61, a2
 	#NO_APP
 	addi	a7, a7, %pcrel_lo(.Lpcrel_hi0)
 	#APP

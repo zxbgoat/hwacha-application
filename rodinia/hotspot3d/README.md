@@ -28,6 +28,6 @@ make gen-hotspot3d      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
-| d | 825,074 | 3,303 | 250x |
+| hotspot3d | 825,074 | 3,303 | 250x |
 
-结果：d **PASS**。
+结果：hotspot3d **PASS**。

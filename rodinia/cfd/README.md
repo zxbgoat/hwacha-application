@@ -28,6 +28,6 @@ make gen-cfd      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
-| cfd | 976,175 | 10,187 | 96x |
+| cfd | 976,175 | 10,031 | 97x |
 
 结果：cfd **PASS**。

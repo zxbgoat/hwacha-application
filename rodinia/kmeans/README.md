@@ -28,7 +28,7 @@ make gen-kmeans      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
-| kmeans_swap | 390,024 | 241 | 1618x |
+| kmeans_swap | 390,024 | 308 | 1266x |
 | kmeans_c | 390,024 | 2,059 | 189x |
 
 结果：kmeans_swap **PASS**，kmeans_c **PASS**。

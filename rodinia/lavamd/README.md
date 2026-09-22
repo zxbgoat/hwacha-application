@@ -28,6 +28,6 @@ make gen-lavamd      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
-| lavamd | 75,779,326 | 293 | 258633x |
+| lavamd | 75,779,326 | 267 | 283818x |
 
 结果：lavamd **PASS**。

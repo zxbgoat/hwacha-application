@@ -23,7 +23,7 @@ histogram1024Kernel_wt:
     @vp1 vand vv4, vv3, vs49
     @vp1 vsll vv5, vv4, vs50
     vaddw vv9, vs0, vs0
-    @vp1 vsxw vv9, vs59, vv5
+    @vp1 vsxw vv9, vs60, vv5
     @vp1 vadd vv3, vs62, vv4
     vcmpltu vp2, vv3, vs48
     vpop vp5, vp1, vp2, vp2, 0x80
@@ -50,7 +50,7 @@ histogram1024Kernel_wt:
     @vp1 vsll vv5, vv4, vs46
     @vp1 vsra vv5, vv5, vs46
     @vp1 vsll vv6, vv5, vs50
-    @vp1 vlxw vv8, vs60, vv6
+    @vp1 vlxw vv8, vs59, vv6
     @vp1 vfsub.s vv8, vv8, vs51
     @vp1 vfdiv.s vv8, vv8, vv9
     @vp1 vfmul.s vv8, vv8, vs45
@@ -63,28 +63,28 @@ histogram1024Kernel_wt:
     vpop vp3, vp1, vp1, vp1, 0xAA
     vpclear vp5
 .Lhistogram1024Kernel_loop4:
-    @vp3 vlxw vv8, vs59, vv6
+    @vp3 vlxw vv8, vs60, vv6
     @vp3 vand vv8, vv8, vs43
     @vp3 vaddw vv8, vv8, vs42
     @vp3 vor vv8, vv8, vv7
-    @vp3 vsxw vv8, vs59, vv6
-    @vp3 vlxw vv10, vs59, vv6
-    vcmpeq vp7, vv10, vv8
-    vpop vp8, vp3, vp7, vp7, 0x80
-    vpop vp9, vp3, vp7, vp7, 0x02
-    vpop vp5, vp5, vp8, vp8, 0xEE
-    vpop vp3, vp3, vp8, vp8, 0x02
-    @vp9 vcjal 1, vs1, .Lhistogram1024Kernel_loop4
+    @vp3 vsxw vv8, vs60, vv6
+    @vp3 vlxw vv10, vs60, vv6
+    vcmpeq vp6, vv10, vv8
+    vpop vp7, vp3, vp6, vp6, 0x80
+    vpop vp8, vp3, vp6, vp6, 0x02
+    vpop vp5, vp5, vp7, vp7, 0xEE
+    vpop vp3, vp3, vp7, vp7, 0x02
+    @vp8 vcjal 1, vs1, .Lhistogram1024Kernel_loop4
     @!vp5 vcjal 0, vs1, .Lhistogram1024Kernel_skip5
     @vp5 vadd vv4, vs61, vv5
     vcmpltu vp3, vv4, vs53
 .Lhistogram1024Kernel_skip5:
-    vpop vp7, vp5, vp3, vp3, 0x80
-    vpop vp9, vp5, vp3, vp3, 0x02
-    vpop vp2, vp2, vp9, vp9, 0xEE
-    vpop vp1, vp1, vp9, vp9, 0x02
-    @vp7 vcjal 1, vs1, .Lhistogram1024Kernel_loop3
-    vpop vp1, vp9, vp9, vp9, 0xAA
+    vpop vp6, vp5, vp3, vp3, 0x80
+    vpop vp7, vp5, vp3, vp3, 0x02
+    vpop vp2, vp2, vp7, vp7, 0xEE
+    vpop vp1, vp1, vp7, vp7, 0x02
+    @vp6 vcjal 1, vs1, .Lhistogram1024Kernel_loop3
+    vpop vp1, vp7, vp7, vp7, 0xAA
     vpop vp1, vp1, vp2, vp2, 0xEE
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp4, vp4, 0xEE
@@ -107,21 +107,21 @@ histogram1024Kernel_wt:
     vpclear vp5
 .Lhistogram1024Kernel_loop8:
     vsll vs4, vs2, vs38
-    vadd vs4, vs59, vs4
+    vadd vs4, vs60, vs4
     @vp3 vlxw vv8, vs4, vv5
     @vp3 vand vv8, vv8, vs43
     @vp3 vaddw vv7, vv8, vv7
     vadd vs4, vs3, vs47
     vadd vv6, vs3, vs0
-    vcmpltu vp7, vv6, vs37
+    vcmpltu vp6, vv6, vs37
     vadd vs2, vs2, vs36
-    vpop vp9, vp3, vp7, vp7, 0x80
-    vpop vp10, vp3, vp7, vp7, 0x02
-    @vp10 vaddw vv8, vv7, vs0
-    vpop vp5, vp5, vp10, vp10, 0xEE
-    vpop vp3, vp3, vp10, vp10, 0x02
-    @vp9 vadd vs3, vs4, vs0
-    @vp9 vcjal 1, vs1, .Lhistogram1024Kernel_loop8
+    vpop vp7, vp3, vp6, vp6, 0x80
+    vpop vp8, vp3, vp6, vp6, 0x02
+    @vp8 vaddw vv8, vv7, vs0
+    vpop vp5, vp5, vp8, vp8, 0xEE
+    vpop vp3, vp3, vp8, vp8, 0x02
+    @vp7 vadd vs3, vs4, vs0
+    @vp7 vcjal 1, vs1, .Lhistogram1024Kernel_loop8
     @!vp5 vcjal 0, vs1, .Lhistogram1024Kernel_skip9
     @vp5 vsra vv4, vv4, vs46
     vmul vv6, vv4, vs35
@@ -130,12 +130,12 @@ histogram1024Kernel_wt:
     @vp5 vadd vv3, vs62, vv4
     vcmplt vp3, vv3, vs39
 .Lhistogram1024Kernel_skip9:
-    vpop vp7, vp5, vp3, vp3, 0x80
-    vpop vp9, vp5, vp3, vp3, 0x02
-    vpop vp2, vp2, vp9, vp9, 0xEE
-    vpop vp1, vp1, vp9, vp9, 0x02
-    @vp7 vcjal 1, vs1, .Lhistogram1024Kernel_loop7
-    vpop vp1, vp9, vp9, vp9, 0xAA
+    vpop vp6, vp5, vp3, vp3, 0x80
+    vpop vp7, vp5, vp3, vp3, 0x02
+    vpop vp2, vp2, vp7, vp7, 0xEE
+    vpop vp1, vp1, vp7, vp7, 0x02
+    @vp6 vcjal 1, vs1, .Lhistogram1024Kernel_loop7
+    vpop vp1, vp7, vp7, vp7, 0xAA
     vpop vp1, vp1, vp2, vp2, 0xEE
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp4, vp4, 0xEE
@@ -200,27 +200,27 @@ bucketcount_wt:
     @vp1 vlxw vv8, vs7, vv3
     vpop vp3, vp1, vp1, vp1, 0xAA
     @vp1 vaddw vv9, vs2, vs0
-    @vp1 vadd vs7, vs43, vs0
+    @vp1 vaddw vs7, vs43, vs0
     @vp1 vaddw vv10, vs42, vs0
     vpclear vp5
 .Lbucketcount_loop4:
-    vcmpflt.s vp7, vv8, vv9
+    vcmpflt.s vp6, vv8, vv9
     vsubw vs8, vs0, vs7
-    @vp7 vaddw vv11, vs8, vs0
-    @!vp7 vaddw vv11, vs7, vs0
+    @vp6 vaddw vv11, vs8, vs0
+    @!vp6 vaddw vv11, vs7, vs0
     @vp3 vaddw vv10, vv11, vv10
     vsrlw vs7, vs7, vs41
     @vp3 vsll vv6, vv10, vs48
     @vp3 vlxw vv9, vs57, vv6
     vaddw vv11, vs7, vs0
-    vcmpeq vp7, vv11, vs0
-    vpop vp8, vp3, vp7, vp7, 0x80
-    vpop vp9, vp3, vp7, vp7, 0x02
-    @vp8 vaddw vv11, vv10, vs0
-    @vp8 vaddw vv12, vv9, vs0
-    vpop vp5, vp5, vp8, vp8, 0xEE
-    vpop vp3, vp3, vp8, vp8, 0x02
-    @vp9 vcjal 1, vs1, .Lbucketcount_loop4
+    vcmpeq vp6, vv11, vs0
+    vpop vp7, vp3, vp6, vp6, 0x80
+    vpop vp8, vp3, vp6, vp6, 0x02
+    @vp7 vaddw vv11, vv10, vs0
+    @vp7 vaddw vv12, vv9, vs0
+    vpop vp5, vp5, vp7, vp7, 0xEE
+    vpop vp3, vp3, vp7, vp7, 0x02
+    @vp8 vcjal 1, vs1, .Lbucketcount_loop4
     @!vp5 vcjal 0, vs1, .Lbucketcount_skip5
     vcmpflt.s vp3, vv8, vv12
     vpop vp3, vp3, vp3, vp3, 0x55
@@ -233,7 +233,7 @@ bucketcount_wt:
     @vp5 vadd vv6, vv4, vv6
 .Lbucketcount_skip5:
     vpop vp3, vp5, vp5, vp5, 0xAA
-    vpclear vp7
+    vpclear vp6
 .Lbucketcount_loop6:
     @vp3 vlxw vv8, vs59, vv6
     @vp3 vand vv9, vv8, vs40
@@ -242,26 +242,26 @@ bucketcount_wt:
     @vp3 vsxw vv9, vs59, vv6
     @vp3 vlxw vv10, vs59, vv6
     vcmpeq vp5, vv10, vv9
-    vpop vp9, vp3, vp5, vp5, 0x80
-    vpop vp10, vp3, vp5, vp5, 0x02
-    @vp9 vaddw vv9, vv8, vs0
-    vpop vp7, vp7, vp9, vp9, 0xEE
-    vpop vp3, vp3, vp9, vp9, 0x02
-    @vp10 vcjal 1, vs1, .Lbucketcount_loop6
-    @!vp7 vcjal 0, vs1, .Lbucketcount_skip7
-    @vp7 vsllw vv9, vv9, vs46
-    @vp7 vaddw vv9, vv9, vv11
-    @vp7 vsxw vv9, vs6, vv3
-    @vp7 vadd vv5, vv5, vs3
+    vpop vp7, vp3, vp5, vp5, 0x80
+    vpop vp8, vp3, vp5, vp5, 0x02
+    @vp7 vaddw vv9, vv8, vs0
+    vpop vp6, vp6, vp7, vp7, 0xEE
+    vpop vp3, vp3, vp7, vp7, 0x02
+    @vp8 vcjal 1, vs1, .Lbucketcount_loop6
+    @!vp6 vcjal 0, vs1, .Lbucketcount_skip7
+    @vp6 vsllw vv9, vv9, vs46
+    @vp6 vaddw vv9, vv9, vv11
+    @vp6 vsxw vv9, vs6, vv3
+    @vp6 vadd vv5, vv5, vs3
     vcmplt vp3, vv5, vs51
     vadd vs5, vs5, vs39
 .Lbucketcount_skip7:
-    vpop vp5, vp7, vp3, vp3, 0x80
-    vpop vp10, vp7, vp3, vp3, 0x02
-    vpop vp2, vp2, vp10, vp10, 0xEE
-    vpop vp1, vp1, vp10, vp10, 0x02
+    vpop vp5, vp6, vp3, vp3, 0x80
+    vpop vp7, vp6, vp3, vp3, 0x02
+    vpop vp2, vp2, vp7, vp7, 0xEE
+    vpop vp1, vp1, vp7, vp7, 0x02
     @vp5 vcjal 1, vs1, .Lbucketcount_loop3
-    vpop vp1, vp10, vp10, vp10, 0xAA
+    vpop vp1, vp7, vp7, vp7, 0xAA
     vpop vp1, vp1, vp2, vp2, 0xEE
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp4, vp4, 0xEE
@@ -288,9 +288,9 @@ bucketcount_wt:
     @vp1 vadd vv3, vs61, vv4
     vcmplt vp3, vv3, vs47
     vpop vp5, vp1, vp3, vp3, 0x80
-    vpop vp7, vp1, vp3, vp3, 0x02
-    vpop vp2, vp2, vp7, vp7, 0xEE
-    vpop vp1, vp1, vp7, vp7, 0x02
+    vpop vp6, vp1, vp3, vp3, 0x02
+    vpop vp2, vp2, vp6, vp6, 0xEE
+    vpop vp1, vp1, vp6, vp6, 0x02
     @vp5 vaddw vv7, vv3, vs0
     @vp5 vcjal 1, vs1, .Lbucketcount_loop9
     vpop vp1, vp2, vp2, vp2, 0xAA
@@ -357,10 +357,10 @@ bucketsort_wt:
 .Lbucketsort_loop0:
     @vp1 vand vv3, vv2, vs47
     @vp1 vsll vv3, vv3, vs48
-    @vp1 vlxw vv7, vs57, vv3
+    @vp1 vlxw vv7, vs56, vv3
     @vp1 vaddw vv8, vv5, vs2
     @vp1 vsll vv3, vv8, vs48
-    @vp1 vlxw vv8, vs56, vv3
+    @vp1 vlxw vv8, vs58, vv3
     @vp1 vaddw vv8, vv8, vv7
     @vp1 vsll vv3, vv2, vs49
     @vp1 vsra vv3, vv3, vs49
@@ -407,14 +407,14 @@ bucketsort_wt:
     vsll vv4, vv9, vs49
     vsrl vv4, vv4, vs49
     @vp1 vsll vv4, vv4, vs48
-    @vp1 vsxw vv5, vs58, vv4
+    @vp1 vsxw vv5, vs57, vv4
     @vp1 vadd vv3, vv3, vs2
     vcmplt vp3, vv3, vs50
     vadd vs4, vs4, vs42
     vpop vp5, vp1, vp3, vp3, 0x80
-    vpop vp7, vp1, vp3, vp3, 0x02
-    vpop vp2, vp2, vp7, vp7, 0xEE
-    vpop vp1, vp1, vp7, vp7, 0x02
+    vpop vp6, vp1, vp3, vp3, 0x02
+    vpop vp2, vp2, vp6, vp6, 0xEE
+    vpop vp1, vp1, vp6, vp6, 0x02
     @vp5 vcjal 1, vs1, .Lbucketsort_loop3
     vpop vp1, vp2, vp2, vp2, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
@@ -429,8 +429,8 @@ bucketsort_wt:
 histogram1024Kernel_ct:                 # @histogram1024Kernel_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a4, 1048541
-	addi	a4, a4, 1009
+	lui	a4, 1048542
+	addi	a4, a4, -1039
 	srli	a4, a4, 1
 	not	a4, a4
 .Lpcrel_hi0:
@@ -440,10 +440,10 @@ histogram1024Kernel_ct:                 # @histogram1024Kernel_ct
 	#NO_APP
 	addi	a4, a5, %pcrel_lo(.Lpcrel_hi0)
 	#APP
-	vmcs vs60, a2
+	vmcs vs60, a4
 	#NO_APP
 	#APP
-	vmcs vs59, a4
+	vmcs vs59, a2
 	#NO_APP
 	li	a2, 5
 	li	a4, -1024
@@ -610,8 +610,8 @@ histogram1024Kernel_ct:                 # @histogram1024Kernel_ct
 bucketcount_ct:                         # @bucketcount_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a6, 1048525
-	addi	a6, a6, 1009
+	lui	a6, 1048526
+	addi	a6, a6, -1039
 	srli	a6, a6, 1
 	not	a6, a6
 .Lpcrel_hi4:
@@ -870,7 +870,7 @@ bucketsort_ct:                          # @bucketsort_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a7, 1048534
-	addi	a7, a7, -11
+	addi	a7, a7, 1013
 	srli	a7, a7, 1
 	not	a7, a7
 .Lpcrel_hi11:
@@ -883,14 +883,14 @@ bucketsort_ct:                          # @bucketsort_ct
 	vmcs vs59, a7
 	#NO_APP
 	#APP
-	vmcs vs58, a3
+	vmcs vs58, a5
 	#NO_APP
 	#APP
-	vmcs vs57, a6
+	vmcs vs57, a3
 	#NO_APP
 	li	a3, 10
 	#APP
-	vmcs vs56, a5
+	vmcs vs56, a6
 	#NO_APP
 	#APP
 	vmcs vs55, a3

@@ -19,7 +19,9 @@ kernel_gpu_opencl_wt:
     vlsw vs3, vs59
     @vp2 vfmul.s vv8, vs3, vs58
     @vp2 vfmul.s vv9, vs3, vv8
-    vmul vs3, vs2, vs22
+    vaddi vs4, vs32, 80
+    vlsd vs4, vs4
+    vmul vs3, vs2, vs4
     vadd vs2, vs57, vs3
     vadd vs3, vs2, vs60
     vlsd vs3, vs3
@@ -100,21 +102,23 @@ kernel_gpu_opencl_wt:
     vadd vv3, vs8, vs0
     vcmpeq vp6, vv3, vs0
     vpop vp7, vp2, vp6, vp6, 0x80
-    vpop vp9, vp2, vp6, vp6, 0x02
-    @!vp9 vcjal 0, vs1, .Lkernel_gpu_opencl_skip6
+    vpop vp8, vp2, vp6, vp6, 0x02
+    @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip6
     vmul vs10, vs8, vs44
     vadd vs9, vs2, vs10
     vadd vs9, vs9, vs42
     vlsw vs9, vs9
 .Lkernel_gpu_opencl_skip6:
-    vpop vp6, vp9, vp9, vp9, 0xAA
+    vpop vp6, vp8, vp8, vp8, 0xAA
     vpop vp6, vp6, vp7, vp7, 0xEE
-    @vp9 vaddw vv8, vs9, vs0
+    @vp8 vaddw vv8, vs9, vs0
     @vp7 vaddw vv8, vs63, vs0
     vpop vp7, vp6, vp1, vp1, 0x80
-    vpop vp9, vp6, vp1, vp1, 0x02
+    vpop vp8, vp6, vp1, vp1, 0x02
     @!vp7 vcjal 0, vs1, .Lkernel_gpu_opencl_skip7
-    vmul vv4, vv8, vs22
+    vaddi vs9, vs32, 80
+    vlsd vs9, vs9
+    vmul vv4, vv8, vs9
     vadd vv3, vs57, vv4
     vadd vv3, vv3, vs60
     @vp7 vlxd vv3, vs0, vv3
@@ -127,7 +131,7 @@ kernel_gpu_opencl_wt:
     vpop vp6, vp7, vp7, vp7, 0xAA
     @vp7 vadd vs9, vs0, vs0
     @vp7 vadd vv6, vv0, vs0
-    vpclear vp10
+    vpclear vp9
 .Lkernel_gpu_opencl_loop8:
     vsll vs10, vs9, vs51
     vadd vs11, vs50, vs10
@@ -157,21 +161,21 @@ kernel_gpu_opencl_wt:
     @vp6 vadd vv7, vv6, vs48
     vcmpltu vp7, vv6, vs47
     vadd vs9, vs9, vs46
-    vpop vp11, vp6, vp7, vp7, 0x80
-    vpop vp12, vp6, vp7, vp7, 0x02
-    vpop vp10, vp10, vp12, vp12, 0xEE
-    vpop vp6, vp6, vp12, vp12, 0x02
-    @vp11 vadd vv6, vv7, vs0
-    @vp11 vcjal 1, vs1, .Lkernel_gpu_opencl_loop8
-    vpop vp6, vp10, vp10, vp10, 0xAA
-    vpop vp6, vp6, vp9, vp9, 0xEE
+    vpop vp10, vp6, vp7, vp7, 0x80
+    vpop vp11, vp6, vp7, vp7, 0x02
+    vpop vp9, vp9, vp11, vp11, 0xEE
+    vpop vp6, vp6, vp11, vp11, 0x02
+    @vp10 vadd vv6, vv7, vs0
+    @vp10 vcjal 1, vs1, .Lkernel_gpu_opencl_loop8
+    vpop vp6, vp9, vp9, vp9, 0xAA
+    vpop vp6, vp6, vp8, vp8, 0xEE
     vfence
     vpop vp7, vp6, vp1, vp1, 0x80
-    vpop vp9, vp6, vp1, vp1, 0x02
+    vpop vp8, vp6, vp1, vp1, 0x02
     vpop vp6, vp7, vp7, vp7, 0xAA
     @vp7 vadd vs9, vs0, vs0
     @vp7 vadd vv3, vv0, vs0
-    vpclear vp10
+    vpclear vp9
 .Lkernel_gpu_opencl_loop9:
     vsll vs10, vs9, vs51
     vadd vs11, vs49, vs10
@@ -203,7 +207,7 @@ kernel_gpu_opencl_wt:
     @vp6 vaddw vv18, vv14, vs0
     @vp6 vaddw vv19, vv15, vs0
     @vp6 vaddw vv20, vv16, vs0
-    vpclear vp11
+    vpclear vp10
 .Lkernel_gpu_opencl_loop10:
     @!vp7 vcjal 0, vs1, .Lkernel_gpu_opencl_skip11
     vmul vs13, vs11, vs60
@@ -227,25 +231,45 @@ kernel_gpu_opencl_wt:
     @vp7 vfmul.s vv22, vv21, vs35
     @vp7 vfadd.s vv22, vv22, vs34
     @vp7 vfadd.s vv23, vv22, vs33
-    @vp7 vfmul.s vv24, vv23, vs32
+    vaddi vs18, vs32, 0
+    vlsd vs18, vs18
+    @vp7 vfmul.s vv24, vv23, vs18
     @vp7 vfsub.s vv21, vv21, vv24
-    @vp7 vfmul.s vv23, vv23, vs31
+    vaddi vs18, vs32, 8
+    vlsd vs18, vs18
+    @vp7 vfmul.s vv23, vv23, vs18
     @vp7 vfsub.s vv21, vv21, vv23
-    @vp7 vfmul.s vv23, vv21, vs30
-    @vp7 vfadd.s vv23, vv23, vs29
+    vaddi vs18, vs32, 16
+    vlsd vs18, vs18
+    @vp7 vfmul.s vv23, vv21, vs18
+    vaddi vs18, vs32, 24
+    vlsd vs18, vs18
+    @vp7 vfadd.s vv23, vv23, vs18
     @vp7 vfmul.s vv23, vv23, vv21
-    @vp7 vfadd.s vv23, vv23, vs28
+    vaddi vs18, vs32, 32
+    vlsd vs18, vs18
+    @vp7 vfadd.s vv23, vv23, vs18
     @vp7 vfmul.s vv23, vv23, vv21
-    @vp7 vfadd.s vv23, vv23, vs27
+    vaddi vs18, vs32, 40
+    vlsd vs18, vs18
+    @vp7 vfadd.s vv23, vv23, vs18
     @vp7 vfmul.s vv23, vv23, vv21
-    @vp7 vfadd.s vv23, vv23, vs26
+    vaddi vs18, vs32, 48
+    vlsd vs18, vs18
+    @vp7 vfadd.s vv23, vv23, vs18
     @vp7 vfmul.s vv23, vv23, vv21
-    @vp7 vfadd.s vv23, vv23, vs25
+    vaddi vs18, vs32, 56
+    vlsd vs18, vs18
+    @vp7 vfadd.s vv23, vv23, vs18
     @vp7 vfmul.s vv24, vv21, vv21
     @vp7 vfmul.s vv23, vv23, vv24
     @vp7 vfadd.s vv23, vv23, vv21
-    @vp7 vfadd.s vv23, vv23, vs24
-    @vp7 vsllw vv21, vv22, vs23
+    vaddi vs18, vs32, 64
+    vlsd vs18, vs18
+    @vp7 vfadd.s vv23, vv23, vs18
+    vaddi vs18, vs32, 72
+    vlsd vs18, vs18
+    @vp7 vsllw vv21, vv22, vs18
     @vp7 vaddw vv21, vv21, vv23
     @vp7 vfmul.s vv22, vv21, vs58
     @vp7 vfsub.s vv23, vv10, vs13
@@ -263,36 +287,36 @@ kernel_gpu_opencl_wt:
     @vp7 vfmadd.s vv20, vs12, vv25, vv20
     vadd vs11, vs11, vs46
     vadd vv4, vs11, vs0
-    vcmpeq vp13, vv4, vs56
+    vcmpeq vp11, vv4, vs56
 .Lkernel_gpu_opencl_skip11:
-    vpop vp14, vp7, vp13, vp13, 0x80
-    vpop vp15, vp7, vp13, vp13, 0x02
-    @vp14 vaddw vv21, vv17, vs0
-    @vp14 vaddw vv22, vv18, vs0
-    @vp14 vaddw vv23, vv19, vs0
-    @vp14 vaddw vv24, vv20, vs0
-    vpop vp11, vp11, vp14, vp14, 0xEE
-    vpop vp7, vp7, vp14, vp14, 0x02
-    @vp15 vcjal 1, vs1, .Lkernel_gpu_opencl_loop10
-    @!vp11 vcjal 0, vs1, .Lkernel_gpu_opencl_skip12
-    @vp11 vsxw vv21, vs15, vv1
-    @vp11 vsxw vv22, vs16, vv1
-    @vp11 vsxw vv23, vs17, vv1
-    @vp11 vsxw vv24, vs10, vv1
-    @vp11 vadd vv4, vv3, vs48
+    vpop vp12, vp7, vp11, vp11, 0x80
+    vpop vp13, vp7, vp11, vp11, 0x02
+    @vp12 vaddw vv21, vv17, vs0
+    @vp12 vaddw vv22, vv18, vs0
+    @vp12 vaddw vv23, vv19, vs0
+    @vp12 vaddw vv24, vv20, vs0
+    vpop vp10, vp10, vp12, vp12, 0xEE
+    vpop vp7, vp7, vp12, vp12, 0x02
+    @vp13 vcjal 1, vs1, .Lkernel_gpu_opencl_loop10
+    @!vp10 vcjal 0, vs1, .Lkernel_gpu_opencl_skip12
+    @vp10 vsxw vv21, vs15, vv1
+    @vp10 vsxw vv22, vs16, vv1
+    @vp10 vsxw vv23, vs17, vv1
+    @vp10 vsxw vv24, vs10, vv1
+    @vp10 vadd vv4, vv3, vs48
     vcmpltu vp7, vv3, vs47
     vadd vs9, vs9, vs46
 .Lkernel_gpu_opencl_skip12:
-    vpop vp13, vp11, vp7, vp7, 0x80
-    vpop vp15, vp11, vp7, vp7, 0x02
-    vpop vp10, vp10, vp15, vp15, 0xEE
-    vpop vp6, vp6, vp15, vp15, 0x02
-    @vp13 vadd vv3, vv4, vs0
-    @vp13 vcjal 1, vs1, .Lkernel_gpu_opencl_loop9
-    vpop vp6, vp15, vp15, vp15, 0xAA
-    vpop vp6, vp6, vp10, vp10, 0xEE
+    vpop vp11, vp10, vp7, vp7, 0x80
+    vpop vp12, vp10, vp7, vp7, 0x02
+    vpop vp9, vp9, vp12, vp12, 0xEE
+    vpop vp6, vp6, vp12, vp12, 0x02
+    @vp11 vadd vv3, vv4, vs0
+    @vp11 vcjal 1, vs1, .Lkernel_gpu_opencl_loop9
+    vpop vp6, vp12, vp12, vp12, 0xAA
+    vpop vp6, vp6, vp9, vp9, 0xEE
     vpop vp7, vp6, vp6, vp6, 0xAA
-    vpop vp7, vp7, vp9, vp9, 0xEE
+    vpop vp7, vp7, vp8, vp8, 0xEE
     @!vp7 vcjal 0, vs1, .Lkernel_gpu_opencl_skip13
     vfence
     vadd vs9, vs8, vs46
@@ -300,13 +324,13 @@ kernel_gpu_opencl_wt:
     vadd vv3, vs8, vs0
     vcmplt vp6, vv3, vs10
 .Lkernel_gpu_opencl_skip13:
-    vpop vp9, vp7, vp6, vp6, 0x80
-    vpop vp10, vp7, vp6, vp6, 0x02
-    vpop vp4, vp4, vp10, vp10, 0xEE
-    vpop vp2, vp2, vp10, vp10, 0x02
-    @vp9 vadd vs8, vs9, vs0
-    @vp9 vcjal 1, vs1, .Lkernel_gpu_opencl_loop5
-    vpop vp1, vp10, vp10, vp10, 0xAA
+    vpop vp8, vp7, vp6, vp6, 0x80
+    vpop vp9, vp7, vp6, vp6, 0x02
+    vpop vp4, vp4, vp9, vp9, 0xEE
+    vpop vp2, vp2, vp9, vp9, 0x02
+    @vp8 vadd vs8, vs9, vs0
+    @vp8 vcjal 1, vs1, .Lkernel_gpu_opencl_loop5
+    vpop vp1, vp9, vp9, vp9, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp5, vp5, 0xEE
@@ -323,182 +347,137 @@ kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a7, 1048428
-	addi	a7, a7, -17
+	addi	a7, a7, 2031
 	srli	a7, a7, 1
 	not	a7, a7
 	#APP
 	vsetcfg a7
 	#NO_APP
-	li	a7, 32
+.Lpcrel_hi0:
+	auipc	a7, %pcrel_hi(.Lkernel_gpu_opencl_cpool)
+	addi	a7, a7, %pcrel_lo(.Lpcrel_hi0)
+	li	t0, 32
 	#APP
-	vmcs vs62, a7
+	vmcs vs32, a7
 	#NO_APP
-	li	a7, 16
+	#APP
+	vmcs vs62, t0
+	#NO_APP
 	#APP
 	vmcs vs61, a2
 	#NO_APP
+	li	a2, 16
 	#APP
-	vmcs vs60, a7
+	vmcs vs60, a2
 	#NO_APP
+	lui	a2, 262144
 	#APP
 	vmcs vs59, a1
 	#NO_APP
-	lui	a1, 262144
 	#APP
-	vmcs vs58, a1
+	vmcs vs58, a2
 	#NO_APP
-	li	a1, 100
 	#APP
 	vmcs vs57, a3
 	#NO_APP
+	li	a1, 100
 	#APP
 	vmcs vs56, a1
 	#NO_APP
 	li	a1, 28
-	li	a2, 4
 	#APP
 	vmcs vs55, a1
 	#NO_APP
+	li	a1, 4
 	#APP
-	vmcs vs54, a2
+	vmcs vs54, a1
 	#NO_APP
 	li	a1, 8
-	li	a2, 12
 	#APP
 	vmcs vs53, a1
 	#NO_APP
+	li	a1, 12
 	#APP
-	vmcs vs52, a2
+	vmcs vs52, a1
 	#NO_APP
 	li	a1, 10
-.Lpcrel_hi0:
-	auipc	a2, %pcrel_hi(.L_MergedGlobals)
 	#APP
 	vmcs vs51, a1
 	#NO_APP
-	addi	a1, a2, %pcrel_lo(.Lpcrel_hi0)
+.Lpcrel_hi1:
+	auipc	a1, %pcrel_hi(.L_MergedGlobals)
 	#APP
 	vmcs vs50, a4
 	#NO_APP
+	addi	a1, a1, %pcrel_lo(.Lpcrel_hi1)
 	addi	a2, a1, 400
+	li	a3, 64
 	#APP
 	vmcs vs49, a2
 	#NO_APP
-	li	a2, 64
 	#APP
-	vmcs vs48, a2
+	vmcs vs48, a3
 	#NO_APP
 	li	a2, 36
+	li	a3, 1
 	#APP
 	vmcs vs47, a2
 	#NO_APP
-	li	a2, 1
 	#APP
-	vmcs vs46, a2
+	vmcs vs46, a3
 	#NO_APP
 	#APP
-	vmcs vs45, a2
+	vmcs vs45, a3
 	#NO_APP
 	li	a2, 24
-	li	a3, 2
 	#APP
 	vmcs vs44, a2
 	#NO_APP
+	li	a2, 2
 	#APP
-	vmcs vs43, a3
+	vmcs vs43, a2
 	#NO_APP
-	li	a2, 20
-.Lpcrel_hi1:
-	auipc	a3, %pcrel_hi(kernel_gpu_opencl.rB_shared)
+.Lpcrel_hi2:
+	auipc	a2, %pcrel_hi(kernel_gpu_opencl.rB_shared)
+	li	a3, 20
+	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2)
 	#APP
-	vmcs vs42, a2
+	vmcs vs42, a3
 	#NO_APP
-	addi	a2, a3, %pcrel_lo(.Lpcrel_hi1)
 	#APP
 	vmcs vs41, a2
 	#NO_APP
 	#APP
 	vmcs vs40, a5
 	#NO_APP
+	lui	a2, 24919
 	#APP
 	vmcs vs39, a1
 	#NO_APP
-	lui	a1, 24919
+	slli	a2, a2, 5
 	#APP
 	vmcs vs38, a6
 	#NO_APP
-	slli	a1, a1, 5
 	#APP
-	vmcs vs37, a1
+	vmcs vs37, a2
 	#NO_APP
 	lui	a1, 273152
+	lui	a2, 261003
 	#APP
 	vmcs vs36, a1
 	#NO_APP
-	lui	a1, 261003
-	addi	a1, a1, -1477
-	lui	a2, 308224
+	addi	a1, a2, -1477
 	#APP
 	vmcs vs35, a1
 	#NO_APP
+	li	a1, 813
+	lui	a2, 308224
+	slli	a1, a1, 22
 	#APP
 	vmcs vs34, a2
 	#NO_APP
-	li	a1, 813
-	lui	a2, 258839
-	slli	a1, a1, 22
-	addi	a2, a2, 512
 	#APP
 	vmcs vs33, a1
-	#NO_APP
-	#APP
-	vmcs vs32, a2
-	#NO_APP
-	lui	a1, 220156
-	lui	a2, 234759
-	addi	a1, a1, -370
-	addi	a2, a2, -1689
-	#APP
-	vmcs vs31, a1
-	#NO_APP
-	#APP
-	vmcs vs30, a2
-	#NO_APP
-	lui	a1, 240500
-	lui	a2, 245897
-	addi	a1, a1, 974
-	addi	a2, a2, -1784
-	#APP
-	vmcs vs29, a1
-	#NO_APP
-	#APP
-	vmcs vs28, a2
-	#NO_APP
-	lui	a1, 250539
-	lui	a2, 254635
-	addi	a1, a1, -1599
-	addi	a2, a2, -1366
-	#APP
-	vmcs vs27, a1
-	#NO_APP
-	#APP
-	vmcs vs26, a2
-	#NO_APP
-	lui	a1, 258048
-	lui	a2, 260096
-	#APP
-	vmcs vs25, a1
-	#NO_APP
-	#APP
-	vmcs vs24, a2
-	#NO_APP
-	li	a1, 23
-	li	a2, 656
-	#APP
-	vmcs vs23, a1
-	#NO_APP
-	#APP
-	vmcs vs22, a2
 	#NO_APP
 	beqz	a0, .LBB0_7
 # %bb.1:                                # %stripmine.preheader
@@ -506,19 +485,19 @@ kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	j	.LBB0_3
 .LBB0_2:                                # %stripmine
                                         #   in Loop: Header=BB0_3 Depth=1
-.Lpcrel_hi3:
+.Lpcrel_hi4:
 	auipc	a3, %pcrel_hi(hwacha_vl_short)
 	#APP
 	vsetvl a4, a2
 	#NO_APP
-	ld	a5, %pcrel_lo(.Lpcrel_hi3)(a3)
+	ld	a5, %pcrel_lo(.Lpcrel_hi4)(a3)
 	sltu	a2, a4, a2
 	sub	a0, a0, a4
-.Lpcrel_hi4:
+.Lpcrel_hi5:
 	auipc	a4, %pcrel_hi(kernel_gpu_opencl_wt)
-	addi	a4, a4, %pcrel_lo(.Lpcrel_hi4)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi5)
 	or	a2, a5, a2
-	sd	a2, %pcrel_lo(.Lpcrel_hi3)(a3)
+	sd	a2, %pcrel_lo(.Lpcrel_hi4)(a3)
 	#APP
 	vmcs vs63, a1
 	#NO_APP
@@ -529,9 +508,9 @@ kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	beqz	a0, .LBB0_7
 .LBB0_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-.Lpcrel_hi2:
+.Lpcrel_hi3:
 	auipc	a2, %pcrel_hi(hwacha_group_size)
-	ld	a2, %pcrel_lo(.Lpcrel_hi2)(a2)
+	ld	a2, %pcrel_lo(.Lpcrel_hi3)(a2)
 	mv	a3, a0
 	beqz	a2, .LBB0_5
 # %bb.4:                                # %stripmine
@@ -554,6 +533,23 @@ kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	.size	kernel_gpu_opencl_ct, .Lfunc_end0-kernel_gpu_opencl_ct
 	.cfi_endproc
                                         # -- End function
+	.type	.Lkernel_gpu_opencl_cpool,@object # @kernel_gpu_opencl_cpool
+	.section	.rodata,"a",@progbits
+	.p2align	3, 0x0
+.Lkernel_gpu_opencl_cpool:
+	.quad	1060205056                      # 0x3f317200
+	.quad	901758606                       # 0x35bfbe8e
+	.quad	961571175                       # 0x39506967
+	.quad	985088974                       # 0x3ab743ce
+	.quad	1007192328                      # 0x3c088908
+	.quad	1026206145                      # 0x3d2aa9c1
+	.quad	1042983594                      # 0x3e2aaaaa
+	.quad	1056964608                      # 0x3f000000
+	.quad	1065353216                      # 0x3f800000
+	.quad	23                              # 0x17
+	.quad	656                             # 0x290
+	.size	.Lkernel_gpu_opencl_cpool, 88
+
 	.type	kernel_gpu_opencl.rB_shared,@object # @kernel_gpu_opencl.rB_shared
 	.local	kernel_gpu_opencl.rB_shared
 	.comm	kernel_gpu_opencl.rB_shared,1600,4

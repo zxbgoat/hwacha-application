@@ -1,6 +1,6 @@
 # myocyte
 
-Rodinia `myocyte` 的 OpenCL 内核在 Hwacha 上运行：**kernel_gpu_opencl（group 0 / lane 0 跑 ECC 模型，group 1 / lane 0 跑三次 CaM 模型：一次 ODE 右端项求值）**。
+Rodinia `myocyte` 的 OpenCL 内核在 Hwacha 上运行：**kernel_gpu_opencl（group 0 / lane 0 跑 ECC 模型，group 1 / lane 0 跑三次 CaM 模型：一次 ODE 右端项求值；两个被调函数标为 always_inline）**。
 
 内核文件 `myocyte.cl` 是 Rodinia 3.1 的原版，唯一改动：kernel_ecc / kernel_cam 加了 __attribute__((always_inline))；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 `kernel_gpu_opencl_ct`，host 以 OpenCL host 传给 kernel 的同样参数调用它们。
 
@@ -29,10 +29,6 @@ make gen-myocyte      # 从 .cl 重新生成汇编（clang -> hwacha-cc）
 
 | 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |
 |---|---|---|---|
-| myocyte | 13,591 | 63 | 216x |
+| myocyte | 13,591 | 123 | 110x |
 
-结果：myocyte **FAIL**。
-
-## 已知问题
-
-kernel 只是分发器，两个约千行的被调函数不内联时 hwacha-cc 不生成其代码，强制内联后又超出 64 个 vs 寄存器；见 `../known-issues/README.md`。
+结果：myocyte **PASS**。
