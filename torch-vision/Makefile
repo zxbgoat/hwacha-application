@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 # Build / run the torchvision classification cases, one directory per model.
 # Each <model>/ holds <model>_tv.s (hwacha-cc assembly), tv_main.c (generic host), hwlib.s (library
 # kernels), <model>_tv_check.bin (input + PyTorch reference, embedded via .incbin) and the weights:
