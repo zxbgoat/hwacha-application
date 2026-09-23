@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Write a README.md into every case directory of torch-module / torch-function / torch-vision / deformable /
-rodinia / polybench, from the
+rodinia / polybench / deepbench, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
 import sys, os, re, struct, inspect, warnings, importlib.util
@@ -305,6 +305,38 @@ elif d == 'polybench':
             sc = {k: int(c) for k, w, c in cyc if w == 'scalar'}; sref = next(iter(sc.values()), None)
             for k, w, c in cyc:
                 if w == 'hwacha-cc': t += f'| {k} | {sref:,} | {int(c):,} | {sref / int(c):.0f}x |\n' if sref else f'| {k} | | {int(c):,} | |\n'
+            t += '\n'
+        if verdicts: t += '结果：' + '，'.join(f'{k} **{v}**' for k, v in verdicts) + '。\n'
+        write(case, t)
+
+elif d == 'deepbench':
+    info = {'gemm': ('GEMM', 'gemm_bench：cublasSgemm 语义的单精度 GEMM，列主序，问题集里的 NN / TN / NT 三种转置组合各一个内核（gemm_nn / gemm_tn / gemm_nt），每个 C 元素一个 work-item', 'training 与 inference 集的 7 个形状，缩小 16–128 倍'),
+            'gemm-int8': ('GEMM（int8 推理）', 'gemm_bench inference int8：cublasGemmEx CUDA_R_8I x CUDA_R_8I -> CUDA_R_32I，内核 gemm_i8 做 int8 乘、int32 累加，比对精确', 'inference server / device 集的 6 个形状，缩小 16–64 倍'),
+            'conv': ('卷积', 'conv_bench：cuDNN 的前向（conv_fwd）、反向数据（conv_bwd_data）、反向权重（conv_bwd_filter），NCHW、互相关；直接卷积形式，每个输出元素一个 work-item，归约循环在 lane 内', 'training 集中 VGG / ResNet / Inception / DeepSpeech 的 5 个层，通道与批缩小'),
+            'rnn-vanilla': ('vanilla RNN', 'rnn_bench "vanilla"：cuDNN CUDNN_RNN_RELU、单层单向、CUDNN_SKIP_INPUT（输入直接进单元，无输入权重矩阵）；h_t = ReLU(x_t + R h_{t-1} + b)，每个时间步一次启动，每个 (batch, unit) 一个 work-item', 'training 集的 3 个形状（隐层 1760–2560）缩小'),
+            'rnn-lstm': ('LSTM', 'rnn_bench "lstm"：cuDNN CUDNN_LSTM（门序 i, f, o, g）、单层单向、SKIP_INPUT；每个 work-item 算自己单元的四个门点积，sigmoid / tanh 用 exp 展开', 'training 集的 3 个形状（隐层 512–2048）缩小'),
+            'rnn-gru': ('GRU', 'rnn_bench "gru"：cuDNN CUDNN_GRU（门序 r, z, h，h\' = tanh(x + r * (R_h h + b_Rh) + b_Wh)）、单层单向、SKIP_INPUT', 'training 集的 3 个形状（隐层 1024–2816）缩小'),
+            'sparse-gemm': ('稀疏 GEMM', 'sparse_bench：cusparseScsrmm，A 为 CSR（稀疏度 0.9 / 0.95，按 DeepBench 的方式由均匀随机数阈值化生成）、B 稠密，alpha = 1/k、beta = 0；内核 csrmm 每个 C 元素一个 work-item，沿行的非零元循环', 'inference server / device 集的 5 个形状缩小 32–64 倍')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        title, kern, size = info.get(case, (case, '', ''))
+        line = R.get(case, '')
+        runs = re.findall(r'(?:^|\s)' + re.escape(case) + r' (.*?): scalar (\d+) cycles, hwacha-cc (\d+) cycles', line)
+        verdicts = re.findall(r'(?:^|\s)(' + re.escape(case) + r') (PASS|FAIL)', line)
+        entries = sorted(set(re.findall(r'^\s*([A-Za-z_0-9]+_ct):', open(os.path.join(D, case, f'{case}.s')).read(), re.M)))
+        t = f'# {case}\n\n'
+        t += f'DeepBench 的 **{title}** 在 Hwacha 上运行：{kern}。\n\n'
+        t += f'DeepBench（baidu-research/DeepBench）本身没有内核，它在 `code/kernels/*.h` 的问题集上调用厂商库（cuDNN / cuBLAS / cuSPARSE / MKL ...）；`{case}.cl` 是按该库的语义为 hwacha-cc 写的 OpenCL 实现。hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 ' + '、'.join(f'`{e}`' for e in entries) + '。\n\n'
+        t += f'问题规模：{size}（`{case}_main.c` 的 `shapes[]`，每项注明对应的 DeepBench 原形状与缩放比）。输入由固定种子的伪随机数生成；host 对每个形状先在 Rocket 标量核上跑 C 参考实现，再跑 Hwacha 内核，逐元素比对并打印两侧周期数。\n\n'
+        extra = [(f'`{case}.cl`', '按 DeepBench 所调用库的语义写的 OpenCL 内核'),
+                 (f'`{case}_main.c`', '裸机 host：问题形状表、输入、标量参考、调用 Hwacha 内核、比对并打印 PASS/FAIL 与周期数'),
+                 ('`common.h`', '伪随机数、rdcycle、REPORT、NDRANGE1/2 启动宏、check_f、percentDiff、__errno 与陷阱桩')]
+        t += '## 文件\n\n' + files_table(case, f'{case}.s', extra)
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 .cl 重新生成汇编（需要 hwacha-cc）\n```\n\n'
+        t += '## Spike 结果\n\n'
+        if runs:
+            t += '| 形状（DeepBench 原形状与缩放） | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |\n|---|---|---|---|\n'
+            for shape, sc, hw in runs: t += f'| {shape} | {int(sc):,} | {int(hw):,} | {int(sc) / int(hw):.0f}x |\n'
             t += '\n'
         if verdicts: t += '结果：' + '，'.join(f'{k} **{v}**' for k, v in verdicts) + '。\n'
         write(case, t)
