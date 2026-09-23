@@ -24,7 +24,7 @@ static void ref_kernel(void) {
   }
 }
 int main(void) {
-  for (int i = 0; i < M; i++) for (int j = 0; j < N; j++) { A[i*N + j] = refa[i*N + j] = (float)(((i*j) % M) / M) * 100 + 10; Q[i*N + j] = refq[i*N + j] = 0; }
+  for (int i = 0; i < M; i++) for (int j = 0; j < N; j++) { A[i*N + j] = refa[i*N + j] = ((float)((i*j) % M) / M) * 100 + 10; Q[i*N + j] = refq[i*N + j] = 0; }
   for (int i = 0; i < N; i++) for (int j = 0; j < N; j++) R[i*N + j] = refr[i*N + j] = 0;
   unsigned long c0 = cyc(); ref_kernel(); unsigned long c1 = cyc();
   REPORT("gramschmidt scalar", c0, c1, (long)M*N*N);

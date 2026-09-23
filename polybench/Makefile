@@ -1,5 +1,6 @@
-# Build / run the PolyBench/GPU OpenCL cases, one directory per application.
-# Each <app>/ holds <app>.cl (the unmodified PolyBench/GPU kernel), <app>.s (hwacha-cc's assembly of it),
+# Build / run the PolyBench cases, one directory per application.
+# Each <app>/ holds <app>.cl (the unmodified PolyBench/GPU 1.0 kernel, or the kernel written from the
+# PolyBenchC-4.2.1 loop nest for the 12 cases the GPU suite lacks), <app>.s (hwacha-cc's assembly of it),
 # <app>_main.c (bare-metal host: builds the inputs, runs the kernels, checks against a scalar
 # reference and prints <app> PASS/FAIL with cycle counts) and common.h.
 #

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torch-module / torch-function / torch-vision, from the
+"""Write a README.md into every case directory of torch-module / torch-function / torch-vision / deformable /
+rodinia / polybench, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
 import sys, os, re, struct, inspect, warnings, importlib.util
@@ -242,6 +243,70 @@ elif d == 'rodinia':
             t += '\n'
         if verdicts: t += '结果：' + '，'.join(f'{k} **{v}**' for k, v in verdicts) + '。\n'
         if case in issues: t += '\n## 已知问题\n\n' + issues[case] + '\n'
+        write(case, t)
+
+elif d == 'polybench':
+    # (origin, kernels, problem size, host defines): origin 'gpu' = unmodified PolyBench/GPU 1.0 .cl,
+    # 'new' = written for hwacha-cc from the PolyBenchC-4.2.1 loop nest (this suite has no OpenCL version)
+    info = {'2dconv': ('gpu', 'Convolution2D_kernel：3x3 卷积模板，每像素一个 work-item', '64x64', 'NI=64 NJ=64'),
+            '3dconv': ('gpu', 'Convolution3D_kernel：3-D 模板，每个 i 平面一次 (j, k) 二维启动', '16x32x32', 'NI=16 NJ=32 NK=32'),
+            '2mm': ('gpu', 'mm2_kernel1（tmp = alpha*A*B）+ mm2_kernel2（D = tmp*C + beta*D）', '32^4', 'NI=NJ=NK=NL=32'),
+            '3mm': ('gpu', 'mm3_kernel1/2/3：E = A*B，F = C*D，G = E*F', '32^5', 'NI=NJ=NK=NL=NM=32'),
+            'adi': ('gpu', 'adi_kernel1..6：交替方向隐式求解的行 / 列前代回代（N 在 .cl 中为编译期常量，Makefile 传 -DN=64）', '64x64，2 步', 'N=64 TSTEPS=2'),
+            'atax': ('gpu', 'atax_kernel1（tmp = A x）+ atax_kernel2（y = A^T tmp）；内核对 tmp / y 做累加，host 给非零初值', '64x64', 'NX=64 NY=64'),
+            'bicg': ('gpu', 'bicgKernel1（q = A p）+ bicgKernel2（s = A^T r）', '64x64', 'NX=64 NY=64'),
+            'corr': ('gpu', 'mean_kernel、std_kernel、reduce_kernel、corr_kernel：列均值 / 标准差、中心化归一化、相关矩阵', '40x32', 'M=32 N=40'),
+            'covar': ('gpu', 'mean_kernel、reduce_kernel、covar_kernel：列均值、中心化、协方差矩阵', '40x32', 'M=32 N=40'),
+            'fdtd-2d': ('gpu', 'fdtd_kernel1/2/3：ey、ex、hz 三步更新，每个时间步各一次二维启动', '48x48，4 步', 'TMAX=4 NX=48 NY=48'),
+            'gemm': ('gpu', 'gemm：C = alpha*A*B + beta*C，每个 C 元素一个 work-item', '48^3', 'NI=NJ=NK=48'),
+            'gemver': ('gpu', 'gemver_kernel1（A += u1 v1^T + u2 v2^T）、kernel2（x += beta A^T y + z）、kernel3（w += alpha A x）', '64x64', 'N=64'),
+            'gesummv': ('gpu', 'gesummv_kernel：y = alpha*A*x + beta*B*x，每行一个 work-item', '64x64', 'N=64'),
+            'gramschmidt': ('gpu', 'gramschmidt_kernel1/2/3：修正 Gram-Schmidt QR，k 在 host 迭代', '48x48', 'M=48 N=48'),
+            'jacobi-1d': ('gpu', 'runJacobi1D_kernel1（B = 三点平均）+ kernel2（A = B），每步两次启动', '128，8 步', 'N=128 TSTEPS=8'),
+            'jacobi-2d': ('gpu', 'runJacobi2D_kernel1（B = 五点平均）+ kernel2（A = B），每步两次二维启动', '64x64，4 步', 'N=64 TSTEPS=4'),
+            'lu': ('gpu', 'lu_kernel1（第 k 行归一化）+ lu_kernel2（尾部更新），k 在 host 迭代；PolyBench/GPU 的形式（单位上三角 U），与 4.2.1 的 Doolittle 形式不同', '64x64', 'N=64'),
+            'mvt': ('gpu', 'mvt_kernel1（x1 += A y1）+ mvt_kernel2（x2 += A^T y2）', '64x64', 'N=64'),
+            'syr2k': ('gpu', 'syr2k_kernel：C = alpha*A*B^T + alpha*B*A^T + beta*C（内核算整个方阵，比对下三角）', '48x48', 'N=48 M=48'),
+            'syrk': ('gpu', 'syrk_kernel：C = alpha*A*A^T + beta*C（内核算整个方阵，比对下三角）', '48x48', 'N=48'),
+            'symm': ('new', 'symm_kernel：C = alpha*A*B + beta*C，A 对称（存下三角），每个 C 元素一个 work-item，按 kernel_symm 的运算顺序求和', '32x40', 'M=32 N=40'),
+            'trmm': ('new', 'trmm_kernel：B = alpha*A^T*B，A 单位下三角；读未修改的 B 写到另一缓冲区', '32x40', 'M=32 N=40'),
+            'doitgen': ('new', 'doitgen_kernel：A[r][q][:] = A[r][q][:]*C4，每个 (r, q) 一个 work-item，sum 用全局暂存区', '16x16x16', 'NR=NQ=NP=16'),
+            'cholesky': ('new', 'cholesky_kernel1/2/3：右视 Cholesky（列缩放、对角开方、尾部更新），k 在 host 迭代；与 4.2.1 的行视形式做同样的减法、同样的顺序，结果精确', '48x48', 'N=48'),
+            'durbin': ('new', 'durbin_kernel1/2/3：Levinson-Durbin 递推，每步 k 三次启动（单 work-item 推进 alpha/beta/sum，k 个 work-item 算 z 再拷回）', '64', 'N=64'),
+            'ludcmp': ('new', 'ludcmp_kernel1/2（右视 Doolittle LU，k 在 host）+ kernel3/4（按列的前代、回代，每行一次启动）', '48x48', 'N=48'),
+            'trisolv': ('new', 'trisolv_kernel：按列的前代（第 i 行的 work-item 完成 x[i]，其余行减去第 i 列），每行一次启动；减法顺序与 4.2.1 相同，结果精确', '64x64', 'N=64'),
+            'deriche': ('new', 'deriche_kernel1..5：Deriche 递归高斯边缘滤波的四遍 IIR（每行 / 每列一个 work-item）与两次合成（每像素一个）；系数在 host 用 expf/powf 算好传入', '32x32', 'W=32 H=32'),
+            'floyd-warshall': ('new', 'floyd_warshall_kernel：全源最短路，每个中间点 k 一次二维启动（int）', '48x48', 'N=48'),
+            'nussinov': ('new', 'nussinov_kernel：RNA 二级结构打分表，按对角线 d = j - i 逐条启动，对角线上每个元素一个 work-item（int）', '48', 'N=48'),
+            'heat-3d': ('new', 'heat_3d_kernel：7 点三维热传导模板，每个内部 (i, j) 一个 work-item、k 在 lane 内循环，每步两次启动（A->B、B->A）', '16^3，4 步', 'N=16 TSTEPS=4'),
+            'seidel-2d': ('new', 'seidel_2d_kernel：就地 Gauss-Seidel 九点平均，按反对角线 i + j 逐条启动（每条对角线上的元素相互独立）', '32x32，2 步', 'N=32 TSTEPS=2')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        origin, kern, size, defs = info.get(case, ('gpu', '', '', ''))
+        line = R.get(case, '')
+        cyc = re.findall(r'([a-z_0-9-]+) (scalar|hwacha-cc): (\d+) cycles', line); verdicts = re.findall(r'([a-z_0-9-]+) (PASS|FAIL)', line)
+        entries = sorted(set(re.findall(r'^\s*([A-Za-z_0-9]+_ct):', open(os.path.join(D, case, f'{case}.s')).read(), re.M)))
+        t = f'# {case}\n\n'
+        t += f'PolyBench `{case}` 在 Hwacha 上运行：**{kern}**。\n\n'
+        if origin == 'gpu':
+            t += f'内核文件 `{case}.cl` 是 PolyBench/GPU 1.0 的原版 OpenCL 内核，未做修改'
+        else:
+            t += f'PolyBench/GPU 没有这个 case 的 OpenCL 版本：`{case}.cl` 是按 PolyBenchC-4.2.1 的 `kernel_{case.replace("-", "_")}` 循环嵌套为 hwacha-cc 改写的 OpenCL 内核，保持原公式与浮点运算顺序'
+        t += f'；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 ' + '、'.join(f'`{e}`' for e in entries) + f'，host 按原 host 的顺序（依赖型算法把外层循环留在 host，每次迭代启动一个小内核）调用。\n\n'
+        t += f'问题规模：{size}（`{case}_main.c` 中 `{defs}`），输入与标量按 PolyBenchC-4.2.1 的 `init_array`。host 先在 Rocket 标量核上跑 C 参考实现，再跑 Hwacha 内核，逐元素比对并打印 PASS/FAIL 与周期数。\n\n'
+        extra = [(f'`{case}.cl`', 'PolyBench/GPU 原版 OpenCL 内核' if origin == 'gpu' else '按 PolyBenchC-4.2.1 改写的 OpenCL 内核'),
+                 (f'`{case}_main.c`', '裸机 host：构造输入、标量参考、调用 Hwacha 内核、比对并打印 PASS/FAIL 与周期数'),
+                 ('`common.h`', '伪随机数、rdcycle、REPORT、NDRANGE1/2 启动宏、check_f、percentDiff、__errno 与陷阱桩')]
+        t += '## 文件\n\n' + files_table(case, f'{case}.s', extra)
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 .cl 重新生成汇编（需要 hwacha-cc）\n```\n\n'
+        t += '## Spike 结果\n\n'
+        if cyc:
+            t += '| 内核 | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |\n|---|---|---|---|\n'
+            sc = {k: int(c) for k, w, c in cyc if w == 'scalar'}; sref = next(iter(sc.values()), None)
+            for k, w, c in cyc:
+                if w == 'hwacha-cc': t += f'| {k} | {sref:,} | {int(c):,} | {sref / int(c):.0f}x |\n' if sref else f'| {k} | | {int(c):,} | |\n'
+            t += '\n'
+        if verdicts: t += '结果：' + '，'.join(f'{k} **{v}**' for k, v in verdicts) + '。\n'
         write(case, t)
 
 elif d == 'deformable':
