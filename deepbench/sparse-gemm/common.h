@@ -38,6 +38,37 @@ static long hwacha_last_group;   // the group size the last launch asked for (0 
 #define NDRANGE2(ng0, ng1, ls0, ls1) (hwacha_ls0 = (ls0), hwacha_ls1 = (ls1), hwacha_ng0 = (ng0), hwacha_ng1 = (ng1), \
                                       hwacha_last_group = hwacha_group_size = (long)(ls0) * (ls1), hwacha_vl_short = 0, (long)(ng0) * (ng1) * (ls0) * (ls1))
 #define CEILDIV(a, b) (((a) + (b) - 1) / (b))
+
+// IEEE half precision on the host (gcc 9.2 for riscv64 has no _Float16): the bit pattern in a uint16_t,
+// conversions with round-to-nearest-even, as Hwacha's vfcvt.h.s / vfcvt.s.h (Spike cvt16.cc). A half
+// arithmetic op on Hwacha is the single-precision op followed by this rounding (vfadd.h etc.), so
+// f16(f32 op) reproduces it exactly.
+typedef uint16_t f16;
+static inline f16 f32_to_f16(float f) {
+  uint32_t x; memcpy(&x, &f, 4);
+  uint32_t sign = (x >> 16) & 0x8000u; int32_t exp = (int32_t)((x >> 23) & 0xff) - 127 + 15; uint32_t mant = x & 0x7fffffu;
+  if (((x >> 23) & 0xff) == 0xff) return (f16)(sign | 0x7c00u | (mant ? 0x200u : 0));   // inf / nan
+  if (exp >= 0x1f) return (f16)(sign | 0x7c00u);                                          // overflow -> inf
+  if (exp <= 0) {                                                                          // subnormal / zero
+    if (exp < -10) return (f16)sign;
+    mant |= 0x800000u; uint32_t shift = (uint32_t)(14 - exp);
+    uint32_t h = mant >> shift, rem = mant & ((1u << shift) - 1), half = 1u << (shift - 1);
+    if (rem > half || (rem == half && (h & 1))) h++;
+    return (f16)(sign | h);
+  }
+  uint32_t h = sign | ((uint32_t)exp << 10) | (mant >> 13), rem = mant & 0x1fffu;
+  if (rem > 0x1000u || (rem == 0x1000u && (h & 1))) h++;   // may carry into the exponent: correct
+  return (f16)h;
+}
+static inline float f16_to_f32(f16 h) {
+  uint32_t sign = ((uint32_t)h & 0x8000u) << 16, exp = (h >> 10) & 0x1f, mant = h & 0x3ffu, x;
+  if (exp == 0x1f) x = sign | 0x7f800000u | (mant << 13);
+  else if (exp == 0) { if (mant == 0) x = sign; else { int e = -1; do { e++; mant <<= 1; } while (!(mant & 0x400u)); x = sign | ((uint32_t)(127 - 15 - e) << 23) | ((mant & 0x3ffu) << 13); } }
+  else x = sign | ((exp + 127 - 15) << 23) | (mant << 13);
+  float f; memcpy(&f, &x, 4); return f;
+}
+static inline float h_round(float f) { return f16_to_f32(f32_to_f16(f)); }   // a half arithmetic result
+
 static int check_f(const char *tag, const float *hw, const float *ref, long n, float rtol) {
   float mx = 0; for (long i = 0; i < n; i++) if (fabsf(ref[i]) > mx) mx = fabsf(ref[i]);
   int bad = 0; float md = 0;

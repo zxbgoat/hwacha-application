@@ -316,6 +316,9 @@ elif d == 'deepbench':
             'rnn-vanilla': ('vanilla RNN', 'rnn_bench "vanilla"：cuDNN CUDNN_RNN_RELU、单层单向、CUDNN_SKIP_INPUT（输入直接进单元，无输入权重矩阵）；h_t = ReLU(x_t + R h_{t-1} + b)，每个时间步一次启动，每个 (batch, unit) 一个 work-item', 'training 集的 3 个形状（隐层 1760–2560）缩小'),
             'rnn-lstm': ('LSTM', 'rnn_bench "lstm"：cuDNN CUDNN_LSTM（门序 i, f, o, g）、单层单向、SKIP_INPUT；每个 work-item 算自己单元的四个门点积，sigmoid / tanh 用 exp 展开', 'training 集的 3 个形状（隐层 512–2048）缩小'),
             'rnn-gru': ('GRU', 'rnn_bench "gru"：cuDNN CUDNN_GRU（门序 r, z, h，h\' = tanh(x + r * (R_h h + b_Rh) + b_Wh)）、单层单向、SKIP_INPUT', 'training 集的 3 个形状（隐层 1024–2816）缩小'),
+            'gemm-fp16': ('GEMM（fp16）', 'gemm_bench "half" 精度：cublasGemmEx 16F 输入输出、32F 计算（DeepBench 的 "FP16 inputs / FP32 math"）；内核 gemm_nn / gemm_tn / gemm_nt 用 vlxh + vfcvt.s.h 装载、vfmadd.s 累加、vfcvt.h.s 一次舍入写回；gemm_nn_h 是纯半精度算术（vfmadd.h，每步一次舍入），参考按同样的舍入建模，全部精确', '与 gemm 相同的 6 个形状，另加 2 个纯半精度算术'),
+            'conv-fp16': ('卷积（fp16）', 'conv_bench "half" 精度：CUDNN_DATA_HALF 张量、float 计算；与 conv 相同的三个方向，半精度装载、单精度累加、写回时一次舍入', '与 conv 相同的 5 个层'),
+            'rnn-lstm-fp16': ('LSTM（fp16）', 'rnn_bench "lstm" 的 "half" 精度：x / R / b / h / c 都是 half，门运算在 float 中进行，h_t / c_t 以 half 存回（下一步读回时已量化，与 cuDNN 的 half 状态一致）', '与 rnn-lstm 相同的 3 个形状'),
             'sparse-gemm': ('稀疏 GEMM', 'sparse_bench：cusparseScsrmm，A 为 CSR（稀疏度 0.9 / 0.95，按 DeepBench 的方式由均匀随机数阈值化生成）、B 稠密，alpha = 1/k、beta = 0；内核 csrmm 每个 C 元素一个 work-item，沿行的非零元循环', 'inference server / device 集的 5 个形状缩小 32–64 倍')}
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue

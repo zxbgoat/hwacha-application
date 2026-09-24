@@ -18,7 +18,7 @@ CC      := $(ROOT)/chipyard/.conda-env/esp-tools/bin/riscv64-unknown-elf-gcc
 CLANG   := $(HOME)/miniforge3/bin/clang
 HWCC    := $(ROOT)/hwacha-cc/build/hwacha-cc
 SPIKE   := $(ROOT)/install/bin/spike --isa=rv64gc --extension=hwacha
-CLFLAGS := -x cl -cl-std=CL1.2 -Xclang -finclude-default-header -Xclang -cl-ext=+cl_khr_fp64 --target=riscv64-unknown-elf \
+CLFLAGS := -x cl -cl-std=CL1.2 -Xclang -finclude-default-header -Xclang -cl-ext=+cl_khr_fp64,+cl_khr_fp16 --target=riscv64-unknown-elf \
            -march=rv64gc -O2 -fno-vectorize -fno-slp-vectorize -fno-unroll-loops -emit-llvm -S
 CFLAGS  := -DPREALLOCATE=1 -mcmodel=medany -static -std=gnu99 -O2 -fno-common -fno-builtin-printf \
            -fno-tree-loop-distribute-patterns -fno-math-errno -march=rv64gcxhwacha -mabi=lp64d \
