@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torch-module / torch-function / torch-vision / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchvision / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -74,7 +74,7 @@ def flags(case):
     return open(p).read().strip() if os.path.exists(p) else ''
 R = results()
 
-if d == 'torch-module':
+if d == 'torchnn':
     em = load(os.path.join('/home/tesla/hwacha-compiler/hwacha-cc/test/modules', 'export_module.py'), 'em')
     src = open(em.__file__).read().split('\n')
     def line_of(layer):
@@ -117,7 +117,7 @@ if d == 'torch-module':
         t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
         write(case, t)
 
-elif d == 'torch-function':
+elif d == 'torchfunc':
     ef = load(os.path.join(D, 'export_function.py'), 'ef')
     src = open(ef.__file__).read()
     docs = 'https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.%s.html'
@@ -437,7 +437,7 @@ elif d == 'deformable':
         t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
         write(case, t)
 
-elif d == 'torch-vision':
+elif d == 'torchvision':
     import torchvision, torchvision.models as M
     models = {}
     for l in open(os.path.join(D, 'models.txt')):

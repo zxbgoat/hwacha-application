@@ -6,9 +6,9 @@ data) that builds with the RISC-V GNU toolchain and runs on Spike.
 
 | directory | what | cases |
 |---|---|---|
-| `torch-module/` | single `torch.nn` layers | 121 |
-| `torch-function/` | `torch.nn.functional` functions | 111 |
-| `torch-vision/` | torchvision models (classification, segmentation, detection, video, optical flow) | 107 |
+| `torchnn/` | single `torch.nn` layers | 121 |
+| `torchfunc/` | `torch.nn.functional` functions | 111 |
+| `torchvision/` | torchvision models (classification, segmentation, detection, video, optical flow) | 107 |
 | `deformable/` | Deformable ConvNets (deform conv / PS-RoI ops, DeepLab, R-FCN, Faster R-CNN, FPN, each plain and deformable) | 20 |
 | `rodinia/` | Rodinia 3.1 OpenCL benchmarks compiled directly by hwacha-cc, with bare-metal hosts (16 pass, 3 documented compiler limits, 2 without assembly) | 21 |
 

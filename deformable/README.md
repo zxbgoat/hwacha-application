@@ -3,7 +3,7 @@
 The models of github.com/msracver/Deformable-ConvNets (Dai et al., ICCV 2017; MXNet, ResNet-101
 backbone) rebuilt in PyTorch and run through torch-mlir -> hwacha-mlir -> hwacha-cc, one directory per
 model, each checked on Spike against PyTorch's own forward (random weights, fixed seed, 64x64 inputs).
-The directory layout, host (`tv_main.c`), linker script and Makefile are those of `../torch-vision`.
+The directory layout, host (`tv_main.c`), linker script and Makefile are those of `../torchvision`.
 
 ## The operators (`dcn_ops.py`)
 
@@ -31,13 +31,13 @@ written with plain tensor ops and checked against torchvision to 1e-7:
 | rcnn, rcnn_dcn (+ `_coco`) | Faster R-CNN (2fc): conv5 dilated, RoI pooling (7x7 average) of 3 fixed RoIs, fc 1024 x2, cls / box; `_dcn`: deformable conv5 + deformable RoI pooling (per-bin offsets from a fc) | RPN cls + box maps, cls and box scores |
 | fpn, fpn_dcn | FPN on ResNet-101 (P2-P6) with the shared RPN head; `_dcn`: deformable conv5 | the RPN head outputs of all levels |
 
-As in `../torch-vision`, the detectors' proposal selection / NMS are data-dependent and are not
+As in `../torchvision`, the detectors' proposal selection / NMS are data-dependent and are not
 exported: RoIs are fixed, and the RPN head outputs are part of what is compared. The repo's training
 details (OHEM, Soft-NMS, multi-scale test) are test/training-time procedures without a place in a
 single forward. Weights are random (the MXNet `.params` are not loaded): the test certifies that the
 Hwacha forward reproduces PyTorch's, not the paper's accuracy.
 
-`make` / `make run` / `make <case>` / `make <case>.spike` / `make gen-<case>` as in torch-vision.
+`make` / `make run` / `make <case>` / `make <case>.spike` / `make gen-<case>` as in torchvision.
 
 ## Results (2026-09-22)
 

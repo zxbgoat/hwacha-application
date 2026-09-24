@@ -11,7 +11,7 @@ import torchvision.models as M
 from torch_mlir import fx
 sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 from dcn_ops import deform_conv2d_ref, ps_roi_pool_ref, deform_ps_roi_pool_ref
-import export_tv_patch  # numpy constant path + streaming print (see torch-vision/export_tv.py)
+import export_tv_patch  # numpy constant path + streaming print (see torchvision/export_tv.py)
 
 class DeformConv(nn.Module):
     """3x3 deformable conv (DCN v1) as in the paper: the offsets are predicted by a 3x3 conv on the

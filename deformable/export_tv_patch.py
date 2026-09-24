@@ -1,4 +1,4 @@
-"""torch-mlir fx importer patch shared with torch-vision/export_tv.py: constant tensors go through numpy
+"""torch-mlir fx importer patch shared with torchvision/export_tv.py: constant tensors go through numpy
 instead of tensor.tolist() (one Python object per element)."""
 import numpy as np, torch
 import inspect, torch_mlir.extras.fx_importer as _fxi
