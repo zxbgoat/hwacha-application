@@ -3,8 +3,10 @@
 to linalg-on-tensors, plus a PyTorch reference for one call. Every case is a single-input module
 net(x) -> one float tensor (second operands are constant buffers, integer results are cast to float),
 so the generic host mod_main.c drives them all.       usage: export_intf.py <fn> <mlir_out> <check_out>"""
-import sys, struct, numpy as np, torch
+import sys, os, struct, numpy as np, torch
 from torch_mlir import fx
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from intf_linalg import add_linalg
 
 class Case(torch.nn.Module):
     """net(x) = body(self, x); every tensor in `bufs` becomes a constant buffer of the module"""
@@ -139,6 +141,8 @@ def build(fn):
         t = (beta / 2) ** 2 * (1 - r * r)                                # (z/2)^2 with z = beta sqrt(1 - r^2)
         return x * (i0_series(t) / i0_beta)
     rcase('kaiser', kaiser_body, lambda s, x: x * W.kaiser(M, beta=beta), R(4, M), n=torch.arange(M).float())
+    # ---- torch.linalg (docs.pytorch.org/docs/2.14/linalg.html): intf_linalg.py
+    add_linalg(case, rcase, R)
     if fn == '--list': return sorted(C)
     if fn not in C: raise SystemExit('unknown function ' + fn)
     return C[fn]()

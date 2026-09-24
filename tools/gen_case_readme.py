@@ -462,6 +462,52 @@ elif d == 'torchintf':
                 'kaiser': 'kaiser(16, beta=12.0)', 'nuttall': 'nuttall(16)'}
     for w, c in wincalls.items(): calls[w] = (f'x * torch.signal.windows.{c}', '给 4 行、长 16 的信号加窗；窗函数没有张量输入，窗在导出图里按定义计算（cos / sin / exp / pow / abs 在 Hwacha 上求值）')
     rewritten['kaiser'] = '`torch.i0`（零阶修正贝塞尔函数）在 torch-mlir 中没有 lowering。导出图用幂级数 I0(z) = Σ_k (z/2)^{2k} / (k!)^2 按 Horner 法则算 30 项（beta = 12 时 z/2 <= 6，float32 下与 torch.i0 相差 < 1e-6），分母 I0(beta) 是常量。'
+    lacalls = {'norm': ('torch.linalg.norm(x)', '4x4 矩阵的 Frobenius 范数'), 'vector_norm': ('torch.linalg.vector_norm(x)', '4x4 矩阵全部元素的 2 范数'),
+               'matrix_norm': ('torch.linalg.matrix_norm(x)', '默认 Frobenius 范数'), 'diagonal': ('torch.linalg.diagonal(x)', '4x4 矩阵的对角线'),
+               'det': ('torch.linalg.det(x)', '4x4 对角占优矩阵'), 'slogdet': ('torch.linalg.slogdet(x)', '输出 [sign, logabsdet]'),
+               'cond': ('torch.linalg.cond(x)', '2 范数条件数 = σmax / σmin'), 'matrix_rank': ('torch.linalg.matrix_rank(x, rtol=1e-3)', '6x4、秩 3 的矩阵，输出 3'),
+               'cholesky': ('torch.linalg.cholesky(x)', '4x4 对称正定矩阵，输出下三角 L'), 'qr': ('torch.linalg.qr(x)', '输出 [Q | R]（4x8）'),
+               'lu': ('torch.linalg.lu(x)', '输出 [L | U]（4x8），P 为单位置换'), 'lu_factor': ('torch.linalg.lu_factor(x)', '输出紧凑的 LU（L 的严格下三角 + U）'),
+               'eigh': ('torch.linalg.eigh(x)', '4x4 对称矩阵，输出 [V | w]（4x5），特征值升序，特征向量符号按第一分量归一'), 'eigvalsh': ('torch.linalg.eigvalsh(x)', '升序特征值'),
+               'eig': ('torch.linalg.eig(x)', '对称输入（实特征值），输出 [V | Re w]（4x5），按实部升序、符号按第一分量归一'), 'eigvals': ('torch.linalg.eigvals(x)', '对称输入，特征值实部升序'),
+               'svd': ('torch.linalg.svd(x)', '输出 [U | σ | Vh]（4x9），σ 降序，V 的列符号按第一分量归一（U 随之）'), 'svdvals': ('torch.linalg.svdvals(x)', '降序奇异值'),
+               'solve': ('torch.linalg.solve(x, B)', 'B 为 4x2 常量'), 'solve_triangular': ('torch.linalg.solve_triangular(x, B, upper=True)', '输入上三角矩阵，B 为 4x2 常量'),
+               'lu_solve': ('torch.linalg.lu_solve(LU, pivots, x)', '输入为右端项 B（4x2），LU 与 pivots 是常量（lu_factor 的结果）'),
+               'lstsq': ('torch.linalg.lstsq(x, B).solution', '6x4 满列秩矩阵，B 为 6x3 常量'), 'inv': ('torch.linalg.inv(x)', '4x4 对角占优矩阵'),
+               'pinv': ('torch.linalg.pinv(x)', '6x4 满列秩矩阵'), 'matrix_exp': ('torch.linalg.matrix_exp(x)', '4x4 矩阵'), 'matrix_power': ('torch.linalg.matrix_power(x, 3)', '4x4 矩阵'),
+               'cross': ('torch.linalg.cross(x, y)', '4 个三维向量与常量 y 的叉积'), 'matmul': ('torch.linalg.matmul(x, y)', 'y 为 4x4 常量'), 'vecdot': ('torch.linalg.vecdot(x, y)', '逐行点积，y 为 4x4 常量'),
+               'multi_dot': ('torch.linalg.multi_dot([x, y, z])', 'y 4x3、z 3x4 常量'), 'householder_product': ('torch.linalg.householder_product(x, tau)', '6x3 的反射向量与常量 tau，输出 H 的前 3 列'),
+               'tensorinv': ('torch.linalg.tensorinv(x, ind=1)', '输入 4x2x2，输出 2x2x4'), 'tensorsolve': ('torch.linalg.tensorsolve(x, B)', '输入 2x2x4，B 为 2x2 常量，输出 4'),
+               'vander': ('torch.linalg.vander(x)', '长 4 的向量，输出 4x4 范德蒙德矩阵'),
+               'cholesky_ex': ('torch.linalg.cholesky_ex(x)[0]', 'info = 0（导出时断言），比对 L'), 'inv_ex': ('torch.linalg.inv_ex(x)[0]', 'info = 0，比对逆'),
+               'solve_ex': ('torch.linalg.solve_ex(x, B)[0]', 'info = 0，B 为 4x2 常量'), 'lu_factor_ex': ('torch.linalg.lu_factor_ex(x)[0]', 'info = 0，比对紧凑 LU'),
+               'ldl_factor': ('torch.linalg.ldl_factor(x)[0]', '对称正定输入，pivots 为单位置换，比对 LD 的下三角'), 'ldl_factor_ex': ('torch.linalg.ldl_factor_ex(x)[0]', 'info = 0，比对 LD 的下三角'),
+               'ldl_solve': ('torch.linalg.ldl_solve(LD, pivots, x)', '输入为右端项 B（4x2），LD 与 pivots 是常量')}
+    calls.update(lacalls)
+    lanote = {'inv': 'Newton–Schulz 迭代 X <- X (2I - A X)，X0 = Aᵀ / (‖A‖₁‖A‖∞)，30 次，每次两个 4x4 矩阵乘',
+              'lu': '无主元的 Gauss 消元（三个 Gauss 变换 I - l_k e_kᵀ，掩码取列 k 主元下方）；输入对角占优，LAPACK 也不选主元（导出时断言 pivots 为单位置换）',
+              'tri': '三角矩阵求逆用幂零级数精确展开：(I + N)⁻¹ = I - N + N² - N³（N 严格三角，N⁴ = 0）；上三角 U = D (I + M)',
+              'jacobi': '循环 Jacobi 旋转（10 遍 x 6 个 (p, q) 对，旋转角用稳定公式 t = 2a_pq·sgn(d) / (|d| + √(d² + 4a_pq²))），特征值用"比它小的个数"做名次的置换矩阵排序，特征向量符号按第一分量归一（参考同样归一）',
+              'svd': 'Jacobi 求 AᵀA 的特征分解得 V 与 σ = √w（降序），U = A V / σ；参考 svd 的 V 列符号同样按第一分量归一、U 随之',
+              'cat': '多个输出用矩阵乘拼接：[A | B] = A @ [I 0] + B @ [0 I]（常量 buffer），不用 tensor.concat'}
+    def la(*keys, extra=''): return '`torch.linalg` 的分解与求解在 torch-mlir 中没有 lowering（LAPACK 类算子）。导出图是定长的 linalg 组合：' + '；'.join(lanote[k] for k in keys) + ('；' + extra if extra else '') + '。'
+    lare = {'norm': '`aten.linalg_norm` 的 lowering 失败；导出图用 √Σx²。', 'vector_norm': '导出的图是基于 pow 的归约，hwacha-mlir 不生成内核（no kernels found）；导出图改用 √Σx²。', 'matrix_norm': '导出的图是基于 pow 的归约，hwacha-mlir 不生成内核（no kernels found）；导出图改用 √Σx²。', 'det': la('lu', extra='det = Π diag(U)'), 'slogdet': la('lu', extra='sign = Π sgn(u_ii)、logabsdet = Σ log|u_ii|，两个标量经 one-hot 拼成长 2 的向量'),
+            'cond': la('jacobi', 'svd', extra='cond = σ₀ / σ₃'), 'matrix_rank': la('jacobi', 'svd', extra='rank = #{σ > rtol·σmax}，秩 3 的 6x4 矩阵'),
+            'cholesky': la('lu', extra='对称正定矩阵 A = L D Lᵀ，D = diag(U)，Cholesky 因子 = L·√D'), 'cholesky_ex': la('lu', extra='同 cholesky，info 恒为 0'),
+            'qr': '改进 Gram–Schmidt（逐列投影、归一，Q = Σ q_j e_jᵀ，R = QᵀA）。' + lanote['cat'] + '。LAPACK 的 Householder QR 允许 R 对角为负，参考按 sgn(diag R) 把 Q 的列、R 的行归一到 diag(R) > 0。',
+            'lu': la('lu', 'cat'), 'lu_factor': la('lu', extra='输出 L - I + U'), 'lu_factor_ex': la('lu', extra='输出 L - I + U，info 恒为 0'),
+            'eigh': la('jacobi', 'cat'), 'eigvalsh': la('jacobi'), 'eig': la('jacobi', 'cat', extra='输入对称，参考的复特征值取实部按升序排列、特征向量取实部并归一符号'), 'eigvals': la('jacobi', extra='参考取实部升序'),
+            'svd': la('jacobi', 'svd', 'cat'), 'svdvals': la('jacobi', 'svd'),
+            'solve': la('inv', extra='X = A⁻¹B'), 'solve_ex': la('inv', extra='X = A⁻¹B，info 恒为 0'), 'inv': la('inv'), 'inv_ex': la('inv', extra='info 恒为 0'),
+            'solve_triangular': la('tri'), 'lu_solve': la('tri', extra='X = U⁻¹ L⁻¹ B，L、U 取自常量 LU'), 'lstsq': la('inv', extra='满列秩：解 = (AᵀA)⁻¹AᵀB'), 'pinv': la('inv', extra='满列秩：pinv = (AᵀA)⁻¹Aᵀ'),
+            'matrix_exp': '`aten.linalg_matrix_exp` 没有 lowering。导出图用缩放平方：exp(A) = (exp(A/4))⁴，exp(A/4) 用 Horner 法则算 15 项 Taylor。',
+            'cross': '`aten.linalg_cross` 的 lowering 要求最后一维为 3 且形状匹配；导出图用常量下标的 `index_select` 写出叉积公式 x[i1]·y[i2] - x[i2]·y[i1]。',
+            'householder_product': '`aten.linalg_householder_product` 没有 lowering。导出图显式相乘 H = Π (I - τ_i v_i v_iᵀ)，v_i 由输入第 i 列取 i 以下的分量并令 v_i[i] = 1。',
+            'tensorinv': la('inv', extra='先 reshape 成 4x4 求逆再 reshape 回 2x2x4'), 'tensorsolve': la('inv', extra='reshape 成 4x4 后 x = A⁻¹b'),
+            'vander': '`torch.vander` 会 lower 成 `tm_tensor.scan`（cumprod）；导出图用重复相乘得到 x⁰..x³，再经 one-hot 外积拼成矩阵。',
+            'ldl_factor': la('lu', extra='对称正定矩阵 A = L D Lᵀ：LD = (L - I) + diag(U)，sytrf 对此输入不选主元（导出时断言）'), 'ldl_factor_ex': la('lu', extra='同 ldl_factor，info 恒为 0'),
+            'ldl_solve': la('tri', extra='X = L⁻ᵀ D⁻¹ L⁻¹ B，L、D 取自常量 LD')}
+    rewritten.update(lare)
     rewritten['fftfreq'] = rewritten['rfftfreq'] = '`aten.fft_fftfreq` / `aten.fft_rfftfreq` 在 torch-mlir 中没有 lowering。频率向量本就是常量，导出图把它作为 buffer 加到输入上。'
     rewritten['fftshift'] = rewritten['ifftshift'] = '`torch.roll` 会 lower 成 slice + concat；导出图用常量下标向量的 `index_select` 逐维做同样的循环移位。'
     rewritten['topk'] = '`aten.topk` 在 torch-mlir 中 lower 成 `tm_tensor.sort`，hwacha-mlir 不接受（与 `../torchfunc` 的 fold / max_unpool 同一限制）。导出图用等价的 linalg 组合：每个元素的名次 = 本行中严格大于它的元素个数（随机数据无并列），名次为 i 的元素用 one-hot 求和选出：`values_i = sum_j x_j [rank_j == i]`，`indices_i = sum_j j [rank_j == i]`。每行 O(N^2) 次比较而不是排序，值与下标都精确。'
@@ -471,7 +517,7 @@ elif d == 'torchintf':
         with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
         call, note = calls.get(case, (f'torch.{case}(x)', ''))
         t = f'# {case}\n\n'
-        qual = f'fft.{case}' if case in rewritten and rewritten[case] is fftnote or case in ('fftshift', 'ifftshift', 'fftfreq', 'rfftfreq') else f'signal.windows.{case}' if case in wincalls else case
+        qual = f'fft.{case}' if case in rewritten and rewritten[case] is fftnote or case in ('fftshift', 'ifftshift', 'fftfreq', 'rfftfreq') else f'signal.windows.{case}' if case in wincalls else f'linalg.{case}' if case in lacalls else case
         t += f'`torch.{qual}` 的单函数测试，一次调用，与 PyTorch 逐元素比对。文档：{docs % qual}\n\n'
         t += f'调用：`{call}`' + (f'（{note}）' if note else '') + '\n\n'
         if case in rewritten: t += f'**注意**：本 case 的导出图与参考不是同一段代码。{rewritten[case]} `check.bin` 中的参考值仍由真正的 `torch.{qual}` 算出，导出前脚本断言两者一致。\n\n'
