@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Write a README.md into every case directory of torch-module / torch-function / torch-vision / deformable /
-rodinia / polybench / deepbench, from the
+rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
 import sys, os, re, struct, inspect, warnings, importlib.util
@@ -342,6 +342,56 @@ elif d == 'deepbench':
         if runs:
             t += '| 形状（DeepBench 原形状与缩放） | 标量 Rocket 周期 | Hwacha 周期 | 加速比 |\n|---|---|---|---|\n'
             for shape, sc, hw in runs: t += f'| {shape} | {int(sc):,} | {int(hw):,} | {int(sc) / int(hw):.0f}x |\n'
+            t += '\n'
+        if verdicts: t += '结果：' + '，'.join(f'{k} **{v}**' for k, v in verdicts) + '。\n'
+        write(case, t)
+
+elif d == 'shoc':
+    # (SHOC level, kernel description, problem size, notes)
+    info = {'triad': ('level1', 'Triad（Triad.cpp 内嵌的内核）：C = A + s*B，每元素一个 work-item，s = 1.75', '64 / 128 / 256 KB 三种块大小（SHOC 到 16 MB）', ''),
+            'reduction': ('level1', 'reduce（每个 work-group 把跨步切片累加进 __local，树形归约后写一个部分和，host 相加）+ reduceNoLocal（SHOC 给工作组大小为 1 的设备的备用内核）', '16384 个 float（i % 3），64 个 work-group', ''),
+            'scan': ('level1', 'reduce + top_scan + bottom_scan：三段前缀和（每组区域求和、单组扫描组和、每组以组和为种子按 4 元素向量扫描），按 Scan.cpp 的顺序启动', '16384 个 float，64 个 work-group x 64', ''),
+            'sort': ('level1', 'reduce + top_scan + bottom_scan：LSD 基数排序，4 位数字、8 趟，每趟三次启动，两个缓冲区乒乓', '16384 个 uint（i % 16），64 个 work-group x 32', 'clang 以 -Xclang -disable-llvm-passes 编译：-O2 的 GlobalOpt 会把 top_scan 的 __local int s_seed 变成每 lane 的私有值'),
+            'spmv': ('level1', 'spmv_csr_scalar_kernel（每行一个 work-item）、spmv_csr_vector_kernel（每行 vecWidth 个 work-item，__local 部分和树形归约）、spmv_ellpackr_kernel（列主序 ELLPACK-R）', '256 x 256、1% 非零（util.h initRandomMatrix），值与 x 均匀分布于 [0, 10)', ''),
+            'md': ('level1', 'compute_lj_force：Lennard-Jones 力，每原子一个 work-item，邻居表转置存放（neighList[j*inum + idx]）；邻居表按 MD.cpp 的方式取最近的 maxNeighbors 个原子', '512 个原子（SHOC 12288），128 个邻居，cutsq 16、lj1 1.5、lj2 2.0', 'float4 位置 / 力由 hwacha-cc 的 scalarizer 拆成标量'),
+            'md5hash': ('level1', 'FindKeyWithDigest_Kernel：在密钥空间里暴力搜索 MD5 摘要等于目标的密钥，每个 work-item 处理 valsPerByte 个连续密钥', '4 字节 x 10 个取值 = 10^4 个密钥（SHOC 7 x 10），3 个随机目标', 'clang 以 -Dinline=static 编译保留 md5_2words 的定义；LEFTROTATE 形成的 llvm.fshl 由 hwacha-cc 展开'),
+            'stencil2d': ('level1', 'StencilKernel（每个 work-item 从 __local 的带 halo 分块算 LROWS 行）+ CopyRect（把左右 halo 列搬到新缓冲区），每次迭代交换缓冲区', '66 x 66（64 x 64 内部），10 次迭代（SHOC 1000），权重 0.25 / 0.15 / 0.05', ''),
+            'bfs': ('level1', 'BFS_kernel_warp（bfs_iiit.cl）：逐层同步 BFS，每个 warp 扫 CHUNK_SZ 个顶点、按 lane 展开邻居，flag 告知 host 是否还有下一层；bfs_uiuc_spill.cl 的 5 个内核也编进了 bfs.s，但未写 host', '2048 个顶点的 GenerateSimpleKWayGraph（度 2），源点 0', 'hwacha-cc 新增 get_num_groups(0)'),
+            'fft': ('level1', 'fft1D_512 / ifft1D_512（64 个 work-item 一组做一个 512 点复数 FFT：基 8 三遍、旋转因子、两次经 __local 的转置）+ chk1D_512（SHOC 的自检内核）', '8 个 512 点 FFT（SHOC 256 个），后半批是前半批的副本', 'float2 由 scalarizer 拆开；旋转因子的 sin / cos 由 hwacha-cc 新增的展开实现'),
+            'gemm': ('level1', 'sgemmNN / sgemmNT（源自 MAGMA：16 x 4 的 work-group 算 64 x 16 的 C 分块，A 每 work-item 暂存 4 个元素，B 经 __local 16 x 17 分块），alpha = 1、beta = -1', '128 x 128（SHOC 256），输入均匀分布于 [0.5, 2)', '已知限制：内核要求 64 lane 的 work-group（分块映射写死），在 Hwacha 上需要 <= 32 个向量寄存器，而 k 循环里 16 个 C 累加器 + 4 个 A 值 + 地址长期活跃（hwacha-cc 分配 65 个，maxvl 24），溢出器无法驱逐跨循环活跃的值；组被拆成三个 stripmine，经 barrier 的 B 分块读到错误的 lane，结果错误（host 报告 hwacha_vl_short）'),
+            's3d': ('level2', '27 个内核（gr_base、ratt..ratt10、rdsmh、ratx、ratxb、ratx2、ratx4、qssa、qssab、qssa2、rdwdot..rdwdot10）按 S3D.cpp 的两阶段顺序启动：22 种组分、206 个反应的化学动力学右端项（组分生成率 WDOT）', '64 个网格点（N_GP 编进内核，-DN_GP=64）；p 1.0132e6、T 1000、y 按 S3D.cpp', 'SHOC 不校验 S3D；这里把同一批 .cl 编成 C（s3d_ref.c）做参考，全部 6 个输出数组相对误差 < 1e-6；exp10 由 hwacha-cc 新增的展开实现')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        level, kern, size, note = info.get(case, ('', '', '', ''))
+        line = R.get(case, '')
+        cyc = []   # every "<label>: N cycles" / "<label> N cycles" the host printed (the hosts use several formats)
+        for m in re.finditer(r'(\d+) cycles', line):
+            pre = re.sub(r'\d+\.\d+ cyc/elem', '|', line[:m.start()])
+            segs = [x.strip().rstrip(':').strip() for x in re.split(r'[,|()]', pre) if x.strip()]
+            lab = segs[-1] if segs else ''
+            if case not in lab:
+                ctx = next((x for x in reversed(segs) if case in x), '')
+                if ctx: lab = ctx.split(':')[0].strip() + ' / ' + lab
+            cyc.append((lab[:80], int(m.group(1))))
+        verdicts = re.findall(r'(?:^|\s)(' + re.escape(case) + r') (PASS|FAIL)', line)
+        entries = sorted(set(re.findall(r'^\s*([A-Za-z_0-9]+_ct):', open(os.path.join(D, case, f'{case}.s')).read(), re.M)))
+        cls = sorted(f for f in os.listdir(os.path.join(D, case)) if f.endswith('.cl'))
+        t = f'# {case}\n\n'
+        t += f'SHOC {level} `{case}` 在 Hwacha 上运行：**{kern}**。\n\n'
+        t += f'内核文件（' + '、'.join(f'`{c}`' for c in cls) + '）是 SHOC 的原版，未做修改（多文件的基准由一个同名 .cl #include 汇总）；hwacha-cc 把每个 work-item 映射到一个 Hwacha lane，生成的入口是控制线程函数 ' + '、'.join(f'`{e}`' for e in entries) + f'，host 按 SHOC host 的启动顺序与工作组形状调用（__local 缓冲区是 host 数组：每个 work-group 独占一个 stripmine）。\n\n'
+        t += f'问题规模：{size}（`{case}_main.c`）。输入按 SHOC host 的方式生成（固定种子）；host 先在 Rocket 标量核上跑参考实现，再跑 Hwacha 内核，按 SHOC 的判据比对并打印 PASS/FAIL 与周期数。\n\n'
+        if note: t += f'说明：{note}。\n\n'
+        extra = [(f'`{c}`', 'SHOC 原版 OpenCL 内核' + ('（汇总 #include）' if c == f'{case}.cl' and len(cls) > 1 else '')) for c in cls]
+        extra += [(f'`{case}_main.c`', '裸机 host：构造输入、标量参考、调用 Hwacha 内核、比对并打印 PASS/FAIL 与周期数'),
+                  ('`common.h`', '伪随机数、rdcycle、REPORT、NDRANGE1/2 启动宏、check_f、__errno 与陷阱桩')]
+        if os.path.exists(os.path.join(D, case, f'{case}_ref.c')): extra.append((f'`{case}_ref.c`', '标量参考' + ('：同一批 .cl 编成 C' if case == 's3d' else '：SHOC host 侧的 md5_2words / IndexToKey')))
+        if os.path.exists(os.path.join(D, case, f'{case}_ref.h')): extra.append((f'`{case}_ref.h`', '参考实现的声明'))
+        t += '## 文件\n\n' + files_table(case, f'{case}.s', extra)
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 .cl 重新生成汇编（需要 hwacha-cc）\n```\n\n'
+        t += '## Spike 结果\n\n'
+        if cyc:
+            t += '| 项 | 周期 |\n|---|---|\n'
+            for lab, c in cyc: t += f'| {lab} | {c:,} |\n'
             t += '\n'
         if verdicts: t += '结果：' + '，'.join(f'{k} **{v}**' for k, v in verdicts) + '。\n'
         write(case, t)
