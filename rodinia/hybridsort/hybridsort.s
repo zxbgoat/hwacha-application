@@ -23,7 +23,7 @@ histogram1024Kernel_wt:
     @vp1 vand vv4, vv3, vs49
     @vp1 vsll vv5, vv4, vs50
     vaddw vv9, vs0, vs0
-    @vp1 vsxw vv9, vs60, vv5
+    @vp1 vsxw vv9, vs59, vv5
     @vp1 vadd vv3, vs62, vv4
     vcmpltu vp2, vv3, vs48
     vpop vp5, vp1, vp2, vp2, 0x80
@@ -50,7 +50,7 @@ histogram1024Kernel_wt:
     @vp1 vsll vv5, vv4, vs46
     @vp1 vsra vv5, vv5, vs46
     @vp1 vsll vv6, vv5, vs50
-    @vp1 vlxw vv8, vs59, vv6
+    @vp1 vlxw vv8, vs60, vv6
     @vp1 vfsub.s vv8, vv8, vs51
     @vp1 vfdiv.s vv8, vv8, vv9
     @vp1 vfmul.s vv8, vv8, vs45
@@ -63,12 +63,12 @@ histogram1024Kernel_wt:
     vpop vp3, vp1, vp1, vp1, 0xAA
     vpclear vp5
 .Lhistogram1024Kernel_loop4:
-    @vp3 vlxw vv8, vs60, vv6
+    @vp3 vlxw vv8, vs59, vv6
     @vp3 vand vv8, vv8, vs43
     @vp3 vaddw vv8, vv8, vs42
     @vp3 vor vv8, vv8, vv7
-    @vp3 vsxw vv8, vs60, vv6
-    @vp3 vlxw vv10, vs60, vv6
+    @vp3 vsxw vv8, vs59, vv6
+    @vp3 vlxw vv10, vs59, vv6
     vcmpeq vp6, vv10, vv8
     vpop vp7, vp3, vp6, vp6, 0x80
     vpop vp8, vp3, vp6, vp6, 0x02
@@ -107,7 +107,7 @@ histogram1024Kernel_wt:
     vpclear vp5
 .Lhistogram1024Kernel_loop8:
     vsll vs4, vs2, vs38
-    vadd vs4, vs60, vs4
+    vadd vs4, vs59, vs4
     @vp3 vlxw vv8, vs4, vv5
     @vp3 vand vv8, vv8, vs43
     @vp3 vaddw vv7, vv8, vv7
@@ -360,12 +360,12 @@ bucketsort_wt:
     @vp1 vlxw vv7, vs56, vv3
     @vp1 vaddw vv8, vv5, vs2
     @vp1 vsll vv3, vv8, vs48
-    @vp1 vlxw vv8, vs58, vv3
+    @vp1 vlxw vv8, vs59, vv3
     @vp1 vaddw vv8, vv8, vv7
     @vp1 vsll vv3, vv2, vs49
     @vp1 vsra vv3, vv3, vs49
     @vp1 vsll vv4, vv3, vs48
-    @vp1 vsxw vv8, vs59, vv4
+    @vp1 vsxw vv8, vs57, vv4
     @vp1 vadd vv2, vs60, vv3
     vcmplt vp2, vv2, vs46
     vpop vp5, vp1, vp2, vp2, 0x80
@@ -401,13 +401,13 @@ bucketsort_wt:
     @vp1 vand vv8, vv7, vs43
     @vp1 vor vv8, vv8, vv6
     @vp1 vsll vv4, vv8, vs48
-    @vp1 vlxw vv9, vs59, vv4
+    @vp1 vlxw vv9, vs57, vv4
     @vp1 vsraw vv7, vv7, vs55
     @vp1 vaddw vv9, vv9, vv7
     vsll vv4, vv9, vs49
     vsrl vv4, vv4, vs49
     @vp1 vsll vv4, vv4, vs48
-    @vp1 vsxw vv5, vs57, vv4
+    @vp1 vsxw vv5, vs58, vv4
     @vp1 vadd vv3, vv3, vs2
     vcmplt vp3, vv3, vs50
     vadd vs4, vs4, vs42
@@ -440,10 +440,10 @@ histogram1024Kernel_ct:                 # @histogram1024Kernel_ct
 	#NO_APP
 	addi	a4, a5, %pcrel_lo(.Lpcrel_hi0)
 	#APP
-	vmcs vs60, a4
+	vmcs vs60, a2
 	#NO_APP
 	#APP
-	vmcs vs59, a2
+	vmcs vs59, a4
 	#NO_APP
 	li	a2, 5
 	li	a4, -1024
@@ -873,18 +873,18 @@ bucketsort_ct:                          # @bucketsort_ct
 	addi	a7, a7, 1013
 	srli	a7, a7, 1
 	not	a7, a7
-.Lpcrel_hi11:
-	auipc	t0, %pcrel_hi(bucketsort.s_offset)
 	#APP
 	vsetcfg a7
 	#NO_APP
-	addi	a7, t0, %pcrel_lo(.Lpcrel_hi11)
 	#APP
-	vmcs vs59, a7
+	vmcs vs59, a5
 	#NO_APP
+.Lpcrel_hi11:
+	auipc	a5, %pcrel_hi(bucketsort.s_offset)
 	#APP
-	vmcs vs58, a5
+	vmcs vs58, a3
 	#NO_APP
+	addi	a3, a5, %pcrel_lo(.Lpcrel_hi11)
 	#APP
 	vmcs vs57, a3
 	#NO_APP

@@ -90,8 +90,8 @@ kmeans_swap_wt_r0_b0:
     @vp2 vsll vv2, vv1, vs58
     @vp2 vadd vv1, vv0, vs4
     @vp2 vsll vv3, vv1, vs58
-    @vp2 vlxw vv5, vs62, vv2
-    @vp2 vsxw vv5, vs61, vv3
+    @vp2 vlxw vv5, vs61, vv2
+    @vp2 vsxw vv5, vs62, vv3
     vstop
     .globl kmeans_swap_wt_a0
 kmeans_swap_wt_a0:
@@ -324,11 +324,11 @@ kmeans_swap_ct:                         # @kmeans_swap_ct
 	vsetcfg a5
 	#NO_APP
 	#APP
-	vmcs vs62, a1
+	vmcs vs62, a2
 	#NO_APP
 	sext.w	a3, a3
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a1
 	#NO_APP
 	#APP
 	vmcs vs60, a3

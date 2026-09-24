@@ -34,8 +34,8 @@ GICOV_kernel_wt_r0_b1:
     @vp2 vmulw vv9, vv9, vs53
     @vp2 vaddw vv8, vv8, vv9
     @vp2 vsll vv1, vv8, vs52
-    @vp2 vlxw vv9, vs61, vv1
-    @vp2 vlxw vv8, vs62, vv1
+    @vp2 vlxw vv9, vs60, vv1
+    @vp2 vlxw vv8, vs61, vv1
     @vp2 vfmul.s vv8, vv8, vs5
     @vp2 vfmadd.s vv9, vv9, vs4, vv8
     @vp2 vfadd.s vv7, vv7, vv9
@@ -61,7 +61,7 @@ GICOV_kernel_wt_a0:
     @vp2 vmulw vv3, vv3, vs53
     @vp2 vaddw vv3, vv3, vv4
     @vp2 vsll vv1, vv3, vs52
-    @vp2 vsxw vv2, vs60, vv1
+    @vp2 vsxw vv2, vs62, vv1
 .LGICOV_kernel_skip1:
     vpop vp1, vp2, vp2, vp2, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
@@ -228,9 +228,9 @@ GICOV_kernel_ct:                        # @GICOV_kernel_ct
 	.cfi_offset s3, -32
 	.cfi_offset s4, -40
 	.cfi_offset s5, -48
-	lw	t0, 56(sp)
+	ld	t0, 48(sp)
 	lui	t1, 1048503
-	ld	t2, 48(sp)
+	lw	t2, 56(sp)
 	addi	t1, t1, -5
 	lw	t3, 64(sp)
 	srli	t1, t1, 1
@@ -239,19 +239,19 @@ GICOV_kernel_ct:                        # @GICOV_kernel_ct
 	vsetcfg t1
 	#NO_APP
 	#APP
-	vmcs vs62, a3
+	vmcs vs62, t0
 	#NO_APP
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a3
 	#NO_APP
 	#APP
-	vmcs vs60, t2
+	vmcs vs60, a2
 	#NO_APP
 	#APP
 	vmcs vs59, t3
 	#NO_APP
 	#APP
-	vmcs vs58, t0
+	vmcs vs58, t2
 	#NO_APP
 	li	a2, 22
 	li	a3, 150

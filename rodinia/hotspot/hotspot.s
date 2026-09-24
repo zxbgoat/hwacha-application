@@ -49,7 +49,7 @@ hotspot_wt:
     vpop vp6, vp3, vp5, vp5, 0x02
     @!vp2 vcjal 0, vs1, .Lhotspot_skip1
     @vp2 vsll vv4, vv25, vs38
-    @vp2 vlxw vv23, vs58, vv4
+    @vp2 vlxw vv23, vs57, vv4
     @vp2 vmul vv4, vs3, vv2
     @vp2 vsub vv4, vs0, vv4
     @vp2 vsub vv4, vv4, vv1
@@ -61,7 +61,7 @@ hotspot_wt:
     @vp2 vadd vv4, vv4, vv5
     @vp2 vsxw vv23, vs62, vv4
     @vp2 vsll vv4, vv25, vs38
-    @vp2 vlxw vv23, vs57, vv4
+    @vp2 vlxw vv23, vs58, vv4
     @vp2 vmul vv4, vs3, vv2
     @vp2 vsub vv4, vs0, vv4
     @vp2 vsub vv4, vv4, vv1
@@ -71,7 +71,7 @@ hotspot_wt:
     @vp2 vadd vv4, vv4, vv5
     @vp2 vsll vv5, vv0, vs38
     @vp2 vadd vv4, vv4, vv5
-    @vp2 vsxw vv23, vs59, vv4
+    @vp2 vsxw vv23, vs61, vv4
 .Lhotspot_skip1:
     vpop vp3, vp2, vp2, vp2, 0xAA
     vpop vp3, vp3, vp6, vp6, 0xEE
@@ -218,7 +218,7 @@ hotspot_wt:
     vpop vp13, vp10, vp4, vp4, 0x02
     @!vp13 vcjal 0, vs1, .Lhotspot_skip6
     @vp13 vlxw vv19, vs62, vv6
-    @vp13 vlxw vv20, vs59, vv8
+    @vp13 vlxw vv20, vs61, vv8
     @vp13 vlxw vv21, vs62, vv9
     @vp13 vlxw vv22, vs62, vv10
     @vp13 vfadd.s vv21, vv21, vv22
@@ -232,7 +232,7 @@ hotspot_wt:
     @vp13 vfsub.s vv21, vs34, vv19
     @vp13 vfmadd.s vv21, vv21, vv18, vv20
     @vp13 vfmadd.s vv21, vv15, vv21, vv19
-    @vp13 vsxw vv21, vs61, vv5
+    @vp13 vsxw vv21, vs60, vv5
 .Lhotspot_skip6:
     vpop vp4, vp13, vp13, vp13, 0xAA
     vpop vp4, vp4, vp12, vp12, 0xEE
@@ -253,7 +253,7 @@ hotspot_wt:
     vpop vp4, vp13, vp10, vp10, 0x80
     vpop vp11, vp13, vp10, vp10, 0x02
     @!vp4 vcjal 0, vs1, .Lhotspot_skip8
-    @vp4 vlxw vv19, vs61, vv12
+    @vp4 vlxw vv19, vs60, vv12
     @vp4 vsxw vv19, vs62, vv13
 .Lhotspot_skip8:
     vpop vp10, vp4, vp4, vp4, 0xAA
@@ -277,9 +277,9 @@ hotspot_wt:
     @vp2 vadd vv2, vv2, vv4
     @vp2 vsll vv1, vv0, vs38
     @vp2 vadd vv2, vv2, vv1
-    @vp2 vlxw vv15, vs61, vv2
+    @vp2 vlxw vv15, vs60, vv2
     @vp2 vsll vv1, vv25, vs38
-    @vp2 vsxw vv15, vs60, vv1
+    @vp2 vsxw vv15, vs59, vv1
 .Lhotspot_skip9:
     vpop vp3, vp2, vp2, vp2, 0xAA
     vpop vp3, vp3, vp4, vp4, 0xEE
@@ -311,30 +311,30 @@ hotspot_ct:                             # @hotspot_ct
 	#APP
 	vmcs vs33, t1
 	#NO_APP
-	addi	t1, t2, 256
 	#APP
 	vmcs vs62, t2
 	#NO_APP
+	addi	t1, t2, 256
+	addi	t2, t2, 512
 	#APP
 	vmcs vs61, t1
 	#NO_APP
 	#APP
-	vmcs vs60, a4
+	vmcs vs60, t2
 	#NO_APP
-	addi	a4, t2, 512
 	#APP
 	vmcs vs59, a4
 	#NO_APP
 	#APP
-	vmcs vs58, a3
+	vmcs vs58, a2
 	#NO_APP
 .Lpcrel_hi2:
-	auipc	a3, %pcrel_hi(hwacha_ls0)
+	auipc	a2, %pcrel_hi(hwacha_ls0)
 	fmv.x.s	a4, fa4
 	#APP
-	vmcs vs57, a2
+	vmcs vs57, a3
 	#NO_APP
-	addi	a2, a3, %pcrel_lo(.Lpcrel_hi2)
+	addi	a2, a2, %pcrel_lo(.Lpcrel_hi2)
 .Lpcrel_hi3:
 	auipc	a3, %pcrel_hi(hwacha_ls1)
 	fmv.x.s	t1, fa0
@@ -541,8 +541,8 @@ hwacha_vl_short:
 	.comm	.L_MergedGlobals,768,4
 hotspot.temp_on_cuda = .L_MergedGlobals
 	.size	hotspot.temp_on_cuda, 256
-hotspot.temp_t = .L_MergedGlobals+256
-	.size	hotspot.temp_t, 256
-hotspot.power_on_cuda = .L_MergedGlobals+512
+hotspot.power_on_cuda = .L_MergedGlobals+256
 	.size	hotspot.power_on_cuda, 256
+hotspot.temp_t = .L_MergedGlobals+512
+	.size	hotspot.temp_t, 256
 	.section	".note.GNU-stack","",@progbits

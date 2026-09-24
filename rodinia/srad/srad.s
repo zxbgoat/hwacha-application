@@ -61,10 +61,10 @@ prepare_kernel_wt:
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lprepare_kernel_skip0
     @vp2 vsll vv2, vv1, vs57
-    @vp2 vlxw vv3, vs62, vv2
-    @vp2 vsxw vv3, vs60, vv2
+    @vp2 vlxw vv3, vs61, vv2
+    @vp2 vsxw vv3, vs62, vv2
     @vp2 vfmul.s vv4, vv3, vv3
-    @vp2 vsxw vv4, vs61, vv2
+    @vp2 vsxw vv4, vs60, vv2
 .Lprepare_kernel_skip0:
     vpop vp1, vp2, vp2, vp2, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
@@ -376,35 +376,35 @@ srad_kernel_wt:
     @vp2 vaddw vv4, vv4, vv3
     @vp2 vaddw vv3, vv6, vs50
     @vp2 vsll vv1, vv2, vs49
-    @vp2 vlxw vv5, vs61, vv1
+    @vp2 vlxw vv5, vs62, vv1
     vadd vs2, vs48, vs47
     @vp2 vsll vv1, vv6, vs49
     @vp2 vlxw vv7, vs2, vv1
     @vp2 vmulw vv8, vv4, vs51
     @vp2 vaddw vv7, vv8, vv7
     @vp2 vsll vv1, vv7, vs49
-    @vp2 vlxw vv7, vs61, vv1
+    @vp2 vlxw vv7, vs62, vv1
     @vp2 vfsub.s vv7, vv7, vv5
     vadd vs2, vs46, vs47
     @vp2 vsll vv1, vv6, vs49
     @vp2 vlxw vv6, vs2, vv1
     @vp2 vaddw vv6, vv6, vv8
     @vp2 vsll vv1, vv6, vs49
-    @vp2 vlxw vv6, vs61, vv1
+    @vp2 vlxw vv6, vs62, vv1
     @vp2 vfsub.s vv6, vv6, vv5
     @vp2 vsll vv1, vv4, vs49
-    @vp2 vlxw vv8, vs59, vv1
+    @vp2 vlxw vv8, vs57, vv1
     @vp2 vmulw vv8, vv8, vs51
     @vp2 vaddw vv8, vv8, vv3
     @vp2 vsll vv1, vv8, vs49
-    @vp2 vlxw vv8, vs61, vv1
+    @vp2 vlxw vv8, vs62, vv1
     @vp2 vfsub.s vv8, vv8, vv5
     @vp2 vsll vv1, vv4, vs49
-    @vp2 vlxw vv4, vs57, vv1
+    @vp2 vlxw vv4, vs60, vv1
     @vp2 vmulw vv4, vv4, vs51
     @vp2 vaddw vv4, vv4, vv3
     @vp2 vsll vv1, vv4, vs49
-    @vp2 vlxw vv3, vs61, vv1
+    @vp2 vlxw vv3, vs62, vv1
     @vp2 vfsub.s vv3, vv3, vv5
     @vp2 vfmul.s vv4, vv6, vv6
     @vp2 vfmadd.s vv4, vv7, vv7, vv4
@@ -443,12 +443,12 @@ srad_kernel_wt:
     @vp4 vaddw vv5, vs0, vs0
     @!vp1 vcjal 0, vs1, .Lsrad_kernel_skip1
     @vp1 vsll vv1, vv2, vs49
-    @vp1 vsxw vv7, vs56, vv1
-    @vp1 vsxw vv6, vs55, vv1
-    @vp1 vsxw vv8, vs62, vv1
+    @vp1 vsxw vv7, vs55, vv1
+    @vp1 vsxw vv6, vs61, vv1
+    @vp1 vsxw vv8, vs59, vv1
     @vp1 vsll vv1, vv2, vs49
-    @vp1 vsxw vv3, vs60, vv1
-    @vp1 vsxw vv5, vs58, vv1
+    @vp1 vsxw vv3, vs58, vv1
+    @vp1 vsxw vv5, vs56, vv1
 .Lsrad_kernel_skip1:
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp3, vp3, 0xEE
@@ -744,13 +744,13 @@ prepare_kernel_ct:                      # @prepare_kernel_ct
 	vsetcfg a5
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a3
 	#NO_APP
 	#APP
-	vmcs vs61, a4
+	vmcs vs61, a2
 	#NO_APP
 	#APP
-	vmcs vs60, a3
+	vmcs vs60, a4
 	#NO_APP
 	li	a2, 6
 	#APP
@@ -1063,15 +1063,15 @@ reduce_kernel_ct:                       # @reduce_kernel_ct
 srad_kernel_ct:                         # @srad_kernel_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	ld	a2, 8(sp)
+	ld	a2, 0(sp)
 	ld	t0, 16(sp)
-	ld	t1, 24(sp)
+	ld	t1, 40(sp)
 	lui	t2, 1048510
-	ld	t3, 40(sp)
+	ld	t3, 8(sp)
 	addi	t2, t2, 1019
-	ld	t4, 32(sp)
+	ld	t4, 24(sp)
 	srli	t2, t2, 1
-	ld	t5, 0(sp)
+	ld	t5, 32(sp)
 	not	t2, t2
 	#APP
 	vsetcfg t2
@@ -1083,16 +1083,16 @@ srad_kernel_ct:                         # @srad_kernel_ct
 	vmcs vs61, t3
 	#NO_APP
 	#APP
-	vmcs vs60, t0
+	vmcs vs60, a6
 	#NO_APP
 	#APP
-	vmcs vs59, a7
+	vmcs vs59, t4
 	#NO_APP
 	#APP
-	vmcs vs58, t4
+	vmcs vs58, t0
 	#NO_APP
 	#APP
-	vmcs vs57, a6
+	vmcs vs57, a7
 	#NO_APP
 	#APP
 	vmcs vs56, t5

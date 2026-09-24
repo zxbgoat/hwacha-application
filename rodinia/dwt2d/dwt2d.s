@@ -12,29 +12,29 @@ c_CopySrcToComponents_wt:
     vmul vs2, vs59, vs60
     vaddw vv3, vs2, vv1
     vmulw vv4, vv3, vs51
-    vlxb vv5, vs55, vv4
+    vlxb vv5, vs56, vv4
     vmul vv2, vv1, vs50
     vsra vv2, vv2, vs49
-    vsxb vv5, vs52, vv2
-    vadd vs2, vs55, vs48
-    vlxb vv5, vs2, vv4
-    vsxb vv5, vs54, vv2
-    vadd vs2, vs55, vs47
+    vsxb vv5, vs55, vv2
+    vadd vs2, vs56, vs48
     vlxb vv5, vs2, vv4
     vsxb vv5, vs58, vv2
+    vadd vs2, vs56, vs47
+    vlxb vv5, vs2, vv4
+    vsxb vv5, vs54, vv2
     vfence
     vcmplt vp1, vv3, vs45
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lc_CopySrcToComponents_skip0
-    @vp2 vlxbu vv4, vs58, vv2
-    @vp2 vlxbu vv5, vs54, vv2
-    @vp2 vlxbu vv6, vs52, vv2
+    @vp2 vlxbu vv4, vs54, vv2
+    @vp2 vlxbu vv5, vs58, vv2
+    @vp2 vlxbu vv6, vs55, vv2
     @vp2 vaddw vv7, vv6, vs44
     @vp2 vsll vv2, vv3, vs47
-    @vp2 vsxw vv7, vs56, vv2
+    @vp2 vsxw vv7, vs57, vv2
     @vp2 vaddw vv6, vv5, vs44
-    @vp2 vsxw vv6, vs57, vv2
+    @vp2 vsxw vv6, vs52, vv2
     @vp2 vaddw vv5, vv4, vs44
     @vp2 vsll vv2, vv3, vs47
     @vp2 vsxw vv5, vs53, vv2
@@ -97,7 +97,7 @@ cl_fdwt53Kernel_wt:
     vdivu vv6, vv3, vs4
     vssw vs49, vs50
     vssw vs47, vs48
-    vssw vs54, vs0
+    vssw vs56, vs0
     vssw vs46, vs0
     vssw vs45, vs0
     vssw vs44, vs0
@@ -8476,7 +8476,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp7 vsll vv6, vv35, vs4
-    @vp7 vlxw vv23, vs56, vv6
+    @vp7 vlxw vv23, vs55, vv6
     @vp7 vaddw vv35, vv35, vv36
     vcmpeq vp5, vv35, vv28
     vaddi vs4, vs32, 32
@@ -8489,7 +8489,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp7 vsll vv6, vv38, vs4
-    @vp7 vlxw vv35, vs56, vv6
+    @vp7 vlxw vv35, vs55, vv6
     @vp7 vaddw vv38, vv38, vv37
     vcmpeq vp5, vv38, vv28
     vaddi vs4, vs32, 32
@@ -8500,7 +8500,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp7 vsll vv6, vv36, vs4
-    @vp7 vlxw vv28, vs56, vv6
+    @vp7 vlxw vv28, vs55, vv6
 .Lcl_fdwt53Kernel_skip10:
     vcmpeq vp5, vv22, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
@@ -8544,7 +8544,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp7 vsll vv6, vv29, vs4
-    @vp7 vlxw vv22, vs56, vv6
+    @vp7 vlxw vv22, vs55, vv6
     @vp7 vaddw vv29, vv29, vv36
     vcmpeq vp5, vv29, vv24
     vaddi vs4, vs32, 32
@@ -8557,7 +8557,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp7 vsll vv6, vv38, vs4
-    @vp7 vlxw vv29, vs56, vv6
+    @vp7 vlxw vv29, vs55, vv6
     @vp7 vaddw vv38, vv38, vv37
     vcmpeq vp5, vv38, vv24
     vaddi vs4, vs32, 32
@@ -8570,7 +8570,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp7 vsll vv6, vv39, vs4
-    @vp7 vlxw vv37, vs56, vv6
+    @vp7 vlxw vv37, vs55, vv6
 .Lcl_fdwt53Kernel_skip11:
     vcmpeq vp5, vv25, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
@@ -8586,21 +8586,21 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv25, vs4
-    @vp9 vlxw vv38, vs56, vv6
+    @vp9 vlxw vv38, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp9 vaddw vv25, vv25, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv25, vs4
-    @vp9 vlxw vv40, vs56, vv6
+    @vp9 vlxw vv40, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp9 vaddw vv25, vv25, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv25, vs4
-    @vp9 vlxw vv25, vs56, vv6
+    @vp9 vlxw vv25, vs55, vv6
 .Lcl_fdwt53Kernel_skip12:
     vcmpeq vp5, vv20, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
@@ -8623,21 +8623,21 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv26, vs4
-    @vp9 vlxw vv20, vs56, vv6
+    @vp9 vlxw vv20, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp9 vaddw vv26, vv26, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv26, vs4
-    @vp9 vlxw vv31, vs56, vv6
+    @vp9 vlxw vv31, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp9 vaddw vv26, vv26, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv26, vs4
-    @vp9 vlxw vv41, vs56, vv6
+    @vp9 vlxw vv41, vs55, vv6
 .Lcl_fdwt53Kernel_skip13:
     vcmpeq vp4, vv27, vs0
     vpop vp4, vp4, vp4, vp4, 0x55
@@ -8653,21 +8653,21 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv6, vv27, vs4
-    @vp5 vlxw vv42, vs56, vv6
+    @vp5 vlxw vv42, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp5 vaddw vv27, vv27, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv6, vv27, vs4
-    @vp5 vlxw vv43, vs56, vv6
+    @vp5 vlxw vv43, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp5 vaddw vv27, vv27, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv6, vv27, vs4
-    @vp5 vlxw vv27, vs56, vv6
+    @vp5 vlxw vv27, vs55, vv6
 .Lcl_fdwt53Kernel_skip14:
     vcmpeq vp3, vv21, vs0
     vpop vp3, vp3, vp3, vp3, 0x55
@@ -8688,21 +8688,21 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp3 vsll vv6, vv33, vs4
-    @vp3 vlxw vv21, vs56, vv6
+    @vp3 vlxw vv21, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp3 vaddw vv33, vv33, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp3 vsll vv6, vv33, vs4
-    @vp3 vlxw vv44, vs56, vv6
+    @vp3 vlxw vv44, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp3 vaddw vv33, vv33, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp3 vsll vv6, vv33, vs4
-    @vp3 vlxw vv45, vs56, vv6
+    @vp3 vlxw vv45, vs55, vv6
 .Lcl_fdwt53Kernel_skip15:
     vcmplt vp1, vv11, vs0
     vpop vp2, vp6, vp1, vp1, 0x80
@@ -9131,7 +9131,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv55, vs4
-    @vp9 vlxw vv40, vs56, vv6
+    @vp9 vlxw vv40, vs55, vv6
     @vp9 vaddw vv55, vv55, vv56
     vcmpeq vp1, vv55, vv45
     vaddi vs4, vs32, 32
@@ -9144,7 +9144,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv58, vs4
-    @vp9 vlxw vv55, vs56, vv6
+    @vp9 vlxw vv55, vs55, vv6
     @vp9 vaddw vv58, vv58, vv57
     vcmpeq vp1, vv58, vv45
     vaddi vs4, vs32, 32
@@ -9155,7 +9155,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv56, vs4
-    @vp9 vlxw vv45, vs56, vv6
+    @vp9 vlxw vv45, vs55, vv6
 .Lcl_fdwt53Kernel_skip32:
     vcmpeq vp1, vv39, vs0
     vpop vp1, vp1, vp1, vp1, 0x55
@@ -9199,7 +9199,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv49, vs4
-    @vp9 vlxw vv39, vs56, vv6
+    @vp9 vlxw vv39, vs55, vv6
     @vp9 vaddw vv49, vv49, vv56
     vcmpeq vp1, vv49, vv41
     vaddi vs4, vs32, 32
@@ -9212,7 +9212,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv58, vs4
-    @vp9 vlxw vv49, vs56, vv6
+    @vp9 vlxw vv49, vs55, vv6
     @vp9 vaddw vv58, vv58, vv57
     vcmpeq vp1, vv58, vv41
     vaddi vs4, vs32, 32
@@ -9225,7 +9225,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv6, vv59, vs4
-    @vp9 vlxw vv57, vs56, vv6
+    @vp9 vlxw vv57, vs55, vv6
 .Lcl_fdwt53Kernel_skip33:
     vcmpeq vp1, vv42, vs0
     vpop vp1, vp1, vp1, vp1, 0x55
@@ -9241,21 +9241,21 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp2 vsll vv6, vv42, vs4
-    @vp2 vlxw vv58, vs56, vv6
+    @vp2 vlxw vv58, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp2 vaddw vv42, vv42, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp2 vsll vv6, vv42, vs4
-    @vp2 vlxw vv60, vs56, vv6
+    @vp2 vlxw vv60, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp2 vaddw vv42, vv42, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp2 vsll vv6, vv42, vs4
-    @vp2 vlxw vv42, vs56, vv6
+    @vp2 vlxw vv42, vs55, vv6
 .Lcl_fdwt53Kernel_skip34:
     vcmpeq vp1, vv37, vs0
     vpop vp1, vp1, vp1, vp1, 0x55
@@ -9278,21 +9278,21 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp2 vsll vv6, vv43, vs4
-    @vp2 vlxw vv37, vs56, vv6
+    @vp2 vlxw vv37, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp2 vaddw vv43, vv43, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp2 vsll vv6, vv43, vs4
-    @vp2 vlxw vv51, vs56, vv6
+    @vp2 vlxw vv51, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp2 vaddw vv43, vv43, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp2 vsll vv6, vv43, vs4
-    @vp2 vlxw vv61, vs56, vv6
+    @vp2 vlxw vv61, vs55, vv6
 .Lcl_fdwt53Kernel_skip35:
     vcmpeq vp1, vv44, vs0
     vpop vp1, vp1, vp1, vp1, 0x55
@@ -9308,21 +9308,21 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv6, vv44, vs4
-    @vp5 vlxw vv62, vs56, vv6
+    @vp5 vlxw vv62, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp5 vaddw vv44, vv44, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv6, vv44, vs4
-    @vp5 vlxw vv63, vs56, vv6
+    @vp5 vlxw vv63, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp5 vaddw vv44, vv44, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv6, vv44, vs4
-    @vp5 vlxw vv44, vs56, vv6
+    @vp5 vlxw vv44, vs55, vv6
 .Lcl_fdwt53Kernel_skip36:
     vcmpeq vp1, vv38, vs0
     vpop vp1, vp1, vp1, vp1, 0x55
@@ -9343,21 +9343,21 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv6, vv53, vs4
-    @vp1 vlxw vv38, vs56, vv6
+    @vp1 vlxw vv38, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp1 vaddw vv53, vv53, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv6, vv53, vs4
-    @vp1 vlxw vv26, vs56, vv6
+    @vp1 vlxw vv26, vs55, vv6
     vaddi vs4, vs32, 56
     vlsd vs4, vs4
     @vp1 vaddw vv53, vv53, vs4
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv6, vv53, vs4
-    @vp1 vlxw vv16, vs56, vv6
+    @vp1 vlxw vv16, vs55, vv6
 .Lcl_fdwt53Kernel_skip37:
     vcmplt vp4, vv14, vs0
     vpop vp5, vp6, vp4, vp4, 0x80
@@ -10329,7 +10329,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv7, vv10, vs4
-    @vp1 vsxw vv60, vs54, vv7
+    @vp1 vsxw vv60, vs56, vv7
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -10340,7 +10340,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv7, vv38, vs4
-    @vp1 vsxw vv61, vs54, vv7
+    @vp1 vsxw vv61, vs56, vv7
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -10354,7 +10354,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv7, vv38, vs4
-    @vp1 vsxw vv62, vs54, vv7
+    @vp1 vsxw vv62, vs56, vv7
     vlsw vs4, vs47
     vaddw vv38, vs0, vs0
     vcmplt vp7, vv38, vs4
@@ -10393,7 +10393,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp9 vsll vv7, vv24, vs9
-    @vp9 vlxw vv19, vs56, vv7
+    @vp9 vlxw vv19, vs55, vv7
     vaddi vs10, vs49, 2040
     vaddi vs10, vs10, 2040
     vaddi vs10, vs10, 2040
@@ -10405,7 +10405,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp9 vsll vv7, vv26, vs9
-    @vp9 vsxw vv19, vs54, vv7
+    @vp9 vsxw vv19, vs56, vv7
     vaddi vs9, vs32, 32
     vlsd vs9, vs9
     vaddw vs10, vs5, vs9
@@ -10452,7 +10452,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp9 vsll vv7, vv19, vs5
-    @vp9 vlxw vv60, vs54, vv7
+    @vp9 vlxw vv60, vs56, vv7
     vaddi vs5, vs32, 32
     vlsd vs5, vs5
     @vp9 vaddw vv41, vv41, vs5
@@ -10461,13 +10461,13 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp9 vsll vv7, vv41, vs5
-    @vp9 vlxw vv61, vs54, vv7
+    @vp9 vlxw vv61, vs56, vv7
     @vp9 vmulw vv38, vs4, vv38
     @vp9 vaddw vv38, vv38, vv10
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv7, vv38, vs4
-    @vp9 vlxw vv62, vs54, vv7
+    @vp9 vlxw vv62, vs56, vv7
     vaddi vs5, vs49, 40
     vlsw vs4, vs5
     vaddi vs5, vs32, 8
@@ -10509,7 +10509,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp9 vsll vv7, vv21, vs10
-    @vp9 vlxw vv21, vs54, vv7
+    @vp9 vlxw vv21, vs56, vv7
     vaddi vs10, vs32, 32
     vlsd vs10, vs10
     vor vs11, vs9, vs10
@@ -10518,7 +10518,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp9 vsll vv7, vv22, vs9
-    @vp9 vlxw vv22, vs54, vv7
+    @vp9 vlxw vv22, vs56, vv7
     @vp9 vaddw vv22, vv22, vv21
     vaddi vs9, vs32, 64
     vlsd vs9, vs9
@@ -10528,9 +10528,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp9 vsll vv7, vv21, vs8
-    @vp9 vlxw vv21, vs54, vv7
+    @vp9 vlxw vv21, vs56, vv7
     @vp9 vaddw vv22, vv22, vv21
-    @vp9 vsxw vv22, vs54, vv7
+    @vp9 vsxw vv22, vs56, vv7
     vaddi vs8, vs32, 32
     vlsd vs8, vs8
     vaddw vs5, vs5, vs8
@@ -10584,7 +10584,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp9 vsll vv7, vv9, vs10
-    @vp9 vlxw vv9, vs54, vv7
+    @vp9 vlxw vv9, vs56, vv7
     vaddi vs10, vs32, 8
     vlsd vs10, vs10
     vaddw vs11, vs9, vs10
@@ -10596,7 +10596,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp9 vsll vv7, vv22, vs9
-    @vp9 vlxw vv22, vs54, vv7
+    @vp9 vlxw vv22, vs56, vv7
     vaddi vs9, vs32, 8
     vlsd vs9, vs9
     @vp9 vaddw vv9, vv9, vs9
@@ -10609,9 +10609,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp9 vsll vv7, vv22, vs8
-    @vp9 vlxw vv22, vs54, vv7
+    @vp9 vlxw vv22, vs56, vv7
     @vp9 vaddw vv9, vv9, vv22
-    @vp9 vsxw vv9, vs54, vv7
+    @vp9 vsxw vv9, vs56, vv7
     vaddi vs8, vs32, 32
     vlsd vs8, vs8
     vaddw vs9, vs5, vs8
@@ -10636,7 +10636,7 @@ cl_fdwt53Kernel_wt:
     vpop vp9, vp11, vp7, vp7, 0x80
     vpop vp10, vp11, vp7, vp7, 0x02
     @!vp9 vcjal 0, vs1, .Lcl_fdwt53Kernel_skip76
-    @vp9 vsxw vv43, vs54, vv2
+    @vp9 vsxw vv43, vs56, vv2
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -10647,7 +10647,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv7, vv9, vs4
-    @vp9 vsxw vv34, vs54, vv7
+    @vp9 vsxw vv34, vs56, vv7
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -10661,7 +10661,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv7, vv9, vs4
-    @vp9 vsxw vv29, vs54, vv7
+    @vp9 vsxw vv29, vs56, vv7
     vlsw vs4, vs47
     vaddw vv9, vs0, vs0
     vcmplt vp7, vv9, vs4
@@ -10702,7 +10702,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp9 vsll vv7, vv27, vs9
-    @vp9 vlxw vv24, vs56, vv7
+    @vp9 vlxw vv24, vs55, vv7
     vaddi vs10, vs49, 2040
     vaddi vs10, vs10, 2040
     vaddi vs10, vs10, 2040
@@ -10714,7 +10714,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp9 vsll vv7, vv37, vs9
-    @vp9 vsxw vv24, vs54, vv7
+    @vp9 vsxw vv24, vs56, vv7
     vaddi vs9, vs32, 32
     vlsd vs9, vs9
     vaddw vs10, vs5, vs9
@@ -10761,7 +10761,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp9 vsll vv7, vv24, vs5
-    @vp9 vlxw vv24, vs54, vv7
+    @vp9 vlxw vv24, vs56, vv7
     vaddi vs5, vs32, 32
     vlsd vs5, vs5
     @vp9 vaddw vv41, vv41, vs5
@@ -10770,13 +10770,13 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp9 vsll vv7, vv41, vs5
-    @vp9 vlxw vv26, vs54, vv7
+    @vp9 vlxw vv26, vs56, vv7
     @vp9 vmulw vv22, vs4, vv22
     @vp9 vaddw vv22, vv22, vv52
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp9 vsll vv7, vv22, vs4
-    @vp9 vlxw vv22, vs54, vv7
+    @vp9 vlxw vv22, vs56, vv7
     vaddi vs5, vs49, 40
     vlsw vs4, vs5
     vaddi vs5, vs32, 8
@@ -10818,7 +10818,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp9 vsll vv7, vv11, vs10
-    @vp9 vlxw vv11, vs54, vv7
+    @vp9 vlxw vv11, vs56, vv7
     vaddi vs10, vs32, 32
     vlsd vs10, vs10
     vor vs11, vs9, vs10
@@ -10827,7 +10827,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp9 vsll vv7, vv13, vs9
-    @vp9 vlxw vv13, vs54, vv7
+    @vp9 vlxw vv13, vs56, vv7
     @vp9 vaddw vv13, vv13, vv11
     vaddi vs9, vs32, 64
     vlsd vs9, vs9
@@ -10837,9 +10837,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp9 vsll vv7, vv11, vs8
-    @vp9 vlxw vv11, vs54, vv7
+    @vp9 vlxw vv11, vs56, vv7
     @vp9 vaddw vv13, vv13, vv11
-    @vp9 vsxw vv13, vs54, vv7
+    @vp9 vsxw vv13, vs56, vv7
     vaddi vs8, vs32, 32
     vlsd vs8, vs8
     vaddw vs5, vs5, vs8
@@ -10893,7 +10893,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp9 vsll vv7, vv13, vs10
-    @vp9 vlxw vv13, vs54, vv7
+    @vp9 vlxw vv13, vs56, vv7
     vaddi vs10, vs32, 8
     vlsd vs10, vs10
     vaddw vs11, vs9, vs10
@@ -10905,7 +10905,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp9 vsll vv7, vv23, vs9
-    @vp9 vlxw vv23, vs54, vv7
+    @vp9 vlxw vv23, vs56, vv7
     vaddi vs9, vs32, 8
     vlsd vs9, vs9
     @vp9 vaddw vv13, vv13, vs9
@@ -10918,9 +10918,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp9 vsll vv7, vv23, vs8
-    @vp9 vlxw vv23, vs54, vv7
+    @vp9 vlxw vv23, vs56, vv7
     @vp9 vaddw vv13, vv13, vv23
-    @vp9 vsxw vv13, vs54, vv7
+    @vp9 vsxw vv13, vs56, vv7
     vaddi vs8, vs32, 32
     vlsd vs8, vs8
     vaddw vs9, vs5, vs8
@@ -10933,35 +10933,35 @@ cl_fdwt53Kernel_wt:
     vpop vp9, vp9, vp11, vp11, 0x02
     @vp12 vaddw vs5, vs9, vs0
     @vp12 vcjal 1, vs1, .Lcl_fdwt53Kernel_loop86
-    vcmpeq vp7, vv11, vs0
+    vcmpeq vp7, vv9, vs0
     vpop vp7, vp7, vp7, vp7, 0x55
-    vcmpeq vp9, vv27, vs0
+    vcmpeq vp9, vv11, vs0
     vpop vp9, vp9, vp9, vp9, 0x55
-    vcmpeq vp11, vv9, vs0
+    vcmpeq vp11, vv27, vs0
     vpop vp11, vp11, vp11, vp11, 0x55
     vpop vp12, vp10, vp10, vp10, 0xAA
+    vpop vp12, vp12, vp11, vp11, 0xEE
     vpop vp12, vp12, vp9, vp9, 0xEE
     vpop vp12, vp12, vp7, vp7, 0xEE
-    vpop vp12, vp12, vp11, vp11, 0xEE
-    @vp11 vaddw vv9, vv12, vs0
+    @vp7 vaddw vv9, vv12, vs0
+    @vp11 vaddw vv9, vv19, vs0
     @vp9 vaddw vv9, vv19, vs0
-    @vp7 vaddw vv9, vv19, vs0
     @vp10 vaddw vv9, vv19, vs0
-    @vp11 vaddw vv11, vv29, vs0
+    @vp7 vaddw vv11, vv29, vs0
+    @vp11 vaddw vv11, vv22, vs0
     @vp9 vaddw vv11, vv22, vs0
-    @vp7 vaddw vv11, vv22, vs0
     @vp10 vaddw vv11, vv22, vs0
-    @vp11 vaddw vv13, vv34, vs0
+    @vp7 vaddw vv13, vv34, vs0
+    @vp11 vaddw vv13, vv26, vs0
     @vp9 vaddw vv13, vv26, vs0
-    @vp7 vaddw vv13, vv26, vs0
     @vp10 vaddw vv13, vv26, vs0
-    @vp11 vaddw vv23, vv43, vs0
+    @vp7 vaddw vv23, vv43, vs0
+    @vp11 vaddw vv23, vv24, vs0
     @vp9 vaddw vv23, vv24, vs0
-    @vp7 vaddw vv23, vv24, vs0
     @vp10 vaddw vv23, vv24, vs0
-    @vp11 vaddw vv27, vv44, vs0
+    @vp7 vaddw vv27, vv44, vs0
+    @vp11 vaddw vv27, vv21, vs0
     @vp9 vaddw vv27, vv21, vs0
-    @vp7 vaddw vv27, vv21, vs0
     @vp10 vaddw vv27, vv21, vs0
     @!vp12 vcjal 0, vs1, .Lcl_fdwt53Kernel_skip88
     vfence
@@ -11009,7 +11009,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs15, vs32, 72
     vlsd vs15, vs15
     vsll vs16, vs14, vs15
-    vadd vs16, vs54, vs16
+    vadd vs16, vs56, vs16
     vaddi vs58, vs60, 48
     vlxd vv7, vs58, vv0
     @vp9 vdivu vv6, vv7, vs2
@@ -11024,7 +11024,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs15, vs32, 72
     vlsd vs15, vs15
     vsll vs16, vs14, vs15
-    vadd vs16, vs54, vs16
+    vadd vs16, vs56, vs16
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp9 vdivu vv7, vv6, vs2
@@ -11045,7 +11045,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp9 vdivu vv7, vv6, vs2
@@ -11060,7 +11060,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp9 vdivu vv7, vv6, vs2
@@ -11100,7 +11100,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs9, vs5, vs4
-    vadd vs9, vs54, vs9
+    vadd vs9, vs56, vs9
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp10 vdivu vv7, vv6, vs2
@@ -11117,7 +11117,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs10, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp10 vdivu vv7, vv6, vs2
@@ -11138,7 +11138,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs12, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp10 vdivu vv7, vv6, vs2
@@ -11155,7 +11155,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs12, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp10 vdivu vv7, vv6, vs2
@@ -11220,7 +11220,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs15, vs32, 72
     vlsd vs15, vs15
     vsll vs16, vs14, vs15
-    vadd vs16, vs54, vs16
+    vadd vs16, vs56, vs16
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp9 vdivu vv7, vv6, vs2
@@ -11237,7 +11237,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs15, vs32, 72
     vlsd vs15, vs15
     vsll vs16, vs14, vs15
-    vadd vs16, vs54, vs16
+    vadd vs16, vs56, vs16
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp9 vdivu vv7, vv6, vs2
@@ -11261,7 +11261,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp9 vdivu vv7, vv6, vs2
@@ -11278,7 +11278,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp9 vdivu vv7, vv6, vs2
@@ -11318,7 +11318,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs8, vs5, vs4
-    vadd vs8, vs54, vs8
+    vadd vs8, vs56, vs8
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp10 vdivu vv7, vv6, vs2
@@ -11335,7 +11335,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs10, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp10 vdivu vv7, vv6, vs2
@@ -11359,7 +11359,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs12, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp10 vdivu vv7, vv6, vs2
@@ -11376,7 +11376,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs12, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv6, vs58, vv0
     @vp10 vdivu vv7, vv6, vs2
@@ -11424,11 +11424,11 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp12 vsll vv6, vv22, vs5
-    @vp12 vlxw vv22, vs54, vv6
+    @vp12 vlxw vv22, vs56, vv6
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp12 vsll vv6, vv21, vs5
-    @vp12 vsxw vv22, vs55, vv6
+    @vp12 vsxw vv22, vs54, vv6
     @vp12 vaddw vv22, vv21, vv55
     vcmpeq vp7, vv22, vv53
 .Lcl_fdwt53Kernel_skip100:
@@ -11445,11 +11445,11 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp14 vsll vv6, vv24, vs5
-    @vp14 vlxw vv24, vs54, vv6
+    @vp14 vlxw vv24, vs56, vv6
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp14 vsll vv6, vv22, vs5
-    @vp14 vsxw vv24, vs55, vv6
+    @vp14 vsxw vv24, vs54, vv6
     @vp14 vaddw vv22, vv22, vv49
 .Lcl_fdwt53Kernel_skip101:
     vpop vp7, vp14, vp14, vp14, 0xAA
@@ -11544,7 +11544,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv2, vv9, vs4
-    @vp1 vsxw vv12, vs54, vv2
+    @vp1 vsxw vv12, vs56, vv2
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -11557,7 +11557,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv2, vv11, vs4
-    @vp1 vsxw vv10, vs54, vv2
+    @vp1 vsxw vv10, vs56, vv2
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -11573,7 +11573,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv2, vv11, vs4
-    @vp1 vsxw vv8, vs54, vv2
+    @vp1 vsxw vv8, vs56, vv2
     vlsw vs4, vs47
     vaddw vv9, vs0, vs0
     vcmplt vp3, vv9, vs4
@@ -11609,7 +11609,7 @@ cl_fdwt53Kernel_wt:
 .Lcl_fdwt53Kernel_loop108:
     @!vp10 vcjal 0, vs1, .Lcl_fdwt53Kernel_skip109
     vmul vs10, vs6, vs5
-    vadd vs10, vs56, vs10
+    vadd vs10, vs55, vs10
     vaddi vs11, vs32, 56
     vlsd vs11, vs11
     @vp10 vaddw vv11, vv11, vs11
@@ -11627,7 +11627,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp10 vsll vv3, vv17, vs10
-    @vp10 vsxw vv13, vs54, vv3
+    @vp10 vsxw vv13, vs56, vv3
     vaddi vs10, vs32, 32
     vlsd vs10, vs10
     vaddw vs11, vs9, vs10
@@ -11672,7 +11672,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp10 vsll vv2, vv13, vs5
-    @vp10 vlxw vv12, vs54, vv2
+    @vp10 vlxw vv12, vs56, vv2
     vaddi vs5, vs32, 32
     vlsd vs5, vs5
     @vp10 vaddw vv19, vv19, vs5
@@ -11683,7 +11683,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp10 vsll vv2, vv19, vs5
-    @vp10 vlxw vv10, vs54, vv2
+    @vp10 vlxw vv10, vs56, vv2
     @vp10 vmulw vv11, vs4, vv11
     vaddi vs58, vs60, 664
     vlxw vv13, vs58, vv0
@@ -11691,7 +11691,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp10 vsll vv2, vv11, vs4
-    @vp10 vlxw vv8, vs54, vv2
+    @vp10 vlxw vv8, vs56, vv2
     vaddi vs5, vs49, 40
     vlsw vs4, vs5
     vaddi vs5, vs32, 8
@@ -11735,7 +11735,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp10 vsll vv2, vv15, vs10
-    @vp10 vlxw vv13, vs54, vv2
+    @vp10 vlxw vv13, vs56, vv2
     vaddi vs10, vs32, 32
     vlsd vs10, vs10
     vor vs11, vs9, vs10
@@ -11746,7 +11746,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp10 vsll vv2, vv17, vs9
-    @vp10 vlxw vv15, vs54, vv2
+    @vp10 vlxw vv15, vs56, vv2
     @vp10 vaddw vv15, vv15, vv13
     vaddi vs9, vs32, 64
     vlsd vs9, vs9
@@ -11758,9 +11758,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp10 vsll vv2, vv17, vs8
-    @vp10 vlxw vv13, vs54, vv2
+    @vp10 vlxw vv13, vs56, vv2
     @vp10 vaddw vv15, vv15, vv13
-    @vp10 vsxw vv15, vs54, vv2
+    @vp10 vsxw vv15, vs56, vv2
     vaddi vs8, vs32, 32
     vlsd vs8, vs8
     vaddw vs5, vs5, vs8
@@ -11816,7 +11816,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp10 vsll vv2, vv17, vs10
-    @vp10 vlxw vv15, vs54, vv2
+    @vp10 vlxw vv15, vs56, vv2
     vaddi vs10, vs32, 8
     vlsd vs10, vs10
     vaddw vs11, vs9, vs10
@@ -11830,7 +11830,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp10 vsll vv2, vv19, vs9
-    @vp10 vlxw vv17, vs54, vv2
+    @vp10 vlxw vv17, vs56, vv2
     vaddi vs9, vs32, 8
     vlsd vs9, vs9
     @vp10 vaddw vv15, vv15, vs9
@@ -11845,9 +11845,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp10 vsll vv2, vv19, vs8
-    @vp10 vlxw vv17, vs54, vv2
+    @vp10 vlxw vv17, vs56, vv2
     @vp10 vaddw vv15, vv15, vv17
-    @vp10 vsxw vv15, vs54, vv2
+    @vp10 vsxw vv15, vs56, vv2
     vaddi vs8, vs32, 32
     vlsd vs8, vs8
     vaddw vs9, vs5, vs8
@@ -11860,13 +11860,13 @@ cl_fdwt53Kernel_wt:
     vpop vp10, vp10, vp12, vp12, 0x02
     @vp13 vaddw vs5, vs9, vs0
     @vp13 vcjal 1, vs1, .Lcl_fdwt53Kernel_loop116
-    vcmpeq vp3, vv13, vs0
+    vcmpeq vp3, vv11, vs0
     vpop vp3, vp3, vp3, vp3, 0x55
-    vcmpeq vp10, vv11, vs0
+    vcmpeq vp10, vv13, vs0
     vpop vp10, vp10, vp10, vp10, 0x55
     vpop vp12, vp11, vp11, vp11, 0xAA
-    vpop vp12, vp12, vp3, vp3, 0xEE
     vpop vp12, vp12, vp10, vp10, 0xEE
+    vpop vp12, vp12, vp3, vp3, 0xEE
     vcmpeq vp3, vv33, vs0
     vpop vp3, vp3, vp3, vp3, 0x55
     vpop vp10, vp12, vp3, vp3, 0x80
@@ -11874,7 +11874,7 @@ cl_fdwt53Kernel_wt:
     @!vp10 vcjal 0, vs1, .Lcl_fdwt53Kernel_skip118
     vaddi vs58, vs60, 176
     vlxd vv2, vs58, vv0
-    @vp10 vsxw vv18, vs54, vv2
+    @vp10 vsxw vv18, vs56, vv2
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -11887,7 +11887,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp10 vsll vv2, vv13, vs4
-    @vp10 vsxw vv21, vs54, vv2
+    @vp10 vsxw vv21, vs56, vv2
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -11903,7 +11903,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp10 vsll vv2, vv13, vs4
-    @vp10 vsxw vv23, vs54, vv2
+    @vp10 vsxw vv23, vs56, vv2
     vlsw vs4, vs47
     vaddw vv11, vs0, vs0
     vcmplt vp3, vv11, vs4
@@ -11947,7 +11947,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs58, vs60, 576
     vlxw vv17, vs58, vv0
     @vp10 vaddw vv15, vv15, vv17
-    @vp10 vlxw vv17, vs56, vv4
+    @vp10 vlxw vv17, vs55, vv4
     vaddi vs11, vs49, 2040
     vaddi vs11, vs11, 2040
     vaddi vs11, vs11, 2040
@@ -11961,7 +11961,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp10 vsll vv3, vv22, vs10
-    @vp10 vsxw vv17, vs54, vv3
+    @vp10 vsxw vv17, vs56, vv3
     vaddi vs10, vs32, 32
     vlsd vs10, vs10
     vaddw vs11, vs9, vs10
@@ -12006,7 +12006,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp10 vsll vv2, vv17, vs5
-    @vp10 vlxw vv17, vs54, vv2
+    @vp10 vlxw vv17, vs56, vv2
     vaddi vs5, vs32, 32
     vlsd vs5, vs5
     @vp10 vaddw vv24, vv24, vs5
@@ -12017,7 +12017,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp10 vsll vv2, vv24, vs5
-    @vp10 vlxw vv19, vs54, vv2
+    @vp10 vlxw vv19, vs56, vv2
     @vp10 vmulw vv15, vs4, vv15
     vaddi vs58, vs60, 584
     vlxw vv22, vs58, vv0
@@ -12025,7 +12025,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp10 vsll vv2, vv15, vs4
-    @vp10 vlxw vv15, vs54, vv2
+    @vp10 vlxw vv15, vs56, vv2
     vaddi vs5, vs49, 40
     vlsw vs4, vs5
     vaddi vs5, vs32, 8
@@ -12069,7 +12069,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp10 vsll vv2, vv26, vs10
-    @vp10 vlxw vv24, vs54, vv2
+    @vp10 vlxw vv24, vs56, vv2
     vaddi vs10, vs32, 32
     vlsd vs10, vs10
     vor vs11, vs9, vs10
@@ -12080,7 +12080,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp10 vsll vv2, vv27, vs9
-    @vp10 vlxw vv26, vs54, vv2
+    @vp10 vlxw vv26, vs56, vv2
     @vp10 vaddw vv26, vv26, vv24
     vaddi vs9, vs32, 64
     vlsd vs9, vs9
@@ -12092,9 +12092,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp10 vsll vv2, vv27, vs8
-    @vp10 vlxw vv24, vs54, vv2
+    @vp10 vlxw vv24, vs56, vv2
     @vp10 vaddw vv26, vv26, vv24
-    @vp10 vsxw vv26, vs54, vv2
+    @vp10 vsxw vv26, vs56, vv2
     vaddi vs8, vs32, 32
     vlsd vs8, vs8
     vaddw vs5, vs5, vs8
@@ -12150,7 +12150,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs10, vs32, 72
     vlsd vs10, vs10
     @vp10 vsll vv2, vv27, vs10
-    @vp10 vlxw vv26, vs54, vv2
+    @vp10 vlxw vv26, vs56, vv2
     vaddi vs10, vs32, 8
     vlsd vs10, vs10
     vaddw vs11, vs9, vs10
@@ -12164,7 +12164,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp10 vsll vv2, vv28, vs9
-    @vp10 vlxw vv27, vs54, vv2
+    @vp10 vlxw vv27, vs56, vv2
     vaddi vs9, vs32, 8
     vlsd vs9, vs9
     @vp10 vaddw vv26, vv26, vs9
@@ -12179,9 +12179,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp10 vsll vv2, vv28, vs8
-    @vp10 vlxw vv27, vs54, vv2
+    @vp10 vlxw vv27, vs56, vv2
     @vp10 vaddw vv26, vv26, vv27
-    @vp10 vsxw vv26, vs54, vv2
+    @vp10 vsxw vv26, vs56, vv2
     vaddi vs8, vs32, 32
     vlsd vs8, vs8
     vaddw vs9, vs5, vs8
@@ -12194,30 +12194,30 @@ cl_fdwt53Kernel_wt:
     vpop vp10, vp10, vp12, vp12, 0x02
     @vp13 vaddw vs5, vs9, vs0
     @vp13 vcjal 1, vs1, .Lcl_fdwt53Kernel_loop129
-    vcmpeq vp3, vv11, vs0
+    vcmpeq vp3, vv22, vs0
     vpop vp3, vp3, vp3, vp3, 0x55
     vcmpeq vp10, vv24, vs0
     vpop vp10, vp10, vp10, vp10, 0x55
-    vcmpeq vp12, vv22, vs0
+    vcmpeq vp12, vv11, vs0
     vpop vp12, vp12, vp12, vp12, 0x55
     vpop vp13, vp11, vp11, vp11, 0xAA
-    vpop vp13, vp13, vp12, vp12, 0xEE
-    vpop vp13, vp13, vp10, vp10, 0xEE
     vpop vp13, vp13, vp3, vp3, 0xEE
-    @vp3 vaddw vv11, vv16, vs0
-    @vp12 vaddw vv11, vv13, vs0
+    vpop vp13, vp13, vp10, vp10, 0xEE
+    vpop vp13, vp13, vp12, vp12, 0xEE
+    @vp12 vaddw vv11, vv16, vs0
+    @vp3 vaddw vv11, vv13, vs0
     @vp10 vaddw vv11, vv13, vs0
     @vp11 vaddw vv11, vv13, vs0
-    @vp3 vaddw vv22, vv18, vs0
-    @vp12 vaddw vv22, vv17, vs0
+    @vp12 vaddw vv22, vv18, vs0
+    @vp3 vaddw vv22, vv17, vs0
     @vp10 vaddw vv22, vv17, vs0
     @vp11 vaddw vv22, vv17, vs0
-    @vp3 vaddw vv24, vv21, vs0
-    @vp12 vaddw vv24, vv19, vs0
+    @vp12 vaddw vv24, vv21, vs0
+    @vp3 vaddw vv24, vv19, vs0
     @vp10 vaddw vv24, vv19, vs0
     @vp11 vaddw vv24, vv19, vs0
-    @vp3 vaddw vv26, vv23, vs0
-    @vp12 vaddw vv26, vv15, vs0
+    @vp12 vaddw vv26, vv23, vs0
+    @vp3 vaddw vv26, vv15, vs0
     @vp10 vaddw vv26, vv15, vs0
     @vp11 vaddw vv26, vv15, vs0
     @!vp13 vcjal 0, vs1, .Lcl_fdwt53Kernel_skip131
@@ -12266,7 +12266,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs15, vs32, 72
     vlsd vs15, vs15
     vsll vs16, vs14, vs15
-    vadd vs16, vs54, vs16
+    vadd vs16, vs56, vs16
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -12285,7 +12285,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs15, vs32, 72
     vlsd vs15, vs15
     vsll vs16, vs14, vs15
-    vadd vs16, vs54, vs16
+    vadd vs16, vs56, vs16
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -12308,7 +12308,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -12327,7 +12327,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -12369,7 +12369,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs9, vs5, vs4
-    vadd vs9, vs54, vs9
+    vadd vs9, vs56, vs9
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp11 vdivu vv3, vv2, vs2
@@ -12388,7 +12388,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs10, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp11 vdivu vv3, vv2, vs2
@@ -12411,7 +12411,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs12, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp11 vdivu vv3, vv2, vs2
@@ -12430,7 +12430,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs12, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp11 vdivu vv3, vv2, vs2
@@ -12497,7 +12497,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs15, vs32, 72
     vlsd vs15, vs15
     vsll vs16, vs14, vs15
-    vadd vs16, vs54, vs16
+    vadd vs16, vs56, vs16
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -12516,7 +12516,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs15, vs32, 72
     vlsd vs15, vs15
     vsll vs16, vs14, vs15
-    vadd vs16, vs54, vs16
+    vadd vs16, vs56, vs16
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -12542,7 +12542,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -12561,7 +12561,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -12603,7 +12603,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs8, vs5, vs4
-    vadd vs8, vs54, vs8
+    vadd vs8, vs56, vs8
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp11 vdivu vv3, vv2, vs2
@@ -12622,7 +12622,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs10, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp11 vdivu vv3, vv2, vs2
@@ -12648,7 +12648,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs12, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp11 vdivu vv3, vv2, vs2
@@ -12667,7 +12667,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs12, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp11 vdivu vv3, vv2, vs2
@@ -12730,8 +12730,8 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp10 vsll vv4, vv19, vs8
-    @vp10 vlxw vv19, vs54, vv4
-    @vp10 vsxw vv19, vs55, vv2
+    @vp10 vlxw vv19, vs56, vv4
+    @vp10 vsxw vv19, vs54, vv2
     vaddi vs58, vs60, 600
     vlxw vv19, vs58, vv0
     @vp10 vaddw vv27, vv17, vv19
@@ -12745,8 +12745,8 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp10 vsll vv2, vv19, vs8
-    @vp10 vlxw vv19, vs54, vv2
-    @vp10 vsxw vv19, vs55, vv3
+    @vp10 vlxw vv19, vs56, vv2
+    @vp10 vsxw vv19, vs54, vv3
     vaddi vs58, vs60, 624
     vlxw vv19, vs58, vv0
     @vp10 vaddw vv17, vv27, vv19
@@ -12835,7 +12835,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv2, vv10, vs4
-    @vp1 vsxw vv13, vs54, vv2
+    @vp1 vsxw vv13, vs56, vv2
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -12848,7 +12848,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv2, vv12, vs4
-    @vp1 vsxw vv11, vs54, vv2
+    @vp1 vsxw vv11, vs56, vv2
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -12864,7 +12864,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp1 vsll vv2, vv12, vs4
-    @vp1 vsxw vv9, vs54, vv2
+    @vp1 vsxw vv9, vs56, vv2
     vlsw vs4, vs47
     vaddw vv10, vs0, vs0
     vcmplt vp4, vv10, vs4
@@ -12900,7 +12900,7 @@ cl_fdwt53Kernel_wt:
 .Lcl_fdwt53Kernel_loop150:
     @!vp5 vcjal 0, vs1, .Lcl_fdwt53Kernel_skip151
     vmul vs9, vs7, vs5
-    vadd vs9, vs56, vs9
+    vadd vs9, vs55, vs9
     vaddi vs10, vs32, 56
     vlsd vs10, vs10
     @vp5 vaddw vv12, vv12, vs10
@@ -12918,7 +12918,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp5 vsll vv3, vv18, vs9
-    @vp5 vsxw vv14, vs54, vv3
+    @vp5 vsxw vv14, vs56, vv3
     vaddi vs9, vs32, 32
     vlsd vs9, vs9
     vaddw vs10, vs8, vs9
@@ -12963,7 +12963,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp5 vsll vv2, vv14, vs5
-    @vp5 vlxw vv13, vs54, vv2
+    @vp5 vlxw vv13, vs56, vv2
     vaddi vs5, vs32, 32
     vlsd vs5, vs5
     @vp5 vaddw vv20, vv20, vs5
@@ -12974,7 +12974,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp5 vsll vv2, vv20, vs5
-    @vp5 vlxw vv11, vs54, vv2
+    @vp5 vlxw vv11, vs56, vv2
     @vp5 vmulw vv12, vs4, vv12
     vaddi vs58, vs60, 8
     vlxw vv14, vs58, vv0
@@ -12982,7 +12982,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv2, vv12, vs4
-    @vp5 vlxw vv9, vs54, vv2
+    @vp5 vlxw vv9, vs56, vv2
     vaddi vs5, vs49, 40
     vlsw vs4, vs5
     vaddi vs5, vs32, 8
@@ -13026,7 +13026,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp5 vsll vv2, vv16, vs9
-    @vp5 vlxw vv14, vs54, vv2
+    @vp5 vlxw vv14, vs56, vv2
     vaddi vs9, vs32, 32
     vlsd vs9, vs9
     vor vs10, vs8, vs9
@@ -13037,7 +13037,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp5 vsll vv2, vv18, vs8
-    @vp5 vlxw vv16, vs54, vv2
+    @vp5 vlxw vv16, vs56, vv2
     @vp5 vaddw vv16, vv16, vv14
     vaddi vs8, vs32, 64
     vlsd vs8, vs8
@@ -13049,9 +13049,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs6, vs32, 72
     vlsd vs6, vs6
     @vp5 vsll vv2, vv18, vs6
-    @vp5 vlxw vv14, vs54, vv2
+    @vp5 vlxw vv14, vs56, vv2
     @vp5 vaddw vv16, vv16, vv14
-    @vp5 vsxw vv16, vs54, vv2
+    @vp5 vsxw vv16, vs56, vv2
     vaddi vs6, vs32, 32
     vlsd vs6, vs6
     vaddw vs5, vs5, vs6
@@ -13107,7 +13107,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp5 vsll vv2, vv18, vs9
-    @vp5 vlxw vv16, vs54, vv2
+    @vp5 vlxw vv16, vs56, vv2
     vaddi vs9, vs32, 8
     vlsd vs9, vs9
     vaddw vs10, vs8, vs9
@@ -13121,7 +13121,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp5 vsll vv2, vv20, vs8
-    @vp5 vlxw vv18, vs54, vv2
+    @vp5 vlxw vv18, vs56, vv2
     vaddi vs8, vs32, 8
     vlsd vs8, vs8
     @vp5 vaddw vv16, vv16, vs8
@@ -13136,9 +13136,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs6, vs32, 72
     vlsd vs6, vs6
     @vp5 vsll vv2, vv20, vs6
-    @vp5 vlxw vv18, vs54, vv2
+    @vp5 vlxw vv18, vs56, vv2
     @vp5 vaddw vv16, vv16, vv18
-    @vp5 vsxw vv16, vs54, vv2
+    @vp5 vsxw vv16, vs56, vv2
     vaddi vs6, vs32, 32
     vlsd vs6, vs6
     vaddw vs8, vs5, vs6
@@ -13165,7 +13165,7 @@ cl_fdwt53Kernel_wt:
     @!vp5 vcjal 0, vs1, .Lcl_fdwt53Kernel_skip160
     vaddi vs58, vs60, 328
     vlxd vv2, vs58, vv0
-    @vp5 vsxw vv19, vs54, vv2
+    @vp5 vsxw vv19, vs56, vv2
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -13178,7 +13178,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv2, vv14, vs4
-    @vp5 vsxw vv21, vs54, vv2
+    @vp5 vsxw vv21, vs56, vv2
     vaddi vs5, vs49, 2040
     vaddi vs5, vs5, 2040
     vaddi vs5, vs5, 2040
@@ -13194,7 +13194,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv2, vv14, vs4
-    @vp5 vsxw vv23, vs54, vv2
+    @vp5 vsxw vv23, vs56, vv2
     vlsw vs4, vs47
     vaddw vv12, vs0, vs0
     vcmplt vp4, vv12, vs4
@@ -13238,7 +13238,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs58, vs60, 512
     vlxw vv18, vs58, vv0
     @vp5 vaddw vv16, vv16, vv18
-    @vp5 vlxw vv18, vs56, vv4
+    @vp5 vlxw vv18, vs55, vv4
     vaddi vs10, vs49, 2040
     vaddi vs10, vs10, 2040
     vaddi vs10, vs10, 2040
@@ -13252,7 +13252,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp5 vsll vv3, vv22, vs9
-    @vp5 vsxw vv18, vs54, vv3
+    @vp5 vsxw vv18, vs56, vv3
     vaddi vs9, vs32, 32
     vlsd vs9, vs9
     vaddw vs10, vs8, vs9
@@ -13297,7 +13297,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp5 vsll vv2, vv18, vs5
-    @vp5 vlxw vv18, vs54, vv2
+    @vp5 vlxw vv18, vs56, vv2
     vaddi vs5, vs32, 32
     vlsd vs5, vs5
     @vp5 vaddw vv24, vv24, vs5
@@ -13308,7 +13308,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp5 vsll vv2, vv24, vs5
-    @vp5 vlxw vv20, vs54, vv2
+    @vp5 vlxw vv20, vs56, vv2
     @vp5 vmulw vv16, vs4, vv16
     vaddi vs58, vs60, 480
     vlxw vv22, vs58, vv0
@@ -13316,7 +13316,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     @vp5 vsll vv2, vv16, vs4
-    @vp5 vlxw vv16, vs54, vv2
+    @vp5 vlxw vv16, vs56, vv2
     vaddi vs5, vs49, 40
     vlsw vs4, vs5
     vaddi vs5, vs32, 8
@@ -13360,7 +13360,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp5 vsll vv2, vv26, vs9
-    @vp5 vlxw vv24, vs54, vv2
+    @vp5 vlxw vv24, vs56, vv2
     vaddi vs9, vs32, 32
     vlsd vs9, vs9
     vor vs10, vs8, vs9
@@ -13371,7 +13371,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp5 vsll vv2, vv27, vs8
-    @vp5 vlxw vv26, vs54, vv2
+    @vp5 vlxw vv26, vs56, vv2
     @vp5 vaddw vv26, vv26, vv24
     vaddi vs8, vs32, 64
     vlsd vs8, vs8
@@ -13383,9 +13383,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs6, vs32, 72
     vlsd vs6, vs6
     @vp5 vsll vv2, vv27, vs6
-    @vp5 vlxw vv24, vs54, vv2
+    @vp5 vlxw vv24, vs56, vv2
     @vp5 vaddw vv26, vv26, vv24
-    @vp5 vsxw vv26, vs54, vv2
+    @vp5 vsxw vv26, vs56, vv2
     vaddi vs6, vs32, 32
     vlsd vs6, vs6
     vaddw vs5, vs5, vs6
@@ -13441,7 +13441,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs9, vs32, 72
     vlsd vs9, vs9
     @vp5 vsll vv2, vv27, vs9
-    @vp5 vlxw vv26, vs54, vv2
+    @vp5 vlxw vv26, vs56, vv2
     vaddi vs9, vs32, 8
     vlsd vs9, vs9
     vaddw vs10, vs8, vs9
@@ -13455,7 +13455,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs8, vs32, 72
     vlsd vs8, vs8
     @vp5 vsll vv2, vv28, vs8
-    @vp5 vlxw vv27, vs54, vv2
+    @vp5 vlxw vv27, vs56, vv2
     vaddi vs8, vs32, 8
     vlsd vs8, vs8
     @vp5 vaddw vv26, vv26, vs8
@@ -13470,9 +13470,9 @@ cl_fdwt53Kernel_wt:
     vaddi vs6, vs32, 72
     vlsd vs6, vs6
     @vp5 vsll vv2, vv28, vs6
-    @vp5 vlxw vv27, vs54, vv2
+    @vp5 vlxw vv27, vs56, vv2
     @vp5 vaddw vv26, vv26, vv27
-    @vp5 vsxw vv26, vs54, vv2
+    @vp5 vsxw vv26, vs56, vv2
     vaddi vs6, vs32, 32
     vlsd vs6, vs6
     vaddw vs8, vs5, vs6
@@ -13485,31 +13485,31 @@ cl_fdwt53Kernel_wt:
     vpop vp5, vp5, vp12, vp12, 0x02
     @vp13 vaddw vs5, vs8, vs0
     @vp13 vcjal 1, vs1, .Lcl_fdwt53Kernel_loop171
-    vcmpeq vp4, vv24, vs0
+    vcmpeq vp4, vv22, vs0
     vpop vp4, vp4, vp4, vp4, 0x55
-    vcmpeq vp5, vv22, vs0
+    vcmpeq vp5, vv24, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
     vcmpeq vp12, vv12, vs0
     vpop vp12, vp12, vp12, vp12, 0x55
     vpop vp13, vp10, vp10, vp10, 0xAA
-    vpop vp13, vp13, vp5, vp5, 0xEE
     vpop vp13, vp13, vp4, vp4, 0xEE
+    vpop vp13, vp13, vp5, vp5, 0xEE
     vpop vp13, vp13, vp12, vp12, 0xEE
     @vp12 vaddw vv12, vv17, vs0
-    @vp5 vaddw vv12, vv14, vs0
     @vp4 vaddw vv12, vv14, vs0
+    @vp5 vaddw vv12, vv14, vs0
     @vp10 vaddw vv12, vv14, vs0
     @vp12 vaddw vv22, vv19, vs0
-    @vp5 vaddw vv22, vv18, vs0
     @vp4 vaddw vv22, vv18, vs0
+    @vp5 vaddw vv22, vv18, vs0
     @vp10 vaddw vv22, vv18, vs0
     @vp12 vaddw vv24, vv21, vs0
-    @vp5 vaddw vv24, vv20, vs0
     @vp4 vaddw vv24, vv20, vs0
+    @vp5 vaddw vv24, vv20, vs0
     @vp10 vaddw vv24, vv20, vs0
     @vp12 vaddw vv26, vv23, vs0
-    @vp5 vaddw vv26, vv16, vs0
     @vp4 vaddw vv26, vv16, vs0
+    @vp5 vaddw vv26, vv16, vs0
     @vp10 vaddw vv26, vv16, vs0
     @!vp13 vcjal 0, vs1, .Lcl_fdwt53Kernel_skip173
     vfence
@@ -13557,7 +13557,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp5 vdivu vv3, vv2, vs2
@@ -13576,7 +13576,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp5 vdivu vv3, vv2, vs2
@@ -13599,7 +13599,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs13, vs32, 72
     vlsd vs13, vs13
     vsll vs14, vs12, vs13
-    vadd vs14, vs54, vs14
+    vadd vs14, vs56, vs14
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp5 vdivu vv3, vv2, vs2
@@ -13618,7 +13618,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs13, vs32, 72
     vlsd vs13, vs13
     vsll vs14, vs12, vs13
-    vadd vs14, vs54, vs14
+    vadd vs14, vs56, vs14
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp5 vdivu vv3, vv2, vs2
@@ -13660,7 +13660,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs8, vs5, vs4
-    vadd vs8, vs54, vs8
+    vadd vs8, vs56, vs8
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -13679,7 +13679,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs9, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -13702,7 +13702,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs11, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -13721,7 +13721,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs11, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -13788,7 +13788,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp5 vdivu vv3, vv2, vs2
@@ -13807,7 +13807,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
     vsll vs15, vs13, vs14
-    vadd vs15, vs54, vs15
+    vadd vs15, vs56, vs15
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp5 vdivu vv3, vv2, vs2
@@ -13833,7 +13833,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs13, vs32, 72
     vlsd vs13, vs13
     vsll vs14, vs12, vs13
-    vadd vs14, vs54, vs14
+    vadd vs14, vs56, vs14
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp5 vdivu vv3, vv2, vs2
@@ -13852,7 +13852,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs13, vs32, 72
     vlsd vs13, vs13
     vsll vs14, vs12, vs13
-    vadd vs14, vs54, vs14
+    vadd vs14, vs56, vs14
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp5 vdivu vv3, vv2, vs2
@@ -13894,7 +13894,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs6, vs5, vs4
-    vadd vs6, vs54, vs6
+    vadd vs6, vs56, vs6
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -13913,7 +13913,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs9, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -13939,7 +13939,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs11, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -13958,7 +13958,7 @@ cl_fdwt53Kernel_wt:
     vaddi vs4, vs32, 72
     vlsd vs4, vs4
     vsll vs5, vs11, vs4
-    vadd vs5, vs54, vs5
+    vadd vs5, vs56, vs5
     vaddi vs58, vs60, 48
     vlxd vv2, vs58, vv0
     @vp10 vdivu vv3, vv2, vs2
@@ -14012,11 +14012,11 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp13 vsll vv2, vv20, vs5
-    @vp13 vlxw vv18, vs54, vv2
+    @vp13 vlxw vv18, vs56, vv2
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp13 vsll vv2, vv16, vs5
-    @vp13 vsxw vv18, vs55, vv2
+    @vp13 vsxw vv18, vs54, vv2
     vaddi vs58, vs60, 504
     vlxw vv18, vs58, vv0
     @vp13 vaddw vv20, vv16, vv18
@@ -14039,11 +14039,11 @@ cl_fdwt53Kernel_wt:
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp15 vsll vv2, vv27, vs5
-    @vp15 vlxw vv18, vs54, vv2
+    @vp15 vlxw vv18, vs56, vv2
     vaddi vs5, vs32, 72
     vlsd vs5, vs5
     @vp15 vsll vv2, vv20, vs5
-    @vp15 vsxw vv18, vs55, vv2
+    @vp15 vsxw vv18, vs54, vv2
     vaddi vs58, vs60, 496
     vlxw vv18, vs58, vv0
     @vp15 vaddw vv20, vv20, vv18
@@ -14145,7 +14145,7 @@ c_CopySrcToComponents_ct:               # @c_CopySrcToComponents_ct
 	#NO_APP
 	addi	a6, a7, %pcrel_lo(.Lpcrel_hi1)
 	li	a7, 8
-	addi	t0, a6, 2
+	addi	t0, a6, 1
 	#APP
 	vmcs vs62, a7
 	#NO_APP
@@ -14153,23 +14153,23 @@ c_CopySrcToComponents_ct:               # @c_CopySrcToComponents_ct
 	vmcs vs58, t0
 	#NO_APP
 	#APP
-	vmcs vs57, a2
+	vmcs vs57, a1
 	#NO_APP
 	#APP
-	vmcs vs56, a1
+	vmcs vs56, a4
 	#NO_APP
 	#APP
-	vmcs vs55, a4
+	vmcs vs55, a6
 	#NO_APP
-	addi	a1, a6, 1
+	addi	a6, a6, 2
 	#APP
-	vmcs vs54, a1
+	vmcs vs54, a6
 	#NO_APP
 	#APP
 	vmcs vs53, a3
 	#NO_APP
 	#APP
-	vmcs vs52, a6
+	vmcs vs52, a2
 	#NO_APP
 	li	a1, 3
 	#APP
@@ -14405,114 +14405,114 @@ cl_fdwt53Kernel_ct:                     # @cl_fdwt53Kernel_ct
 .Lpcrel_hi12:
 	auipc	a3, %pcrel_hi(.Lcl_fdwt53Kernel_spill)
 	addi	a3, a3, %pcrel_lo(.Lpcrel_hi12)
-	li	a4, 1
+.Lpcrel_hi13:
+	auipc	a4, %pcrel_hi(cl_fdwt53Kernel.fdwt53)
 	#APP
 	vmcs vs63, a3
 	#NO_APP
+	addi	a3, a4, %pcrel_lo(.Lpcrel_hi13)
+	li	a4, 1
+	addi	a5, a3, 64
 	#APP
 	vmcs vs61, a4
 	#NO_APP
 	#APP
-	vmcs vs56, a1
+	vmcs vs56, a5
 	#NO_APP
-.Lpcrel_hi13:
-	auipc	a1, %pcrel_hi(cl_fdwt53Kernel.fdwt53)
 	#APP
-	vmcs vs55, a2
+	vmcs vs55, a1
 	#NO_APP
-	addi	a1, a1, %pcrel_lo(.Lpcrel_hi13)
-	addi	a2, a1, 64
 .Lpcrel_hi14:
-	auipc	a3, %pcrel_hi(hwacha_ls0)
+	auipc	a1, %pcrel_hi(hwacha_ls0)
 	#APP
 	vmcs vs54, a2
 	#NO_APP
-	addi	a2, a3, %pcrel_lo(.Lpcrel_hi14)
+	addi	a1, a1, %pcrel_lo(.Lpcrel_hi14)
 	#APP
-	vmcs vs53, a2
+	vmcs vs53, a1
 	#NO_APP
 .Lpcrel_hi15:
-	auipc	a2, %pcrel_hi(hwacha_ls1)
-	addi	a2, a2, %pcrel_lo(.Lpcrel_hi15)
+	auipc	a1, %pcrel_hi(hwacha_ls1)
+	addi	a1, a1, %pcrel_lo(.Lpcrel_hi15)
 .Lpcrel_hi16:
-	auipc	a3, %pcrel_hi(hwacha_ng0)
+	auipc	a2, %pcrel_hi(hwacha_ng0)
 	#APP
-	vmcs vs52, a2
+	vmcs vs52, a1
 	#NO_APP
-	addi	a2, a3, %pcrel_lo(.Lpcrel_hi16)
+	addi	a1, a2, %pcrel_lo(.Lpcrel_hi16)
 	#APP
-	vmcs vs51, a2
+	vmcs vs51, a1
 	#NO_APP
 	sext.w	a6, a6
 	#APP
 	vmcs vs50, a6
 	#NO_APP
 	#APP
-	vmcs vs49, a1
+	vmcs vs49, a3
 	#NO_APP
 	sext.w	a7, a7
-	addi	a2, a1, 4
+	addi	a1, a3, 4
 	#APP
 	vmcs vs48, a7
 	#NO_APP
 	#APP
-	vmcs vs47, a2
+	vmcs vs47, a1
 	#NO_APP
-	addi	a2, a1, 68
-	addi	a3, a1, 72
+	addi	a1, a3, 68
+	addi	a2, a3, 72
 	#APP
-	vmcs vs46, a2
-	#NO_APP
-	#APP
-	vmcs vs45, a3
-	#NO_APP
-	addi	a2, a1, 76
-	addi	a3, a1, 80
-	#APP
-	vmcs vs44, a2
+	vmcs vs46, a1
 	#NO_APP
 	#APP
-	vmcs vs43, a3
+	vmcs vs45, a2
 	#NO_APP
-	addi	a2, a1, 84
-	addi	a3, a1, 88
+	addi	a1, a3, 76
+	addi	a2, a3, 80
 	#APP
-	vmcs vs42, a2
-	#NO_APP
-	#APP
-	vmcs vs41, a3
-	#NO_APP
-	addi	a2, a1, 92
-	addi	a3, a1, 96
-	#APP
-	vmcs vs40, a2
+	vmcs vs44, a1
 	#NO_APP
 	#APP
-	vmcs vs39, a3
+	vmcs vs43, a2
 	#NO_APP
-	addi	a2, a1, 100
-	addi	a3, a1, 104
+	addi	a1, a3, 84
+	addi	a2, a3, 88
 	#APP
-	vmcs vs38, a2
-	#NO_APP
-	#APP
-	vmcs vs37, a3
-	#NO_APP
-	addi	a2, a1, 108
-	addi	a3, a1, 112
-	#APP
-	vmcs vs36, a2
+	vmcs vs42, a1
 	#NO_APP
 	#APP
-	vmcs vs35, a3
+	vmcs vs41, a2
 	#NO_APP
-	addi	a2, a1, 116
-	addi	a1, a1, 120
+	addi	a1, a3, 92
+	addi	a2, a3, 96
 	#APP
-	vmcs vs34, a2
+	vmcs vs40, a1
 	#NO_APP
 	#APP
-	vmcs vs33, a1
+	vmcs vs39, a2
+	#NO_APP
+	addi	a1, a3, 100
+	addi	a2, a3, 104
+	#APP
+	vmcs vs38, a1
+	#NO_APP
+	#APP
+	vmcs vs37, a2
+	#NO_APP
+	addi	a1, a3, 108
+	addi	a2, a3, 112
+	#APP
+	vmcs vs36, a1
+	#NO_APP
+	#APP
+	vmcs vs35, a2
+	#NO_APP
+	addi	a1, a3, 116
+	addi	a2, a3, 120
+	#APP
+	vmcs vs34, a1
+	#NO_APP
+	#APP
+	vmcs vs33, a2
 	#NO_APP
 	beqz	a0, .LBB2_7
 # %bb.1:                                # %stripmine.preheader

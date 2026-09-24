@@ -415,7 +415,7 @@ lud_internal_wt:
     vsll vv2, vv9, vs47
     vsrl vv2, vv2, vs47
     vsll vv4, vv2, vs52
-    vsxw vv7, vs60, vv4
+    vsxw vv7, vs61, vv4
     vaddw vv7, vs2, vv5
     vaddw vv7, vv7, vv1
     vmulw vv7, vv7, vs53
@@ -424,7 +424,7 @@ lud_internal_wt:
     vsll vv4, vv9, vs52
     vlxw vv5, vs62, vv4
     vsll vv2, vv2, vs52
-    vsxw vv5, vs61, vv2
+    vsxw vv5, vs60, vv2
     vfence
     vsll vv3, vv3, vs52
     vaddw vv5, vs0, vs0
@@ -1031,10 +1031,10 @@ lud_internal_ct:                        # @lud_internal_ct
 	vmcs vs62, a1
 	#NO_APP
 	#APP
-	vmcs vs61, a3
+	vmcs vs61, a2
 	#NO_APP
 	#APP
-	vmcs vs60, a2
+	vmcs vs60, a3
 	#NO_APP
 .Lpcrel_hi22:
 	auipc	a1, %pcrel_hi(hwacha_ls0)

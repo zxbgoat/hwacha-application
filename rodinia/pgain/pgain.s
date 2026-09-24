@@ -99,13 +99,13 @@ pgain_kernel_wt_a0:
     @vp5 vlstd vv3, va5, va9
     @vp5 vsll vv3, vv3, vs51
     @vp5 vsra vv3, vv3, vs50
-    @vp5 vlxw vv6, vs62, vv3
+    @vp5 vlxw vv6, vs61, vv3
     @vp5 vadd vv2, vv6, vv2
     @vp5 vfsub.s vv5, vv4, vv5
     @vp5 vsll vv2, vv2, vs49
-    @vp5 vlxw vv4, vs61, vv2
+    @vp5 vlxw vv4, vs62, vv2
     @vp5 vfadd.s vv5, vv5, vv4
-    @vp5 vsxw vv5, vs61, vv2
+    @vp5 vsxw vv5, vs62, vv2
 .Lpgain_kernel_skip7:
     vpop vp1, vp5, vp5, vp5, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
@@ -209,10 +209,10 @@ pgain_kernel_ct:                        # @pgain_kernel_ct
 	vsetcfg t1
 	#NO_APP
 	#APP
-	vmcs vs62, a4
+	vmcs vs62, a3
 	#NO_APP
 	#APP
-	vmcs vs61, a3
+	vmcs vs61, a4
 	#NO_APP
 	sext.w	t3, a7
 	#APP

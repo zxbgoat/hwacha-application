@@ -50,7 +50,7 @@ bpnn_layerforward_ocl_wt:
     vaddi vs61, vs63, 0
     vlxd vv2, vs61, vv0
     @vp2 vsll vv3, vv2, vs48
-    @vp2 vsxw vv5, vs59, vv3
+    @vp2 vsxw vv5, vs58, vv3
 .Lbpnn_layerforward_ocl_skip0:
     @!vp3 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip1
     vaddi vs61, vs63, 0
@@ -68,7 +68,7 @@ bpnn_layerforward_ocl_wt:
     vaddi vs61, vs63, 32
     vsxw vv7, vs61, vv0
     @vp4 vsll vv3, vv7, vs48
-    @vp4 vlxw vv5, vs56, vv3
+    @vp4 vlxw vv5, vs57, vv3
     vaddi vs61, vs63, 0
     vlxd vv3, vs61, vv0
     @vp4 vsll vv4, vv3, vs46
@@ -77,13 +77,13 @@ bpnn_layerforward_ocl_wt:
     @vp4 vadd vv4, vv4, vv3
     @vp4 vand vv4, vv4, vs45
     @vp4 vsll vv3, vv4, vs48
-    @vp4 vsxw vv5, vs58, vv3
+    @vp4 vsxw vv5, vs59, vv3
     vfence
-    @vp4 vlxw vv5, vs58, vv3
-    @vp4 vlxw vv6, vs59, vv2
+    @vp4 vlxw vv5, vs59, vv3
+    @vp4 vlxw vv6, vs58, vv2
     @vp4 vfmul.s vv6, vv5, vv6
     @vp4 vsll vv3, vv4, vs48
-    @vp4 vsxw vv6, vs58, vv3
+    @vp4 vsxw vv6, vs59, vv3
     vfence
     @vp4 vsll vv3, vv4, vs48
     vaddi vs61, vs63, 40
@@ -104,7 +104,7 @@ bpnn_layerforward_ocl_wt:
     @!vp5 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip4
     vaddi vs61, vs63, 40
     vlxd vv3, vs61, vv0
-    @vp5 vlxw vv5, vs58, vv3
+    @vp5 vlxw vv5, vs59, vv3
     vsrlw vs3, vs2, vs51
     vaddi vs61, vs63, 0
     vlxw vv6, vs61, vv0
@@ -114,9 +114,9 @@ bpnn_layerforward_ocl_wt:
     vlxw vv6, vs61, vv0
     @vp5 vaddw vv7, vv7, vv6
     @vp5 vsll vv3, vv7, vs48
-    @vp5 vlxw vv6, vs58, vv3
+    @vp5 vlxw vv6, vs59, vv3
     @vp5 vfadd.s vv6, vv5, vv6
-    @vp5 vsxw vv6, vs58, vv2
+    @vp5 vsxw vv6, vs59, vv2
 .Lbpnn_layerforward_ocl_skip4:
     vpop vp4, vp5, vp5, vp5, 0xAA
     vpop vp4, vp4, vp6, vp6, 0xEE
@@ -136,11 +136,11 @@ bpnn_layerforward_ocl_wt:
     vpop vp2, vp2, vp3, vp3, 0xEE
     @!vp2 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip6
     @vp2 vsll vv4, vv4, vs48
-    @vp2 vlxw vv5, vs58, vv4
+    @vp2 vlxw vv5, vs59, vv4
     vaddi vs61, vs63, 32
     vlxd vv2, vs61, vv0
     @vp2 vsll vv3, vv2, vs48
-    @vp2 vsxw vv5, vs56, vv3
+    @vp2 vsxw vv5, vs57, vv3
     vfence
 .Lbpnn_layerforward_ocl_skip6:
     vpop vp3, vp2, vp1, vp1, 0x80
@@ -148,7 +148,7 @@ bpnn_layerforward_ocl_wt:
     @!vp3 vcjal 0, vs1, .Lbpnn_layerforward_ocl_skip7
     vaddi vs61, vs63, 24
     vlxd vv2, vs61, vv0
-    @vp3 vlxw vv5, vs58, vv2
+    @vp3 vlxw vv5, vs59, vv2
     vaddi vs61, vs63, 8
     vlxw vv6, vs61, vv0
     @vp3 vmulw vv7, vs52, vv6
@@ -156,7 +156,7 @@ bpnn_layerforward_ocl_wt:
     vlxw vv6, vs61, vv0
     @vp3 vaddw vv7, vv7, vv6
     @vp3 vsll vv2, vv7, vs48
-    @vp3 vsxw vv5, vs57, vv2
+    @vp3 vsxw vv5, vs56, vv2
 .Lbpnn_layerforward_ocl_skip7:
     vpop vp1, vp3, vp3, vp3, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
@@ -219,19 +219,19 @@ bpnn_adjust_weights_ocl_wt:
     vaddi vs61, vs63, 16
     vlxw vv6, vs61, vv0
     vsll vv2, vv6, vs48
-    vlxw vv6, vs58, vv2
+    vlxw vv6, vs59, vv2
     vfmul.s vv7, vv6, vs47
     vaddi vs61, vs63, 32
     vlxw vv6, vs61, vv0
     vaddi vs61, vs63, 24
     vlxw vv4, vs61, vv0
     vfmadd.s vv7, vv6, vv4, vv7
-    vlxw vv6, vs59, vv2
+    vlxw vv6, vs58, vv2
     vfadd.s vv7, vv6, vv7
     vaddi vs61, vs63, 16
     vlxw vv6, vs61, vv0
     vsll vv2, vv6, vs48
-    vsxw vv7, vs59, vv2
+    vsxw vv7, vs58, vv2
     vadd vs4, vs50, vs49
     vmul vv2, vs3, vv3
     vsub vv2, vs0, vv2
@@ -256,14 +256,14 @@ bpnn_adjust_weights_ocl_wt:
     vaddi vs61, vs63, 16
     vlxw vv6, vs61, vv0
     vsll vv2, vv6, vs48
-    vlxw vv6, vs58, vv2
+    vlxw vv6, vs59, vv2
     vfmul.s vv7, vv6, vs47
     vaddi vs61, vs63, 48
     vlxw vv6, vs61, vv0
     vaddi vs61, vs63, 40
     vlxw vv4, vs61, vv0
     vfmadd.s vv7, vv6, vv4, vv7
-    vsxw vv7, vs58, vv2
+    vsxw vv7, vs59, vv2
     vfence
     vaddi vs61, vs63, 8
     vlxd vv2, vs61, vv0
@@ -283,7 +283,7 @@ bpnn_adjust_weights_ocl_wt:
     @vp2 vsll vv4, vv1, vs48
     @vp2 vadd vv2, vv2, vv4
     @vp2 vlxw vv6, vs4, vv2
-    vadd vs4, vs58, vs49
+    vadd vs4, vs59, vs49
     @vp2 vmul vv2, vs3, vv3
     @vp2 vsub vv2, vs0, vv2
     vaddi vs61, vs63, 8
@@ -296,7 +296,7 @@ bpnn_adjust_weights_ocl_wt:
     @vp2 vlxw vv7, vs4, vv2
     @vp2 vfmul.s vv7, vv7, vs47
     @vp2 vfmadd.s vv7, vv6, vs47, vv7
-    vadd vs4, vs59, vs49
+    vadd vs4, vs58, vs49
     @vp2 vmul vv2, vs3, vv3
     @vp2 vsub vv2, vs0, vv2
     vaddi vs61, vs63, 8
@@ -308,7 +308,7 @@ bpnn_adjust_weights_ocl_wt:
     @vp2 vadd vv2, vv2, vv4
     @vp2 vlxw vv6, vs4, vv2
     @vp2 vfadd.s vv7, vv6, vv7
-    vadd vs4, vs59, vs49
+    vadd vs4, vs58, vs49
     @vp2 vmul vv2, vs3, vv3
     @vp2 vsub vv2, vs0, vv2
     vaddi vs61, vs63, 8
@@ -330,7 +330,7 @@ bpnn_adjust_weights_ocl_wt:
     @vp2 vsll vv4, vv1, vs48
     @vp2 vadd vv2, vv2, vv4
     @vp2 vlxw vv6, vs4, vv2
-    vadd vs4, vs58, vs49
+    vadd vs4, vs59, vs49
     @vp2 vmul vv2, vs3, vv3
     @vp2 vsub vv2, vs0, vv2
     vaddi vs61, vs63, 8
@@ -343,7 +343,7 @@ bpnn_adjust_weights_ocl_wt:
     @vp2 vlxw vv7, vs4, vv2
     @vp2 vfmul.s vv7, vv7, vs47
     @vp2 vfmadd.s vv7, vv6, vs47, vv7
-    vadd vs4, vs58, vs49
+    vadd vs4, vs59, vs49
     @vp2 vmul vv3, vs3, vv3
     @vp2 vsub vv3, vs0, vv3
     vaddi vs61, vs63, 8
@@ -387,19 +387,19 @@ bpnn_layerforward_ocl_ct:               # @bpnn_layerforward_ocl_ct
 	vmcs vs62, a2
 	#NO_APP
 	#APP
-	vmcs vs59, a5
+	vmcs vs59, a6
 	#NO_APP
 	#APP
-	vmcs vs58, a6
+	vmcs vs58, a5
 	#NO_APP
 .Lpcrel_hi1:
 	auipc	a2, %pcrel_hi(hwacha_ls0)
 	#APP
-	vmcs vs57, a4
+	vmcs vs57, a3
 	#NO_APP
 	addi	a2, a2, %pcrel_lo(.Lpcrel_hi1)
 	#APP
-	vmcs vs56, a3
+	vmcs vs56, a4
 	#NO_APP
 	#APP
 	vmcs vs55, a2
@@ -532,12 +532,12 @@ bpnn_adjust_weights_ocl_ct:             # @bpnn_adjust_weights_ocl_ct
 	vmcs vs62, a7
 	#NO_APP
 	#APP
-	vmcs vs59, a5
+	vmcs vs59, a6
 	#NO_APP
 .Lpcrel_hi8:
 	auipc	a4, %pcrel_hi(hwacha_ls0)
 	#APP
-	vmcs vs58, a6
+	vmcs vs58, a5
 	#NO_APP
 	addi	a4, a4, %pcrel_lo(.Lpcrel_hi8)
 	#APP
