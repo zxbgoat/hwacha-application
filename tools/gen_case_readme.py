@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / torchvision / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttf-module / torchvision / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -569,6 +569,60 @@ elif d == 'torchintf':
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         b = bufs_of(m)
         if b: t += f'| 常量 buffer | {b} |\n'
+        has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
+        t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认"}`\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
+elif d == 'ttf-module':
+    ef = load(os.path.join(D, 'export_ttf.py'), 'ef')
+    docs = 'https://meta-pytorch.org/torchtune/0.6/generated/torchtune.%s.html'
+    info = {   # case -> (qualified name, what the case does, note on the export)
+        'multi_head_attention': ('modules.MultiHeadAttention', 'GQA 自注意力：embed 32、4 个 query 头 / 2 个 kv 头、head_dim 8、RoPE、因果掩码；x = y', ''),
+        'feed_forward': ('modules.FeedForward', 'SwiGLU 前馈：gate / up 32 -> 64，down 64 -> 32', ''),
+        'kv_cache': ('modules.KVCache', '容量 8 的 kv 缓存已写入 4 个位置，再 update() 2 个位置（输入为堆叠的 k、v），输出整个缓存 [k; v]', '缓存的 index-copy 写入没有 lowering；导出图用选择矩阵的矩阵乘把新行加到常量缓存上：base + P @ x'),
+        'rotary_positional_embeddings': ('modules.RotaryPositionalEmbeddings', 'head_dim 8、序列 8、4 个头的旋转位置编码', 'RoPE 的 cos/sin 表是非持久 buffer，导出前重新注册为持久 buffer（torch-mlir 导入需要）'),
+        'rmsnorm': ('modules.RMSNorm', 'dim 32 的 RMSNorm', ''), 'fp32_layer_norm': ('modules.Fp32LayerNorm', 'dim 32 的 LayerNorm（内部按 fp32 计算）', ''),
+        'tanh_gate': ('modules.TanhGate', 'x · tanh(scale)，scale 置为 0.5（默认 0 会输出全零）', ''),
+        'tied_linear': ('modules.TiedLinear', '与 Embedding(16, 32) 的权重绑定的线性层：32 -> 16', ''),
+        'transformer_self_attention_layer': ('modules.TransformerSelfAttentionLayer', 'pre-norm 自注意力层：RMSNorm -> GQA 注意力 -> 残差 -> RMSNorm -> SwiGLU -> 残差', ''),
+        'transformer_cross_attention_layer': ('modules.TransformerCrossAttentionLayer', '交叉注意力层：query 来自 8 个 token，key/value 来自 6 个常量 encoder 向量', ''),
+        'transformer_decoder': ('modules.TransformerDecoder', '两层解码器：Embedding(16, 32) -> 2 x 自注意力层 -> RMSNorm -> 输出 32 -> 16 logits；输入 8 个 token id（float 转 long）', ''),
+        'vision_transformer': ('modules.VisionTransformer', '1 张 8x8 图、patch 4 -> 4 个 patch + CLS，1 层 transformer，输出 token 序列 (1, 1, 1, 5, 32)', ''),
+        'layer_dropout': ('modules.LayerDropout', 'prob 0.5 的 LayerDropout 包住一个 FeedForward，eval 模式下被包函数无条件执行', ''),
+        'prepare_layer_dropout': ('modules.prepare_layer_dropout', '对两个 FeedForward 调用 prepare_layer_dropout(prob_max=0.2) 后顺序执行（eval：恒等包装）', ''),
+        'ce_with_chunked_output_loss': ('modules.loss.CEWithChunkedOutputLoss', '2 个 chunk 的交叉熵：logits (1, 8, 16) 切成两半，标签含一个 ignore_index', ''),
+        'forward_kl_loss': ('modules.loss.ForwardKLLoss', '学生 / 教师 logits (1, 8, 16) 的前向 KL，标签含一个 ignore_index', '损失对未掩码 token 数做数据相关分支（if sum_masks == 0），torch.export 无法追踪；导出图写出公式 -Σ_i m_i Σ_v p_t log p_s / Σ_i m_i'),
+        'forward_kl_with_chunked_output_loss': ('modules.loss.ForwardKLWithChunkedOutputLoss', '2 个 chunk 的前向 KL', '同 forward_kl_loss：导出图写出公式（chunk 求和等价于整体）'),
+        'lora_linear': ('modules.peft.LoRALinear', '32 -> 16、rank 4、alpha 8 的 LoRA 线性层（lora_b 随机初始化，默认为零）', ''),
+        'dora_linear': ('modules.peft.DoRALinear', '32 -> 16、rank 4、alpha 8 的 DoRA 线性层，magnitude 由 initialize_dora_magnitude 计算', ''),
+        'adapter_module': ('modules.peft.AdapterModule', '实现 AdapterModule 协议的最小模块：y = base(x) + scale · adapter(x)，adapter_params 返回 adapter 权重与 scale', ''),
+        'get_adapter_params': ('modules.peft.get_adapter_params', '对 LoRALinear 调用 get_adapter_params（断言得到 lora_a / lora_b），再前向', ''),
+        'set_trainable_params': ('modules.peft.set_trainable_params', '只把 adapter 参数设为可训练（断言 base 权重冻结），再前向', ''),
+        'get_adapter_state_dict': ('modules.peft.get_adapter_state_dict', '从 LoRALinear 的 state_dict 取出 adapter 权重，用它们重建 LoRA 增量：base(x) + (alpha/rank) x Aᵀ Bᵀ', '导出图用取出的 adapter state dict 重建前向，参考是原 LoRALinear'),
+        'validate_missing_and_unexpected_for_lora': ('modules.peft.validate_missing_and_unexpected_for_lora', '按 q_proj 的 LoRA 配置校验 missing / unexpected 键（通过），再前向 LoRALinear', ''),
+        'disable_adapter': ('modules.peft.disable_adapter', '在 disable_adapter 上下文中前向 LoRALinear：只剩 base 线性层', ''),
+        'fusion_layer': ('modules.model_fusion.FusionLayer', '自注意力层 + 交叉注意力融合层（fusion_first），encoder_input 为 6 个常量向量', ''),
+        'fusion_embedding': ('modules.model_fusion.FusionEmbedding', '词表 16 + 融合词表 4 的嵌入，8 个 token 中 4 个落在融合词表', 'masked_select / masked_scatter 没有 lowering；导出图用 one-hot 从拼接的 [E; E_fusion] 表中取行'),
+        'deep_fusion_model': ('modules.model_fusion.DeepFusionModel', '解码器（自注意力层 + FusionLayer）+ 线性 encoder，encoder_input 6 个向量，输出 8 个 token 的 logits', ''),
+        'register_fusion_module': ('modules.model_fusion.register_fusion_module', '把交叉注意力层注册为融合模块（断言 fusion_params 为其全部参数），再前向', ''),
+        'get_fusion_params': ('modules.model_fusion.get_fusion_params', '对 DeepFusionModel 调用 get_fusion_params（断言只含 fusion_layer 的参数），再前向', ''),
+        'local_kv_cache': ('modules.common_utils.local_kv_cache', '在 local_kv_cache 上下文中对 8 个 token 做整段 prefill（因果掩码、input_pos 0..7）', '带缓存的前向把 k / v index-copy 进缓存（没有 lowering）；导出图跑同一个解码器的无缓存前向，整段 prefill 下二者相同'),
+        'disable_kv_cache': ('modules.common_utils.disable_kv_cache', '已 setup_caches 的解码器在 disable_kv_cache 上下文中前向（不用缓存）', ''),
+        'delete_kv_caches': ('modules.common_utils.delete_kv_caches', 'setup_caches 后 delete_kv_caches（断言缓存已删除），再前向', ''),
+        'vision_cross_attention_mask': ('modules.transforms.VisionCrossAttentionMask', '由 token 列表 [image_token, 7 个文本 token] 与 1 张 8x8 图（patch 4：4 个 patch + CLS）生成文本 -> 图像掩码，作为交叉注意力层的 encoder_mask', '')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        qual, what, note = info.get(case, (case, '', ''))
+        m, x = ef.build(case); m = m.eval()
+        with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
+        t = f'# {case}\n\n'
+        t += f'torchtune 的 `torchtune.{qual}` 在 Hwacha 上的一次前向，与 PyTorch 逐元素比对。文档：{docs % qual}\n\n'
+        t += f'用例：{what}。\n\n'
+        if note: t += f'**注意**：{note}。参考值由真正的 torchtune 调用算出，导出前脚本断言两者一致。\n\n'
+        t += '来源：`export_ttf.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机权重与输入、固定种子；规模很小（embed 32、4 头 x head_dim 8、序列 8、词表 16）。\n\n'
+        t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
         t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认"}`\n\n'
