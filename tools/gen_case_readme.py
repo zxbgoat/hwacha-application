@@ -440,17 +440,36 @@ elif d == 'deformable':
 elif d == 'torchintf':
     ef = load(os.path.join(D, 'export_intf.py'), 'ef')
     docs = 'https://docs.pytorch.org/docs/2.14/generated/torch.%s.html'
-    calls = {'topk': ('torch.topk(x, 4)', 'dim=-1、largest=True、sorted=True：每行最大的 4 个值（降序）及其下标，输出为每行 [values | indices]')}
-    rewritten = {'topk': '`aten.topk` 在 torch-mlir 中 lower 成 `tm_tensor.sort`，hwacha-mlir 不接受（与 `../torchfunc` 的 fold / max_unpool 同一限制）。导出图用等价的 linalg 组合：每个元素的名次 = 本行中严格大于它的元素个数（随机数据无并列），名次为 i 的元素用 one-hot 求和选出：`values_i = sum_j x_j [rank_j == i]`，`indices_i = sum_j j [rank_j == i]`。每行 O(N^2) 次比较而不是排序，值与下标都精确。'}
+    calls = {'topk': ('torch.topk(x, 4)', 'dim=-1、largest=True、sorted=True：每行最大的 4 个值（降序）及其下标，输出为每行 [values | indices]'),
+             'fft': ('torch.fft.fft(x)', '4 行、长度 16 的实数序列，输出每行 [实部 | 虚部]'), 'ifft': ('torch.fft.ifft(x)', '输入每行 [实部 | 虚部] 各 16，输出同布局'),
+             'rfft': ('torch.fft.rfft(x)', '实数序列长 16，输出 9 个半谱 bin 的 [实部 | 虚部]'), 'irfft': ('torch.fft.irfft(x, 16)', '输入 9 个 bin 的 [实部 | 虚部]，输出长 16 的实数序列'),
+             'hfft': ('torch.fft.hfft(x, 16)', '厄米对称的单侧输入（9 个 bin 的 [实部 | 虚部]），输出长 16 的实数序列'), 'ihfft': ('torch.fft.ihfft(x)', '实数序列长 16，输出 9 个 bin 的 [实部 | 虚部]'),
+             'fft2': ('torch.fft.fft2(x)', '2 个 8x8 实数图，最后两维变换，输出 [实部 | 虚部]'), 'ifft2': ('torch.fft.ifft2(x)', '输入 2 x 8 x [8 | 8]，输出同布局'),
+             'rfft2': ('torch.fft.rfft2(x)', '2 个 8x8 实数图，输出 2 x 8 x [5 | 5]'), 'irfft2': ('torch.fft.irfft2(x, s=(8, 8))', '输入 2 x 8 x [5 | 5]，输出 2 个 8x8 实数图'),
+             'hfft2': ('torch.fft.hfft2(x, s=(8, 8))', '输入 2 x 8 x [5 | 5]（最后一维单侧），输出 2 个 8x8 实数图'), 'ihfft2': ('torch.fft.ihfft2(x)', '2 个 8x8 实数图，输出 2 x 8 x [5 | 5]'),
+             'fftn': ('torch.fft.fftn(x)', '4x4x4 实数张量，三维全变换，输出 4 x 4 x [4 | 4]'), 'ifftn': ('torch.fft.ifftn(x)', '输入 4 x 4 x [4 | 4]，输出同布局'),
+             'rfftn': ('torch.fft.rfftn(x)', '4x4x4 实数张量，输出 4 x 4 x [3 | 3]'), 'irfftn': ('torch.fft.irfftn(x, s=(4, 4, 4))', '输入 4 x 4 x [3 | 3]，输出 4x4x4 实数张量'),
+             'hfftn': ('torch.fft.hfftn(x, s=(4, 4, 4))', '输入 4 x 4 x [3 | 3]，输出 4x4x4 实数张量'), 'ihfftn': ('torch.fft.ihfftn(x)', '4x4x4 实数张量，输出 4 x 4 x [3 | 3]'),
+             'fftfreq': ('x + torch.fft.fftfreq(16)', '频率向量是常量，加到长 16 的输入上'), 'rfftfreq': ('x + torch.fft.rfftfreq(16)', '频率向量是常量，加到长 9 的输入上'),
+             'fftshift': ('torch.fft.fftshift(x)', '5x7 张量，两个维度都移位'), 'ifftshift': ('torch.fft.ifftshift(x)', '5x7 张量，两个维度都移位（奇数尺寸下与 fftshift 不同）')}
+    fftnote = ('torch-mlir 没有复数张量：复数张量表示为实数张量，实部与虚部沿最后一维拼接（`[实部 | 虚部]`），实数输入 / 输出保持原形状。沿某一维的 DFT 是与常量块矩阵的矩阵乘：'
+               '沿最后一维 `[xr | xi] @ [[Fr, Fi], [-Fi, Fr]]`（实数输入 `x @ [Fr | Fi]`）；沿其他维 `Fr @ x + Fi @ (x @ P)`，`P = [[0, I], [-I, 0]]` 把 `[xr | xi]` 变成 `[-xi | xr]`；'
+               'F = C - iS（正变换）或 (C + iS) / N（逆变换），C、S = cos / sin(2πnk/N)。rfft 取前 N/2+1 列；irfft 是带厄米权重 (1, 2, ..., 2, 1) / N 的 C2R 求和；'
+               'hfft(x) = N·irfft(conj x)，ihfft(x) = conj(rfft x) / N（n 维同理，N 为各维长度之积）。矩阵在 float64 里生成再转 float32。')
+    rewritten = {f: fftnote for f in ('fft', 'ifft', 'rfft', 'irfft', 'hfft', 'ihfft', 'fft2', 'ifft2', 'rfft2', 'irfft2', 'hfft2', 'ihfft2', 'fftn', 'ifftn', 'rfftn', 'irfftn', 'hfftn', 'ihfftn')}
+    rewritten['fftfreq'] = rewritten['rfftfreq'] = '`aten.fft_fftfreq` / `aten.fft_rfftfreq` 在 torch-mlir 中没有 lowering。频率向量本就是常量，导出图把它作为 buffer 加到输入上。'
+    rewritten['fftshift'] = rewritten['ifftshift'] = '`torch.roll` 会 lower 成 slice + concat；导出图用常量下标向量的 `index_select` 逐维做同样的循环移位。'
+    rewritten['topk'] = '`aten.topk` 在 torch-mlir 中 lower 成 `tm_tensor.sort`，hwacha-mlir 不接受（与 `../torchfunc` 的 fold / max_unpool 同一限制）。导出图用等价的 linalg 组合：每个元素的名次 = 本行中严格大于它的元素个数（随机数据无并列），名次为 i 的元素用 one-hot 求和选出：`values_i = sum_j x_j [rank_j == i]`，`indices_i = sum_j j [rank_j == i]`。每行 O(N^2) 次比较而不是排序，值与下标都精确。'
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
         m, x = ef.build(case); m = m.eval()
         with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
         call, note = calls.get(case, (f'torch.{case}(x)', ''))
         t = f'# {case}\n\n'
-        t += f'`torch.{case}` 的单函数测试，一次调用，与 PyTorch 逐元素比对。文档：{docs % case}\n\n'
+        qual = f'fft.{case}' if case in rewritten and rewritten[case] is fftnote or case in ('fftshift', 'ifftshift', 'fftfreq', 'rfftfreq') else case
+        t += f'`torch.{qual}` 的单函数测试，一次调用，与 PyTorch 逐元素比对。文档：{docs % qual}\n\n'
         t += f'调用：`{call}`' + (f'（{note}）' if note else '') + '\n\n'
-        if case in rewritten: t += f'**注意**：本 case 的导出图与参考不是同一段代码。{rewritten[case]} `check.bin` 中的参考值仍由真正的 `torch.{case}` 算出，导出前脚本断言两者一致。\n\n'
+        if case in rewritten: t += f'**注意**：本 case 的导出图与参考不是同一段代码。{rewritten[case]} `check.bin` 中的参考值仍由真正的 `torch.{qual}` 算出，导出前脚本断言两者一致。\n\n'
         t += '来源：`export_intf.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机数据、固定种子。\n\n'
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         b = bufs_of(m)
