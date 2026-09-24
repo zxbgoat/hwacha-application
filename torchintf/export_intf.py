@@ -7,6 +7,7 @@ import sys, os, struct, numpy as np, torch
 from torch_mlir import fx
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from intf_linalg import add_linalg
+from intf_special import add_special
 
 class Case(torch.nn.Module):
     """net(x) = body(self, x); every tensor in `bufs` becomes a constant buffer of the module"""
@@ -143,6 +144,8 @@ def build(fn):
     rcase('kaiser', kaiser_body, lambda s, x: x * W.kaiser(M, beta=beta), R(4, M), n=torch.arange(M).float())
     # ---- torch.linalg (docs.pytorch.org/docs/2.14/linalg.html): intf_linalg.py
     add_linalg(case, rcase, R)
+    # ---- torch.special (docs.pytorch.org/docs/2.14/special.html): intf_special.py
+    add_special(case, rcase, R)
     if fn == '--list': return sorted(C)
     if fn not in C: raise SystemExit('unknown function ' + fn)
     return C[fn]()

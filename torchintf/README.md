@@ -14,7 +14,7 @@ mlir-opt and the torch-mlir venv `../.tmenv`), `make gen-all` every missing one.
 Every case is a single-input module `net(x)` returning one float tensor: second operands are constant
 buffers, integer results (indices) are cast to float.
 
-## Cases: 75, all PASS
+## Cases: 131, all PASS
 
 | function | call | input | output | Hwacha |
 |---|---|---|---|---|
@@ -96,6 +96,63 @@ buffers, integer results (indices) are cast to float.
 | ldl_factor_ex | `torch.linalg.ldl_factor_ex(x)[0]` | 4x4 SPD | tril(LD) 4x4 | PASS, max\|diff\| 0, 2,218 周期 |
 | ldl_solve | `torch.linalg.ldl_solve(LD, piv, x)` | B 4x2 | 4x2 | PASS, max\|diff\| 0, 1,403 周期 |
 
+| airy_ai | `torch.special.airy_ai(x)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 6,848 周期 |
+| bessel_j0 | `torch.special.bessel_j0(x)` | 4x16, x ∈ [0.5, 4] | 4x16 | PASS, max\|diff\| 0, 2,164 周期 |
+| bessel_j1 | `torch.special.bessel_j1(x)` | 4x16, x ∈ [0.5, 4] | 4x16 | PASS, max\|diff\| 0, 2,261 周期 |
+| bessel_y0 | `torch.special.bessel_y0(x)` | 4x16, x ∈ [0.5, 4] | 4x16 | PASS, max\|diff\| 0, 4,468 周期 |
+| bessel_y1 | `torch.special.bessel_y1(x)` | 4x16, x ∈ [0.5, 4] | 4x16 | PASS, max\|diff\| 0, 4,761 周期 |
+| chebyshev_polynomial_t | `torch.special.chebyshev_polynomial_t(x, 5)` | 4x16, x ∈ [-1, 1] | 4x16 | PASS, max\|diff\| 0, 483 周期 |
+| chebyshev_polynomial_u | `torch.special.chebyshev_polynomial_u(x, 5)` | 4x16, x ∈ [-1, 1] | 4x16 | PASS, max\|diff\| 0, 478 周期 |
+| chebyshev_polynomial_v | `torch.special.chebyshev_polynomial_v(x, 5)` | 4x16, x ∈ [-1, 1] | 4x16 | PASS, max\|diff\| 0, 545 周期 |
+| chebyshev_polynomial_w | `torch.special.chebyshev_polynomial_w(x, 5)` | 4x16, x ∈ [-1, 1] | 4x16 | PASS, max\|diff\| 0, 544 周期 |
+| digamma | `torch.special.digamma(x)` | 4x16, x ∈ [0.5, 4] | 4x16 | PASS, max\|diff\| 0, 1,911 周期 |
+| entr | `torch.special.entr(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 584 周期 |
+| erf | `torch.special.erf(x)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 133 周期 |
+| erfc | `torch.special.erfc(x)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 180 周期 |
+| erfcx | `torch.special.erfcx(x)` | 4x16, x ∈ [0, 2] | 4x16 | PASS, max\|diff\| 5e-06, 361 周期 |
+| erfinv | `torch.special.erfinv(x)` | 4x16, x ∈ [-0.9, 0.9] | 4x16 | PASS, max\|diff\| 0, 1,918 周期 |
+| exp2 | `torch.special.exp2(x)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 161 周期 |
+| expit | `torch.special.expit(x)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 113 周期 |
+| expm1 | `torch.special.expm1(x)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 116 周期 |
+| gammainc | `torch.special.gammainc(a=2.5, x)` | 4x16, x ∈ [0.5, 5] | 4x16 | PASS, max\|diff\| 0, 5,944 周期 |
+| gammaincc | `torch.special.gammaincc(a=2.5, x)` | 4x16, x ∈ [0.5, 5] | 4x16 | PASS, max\|diff\| 0, 5,982 周期 |
+| gammaln | `torch.special.gammaln(x)` | 4x16, x ∈ [0.5, 4] | 4x16 | PASS, max\|diff\| 3e-06, 2,477 周期 |
+| hermite_polynomial_h | `torch.special.hermite_polynomial_h(x, 5)` | 4x16, x ∈ [-1, 1] | 4x16 | PASS, max\|diff\| 5e-06, 666 周期 |
+| hermite_polynomial_he | `torch.special.hermite_polynomial_he(x, 5)` | 4x16, x ∈ [-1, 1] | 4x16 | PASS, max\|diff\| 0, 605 周期 |
+| i0 | `torch.special.i0(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 2,147 周期 |
+| i0e | `torch.special.i0e(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 2,328 周期 |
+| i1 | `torch.special.i1(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 2,250 周期 |
+| i1e | `torch.special.i1e(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 2,431 周期 |
+| laguerre_polynomial_l | `torch.special.laguerre_polynomial_l(x, 5)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 1,005 周期 |
+| legendre_polynomial_p | `torch.special.legendre_polynomial_p(x, 5)` | 4x16, x ∈ [-1, 1] | 4x16 | PASS, max\|diff\| 0, 944 周期 |
+| log1p | `torch.special.log1p(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 135 周期 |
+| log_ndtr | `torch.special.log_ndtr(x)` | 4x16, x ∈ [-2, 3] | 4x16 | PASS, max\|diff\| 2e-06, 353 周期 |
+| log_softmax | `torch.special.log_softmax(x, 1)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 815 周期 |
+| logit | `torch.special.logit(x)` | 4x16, x ∈ [0.05, 0.95] | 4x16 | PASS, max\|diff\| 0, 463 周期 |
+| logsumexp | `torch.special.logsumexp(x, 1)` | 4x16, x ∈ [-2, 2] | 4 | PASS, max\|diff\| 0, 927 周期 |
+| modified_bessel_i0 | `torch.special.modified_bessel_i0(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 2,147 周期 |
+| modified_bessel_i1 | `torch.special.modified_bessel_i1(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 2,250 周期 |
+| modified_bessel_k0 | `torch.special.modified_bessel_k0(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 4,472 周期 |
+| modified_bessel_k1 | `torch.special.modified_bessel_k1(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 4,697 周期 |
+| multigammaln | `torch.special.multigammaln(x, 3)` | 4x16, x ∈ [2.5, 5.5] | 4x16 | PASS, max\|diff\| 1e-05, 7,608 周期 |
+| ndtr | `torch.special.ndtr(x)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 257 周期 |
+| ndtri | `torch.special.ndtri(x)` | 4x16, x ∈ [0.05, 0.95] | 4x16 | PASS, max\|diff\| 0, 2,060 周期 |
+| polygamma | `torch.special.polygamma(1, x)` | 4x16, x ∈ [0.5, 4] | 4x16 | PASS, max\|diff\| 0, 2,165 周期 |
+| psi | `torch.special.psi(x)` | 4x16, x ∈ [0.5, 4] | 4x16 | PASS, max\|diff\| 0, 1,911 周期 |
+| round | `torch.special.round(x)` | 4x16, x ∈ [-6, 6] | 4x16 | PASS, max\|diff\| 0, 82 周期 |
+| scaled_modified_bessel_k0 | `torch.special.scaled_modified_bessel_k0(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 1.3e-05, 4,610 周期 |
+| scaled_modified_bessel_k1 | `torch.special.scaled_modified_bessel_k1(x)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 1e-05, 4,835 周期 |
+| shifted_chebyshev_polynomial_t | `torch.special.shifted_chebyshev_polynomial_t(x, 5)` | 4x16, x ∈ [0, 1] | 4x16 | PASS, max\|diff\| 0, 586 周期 |
+| shifted_chebyshev_polynomial_u | `torch.special.shifted_chebyshev_polynomial_u(x, 5)` | 4x16, x ∈ [0, 1] | 4x16 | PASS, max\|diff\| 1e-06, 558 周期 |
+| shifted_chebyshev_polynomial_v | `torch.special.shifted_chebyshev_polynomial_v(x, 5)` | 4x16, x ∈ [0, 1] | 4x16 | PASS, max\|diff\| 1e-06, 625 周期 |
+| shifted_chebyshev_polynomial_w | `torch.special.shifted_chebyshev_polynomial_w(x, 5)` | 4x16, x ∈ [0, 1] | 4x16 | PASS, max\|diff\| 1e-06, 624 周期 |
+| sinc | `torch.special.sinc(x)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 340 周期 |
+| softmax | `torch.special.softmax(x, 1)` | 4x16, x ∈ [-2, 2] | 4x16 | PASS, max\|diff\| 0, 689 周期 |
+| spherical_bessel_j0 | `torch.special.spherical_bessel_j0(x)` | 4x16, x ∈ [0.5, 4] | 4x16 | PASS, max\|diff\| 0, 170 周期 |
+| xlog1py | `torch.special.xlog1py(x, y)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 365 周期 |
+| xlogy | `torch.special.xlogy(x, y)` | 4x16, x ∈ [0.5, 3] | 4x16 | PASS, max\|diff\| 0, 363 周期 |
+| zeta | `torch.special.zeta(s=3.5, x)` | 4x16, x ∈ [1, 5] | 4x16 | PASS, max\|diff\| 0, 4,201 周期 |
+
 `[a\|b]`: a complex tensor, real and imaginary parts concatenated along the last dim.
 
 **topk**: `aten.topk` lowers in torch-mlir to `tm_tensor.sort`, which hwacha-mlir does not take (the
@@ -142,3 +199,18 @@ are concatenated by matmul with [I 0] / [0 I] buffers (no tensor.concat). The `_
 the result (info is 0, asserted). `norm` / `vector_norm` / `matrix_norm` use sqrt(sum x^2) (the pow
 based reductions torch-mlir emits give hwacha-mlir no kernel). Sizes are small (4x4, 6x4), chosen
 well conditioned.
+
+**torch.special** (docs.pytorch.org/docs/2.14/special.html, all 56 functions; `intf_special.py`):
+torch-mlir lowers the elementary ones (erf, exp, log, log1p, expm1, sigmoid, sin, softmax, round);
+the Bessel / Airy / gamma / zeta functions, erfinv and the orthogonal polynomials have no lowering, so
+the exported graphs evaluate them on a restricted input range with fixed-length series, asymptotic
+expansions or recurrences (the reference is the genuine call): J0 / J1 / I0 / I1 as power series in
+x^2/4 (25 terms, Horner), Y0 / Y1 / K0 / K1 as the log-series with harmonic numbers, Airy Ai by its
+Maclaurin series, lgamma / digamma / trigamma by an argument shift of 8 and the Stirling / asymptotic
+expansions (multigammaln as a sum of lgamma), gammainc by its series (a = 2.5), the Hurwitz zeta by
+Euler-Maclaurin, erfinv / ndtri by Giles' single-precision rational approximation, erfc / erfcx /
+log_ndtr from erf, the Chebyshev / Hermite / Laguerre / Legendre polynomials (n = 5) by their
+three-term recurrences. exp2 as exp(x ln 2) (the powf form gives hwacha-mlir no kernel). Two hwacha-cc
+additions came out of this batch: unordered float compares (`fcmp uno` / ord / one / ueq: torch's
+isnan in `entr`) and the rounding intrinsics (`llvm.rint` / roundeven / nearbyint half-to-even,
+`llvm.round` half-away: `round`).

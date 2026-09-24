@@ -8,7 +8,7 @@ data) that builds with the RISC-V GNU toolchain and runs on Spike.
 |---|---|---|
 | `torchnn/` | single `torch.nn` layers | 121 |
 | `torchfunc/` | `torch.nn.functional` functions | 111 |
-| `torchintf/` | top-level `torch.*` tensor functions: `torch.topk`, the 22 `torch.fft` functions, the 11 `torch.signal.windows`, the 41 `torch.linalg` functions | 75 |
+| `torchintf/` | top-level `torch.*` tensor functions: `torch.topk`, the 22 `torch.fft` functions, the 11 `torch.signal.windows`, the 41 `torch.linalg` functions, the 56 `torch.special` functions | 131 |
 | `torchvision/` | torchvision models (classification, segmentation, detection, video, optical flow) | 107 |
 | `deformable/` | Deformable ConvNets (deform conv / PS-RoI ops, DeepLab, R-FCN, Faster R-CNN, FPN, each plain and deformable) | 20 |
 | `rodinia/` | Rodinia 3.1 OpenCL benchmarks compiled directly by hwacha-cc, with bare-metal hosts (16 pass, 3 documented compiler limits, 2 without assembly) | 21 |

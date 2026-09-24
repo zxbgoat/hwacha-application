@@ -508,6 +508,50 @@ elif d == 'torchintf':
             'ldl_factor': la('lu', extra='对称正定矩阵 A = L D Lᵀ：LD = (L - I) + diag(U)，sytrf 对此输入不选主元（导出时断言）'), 'ldl_factor_ex': la('lu', extra='同 ldl_factor，info 恒为 0'),
             'ldl_solve': la('tri', extra='X = L⁻ᵀ D⁻¹ L⁻¹ B，L、D 取自常量 LD')}
     rewritten.update(lare)
+    spcalls = {'entr': ('torch.special.entr(x)', 'x ∈ [0.5, 3]'), 'erf': ('torch.special.erf(x)', 'x ∈ [-2, 2]'), 'expit': ('torch.special.expit(x)', 'x ∈ [-2, 2]'),
+               'expm1': ('torch.special.expm1(x)', 'x ∈ [-2, 2]'), 'log1p': ('torch.special.log1p(x)', 'x ∈ [0.5, 3]'), 'logit': ('torch.special.logit(x)', 'x ∈ [0.05, 0.95]'),
+               'log_softmax': ('torch.special.log_softmax(x, 1)', '4 x 16，沿最后一维'), 'softmax': ('torch.special.softmax(x, 1)', '4 x 16，沿最后一维'), 'logsumexp': ('torch.special.logsumexp(x, 1)', '4 x 16，沿最后一维'),
+               'ndtr': ('torch.special.ndtr(x)', 'x ∈ [-2, 2]'), 'round': ('torch.special.round(x)', 'x ∈ [-6, 6]'), 'sinc': ('torch.special.sinc(x)', 'x ∈ [-2, 2]'),
+               'xlogy': ('torch.special.xlogy(x, y)', 'y 为常量，x, y ∈ [0.5, 3]'), 'xlog1py': ('torch.special.xlog1py(x, y)', 'y 为常量，x, y ∈ [0.5, 3]'), 'exp2': ('torch.special.exp2(x)', 'x ∈ [-2, 2]'),
+               'erfc': ('torch.special.erfc(x)', 'x ∈ [-2, 2]'), 'erfcx': ('torch.special.erfcx(x)', 'x ∈ [0, 2]'), 'log_ndtr': ('torch.special.log_ndtr(x)', 'x ∈ [-2, 3]'),
+               'erfinv': ('torch.special.erfinv(x)', 'x ∈ [-0.9, 0.9]'), 'ndtri': ('torch.special.ndtri(x)', 'x ∈ [0.05, 0.95]'),
+               'gammaln': ('torch.special.gammaln(x)', 'x ∈ [0.5, 4]'), 'digamma': ('torch.special.digamma(x)', 'x ∈ [0.5, 4]'), 'psi': ('torch.special.psi(x)', 'x ∈ [0.5, 4]'),
+               'polygamma': ('torch.special.polygamma(1, x)', 'n = 1（trigamma），x ∈ [0.5, 4]'), 'multigammaln': ('torch.special.multigammaln(x, 3)', 'p = 3，x ∈ [2.5, 5.5]'),
+               'gammainc': ('torch.special.gammainc(a, x)', 'a = 2.5 常量，x ∈ [0.5, 5]'), 'gammaincc': ('torch.special.gammaincc(a, x)', 'a = 2.5 常量，x ∈ [0.5, 5]'), 'zeta': ('torch.special.zeta(s, x)', 's = 3.5 常量（Hurwitz zeta），x ∈ [1, 5]'),
+               'bessel_j0': ('torch.special.bessel_j0(x)', 'x ∈ [0.5, 4]'), 'bessel_j1': ('torch.special.bessel_j1(x)', 'x ∈ [0.5, 4]'), 'bessel_y0': ('torch.special.bessel_y0(x)', 'x ∈ [0.5, 4]'), 'bessel_y1': ('torch.special.bessel_y1(x)', 'x ∈ [0.5, 4]'),
+               'modified_bessel_i0': ('torch.special.modified_bessel_i0(x)', 'x ∈ [0.5, 3]'), 'modified_bessel_i1': ('torch.special.modified_bessel_i1(x)', 'x ∈ [0.5, 3]'),
+               'modified_bessel_k0': ('torch.special.modified_bessel_k0(x)', 'x ∈ [0.5, 3]'), 'modified_bessel_k1': ('torch.special.modified_bessel_k1(x)', 'x ∈ [0.5, 3]'),
+               'i0': ('torch.special.i0(x)', 'x ∈ [0.5, 3]'), 'i1': ('torch.special.i1(x)', 'x ∈ [0.5, 3]'), 'i0e': ('torch.special.i0e(x)', 'x ∈ [0.5, 3]'), 'i1e': ('torch.special.i1e(x)', 'x ∈ [0.5, 3]'),
+               'scaled_modified_bessel_k0': ('torch.special.scaled_modified_bessel_k0(x)', 'x ∈ [0.5, 3]'), 'scaled_modified_bessel_k1': ('torch.special.scaled_modified_bessel_k1(x)', 'x ∈ [0.5, 3]'),
+               'spherical_bessel_j0': ('torch.special.spherical_bessel_j0(x)', 'x ∈ [0.5, 4]'), 'airy_ai': ('torch.special.airy_ai(x)', 'x ∈ [-2, 2]'),
+               'hermite_polynomial_h': ('torch.special.hermite_polynomial_h(x, 5)', 'x ∈ [-1, 1]'), 'hermite_polynomial_he': ('torch.special.hermite_polynomial_he(x, 5)', 'x ∈ [-1, 1]'),
+               'laguerre_polynomial_l': ('torch.special.laguerre_polynomial_l(x, 5)', 'x ∈ [0.5, 3]'), 'legendre_polynomial_p': ('torch.special.legendre_polynomial_p(x, 5)', 'x ∈ [-1, 1]')}
+    for t in 'tuvw':
+        spcalls[f'chebyshev_polynomial_{t}'] = (f'torch.special.chebyshev_polynomial_{t}(x, 5)', 'x ∈ [-1, 1]')
+        spcalls[f'shifted_chebyshev_polynomial_{t}'] = (f'torch.special.shifted_chebyshev_polynomial_{t}(x, 5)', 'x ∈ [0, 1]')
+    calls.update(spcalls)
+    nolow = '`torch.special` 的这个函数在 torch-mlir 中没有 lowering。导出图'
+    spre = {'exp2': '导出的 `powf(2, x)` 让 hwacha-mlir 不生成内核；导出图用 exp(x·ln 2)。', 'erfc': nolow + '用 1 - erf(x)（erf 有 lowering；|x| <= 2 无抵消问题）。',
+            'erfcx': nolow + '用 exp(x²)(1 - erf x)，x ∈ [0, 2]。', 'log_ndtr': nolow + '用 log(½(1 + erf(x/√2)))。',
+            'erfinv': '`aten.erfinv` 的 lowering 失败。导出图用 Giles 的单精度有理逼近（w = -log(1 - x²) 分两段的 9 次多项式）。', 'ndtri': nolow + '用 √2·erfinv(2x - 1)（Giles 逼近）。',
+            'gammaln': nolow + '先把自变量平移 8（减去 Σ log(x + k)），再用 Stirling 级数（到 1/z⁷ 项）。', 'digamma': nolow + '先平移 8（减去 Σ 1/(x + k)），再用渐近级数（到 1/z⁸ 项）。',
+            'psi': nolow + '同 digamma：平移 8 加渐近级数。', 'polygamma': nolow + '（trigamma）平移 8（加上 Σ 1/(x + k)²），再用渐近级数（到 1/z⁹ 项）。',
+            'multigammaln': nolow + '用定义 p(p-1)/4·log π + Σ_j lgamma(x - j/2)，lgamma 用平移 + Stirling。',
+            'gammainc': nolow + '用级数 P(a, x) = xᵃe⁻ˣ/Γ(a+1)·Σ_k xᵏ/((a+1)…(a+k))，40 项，Γ(a+1) 为常量。', 'gammaincc': nolow + '用 1 - P(a, x)（同 gammainc 的级数）。',
+            'zeta': nolow + '用 Euler–Maclaurin：10 项直接求和 + 尾积分 + 3 项 Bernoulli 修正。',
+            'bessel_j0': nolow + '用幂级数 Σ (-1)ᵏ tᵏ/(k!)²（t = x²/4，Horner，25 项）。', 'bessel_j1': nolow + '用幂级数 (x/2) Σ (-1)ᵏ tᵏ/(k!(k+1)!)。',
+            'bessel_y0': nolow + '用对数级数 (2/π)[(ln(x/2) + γ) J₀ + Σ (-1)ᵏ⁺¹ H_k tᵏ/(k!)²]。', 'bessel_y1': nolow + '用对数级数（含 J₁、-2/(πx) 与调和数级数）。',
+            'modified_bessel_i0': nolow + '用幂级数 Σ tᵏ/(k!)²。', 'modified_bessel_i1': nolow + '用幂级数 (x/2) Σ tᵏ/(k!(k+1)!)。', 'i0': nolow + '用幂级数 Σ tᵏ/(k!)²。', 'i1': nolow + '用幂级数 (x/2) Σ tᵏ/(k!(k+1)!)。',
+            'i0e': nolow + '用 e⁻ˣ·I₀（幂级数）。', 'i1e': nolow + '用 e⁻ˣ·I₁（幂级数）。',
+            'modified_bessel_k0': nolow + '用对数级数 -(ln(x/2) + γ) I₀ + Σ H_k tᵏ/(k!)²。', 'modified_bessel_k1': nolow + '用对数级数 1/x + (ln(x/2) + γ) I₁ - (x/4) Σ (H_k + H_{k+1}) tᵏ/(k!(k+1)!)。',
+            'scaled_modified_bessel_k0': nolow + '用 eˣ·K₀（对数级数）。', 'scaled_modified_bessel_k1': nolow + '用 eˣ·K₁（对数级数）。',
+            'spherical_bessel_j0': nolow + '用 sin(x)/x。', 'airy_ai': nolow + '用 Maclaurin 级数 Ai = c₁f - c₂g（20 项）。',
+            'hermite_polynomial_h': nolow + '用三项递推 H_{k+1} = 2x H_k - 2k H_{k-1}，n = 5。', 'hermite_polynomial_he': nolow + '用三项递推 He_{k+1} = x He_k - k He_{k-1}，n = 5。',
+            'laguerre_polynomial_l': nolow + '用三项递推 (k+1) L_{k+1} = (2k+1-x) L_k - k L_{k-1}，n = 5。', 'legendre_polynomial_p': nolow + '用三项递推 (k+1) P_{k+1} = (2k+1) x P_k - k P_{k-1}，n = 5。'}
+    for t in 'tuvw':
+        spre[f'chebyshev_polynomial_{t}'] = nolow + f'用三项递推 P_{{k+1}} = 2x P_k - P_{{k-1}}（P₁ 按 {t.upper()} 的定义），n = 5。'
+        spre[f'shifted_chebyshev_polynomial_{t}'] = nolow + f'用 {t.upper()}(2x - 1) 的三项递推，n = 5。'
+    rewritten.update(spre)
     rewritten['fftfreq'] = rewritten['rfftfreq'] = '`aten.fft_fftfreq` / `aten.fft_rfftfreq` 在 torch-mlir 中没有 lowering。频率向量本就是常量，导出图把它作为 buffer 加到输入上。'
     rewritten['fftshift'] = rewritten['ifftshift'] = '`torch.roll` 会 lower 成 slice + concat；导出图用常量下标向量的 `index_select` 逐维做同样的循环移位。'
     rewritten['topk'] = '`aten.topk` 在 torch-mlir 中 lower 成 `tm_tensor.sort`，hwacha-mlir 不接受（与 `../torchfunc` 的 fold / max_unpool 同一限制）。导出图用等价的 linalg 组合：每个元素的名次 = 本行中严格大于它的元素个数（随机数据无并列），名次为 i 的元素用 one-hot 求和选出：`values_i = sum_j x_j [rank_j == i]`，`indices_i = sum_j j [rank_j == i]`。每行 O(N^2) 次比较而不是排序，值与下标都精确。'
@@ -517,7 +561,7 @@ elif d == 'torchintf':
         with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
         call, note = calls.get(case, (f'torch.{case}(x)', ''))
         t = f'# {case}\n\n'
-        qual = f'fft.{case}' if case in rewritten and rewritten[case] is fftnote or case in ('fftshift', 'ifftshift', 'fftfreq', 'rfftfreq') else f'signal.windows.{case}' if case in wincalls else f'linalg.{case}' if case in lacalls else case
+        qual = f'fft.{case}' if case in rewritten and rewritten[case] is fftnote or case in ('fftshift', 'ifftshift', 'fftfreq', 'rfftfreq') else f'signal.windows.{case}' if case in wincalls else f'linalg.{case}' if case in lacalls else f'special.{case}' if case in spcalls else case
         t += f'`torch.{qual}` 的单函数测试，一次调用，与 PyTorch 逐元素比对。文档：{docs % qual}\n\n'
         t += f'调用：`{call}`' + (f'（{note}）' if note else '') + '\n\n'
         if case in rewritten: t += f'**注意**：本 case 的导出图与参考不是同一段代码。{rewritten[case]} `check.bin` 中的参考值仍由真正的 `torch.{qual}` 算出，导出前脚本断言两者一致。\n\n'
