@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / torchvision / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / torchvision / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -622,6 +622,62 @@ elif d == 'ttmodule':
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchtune 调用算出，导出前脚本断言两者一致。\n\n'
         t += '来源：`export_ttf.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机权重与输入、固定种子；规模很小（embed 32、4 头 x head_dim 8、序列 8、词表 16）。\n\n'
+        t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
+        has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
+        t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认"}`\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
+elif d == 'ttmodel':
+    ef = load(os.path.join(D, 'export_ttm.py'), 'ef')
+    docs = 'https://meta-pytorch.org/torchtune/0.6/generated/torchtune.models.%s.html'
+    tiny = 'vocab 16、2 层、4 个 query 头 / 2 个 kv 头（head_dim 8）、embed 32、intermediate 64、序列 8'
+    lora_note = 'LoRA 加在 q_proj / v_proj 和 MLP 上（rank 4、alpha 8），lora_b 随机初始化（torchtune 默认置零，adapter 是恒等）'
+    info = {   # case -> (doc entry, what it builds, note)
+        'llama2': ('llama2.llama2', f'Llama 2 解码器（llama2_7b/13b/70b 的组件构建函数），{tiny}', ''),
+        'lora_llama2': ('llama2.lora_llama2', f'LoRA Llama 2 解码器，{tiny}；{lora_note}', ''),
+        'llama2_reward': ('llama2.llama2_reward_7b', f'llama2_classifier(num_classes=1)：llama2_reward_7b 所用的奖励模型架构（输出每个 token 一个分数），{tiny}', ''),
+        'lora_llama2_reward': ('llama2.lora_llama2_reward_7b', f'lora_llama2_classifier(num_classes=1)，{tiny}；{lora_note}', ''),
+        'code_llama2': ('code_llama2.code_llama2_7b', f'Code Llama：code_llama2_7b 所用的 llama2 架构（rope_base 1e6），{tiny}', ''),
+        'lora_code_llama2': ('code_llama2.lora_code_llama2_7b', f'LoRA Code Llama（lora_llama2 架构），{tiny}；{lora_note}', ''),
+        'llama3': ('llama3.llama3', f'Llama 3 解码器（rope_base 500000、GQA），{tiny}', ''), 'lora_llama3': ('llama3.lora_llama3', f'LoRA Llama 3 解码器，{tiny}；{lora_note}', ''),
+        'llama3_1': ('llama3_1.llama3_1', f'Llama 3.1 解码器（scaled RoPE，scale_factor 8），{tiny}', ''), 'lora_llama3_1': ('llama3_1.lora_llama3_1', f'LoRA Llama 3.1 解码器，{tiny}；{lora_note}', ''),
+        'llama3_2': ('llama3_2.llama3_2_1b', f'Llama 3.2 解码器（llama3_2_1b/3b 的组件构建函数：tied embeddings、scale_factor 32），{tiny}', ''),
+        'lora_llama3_2': ('llama3_2.lora_llama3_2_1b', f'LoRA Llama 3.2 解码器，{tiny}；{lora_note}', ''),
+        'llama3_3': ('llama3_3.llama3_3_70b', f'Llama 3.3：llama3_3_70b 所用的 llama3_1 架构，{tiny}', ''), 'lora_llama3_3': ('llama3_3.lora_llama3_3_70b', f'LoRA Llama 3.3（lora_llama3_1 架构），{tiny}；{lora_note}', ''),
+        'llama3_2_vision_encoder': ('llama3_2_vision.llama3_2_vision_encoder', 'Llama 3.2 Vision 编码器：CLIP（tile 8、patch 4：4 个 patch + CLS，2 层，embed 32，隐藏状态 [0]）+ 1 层投影头 -> 5 个 token', '单 tile（max_num_tiles=1）：多 tile 的平铺位置编码按每张图的 aspect ratio 循环，torch.export 无法追踪'),
+        'lora_llama3_2_vision_encoder': ('llama3_2_vision.lora_llama3_2_vision_encoder', f'LoRA Llama 3.2 Vision 编码器（encoder_lora、fusion_lora），{lora_note}', '单 tile，同 llama3_2_vision_encoder'),
+        'llama3_2_vision_decoder': ('llama3_2_vision.llama3_2_vision_decoder', f'Llama 3.2 Vision 融合解码器：每 2 层一个交叉注意力 FusionLayer，FusionEmbedding（2 个特殊 token），encoder_input 为 5 个常量向量，{tiny}', 'FusionEmbedding 的 masked_select / masked_scatter 没有 lowering；导出的副本把它换成 one-hot 从拼接表 [E; E_fusion] 取行的等价模块'),
+        'lora_llama3_2_vision_decoder': ('llama3_2_vision.lora_llama3_2_vision_decoder', f'LoRA Llama 3.2 Vision 融合解码器（decoder_lora、fusion_lora），{lora_note}', '同 llama3_2_vision_decoder：FusionEmbedding 换成 one-hot 等价模块'),
+        'llama3_2_vision': ('llama3_2_vision.llama3_2_vision_11b', 'llama3_2_vision_11b 的结构：DeepFusionModel(编码器, 融合解码器)，输入 8 个 token 与 1 张 8x8 图，输出 logits', '单 tile 编码器；FusionEmbedding 换成 one-hot 等价模块'),
+        'llama3_vision_encoder': ('llama3_2_vision.Llama3VisionEncoder', 'Llama3VisionEncoder 类：clip_vision_encoder（out_indices [0]）+ Llama3VisionProjectionHead', '单 tile'),
+        'llama3_vision_projection_head': ('llama3_2_vision.Llama3VisionProjectionHead', '投影头单独运行：1 层 transformer + 输出投影，输入 CLIP 输出 (1,1,1,5,32) 与 1 个隐藏状态', ''),
+        'qwen2': ('qwen2.qwen2', f'Qwen2 解码器（带偏置的 q/k/v 投影、rope_base 1e6），{tiny}', ''), 'lora_qwen2': ('qwen2.lora_qwen2', f'LoRA Qwen2 解码器，{tiny}；{lora_note}', ''),
+        'qwen2_5': ('qwen2_5.qwen2_5_0_5b', f'Qwen2.5：qwen2_5_0_5b 所用的 qwen2 架构（tie_word_embeddings、norm_eps 1e-6、rope_base 1e6），{tiny}', ''),
+        'lora_qwen2_5': ('qwen2_5.lora_qwen2_5_0_5b', f'LoRA Qwen2.5（lora_qwen2 架构，tied embeddings），{tiny}；{lora_note}', ''),
+        'phi3': ('phi3.phi3', f'Phi-3 解码器，{tiny}', ''), 'lora_phi3': ('phi3.lora_phi3', f'LoRA Phi-3 解码器，{tiny}；{lora_note}', ''),
+        'phi4': ('phi4.phi4_14b', f'Phi-4：phi4_14b 所用的 phi3 架构（rope_base 250000），{tiny}', ''), 'lora_phi4': ('phi4.lora_phi4_14b', f'LoRA Phi-4（lora_phi3 架构），{tiny}；{lora_note}', ''),
+        'mistral': ('mistral.mistral', f'Mistral 解码器，{tiny}', ''), 'lora_mistral': ('mistral.lora_mistral', f'LoRA Mistral 解码器，{tiny}；{lora_note}', ''),
+        'mistral_reward': ('mistral.mistral_classifier', f'mistral_classifier(num_classes=1)：mistral_reward_7b 所用的奖励模型架构，{tiny}', ''),
+        'lora_mistral_reward': ('mistral.lora_mistral_classifier', f'lora_mistral_classifier(num_classes=1)，{tiny}；{lora_note}', ''),
+        'gemma': ('gemma.gemma', f'Gemma 解码器（GeLU MLP、tied 输出、embed 缩放），{tiny}', ''), 'lora_gemma': ('gemma.lora_gemma', f'LoRA Gemma 解码器，{tiny}；{lora_note}', ''),
+        'gemma2': ('gemma2.gemma2', f'Gemma 2 解码器（logit 与注意力 soft-capping、隔层滑动窗口注意力（窗口 4）、query_pre_attn_scalar），{tiny}', ''),
+        'lora_gemma2': ('gemma2.lora_gemma2', f'LoRA Gemma 2 解码器，{tiny}；{lora_note}', ''),
+        'clip_vision_encoder': ('clip.clip_vision_encoder', 'CLIP 视觉编码器：tile 8、patch 4（4 个 patch + CLS）、2 层、embed 32，输出 token 序列', '单 tile（max_num_tiles=1）：平铺位置编码按 aspect ratio 循环，torch.export 无法追踪'),
+        'token_positional_embedding': ('clip.TokenPositionalEmbedding', '单 tile 的 token 位置编码：x + 可学习的 (5, 32) 表', ''),
+        'tiled_token_positional_embedding': ('clip.TiledTokenPositionalEmbedding', '平铺 token 位置编码：2 个 tile（aspect ratio (2, 1)），局部表 + 门控的全局表', '前向按每张图的 aspect ratio 循环并原地累加（数据相关）；固定 aspect ratio (2, 1) 下导出图加上同样的常量切片 local·(1 - tanh g) + global[:2, :1]·tanh g'),
+        'tile_positional_embedding': ('clip.TilePositionalEmbedding', 'tile 位置编码：2 个 tile（aspect ratio (2, 1)），每个 tile 一个门控向量', '同 tiled_token_positional_embedding：固定 aspect ratio 下导出图加上常量切片 embedding[:2, :1]·tanh g')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        doc, what, note = info.get(case, (case, '', ''))
+        m, x = ef.build(case); m = m.eval()
+        with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
+        t = f'# {case}\n\n'
+        t += f'torchtune 模型参考页的 `torchtune.models.{doc}` 所用架构在 Hwacha 上的一次前向，与 PyTorch 逐元素比对。文档：{docs % doc}\n\n'
+        t += f'用例：{what}。\n\n'
+        if note: t += f'**注意**：{note}。参考值由真正的 torchtune 前向算出，导出前脚本断言两者一致。\n\n'
+        t += '来源：`export_ttm.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机权重与输入、固定种子。带尺寸的构建函数（7b、0.5b …）是同一组件构建函数加固定超参数，远超 Spike 的规模，这里用微型尺寸实例化同一架构。\n\n'
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
