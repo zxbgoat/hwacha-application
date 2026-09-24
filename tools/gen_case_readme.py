@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttf-module / torchvision / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / torchvision / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -575,7 +575,7 @@ elif d == 'torchintf':
         t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
         write(case, t)
 
-elif d == 'ttf-module':
+elif d == 'ttmodule':
     ef = load(os.path.join(D, 'export_ttf.py'), 'ef')
     docs = 'https://meta-pytorch.org/torchtune/0.6/generated/torchtune.%s.html'
     info = {   # case -> (qualified name, what the case does, note on the export)
