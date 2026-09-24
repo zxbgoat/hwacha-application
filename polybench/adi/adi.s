@@ -57,17 +57,17 @@ adi_kernel1_wt_a1:
     vstop
     .globl adi_kernel1_wt_r0_b0
 adi_kernel1_wt_r0_b0:
-    @vp5 vlstw vv11, va8, va22
-    @vp5 vlstw vv12, va9, va23
-    @vp5 vfmul.s vv12, vv10, vv12
-    @vp5 vfdiv.s vv12, vv12, vv9
-    @vp5 vfsub.s vv10, vv11, vv12
+    @vp5 vlstw vv7, va8, va22
+    @vp5 vlstw vv8, va9, va23
+    @vp5 vfmul.s vv10, vv10, vv8
+    @vp5 vfdiv.s vv10, vv10, vv9
+    @vp5 vfsub.s vv10, vv7, vv10
     @vp5 vsstw vv10, va10, va24
-    @vp5 vlstw vv11, va11, va25
-    @vp5 vlstw vv12, va12, va26
-    @vp5 vfmul.s vv12, vv12, vv12
-    @vp5 vfdiv.s vv12, vv12, vv9
-    @vp5 vfsub.s vv9, vv11, vv12
+    @vp5 vlstw vv7, va11, va25
+    @vp5 vlstw vv8, va12, va26
+    @vp5 vfmul.s vv8, vv8, vv8
+    @vp5 vfdiv.s vv8, vv8, vv9
+    @vp5 vfsub.s vv9, vv7, vv8
     @vp5 vsstw vv9, va13, va27
     vstop
     .globl adi_kernel1_wt_a0
@@ -141,31 +141,26 @@ adi_kernel4_wt:
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Ladi_kernel4_skip0
     vsllw vs2, vs58, vs57
-    @vp2 vor vv2, vs2, vv0
-    @vp2 vsll vv1, vv2, vs56
-    @vp2 vlxw vv3, vs62, vv1
-    vaddw vs2, vs2, vs55
-    @vp2 vor vv4, vs2, vv0
-    @vp2 vsll vv1, vv4, vs56
-    @vp2 vlxw vv5, vs62, vv1
-    @vp2 vsll vv1, vv2, vs56
-    @vp2 vlxw vv6, vs60, vv1
-    @vp2 vfmul.s vv5, vv5, vv6
-    @vp2 vsll vv1, vv4, vs56
-    @vp2 vlxw vv6, vs61, vv1
-    @vp2 vfdiv.s vv5, vv5, vv6
-    @vp2 vfsub.s vv3, vv3, vv5
-    @vp2 vsll vv1, vv2, vs56
-    @vp2 vsxw vv3, vs62, vv1
-    @vp2 vlxw vv3, vs61, vv1
-    @vp2 vlxw vv5, vs60, vv1
-    @vp2 vfmul.s vv5, vv5, vv5
-    @vp2 vsll vv1, vv4, vs56
+    @vp2 vor vv3, vs2, vv0
+    @vp2 vsll vv1, vv3, vs56
     @vp2 vlxw vv4, vs61, vv1
-    @vp2 vfdiv.s vv5, vv5, vv4
-    @vp2 vfsub.s vv3, vv3, vv5
-    @vp2 vsll vv1, vv2, vs56
-    @vp2 vsxw vv3, vs61, vv1
+    vaddw vs2, vs2, vs55
+    @vp2 vor vv5, vs2, vv0
+    @vp2 vsll vv2, vv5, vs56
+    @vp2 vlxw vv6, vs61, vv2
+    @vp2 vlxw vv7, vs62, vv1
+    @vp2 vfmul.s vv6, vv6, vv7
+    @vp2 vlxw vv5, vs60, vv2
+    @vp2 vfdiv.s vv6, vv6, vv5
+    @vp2 vfsub.s vv4, vv4, vv6
+    @vp2 vsxw vv4, vs61, vv1
+    @vp2 vlxw vv3, vs60, vv1
+    @vp2 vlxw vv4, vs62, vv1
+    @vp2 vfmul.s vv4, vv4, vv4
+    @vp2 vlxw vv5, vs60, vv2
+    @vp2 vfdiv.s vv4, vv4, vv5
+    @vp2 vfsub.s vv4, vv3, vv4
+    @vp2 vsxw vv4, vs60, vv1
 .Ladi_kernel4_skip0:
     vpop vp1, vp2, vp2, vp2, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
@@ -203,20 +198,19 @@ adi_kernel6_wt:
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Ladi_kernel6_skip0
     vsllw vs2, vs58, vs57
-    @vp2 vsubw vv2, vv0, vs2
-    @vp2 vaddw vv3, vv2, vs56
-    @vp2 vsll vv1, vv3, vs55
-    @vp2 vlxw vv4, vs61, vv1
-    @vp2 vaddw vv5, vv2, vs54
-    @vp2 vsll vv1, vv5, vs55
-    @vp2 vlxw vv2, vs61, vv1
-    @vp2 vlxw vv5, vs62, vv1
-    @vp2 vfsgnjn.s vv6, vv2, vv2
-    @vp2 vfmadd.s vv6, vv6, vv5, vv4
-    @vp2 vsll vv1, vv3, vs55
-    @vp2 vlxw vv2, vs60, vv1
-    @vp2 vfdiv.s vv6, vv6, vv2
-    @vp2 vsxw vv6, vs61, vv1
+    @vp2 vsubw vv3, vv0, vs2
+    @vp2 vaddw vv4, vv3, vs56
+    @vp2 vsll vv1, vv4, vs55
+    @vp2 vlxw vv5, vs60, vv1
+    @vp2 vaddw vv6, vv3, vs54
+    @vp2 vsll vv2, vv6, vs55
+    @vp2 vlxw vv3, vs60, vv2
+    @vp2 vlxw vv6, vs61, vv2
+    @vp2 vfsgnjn.s vv7, vv3, vv3
+    @vp2 vfmadd.s vv7, vv7, vv6, vv5
+    @vp2 vlxw vv3, vs62, vv1
+    @vp2 vfdiv.s vv7, vv7, vv3
+    @vp2 vsxw vv7, vs60, vv1
 .Ladi_kernel6_skip0:
     vpop vp1, vp2, vp2, vp2, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
@@ -231,7 +225,7 @@ adi_kernel6_wt:
 adi_kernel1_ct:                         # @adi_kernel1_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a4, 1048526
+	lui	a4, 1048534
 	addi	a4, a4, 2033
 	srli	a4, a4, 1
 	not	a5, a4
@@ -746,24 +740,24 @@ adi_kernel4_ct:                         # @adi_kernel4_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a5, 1048535
-	addi	a5, a5, -5
+	addi	a5, a5, -7
 	srli	a5, a5, 1
 	not	a5, a5
 	#APP
 	vsetcfg a5
 	#NO_APP
 	#APP
-	vmcs vs62, a3
+	vmcs vs62, a1
 	#NO_APP
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a3
 	#NO_APP
-	li	a2, 64
+	li	a1, 64
 	#APP
-	vmcs vs60, a1
+	vmcs vs60, a2
 	#NO_APP
 	#APP
-	vmcs vs59, a2
+	vmcs vs59, a1
 	#NO_APP
 	sext.w	a4, a4
 	li	a1, 6
@@ -926,20 +920,20 @@ adi_kernel6_ct:                         # @adi_kernel6_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a5, 1048535
-	addi	a5, a5, -5
+	addi	a5, a5, -7
 	srli	a5, a5, 1
 	not	a5, a5
 	#APP
 	vsetcfg a5
 	#NO_APP
 	#APP
-	vmcs vs62, a1
+	vmcs vs62, a2
 	#NO_APP
 	#APP
-	vmcs vs61, a3
+	vmcs vs61, a1
 	#NO_APP
 	#APP
-	vmcs vs60, a2
+	vmcs vs60, a3
 	#NO_APP
 	li	a1, 64
 	sext.w	a4, a4

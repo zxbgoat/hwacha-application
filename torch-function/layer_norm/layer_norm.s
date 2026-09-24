@@ -39,8 +39,8 @@ net_kernel_2_wt:
     vstop
     .globl net_kernel_2_wt_r0_b0
 net_kernel_2_wt_r0_b0:
-    vlstd vv2, va1, va2
-    vfadd.d vv1, vv2, vv1
+    vlstd vv0, va1, va2
+    vfadd.d vv1, vv0, vv1
     vstop
     .globl net_kernel_2_wt_a0
 net_kernel_2_wt_a0:
@@ -92,8 +92,8 @@ net_kernel_6_wt:
     vstop
     .globl net_kernel_6_wt_r0_b0
 net_kernel_6_wt_r0_b0:
-    vlstd vv2, va1, va2
-    vfadd.d vv1, vv2, vv1
+    vlstd vv0, va1, va2
+    vfadd.d vv1, vv0, vv1
     vstop
     .globl net_kernel_6_wt_a0
 net_kernel_6_wt_a0:
@@ -139,8 +139,8 @@ net_kernel_10_wt:
     vstop
     .globl net_kernel_10_wt_r0_b0
 net_kernel_10_wt_r0_b0:
-    vlstw vv2, va1, va2
-    vfadd.s vv1, vv2, vv1
+    vlstw vv0, va1, va2
+    vfadd.s vv1, vv0, vv1
     vstop
     .globl net_kernel_10_wt_a0
 net_kernel_10_wt_a0:
@@ -457,7 +457,7 @@ net_kernel_2_ct:                        # @net_kernel_2_ct
 # %bb.0:                                # %entry
 	li	a3, -1
 	slli	a3, a3, 63
-	addi	a3, a3, 515
+	addi	a3, a3, 514
 	li	a4, 1
 	#APP
 	vsetcfg a3
@@ -788,7 +788,7 @@ net_kernel_6_ct:                        # @net_kernel_6_ct
 # %bb.0:                                # %entry
 	li	a3, -1
 	slli	a3, a3, 63
-	addi	a3, a3, 515
+	addi	a3, a3, 514
 	li	a4, 1
 	#APP
 	vsetcfg a3
@@ -1110,7 +1110,7 @@ net_kernel_10_ct:                       # @net_kernel_10_ct
 # %bb.0:                                # %entry
 	li	a3, -1
 	slli	a3, a3, 54
-	addi	a3, a3, 97
+	addi	a3, a3, 65
 	li	a4, 1
 	slli	a3, a3, 9
 	#APP

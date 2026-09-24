@@ -43,7 +43,7 @@ dynproc_kernel_wt:
     vpop vp6, vp0, vp4, vp4, 0x02
     @!vp5 vcjal 0, vs1, .Ldynproc_kernel_skip0
     @vp5 vsll vv2, vv1, vs51
-    @vp5 vlxw vv6, vs61, vv2
+    @vp5 vlxw vv6, vs60, vv2
     @vp5 vsw vv6, va0
 .Ldynproc_kernel_skip0:
     vpop vp4, vp5, vp5, vp5, 0xAA
@@ -97,9 +97,9 @@ dynproc_kernel_wt:
     vpop vp11, vp9, vp6, vp6, 0x80
     vpop vp12, vp9, vp6, vp6, 0x02
     @!vp11 vcjal 0, vs1, .Ldynproc_kernel_skip5
-    @vp11 vlxw vv6, vs60, vv2
+    @vp11 vlxw vv6, vs59, vv2
     @vp11 vlw vv7, va0
-    @vp11 vlxw vv8, vs60, vv3
+    @vp11 vlxw vv8, vs59, vv3
     vcmplt vp6, vv6, vv7
     @vp6 vaddw vv7, vv6, vs0
     @!vp6 vaddw vv7, vv7, vs0
@@ -116,10 +116,10 @@ dynproc_kernel_wt:
     vpop vp9, vp11, vp6, vp6, 0x80
     vpop vp13, vp11, vp6, vp6, 0x02
     @!vp9 vcjal 0, vs1, .Ldynproc_kernel_skip6
-    @vp9 vlxw vv6, vs61, vv4
+    @vp9 vlxw vv6, vs60, vv4
     @vp9 vsll vv5, vv6, vs51
     vaddw vv6, vs56, vs0
-    @vp9 vsxw vv6, vs58, vv5
+    @vp9 vsxw vv6, vs61, vv5
 .Ldynproc_kernel_skip6:
     vpop vp6, vp9, vp9, vp9, 0xAA
     vpop vp6, vp6, vp13, vp13, 0xEE
@@ -136,7 +136,6 @@ dynproc_kernel_wt:
 .Ldynproc_kernel_skip7:
     vpop vp10, vp6, vp9, vp9, 0x80
     vpop vp12, vp6, vp9, vp9, 0x02
-    vpop vp13, vp10, vp11, vp13, 0xD8
     vpop vp8, vp8, vp10, vp10, 0xEE
     vpop vp5, vp5, vp10, vp10, 0x02
     vpop vp6, vp12, vp11, vp11, 0x80
@@ -145,22 +144,22 @@ dynproc_kernel_wt:
     @vp6 vlw vv6, va1
     @vp6 vsw vv6, va0
 .Ldynproc_kernel_skip8:
-    vpop vp11, vp6, vp6, vp6, 0xAA
-    vpop vp11, vp11, vp9, vp9, 0xEE
+    vpop vp12, vp6, vp6, vp6, 0xAA
+    vpop vp12, vp12, vp9, vp9, 0xEE
     vfence
-    @vp11 vadd vs6, vs9, vs0
-    @vp11 vaddw vs7, vs10, vs0
-    @vp11 vcjal 1, vs1, .Ldynproc_kernel_loop3
+    @vp12 vadd vs6, vs9, vs0
+    @vp12 vaddw vs7, vs10, vs0
+    @vp12 vcjal 1, vs1, .Ldynproc_kernel_loop3
     vpop vp2, vp10, vp10, vp10, 0xAA
     vpop vp2, vp2, vp8, vp8, 0xEE
-    vpop vp3, vp2, vp13, vp13, 0x80
-    vpop vp4, vp2, vp13, vp13, 0x02
+    vpop vp3, vp2, vp11, vp11, 0x80
+    vpop vp4, vp2, vp11, vp11, 0x02
     vpop vp2, vp3, vp3, vp3, 0xAA
     vpop vp2, vp2, vp7, vp7, 0xEE
     @!vp2 vcjal 0, vs1, .Ldynproc_kernel_skip9
     @vp2 vlw vv6, va1
     @vp2 vsll vv1, vv1, vs51
-    @vp2 vsxw vv6, vs59, vv1
+    @vp2 vsxw vv6, vs58, vv1
 .Ldynproc_kernel_skip9:
     vpop vp3, vp2, vp2, vp2, 0xAA
     vpop vp3, vp3, vp4, vp4, 0xEE
@@ -175,28 +174,28 @@ dynproc_kernel_wt:
 dynproc_kernel_ct:                      # @dynproc_kernel_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	t0, 1048540
+	lui	a6, 1048540
+	ld	t0, 32(sp)
+	addi	t1, a6, 2035
 	ld	a6, 16(sp)
-	addi	t0, t0, 2035
-	ld	t1, 32(sp)
-	srli	t0, t0, 1
+	srli	t1, t1, 1
 	lw	t2, 0(sp)
-	not	t0, t0
+	not	t1, t1
 	lw	t3, 8(sp)
 	#APP
-	vsetcfg t0
+	vsetcfg t1
 	#NO_APP
 	#APP
-	vmcs vs61, a3
+	vmcs vs61, t0
 	#NO_APP
 	#APP
-	vmcs vs60, a6
+	vmcs vs60, a3
 	#NO_APP
 	#APP
-	vmcs vs59, a4
+	vmcs vs59, a6
 	#NO_APP
 	#APP
-	vmcs vs58, t1
+	vmcs vs58, a4
 	#NO_APP
 	sext.w	a1, a1
 	li	a3, 1

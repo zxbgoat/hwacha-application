@@ -30,39 +30,12 @@ net_kernel_0_wt:
     vlw vv4, va0
     vfadd.s vv4, vv3, vv4
     vadd vs2, vs62, vs59
-    vsrl vv1, vv0, vs61
-    vsll vv1, vv1, vs60
-    vand vv2, vv0, vs61
-    vcmpeq vp1, vv2, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv2, vs0, vs0
-    @vp1 vadd vv2, vs0, vs61
-    vsll vv2, vv2, vs59
-    vadd vv1, vv1, vv2
     vlxw vv3, vs2, vv1
     vfadd.s vv4, vv4, vv3
     vadd vs2, vs62, vs58
-    vsrl vv1, vv0, vs61
-    vsll vv1, vv1, vs60
-    vand vv2, vv0, vs61
-    vcmpeq vp1, vv2, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv2, vs0, vs0
-    @vp1 vadd vv2, vs0, vs61
-    vsll vv2, vv2, vs59
-    vadd vv1, vv1, vv2
     vlxw vv3, vs2, vv1
     vfadd.s vv4, vv4, vv3
     vadd vs2, vs62, vs57
-    vsrl vv1, vv0, vs61
-    vsll vv1, vv1, vs60
-    vand vv2, vv0, vs61
-    vcmpeq vp1, vv2, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv2, vs0, vs0
-    @vp1 vadd vv2, vs0, vs61
-    vsll vv2, vv2, vs59
-    vadd vv1, vv1, vv2
     vlxw vv3, vs2, vv1
     vfadd.s vv4, vv4, vv3
     vsw vv4, va0

@@ -73,103 +73,103 @@ FindKeyWithDigest_Kernel_wt:
     @vp3 vaddw vv14, vv3, vs0
     vpclear vp5
 .LFindKeyWithDigest_Kernel_loop1:
-    @vp2 vaddw vv15, vs12, vv2
-    vcmplt vp3, vv15, vs41
+    @vp2 vaddw vv3, vs12, vv2
+    vcmplt vp3, vv3, vs41
     vpop vp6, vp2, vp3, vp3, 0x80
     vpop vp7, vp2, vp3, vp3, 0x02
     vpop vp5, vp5, vp7, vp7, 0xEE
     vpop vp2, vp2, vp7, vp7, 0x02
     @!vp6 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip2
-    vaddw vv16, vs40, vs0
-    vcmplt vp3, vv16, vs39
+    vaddw vv12, vs40, vs0
+    vcmplt vp3, vv12, vs39
 .LFindKeyWithDigest_Kernel_skip2:
     vpop vp8, vp6, vp3, vp3, 0x80
     vpop vp9, vp6, vp3, vp3, 0x02
     @!vp8 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip3
-    vaddw vv16, vs40, vs0
-    vcmplt vp3, vv16, vs36
+    vaddw vv12, vs40, vs0
+    vcmplt vp3, vv12, vs36
 .LFindKeyWithDigest_Kernel_skip3:
     vpop vp6, vp8, vp3, vp3, 0x80
     vpop vp10, vp8, vp3, vp3, 0x02
     @!vp9 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip4
-    vaddw vv16, vs40, vs0
-    vcmplt vp3, vv16, vs38
+    vaddw vv12, vs40, vs0
+    vcmplt vp3, vv12, vs38
 .LFindKeyWithDigest_Kernel_skip4:
     vpop vp8, vp9, vp3, vp3, 0x80
     vpop vp11, vp9, vp3, vp3, 0x02
     @!vp10 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip5
-    vaddw vv16, vs40, vs0
-    vcmpeq vp3, vv16, vs35
+    vaddw vv12, vs40, vs0
+    vcmpeq vp3, vv12, vs35
 .LFindKeyWithDigest_Kernel_skip5:
     vpop vp9, vp10, vp3, vp3, 0x80
     vpop vp12, vp10, vp3, vp3, 0x02
     @!vp8 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip6
-    vaddw vv16, vs40, vs0
-    vcmpeq vp3, vv16, vs39
+    vaddw vv12, vs40, vs0
+    vcmpeq vp3, vv12, vs39
 .LFindKeyWithDigest_Kernel_skip6:
     vpop vp10, vp8, vp3, vp3, 0x80
     vpop vp13, vp8, vp3, vp3, 0x02
     @!vp6 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip7
-    vaddw vv16, vs40, vs0
-    vcmplt vp3, vv16, vs34
+    vaddw vv12, vs40, vs0
+    vcmplt vp3, vv12, vs34
 .LFindKeyWithDigest_Kernel_skip7:
     vpop vp8, vp6, vp3, vp3, 0x80
     vpop vp14, vp6, vp3, vp3, 0x02
     @!vp9 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip8
     vaddi vs13, vs32, 16
     vlsd vs13, vs13
-    @vp9 vor vv16, vv13, vs13
+    @vp9 vor vv12, vv13, vs13
 .LFindKeyWithDigest_Kernel_skip8:
     @!vp12 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip9
     vaddi vs13, vs32, 8
     vlsd vs13, vs13
-    @vp12 vor vv17, vv13, vs13
+    @vp12 vor vv15, vv13, vs13
 .LFindKeyWithDigest_Kernel_skip9:
-    @vp10 vor vv18, vv9, vs33
+    @vp10 vor vv16, vv9, vs33
     @!vp13 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip10
     vaddi vs13, vs32, 0
     vlsd vs13, vs13
-    @vp13 vor vv19, vv9, vs13
+    @vp13 vor vv17, vv9, vs13
 .LFindKeyWithDigest_Kernel_skip10:
     @!vp11 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip11
-    vaddw vv20, vs40, vs0
-    vcmplt vp3, vv20, vs37
+    vaddw vv18, vs40, vs0
+    vcmplt vp3, vv18, vs37
 .LFindKeyWithDigest_Kernel_skip11:
     vpop vp6, vp11, vp3, vp3, 0x80
     vpop vp15, vp11, vp3, vp3, 0x02
     @!vp8 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip12
-    vaddw vv20, vs40, vs0
-    vcmpeq vp3, vv20, vs0
+    vaddw vv18, vs40, vs0
+    vcmpeq vp3, vv18, vs0
 .LFindKeyWithDigest_Kernel_skip12:
     vpop vp11, vp8, vp3, vp3, 0x80
-    vaddw vv20, vs0, vs0
-    @vp7 vaddw vv20, vs0, vs61
+    vaddw vv18, vs0, vs0
+    @vp7 vaddw vv18, vs0, vs61
     vpop vp7, vp8, vp3, vp3, 0x02
     @!vp14 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip13
     vaddi vs13, vs32, 0
     vlsd vs13, vs13
-    @vp14 vor vv21, vv13, vs13
+    @vp14 vor vv19, vv13, vs13
 .LFindKeyWithDigest_Kernel_skip13:
     @!vp6 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip14
     vaddi vs13, vs32, 8
     vlsd vs13, vs13
-    @vp6 vor vv22, vv9, vs13
+    @vp6 vor vv20, vv9, vs13
 .LFindKeyWithDigest_Kernel_skip14:
     @!vp15 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip15
-    vaddw vv23, vs40, vs0
-    vcmpeq vp3, vv23, vs37
+    vaddw vv21, vs40, vs0
+    vcmpeq vp3, vv21, vs37
 .LFindKeyWithDigest_Kernel_skip15:
     vpop vp8, vp15, vp3, vp3, 0x80
-    vaddw vv23, vs0, vs0
-    @vp7 vaddw vv23, vs0, vs61
+    vaddw vv21, vs0, vs0
+    @vp7 vaddw vv21, vs0, vs61
     vpop vp7, vp15, vp3, vp3, 0x02
-    @vp11 vor vv24, vv13, vs33
+    @vp11 vor vv22, vv13, vs33
     @!vp8 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip16
     vaddi vs13, vs32, 16
     vlsd vs13, vs13
-    @vp8 vor vv25, vv9, vs13
+    @vp8 vor vv23, vv9, vs13
 .LFindKeyWithDigest_Kernel_skip16:
-    vcmpeq vp3, vv23, vs0
+    vcmpeq vp3, vv21, vs0
     vpop vp3, vp3, vp3, vp3, 0x55
     vpop vp15, vp3, vp3, vp3, 0xAA
     vpop vp15, vp15, vp7, vp7, 0xEE
@@ -181,1152 +181,1152 @@ FindKeyWithDigest_Kernel_wt:
     vpop vp15, vp15, vp13, vp13, 0xEE
     vpop vp15, vp15, vp6, vp6, 0xEE
     vpop vp15, vp15, vp8, vp8, 0xEE
-    @vp7 vaddw vv23, vv9, vs0
-    @vp11 vaddw vv23, vv9, vs0
-    @vp14 vaddw vv23, vv9, vs0
-    @vp12 vaddw vv23, vv9, vs0
-    @vp9 vaddw vv23, vv9, vs0
-    @vp10 vaddw vv23, vv18, vs0
-    @vp13 vaddw vv23, vv19, vs0
-    @vp6 vaddw vv23, vv22, vs0
-    @vp8 vaddw vv23, vv25, vs0
-    @vp3 vaddw vv23, vv9, vs0
-    @vp7 vaddw vv26, vv13, vs0
-    @vp11 vaddw vv26, vv24, vs0
-    @vp14 vaddw vv26, vv21, vs0
-    @vp12 vaddw vv26, vv17, vs0
-    @vp9 vaddw vv26, vv16, vs0
-    @vp10 vaddw vv26, vv13, vs0
-    @vp13 vaddw vv26, vv13, vs0
-    @vp6 vaddw vv26, vv13, vs0
-    @vp8 vaddw vv26, vv13, vs0
-    @vp3 vaddw vv26, vv13, vs0
+    @vp7 vaddw vv21, vv9, vs0
+    @vp11 vaddw vv21, vv9, vs0
+    @vp14 vaddw vv21, vv9, vs0
+    @vp12 vaddw vv21, vv9, vs0
+    @vp9 vaddw vv21, vv9, vs0
+    @vp10 vaddw vv21, vv16, vs0
+    @vp13 vaddw vv21, vv17, vs0
+    @vp6 vaddw vv21, vv20, vs0
+    @vp8 vaddw vv21, vv23, vs0
+    @vp3 vaddw vv21, vv9, vs0
+    @vp7 vaddw vv24, vv13, vs0
+    @vp11 vaddw vv24, vv22, vs0
+    @vp14 vaddw vv24, vv19, vs0
+    @vp12 vaddw vv24, vv15, vs0
+    @vp9 vaddw vv24, vv12, vs0
+    @vp10 vaddw vv24, vv13, vs0
+    @vp13 vaddw vv24, vv13, vs0
+    @vp6 vaddw vv24, vv13, vs0
+    @vp8 vaddw vv24, vv13, vs0
+    @vp3 vaddw vv24, vv13, vs0
     @!vp15 vcjal 0, vs1, .LFindKeyWithDigest_Kernel_skip17
     vsllw vs13, vs40, vs35
     vaddi vs14, vs32, 24
     vlsd vs14, vs14
-    @vp15 vaddw vv16, vv26, vs14
+    @vp15 vaddw vv12, vv24, vs14
     vaddi vs14, vs32, 32
     vlsd vs14, vs14
-    @vp15 vsrlw vv17, vv16, vs14
-    @vp15 vsllw vv18, vv16, vs37
-    @!vp1 vor vv19, vv18, vv17
-    @vp1 vaddw vv19, vv16, vs0
+    @vp15 vsrlw vv15, vv12, vs14
+    @vp15 vsllw vv16, vv12, vs37
+    @!vp1 vor vv17, vv16, vv15
+    @vp1 vaddw vv17, vv12, vs0
     vaddi vs14, vs32, 40
     vlsd vs14, vs14
-    @vp15 vaddw vv16, vv19, vs14
+    @vp15 vaddw vv12, vv17, vs14
     vaddi vs14, vs32, 40
     vlsd vs14, vs14
-    @vp15 vand vv17, vv16, vs14
+    @vp15 vand vv15, vv12, vs14
     vaddi vs14, vs32, 48
     vlsd vs14, vs14
-    @vp15 vsubw vv18, vs14, vv19
+    @vp15 vsubw vv16, vs14, vv17
     vaddi vs14, vs32, 56
     vlsd vs14, vs14
-    @vp15 vand vv18, vv18, vs14
-    @vp15 vor vv17, vv17, vv18
+    @vp15 vand vv16, vv16, vs14
+    @vp15 vor vv15, vv15, vv16
     vaddi vs14, vs32, 64
     vlsd vs14, vs14
-    @vp15 vaddw vv18, vv23, vs14
-    @vp15 vaddw vv18, vv18, vv17
+    @vp15 vaddw vv16, vv21, vs14
+    @vp15 vaddw vv16, vv16, vv15
     vaddi vs14, vs32, 72
     vlsd vs14, vs14
-    @vp15 vsrlw vv17, vv18, vs14
+    @vp15 vsrlw vv15, vv16, vs14
     vaddi vs14, vs32, 80
     vlsd vs14, vs14
-    @vp15 vsllw vv21, vv18, vs14
-    @!vp1 vor vv22, vv21, vv17
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv16
-    @vp15 vand vv17, vv22, vv16
+    @vp15 vsllw vv19, vv16, vs14
+    @!vp1 vor vv20, vv19, vv15
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv12
+    @vp15 vand vv15, vv20, vv12
     vaddi vs14, vs32, 40
     vlsd vs14, vs14
-    @vp15 vand vv18, vv22, vs14
+    @vp15 vand vv16, vv20, vs14
     vaddi vs14, vs32, 40
     vlsd vs14, vs14
-    @vp15 vxor vv18, vv18, vs14
-    @vp15 vor vv18, vv18, vv17
+    @vp15 vxor vv16, vv16, vs14
+    @vp15 vor vv16, vv16, vv15
     vaddi vs14, vs32, 88
     vlsd vs14, vs14
-    @vp15 vaddw vv18, vv18, vs14
+    @vp15 vaddw vv16, vv16, vs14
     vaddi vs14, vs32, 96
     vlsd vs14, vs14
-    @vp15 vsrlw vv17, vv18, vs14
+    @vp15 vsrlw vv15, vv16, vs14
     vaddi vs14, vs32, 104
     vlsd vs14, vs14
-    @vp15 vsllw vv21, vv18, vs14
-    @!vp1 vor vv24, vv21, vv17
-    @vp1 vaddw vv24, vv18, vs0
-    @vp15 vaddw vv24, vv24, vv22
-    @vp15 vand vv17, vv24, vv22
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv18, vv24, vs14
-    @vp15 vand vv16, vv16, vv18
-    @vp15 vor vv17, vv17, vv16
-    vaddi vs14, vs32, 120
-    vlsd vs14, vs14
-    @vp15 vaddw vv17, vv17, vs14
-    vaddi vs14, vs32, 128
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv17, vs14
-    vaddi vs14, vs32, 136
-    vlsd vs14, vs14
-    @vp15 vsllw vv18, vv17, vs14
-    @!vp1 vor vv21, vv18, vv16
-    @vp1 vaddw vv21, vv17, vs0
-    @vp15 vaddw vv21, vv21, vv24
-    @vp15 vand vv16, vv21, vv24
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv21, vs14
-    @vp15 vand vv17, vv22, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 144
-    vlsd vs14, vs14
-    @vp15 vaddw vv19, vv19, vs14
-    @vp15 vaddw vv19, vv19, vv16
-    vaddi vs14, vs32, 32
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv19, vs14
-    @vp15 vsllw vv17, vv19, vs37
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv19, vs0
-    @vp15 vaddw vv18, vv18, vv21
-    @vp15 vand vv16, vv18, vv21
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv18, vs14
-    @vp15 vand vv17, vv24, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 152
-    vlsd vs14, vs14
-    @vp15 vaddw vv22, vv22, vs14
-    @vp15 vaddw vv22, vv22, vv16
-    vaddi vs14, vs32, 72
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv22, vs14
-    vaddi vs14, vs32, 80
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv22, vs14
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv22, vs0
-    @vp15 vaddw vv19, vv19, vv18
-    @vp15 vand vv16, vv19, vv18
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv19, vs14
-    @vp15 vand vv17, vv21, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 160
-    vlsd vs14, vs14
-    @vp15 vaddw vv24, vv24, vs14
-    @vp15 vaddw vv24, vv24, vv16
-    vaddi vs14, vs32, 96
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv24, vs14
-    vaddi vs14, vs32, 104
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv24, vs14
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv24, vs0
-    @vp15 vaddw vv22, vv22, vv19
-    @vp15 vand vv16, vv22, vv19
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv22, vs14
-    @vp15 vand vv17, vv18, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 168
-    vlsd vs14, vs14
-    @vp15 vaddw vv21, vv21, vs14
-    @vp15 vaddw vv21, vv21, vv16
-    vaddi vs14, vs32, 128
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv21, vs14
-    vaddi vs14, vs32, 136
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv21, vs14
-    @!vp1 vor vv24, vv17, vv16
-    @vp1 vaddw vv24, vv21, vs0
-    @vp15 vaddw vv24, vv24, vv22
-    @vp15 vand vv16, vv24, vv22
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv24, vs14
-    @vp15 vand vv17, vv19, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 176
-    vlsd vs14, vs14
-    @vp15 vaddw vv18, vv18, vs14
-    @vp15 vaddw vv18, vv18, vv16
-    vaddi vs14, vs32, 32
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv18, vs14
-    @vp15 vsllw vv17, vv18, vs37
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv18, vs0
-    @vp15 vaddw vv21, vv21, vv24
-    @vp15 vand vv16, vv21, vv24
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv21, vs14
-    @vp15 vand vv17, vv22, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 184
-    vlsd vs14, vs14
-    @vp15 vaddw vv19, vv19, vs14
-    @vp15 vaddw vv19, vv19, vv16
-    vaddi vs14, vs32, 72
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv19, vs14
-    vaddi vs14, vs32, 80
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv19, vs14
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv19, vs0
-    @vp15 vaddw vv18, vv18, vv21
-    @vp15 vand vv16, vv18, vv21
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv18, vs14
-    @vp15 vand vv17, vv24, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 192
-    vlsd vs14, vs14
-    @vp15 vaddw vv22, vv22, vs14
-    @vp15 vaddw vv22, vv22, vv16
-    vaddi vs14, vs32, 96
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv22, vs14
-    vaddi vs14, vs32, 104
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv22, vs14
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv22, vs0
-    @vp15 vaddw vv19, vv19, vv18
-    @vp15 vand vv16, vv19, vv18
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv19, vs14
-    @vp15 vand vv17, vv21, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 200
-    vlsd vs14, vs14
-    @vp15 vaddw vv24, vv24, vs14
-    @vp15 vaddw vv24, vv24, vv16
-    vaddi vs14, vs32, 128
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv24, vs14
-    vaddi vs14, vs32, 136
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv24, vs14
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv24, vs0
-    @vp15 vaddw vv22, vv22, vv19
-    @vp15 vand vv16, vv22, vv19
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv22, vs14
-    @vp15 vand vv17, vv18, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 208
-    vlsd vs14, vs14
-    @vp15 vaddw vv21, vv21, vs14
-    @vp15 vaddw vv21, vv21, vv16
-    vaddi vs14, vs32, 32
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv21, vs14
-    @vp15 vsllw vv17, vv21, vs37
-    @!vp1 vor vv24, vv17, vv16
-    @vp1 vaddw vv24, vv21, vs0
-    @vp15 vaddw vv24, vv24, vv22
-    @vp15 vand vv16, vv24, vv22
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv24, vs14
-    @vp15 vand vv17, vv19, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 216
-    vlsd vs14, vs14
-    @vp15 vaddw vv18, vv18, vs14
-    @vp15 vaddw vv18, vv18, vv16
-    vaddi vs14, vs32, 72
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv18, vs14
-    vaddi vs14, vs32, 80
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv18, vs14
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv18, vs0
-    @vp15 vaddw vv21, vv21, vv24
-    @vp15 vand vv16, vv21, vv24
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv21, vs14
-    @vp15 vand vv18, vv22, vv17
-    @vp15 vor vv16, vv16, vv18
-    vaddi vs14, vs32, 224
-    vlsd vs14, vs14
-    vaddw vs15, vs13, vs14
-    @vp15 vaddw vv19, vs15, vv19
-    @vp15 vaddw vv19, vv19, vv16
-    vaddi vs14, vs32, 96
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv19, vs14
-    vaddi vs14, vs32, 104
-    vlsd vs14, vs14
-    @vp15 vsllw vv18, vv19, vs14
-    @!vp1 vor vv25, vv18, vv16
-    @vp1 vaddw vv25, vv19, vs0
-    @vp15 vaddw vv25, vv25, vv21
-    @vp15 vand vv16, vv25, vv21
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv18, vv25, vs14
-    @vp15 vand vv19, vv24, vv18
-    @vp15 vor vv16, vv16, vv19
-    vaddi vs14, vs32, 232
-    vlsd vs14, vs14
-    @vp15 vaddw vv22, vv22, vs14
-    @vp15 vaddw vv22, vv22, vv16
-    vaddi vs14, vs32, 128
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv22, vs14
-    vaddi vs14, vs32, 136
-    vlsd vs14, vs14
-    @vp15 vsllw vv19, vv22, vs14
-    @!vp1 vor vv27, vv19, vv16
-    @vp1 vaddw vv27, vv22, vs0
-    @vp15 vaddw vv27, vv27, vv25
-    @vp15 vand vv16, vv27, vv21
-    @vp15 vand vv17, vv25, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 240
-    vlsd vs14, vs14
-    @vp15 vaddw vv17, vv23, vs14
-    @vp15 vaddw vv17, vv17, vv24
-    @vp15 vaddw vv17, vv17, vv16
-    vaddi vs14, vs32, 248
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv17, vs14
-    vaddi vs14, vs32, 256
-    vlsd vs14, vs14
-    @vp15 vsllw vv19, vv17, vs14
-    @!vp1 vor vv22, vv19, vv16
-    @vp1 vaddw vv22, vv17, vs0
-    @vp15 vaddw vv22, vv22, vv27
-    @vp15 vand vv16, vv22, vv25
-    @vp15 vand vv18, vv27, vv18
-    @vp15 vor vv16, vv16, vv18
-    vaddi vs14, vs32, 264
-    vlsd vs14, vs14
-    @vp15 vaddw vv21, vv21, vs14
-    @vp15 vaddw vv21, vv21, vv16
-    vaddi vs14, vs32, 272
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv21, vs14
-    vaddi vs14, vs32, 280
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv21, vs14
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv21, vs0
-    @vp15 vaddw vv18, vv18, vv22
-    @vp15 vand vv16, vv18, vv27
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv27, vs14
-    @vp15 vand vv17, vv22, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 288
-    vlsd vs14, vs14
-    @vp15 vaddw vv25, vv25, vs14
-    @vp15 vaddw vv25, vv25, vv16
-    vaddi vs14, vs32, 296
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv25, vs14
-    vaddi vs14, vs32, 304
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv25, vs14
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv25, vs0
-    @vp15 vaddw vv19, vv19, vv18
-    @vp15 vand vv16, vv19, vv22
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv22, vs14
-    @vp15 vand vv17, vv18, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 312
-    vlsd vs14, vs14
-    @vp15 vaddw vv17, vv26, vs14
-    @vp15 vaddw vv17, vv17, vv27
-    @vp15 vaddw vv17, vv17, vv16
-    vaddi vs14, vs32, 80
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv17, vs14
-    vaddi vs14, vs32, 72
-    vlsd vs14, vs14
-    @vp15 vsllw vv21, vv17, vs14
-    @!vp1 vor vv24, vv21, vv16
-    @vp1 vaddw vv24, vv17, vs0
-    @vp15 vaddw vv24, vv24, vv19
-    @vp15 vand vv16, vv24, vv18
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv18, vs14
-    @vp15 vand vv17, vv19, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 320
-    vlsd vs14, vs14
-    @vp15 vaddw vv22, vv22, vs14
-    @vp15 vaddw vv22, vv22, vv16
-    vaddi vs14, vs32, 248
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv22, vs14
-    vaddi vs14, vs32, 256
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv22, vs14
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv22, vs0
-    @vp15 vaddw vv21, vv21, vv24
-    @vp15 vand vv16, vv21, vv19
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv19, vs14
-    @vp15 vand vv17, vv24, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 328
-    vlsd vs14, vs14
-    @vp15 vaddw vv18, vv18, vs14
-    @vp15 vaddw vv18, vv18, vv16
-    vaddi vs14, vs32, 272
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv18, vs14
-    vaddi vs14, vs32, 280
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv18, vs14
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv21
-    @vp15 vand vv16, vv22, vv24
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv24, vs14
-    @vp15 vand vv17, vv21, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 336
-    vlsd vs14, vs14
-    @vp15 vaddw vv19, vv19, vs14
-    @vp15 vaddw vv19, vv19, vv16
-    vaddi vs14, vs32, 296
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv19, vs14
-    vaddi vs14, vs32, 304
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv19, vs14
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv19, vs0
-    @vp15 vaddw vv18, vv18, vv22
-    @vp15 vand vv16, vv18, vv21
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv21, vs14
-    @vp15 vand vv17, vv22, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 344
-    vlsd vs14, vs14
-    @vp15 vaddw vv24, vv24, vs14
-    @vp15 vaddw vv24, vv24, vv16
-    vaddi vs14, vs32, 80
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv24, vs14
-    vaddi vs14, vs32, 72
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv24, vs14
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv24, vs0
-    @vp15 vaddw vv19, vv19, vv18
-    @vp15 vand vv16, vv19, vv22
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv22, vs14
-    @vp15 vand vv17, vv18, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 352
-    vlsd vs14, vs14
-    @vp15 vaddw vv21, vv21, vs14
-    @vp15 vaddw vv21, vv21, vv16
-    vaddi vs14, vs32, 248
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv21, vs14
-    vaddi vs14, vs32, 256
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv21, vs14
-    @!vp1 vor vv24, vv17, vv16
-    @vp1 vaddw vv24, vv21, vs0
-    @vp15 vaddw vv24, vv24, vv19
-    @vp15 vand vv16, vv24, vv18
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv18, vs14
-    @vp15 vand vv17, vv19, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 360
-    vlsd vs14, vs14
-    vaddw vs15, vs13, vs14
-    @vp15 vaddw vv22, vs15, vv22
-    @vp15 vaddw vv22, vv22, vv16
-    vaddi vs14, vs32, 272
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv22, vs14
-    vaddi vs14, vs32, 280
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv22, vs14
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv22, vs0
-    @vp15 vaddw vv21, vv21, vv24
-    @vp15 vand vv16, vv21, vv19
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv19, vs14
-    @vp15 vand vv17, vv24, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 368
-    vlsd vs14, vs14
-    @vp15 vaddw vv18, vv18, vs14
-    @vp15 vaddw vv18, vv18, vv16
-    vaddi vs14, vs32, 296
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv18, vs14
-    vaddi vs14, vs32, 304
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv18, vs14
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv21
-    @vp15 vand vv16, vv22, vv24
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv24, vs14
-    @vp15 vand vv17, vv21, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 376
-    vlsd vs14, vs14
-    @vp15 vaddw vv19, vv19, vs14
-    @vp15 vaddw vv19, vv19, vv16
-    vaddi vs14, vs32, 80
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv19, vs14
-    vaddi vs14, vs32, 72
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv19, vs14
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv19, vs0
-    @vp15 vaddw vv18, vv18, vv22
-    @vp15 vand vv16, vv18, vv21
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv21, vs14
-    @vp15 vand vv17, vv22, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 384
-    vlsd vs14, vs14
-    @vp15 vaddw vv24, vv24, vs14
-    @vp15 vaddw vv24, vv24, vv16
-    vaddi vs14, vs32, 248
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv24, vs14
-    vaddi vs14, vs32, 256
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv24, vs14
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv24, vs0
-    @vp15 vaddw vv19, vv19, vv18
-    @vp15 vand vv16, vv19, vv22
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv22, vs14
-    @vp15 vand vv17, vv18, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 392
-    vlsd vs14, vs14
-    @vp15 vaddw vv21, vv21, vs14
-    @vp15 vaddw vv21, vv21, vv16
-    vaddi vs14, vs32, 272
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv21, vs14
-    vaddi vs14, vs32, 280
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv21, vs14
-    @!vp1 vor vv24, vv17, vv16
-    @vp1 vaddw vv24, vv21, vs0
-    @vp15 vaddw vv24, vv24, vv19
-    @vp15 vand vv16, vv24, vv18
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv18, vs14
-    @vp15 vand vv17, vv19, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 400
-    vlsd vs14, vs14
-    @vp15 vaddw vv22, vv22, vs14
-    @vp15 vaddw vv22, vv22, vv16
-    vaddi vs14, vs32, 296
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv22, vs14
-    vaddi vs14, vs32, 304
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv22, vs14
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv22, vs0
-    @vp15 vaddw vv21, vv21, vv24
-    @vp15 vand vv16, vv21, vv19
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv17, vv19, vs14
-    @vp15 vand vv17, vv24, vv17
-    @vp15 vor vv16, vv16, vv17
-    vaddi vs14, vs32, 408
-    vlsd vs14, vs14
-    @vp15 vaddw vv18, vv18, vs14
-    @vp15 vaddw vv18, vv18, vv16
-    vaddi vs14, vs32, 80
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv18, vs14
-    vaddi vs14, vs32, 72
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv18, vs14
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv21
-    @vp15 vxor vv16, vv22, vv21
-    @vp15 vxor vv17, vv16, vv24
-    vaddi vs14, vs32, 416
-    vlsd vs14, vs14
-    @vp15 vaddw vv19, vv19, vs14
-    @vp15 vaddw vv19, vv19, vv17
-    vaddi vs14, vs32, 424
-    vlsd vs14, vs14
-    @vp15 vsrlw vv17, vv19, vs14
-    @vp15 vsllw vv18, vv19, vs39
-    @!vp1 vor vv25, vv18, vv17
-    @vp1 vaddw vv25, vv19, vs0
-    @vp15 vaddw vv25, vv25, vv22
-    @vp15 vxor vv16, vv16, vv25
-    vaddi vs14, vs32, 432
-    vlsd vs14, vs14
-    @vp15 vaddw vv24, vv24, vs14
-    @vp15 vaddw vv24, vv24, vv16
-    vaddi vs14, vs32, 440
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv24, vs14
-    vaddi vs14, vs32, 448
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv24, vs14
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv24, vs0
-    @vp15 vaddw vv18, vv18, vv25
-    @vp15 vxor vv16, vv25, vv22
-    @vp15 vxor vv16, vv16, vv18
-    vaddi vs14, vs32, 456
-    vlsd vs14, vs14
-    @vp15 vaddw vv21, vv21, vs14
-    @vp15 vaddw vv21, vv21, vv16
-    @vp15 vsrlw vv16, vv21, vs54
-    @vp15 vsllw vv17, vv21, vs54
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv21, vs0
-    @vp15 vaddw vv19, vv19, vv18
-    @vp15 vxor vv16, vv18, vv25
-    @vp15 vxor vv16, vv16, vv19
-    vaddi vs14, vs32, 464
-    vlsd vs14, vs14
-    vaddw vs15, vs13, vs14
-    @vp15 vaddw vv22, vs15, vv22
-    @vp15 vaddw vv22, vv22, vv16
-    vaddi vs14, vs32, 280
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv22, vs14
-    vaddi vs14, vs32, 272
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv22, vs14
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv22, vs0
-    @vp15 vaddw vv21, vv21, vv19
-    @vp15 vxor vv16, vv19, vv18
-    @vp15 vxor vv16, vv16, vv21
-    vaddi vs14, vs32, 472
-    vlsd vs14, vs14
-    @vp15 vaddw vv17, vv23, vs14
-    @vp15 vaddw vv17, vv17, vv25
-    @vp15 vaddw vv17, vv17, vv16
-    vaddi vs14, vs32, 424
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv17, vs14
-    @vp15 vsllw vv22, vv17, vs39
-    @!vp1 vor vv24, vv22, vv16
-    @vp1 vaddw vv24, vv17, vs0
-    @vp15 vaddw vv24, vv24, vv21
-    @vp15 vxor vv16, vv21, vv19
-    @vp15 vxor vv16, vv16, vv24
-    vaddi vs14, vs32, 480
-    vlsd vs14, vs14
-    @vp15 vaddw vv18, vv18, vs14
-    @vp15 vaddw vv18, vv18, vv16
-    vaddi vs14, vs32, 440
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv18, vs14
-    vaddi vs14, vs32, 448
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv18, vs14
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv24
-    @vp15 vxor vv16, vv24, vv21
-    @vp15 vxor vv16, vv16, vv22
-    vaddi vs14, vs32, 488
-    vlsd vs14, vs14
-    @vp15 vaddw vv19, vv19, vs14
-    @vp15 vaddw vv19, vv19, vv16
-    @vp15 vsrlw vv16, vv19, vs54
-    @vp15 vsllw vv17, vv19, vs54
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv19, vs0
-    @vp15 vaddw vv18, vv18, vv22
-    @vp15 vxor vv16, vv22, vv24
-    @vp15 vxor vv16, vv16, vv18
-    vaddi vs14, vs32, 496
-    vlsd vs14, vs14
-    @vp15 vaddw vv21, vv21, vs14
-    @vp15 vaddw vv21, vv21, vv16
-    vaddi vs14, vs32, 280
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv21, vs14
-    vaddi vs14, vs32, 272
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv21, vs14
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv21, vs0
-    @vp15 vaddw vv19, vv19, vv18
-    @vp15 vxor vv16, vv18, vv22
-    @vp15 vxor vv16, vv16, vv19
-    vaddi vs14, vs32, 504
-    vlsd vs14, vs14
-    @vp15 vaddw vv24, vv24, vs14
-    @vp15 vaddw vv24, vv24, vv16
-    vaddi vs14, vs32, 424
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv24, vs14
-    @vp15 vsllw vv17, vv24, vs39
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv24, vs0
-    @vp15 vaddw vv21, vv21, vv19
-    @vp15 vxor vv16, vv19, vv18
-    @vp15 vxor vv16, vv16, vv21
-    vaddi vs14, vs32, 512
-    vlsd vs14, vs14
-    @vp15 vaddw vv17, vv26, vs14
-    @vp15 vaddw vv17, vv17, vv22
-    @vp15 vaddw vv17, vv17, vv16
-    vaddi vs14, vs32, 440
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv17, vs14
-    vaddi vs14, vs32, 448
-    vlsd vs14, vs14
-    @vp15 vsllw vv22, vv17, vs14
-    @!vp1 vor vv24, vv22, vv16
-    @vp1 vaddw vv24, vv17, vs0
-    @vp15 vaddw vv24, vv24, vv21
-    @vp15 vxor vv16, vv21, vv19
-    @vp15 vxor vv16, vv16, vv24
-    vaddi vs14, vs32, 520
-    vlsd vs14, vs14
-    @vp15 vaddw vv18, vv18, vs14
-    @vp15 vaddw vv18, vv18, vv16
-    @vp15 vsrlw vv16, vv18, vs54
-    @vp15 vsllw vv17, vv18, vs54
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv24
-    @vp15 vxor vv16, vv24, vv21
-    @vp15 vxor vv16, vv16, vv22
-    vaddi vs14, vs32, 528
-    vlsd vs14, vs14
-    @vp15 vaddw vv19, vv19, vs14
-    @vp15 vaddw vv19, vv19, vv16
-    vaddi vs14, vs32, 280
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv19, vs14
-    vaddi vs14, vs32, 272
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv19, vs14
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv19, vs0
-    @vp15 vaddw vv18, vv18, vv22
-    @vp15 vxor vv16, vv22, vv24
-    @vp15 vxor vv16, vv16, vv18
-    vaddi vs14, vs32, 536
-    vlsd vs14, vs14
-    @vp15 vaddw vv21, vv21, vs14
-    @vp15 vaddw vv21, vv21, vv16
-    vaddi vs14, vs32, 424
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv21, vs14
-    @vp15 vsllw vv17, vv21, vs39
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv21, vs0
-    @vp15 vaddw vv19, vv19, vv18
-    @vp15 vxor vv16, vv18, vv22
-    @vp15 vxor vv16, vv16, vv19
-    vaddi vs14, vs32, 544
-    vlsd vs14, vs14
-    @vp15 vaddw vv24, vv24, vs14
-    @vp15 vaddw vv24, vv24, vv16
-    vaddi vs14, vs32, 440
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv24, vs14
-    vaddi vs14, vs32, 448
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv24, vs14
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv24, vs0
-    @vp15 vaddw vv21, vv21, vv19
-    @vp15 vxor vv16, vv19, vv18
-    @vp15 vxor vv16, vv16, vv21
-    vaddi vs14, vs32, 552
-    vlsd vs14, vs14
-    @vp15 vaddw vv22, vv22, vs14
-    @vp15 vaddw vv22, vv22, vv16
-    @vp15 vsrlw vv16, vv22, vs54
-    @vp15 vsllw vv17, vv22, vs54
-    @!vp1 vor vv24, vv17, vv16
-    @vp1 vaddw vv24, vv22, vs0
-    @vp15 vaddw vv24, vv24, vv21
-    @vp15 vxor vv16, vv21, vv19
-    @vp15 vxor vv16, vv16, vv24
-    vaddi vs14, vs32, 560
-    vlsd vs14, vs14
-    @vp15 vaddw vv18, vv18, vs14
-    @vp15 vaddw vv18, vv18, vv16
-    vaddi vs14, vs32, 280
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv18, vs14
-    vaddi vs14, vs32, 272
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv18, vs14
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv24
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv16, vv21, vs14
-    @vp15 vor vv16, vv22, vv16
-    @vp15 vxor vv16, vv16, vv24
-    vaddi vs14, vs32, 568
-    vlsd vs14, vs14
-    @vp15 vaddw vv26, vv26, vs14
-    @vp15 vaddw vv26, vv26, vv19
-    @vp15 vaddw vv26, vv26, vv16
-    vaddi vs14, vs32, 576
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv26, vs14
-    @vp15 vsllw vv17, vv26, vs38
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv26, vs0
-    @vp15 vaddw vv18, vv18, vv22
-    vaddi vs14, vs32, 112
-    vlsd vs14, vs14
-    @vp15 vxor vv16, vv24, vs14
-    @vp15 vor vv16, vv18, vv16
-    @vp15 vxor vv16, vv16, vv22
-    vaddi vs14, vs32, 584
-    vlsd vs14, vs14
-    @vp15 vaddw vv21, vv21, vs14
-    @vp15 vaddw vv21, vv21, vv16
-    vaddi vs14, vs32, 136
-    vlsd vs14, vs14
-    @vp15 vsrlw vv16, vv21, vs14
-    vaddi vs14, vs32, 128
-    vlsd vs14, vs14
-    @vp15 vsllw vv17, vv21, vs14
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv21, vs0
-    @vp15 vaddw vv19, vv19, vv18
+    @vp15 vsllw vv19, vv16, vs14
+    @!vp1 vor vv22, vv19, vv15
+    @vp1 vaddw vv22, vv16, vs0
+    @vp15 vaddw vv22, vv22, vv20
+    @vp15 vand vv15, vv22, vv20
     vaddi vs14, vs32, 112
     vlsd vs14, vs14
     @vp15 vxor vv16, vv22, vs14
-    @vp15 vor vv16, vv19, vv16
-    @vp15 vxor vv16, vv16, vv18
+    @vp15 vand vv12, vv12, vv16
+    @vp15 vor vv15, vv15, vv12
+    vaddi vs14, vs32, 120
+    vlsd vs14, vs14
+    @vp15 vaddw vv15, vv15, vs14
+    vaddi vs14, vs32, 128
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv15, vs14
+    vaddi vs14, vs32, 136
+    vlsd vs14, vs14
+    @vp15 vsllw vv16, vv15, vs14
+    @!vp1 vor vv19, vv16, vv12
+    @vp1 vaddw vv19, vv15, vs0
+    @vp15 vaddw vv19, vv19, vv22
+    @vp15 vand vv12, vv19, vv22
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv19, vs14
+    @vp15 vand vv15, vv20, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 144
+    vlsd vs14, vs14
+    @vp15 vaddw vv17, vv17, vs14
+    @vp15 vaddw vv17, vv17, vv12
+    vaddi vs14, vs32, 32
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv17, vs14
+    @vp15 vsllw vv15, vv17, vs37
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv17, vs0
+    @vp15 vaddw vv16, vv16, vv19
+    @vp15 vand vv12, vv16, vv19
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv16, vs14
+    @vp15 vand vv15, vv22, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 152
+    vlsd vs14, vs14
+    @vp15 vaddw vv20, vv20, vs14
+    @vp15 vaddw vv20, vv20, vv12
+    vaddi vs14, vs32, 72
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv20, vs14
+    vaddi vs14, vs32, 80
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv20, vs14
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv20, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    @vp15 vand vv12, vv17, vv16
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv17, vs14
+    @vp15 vand vv15, vv19, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 160
+    vlsd vs14, vs14
+    @vp15 vaddw vv22, vv22, vs14
+    @vp15 vaddw vv22, vv22, vv12
+    vaddi vs14, vs32, 96
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv22, vs14
+    vaddi vs14, vs32, 104
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv22, vs14
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv22, vs0
+    @vp15 vaddw vv20, vv20, vv17
+    @vp15 vand vv12, vv20, vv17
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv20, vs14
+    @vp15 vand vv15, vv16, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 168
+    vlsd vs14, vs14
+    @vp15 vaddw vv19, vv19, vs14
+    @vp15 vaddw vv19, vv19, vv12
+    vaddi vs14, vs32, 128
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv19, vs14
+    vaddi vs14, vs32, 136
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv19, vs14
+    @!vp1 vor vv22, vv15, vv12
+    @vp1 vaddw vv22, vv19, vs0
+    @vp15 vaddw vv22, vv22, vv20
+    @vp15 vand vv12, vv22, vv20
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv22, vs14
+    @vp15 vand vv15, vv17, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 176
+    vlsd vs14, vs14
+    @vp15 vaddw vv16, vv16, vs14
+    @vp15 vaddw vv16, vv16, vv12
+    vaddi vs14, vs32, 32
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv16, vs14
+    @vp15 vsllw vv15, vv16, vs37
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv16, vs0
+    @vp15 vaddw vv19, vv19, vv22
+    @vp15 vand vv12, vv19, vv22
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv19, vs14
+    @vp15 vand vv15, vv20, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 184
+    vlsd vs14, vs14
+    @vp15 vaddw vv17, vv17, vs14
+    @vp15 vaddw vv17, vv17, vv12
+    vaddi vs14, vs32, 72
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv17, vs14
+    vaddi vs14, vs32, 80
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv17, vs14
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv17, vs0
+    @vp15 vaddw vv16, vv16, vv19
+    @vp15 vand vv12, vv16, vv19
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv16, vs14
+    @vp15 vand vv15, vv22, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 192
+    vlsd vs14, vs14
+    @vp15 vaddw vv20, vv20, vs14
+    @vp15 vaddw vv20, vv20, vv12
+    vaddi vs14, vs32, 96
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv20, vs14
+    vaddi vs14, vs32, 104
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv20, vs14
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv20, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    @vp15 vand vv12, vv17, vv16
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv17, vs14
+    @vp15 vand vv15, vv19, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 200
+    vlsd vs14, vs14
+    @vp15 vaddw vv22, vv22, vs14
+    @vp15 vaddw vv22, vv22, vv12
+    vaddi vs14, vs32, 128
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv22, vs14
+    vaddi vs14, vs32, 136
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv22, vs14
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv22, vs0
+    @vp15 vaddw vv20, vv20, vv17
+    @vp15 vand vv12, vv20, vv17
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv20, vs14
+    @vp15 vand vv15, vv16, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 208
+    vlsd vs14, vs14
+    @vp15 vaddw vv19, vv19, vs14
+    @vp15 vaddw vv19, vv19, vv12
+    vaddi vs14, vs32, 32
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv19, vs14
+    @vp15 vsllw vv15, vv19, vs37
+    @!vp1 vor vv22, vv15, vv12
+    @vp1 vaddw vv22, vv19, vs0
+    @vp15 vaddw vv22, vv22, vv20
+    @vp15 vand vv12, vv22, vv20
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv22, vs14
+    @vp15 vand vv15, vv17, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 216
+    vlsd vs14, vs14
+    @vp15 vaddw vv16, vv16, vs14
+    @vp15 vaddw vv16, vv16, vv12
+    vaddi vs14, vs32, 72
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv16, vs14
+    vaddi vs14, vs32, 80
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv16, vs14
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv16, vs0
+    @vp15 vaddw vv19, vv19, vv22
+    @vp15 vand vv12, vv19, vv22
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv19, vs14
+    @vp15 vand vv16, vv20, vv15
+    @vp15 vor vv12, vv12, vv16
+    vaddi vs14, vs32, 224
+    vlsd vs14, vs14
+    vaddw vs15, vs13, vs14
+    @vp15 vaddw vv17, vs15, vv17
+    @vp15 vaddw vv17, vv17, vv12
+    vaddi vs14, vs32, 96
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv17, vs14
+    vaddi vs14, vs32, 104
+    vlsd vs14, vs14
+    @vp15 vsllw vv16, vv17, vs14
+    @!vp1 vor vv23, vv16, vv12
+    @vp1 vaddw vv23, vv17, vs0
+    @vp15 vaddw vv23, vv23, vv19
+    @vp15 vand vv12, vv23, vv19
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv16, vv23, vs14
+    @vp15 vand vv17, vv22, vv16
+    @vp15 vor vv12, vv12, vv17
+    vaddi vs14, vs32, 232
+    vlsd vs14, vs14
+    @vp15 vaddw vv20, vv20, vs14
+    @vp15 vaddw vv20, vv20, vv12
+    vaddi vs14, vs32, 128
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv20, vs14
+    vaddi vs14, vs32, 136
+    vlsd vs14, vs14
+    @vp15 vsllw vv17, vv20, vs14
+    @!vp1 vor vv25, vv17, vv12
+    @vp1 vaddw vv25, vv20, vs0
+    @vp15 vaddw vv25, vv25, vv23
+    @vp15 vand vv12, vv25, vv19
+    @vp15 vand vv15, vv23, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 240
+    vlsd vs14, vs14
+    @vp15 vaddw vv15, vv21, vs14
+    @vp15 vaddw vv15, vv15, vv22
+    @vp15 vaddw vv15, vv15, vv12
+    vaddi vs14, vs32, 248
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv15, vs14
+    vaddi vs14, vs32, 256
+    vlsd vs14, vs14
+    @vp15 vsllw vv17, vv15, vs14
+    @!vp1 vor vv20, vv17, vv12
+    @vp1 vaddw vv20, vv15, vs0
+    @vp15 vaddw vv20, vv20, vv25
+    @vp15 vand vv12, vv20, vv23
+    @vp15 vand vv16, vv25, vv16
+    @vp15 vor vv12, vv12, vv16
+    vaddi vs14, vs32, 264
+    vlsd vs14, vs14
+    @vp15 vaddw vv19, vv19, vs14
+    @vp15 vaddw vv19, vv19, vv12
+    vaddi vs14, vs32, 272
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv19, vs14
+    vaddi vs14, vs32, 280
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv19, vs14
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv19, vs0
+    @vp15 vaddw vv16, vv16, vv20
+    @vp15 vand vv12, vv16, vv25
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv25, vs14
+    @vp15 vand vv15, vv20, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 288
+    vlsd vs14, vs14
+    @vp15 vaddw vv23, vv23, vs14
+    @vp15 vaddw vv23, vv23, vv12
+    vaddi vs14, vs32, 296
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv23, vs14
+    vaddi vs14, vs32, 304
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv23, vs14
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv23, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    @vp15 vand vv12, vv17, vv20
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv20, vs14
+    @vp15 vand vv15, vv16, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 312
+    vlsd vs14, vs14
+    @vp15 vaddw vv15, vv24, vs14
+    @vp15 vaddw vv15, vv15, vv25
+    @vp15 vaddw vv15, vv15, vv12
+    vaddi vs14, vs32, 80
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv15, vs14
+    vaddi vs14, vs32, 72
+    vlsd vs14, vs14
+    @vp15 vsllw vv19, vv15, vs14
+    @!vp1 vor vv22, vv19, vv12
+    @vp1 vaddw vv22, vv15, vs0
+    @vp15 vaddw vv22, vv22, vv17
+    @vp15 vand vv12, vv22, vv16
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv16, vs14
+    @vp15 vand vv15, vv17, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 320
+    vlsd vs14, vs14
+    @vp15 vaddw vv20, vv20, vs14
+    @vp15 vaddw vv20, vv20, vv12
+    vaddi vs14, vs32, 248
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv20, vs14
+    vaddi vs14, vs32, 256
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv20, vs14
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv20, vs0
+    @vp15 vaddw vv19, vv19, vv22
+    @vp15 vand vv12, vv19, vv17
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv17, vs14
+    @vp15 vand vv15, vv22, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 328
+    vlsd vs14, vs14
+    @vp15 vaddw vv16, vv16, vs14
+    @vp15 vaddw vv16, vv16, vv12
+    vaddi vs14, vs32, 272
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv16, vs14
+    vaddi vs14, vs32, 280
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv16, vs14
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv19
+    @vp15 vand vv12, vv20, vv22
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv22, vs14
+    @vp15 vand vv15, vv19, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 336
+    vlsd vs14, vs14
+    @vp15 vaddw vv17, vv17, vs14
+    @vp15 vaddw vv17, vv17, vv12
+    vaddi vs14, vs32, 296
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv17, vs14
+    vaddi vs14, vs32, 304
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv17, vs14
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv17, vs0
+    @vp15 vaddw vv16, vv16, vv20
+    @vp15 vand vv12, vv16, vv19
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv19, vs14
+    @vp15 vand vv15, vv20, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 344
+    vlsd vs14, vs14
+    @vp15 vaddw vv22, vv22, vs14
+    @vp15 vaddw vv22, vv22, vv12
+    vaddi vs14, vs32, 80
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv22, vs14
+    vaddi vs14, vs32, 72
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv22, vs14
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv22, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    @vp15 vand vv12, vv17, vv20
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv20, vs14
+    @vp15 vand vv15, vv16, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 352
+    vlsd vs14, vs14
+    @vp15 vaddw vv19, vv19, vs14
+    @vp15 vaddw vv19, vv19, vv12
+    vaddi vs14, vs32, 248
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv19, vs14
+    vaddi vs14, vs32, 256
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv19, vs14
+    @!vp1 vor vv22, vv15, vv12
+    @vp1 vaddw vv22, vv19, vs0
+    @vp15 vaddw vv22, vv22, vv17
+    @vp15 vand vv12, vv22, vv16
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv16, vs14
+    @vp15 vand vv15, vv17, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 360
+    vlsd vs14, vs14
+    vaddw vs15, vs13, vs14
+    @vp15 vaddw vv20, vs15, vv20
+    @vp15 vaddw vv20, vv20, vv12
+    vaddi vs14, vs32, 272
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv20, vs14
+    vaddi vs14, vs32, 280
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv20, vs14
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv20, vs0
+    @vp15 vaddw vv19, vv19, vv22
+    @vp15 vand vv12, vv19, vv17
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv17, vs14
+    @vp15 vand vv15, vv22, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 368
+    vlsd vs14, vs14
+    @vp15 vaddw vv16, vv16, vs14
+    @vp15 vaddw vv16, vv16, vv12
+    vaddi vs14, vs32, 296
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv16, vs14
+    vaddi vs14, vs32, 304
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv16, vs14
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv19
+    @vp15 vand vv12, vv20, vv22
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv22, vs14
+    @vp15 vand vv15, vv19, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 376
+    vlsd vs14, vs14
+    @vp15 vaddw vv17, vv17, vs14
+    @vp15 vaddw vv17, vv17, vv12
+    vaddi vs14, vs32, 80
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv17, vs14
+    vaddi vs14, vs32, 72
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv17, vs14
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv17, vs0
+    @vp15 vaddw vv16, vv16, vv20
+    @vp15 vand vv12, vv16, vv19
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv19, vs14
+    @vp15 vand vv15, vv20, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 384
+    vlsd vs14, vs14
+    @vp15 vaddw vv22, vv22, vs14
+    @vp15 vaddw vv22, vv22, vv12
+    vaddi vs14, vs32, 248
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv22, vs14
+    vaddi vs14, vs32, 256
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv22, vs14
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv22, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    @vp15 vand vv12, vv17, vv20
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv20, vs14
+    @vp15 vand vv15, vv16, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 392
+    vlsd vs14, vs14
+    @vp15 vaddw vv19, vv19, vs14
+    @vp15 vaddw vv19, vv19, vv12
+    vaddi vs14, vs32, 272
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv19, vs14
+    vaddi vs14, vs32, 280
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv19, vs14
+    @!vp1 vor vv22, vv15, vv12
+    @vp1 vaddw vv22, vv19, vs0
+    @vp15 vaddw vv22, vv22, vv17
+    @vp15 vand vv12, vv22, vv16
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv16, vs14
+    @vp15 vand vv15, vv17, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 400
+    vlsd vs14, vs14
+    @vp15 vaddw vv20, vv20, vs14
+    @vp15 vaddw vv20, vv20, vv12
+    vaddi vs14, vs32, 296
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv20, vs14
+    vaddi vs14, vs32, 304
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv20, vs14
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv20, vs0
+    @vp15 vaddw vv19, vv19, vv22
+    @vp15 vand vv12, vv19, vv17
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv15, vv17, vs14
+    @vp15 vand vv15, vv22, vv15
+    @vp15 vor vv12, vv12, vv15
+    vaddi vs14, vs32, 408
+    vlsd vs14, vs14
+    @vp15 vaddw vv16, vv16, vs14
+    @vp15 vaddw vv16, vv16, vv12
+    vaddi vs14, vs32, 80
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv16, vs14
+    vaddi vs14, vs32, 72
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv16, vs14
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv19
+    @vp15 vxor vv12, vv20, vv19
+    @vp15 vxor vv15, vv12, vv22
+    vaddi vs14, vs32, 416
+    vlsd vs14, vs14
+    @vp15 vaddw vv17, vv17, vs14
+    @vp15 vaddw vv17, vv17, vv15
+    vaddi vs14, vs32, 424
+    vlsd vs14, vs14
+    @vp15 vsrlw vv15, vv17, vs14
+    @vp15 vsllw vv16, vv17, vs39
+    @!vp1 vor vv23, vv16, vv15
+    @vp1 vaddw vv23, vv17, vs0
+    @vp15 vaddw vv23, vv23, vv20
+    @vp15 vxor vv12, vv12, vv23
+    vaddi vs14, vs32, 432
+    vlsd vs14, vs14
+    @vp15 vaddw vv22, vv22, vs14
+    @vp15 vaddw vv22, vv22, vv12
+    vaddi vs14, vs32, 440
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv22, vs14
+    vaddi vs14, vs32, 448
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv22, vs14
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv22, vs0
+    @vp15 vaddw vv16, vv16, vv23
+    @vp15 vxor vv12, vv23, vv20
+    @vp15 vxor vv12, vv12, vv16
+    vaddi vs14, vs32, 456
+    vlsd vs14, vs14
+    @vp15 vaddw vv19, vv19, vs14
+    @vp15 vaddw vv19, vv19, vv12
+    @vp15 vsrlw vv12, vv19, vs54
+    @vp15 vsllw vv15, vv19, vs54
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv19, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    @vp15 vxor vv12, vv16, vv23
+    @vp15 vxor vv12, vv12, vv17
+    vaddi vs14, vs32, 464
+    vlsd vs14, vs14
+    vaddw vs15, vs13, vs14
+    @vp15 vaddw vv20, vs15, vv20
+    @vp15 vaddw vv20, vv20, vv12
+    vaddi vs14, vs32, 280
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv20, vs14
+    vaddi vs14, vs32, 272
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv20, vs14
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv20, vs0
+    @vp15 vaddw vv19, vv19, vv17
+    @vp15 vxor vv12, vv17, vv16
+    @vp15 vxor vv12, vv12, vv19
+    vaddi vs14, vs32, 472
+    vlsd vs14, vs14
+    @vp15 vaddw vv15, vv21, vs14
+    @vp15 vaddw vv15, vv15, vv23
+    @vp15 vaddw vv15, vv15, vv12
+    vaddi vs14, vs32, 424
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv15, vs14
+    @vp15 vsllw vv20, vv15, vs39
+    @!vp1 vor vv22, vv20, vv12
+    @vp1 vaddw vv22, vv15, vs0
+    @vp15 vaddw vv22, vv22, vv19
+    @vp15 vxor vv12, vv19, vv17
+    @vp15 vxor vv12, vv12, vv22
+    vaddi vs14, vs32, 480
+    vlsd vs14, vs14
+    @vp15 vaddw vv16, vv16, vs14
+    @vp15 vaddw vv16, vv16, vv12
+    vaddi vs14, vs32, 440
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv16, vs14
+    vaddi vs14, vs32, 448
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv16, vs14
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv22
+    @vp15 vxor vv12, vv22, vv19
+    @vp15 vxor vv12, vv12, vv20
+    vaddi vs14, vs32, 488
+    vlsd vs14, vs14
+    @vp15 vaddw vv17, vv17, vs14
+    @vp15 vaddw vv17, vv17, vv12
+    @vp15 vsrlw vv12, vv17, vs54
+    @vp15 vsllw vv15, vv17, vs54
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv17, vs0
+    @vp15 vaddw vv16, vv16, vv20
+    @vp15 vxor vv12, vv20, vv22
+    @vp15 vxor vv12, vv12, vv16
+    vaddi vs14, vs32, 496
+    vlsd vs14, vs14
+    @vp15 vaddw vv19, vv19, vs14
+    @vp15 vaddw vv19, vv19, vv12
+    vaddi vs14, vs32, 280
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv19, vs14
+    vaddi vs14, vs32, 272
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv19, vs14
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv19, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    @vp15 vxor vv12, vv16, vv20
+    @vp15 vxor vv12, vv12, vv17
+    vaddi vs14, vs32, 504
+    vlsd vs14, vs14
+    @vp15 vaddw vv22, vv22, vs14
+    @vp15 vaddw vv22, vv22, vv12
+    vaddi vs14, vs32, 424
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv22, vs14
+    @vp15 vsllw vv15, vv22, vs39
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv22, vs0
+    @vp15 vaddw vv19, vv19, vv17
+    @vp15 vxor vv12, vv17, vv16
+    @vp15 vxor vv12, vv12, vv19
+    vaddi vs14, vs32, 512
+    vlsd vs14, vs14
+    @vp15 vaddw vv15, vv24, vs14
+    @vp15 vaddw vv15, vv15, vv20
+    @vp15 vaddw vv15, vv15, vv12
+    vaddi vs14, vs32, 440
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv15, vs14
+    vaddi vs14, vs32, 448
+    vlsd vs14, vs14
+    @vp15 vsllw vv20, vv15, vs14
+    @!vp1 vor vv22, vv20, vv12
+    @vp1 vaddw vv22, vv15, vs0
+    @vp15 vaddw vv22, vv22, vv19
+    @vp15 vxor vv12, vv19, vv17
+    @vp15 vxor vv12, vv12, vv22
+    vaddi vs14, vs32, 520
+    vlsd vs14, vs14
+    @vp15 vaddw vv16, vv16, vs14
+    @vp15 vaddw vv16, vv16, vv12
+    @vp15 vsrlw vv12, vv16, vs54
+    @vp15 vsllw vv15, vv16, vs54
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv22
+    @vp15 vxor vv12, vv22, vv19
+    @vp15 vxor vv12, vv12, vv20
+    vaddi vs14, vs32, 528
+    vlsd vs14, vs14
+    @vp15 vaddw vv17, vv17, vs14
+    @vp15 vaddw vv17, vv17, vv12
+    vaddi vs14, vs32, 280
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv17, vs14
+    vaddi vs14, vs32, 272
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv17, vs14
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv17, vs0
+    @vp15 vaddw vv16, vv16, vv20
+    @vp15 vxor vv12, vv20, vv22
+    @vp15 vxor vv12, vv12, vv16
+    vaddi vs14, vs32, 536
+    vlsd vs14, vs14
+    @vp15 vaddw vv19, vv19, vs14
+    @vp15 vaddw vv19, vv19, vv12
+    vaddi vs14, vs32, 424
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv19, vs14
+    @vp15 vsllw vv15, vv19, vs39
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv19, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    @vp15 vxor vv12, vv16, vv20
+    @vp15 vxor vv12, vv12, vv17
+    vaddi vs14, vs32, 544
+    vlsd vs14, vs14
+    @vp15 vaddw vv22, vv22, vs14
+    @vp15 vaddw vv22, vv22, vv12
+    vaddi vs14, vs32, 440
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv22, vs14
+    vaddi vs14, vs32, 448
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv22, vs14
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv22, vs0
+    @vp15 vaddw vv19, vv19, vv17
+    @vp15 vxor vv12, vv17, vv16
+    @vp15 vxor vv12, vv12, vv19
+    vaddi vs14, vs32, 552
+    vlsd vs14, vs14
+    @vp15 vaddw vv20, vv20, vs14
+    @vp15 vaddw vv20, vv20, vv12
+    @vp15 vsrlw vv12, vv20, vs54
+    @vp15 vsllw vv15, vv20, vs54
+    @!vp1 vor vv22, vv15, vv12
+    @vp1 vaddw vv22, vv20, vs0
+    @vp15 vaddw vv22, vv22, vv19
+    @vp15 vxor vv12, vv19, vv17
+    @vp15 vxor vv12, vv12, vv22
+    vaddi vs14, vs32, 560
+    vlsd vs14, vs14
+    @vp15 vaddw vv16, vv16, vs14
+    @vp15 vaddw vv16, vv16, vv12
+    vaddi vs14, vs32, 280
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv16, vs14
+    vaddi vs14, vs32, 272
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv16, vs14
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv22
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv12, vv19, vs14
+    @vp15 vor vv12, vv20, vv12
+    @vp15 vxor vv12, vv12, vv22
+    vaddi vs14, vs32, 568
+    vlsd vs14, vs14
+    @vp15 vaddw vv24, vv24, vs14
+    @vp15 vaddw vv24, vv24, vv17
+    @vp15 vaddw vv24, vv24, vv12
+    vaddi vs14, vs32, 576
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv24, vs14
+    @vp15 vsllw vv15, vv24, vs38
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv24, vs0
+    @vp15 vaddw vv16, vv16, vv20
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv12, vv22, vs14
+    @vp15 vor vv12, vv16, vv12
+    @vp15 vxor vv12, vv12, vv20
+    vaddi vs14, vs32, 584
+    vlsd vs14, vs14
+    @vp15 vaddw vv19, vv19, vs14
+    @vp15 vaddw vv19, vv19, vv12
+    vaddi vs14, vs32, 136
+    vlsd vs14, vs14
+    @vp15 vsrlw vv12, vv19, vs14
+    vaddi vs14, vs32, 128
+    vlsd vs14, vs14
+    @vp15 vsllw vv15, vv19, vs14
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv19, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    vaddi vs14, vs32, 112
+    vlsd vs14, vs14
+    @vp15 vxor vv12, vv20, vs14
+    @vp15 vor vv12, vv17, vv12
+    @vp15 vxor vv12, vv12, vv16
     vaddi vs14, vs32, 592
     vlsd vs14, vs14
     vaddw vs13, vs13, vs14
-    @vp15 vaddw vv24, vs13, vv24
-    @vp15 vaddw vv24, vv24, vv16
+    @vp15 vaddw vv22, vs13, vv22
+    @vp15 vaddw vv22, vv22, vv12
     vaddi vs13, vs32, 104
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv24, vs13
+    @vp15 vsrlw vv12, vv22, vs13
     vaddi vs13, vs32, 96
     vlsd vs13, vs13
-    @vp15 vsllw vv17, vv24, vs13
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv24, vs0
-    @vp15 vaddw vv21, vv21, vv19
+    @vp15 vsllw vv15, vv22, vs13
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv22, vs0
+    @vp15 vaddw vv19, vv19, vv17
     vaddi vs13, vs32, 112
     vlsd vs13, vs13
-    @vp15 vxor vv16, vv18, vs13
-    @vp15 vor vv16, vv21, vv16
-    @vp15 vxor vv16, vv16, vv19
+    @vp15 vxor vv12, vv16, vs13
+    @vp15 vor vv12, vv19, vv12
+    @vp15 vxor vv12, vv12, vv17
     vaddi vs13, vs32, 600
     vlsd vs13, vs13
-    @vp15 vaddw vv22, vv22, vs13
-    @vp15 vaddw vv22, vv22, vv16
+    @vp15 vaddw vv20, vv20, vs13
+    @vp15 vaddw vv20, vv20, vv12
     vaddi vs13, vs32, 448
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv22, vs13
+    @vp15 vsrlw vv12, vv20, vs13
     vaddi vs13, vs32, 440
     vlsd vs13, vs13
-    @vp15 vsllw vv17, vv22, vs13
-    @!vp1 vor vv24, vv17, vv16
-    @vp1 vaddw vv24, vv22, vs0
-    @vp15 vaddw vv24, vv24, vv21
+    @vp15 vsllw vv15, vv20, vs13
+    @!vp1 vor vv22, vv15, vv12
+    @vp1 vaddw vv22, vv20, vs0
+    @vp15 vaddw vv22, vv22, vv19
     vaddi vs13, vs32, 112
     vlsd vs13, vs13
-    @vp15 vxor vv16, vv19, vs13
-    @vp15 vor vv16, vv24, vv16
-    @vp15 vxor vv16, vv16, vv21
+    @vp15 vxor vv12, vv17, vs13
+    @vp15 vor vv12, vv22, vv12
+    @vp15 vxor vv12, vv12, vv19
     vaddi vs13, vs32, 608
     vlsd vs13, vs13
-    @vp15 vaddw vv18, vv18, vs13
-    @vp15 vaddw vv18, vv18, vv16
+    @vp15 vaddw vv16, vv16, vs13
+    @vp15 vaddw vv16, vv16, vv12
     vaddi vs13, vs32, 576
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv18, vs13
-    @vp15 vsllw vv17, vv18, vs38
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv24
+    @vp15 vsrlw vv12, vv16, vs13
+    @vp15 vsllw vv15, vv16, vs38
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv22
     vaddi vs13, vs32, 112
     vlsd vs13, vs13
-    @vp15 vxor vv16, vv21, vs13
-    @vp15 vor vv16, vv22, vv16
-    @vp15 vxor vv16, vv16, vv24
+    @vp15 vxor vv12, vv19, vs13
+    @vp15 vor vv12, vv20, vv12
+    @vp15 vxor vv12, vv12, vv22
     vaddi vs13, vs32, 616
     vlsd vs13, vs13
-    @vp15 vaddw vv19, vv19, vs13
-    @vp15 vaddw vv19, vv19, vv16
+    @vp15 vaddw vv17, vv17, vs13
+    @vp15 vaddw vv17, vv17, vv12
     vaddi vs13, vs32, 136
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv19, vs13
+    @vp15 vsrlw vv12, vv17, vs13
     vaddi vs13, vs32, 128
     vlsd vs13, vs13
-    @vp15 vsllw vv17, vv19, vs13
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv19, vs0
-    @vp15 vaddw vv18, vv18, vv22
+    @vp15 vsllw vv15, vv17, vs13
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv17, vs0
+    @vp15 vaddw vv16, vv16, vv20
     vaddi vs13, vs32, 112
     vlsd vs13, vs13
-    @vp15 vxor vv16, vv24, vs13
-    @vp15 vor vv16, vv18, vv16
-    @vp15 vxor vv16, vv16, vv22
+    @vp15 vxor vv12, vv22, vs13
+    @vp15 vor vv12, vv16, vv12
+    @vp15 vxor vv12, vv12, vv20
     vaddi vs13, vs32, 624
     vlsd vs13, vs13
-    @vp15 vaddw vv21, vv21, vs13
-    @vp15 vaddw vv21, vv21, vv16
+    @vp15 vaddw vv19, vv19, vs13
+    @vp15 vaddw vv19, vv19, vv12
     vaddi vs13, vs32, 104
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv21, vs13
+    @vp15 vsrlw vv12, vv19, vs13
     vaddi vs13, vs32, 96
     vlsd vs13, vs13
-    @vp15 vsllw vv17, vv21, vs13
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv21, vs0
-    @vp15 vaddw vv19, vv19, vv18
+    @vp15 vsllw vv15, vv19, vs13
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv19, vs0
+    @vp15 vaddw vv17, vv17, vv16
     vaddi vs13, vs32, 112
     vlsd vs13, vs13
-    @vp15 vxor vv16, vv22, vs13
-    @vp15 vor vv16, vv19, vv16
-    @vp15 vxor vv16, vv16, vv18
+    @vp15 vxor vv12, vv20, vs13
+    @vp15 vor vv12, vv17, vv12
+    @vp15 vxor vv12, vv12, vv16
     vaddi vs13, vs32, 632
     vlsd vs13, vs13
-    @vp15 vaddw vv23, vv23, vs13
-    @vp15 vaddw vv23, vv23, vv24
-    @vp15 vaddw vv23, vv23, vv16
+    @vp15 vaddw vv21, vv21, vs13
+    @vp15 vaddw vv21, vv21, vv22
+    @vp15 vaddw vv21, vv21, vv12
     vaddi vs13, vs32, 448
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv23, vs13
+    @vp15 vsrlw vv12, vv21, vs13
     vaddi vs13, vs32, 440
     vlsd vs13, vs13
-    @vp15 vsllw vv17, vv23, vs13
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv23, vs0
-    @vp15 vaddw vv21, vv21, vv19
+    @vp15 vsllw vv15, vv21, vs13
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv21, vs0
+    @vp15 vaddw vv19, vv19, vv17
     vaddi vs13, vs32, 112
     vlsd vs13, vs13
-    @vp15 vxor vv16, vv18, vs13
-    @vp15 vor vv16, vv21, vv16
-    @vp15 vxor vv16, vv16, vv19
+    @vp15 vxor vv12, vv16, vs13
+    @vp15 vor vv12, vv19, vv12
+    @vp15 vxor vv12, vv12, vv17
     vaddi vs13, vs32, 640
     vlsd vs13, vs13
-    @vp15 vaddw vv22, vv22, vs13
-    @vp15 vaddw vv22, vv22, vv16
+    @vp15 vaddw vv20, vv20, vs13
+    @vp15 vaddw vv20, vv20, vv12
     vaddi vs13, vs32, 576
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv22, vs13
-    @vp15 vsllw vv17, vv22, vs38
-    @!vp1 vor vv23, vv17, vv16
-    @vp1 vaddw vv23, vv22, vs0
-    @vp15 vaddw vv23, vv23, vv21
-    vaddi vs13, vs32, 112
-    vlsd vs13, vs13
-    @vp15 vxor vv16, vv19, vs13
-    @vp15 vor vv16, vv23, vv16
-    @vp15 vxor vv16, vv16, vv21
-    vaddi vs13, vs32, 648
-    vlsd vs13, vs13
-    @vp15 vaddw vv18, vv18, vs13
-    @vp15 vaddw vv18, vv18, vv16
-    vaddi vs13, vs32, 136
-    vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv18, vs13
-    vaddi vs13, vs32, 128
-    vlsd vs13, vs13
-    @vp15 vsllw vv17, vv18, vs13
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv23
-    vaddi vs13, vs32, 112
-    vlsd vs13, vs13
-    @vp15 vxor vv16, vv21, vs13
-    @vp15 vor vv16, vv22, vv16
-    @vp15 vxor vv16, vv16, vv23
-    vaddi vs13, vs32, 656
-    vlsd vs13, vs13
-    @vp15 vaddw vv19, vv19, vs13
-    @vp15 vaddw vv19, vv19, vv16
-    vaddi vs13, vs32, 104
-    vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv19, vs13
-    vaddi vs13, vs32, 96
-    vlsd vs13, vs13
-    @vp15 vsllw vv17, vv19, vs13
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv19, vs0
-    @vp15 vaddw vv18, vv18, vv22
-    vaddi vs13, vs32, 112
-    vlsd vs13, vs13
-    @vp15 vxor vv16, vv23, vs13
-    @vp15 vor vv16, vv18, vv16
-    @vp15 vxor vv16, vv16, vv22
-    vaddi vs13, vs32, 664
-    vlsd vs13, vs13
-    @vp15 vaddw vv21, vv21, vs13
-    @vp15 vaddw vv21, vv21, vv16
-    vaddi vs13, vs32, 448
-    vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv21, vs13
-    vaddi vs13, vs32, 440
-    vlsd vs13, vs13
-    @vp15 vsllw vv17, vv21, vs13
-    @!vp1 vor vv19, vv17, vv16
-    @vp1 vaddw vv19, vv21, vs0
-    @vp15 vaddw vv19, vv19, vv18
-    vaddi vs13, vs32, 112
-    vlsd vs13, vs13
-    @vp15 vxor vv16, vv22, vs13
-    @vp15 vor vv16, vv19, vv16
-    @vp15 vxor vv16, vv16, vv18
-    vaddi vs13, vs32, 672
-    vlsd vs13, vs13
-    @vp15 vaddw vv23, vv23, vs13
-    @vp15 vaddw vv23, vv23, vv16
-    vaddi vs13, vs32, 576
-    vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv23, vs13
-    @vp15 vsllw vv17, vv23, vs38
-    @!vp1 vor vv21, vv17, vv16
-    @vp1 vaddw vv21, vv23, vs0
+    @vp15 vsrlw vv12, vv20, vs13
+    @vp15 vsllw vv15, vv20, vs38
+    @!vp1 vor vv21, vv15, vv12
+    @vp1 vaddw vv21, vv20, vs0
     @vp15 vaddw vv21, vv21, vv19
     vaddi vs13, vs32, 112
     vlsd vs13, vs13
-    @vp15 vxor vv16, vv18, vs13
-    @vp15 vor vv16, vv21, vv16
-    @vp15 vxor vv16, vv16, vv19
-    vaddi vs13, vs32, 680
+    @vp15 vxor vv12, vv17, vs13
+    @vp15 vor vv12, vv21, vv12
+    @vp15 vxor vv12, vv12, vv19
+    vaddi vs13, vs32, 648
     vlsd vs13, vs13
-    @vp15 vaddw vv22, vv22, vs13
-    @vp15 vaddw vv22, vv22, vv16
+    @vp15 vaddw vv16, vv16, vs13
+    @vp15 vaddw vv16, vv16, vv12
     vaddi vs13, vs32, 136
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv22, vs13
+    @vp15 vsrlw vv12, vv16, vs13
     vaddi vs13, vs32, 128
     vlsd vs13, vs13
-    @vp15 vsllw vv17, vv22, vs13
-    @!vp1 vor vv23, vv17, vv16
-    @vp1 vaddw vv23, vv22, vs0
-    @vp15 vaddw vv23, vv23, vv21
+    @vp15 vsllw vv15, vv16, vs13
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv21
     vaddi vs13, vs32, 112
     vlsd vs13, vs13
-    @vp15 vxor vv16, vv19, vs13
-    @vp15 vor vv16, vv23, vv16
-    @vp15 vxor vv16, vv16, vv21
-    vaddi vs13, vs32, 688
+    @vp15 vxor vv12, vv19, vs13
+    @vp15 vor vv12, vv20, vv12
+    @vp15 vxor vv12, vv12, vv21
+    vaddi vs13, vs32, 656
     vlsd vs13, vs13
-    @vp15 vaddw vv18, vv18, vs13
-    @vp15 vaddw vv18, vv18, vv16
+    @vp15 vaddw vv17, vv17, vs13
+    @vp15 vaddw vv17, vv17, vv12
     vaddi vs13, vs32, 104
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv18, vs13
+    @vp15 vsrlw vv12, vv17, vs13
     vaddi vs13, vs32, 96
     vlsd vs13, vs13
-    @vp15 vsllw vv17, vv18, vs13
-    @!vp1 vor vv22, vv17, vv16
-    @vp1 vaddw vv22, vv18, vs0
-    @vp15 vaddw vv22, vv22, vv23
+    @vp15 vsllw vv15, vv17, vs13
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv17, vs0
+    @vp15 vaddw vv16, vv16, vv20
     vaddi vs13, vs32, 112
     vlsd vs13, vs13
-    @vp15 vxor vv16, vv21, vs13
-    @vp15 vor vv16, vv22, vv16
-    @vp15 vxor vv16, vv16, vv23
-    vaddi vs13, vs32, 696
+    @vp15 vxor vv12, vv21, vs13
+    @vp15 vor vv12, vv16, vv12
+    @vp15 vxor vv12, vv12, vv20
+    vaddi vs13, vs32, 664
     vlsd vs13, vs13
     @vp15 vaddw vv19, vv19, vs13
-    @vp15 vaddw vv19, vv19, vv16
+    @vp15 vaddw vv19, vv19, vv12
     vaddi vs13, vs32, 448
     vlsd vs13, vs13
-    @vp15 vsrlw vv16, vv19, vs13
+    @vp15 vsrlw vv12, vv19, vs13
     vaddi vs13, vs32, 440
     vlsd vs13, vs13
-    @vp15 vsllw vv17, vv19, vs13
-    @!vp1 vor vv18, vv17, vv16
-    @vp1 vaddw vv18, vv19, vs0
-    vaddi vs13, vs32, 704
+    @vp15 vsllw vv15, vv19, vs13
+    @!vp1 vor vv17, vv15, vv12
+    @vp1 vaddw vv17, vv19, vs0
+    @vp15 vaddw vv17, vv17, vv16
+    vaddi vs13, vs32, 112
+    vlsd vs13, vs13
+    @vp15 vxor vv12, vv20, vs13
+    @vp15 vor vv12, vv17, vv12
+    @vp15 vxor vv12, vv12, vv16
+    vaddi vs13, vs32, 672
     vlsd vs13, vs13
     @vp15 vaddw vv21, vv21, vs13
+    @vp15 vaddw vv21, vv21, vv12
+    vaddi vs13, vs32, 576
+    vlsd vs13, vs13
+    @vp15 vsrlw vv12, vv21, vs13
+    @vp15 vsllw vv15, vv21, vs38
+    @!vp1 vor vv19, vv15, vv12
+    @vp1 vaddw vv19, vv21, vs0
+    @vp15 vaddw vv19, vv19, vv17
+    vaddi vs13, vs32, 112
+    vlsd vs13, vs13
+    @vp15 vxor vv12, vv16, vs13
+    @vp15 vor vv12, vv19, vv12
+    @vp15 vxor vv12, vv12, vv17
+    vaddi vs13, vs32, 680
+    vlsd vs13, vs13
+    @vp15 vaddw vv20, vv20, vs13
+    @vp15 vaddw vv20, vv20, vv12
+    vaddi vs13, vs32, 136
+    vlsd vs13, vs13
+    @vp15 vsrlw vv12, vv20, vs13
+    vaddi vs13, vs32, 128
+    vlsd vs13, vs13
+    @vp15 vsllw vv15, vv20, vs13
+    @!vp1 vor vv21, vv15, vv12
+    @vp1 vaddw vv21, vv20, vs0
+    @vp15 vaddw vv21, vv21, vv19
+    vaddi vs13, vs32, 112
+    vlsd vs13, vs13
+    @vp15 vxor vv12, vv17, vs13
+    @vp15 vor vv12, vv21, vv12
+    @vp15 vxor vv12, vv12, vv19
+    vaddi vs13, vs32, 688
+    vlsd vs13, vs13
+    @vp15 vaddw vv16, vv16, vs13
+    @vp15 vaddw vv16, vv16, vv12
+    vaddi vs13, vs32, 104
+    vlsd vs13, vs13
+    @vp15 vsrlw vv12, vv16, vs13
+    vaddi vs13, vs32, 96
+    vlsd vs13, vs13
+    @vp15 vsllw vv15, vv16, vs13
+    @!vp1 vor vv20, vv15, vv12
+    @vp1 vaddw vv20, vv16, vs0
+    @vp15 vaddw vv20, vv20, vv21
+    vaddi vs13, vs32, 112
+    vlsd vs13, vs13
+    @vp15 vxor vv12, vv19, vs13
+    @vp15 vor vv12, vv20, vv12
+    @vp15 vxor vv12, vv12, vv21
+    vaddi vs13, vs32, 696
+    vlsd vs13, vs13
+    @vp15 vaddw vv17, vv17, vs13
+    @vp15 vaddw vv17, vv17, vv12
+    vaddi vs13, vs32, 448
+    vlsd vs13, vs13
+    @vp15 vsrlw vv12, vv17, vs13
+    vaddi vs13, vs32, 440
+    vlsd vs13, vs13
+    @vp15 vsllw vv15, vv17, vs13
+    @!vp1 vor vv16, vv15, vv12
+    @vp1 vaddw vv16, vv17, vs0
+    vaddi vs13, vs32, 704
+    vlsd vs13, vs13
+    @vp15 vaddw vv19, vv19, vs13
     vaddi vs13, vs32, 40
     vlsd vs13, vs13
-    @vp15 vaddw vv16, vv22, vs13
-    @vp15 vaddw vv16, vv16, vv18
+    @vp15 vaddw vv12, vv20, vs13
+    @vp15 vaddw vv12, vv12, vv16
     vaddi vs13, vs32, 56
     vlsd vs13, vs13
-    @vp15 vaddw vv22, vv22, vs13
+    @vp15 vaddw vv20, vv20, vs13
     vaddi vs13, vs32, 48
     vlsd vs13, vs13
-    @vp15 vaddw vv23, vv23, vs13
+    @vp15 vaddw vv21, vv21, vs13
     vaddi vs13, vs32, 712
     vlsd vs13, vs13
-    vcmpeq vp3, vv21, vs13
+    vcmpeq vp3, vv19, vs13
     vaddi vs13, vs32, 720
     vlsd vs13, vs13
-    vcmpeq vp6, vv16, vs13
+    vcmpeq vp6, vv12, vs13
     vpop vp6, vp3, vp6, vp1, 0xD8
     vaddi vs13, vs32, 728
     vlsd vs13, vs13
-    vcmpeq vp3, vv22, vs13
+    vcmpeq vp3, vv20, vs13
     vpop vp3, vp6, vp3, vp1, 0xD8
     vaddi vs13, vs32, 736
     vlsd vs13, vs13
-    vcmpeq vp6, vv23, vs13
+    vcmpeq vp6, vv21, vs13
     vpop vp6, vp3, vp6, vp1, 0xD8
 .LFindKeyWithDigest_Kernel_skip17:
     vpop vp3, vp15, vp6, vp6, 0x80
@@ -1335,7 +1335,7 @@ FindKeyWithDigest_Kernel_wt:
     vaddi vs13, vs32, 744
     vlsd vs13, vs13
     vadd vv1, vs13, vs0
-    @vp3 vsxw vv15, vs0, vv1
+    @vp3 vsxw vv3, vs0, vv1
     vadd vv1, vs51, vs0
     @vp3 vsxb vv14, vs0, vv1
     vadd vv1, vs2, vs0
@@ -1373,15 +1373,15 @@ FindKeyWithDigest_Kernel_wt:
     @vp6 vadd vv14, vv14, vs13
     vaddi vs13, vs32, 768
     vlsd vs13, vs13
-    vsll vv15, vv14, vs13
-    vsrl vv15, vv15, vs13
+    vsll vv3, vv14, vs13
+    vsrl vv3, vv3, vs13
     vaddi vs13, vs32, 760
     vlsd vs13, vs13
-    @vp6 vand vv16, vv13, vs13
-    @vp6 vor vv13, vv16, vv15
+    @vp6 vand vv12, vv13, vs13
+    @vp6 vor vv13, vv12, vv3
     vaddw vs12, vs12, vs34
-    vaddw vv15, vs12, vs0
-    vcmpeq vp3, vv15, vs58
+    vaddw vv3, vs12, vs0
+    vcmpeq vp3, vv3, vs58
 .LFindKeyWithDigest_Kernel_skip19:
     vpop vp7, vp6, vp3, vp3, 0x80
     vpop vp8, vp6, vp3, vp3, 0x02
@@ -1403,7 +1403,7 @@ FindKeyWithDigest_Kernel_wt:
 FindKeyWithDigest_Kernel_ct:            # @FindKeyWithDigest_Kernel_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	t1, 1048364
+	lui	t1, 1048380
 	ld	t0, 16(sp)
 	addi	t1, t1, -5
 	ld	t2, 8(sp)

@@ -63,14 +63,14 @@ net_kernel_3_wt:
     vsrl vv3, vv0, vs55
     vlsd vs2, vs54
     vsll vv4, vv3, vs58
-    vlxd vv5, vs61, vv4
+    vlxd vv5, vs60, vv4
     vsll vv4, vv2, vs57
     vsll vv6, vv1, vs58
     vadd vv4, vv4, vv6
-    vlxd vv6, vs60, vv4
+    vlxd vv6, vs61, vv4
     vand vv4, vv0, vs53
     vsll vv7, vv4, vs58
-    vlxd vv8, vs59, vv7
+    vlxd vv8, vs62, vv7
     vsrl vs3, vs2, vs52
     vadd vs3, vs3, vs2
     vsll vs3, vs3, vs51
@@ -97,7 +97,7 @@ net_kernel_3_wt:
     vadd vv3, vv3, vv1
     vsll vv4, vv4, vs48
     vadd vv3, vv3, vv4
-    vsxw vv9, vs62, vv3
+    vsxw vv9, vs59, vv3
     vstop
 
     .text
@@ -120,7 +120,7 @@ net_kernel_4_wt:
     vadd vv6, vv6, vv5
     vsll vv4, vv1, vs59
     vadd vv6, vv6, vv4
-    vlxw vv7, vs62, vv6
+    vlxw vv7, vs61, vv6
     vsll vv3, vv3, vs54
     vsll vv2, vv2, vs58
     vsrl vv4, vv0, vs56
@@ -129,7 +129,7 @@ net_kernel_4_wt:
     vadd vv4, vv4, vv2
     vsll vv1, vv1, vs59
     vadd vv4, vv4, vv1
-    vsxw vv7, vs61, vv4
+    vsxw vv7, vs62, vv4
     vstop
 
 # ---- control threads (from llc) ----
@@ -451,16 +451,16 @@ net_kernel_3_ct:                        # @net_kernel_3_ct
 	vsetcfg a7
 	#NO_APP
 	#APP
-	vmcs vs62, a6
+	vmcs vs62, a4
 	#NO_APP
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a3
 	#NO_APP
 	#APP
-	vmcs vs60, a3
+	vmcs vs60, a2
 	#NO_APP
 	#APP
-	vmcs vs59, a4
+	vmcs vs59, a6
 	#NO_APP
 	li	a2, 3
 	li	a3, 5
@@ -573,10 +573,10 @@ net_kernel_4_ct:                        # @net_kernel_4_ct
 	#NO_APP
 	li	a3, 3
 	#APP
-	vmcs vs62, a1
+	vmcs vs62, a2
 	#NO_APP
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a1
 	#NO_APP
 	#APP
 	vmcs vs60, a3

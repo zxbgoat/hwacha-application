@@ -19,8 +19,8 @@ compute_lj_force_wt:
     @vp2 vfsgnjn.s vv6, vs59, vs59
     vsll vs2, vs60, vs50
     vsrl vs2, vs2, vs50
-    vadd vs3, vs61, vs57
-    vadd vs4, vs61, vs56
+    vadd vs3, vs62, vs57
+    vadd vs4, vs62, vs56
 .Lcompute_lj_force_skip0:
     vpop vp1, vp2, vp2, vp2, 0xAA
     @vp2 vadd vs5, vs0, vs0
@@ -32,9 +32,9 @@ compute_lj_force_wt:
     vmul vs6, vs58, vs5
     @vp1 vadd vv1, vv0, vs6
     @vp1 vsll vv2, vv1, vs55
-    @vp1 vlxw vv10, vs62, vv2
+    @vp1 vlxw vv10, vs61, vv2
     @vp1 vsll vv1, vv10, vs57
-    @vp1 vlxw vv10, vs61, vv1
+    @vp1 vlxw vv10, vs62, vv1
     @vp1 vlxw vv11, vs3, vv1
     @vp1 vlxw vv12, vs4, vv1
     @vp1 vfsub.s vv10, vv3, vv10
@@ -72,9 +72,6 @@ compute_lj_force_wt:
 .Lcompute_lj_force_skip3:
     vpop vp6, vp2, vp5, vp5, 0x80
     vpop vp7, vp2, vp5, vp5, 0x02
-    @vp6 vaddw vv10, vv13, vs0
-    @vp6 vaddw vv11, vv14, vs0
-    @vp6 vaddw vv12, vv15, vs0
     vpop vp4, vp4, vp6, vp6, 0xEE
     vpop vp1, vp1, vp6, vp6, 0x02
     @vp7 vaddw vv7, vv13, vs0
@@ -86,11 +83,11 @@ compute_lj_force_wt:
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp3, vp3, 0xEE
     @vp3 vaddw vv3, vs0, vs0
-    @vp1 vaddw vv3, vv10, vs0
+    @vp1 vaddw vv3, vv13, vs0
     @vp3 vaddw vv4, vs0, vs0
-    @vp1 vaddw vv4, vv11, vs0
+    @vp1 vaddw vv4, vv14, vs0
     @vp3 vaddw vv5, vs0, vs0
-    @vp1 vaddw vv5, vv12, vs0
+    @vp1 vaddw vv5, vv15, vs0
     @!vp2 vcjal 0, vs1, .Lcompute_lj_force_skip4
     @vp2 vsstw vv3, va3, va10
     @vp2 vsstw vv4, va4, va11
@@ -118,10 +115,10 @@ compute_lj_force_ct:                    # @compute_lj_force_ct
 	vsetcfg a6
 	#NO_APP
 	#APP
-	vmcs vs62, a4
+	vmcs vs62, a2
 	#NO_APP
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a4
 	#NO_APP
 	sext.w	a3, a3
 	slli	a7, a7, 32

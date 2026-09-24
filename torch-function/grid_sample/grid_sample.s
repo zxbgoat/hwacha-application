@@ -40,7 +40,7 @@ net_kernel_1_wt:
     vsll vv5, vv1, vs59
     vadd vv3, vv3, vv4
     vadd vv3, vv3, vv5
-    vlxw vv6, vs62, vv3
+    vlxw vv6, vs61, vv3
     vfmul.s vv7, vv6, vs56
     vsll vv2, vv2, vs55
     vsrl vv3, vv0, vs57
@@ -48,7 +48,7 @@ net_kernel_1_wt:
     vadd vv3, vv3, vv2
     vsll vv1, vv1, vs53
     vadd vv3, vv3, vv1
-    vsxw vv7, vs61, vv3
+    vsxw vv7, vs62, vv3
     vstop
 
     .text
@@ -1101,10 +1101,10 @@ net_kernel_1_ct:                        # @net_kernel_1_ct
 	#NO_APP
 	li	a3, 7
 	#APP
-	vmcs vs62, a1
+	vmcs vs62, a2
 	#NO_APP
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a1
 	#NO_APP
 	#APP
 	vmcs vs60, a3

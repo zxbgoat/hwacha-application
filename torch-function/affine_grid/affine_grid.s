@@ -179,11 +179,11 @@ net_kernel_14_wt:
     vsll vv3, vv7, vs50
     vsrl vv3, vv3, vs50
     vsll vv3, vv3, vs54
-    vlxw vv5, vs60, vv3
+    vlxw vv5, vs62, vv3
     vmul vv3, vv2, vs53
     vsll vv4, vv1, vs54
     vadd vv3, vv3, vv4
-    vlxw vv7, vs62, vv3
+    vlxw vv7, vs60, vv3
     vfadd.s vv7, vv5, vv7
     vmul vv2, vv2, vs52
     vmulw vv6, vv6, vs51
@@ -208,22 +208,15 @@ net_kernel_15_wt:
     vdivu vv3, vv0, vs57
     vmul vv3, vv3, vs56
     vadd vv3, vv3, vv2
-    vsll vv4, vv0, vs55
-    vadd vv3, vv3, vv4
-    vmul vv5, vv1, vs58
-    vsub vv3, vv3, vv5
-    vlxw vv6, vs62, vv3
-    vsub vv4, vv4, vv5
-    vlxw vv7, vs61, vv4
-    vfadd.s vv7, vv6, vv7
-    vdivu vv3, vv0, vs57
-    vmul vv3, vv3, vs56
-    vadd vv3, vv3, vv2
     vsll vv2, vv0, vs55
     vadd vv3, vv3, vv2
     vmul vv1, vv1, vs58
     vsub vv3, vv3, vv1
-    vsxw vv7, vs62, vv3
+    vlxw vv4, vs62, vv3
+    vsub vv2, vv2, vv1
+    vlxw vv5, vs61, vv2
+    vfadd.s vv5, vv4, vv5
+    vsxw vv5, vs62, vv3
     vstop
 
     .text
@@ -263,20 +256,20 @@ net_kernel_17_wt:
     vmul vv4, vv3, vs56
     vsll vv5, vv2, vs55
     vadd vv4, vv4, vv5
-    vlxw vv7, vs61, vv4
+    vlxw vv7, vs62, vv4
     vmulw vv8, vv6, vs54
     vaddw vv8, vv8, vv0
     vsll vv4, vv8, vs51
     vsrl vv4, vv4, vs51
     vsll vv4, vv4, vs55
-    vlxw vv6, vs62, vv4
+    vlxw vv6, vs60, vv4
     vfmul.s vv7, vv7, vv6
     vmul vv3, vv3, vs53
     vsll vv2, vv2, vs52
     vadd vv3, vv3, vv2
     vsll vv1, vv1, vs55
     vadd vv3, vv3, vv1
-    vsxw vv7, vs60, vv3
+    vsxw vv7, vs61, vv3
     vstop
 
     .text
@@ -1426,13 +1419,13 @@ net_kernel_14_ct:                       # @net_kernel_14_ct
 	vsetcfg a4
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a1
 	#NO_APP
 	#APP
 	vmcs vs61, a3
 	#NO_APP
 	#APP
-	vmcs vs60, a1
+	vmcs vs60, a2
 	#NO_APP
 	li	a1, 3
 	#APP
@@ -1534,7 +1527,7 @@ net_kernel_15_ct:                       # @net_kernel_15_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a3, 1048560
-	addi	a3, a3, -1037
+	addi	a3, a3, -1033
 	srli	a3, a3, 1
 	not	a3, a3
 	#APP
@@ -1725,13 +1718,13 @@ net_kernel_17_ct:                       # @net_kernel_17_ct
 	vsetcfg a4
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a1
 	#NO_APP
 	#APP
-	vmcs vs61, a1
+	vmcs vs61, a3
 	#NO_APP
 	#APP
-	vmcs vs60, a3
+	vmcs vs60, a2
 	#NO_APP
 	li	a1, 1
 	#APP

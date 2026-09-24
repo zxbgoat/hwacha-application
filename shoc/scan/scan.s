@@ -27,20 +27,20 @@ reduce_wt:
     vpclear vp4
 .Lreduce_loop0:
     @vp1 vsll vv1, vv5, vs54
-    @vp1 vlxw vv6, vs59, vv1
-    @vp1 vfadd.s vv4, vv4, vv6
+    @vp1 vlxw vv3, vs59, vv1
+    @vp1 vfadd.s vv4, vv4, vv3
     @vp1 vaddw vv5, vv5, vs61
     vcmplt vp2, vv5, vv2
     vpop vp5, vp1, vp2, vp2, 0x80
     vpop vp6, vp1, vp2, vp2, 0x02
-    @vp6 vaddw vv6, vv4, vs0
+    @vp6 vaddw vv3, vv4, vs0
     vpop vp4, vp4, vp6, vp6, 0xEE
     vpop vp1, vp1, vp6, vp6, 0x02
     @vp5 vcjal 1, vs1, .Lreduce_loop0
     vpop vp1, vp4, vp4, vp4, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
     @vp3 vaddw vv2, vs0, vs0
-    @vp4 vaddw vv2, vv6, vs0
+    @vp4 vaddw vv2, vv3, vs0
     @!vp1 vcjal 0, vs1, .Lreduce_skip1
     @vp1 vsw vv2, va0
     vfence
@@ -178,9 +178,9 @@ bottom_scan_wt:
     vadd vv3, vs62, vs0
     vcmpeq vp1, vv3, vs5
     vaddw vs5, vs4, vs3
-    @vp1 vaddw vv10, vs2, vs0
-    @!vp1 vaddw vv10, vs5, vs0
-    vcmpltu vp1, vs4, vv10
+    @vp1 vaddw vv9, vs2, vs0
+    @!vp1 vaddw vv9, vs5, vs0
+    vcmpltu vp1, vs4, vv9
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lbottom_scan_skip0
@@ -197,111 +197,111 @@ bottom_scan_wt:
 .Lbottom_scan_skip0:
     vpop vp1, vp2, vp2, vp2, 0xAA
     @vp2 vadd vv4, vv3, vs0
-    @vp2 vaddw vv11, vs2, vs0
+    @vp2 vaddw vv10, vs2, vs0
     @vp2 vaddw vs10, vs4, vs0
-    @vp2 vaddw vv12, vs0, vs0
+    @vp2 vaddw vv11, vs0, vs0
     vpclear vp4
 .Lbottom_scan_loop1:
-    vcmplt vp2, vv4, vv10
+    vcmplt vp2, vv4, vv9
     vpop vp5, vp1, vp2, vp2, 0x80
     vpop vp6, vp1, vp2, vp2, 0x02
     @!vp5 vcjal 0, vs1, .Lbottom_scan_skip2
-    @vp5 vsll vv5, vv4, vs50
-    @vp5 vsra vv5, vv5, vs49
-    @vp5 vlxw vv13, vs58, vv5
-    @vp5 vlxw vv14, vs3, vv5
-    @vp5 vlxw vv15, vs5, vv5
-    @vp5 vlxw vv16, vs6, vv5
+    @vp5 vsll vv3, vv4, vs50
+    @vp5 vsra vv3, vv3, vs49
+    @vp5 vlxw vv12, vs58, vv3
+    @vp5 vlxw vv13, vs3, vv3
+    @vp5 vlxw vv14, vs5, vv3
+    @vp5 vlxw vv15, vs6, vv3
+    @vp5 vfadd.s vv13, vv13, vv12
     @vp5 vfadd.s vv14, vv14, vv13
     @vp5 vfadd.s vv15, vv15, vv14
-    @vp5 vfadd.s vv16, vv16, vv15
 .Lbottom_scan_skip2:
     vpop vp7, vp5, vp5, vp5, 0xAA
     vpop vp7, vp7, vp6, vp6, 0xEE
+    @vp5 vaddw vv16, vv12, vs0
+    @vp6 vaddw vv16, vs0, vs0
     @vp5 vaddw vv17, vv13, vs0
     @vp6 vaddw vv17, vs0, vs0
     @vp5 vaddw vv18, vv14, vs0
     @vp6 vaddw vv18, vs0, vs0
     @vp5 vaddw vv19, vv15, vs0
     @vp6 vaddw vv19, vs0, vs0
-    @vp5 vaddw vv20, vv16, vs0
-    @vp6 vaddw vv20, vs0, vs0
     @!vp7 vcjal 0, vs1, .Lbottom_scan_skip3
-    vaddw vv13, vs0, vs0
-    @vp7 vsw vv13, va0
-    @vp7 vadd vv5, vs61, vv1
-    @vp7 vsll vv6, vv5, vs50
-    @vp7 vsra vv7, vv6, vs48
-    @vp7 vsxw vv20, vs60, vv7
+    vaddw vv12, vs0, vs0
+    @vp7 vsw vv12, va0
+    @vp7 vadd vv3, vs61, vv1
+    @vp7 vsll vv5, vv3, vs50
+    @vp7 vsra vv6, vv5, vs48
+    @vp7 vsxw vv19, vs60, vv6
     vfence
-    @vp7 vsll vv8, vv5, vs46
+    @vp7 vsll vv7, vv3, vs46
 .Lbottom_scan_skip3:
     vpop vp5, vp7, vp7, vp7, 0xAA
-    @vp7 vaddw vs11, vs47, vs0
+    @vp7 vaddw vs2, vs47, vs0
     vpclear vp6
 .Lbottom_scan_loop4:
-    vsll vs12, vs11, vs50
-    vsrl vs12, vs12, vs50
-    vadd vv9, vs12, vs0
-    vcmpltu vp7, vv9, vs61
+    vsll vs4, vs2, vs50
+    vsrl vs4, vs4, vs50
+    vadd vv8, vs4, vs0
+    vcmpltu vp7, vv8, vs61
     vpop vp8, vp5, vp7, vp7, 0x80
     vpop vp9, vp5, vp7, vp7, 0x02
     vpop vp6, vp6, vp9, vp9, 0xEE
     vpop vp5, vp5, vp9, vp9, 0x02
     @!vp8 vcjal 0, vs1, .Lbottom_scan_skip5
-    vmul vs12, vs11, vs45
-    vadd vs12, vs60, vs12
-    @vp8 vlxw vv13, vs12, vv8
+    vmul vs4, vs2, vs45
+    vadd vs4, vs60, vs4
+    @vp8 vlxw vv12, vs4, vv7
     vfence
-    @vp8 vlxw vv14, vs60, vv7
-    @vp8 vfadd.s vv13, vv13, vv14
-    @vp8 vsxw vv13, vs60, vv7
+    @vp8 vlxw vv13, vs60, vv6
+    @vp8 vfadd.s vv12, vv12, vv13
+    @vp8 vsxw vv12, vs60, vv6
     vfence
-    vsllw vs11, vs11, vs47
+    vsllw vs2, vs2, vs47
 .Lbottom_scan_skip5:
     @vp8 vcjal 1, vs1, .Lbottom_scan_loop4
     @!vp6 vcjal 0, vs1, .Lbottom_scan_skip6
-    @vp6 vadd vv6, vv6, vs44
-    @vp6 vsra vv6, vv6, vs48
-    @vp6 vlxw vv13, vs60, vv6
-    @vp6 vfadd.s vv13, vv11, vv13
-    @vp6 vfadd.s vv20, vv20, vv13
+    @vp6 vadd vv5, vv5, vs44
+    @vp6 vsra vv5, vv5, vs48
+    @vp6 vlxw vv12, vs60, vv5
+    @vp6 vfadd.s vv12, vv10, vv12
+    @vp6 vfadd.s vv19, vv19, vv12
 .Lbottom_scan_skip6:
     vpop vp5, vp6, vp2, vp2, 0x80
     vpop vp7, vp6, vp2, vp2, 0x02
     @!vp5 vcjal 0, vs1, .Lbottom_scan_skip7
-    @vp5 vfadd.s vv17, vv17, vv13
-    @vp5 vfadd.s vv18, vv18, vv13
-    @vp5 vfadd.s vv19, vv19, vv13
-    @vp5 vsll vv5, vv4, vs50
-    @vp5 vsra vv6, vv5, vs49
-    @vp5 vsxw vv17, vs59, vv6
-    @vp5 vsxw vv18, vs7, vv6
-    @vp5 vsxw vv19, vs8, vv6
-    @vp5 vsxw vv20, vs9, vv6
+    @vp5 vfadd.s vv16, vv16, vv12
+    @vp5 vfadd.s vv17, vv17, vv12
+    @vp5 vfadd.s vv18, vv18, vv12
+    @vp5 vsll vv3, vv4, vs50
+    @vp5 vsra vv5, vv3, vs49
+    @vp5 vsxw vv16, vs59, vv5
+    @vp5 vsxw vv17, vs7, vv5
+    @vp5 vsxw vv18, vs8, vv5
+    @vp5 vsxw vv19, vs9, vv5
 .Lbottom_scan_skip7:
-    @vp7 vsll vv6, vv4, vs50
+    @vp7 vsll vv5, vv4, vs50
     vpop vp2, vp5, vp5, vp5, 0xAA
     vpop vp2, vp2, vp7, vp7, 0xEE
-    @vp7 vadd vv7, vv6, vs0
-    @vp5 vadd vv7, vv5, vs0
+    @vp7 vadd vv6, vv5, vs0
+    @vp5 vadd vv6, vv3, vs0
     @!vp2 vcjal 0, vs1, .Lbottom_scan_skip8
     vfence
-    vadd vs11, vs61, vs55
-    vcmpeq vp5, vv2, vs11
-    @vp5 vaddw vv11, vv20, vs0
-    @!vp5 vaddw vv11, vv12, vs0
+    vadd vs2, vs61, vs55
+    vcmpeq vp5, vv2, vs2
+    @vp5 vaddw vv10, vv19, vs0
+    @!vp5 vaddw vv10, vv11, vs0
     vfence
     vaddw vs10, vs10, vs61
-    @vp2 vsra vv7, vv7, vs50
-    @vp2 vadd vv4, vs61, vv7
-    vcmpltu vp5, vs10, vv10
+    @vp2 vsra vv6, vv6, vs50
+    @vp2 vadd vv4, vs61, vv6
+    vcmpltu vp5, vs10, vv9
 .Lbottom_scan_skip8:
     vpop vp6, vp2, vp5, vp5, 0x80
     vpop vp7, vp2, vp5, vp5, 0x02
     vpop vp4, vp4, vp7, vp7, 0xEE
     vpop vp1, vp1, vp7, vp7, 0x02
-    @vp6 vaddw vv12, vv11, vs0
+    @vp6 vaddw vv11, vv10, vs0
     @vp6 vcjal 1, vs1, .Lbottom_scan_loop1
     vpop vp1, vp7, vp7, vp7, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
@@ -318,7 +318,7 @@ bottom_scan_wt:
 reduce_ct:                              # @reduce_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a5, 1048534
+	lui	a5, 1048542
 	addi	a5, a5, -5
 	srli	a5, a5, 1
 	not	a6, a5
@@ -552,7 +552,7 @@ bottom_scan_ct:                         # @bottom_scan_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a6, 1048485
-	addi	a6, a6, 2027
+	addi	a6, a6, 2029
 	srli	a6, a6, 1
 	not	a7, a6
 .Lpcrel_hi6:

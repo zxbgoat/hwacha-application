@@ -47,10 +47,10 @@ fft1D_512_wt_a0:
     vfadd.s vv20, vv14, vv18
     vfsub.s vv17, vv7, vv17
     vfsub.s vv14, vv14, vv18
-    vlxw vv7, vs57, vv2
-    vlxw vv18, vs58, vv2
-    vlxw vv21, vs59, vv2
-    vlxw vv22, vs56, vv2
+    vlxw vv7, vs59, vv2
+    vlxw vv18, vs56, vv2
+    vlxw vv21, vs57, vv2
+    vlxw vv22, vs58, vv2
     vfadd.s vv23, vv7, vv21
     vfadd.s vv24, vv18, vv22
     vfsub.s vv21, vv7, vv21
@@ -92,8 +92,8 @@ fft1D_512_wt_a0:
     vsstw vv19, va11, va26
     vfsub.s vv11, vv11, vv23
     vfsub.s vv12, vv12, vv16
-    vsxw vv11, vs57, vv2
-    vsxw vv12, vs58, vv2
+    vsxw vv11, vs59, vv2
+    vsxw vv12, vs56, vv2
     vfadd.s vv11, vv9, vv7
     vfadd.s vv12, vv8, vv14
     vfsub.s vv9, vv9, vv7
@@ -119,8 +119,8 @@ fft1D_512_wt_a0:
     vsstw vv11, va13, va28
     vfsub.s vv9, vv9, vv15
     vfsub.s vv8, vv8, vv10
-    vsxw vv9, vs59, vv2
-    vsxw vv8, vs56, vv2
+    vsxw vv9, vs57, vv2
+    vsxw vv8, vs58, vv2
     vfcvt.d.wu vv4, vv1
     vstop
     .globl fft1D_512_wt_r1_b0
@@ -235,11 +235,11 @@ fft1D_512_wt_a2:
     vaddw vv9, vv9, vv7
     vsll vv5, vv9, vs53
     vsrl vv5, vv5, vs53
-    vsll vv6, vv5, vs46
+    vsll vv5, vv5, vs46
     vstop
     .globl fft1D_512_wt_r3_b0
 fft1D_512_wt_r3_b0:
-    vlxw vv9, vs4, vv6
+    vlxw vv9, vs4, vv5
     vlxw vv10, vs3, vv2
     vsxw vv9, vs5, vv2
     vsxw vv10, vs3, vv2
@@ -256,7 +256,6 @@ fft1D_512_wt_r4_b0:
     .globl fft1D_512_wt_a4
 fft1D_512_wt_a4:
     vfence
-    vsll vv5, vv5, vs46
     vstop
     .globl fft1D_512_wt_r5_b0
 fft1D_512_wt_r5_b0:
@@ -290,10 +289,10 @@ fft1D_512_wt_a5:
     vfadd.s vv22, vv16, vv20
     vfsub.s vv15, vv15, vv19
     vfsub.s vv16, vv16, vv20
-    vlxw vv19, vs57, vv2
-    vlxw vv20, vs58, vv2
-    vlxw vv23, vs59, vv2
-    vlxw vv24, vs56, vv2
+    vlxw vv19, vs59, vv2
+    vlxw vv20, vs56, vv2
+    vlxw vv23, vs57, vv2
+    vlxw vv24, vs58, vv2
     vfadd.s vv25, vv19, vv23
     vfadd.s vv26, vv20, vv24
     vfsub.s vv19, vv19, vv23
@@ -335,8 +334,8 @@ fft1D_512_wt_a5:
     vsstw vv19, va11, va26
     vfsub.s vv13, vv13, vv25
     vfsub.s vv14, vv14, vv18
-    vsxw vv13, vs57, vv2
-    vsxw vv14, vs58, vv2
+    vsxw vv13, vs59, vv2
+    vsxw vv14, vs56, vv2
     vfadd.s vv13, vv9, vv11
     vfadd.s vv14, vv10, vv16
     vfsub.s vv9, vv9, vv11
@@ -362,8 +361,8 @@ fft1D_512_wt_a5:
     vsstw vv13, va13, va28
     vfsub.s vv9, vv9, vv15
     vfsub.s vv10, vv10, vv12
-    vsxw vv9, vs59, vv2
-    vsxw vv10, vs56, vv2
+    vsxw vv9, vs57, vv2
+    vsxw vv10, vs58, vv2
     vfcvt.d.wu vv5, vv7
     vstop
     .globl fft1D_512_wt_r6_b0
@@ -480,11 +479,11 @@ fft1D_512_wt_a7:
     vor vv9, vv9, vv8
     vsll vv5, vv9, vs53
     vsrl vv5, vv5, vs53
-    vsll vv6, vv5, vs46
+    vsll vv5, vv5, vs46
     vstop
     .globl fft1D_512_wt_r8_b0
 fft1D_512_wt_r8_b0:
-    vlxw vv7, vs4, vv6
+    vlxw vv7, vs4, vv5
     vlxw vv8, vs3, vv2
     vsxw vv7, vs5, vv2
     vsxw vv8, vs3, vv2
@@ -501,7 +500,6 @@ fft1D_512_wt_r9_b0:
     .globl fft1D_512_wt_a9
 fft1D_512_wt_a9:
     vfence
-    vsll vv5, vv5, vs46
     vstop
     .globl fft1D_512_wt_r10_b0
 fft1D_512_wt_r10_b0:
@@ -534,10 +532,10 @@ fft1D_512_wt_a10:
     vfadd.s vv20, vv14, vv18
     vfsub.s vv17, vv7, vv17
     vfsub.s vv14, vv14, vv18
-    vlxw vv7, vs57, vv2
-    vlxw vv18, vs58, vv2
-    vlxw vv21, vs59, vv2
-    vlxw vv22, vs56, vv2
+    vlxw vv7, vs59, vv2
+    vlxw vv18, vs56, vv2
+    vlxw vv21, vs57, vv2
+    vlxw vv22, vs58, vv2
     vfadd.s vv23, vv7, vv21
     vfadd.s vv24, vv18, vv22
     vfsub.s vv21, vv7, vv21
@@ -579,8 +577,8 @@ fft1D_512_wt_a10:
     vsstw vv19, va11, va26
     vfsub.s vv11, vv11, vv23
     vfsub.s vv12, vv12, vv16
-    vsxw vv11, vs57, vv2
-    vsxw vv12, vs58, vv2
+    vsxw vv11, vs59, vv2
+    vsxw vv12, vs56, vv2
     vfadd.s vv11, vv9, vv7
     vfadd.s vv12, vv8, vv14
     vfsub.s vv9, vv9, vv7
@@ -606,8 +604,8 @@ fft1D_512_wt_a10:
     vsstw vv11, va13, va28
     vfsub.s vv9, vv9, vv15
     vfsub.s vv8, vv8, vv10
-    vsxw vv9, vs59, vv2
-    vsxw vv8, vs56, vv2
+    vsxw vv9, vs57, vv2
+    vsxw vv8, vs58, vv2
     vstop
     .globl fft1D_512_wt_r11_b0
 fft1D_512_wt_r11_b0:
@@ -666,10 +664,10 @@ ifft1D_512_wt_a0:
     vfadd.s vv20, vv14, vv18
     vfsub.s vv17, vv7, vv17
     vfsub.s vv14, vv14, vv18
-    vlxw vv7, vs57, vv2
-    vlxw vv18, vs59, vv2
-    vlxw vv21, vs58, vv2
-    vlxw vv22, vs56, vv2
+    vlxw vv7, vs58, vv2
+    vlxw vv18, vs56, vv2
+    vlxw vv21, vs59, vv2
+    vlxw vv22, vs57, vv2
     vfadd.s vv23, vv7, vv21
     vfadd.s vv24, vv18, vv22
     vfsub.s vv21, vv7, vv21
@@ -713,8 +711,8 @@ ifft1D_512_wt_a0:
     vsstw vv16, va11, va26
     vfsub.s vv11, vv11, vv23
     vfsub.s vv12, vv12, vv15
-    vsxw vv11, vs57, vv2
-    vsxw vv12, vs59, vv2
+    vsxw vv11, vs58, vv2
+    vsxw vv12, vs56, vv2
     vfadd.s vv7, vv9, vv22
     vfadd.s vv11, vv8, vv17
     vfsub.s vv9, vv9, vv22
@@ -741,8 +739,8 @@ ifft1D_512_wt_a0:
     vsstw vv11, va13, va28
     vfsub.s vv9, vv9, vv14
     vfsub.s vv8, vv8, vv10
-    vsxw vv9, vs58, vv2
-    vsxw vv8, vs56, vv2
+    vsxw vv9, vs59, vv2
+    vsxw vv8, vs57, vv2
     vfcvt.d.wu vv4, vv1
     vstop
     .globl ifft1D_512_wt_r1_b0
@@ -857,11 +855,11 @@ ifft1D_512_wt_a2:
     vaddw vv9, vv9, vv7
     vsll vv5, vv9, vs53
     vsrl vv5, vv5, vs53
-    vsll vv6, vv5, vs46
+    vsll vv5, vv5, vs46
     vstop
     .globl ifft1D_512_wt_r3_b0
 ifft1D_512_wt_r3_b0:
-    vlxw vv9, vs4, vv6
+    vlxw vv9, vs4, vv5
     vlxw vv10, vs3, vv2
     vsxw vv9, vs5, vv2
     vsxw vv10, vs3, vv2
@@ -878,7 +876,6 @@ ifft1D_512_wt_r4_b0:
     .globl ifft1D_512_wt_a4
 ifft1D_512_wt_a4:
     vfence
-    vsll vv5, vv5, vs46
     vstop
     .globl ifft1D_512_wt_r5_b0
 ifft1D_512_wt_r5_b0:
@@ -912,10 +909,10 @@ ifft1D_512_wt_a5:
     vfadd.s vv22, vv16, vv20
     vfsub.s vv15, vv15, vv19
     vfsub.s vv16, vv16, vv20
-    vlxw vv19, vs57, vv2
-    vlxw vv20, vs59, vv2
-    vlxw vv23, vs58, vv2
-    vlxw vv24, vs56, vv2
+    vlxw vv19, vs58, vv2
+    vlxw vv20, vs56, vv2
+    vlxw vv23, vs59, vv2
+    vlxw vv24, vs57, vv2
     vfadd.s vv25, vv19, vv23
     vfadd.s vv26, vv20, vv24
     vfsub.s vv19, vv19, vv23
@@ -959,8 +956,8 @@ ifft1D_512_wt_a5:
     vsstw vv20, va11, va26
     vfsub.s vv13, vv13, vv25
     vfsub.s vv14, vv14, vv17
-    vsxw vv13, vs57, vv2
-    vsxw vv14, vs59, vv2
+    vsxw vv13, vs58, vv2
+    vsxw vv14, vs56, vv2
     vfadd.s vv13, vv9, vv12
     vfadd.s vv14, vv10, vv15
     vfsub.s vv9, vv9, vv12
@@ -987,8 +984,8 @@ ifft1D_512_wt_a5:
     vsstw vv12, va13, va28
     vfsub.s vv9, vv9, vv16
     vfsub.s vv10, vv10, vv23
-    vsxw vv9, vs58, vv2
-    vsxw vv10, vs56, vv2
+    vsxw vv9, vs59, vv2
+    vsxw vv10, vs57, vv2
     vfcvt.d.wu vv5, vv7
     vstop
     .globl ifft1D_512_wt_r6_b0
@@ -1105,11 +1102,11 @@ ifft1D_512_wt_a7:
     vor vv9, vv9, vv8
     vsll vv5, vv9, vs53
     vsrl vv5, vv5, vs53
-    vsll vv6, vv5, vs46
+    vsll vv5, vv5, vs46
     vstop
     .globl ifft1D_512_wt_r8_b0
 ifft1D_512_wt_r8_b0:
-    vlxw vv7, vs4, vv6
+    vlxw vv7, vs4, vv5
     vlxw vv8, vs3, vv2
     vsxw vv7, vs5, vv2
     vsxw vv8, vs3, vv2
@@ -1126,7 +1123,6 @@ ifft1D_512_wt_r9_b0:
     .globl ifft1D_512_wt_a9
 ifft1D_512_wt_a9:
     vfence
-    vsll vv5, vv5, vs46
     vstop
     .globl ifft1D_512_wt_r10_b0
 ifft1D_512_wt_r10_b0:
@@ -1159,10 +1155,10 @@ ifft1D_512_wt_a10:
     vfadd.s vv20, vv14, vv18
     vfsub.s vv17, vv7, vv17
     vfsub.s vv14, vv14, vv18
-    vlxw vv7, vs57, vv2
-    vlxw vv18, vs59, vv2
-    vlxw vv21, vs58, vv2
-    vlxw vv22, vs56, vv2
+    vlxw vv7, vs58, vv2
+    vlxw vv18, vs56, vv2
+    vlxw vv21, vs59, vv2
+    vlxw vv22, vs57, vv2
     vfadd.s vv23, vv7, vv21
     vfadd.s vv24, vv18, vv22
     vfsub.s vv21, vv7, vv21
@@ -1206,8 +1202,8 @@ ifft1D_512_wt_a10:
     vsstw vv16, va11, va26
     vfsub.s vv11, vv11, vv23
     vfsub.s vv12, vv12, vv15
-    vsxw vv11, vs57, vv2
-    vsxw vv12, vs59, vv2
+    vsxw vv11, vs58, vv2
+    vsxw vv12, vs56, vv2
     vfadd.s vv7, vv9, vv22
     vfadd.s vv11, vv8, vv17
     vfsub.s vv9, vv9, vv22
@@ -1234,8 +1230,8 @@ ifft1D_512_wt_a10:
     vsstw vv11, va13, va28
     vfsub.s vv9, vv9, vv14
     vfsub.s vv8, vv8, vv10
-    vsxw vv9, vs58, vv2
-    vsxw vv8, vs56, vv2
+    vsxw vv9, vs59, vv2
+    vsxw vv8, vs57, vv2
     vstop
     .globl ifft1D_512_wt_r11_b0
 ifft1D_512_wt_r11_b0:
@@ -1377,19 +1373,19 @@ fft1D_512_ct:                           # @fft1D_512_ct
 	#APP
 	vmcs vs61, a5
 	#NO_APP
-	addi	a3, a2, 56
+	addi	a3, a2, 24
 	#APP
 	vmcs vs59, a3
 	#NO_APP
-	addi	a3, a2, 28
+	addi	a3, a2, 60
 	#APP
 	vmcs vs58, a3
 	#NO_APP
-	addi	a3, a2, 24
+	addi	a3, a2, 56
 	#APP
 	vmcs vs57, a3
 	#NO_APP
-	addi	a3, a2, 60
+	addi	a3, a2, 28
 	#APP
 	vmcs vs56, a3
 	#NO_APP
@@ -2221,19 +2217,19 @@ ifft1D_512_ct:                          # @ifft1D_512_ct
 	#APP
 	vmcs vs61, a5
 	#NO_APP
-	addi	a3, a2, 28
+	addi	a3, a2, 56
 	#APP
 	vmcs vs59, a3
 	#NO_APP
-	addi	a3, a2, 56
+	addi	a3, a2, 24
 	#APP
 	vmcs vs58, a3
 	#NO_APP
-	addi	a3, a2, 24
+	addi	a3, a2, 60
 	#APP
 	vmcs vs57, a3
 	#NO_APP
-	addi	a3, a2, 60
+	addi	a3, a2, 28
 	#APP
 	vmcs vs56, a3
 	#NO_APP

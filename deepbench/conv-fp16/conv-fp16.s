@@ -145,7 +145,6 @@ conv_fwd_wt:
 .Lconv_fwd_skip6:
     vpop vp14, vp5, vp13, vp13, 0x80
     vpop vp15, vp5, vp13, vp13, 0x02
-    @vp14 vaddw vv18, vv19, vs0
     vpop vp12, vp12, vp14, vp14, 0xEE
     vpop vp11, vp11, vp14, vp14, 0x02
     @vp15 vaddw vv17, vv19, vs0
@@ -157,7 +156,7 @@ conv_fwd_wt:
     vpop vp12, vp5, vp5, vp5, 0xAA
     vpop vp12, vp12, vp11, vp11, 0xEE
     @vp11 vaddw vv16, vv15, vs0
-    @vp5 vaddw vv16, vv18, vs0
+    @vp5 vaddw vv16, vv19, vs0
     @!vp12 vcjal 0, vs1, .Lconv_fwd_skip7
     vadd vs10, vs10, vs43
     vadd vv4, vs10, vs0
@@ -165,7 +164,6 @@ conv_fwd_wt:
 .Lconv_fwd_skip7:
     vpop vp11, vp12, vp5, vp5, 0x80
     vpop vp13, vp12, vp5, vp5, 0x02
-    @vp11 vaddw vv17, vv16, vs0
     vpop vp10, vp10, vp11, vp11, 0xEE
     vpop vp9, vp9, vp11, vp11, 0x02
     @vp13 vaddw vv15, vv16, vs0
@@ -177,7 +175,7 @@ conv_fwd_wt:
     vpop vp10, vp5, vp5, vp5, 0xAA
     vpop vp10, vp10, vp9, vp9, 0xEE
     @vp9 vaddw vv13, vv11, vs0
-    @vp5 vaddw vv13, vv17, vs0
+    @vp5 vaddw vv13, vv16, vs0
     @!vp10 vcjal 0, vs1, .Lconv_fwd_skip8
     vadd vs6, vs6, vs43
     vadd vv3, vs6, vs0
@@ -185,25 +183,24 @@ conv_fwd_wt:
 .Lconv_fwd_skip8:
     vpop vp9, vp10, vp5, vp5, 0x80
     vpop vp11, vp10, vp5, vp5, 0x02
-    @vp9 vaddw vv15, vv13, vs0
     vpop vp8, vp8, vp9, vp9, 0xEE
     vpop vp7, vp7, vp9, vp9, 0x02
     @vp11 vaddw vv11, vv13, vs0
     @vp11 vcjal 1, vs1, .Lconv_fwd_loop2
     vpop vp2, vp9, vp9, vp9, 0xAA
     vpop vp2, vp2, vp8, vp8, 0xEE
-    vfcvt.h.s vv15, vv15
+    vfcvt.h.s vv9, vv13
     vpop vp3, vp2, vp2, vp2, 0xAA
     vpop vp3, vp3, vp6, vp6, 0xEE
-    @vp6 vaddw vv9, vs0, vs0
-    @vp2 vaddw vv9, vv15, vs0
+    @vp6 vaddw vv10, vs0, vs0
+    @vp2 vaddw vv10, vv9, vs0
     @!vp3 vcjal 0, vs1, .Lconv_fwd_skip9
-    @vp3 vmulw vv10, vv2, vs56
-    @vp3 vaddw vv10, vv10, vv7
-    @vp3 vmulw vv10, vv10, vs57
-    @vp3 vaddw vv10, vv10, vv8
-    @vp3 vsll vv1, vv10, vs43
-    @vp3 vsxh vv9, vs62, vv1
+    @vp3 vmulw vv9, vv2, vs56
+    @vp3 vaddw vv9, vv9, vv7
+    @vp3 vmulw vv9, vv9, vs57
+    @vp3 vaddw vv9, vv9, vv8
+    @vp3 vsll vv1, vv9, vs43
+    @vp3 vsxh vv10, vs62, vv1
 .Lconv_fwd_skip9:
     vpop vp2, vp3, vp3, vp3, 0xAA
     vpop vp2, vp2, vp4, vp4, 0xEE
@@ -371,23 +368,22 @@ conv_bwd_data_wt:
 .Lconv_bwd_data_skip10:
     vpop vp13, vp14, vp5, vp5, 0x80
     vpop vp15, vp14, vp5, vp5, 0x02
-    @vp13 vaddw vv20, vv19, vs0
     vpop vp12, vp12, vp13, vp13, 0xEE
     vpop vp11, vp11, vp13, vp13, 0x02
     @vp15 vaddw vv18, vv19, vs0
     @vp15 vcjal 1, vs1, .Lconv_bwd_data_loop7
     vpop vp5, vp13, vp13, vp13, 0xAA
     vpop vp5, vp5, vp12, vp12, 0xEE
-    vcmpeq vp11, vv17, vs0
+    vcmpeq vp11, vv15, vs0
     vpop vp11, vp11, vp11, vp11, 0x55
-    vcmpeq vp12, vv15, vs0
+    vcmpeq vp12, vv17, vs0
     vpop vp12, vp12, vp12, vp12, 0x55
     vpop vp13, vp5, vp5, vp5, 0xAA
-    vpop vp13, vp13, vp11, vp11, 0xEE
     vpop vp13, vp13, vp12, vp12, 0xEE
-    @vp12 vaddw vv15, vv14, vs0
+    vpop vp13, vp13, vp11, vp11, 0xEE
     @vp11 vaddw vv15, vv14, vs0
-    @vp5 vaddw vv15, vv20, vs0
+    @vp12 vaddw vv15, vv14, vs0
+    @vp5 vaddw vv15, vv19, vs0
     @!vp13 vcjal 0, vs1, .Lconv_bwd_data_skip11
     vadd vs9, vs9, vs47
     vadd vv3, vs9, vs0
@@ -395,7 +391,6 @@ conv_bwd_data_wt:
 .Lconv_bwd_data_skip11:
     vpop vp11, vp13, vp5, vp5, 0x80
     vpop vp12, vp13, vp5, vp5, 0x02
-    @vp11 vaddw vv16, vv15, vs0
     vpop vp10, vp10, vp11, vp11, 0xEE
     vpop vp9, vp9, vp11, vp11, 0x02
     @vp12 vaddw vv14, vv15, vs0
@@ -407,7 +402,7 @@ conv_bwd_data_wt:
     vpop vp10, vp5, vp5, vp5, 0xAA
     vpop vp10, vp10, vp9, vp9, 0xEE
     @vp9 vaddw vv12, vv11, vs0
-    @vp5 vaddw vv12, vv16, vs0
+    @vp5 vaddw vv12, vv15, vs0
     @!vp10 vcjal 0, vs1, .Lconv_bwd_data_skip12
     vadd vs5, vs5, vs47
     vadd vv3, vs5, vs0
@@ -415,25 +410,24 @@ conv_bwd_data_wt:
 .Lconv_bwd_data_skip12:
     vpop vp9, vp10, vp5, vp5, 0x80
     vpop vp11, vp10, vp5, vp5, 0x02
-    @vp9 vaddw vv13, vv12, vs0
     vpop vp8, vp8, vp9, vp9, 0xEE
     vpop vp7, vp7, vp9, vp9, 0x02
     @vp11 vaddw vv11, vv12, vs0
     @vp11 vcjal 1, vs1, .Lconv_bwd_data_loop2
     vpop vp2, vp9, vp9, vp9, 0xAA
     vpop vp2, vp2, vp8, vp8, 0xEE
-    vfcvt.h.s vv13, vv13
+    vfcvt.h.s vv7, vv12
     vpop vp3, vp2, vp2, vp2, 0xAA
     vpop vp3, vp3, vp6, vp6, 0xEE
-    @vp6 vaddw vv7, vs0, vs0
-    @vp2 vaddw vv7, vv13, vs0
+    @vp6 vaddw vv8, vs0, vs0
+    @vp2 vaddw vv8, vv7, vs0
     @!vp3 vcjal 0, vs1, .Lconv_bwd_data_skip13
-    @vp3 vmulw vv8, vv2, vs56
-    @vp3 vaddw vv8, vv8, vv5
-    @vp3 vmulw vv8, vv8, vs57
-    @vp3 vaddw vv8, vv8, vv6
-    @vp3 vsll vv1, vv8, vs47
-    @vp3 vsxh vv7, vs61, vv1
+    @vp3 vmulw vv7, vv2, vs56
+    @vp3 vaddw vv7, vv7, vv5
+    @vp3 vmulw vv7, vv7, vs57
+    @vp3 vaddw vv7, vv7, vv6
+    @vp3 vsll vv1, vv7, vs47
+    @vp3 vsxh vv8, vs61, vv1
 .Lconv_bwd_data_skip13:
     vpop vp2, vp3, vp3, vp3, 0xAA
     vpop vp2, vp2, vp4, vp4, 0xEE
@@ -572,7 +566,7 @@ conv_bwd_filter_wt:
     @!vp13 vcjal 0, vs1, .Lconv_bwd_filter_skip5
     @vp13 vlxh vv20, vs14, vv1
     vfcvt.s.h vv20, vv20
-    @vp13 vlxh vv19, vs62, vv6
+    @vp13 vlxh vv19, vs61, vv6
     vfcvt.s.h vv19, vv19
     @vp13 vfmadd.s vv20, vv20, vv19, vv18
 .Lconv_bwd_filter_skip5:
@@ -587,7 +581,6 @@ conv_bwd_filter_wt:
 .Lconv_bwd_filter_skip6:
     vpop vp14, vp5, vp13, vp13, 0x80
     vpop vp15, vp5, vp13, vp13, 0x02
-    @vp14 vaddw vv20, vv19, vs0
     vpop vp12, vp12, vp14, vp14, 0xEE
     vpop vp11, vp11, vp14, vp14, 0x02
     @vp15 vaddw vv18, vv19, vs0
@@ -599,7 +592,7 @@ conv_bwd_filter_wt:
     vpop vp12, vp5, vp5, vp5, 0xAA
     vpop vp12, vp12, vp11, vp11, 0xEE
     @vp11 vaddw vv17, vv16, vs0
-    @vp5 vaddw vv17, vv20, vs0
+    @vp5 vaddw vv17, vv19, vs0
     @!vp12 vcjal 0, vs1, .Lconv_bwd_filter_skip7
     vadd vs11, vs11, vs47
     vadd vv4, vs11, vs0
@@ -607,7 +600,6 @@ conv_bwd_filter_wt:
 .Lconv_bwd_filter_skip7:
     vpop vp11, vp12, vp5, vp5, 0x80
     vpop vp13, vp12, vp5, vp5, 0x02
-    @vp11 vaddw vv18, vv17, vs0
     vpop vp10, vp10, vp11, vp11, 0xEE
     vpop vp9, vp9, vp11, vp11, 0x02
     @vp13 vaddw vv16, vv17, vs0
@@ -619,7 +611,7 @@ conv_bwd_filter_wt:
     vpop vp10, vp5, vp5, vp5, 0xAA
     vpop vp10, vp10, vp9, vp9, 0xEE
     @vp9 vaddw vv15, vv8, vs0
-    @vp5 vaddw vv15, vv18, vs0
+    @vp5 vaddw vv15, vv17, vs0
     @!vp10 vcjal 0, vs1, .Lconv_bwd_filter_skip8
     vadd vs9, vs9, vs47
     vadd vv3, vs9, vs0
@@ -627,25 +619,24 @@ conv_bwd_filter_wt:
 .Lconv_bwd_filter_skip8:
     vpop vp9, vp10, vp5, vp5, 0x80
     vpop vp11, vp10, vp5, vp5, 0x02
-    @vp9 vaddw vv16, vv15, vs0
     vpop vp8, vp8, vp9, vp9, 0xEE
     vpop vp7, vp7, vp9, vp9, 0x02
     @vp11 vaddw vv8, vv15, vs0
     @vp11 vcjal 1, vs1, .Lconv_bwd_filter_loop2
     vpop vp2, vp9, vp9, vp9, 0xAA
     vpop vp2, vp2, vp8, vp8, 0xEE
-    vfcvt.h.s vv16, vv16
+    vfcvt.h.s vv8, vv15
     vpop vp3, vp2, vp2, vp2, 0xAA
     vpop vp3, vp3, vp6, vp6, 0xEE
-    @vp6 vaddw vv8, vs0, vs0
-    @vp2 vaddw vv8, vv16, vs0
+    @vp6 vaddw vv10, vs0, vs0
+    @vp2 vaddw vv10, vv8, vs0
     @!vp3 vcjal 0, vs1, .Lconv_bwd_filter_skip9
-    @vp3 vmulw vv10, vv2, vs56
-    @vp3 vaddw vv10, vv10, vv7
-    @vp3 vmulw vv10, vv10, vs57
-    @vp3 vaddw vv10, vv10, vv9
-    @vp3 vsll vv1, vv10, vs47
-    @vp3 vsxh vv8, vs61, vv1
+    @vp3 vmulw vv8, vv2, vs56
+    @vp3 vaddw vv8, vv8, vv7
+    @vp3 vmulw vv8, vv8, vs57
+    @vp3 vaddw vv8, vv8, vv9
+    @vp3 vsll vv1, vv8, vs47
+    @vp3 vsxh vv10, vs62, vv1
 .Lconv_bwd_filter_skip9:
     vpop vp2, vp3, vp3, vp3, 0xAA
     vpop vp2, vp2, vp4, vp4, 0xEE
@@ -1035,14 +1026,14 @@ conv_bwd_filter_ct:                     # @conv_bwd_filter_ct
 	vsetcfg t5
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a3
 	#NO_APP
 .Lpcrel_hi12:
-	auipc	a2, %pcrel_hi(hwacha_ls0)
+	auipc	a3, %pcrel_hi(hwacha_ls0)
 	#APP
-	vmcs vs61, a3
+	vmcs vs61, a2
 	#NO_APP
-	addi	a2, a2, %pcrel_lo(.Lpcrel_hi12)
+	addi	a2, a3, %pcrel_lo(.Lpcrel_hi12)
 	#APP
 	vmcs vs60, a2
 	#NO_APP

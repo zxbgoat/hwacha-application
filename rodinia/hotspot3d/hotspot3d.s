@@ -22,148 +22,145 @@ hotspotOpt1_wt:
     vadd vv4, vv4, vv3
     vmul vv2, vv2, vs3
     vadd vv2, vv2, vv1
-    vmulw vv15, vs56, vv2
-    vaddw vv16, vv15, vv4
+    vmulw vv14, vs56, vv2
+    vaddw vv15, vv14, vv4
     vmulw vs2, vs55, vs56
     vcmpeq vp1, vv4, vs0
-    @!vp1 vaddw vv17, vv16, vs54
-    @vp1 vaddw vv17, vv15, vs0
+    @!vp1 vaddw vv16, vv15, vs54
+    @vp1 vaddw vv16, vv14, vs0
     vaddw vs3, vs56, vs54
     vcmpeq vp1, vs3, vv4
     vpop vp1, vp1, vp1, vp1, 0x55
-    vaddw vv15, vs0, vs0
-    @vp1 vaddw vv15, vs0, vs39
-    vaddw vv18, vv16, vv15
+    vaddw vv14, vs0, vs0
+    @vp1 vaddw vv14, vs0, vs39
+    vaddw vv17, vv15, vv14
     vcmpeq vp1, vv2, vs0
-    @!vp1 vsubw vv15, vv16, vs56
-    @vp1 vaddw vv15, vv4, vs0
+    @!vp1 vsubw vv14, vv15, vs56
+    @vp1 vaddw vv14, vv4, vs0
     vaddw vs3, vs55, vs54
     vcmpeq vp1, vs3, vv2
-    @vp1 vaddw vv19, vs0, vs0
-    @!vp1 vaddw vv19, vs56, vs0
-    vaddw vv19, vv16, vv19
-    vsll vv1, vv16, vs53
-    vlxw vv20, vs62, vv1
-    vaddw vv21, vv16, vs2
-    vsll vv1, vv21, vs53
-    vlxw vv22, vs62, vv1
-    vsll vv1, vv17, vs53
-    vlxw vv23, vs62, vv1
-    vfmul.s vv23, vs52, vv23
-    vfmadd.s vv23, vs51, vv20, vv23
-    vsll vv1, vv18, vs53
-    vlxw vv24, vs62, vv1
-    vfmadd.s vv24, vs50, vv24, vv23
-    vsll vv1, vv19, vs53
-    vlxw vv23, vs62, vv1
-    vfmadd.s vv23, vs49, vv23, vv24
+    @vp1 vaddw vv18, vs0, vs0
+    @!vp1 vaddw vv18, vs56, vs0
+    vaddw vv18, vv15, vv18
     vsll vv1, vv15, vs53
-    vlxw vv24, vs62, vv1
-    vfmadd.s vv24, vs48, vv24, vv23
-    vfmadd.s vv24, vs47, vv20, vv24
-    vfmadd.s vv24, vs46, vv22, vv24
-    vsll vv1, vv16, vs53
-    vlxw vv23, vs61, vv1
-    vfmadd.s vv23, vs45, vv23, vv24
-    vfmadd.s vv23, vs46, vs44, vv23
-    vsxw vv23, vs60, vv1
-    vaddw vv19, vv19, vs2
-    vaddw vv16, vv15, vs2
+    vlxw vv19, vs62, vv1
+    vaddw vv20, vv15, vs2
+    vsll vv2, vv20, vs53
+    vlxw vv21, vs62, vv2
+    vsll vv3, vv16, vs53
+    vlxw vv22, vs62, vv3
+    vfmul.s vv22, vs52, vv22
+    vfmadd.s vv22, vs51, vv19, vv22
+    vsll vv3, vv17, vs53
+    vlxw vv23, vs62, vv3
+    vfmadd.s vv23, vs50, vv23, vv22
+    vsll vv3, vv18, vs53
+    vlxw vv22, vs62, vv3
+    vfmadd.s vv22, vs49, vv22, vv23
+    vsll vv3, vv14, vs53
+    vlxw vv23, vs62, vv3
+    vfmadd.s vv23, vs48, vv23, vv22
+    vfmadd.s vv23, vs47, vv19, vv23
+    vfmadd.s vv23, vs46, vv21, vv23
+    vlxw vv22, vs61, vv1
+    vfmadd.s vv22, vs45, vv22, vv23
+    vfmadd.s vv22, vs46, vs44, vv22
+    vsxw vv22, vs60, vv1
     vaddw vv18, vv18, vs2
+    vaddw vv15, vv14, vs2
     vaddw vv17, vv17, vs2
-    vaddw vv15, vs42, vs0
-    vcmplt vp1, vv15, vs43
+    vaddw vv16, vv16, vs2
+    vaddw vv14, vs42, vs0
+    vcmplt vp1, vv14, vs43
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .LhotspotOpt1_skip0
     vaddw vs3, vs43, vs41
     vsll vs4, vs2, vs53
-    @vp2 vadd vv1, vs2, vv21
+    @vp2 vadd vv1, vs2, vv20
     @vp2 vsll vv1, vv1, vs53
-    @vp2 vsll vv2, vv17, vs53
-    @vp2 vsll vv3, vv18, vs53
-    @vp2 vsll vv4, vv19, vs53
-    @vp2 vsll vv5, vv16, vs53
-    @vp2 vsll vv6, vv21, vs53
-    @vp2 vsll vv7, vv21, vs53
+    @vp2 vsll vv3, vv16, vs53
+    @vp2 vsll vv4, vv17, vs53
+    @vp2 vsll vv5, vv18, vs53
+    @vp2 vsll vv6, vv15, vs53
 .LhotspotOpt1_skip0:
-    @vp2 vadd vv8, vv21, vs0
-    @vp2 vadd vv9, vv19, vs0
-    @vp2 vadd vv10, vv16, vs0
-    @vp2 vadd vv11, vv18, vs0
-    @vp2 vadd vv12, vv17, vs0
-    @vp2 vaddw vv15, vv22, vs0
-    @vp2 vaddw vv23, vv20, vs0
+    @vp2 vadd vv7, vv20, vs0
+    @vp2 vadd vv8, vv18, vs0
+    @vp2 vadd vv9, vv15, vs0
+    @vp2 vadd vv10, vv17, vs0
+    @vp2 vadd vv11, vv16, vs0
+    @vp2 vaddw vv14, vv21, vs0
+    @vp2 vaddw vv22, vv19, vs0
     vstop
     .globl hotspotOpt1_wt_r0_b0
 hotspotOpt1_wt_r0_b0:
-    @vp2 vadd vv13, vv8, vs2
-    @vp2 vlxw vv24, vs5, vv1
-    @vp2 vlxw vv25, vs5, vv2
-    @vp2 vfmul.s vv25, vs52, vv25
-    @vp2 vfmadd.s vv25, vs51, vv15, vv25
-    @vp2 vlxw vv26, vs5, vv3
-    @vp2 vfmadd.s vv26, vs50, vv26, vv25
+    @vp2 vadd vv12, vv7, vs2
+    @vp2 vlxw vv23, vs5, vv1
+    @vp2 vlxw vv24, vs5, vv3
+    @vp2 vfmul.s vv24, vs52, vv24
+    @vp2 vfmadd.s vv24, vs51, vv14, vv24
     @vp2 vlxw vv25, vs5, vv4
-    @vp2 vfmadd.s vv25, vs49, vv25, vv26
-    @vp2 vlxw vv26, vs5, vv5
-    @vp2 vfmadd.s vv26, vs48, vv26, vv25
-    @vp2 vfmadd.s vv26, vs47, vv23, vv26
-    @vp2 vfmadd.s vv26, vs46, vv24, vv26
-    @vp2 vlxw vv25, vs6, vv6
-    @vp2 vfmadd.s vv25, vs45, vv25, vv26
-    @vp2 vfmadd.s vv25, vs46, vs44, vv25
-    @vp2 vsxw vv25, vs7, vv7
+    @vp2 vfmadd.s vv25, vs50, vv25, vv24
+    @vp2 vlxw vv24, vs5, vv5
+    @vp2 vfmadd.s vv24, vs49, vv24, vv25
+    @vp2 vlxw vv25, vs5, vv6
+    @vp2 vfmadd.s vv25, vs48, vv25, vv24
+    @vp2 vfmadd.s vv25, vs47, vv22, vv25
+    @vp2 vfmadd.s vv25, vs46, vv23, vv25
+    @vp2 vlxw vv24, vs6, vv2
+    @vp2 vfmadd.s vv24, vs45, vv24, vv25
+    @vp2 vfmadd.s vv24, vs46, vs44, vv24
+    @vp2 vsxw vv24, vs7, vv2
+    @vp2 vadd vv8, vv8, vs2
     @vp2 vadd vv9, vv9, vs2
     @vp2 vadd vv10, vv10, vs2
     @vp2 vadd vv11, vv11, vs2
-    @vp2 vadd vv12, vv12, vs2
-    vaddw vv25, vv15, vs0
-    vadd vv14, vv13, vs0
-    vaddw vv26, vv24, vs0
-    vadd vv8, vv13, vs0
-    vaddw vv23, vv15, vs0
-    vaddw vv15, vv24, vs0
+    vaddw vv24, vv14, vs0
+    vadd vv13, vv12, vs0
+    vaddw vv25, vv23, vs0
+    vadd vv7, vv12, vs0
+    vaddw vv22, vv14, vs0
+    vaddw vv14, vv23, vs0
     vstop
     .globl hotspotOpt1_wt_a0
 hotspotOpt1_wt_a0:
     vpop vp1, vp2, vp2, vp2, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
-    @vp2 vadd vv1, vv14, vs0
-    @vp3 vadd vv1, vv21, vs0
-    @vp2 vaddw vv23, vv25, vs0
-    @vp3 vaddw vv23, vv20, vs0
-    @vp2 vaddw vv27, vv26, vs0
-    @vp3 vaddw vv27, vv22, vs0
+    @vp2 vadd vv1, vv13, vs0
+    @vp3 vadd vv1, vv20, vs0
+    @vp2 vaddw vv22, vv24, vs0
+    @vp3 vaddw vv22, vv19, vs0
+    @vp2 vaddw vv26, vv25, vs0
+    @vp3 vaddw vv26, vv21, vs0
+    @vp2 vaddw vv27, vv8, vs0
+    @vp3 vaddw vv27, vv18, vs0
     @vp2 vaddw vv28, vv9, vs0
-    @vp3 vaddw vv28, vv19, vs0
+    @vp3 vaddw vv28, vv15, vs0
     @vp2 vaddw vv29, vv10, vs0
-    @vp3 vaddw vv29, vv16, vs0
+    @vp3 vaddw vv29, vv17, vs0
     @vp2 vaddw vv30, vv11, vs0
-    @vp3 vaddw vv30, vv18, vs0
-    @vp2 vaddw vv31, vv12, vs0
-    @vp3 vaddw vv31, vv17, vs0
+    @vp3 vaddw vv30, vv16, vs0
     @!vp1 vcjal 0, vs1, .LhotspotOpt1_skip1
-    @vp1 vsll vv2, vv31, vs53
-    @vp1 vlxw vv15, vs62, vv2
-    @vp1 vfmul.s vv16, vs52, vv15
-    @vp1 vfmadd.s vv16, vs51, vv27, vv16
     @vp1 vsll vv2, vv30, vs53
-    @vp1 vlxw vv15, vs62, vv2
-    @vp1 vfmadd.s vv16, vs50, vv15, vv16
-    @vp1 vsll vv2, vv28, vs53
-    @vp1 vlxw vv15, vs62, vv2
-    @vp1 vfmadd.s vv16, vs49, vv15, vv16
+    @vp1 vlxw vv14, vs62, vv2
+    @vp1 vfmul.s vv15, vs52, vv14
+    @vp1 vfmadd.s vv15, vs51, vv26, vv15
     @vp1 vsll vv2, vv29, vs53
-    @vp1 vlxw vv15, vs62, vv2
-    @vp1 vfmadd.s vv16, vs48, vv15, vv16
-    @vp1 vfmadd.s vv23, vs47, vv23, vv16
-    @vp1 vfmadd.s vv27, vs46, vv27, vv23
+    @vp1 vlxw vv14, vs62, vv2
+    @vp1 vfmadd.s vv15, vs50, vv14, vv15
+    @vp1 vsll vv2, vv27, vs53
+    @vp1 vlxw vv14, vs62, vv2
+    @vp1 vfmadd.s vv15, vs49, vv14, vv15
+    @vp1 vsll vv2, vv28, vs53
+    @vp1 vlxw vv14, vs62, vv2
+    @vp1 vfmadd.s vv15, vs48, vv14, vv15
+    @vp1 vfmadd.s vv22, vs47, vv22, vv15
+    @vp1 vfmadd.s vv26, vs46, vv26, vv22
     @vp1 vsll vv2, vv1, vs53
-    @vp1 vlxw vv15, vs61, vv2
-    @vp1 vfmadd.s vv27, vs45, vv15, vv27
-    @vp1 vfmadd.s vv27, vs46, vs44, vv27
-    @vp1 vsxw vv27, vs60, vv2
+    @vp1 vlxw vv14, vs61, vv2
+    @vp1 vfmadd.s vv26, vs45, vv14, vv26
+    @vp1 vfmadd.s vv26, vs46, vs44, vv26
+    @vp1 vsxw vv26, vs60, vv2
 .LhotspotOpt1_skip1:
     vstop
 
@@ -177,7 +174,7 @@ hotspotOpt1_ct:                         # @hotspotOpt1_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a7, 1048439
-	addi	a7, a7, -31
+	addi	a7, a7, -29
 	srli	a7, a7, 1
 	not	a7, a7
 	#APP

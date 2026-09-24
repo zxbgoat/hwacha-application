@@ -6,7 +6,7 @@ SHOC level1 `gemm` 在 Hwacha 上运行：**sgemmNN / sgemmNT（源自 MAGMA：1
 
 问题规模：128 x 128（SHOC 256），输入均匀分布于 [0.5, 2)（`gemm_main.c`）。输入按 SHOC host 的方式生成（固定种子）；host 先在 Rocket 标量核上跑参考实现，再跑 Hwacha 内核，按 SHOC 的判据比对并打印 PASS/FAIL 与周期数。
 
-说明：已知限制：内核要求 64 lane 的 work-group（分块映射写死），在 Hwacha 上需要 <= 32 个向量寄存器，而 k 循环里 16 个 C 累加器 + 4 个 A 值 + 地址长期活跃（hwacha-cc 分配 65 个，maxvl 24），溢出器无法驱逐跨循环活跃的值；组被拆成三个 stripmine，经 barrier 的 B 分块读到错误的 lane，结果错误（host 报告 hwacha_vl_short）。
+说明：内核要求 64 lane 的 work-group（分块映射写死），在 Hwacha 上即 <= 32 个向量寄存器，以 -vregs 32 生成；k 循环里 16 个 C 累加器 + 4 个 A 值 + 地址长期活跃，靠 hwacha-cc 的累加链原地计算、gather 偏移共享、uniform 出口值别名与溢出器放进 32 个寄存器。
 
 ## 文件
 
@@ -31,8 +31,8 @@ make gen-gemm      # 从 .cl 重新生成汇编（需要 hwacha-cc）
 | 项 | 周期 |
 |---|---|
 | gemm sgemmNN 128x128x128: scalar | 23,282,957 |
-| gemm sgemmNN 128x128x128 / hwacha-cc | 8,901 |
+| gemm sgemmNN 128x128x128 / hwacha-cc | 3,424 |
 | gemm sgemmNT 128x128x128: scalar | 23,282,957 |
-| gemm sgemmNT 128x128x128 / hwacha-cc | 10,791 |
+| gemm sgemmNT 128x128x128 / hwacha-cc | 4,123 |
 
-结果：gemm **FAIL**。
+结果：gemm **PASS**。

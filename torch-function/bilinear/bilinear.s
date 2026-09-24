@@ -11,14 +11,14 @@ net_kernel_wt:
     vsrl vv1, vv0, vs59
     vand vv1, vv1, vs58
     vsll vv2, vv1, vs57
-    vlxw vv3, vs60, vv2
+    vlxw vv3, vs62, vv2
     vand vv2, vv0, vs56
     vsll vv1, vv1, vs55
     vsll vv2, vv2, vs57
     vadd vv1, vv1, vv2
-    vlxw vv4, vs61, vv1
+    vlxw vv4, vs60, vv1
     vfmul.s vv4, vv3, vv4
-    vsxw vv4, vs62, vv1
+    vsxw vv4, vs61, vv1
     vstop
 
     .text
@@ -89,8 +89,8 @@ net_kernel_4_wt:
     vstop
     .globl net_kernel_4_wt_r0_b0
 net_kernel_4_wt_r0_b0:
-    vlstw vv2, va1, va2
-    vfadd.s vv1, vv2, vv1
+    vlstw vv0, va1, va2
+    vfadd.s vv1, vv0, vv1
     vstop
     .globl net_kernel_4_wt_a0
 net_kernel_4_wt_a0:
@@ -125,13 +125,13 @@ net_kernel_ct:                          # @net_kernel_ct
 	vsetcfg a4
 	#NO_APP
 	#APP
-	vmcs vs62, a3
+	vmcs vs62, a1
 	#NO_APP
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a3
 	#NO_APP
 	#APP
-	vmcs vs60, a1
+	vmcs vs60, a2
 	#NO_APP
 	li	a1, 3
 	#APP
@@ -565,7 +565,7 @@ net_kernel_4_ct:                        # @net_kernel_4_ct
 # %bb.0:                                # %entry
 	li	a3, -1
 	slli	a3, a3, 54
-	addi	a3, a3, 97
+	addi	a3, a3, 65
 	li	a4, 1
 	slli	a3, a3, 9
 	#APP

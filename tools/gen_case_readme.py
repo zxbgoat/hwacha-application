@@ -358,7 +358,7 @@ elif d == 'shoc':
             'stencil2d': ('level1', 'StencilKernel（每个 work-item 从 __local 的带 halo 分块算 LROWS 行）+ CopyRect（把左右 halo 列搬到新缓冲区），每次迭代交换缓冲区', '66 x 66（64 x 64 内部），10 次迭代（SHOC 1000），权重 0.25 / 0.15 / 0.05', ''),
             'bfs': ('level1', 'BFS_kernel_warp（bfs_iiit.cl）：逐层同步 BFS，每个 warp 扫 CHUNK_SZ 个顶点、按 lane 展开邻居，flag 告知 host 是否还有下一层；bfs_uiuc_spill.cl 的 5 个内核也编进了 bfs.s，但未写 host', '2048 个顶点的 GenerateSimpleKWayGraph（度 2），源点 0', 'hwacha-cc 新增 get_num_groups(0)'),
             'fft': ('level1', 'fft1D_512 / ifft1D_512（64 个 work-item 一组做一个 512 点复数 FFT：基 8 三遍、旋转因子、两次经 __local 的转置）+ chk1D_512（SHOC 的自检内核）', '8 个 512 点 FFT（SHOC 256 个），后半批是前半批的副本', 'float2 由 scalarizer 拆开；旋转因子的 sin / cos 由 hwacha-cc 新增的展开实现'),
-            'gemm': ('level1', 'sgemmNN / sgemmNT（源自 MAGMA：16 x 4 的 work-group 算 64 x 16 的 C 分块，A 每 work-item 暂存 4 个元素，B 经 __local 16 x 17 分块），alpha = 1、beta = -1', '128 x 128（SHOC 256），输入均匀分布于 [0.5, 2)', '已知限制：内核要求 64 lane 的 work-group（分块映射写死），在 Hwacha 上需要 <= 32 个向量寄存器，而 k 循环里 16 个 C 累加器 + 4 个 A 值 + 地址长期活跃（hwacha-cc 分配 65 个，maxvl 24），溢出器无法驱逐跨循环活跃的值；组被拆成三个 stripmine，经 barrier 的 B 分块读到错误的 lane，结果错误（host 报告 hwacha_vl_short）'),
+            'gemm': ('level1', 'sgemmNN / sgemmNT（源自 MAGMA：16 x 4 的 work-group 算 64 x 16 的 C 分块，A 每 work-item 暂存 4 个元素，B 经 __local 16 x 17 分块），alpha = 1、beta = -1', '128 x 128（SHOC 256），输入均匀分布于 [0.5, 2)', '内核要求 64 lane 的 work-group（分块映射写死），在 Hwacha 上即 <= 32 个向量寄存器，以 -vregs 32 生成；k 循环里 16 个 C 累加器 + 4 个 A 值 + 地址长期活跃，靠 hwacha-cc 的累加链原地计算、gather 偏移共享、uniform 出口值别名与溢出器放进 32 个寄存器'),
             's3d': ('level2', '27 个内核（gr_base、ratt..ratt10、rdsmh、ratx、ratxb、ratx2、ratx4、qssa、qssab、qssa2、rdwdot..rdwdot10）按 S3D.cpp 的两阶段顺序启动：22 种组分、206 个反应的化学动力学右端项（组分生成率 WDOT）', '64 个网格点（N_GP 编进内核，-DN_GP=64）；p 1.0132e6、T 1000、y 按 S3D.cpp', 'SHOC 不校验 S3D；这里把同一批 .cl 编成 C（s3d_ref.c）做参考，全部 6 个输出数组相对误差 < 1e-6；exp10 由 hwacha-cc 新增的展开实现')}
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
@@ -368,10 +368,10 @@ elif d == 'shoc':
         for m in re.finditer(r'(\d+) cycles', line):
             pre = re.sub(r'\d+\.\d+ cyc/elem', '|', line[:m.start()])
             segs = [x.strip().rstrip(':').strip() for x in re.split(r'[,|()]', pre) if x.strip()]
-            lab = segs[-1] if segs else ''
+            lab = re.sub(r'^\d+ mismatches\s*', '', segs[-1]) if segs else ''
             if case not in lab:
                 ctx = next((x for x in reversed(segs) if case in x), '')
-                if ctx: lab = ctx.split(':')[0].strip() + ' / ' + lab
+                if ctx: lab = re.sub(r'^\d+ mismatches\s*', '', ctx.split(':')[0].strip()) + ' / ' + lab
             cyc.append((lab[:80], int(m.group(1))))
         verdicts = re.findall(r'(?:^|\s)(' + re.escape(case) + r') (PASS|FAIL)', line)
         entries = sorted(set(re.findall(r'^\s*([A-Za-z_0-9]+_ct):', open(os.path.join(D, case, f'{case}.s')).read(), re.M)))

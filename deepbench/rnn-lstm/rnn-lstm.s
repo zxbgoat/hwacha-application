@@ -28,176 +28,134 @@ lstm_step_wt:
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Llstm_step_skip0
-    vaddw vv9, vs53, vs0
-    vcmpeq vp1, vv9, vs0
+    vaddw vv10, vs53, vs0
+    vcmpeq vp1, vv10, vs0
 .Llstm_step_skip0:
     vpop vp4, vp2, vp1, vp1, 0x80
     vpop vp5, vp2, vp1, vp1, 0x02
-    @vp4 vmulw vv9, vs55, vv2
+    @vp4 vmulw vv10, vs55, vv2
     @!vp5 vcjal 0, vs1, .Llstm_step_skip1
     vaddw vs2, vs53, vs52
     vmulw vs2, vs2, vs54
-    @vp5 vaddw vv10, vs2, vv2
-    @vp5 vmulw vv10, vv10, vs55
+    @vp5 vaddw vv11, vs2, vv2
+    @vp5 vmulw vv11, vv11, vs55
 .Llstm_step_skip1:
     vpop vp1, vp5, vp5, vp5, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
-    @vp5 vaddw vv11, vv10, vs0
-    @vp4 vaddw vv11, vv9, vs0
-    @vp5 vadd vv1, vs59, vs0
+    @vp5 vaddw vv12, vv11, vs0
+    @vp4 vaddw vv12, vv10, vs0
+    @vp5 vadd vv1, vs62, vs0
     @vp4 vadd vv1, vs51, vs0
-    @vp5 vadd vv3, vs62, vs0
+    @vp5 vadd vv3, vs59, vs0
     @vp4 vadd vv3, vs50, vs0
     @!vp1 vcjal 0, vs1, .Llstm_step_skip2
-    @vp1 vaddw vv9, vv11, vv4
-    @vp1 vsll vv5, vv9, vs49
+    @vp1 vaddw vv10, vv12, vv4
+    @vp1 vsll vv5, vv10, vs49
     @vp1 vadd vv6, vv3, vv5
-    @vp1 vlxw vv9, vs0, vv6
+    @vp1 vlxw vv10, vs0, vv6
     vmulw vs2, vs54, vs53
-    @vp1 vaddw vv10, vs2, vv2
-    @vp1 vmulw vv10, vv10, vs55
-    @vp1 vaddw vv10, vv10, vv4
-    @vp1 vsll vv2, vv10, vs49
-    @vp1 vlxw vv12, vs61, vv2
-    @vp1 vsll vv2, vv4, vs48
-    @vp1 vsra vv2, vv2, vs47
-    @vp1 vlxw vv13, vs60, vv2
-    @vp1 vfadd.s vv13, vv12, vv13
-    @vp1 vaddw vv14, vs55, vv4
-    @vp1 vsll vv2, vv14, vs49
-    @vp1 vlxw vv15, vs60, vv2
-    @vp1 vfadd.s vv15, vv12, vv15
+    @vp1 vaddw vv11, vs2, vv2
+    @vp1 vmulw vv11, vv11, vs55
+    @vp1 vaddw vv11, vv11, vv4
+    @vp1 vsll vv2, vv11, vs49
+    @vp1 vlxw vv13, vs61, vv2
+    @vp1 vsll vv3, vv4, vs48
+    @vp1 vsra vv3, vv3, vs47
+    @vp1 vlxw vv14, vs60, vv3
+    @vp1 vfadd.s vv14, vv13, vv14
+    @vp1 vaddw vv15, vs55, vv4
+    @vp1 vsll vv3, vv15, vs49
+    @vp1 vlxw vv16, vs60, vv3
+    @vp1 vfadd.s vv16, vv13, vv16
     vsllw vs2, vs55, vs46
-    @vp1 vaddw vv16, vs2, vv4
-    @vp1 vsll vv2, vv16, vs49
-    @vp1 vlxw vv17, vs60, vv2
-    @vp1 vfadd.s vv17, vv12, vv17
+    @vp1 vaddw vv17, vs2, vv4
+    @vp1 vsll vv3, vv17, vs49
+    @vp1 vlxw vv18, vs60, vv3
+    @vp1 vfadd.s vv18, vv13, vv18
     vmulw vs2, vs55, vs45
-    @vp1 vaddw vv18, vs2, vv4
-    @vp1 vsll vv2, vv18, vs49
-    @vp1 vlxw vv19, vs60, vv2
-    @vp1 vfadd.s vv12, vv12, vv19
-    vaddw vv19, vs0, vs0
-    vcmplt vp2, vv19, vs55
+    @vp1 vaddw vv19, vs2, vv4
+    @vp1 vsll vv3, vv19, vs49
+    @vp1 vlxw vv20, vs60, vv3
+    @vp1 vfadd.s vv13, vv13, vv20
+    vaddw vv20, vs0, vs0
+    vcmplt vp2, vv20, vs55
 .Llstm_step_skip2:
     vpop vp4, vp1, vp2, vp2, 0x80
     vpop vp5, vp1, vp2, vp2, 0x02
     @!vp4 vcjal 0, vs1, .Llstm_step_skip3
-    @vp4 vmulw vv19, vs55, vv4
-    @vp4 vmulw vv14, vv14, vs55
-    @vp4 vmulw vv16, vv16, vs55
-    @vp4 vmulw vv18, vv18, vs55
+    @vp4 vmulw vv20, vs55, vv4
+    @vp4 vmulw vv15, vv15, vs55
+    @vp4 vmulw vv17, vv17, vs55
+    @vp4 vmulw vv19, vv19, vs55
     vsll vs2, vs55, vs48
     vsrl vs2, vs2, vs48
-    @vp4 vsll vv2, vv11, vs49
-    @vp4 vsll vv3, vv19, vs49
-    @vp4 vsll vv4, vv14, vs49
-    @vp4 vsll vv5, vv16, vs49
-    @vp4 vsll vv6, vv18, vs49
+    @vp4 vsll vv3, vv12, vs49
+    @vp4 vsll vv4, vv20, vs49
+    @vp4 vsll vv5, vv15, vs49
+    @vp4 vsll vv6, vv17, vs49
+    @vp4 vsll vv7, vv19, vs49
 .Llstm_step_skip3:
-    @vp4 vaddw vv11, vv13, vs0
-    @vp4 vaddw vv14, vv15, vs0
-    @vp4 vaddw vv16, vv17, vs0
-    @vp4 vaddw vv18, vv12, vs0
+    @vp4 vaddw vv12, vv14, vs0
+    @vp4 vaddw vv15, vv16, vs0
+    @vp4 vaddw vv17, vv18, vs0
+    @vp4 vaddw vv19, vv13, vs0
     vstop
     .globl lstm_step_wt_r0_b0
 lstm_step_wt_r0_b0:
-    vadd vv7, vv1, vs4
-    @vp4 vadd vv8, vv7, vv2
-    @vp4 vlxw vv19, vs0, vv8
-    @vp4 vlxw vv20, vs5, vv3
-    @vp4 vfmadd.s vv11, vv20, vv19, vv11
-    @vp4 vlxw vv20, vs5, vv4
-    @vp4 vfmadd.s vv14, vv20, vv19, vv14
-    @vp4 vlxw vv20, vs5, vv5
-    @vp4 vfmadd.s vv16, vv20, vv19, vv16
-    @vp4 vlxw vv20, vs5, vv6
-    @vp4 vfmadd.s vv18, vv20, vv19, vv18
+    vadd vv8, vv1, vs4
+    @vp4 vadd vv9, vv8, vv3
+    @vp4 vlxw vv20, vs0, vv9
+    @vp4 vlxw vv21, vs5, vv4
+    @vp4 vfmadd.s vv12, vv21, vv20, vv12
+    @vp4 vlxw vv21, vs5, vv5
+    @vp4 vfmadd.s vv15, vv21, vv20, vv15
+    @vp4 vlxw vv21, vs5, vv6
+    @vp4 vfmadd.s vv17, vv21, vv20, vv17
+    @vp4 vlxw vv21, vs5, vv7
+    @vp4 vfmadd.s vv19, vv21, vv20, vv19
     vstop
     .globl lstm_step_wt_a0
 lstm_step_wt_a0:
     vpop vp1, vp4, vp4, vp4, 0xAA
     vpop vp1, vp1, vp5, vp5, 0xEE
-    @vp5 vaddw vv19, vv12, vs0
-    @vp4 vaddw vv19, vv18, vs0
-    @vp5 vaddw vv20, vv17, vs0
-    @vp4 vaddw vv20, vv16, vs0
-    @vp5 vaddw vv21, vv15, vs0
-    @vp4 vaddw vv21, vv14, vs0
-    @vp5 vaddw vv22, vv13, vs0
-    @vp4 vaddw vv22, vv11, vs0
+    @vp5 vaddw vv20, vv13, vs0
+    @vp4 vaddw vv20, vv19, vs0
+    @vp5 vaddw vv21, vv18, vs0
+    @vp4 vaddw vv21, vv17, vs0
+    @vp5 vaddw vv22, vv16, vs0
+    @vp4 vaddw vv22, vv15, vs0
+    @vp5 vaddw vv23, vv14, vs0
+    @vp4 vaddw vv23, vv12, vs0
     @!vp1 vcjal 0, vs1, .Llstm_step_skip4
-    @vp1 vfsgnjn.s vv22, vv22, vv22
-    @vp1 vfmax.s vv22, vv22, vs42
-    @vp1 vfmin.s vv22, vv22, vs41
-    @vp1 vfmul.s vv11, vv22, vs40
-    @vp1 vfadd.s vv11, vv11, vs39
-    @vp1 vfadd.s vv12, vv11, vs38
-    @vp1 vfmul.s vv13, vv12, vs37
-    @vp1 vfsub.s vv22, vv22, vv13
-    @vp1 vfmul.s vv12, vv12, vs36
-    @vp1 vfsub.s vv22, vv22, vv12
-    @vp1 vfmul.s vv12, vv22, vs35
-    @vp1 vfadd.s vv12, vv12, vs34
-    @vp1 vfmul.s vv12, vv12, vv22
-    @vp1 vfadd.s vv12, vv12, vs33
-    @vp1 vfmul.s vv12, vv12, vv22
-    vaddi vs2, vs32, 0
-    vlsd vs2, vs2
-    @vp1 vfadd.s vv12, vv12, vs2
-    @vp1 vfmul.s vv12, vv12, vv22
-    vaddi vs2, vs32, 8
-    vlsd vs2, vs2
-    @vp1 vfadd.s vv12, vv12, vs2
-    @vp1 vfmul.s vv12, vv12, vv22
-    vaddi vs2, vs32, 16
-    vlsd vs2, vs2
-    @vp1 vfadd.s vv12, vv12, vs2
-    @vp1 vfmul.s vv13, vv22, vv22
-    @vp1 vfmul.s vv12, vv12, vv13
-    @vp1 vfadd.s vv12, vv12, vv22
-    vaddi vs2, vs32, 24
-    vlsd vs2, vs2
-    @vp1 vfadd.s vv12, vv12, vs2
-    vaddi vs2, vs32, 32
-    vlsd vs2, vs2
-    @vp1 vsllw vv13, vv11, vs2
-    @vp1 vaddw vv13, vv13, vv12
-    vaddi vs2, vs32, 24
-    vlsd vs2, vs2
-    @vp1 vfadd.s vv11, vv13, vs2
-    vaddi vs2, vs32, 24
-    vlsd vs2, vs2
-    @vp1 vfdiv.s vv11, vs2, vv11
-    @vp1 vfsgnjn.s vv21, vv21, vv21
-    @vp1 vfmax.s vv21, vv21, vs42
-    @vp1 vfmin.s vv21, vv21, vs41
-    @vp1 vfmul.s vv12, vv21, vs40
+    @vp1 vfsgnjn.s vv23, vv23, vv23
+    @vp1 vfmax.s vv23, vv23, vs42
+    @vp1 vfmin.s vv23, vv23, vs41
+    @vp1 vfmul.s vv12, vv23, vs40
     @vp1 vfadd.s vv12, vv12, vs39
     @vp1 vfadd.s vv13, vv12, vs38
     @vp1 vfmul.s vv14, vv13, vs37
-    @vp1 vfsub.s vv21, vv21, vv14
+    @vp1 vfsub.s vv23, vv23, vv14
     @vp1 vfmul.s vv13, vv13, vs36
-    @vp1 vfsub.s vv21, vv21, vv13
-    @vp1 vfmul.s vv13, vv21, vs35
+    @vp1 vfsub.s vv23, vv23, vv13
+    @vp1 vfmul.s vv13, vv23, vs35
     @vp1 vfadd.s vv13, vv13, vs34
-    @vp1 vfmul.s vv13, vv13, vv21
+    @vp1 vfmul.s vv13, vv13, vv23
     @vp1 vfadd.s vv13, vv13, vs33
-    @vp1 vfmul.s vv13, vv13, vv21
+    @vp1 vfmul.s vv13, vv13, vv23
     vaddi vs2, vs32, 0
     vlsd vs2, vs2
     @vp1 vfadd.s vv13, vv13, vs2
-    @vp1 vfmul.s vv13, vv13, vv21
+    @vp1 vfmul.s vv13, vv13, vv23
     vaddi vs2, vs32, 8
     vlsd vs2, vs2
     @vp1 vfadd.s vv13, vv13, vs2
-    @vp1 vfmul.s vv13, vv13, vv21
+    @vp1 vfmul.s vv13, vv13, vv23
     vaddi vs2, vs32, 16
     vlsd vs2, vs2
     @vp1 vfadd.s vv13, vv13, vs2
-    @vp1 vfmul.s vv14, vv21, vv21
+    @vp1 vfmul.s vv14, vv23, vv23
     @vp1 vfmul.s vv13, vv13, vv14
-    @vp1 vfadd.s vv13, vv13, vv21
+    @vp1 vfadd.s vv13, vv13, vv23
     vaddi vs2, vs32, 24
     vlsd vs2, vs2
     @vp1 vfadd.s vv13, vv13, vs2
@@ -211,35 +169,35 @@ lstm_step_wt_a0:
     vaddi vs2, vs32, 24
     vlsd vs2, vs2
     @vp1 vfdiv.s vv12, vs2, vv12
-    @vp1 vfsgnjn.s vv20, vv20, vv20
-    @vp1 vfmax.s vv20, vv20, vs42
-    @vp1 vfmin.s vv20, vv20, vs41
-    @vp1 vfmul.s vv13, vv20, vs40
+    @vp1 vfsgnjn.s vv22, vv22, vv22
+    @vp1 vfmax.s vv22, vv22, vs42
+    @vp1 vfmin.s vv22, vv22, vs41
+    @vp1 vfmul.s vv13, vv22, vs40
     @vp1 vfadd.s vv13, vv13, vs39
     @vp1 vfadd.s vv14, vv13, vs38
     @vp1 vfmul.s vv15, vv14, vs37
-    @vp1 vfsub.s vv20, vv20, vv15
+    @vp1 vfsub.s vv22, vv22, vv15
     @vp1 vfmul.s vv14, vv14, vs36
-    @vp1 vfsub.s vv20, vv20, vv14
-    @vp1 vfmul.s vv14, vv20, vs35
+    @vp1 vfsub.s vv22, vv22, vv14
+    @vp1 vfmul.s vv14, vv22, vs35
     @vp1 vfadd.s vv14, vv14, vs34
-    @vp1 vfmul.s vv14, vv14, vv20
+    @vp1 vfmul.s vv14, vv14, vv22
     @vp1 vfadd.s vv14, vv14, vs33
-    @vp1 vfmul.s vv14, vv14, vv20
+    @vp1 vfmul.s vv14, vv14, vv22
     vaddi vs2, vs32, 0
     vlsd vs2, vs2
     @vp1 vfadd.s vv14, vv14, vs2
-    @vp1 vfmul.s vv14, vv14, vv20
+    @vp1 vfmul.s vv14, vv14, vv22
     vaddi vs2, vs32, 8
     vlsd vs2, vs2
     @vp1 vfadd.s vv14, vv14, vs2
-    @vp1 vfmul.s vv14, vv14, vv20
+    @vp1 vfmul.s vv14, vv14, vv22
     vaddi vs2, vs32, 16
     vlsd vs2, vs2
     @vp1 vfadd.s vv14, vv14, vs2
-    @vp1 vfmul.s vv15, vv20, vv20
+    @vp1 vfmul.s vv15, vv22, vv22
     @vp1 vfmul.s vv14, vv14, vv15
-    @vp1 vfadd.s vv14, vv14, vv20
+    @vp1 vfadd.s vv14, vv14, vv22
     vaddi vs2, vs32, 24
     vlsd vs2, vs2
     @vp1 vfadd.s vv14, vv14, vs2
@@ -253,37 +211,35 @@ lstm_step_wt_a0:
     vaddi vs2, vs32, 24
     vlsd vs2, vs2
     @vp1 vfdiv.s vv13, vs2, vv13
-    vaddi vs2, vs32, 40
-    vlsd vs2, vs2
-    @vp1 vfmul.s vv19, vv19, vs2
-    @vp1 vfmax.s vv19, vv19, vs42
-    @vp1 vfmin.s vv19, vv19, vs41
-    @vp1 vfmul.s vv14, vv19, vs40
+    @vp1 vfsgnjn.s vv21, vv21, vv21
+    @vp1 vfmax.s vv21, vv21, vs42
+    @vp1 vfmin.s vv21, vv21, vs41
+    @vp1 vfmul.s vv14, vv21, vs40
     @vp1 vfadd.s vv14, vv14, vs39
     @vp1 vfadd.s vv15, vv14, vs38
     @vp1 vfmul.s vv16, vv15, vs37
-    @vp1 vfsub.s vv19, vv19, vv16
+    @vp1 vfsub.s vv21, vv21, vv16
     @vp1 vfmul.s vv15, vv15, vs36
-    @vp1 vfsub.s vv19, vv19, vv15
-    @vp1 vfmul.s vv15, vv19, vs35
+    @vp1 vfsub.s vv21, vv21, vv15
+    @vp1 vfmul.s vv15, vv21, vs35
     @vp1 vfadd.s vv15, vv15, vs34
-    @vp1 vfmul.s vv15, vv15, vv19
+    @vp1 vfmul.s vv15, vv15, vv21
     @vp1 vfadd.s vv15, vv15, vs33
-    @vp1 vfmul.s vv15, vv15, vv19
+    @vp1 vfmul.s vv15, vv15, vv21
     vaddi vs2, vs32, 0
     vlsd vs2, vs2
     @vp1 vfadd.s vv15, vv15, vs2
-    @vp1 vfmul.s vv15, vv15, vv19
+    @vp1 vfmul.s vv15, vv15, vv21
     vaddi vs2, vs32, 8
     vlsd vs2, vs2
     @vp1 vfadd.s vv15, vv15, vs2
-    @vp1 vfmul.s vv15, vv15, vv19
+    @vp1 vfmul.s vv15, vv15, vv21
     vaddi vs2, vs32, 16
     vlsd vs2, vs2
     @vp1 vfadd.s vv15, vv15, vs2
-    @vp1 vfmul.s vv16, vv19, vv19
+    @vp1 vfmul.s vv16, vv21, vv21
     @vp1 vfmul.s vv15, vv15, vv16
-    @vp1 vfadd.s vv15, vv15, vv19
+    @vp1 vfadd.s vv15, vv15, vv21
     vaddi vs2, vs32, 24
     vlsd vs2, vs2
     @vp1 vfadd.s vv15, vv15, vs2
@@ -294,66 +250,108 @@ lstm_step_wt_a0:
     vaddi vs2, vs32, 24
     vlsd vs2, vs2
     @vp1 vfadd.s vv14, vv16, vs2
-    vaddi vs2, vs32, 48
+    vaddi vs2, vs32, 24
     vlsd vs2, vs2
     @vp1 vfdiv.s vv14, vs2, vv14
-    vaddi vs2, vs32, 56
-    vlsd vs2, vs2
-    @vp1 vfadd.s vv14, vv14, vs2
-    @vp1 vfmul.s vv11, vv11, vv14
-    @vp1 vfmadd.s vv12, vv12, vv9, vv11
-    @vp1 vsll vv1, vv10, vs49
-    @vp1 vsxw vv12, vs62, vv1
     vaddi vs2, vs32, 40
     vlsd vs2, vs2
-    @vp1 vfmul.s vv12, vv12, vs2
-    @vp1 vfmax.s vv12, vv12, vs42
-    @vp1 vfmin.s vv12, vv12, vs41
-    @vp1 vfmul.s vv9, vv12, vs40
-    @vp1 vfadd.s vv11, vv9, vs39
-    @vp1 vfadd.s vv9, vv11, vs38
-    @vp1 vfmul.s vv14, vv9, vs37
-    @vp1 vfsub.s vv12, vv12, vv14
-    @vp1 vfmul.s vv14, vv9, vs36
-    @vp1 vfsub.s vv12, vv12, vv14
-    @vp1 vfmul.s vv9, vv12, vs35
-    @vp1 vfadd.s vv14, vv9, vs34
-    @vp1 vfmul.s vv14, vv14, vv12
-    @vp1 vfadd.s vv14, vv14, vs33
-    @vp1 vfmul.s vv14, vv14, vv12
+    @vp1 vfmul.s vv20, vv20, vs2
+    @vp1 vfmax.s vv20, vv20, vs42
+    @vp1 vfmin.s vv20, vv20, vs41
+    @vp1 vfmul.s vv15, vv20, vs40
+    @vp1 vfadd.s vv15, vv15, vs39
+    @vp1 vfadd.s vv16, vv15, vs38
+    @vp1 vfmul.s vv17, vv16, vs37
+    @vp1 vfsub.s vv20, vv20, vv17
+    @vp1 vfmul.s vv16, vv16, vs36
+    @vp1 vfsub.s vv20, vv20, vv16
+    @vp1 vfmul.s vv16, vv20, vs35
+    @vp1 vfadd.s vv16, vv16, vs34
+    @vp1 vfmul.s vv16, vv16, vv20
+    @vp1 vfadd.s vv16, vv16, vs33
+    @vp1 vfmul.s vv16, vv16, vv20
     vaddi vs2, vs32, 0
     vlsd vs2, vs2
-    @vp1 vfadd.s vv14, vv14, vs2
-    @vp1 vfmul.s vv14, vv14, vv12
+    @vp1 vfadd.s vv16, vv16, vs2
+    @vp1 vfmul.s vv16, vv16, vv20
     vaddi vs2, vs32, 8
     vlsd vs2, vs2
-    @vp1 vfadd.s vv14, vv14, vs2
-    @vp1 vfmul.s vv14, vv14, vv12
+    @vp1 vfadd.s vv16, vv16, vs2
+    @vp1 vfmul.s vv16, vv16, vv20
     vaddi vs2, vs32, 16
     vlsd vs2, vs2
-    @vp1 vfadd.s vv14, vv14, vs2
-    @vp1 vfmul.s vv9, vv12, vv12
-    @vp1 vfmul.s vv14, vv14, vv9
-    @vp1 vfadd.s vv14, vv14, vv12
+    @vp1 vfadd.s vv16, vv16, vs2
+    @vp1 vfmul.s vv17, vv20, vv20
+    @vp1 vfmul.s vv16, vv16, vv17
+    @vp1 vfadd.s vv16, vv16, vv20
     vaddi vs2, vs32, 24
     vlsd vs2, vs2
-    @vp1 vfadd.s vv14, vv14, vs2
+    @vp1 vfadd.s vv16, vv16, vs2
     vaddi vs2, vs32, 32
     vlsd vs2, vs2
-    @vp1 vsllw vv9, vv11, vs2
-    @vp1 vaddw vv11, vv9, vv14
+    @vp1 vsllw vv17, vv15, vs2
+    @vp1 vaddw vv17, vv17, vv16
     vaddi vs2, vs32, 24
     vlsd vs2, vs2
-    @vp1 vfadd.s vv9, vv11, vs2
+    @vp1 vfadd.s vv15, vv17, vs2
     vaddi vs2, vs32, 48
     vlsd vs2, vs2
-    @vp1 vfdiv.s vv11, vs2, vv9
+    @vp1 vfdiv.s vv15, vs2, vv15
     vaddi vs2, vs32, 56
     vlsd vs2, vs2
-    @vp1 vfadd.s vv11, vv11, vs2
-    @vp1 vfmul.s vv13, vv13, vv11
-    @vp1 vsll vv1, vv10, vs49
-    @vp1 vsxw vv13, vs59, vv1
+    @vp1 vfadd.s vv15, vv15, vs2
+    @vp1 vfmul.s vv12, vv12, vv15
+    @vp1 vfmadd.s vv13, vv13, vv10, vv12
+    @vp1 vsxw vv13, vs59, vv2
+    vaddi vs2, vs32, 40
+    vlsd vs2, vs2
+    @vp1 vfmul.s vv13, vv13, vs2
+    @vp1 vfmax.s vv13, vv13, vs42
+    @vp1 vfmin.s vv13, vv13, vs41
+    @vp1 vfmul.s vv10, vv13, vs40
+    @vp1 vfadd.s vv12, vv10, vs39
+    @vp1 vfadd.s vv10, vv12, vs38
+    @vp1 vfmul.s vv15, vv10, vs37
+    @vp1 vfsub.s vv13, vv13, vv15
+    @vp1 vfmul.s vv15, vv10, vs36
+    @vp1 vfsub.s vv13, vv13, vv15
+    @vp1 vfmul.s vv10, vv13, vs35
+    @vp1 vfadd.s vv15, vv10, vs34
+    @vp1 vfmul.s vv15, vv15, vv13
+    @vp1 vfadd.s vv15, vv15, vs33
+    @vp1 vfmul.s vv15, vv15, vv13
+    vaddi vs2, vs32, 0
+    vlsd vs2, vs2
+    @vp1 vfadd.s vv15, vv15, vs2
+    @vp1 vfmul.s vv15, vv15, vv13
+    vaddi vs2, vs32, 8
+    vlsd vs2, vs2
+    @vp1 vfadd.s vv15, vv15, vs2
+    @vp1 vfmul.s vv15, vv15, vv13
+    vaddi vs2, vs32, 16
+    vlsd vs2, vs2
+    @vp1 vfadd.s vv15, vv15, vs2
+    @vp1 vfmul.s vv10, vv13, vv13
+    @vp1 vfmul.s vv15, vv15, vv10
+    @vp1 vfadd.s vv15, vv15, vv13
+    vaddi vs2, vs32, 24
+    vlsd vs2, vs2
+    @vp1 vfadd.s vv15, vv15, vs2
+    vaddi vs2, vs32, 32
+    vlsd vs2, vs2
+    @vp1 vsllw vv10, vv12, vs2
+    @vp1 vaddw vv12, vv10, vv15
+    vaddi vs2, vs32, 24
+    vlsd vs2, vs2
+    @vp1 vfadd.s vv10, vv12, vs2
+    vaddi vs2, vs32, 48
+    vlsd vs2, vs2
+    @vp1 vfdiv.s vv12, vs2, vv10
+    vaddi vs2, vs32, 56
+    vlsd vs2, vs2
+    @vp1 vfadd.s vv12, vv12, vs2
+    @vp1 vfmul.s vv14, vv14, vv12
+    @vp1 vsxw vv14, vs62, vv2
 .Llstm_step_skip4:
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp3, vp3, 0xEE
@@ -370,7 +368,7 @@ lstm_step_ct:                           # @lstm_step_ct
 # %bb.0:                                # %entry
 	lui	t1, 1048462
 	lw	t0, 16(sp)
-	addi	t1, t1, 2029
+	addi	t1, t1, 2027
 	lw	t2, 0(sp)
 	srli	t1, t1, 1
 	not	t1, t1
@@ -385,7 +383,7 @@ lstm_step_ct:                           # @lstm_step_ct
 	vmcs vs32, t1
 	#NO_APP
 	#APP
-	vmcs vs62, a7
+	vmcs vs62, a6
 	#NO_APP
 	#APP
 	vmcs vs61, a1
@@ -396,7 +394,7 @@ lstm_step_ct:                           # @lstm_step_ct
 .Lpcrel_hi1:
 	auipc	a1, %pcrel_hi(hwacha_ls0)
 	#APP
-	vmcs vs59, a6
+	vmcs vs59, a7
 	#NO_APP
 	addi	a1, a1, %pcrel_lo(.Lpcrel_hi1)
 	#APP

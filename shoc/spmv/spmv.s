@@ -28,25 +28,25 @@ spmv_csr_scalar_kernel_wt:
     vsll vs3, vs2, vs60
     vadd vs4, vs59, vs3
     vadd vs3, vs58, vs3
-    @vp1 vlxw vv7, vs4, vv1
-    @vp1 vlxw vv8, vs3, vv1
-    @vp1 vsll vv3, vv7, vs60
-    @vp1 vlxw vv7, vs62, vv3
-    @vp1 vfmadd.s vv6, vv8, vv7, vv6
+    @vp1 vlxw vv4, vs4, vv1
+    @vp1 vlxw vv7, vs3, vv1
+    @vp1 vsll vv3, vv4, vs60
+    @vp1 vlxw vv4, vs62, vv3
+    @vp1 vfmadd.s vv6, vv7, vv4, vv6
     @vp1 vadd vv2, vv2, vs57
     vcmpeq vp4, vv2, vv5
     vadd vs2, vs2, vs57
     vpop vp6, vp1, vp4, vp4, 0x80
     vpop vp7, vp1, vp4, vp4, 0x02
-    @vp6 vaddw vv7, vv6, vs0
+    @vp6 vaddw vv4, vv6, vs0
     vpop vp2, vp2, vp6, vp6, 0xEE
     vpop vp1, vp1, vp6, vp6, 0x02
     @vp7 vcjal 1, vs1, .Lspmv_csr_scalar_kernel_loop1
     vpop vp1, vp2, vp2, vp2, 0xAA
     vpop vp1, vp1, vp5, vp5, 0xEE
-    @vp5 vaddw vv4, vs0, vs0
-    @vp2 vaddw vv4, vv7, vs0
-    @vp1 vsw vv4, va2
+    @vp5 vaddw vv5, vs0, vs0
+    @vp2 vaddw vv5, vv4, vs0
+    @vp1 vsw vv5, va2
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp3, vp3, 0xEE
     vstop
@@ -70,8 +70,8 @@ spmv_csr_vector_kernel_wt:
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lspmv_csr_vector_kernel_skip0
     @vp2 vsll vv1, vv6, vs54
-    @vp2 vlxw vv7, vs58, vv1
-    vadd vs2, vs58, vs53
+    @vp2 vlxw vv7, vs60, vv1
+    vadd vs2, vs60, vs53
     @vp2 vlxw vv8, vs2, vv1
     @vp2 vaddw vv9, vv7, vv5
     vcmplt vp1, vv9, vv8
@@ -79,28 +79,28 @@ spmv_csr_vector_kernel_wt:
     vpop vp4, vp2, vp1, vp1, 0x80
     vpop vp5, vp2, vp1, vp1, 0x02
     @!vp4 vcjal 0, vs1, .Lspmv_csr_vector_kernel_skip1
-    vsll vv1, vv5, vs48
-    vsrl vv1, vv1, vs48
-    @vp4 vadd vv1, vv7, vv1
+    vsll vv2, vv5, vs48
+    vsrl vv2, vv2, vs48
+    @vp4 vadd vv2, vv7, vv2
     vsll vs2, vs57, vs54
-    @vp4 vsll vv2, vv1, vs54
+    @vp4 vsll vv3, vv2, vs54
 .Lspmv_csr_vector_kernel_skip1:
     vpop vp1, vp4, vp4, vp4, 0xAA
     @vp4 vadd vs3, vs0, vs0
-    @vp4 vadd vv3, vv1, vs0
+    @vp4 vadd vv4, vv2, vs0
     @vp4 vaddw vv7, vs0, vs0
     vpclear vp2
 .Lspmv_csr_vector_kernel_loop2:
     vmul vs4, vs2, vs3
     vadd vs5, vs51, vs4
     vadd vs4, vs50, vs4
-    @vp1 vlxw vv9, vs5, vv2
-    @vp1 vlxw vv10, vs4, vv2
-    @vp1 vsll vv4, vv9, vs54
-    @vp1 vlxw vv9, vs60, vv4
+    @vp1 vlxw vv9, vs5, vv3
+    @vp1 vlxw vv10, vs4, vv3
+    @vp1 vsll vv2, vv9, vs54
+    @vp1 vlxw vv9, vs58, vv2
     @vp1 vfmadd.s vv7, vv10, vv9, vv7
-    @vp1 vadd vv3, vv3, vs57
-    vcmplt vp4, vv3, vv8
+    @vp1 vadd vv4, vv4, vs57
+    vcmplt vp4, vv4, vv8
     vadd vs3, vs3, vs49
     vpop vp6, vp1, vp4, vp4, 0x80
     vpop vp7, vp1, vp4, vp4, 0x02
@@ -129,9 +129,9 @@ spmv_csr_vector_kernel_wt:
     vpop vp6, vp1, vp4, vp4, 0x80
     vpop vp7, vp1, vp4, vp4, 0x02
     @!vp6 vcjal 0, vs1, .Lspmv_csr_vector_kernel_skip5
-    @vp6 vadd vv1, vs3, vv0
-    @vp6 vsll vv1, vv1, vs54
-    @vp6 vlxw vv7, vs61, vv1
+    @vp6 vadd vv2, vs3, vv0
+    @vp6 vsll vv2, vv2, vs54
+    @vp6 vlxw vv7, vs59, vv2
     @vp6 vlw vv8, va0
     @vp6 vfadd.s vv7, vv7, vv8
     @vp6 vsw vv7, va0
@@ -158,8 +158,7 @@ spmv_csr_vector_kernel_wt:
     vpop vp5, vp2, vp1, vp1, 0x02
     @!vp4 vcjal 0, vs1, .Lspmv_csr_vector_kernel_skip7
     @vp4 vlw vv5, va0
-    @vp4 vsll vv1, vv6, vs54
-    @vp4 vsxw vv5, vs59, vv1
+    @vp4 vsxw vv5, vs61, vv1
 .Lspmv_csr_vector_kernel_skip7:
     vpop vp1, vp4, vp4, vp4, 0xAA
     vpop vp1, vp1, vp5, vp5, 0xEE
@@ -227,7 +226,7 @@ spmv_ellpackr_kernel_wt:
 spmv_csr_scalar_kernel_ct:              # @spmv_csr_scalar_kernel_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a7, 1048534
+	lui	a7, 1048542
 	addi	a7, a7, -9
 	srli	a7, a7, 1
 	not	a7, a7
@@ -333,23 +332,23 @@ spmv_csr_vector_kernel_ct:              # @spmv_csr_vector_kernel_ct
 	addi	t0, t0, -1035
 	srli	t0, t0, 1
 	not	t0, t0
-.Lpcrel_hi3:
-	auipc	t1, %pcrel_hi(spmv_csr_vector_kernel.partialSums)
 	#APP
 	vsetcfg t0
 	#NO_APP
-	addi	t0, t1, %pcrel_lo(.Lpcrel_hi3)
 	#APP
-	vmcs vs61, t0
+	vmcs vs61, a7
+	#NO_APP
+.Lpcrel_hi3:
+	auipc	a7, %pcrel_hi(spmv_csr_vector_kernel.partialSums)
+	#APP
+	vmcs vs60, a4
+	#NO_APP
+	addi	a4, a7, %pcrel_lo(.Lpcrel_hi3)
+	#APP
+	vmcs vs59, a4
 	#NO_APP
 	#APP
-	vmcs vs60, a2
-	#NO_APP
-	#APP
-	vmcs vs59, a7
-	#NO_APP
-	#APP
-	vmcs vs58, a4
+	vmcs vs58, a2
 	#NO_APP
 	sext.w	a6, a6
 	lui	a2, 262144

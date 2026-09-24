@@ -28,73 +28,72 @@ rnn_relu_step_wt:
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .Lrnn_relu_step_skip0
-    vaddw vv6, vs54, vs0
-    vcmpeq vp1, vv6, vs0
+    vaddw vv7, vs54, vs0
+    vcmpeq vp1, vv7, vs0
 .Lrnn_relu_step_skip0:
     vpop vp4, vp2, vp1, vp1, 0x80
     vpop vp5, vp2, vp1, vp1, 0x02
-    @vp4 vmulw vv6, vs56, vv2
+    @vp4 vmulw vv7, vs56, vv2
     @!vp5 vcjal 0, vs1, .Lrnn_relu_step_skip1
     vaddw vs2, vs54, vs53
     vmulw vs2, vs2, vs55
-    @vp5 vaddw vv7, vs2, vv2
-    @vp5 vmulw vv7, vv7, vs56
+    @vp5 vaddw vv8, vs2, vv2
+    @vp5 vmulw vv8, vv8, vs56
 .Lrnn_relu_step_skip1:
     vpop vp1, vp5, vp5, vp5, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
-    @vp5 vaddw vv8, vv7, vs0
-    @vp4 vaddw vv8, vv6, vs0
-    @vp5 vadd vv1, vs61, vs0
+    @vp5 vaddw vv9, vv8, vs0
+    @vp4 vaddw vv9, vv7, vs0
+    @vp5 vadd vv1, vs62, vs0
     @vp4 vadd vv1, vs52, vs0
     @!vp1 vcjal 0, vs1, .Lrnn_relu_step_skip2
     vmulw vs2, vs55, vs54
-    @vp1 vaddw vv6, vs2, vv2
-    @vp1 vmulw vv7, vv6, vs56
-    @vp1 vaddw vv7, vv7, vv4
-    @vp1 vsll vv2, vv7, vs51
-    @vp1 vlxh vv6, vs62, vv2
-    vfcvt.s.h vv9, vv6
-    @vp1 vsll vv2, vv4, vs50
-    @vp1 vsra vv2, vv2, vs49
-    @vp1 vlxh vv6, vs60, vv2
-    vfcvt.s.h vv10, vv6
-    @vp1 vfadd.s vv9, vv9, vv10
-    vaddw vv6, vs0, vs0
-    vcmplt vp2, vv6, vs56
+    @vp1 vaddw vv7, vs2, vv2
+    @vp1 vmulw vv8, vv7, vs56
+    @vp1 vaddw vv8, vv8, vv4
+    @vp1 vsll vv2, vv8, vs51
+    @vp1 vlxh vv7, vs60, vv2
+    vfcvt.s.h vv10, vv7
+    @vp1 vsll vv3, vv4, vs50
+    @vp1 vsra vv3, vv3, vs49
+    @vp1 vlxh vv7, vs61, vv3
+    vfcvt.s.h vv11, vv7
+    @vp1 vfadd.s vv10, vv10, vv11
+    vaddw vv7, vs0, vs0
+    vcmplt vp2, vv7, vs56
 .Lrnn_relu_step_skip2:
     vpop vp4, vp1, vp2, vp2, 0x80
     vpop vp5, vp1, vp2, vp2, 0x02
     @!vp4 vcjal 0, vs1, .Lrnn_relu_step_skip3
-    @vp4 vmulw vv6, vs56, vv4
+    @vp4 vmulw vv7, vs56, vv4
     vsll vs2, vs56, vs50
     vsrl vs2, vs2, vs50
-    @vp4 vsll vv2, vv6, vs51
-    @vp4 vsll vv3, vv8, vs51
+    @vp4 vsll vv3, vv7, vs51
+    @vp4 vsll vv4, vv9, vs51
 .Lrnn_relu_step_skip3:
-    @vp4 vaddw vv6, vv9, vs0
+    @vp4 vaddw vv7, vv10, vs0
     vstop
     .globl rnn_relu_step_wt_r0_b0
 rnn_relu_step_wt_r0_b0:
-    vadd vv4, vv1, vs4
-    @vp4 vlxh vv8, vs5, vv2
-    vfcvt.s.h vv8, vv8
-    @vp4 vadd vv5, vv4, vv3
-    @vp4 vlxh vv10, vs0, vv5
-    vfcvt.s.h vv10, vv10
-    @vp4 vfmadd.s vv6, vv8, vv10, vv6
+    vadd vv5, vv1, vs4
+    @vp4 vlxh vv9, vs5, vv3
+    vfcvt.s.h vv9, vv9
+    @vp4 vadd vv6, vv5, vv4
+    @vp4 vlxh vv11, vs0, vv6
+    vfcvt.s.h vv11, vv11
+    @vp4 vfmadd.s vv7, vv9, vv11, vv7
     vstop
     .globl rnn_relu_step_wt_a0
 rnn_relu_step_wt_a0:
     vpop vp1, vp4, vp4, vp4, 0xAA
     vpop vp1, vp1, vp5, vp5, 0xEE
-    @vp5 vaddw vv8, vv9, vs0
-    @vp4 vaddw vv8, vv6, vs0
+    @vp5 vaddw vv9, vv10, vs0
+    @vp4 vaddw vv9, vv7, vs0
     @!vp1 vcjal 0, vs1, .Lrnn_relu_step_skip4
-    vcmpflt.s vp2, vs0, vv8
-    @!vp2 vaddw vv8, vs0, vs0
-    vfcvt.h.s vv8, vv8
-    @vp1 vsll vv1, vv7, vs51
-    @vp1 vsxh vv8, vs61, vv1
+    vcmpflt.s vp2, vs0, vv9
+    @!vp2 vaddw vv9, vs0, vs0
+    vfcvt.h.s vv9, vv9
+    @vp1 vsxh vv9, vs62, vv2
 .Lrnn_relu_step_skip4:
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp3, vp3, 0xEE
@@ -110,7 +109,7 @@ rnn_relu_step_ct:                       # @rnn_relu_step_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	t0, 1048534
-	addi	t0, t0, 2035
+	addi	t0, t0, 2033
 	srli	t1, t0, 1
 	lw	t0, 0(sp)
 	not	t1, t1
@@ -118,17 +117,17 @@ rnn_relu_step_ct:                       # @rnn_relu_step_ct
 	vsetcfg t1
 	#NO_APP
 	#APP
-	vmcs vs62, a1
+	vmcs vs62, a5
 	#NO_APP
 	#APP
-	vmcs vs61, a5
+	vmcs vs61, a3
 	#NO_APP
 .Lpcrel_hi0:
-	auipc	a1, %pcrel_hi(hwacha_ls0)
+	auipc	a3, %pcrel_hi(hwacha_ls0)
 	#APP
-	vmcs vs60, a3
+	vmcs vs60, a1
 	#NO_APP
-	addi	a1, a1, %pcrel_lo(.Lpcrel_hi0)
+	addi	a1, a3, %pcrel_lo(.Lpcrel_hi0)
 	#APP
 	vmcs vs59, a1
 	#NO_APP

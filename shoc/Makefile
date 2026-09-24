@@ -28,6 +28,7 @@ CLDEFS_scan      := -DSINGLE_PRECISION
 CLDEFS_spmv      := -DSINGLE_PRECISION
 CLDEFS_md        := -DSINGLE_PRECISION
 CLDEFS_gemm      := -DSINGLE_PRECISION
+HWCCFLAGS_gemm   := -vregs 32   # the 16 x 4 work-group must fit one stripmine: maxvl = 8 * 256 / 32 = 64
 CLDEFS_stencil2d := -DSINGLE_PRECISION -DLROWS=8 -DLCOLS=8   # the work-group shape (SHOC: lsize x lsize tiles)
 CLDEFS_s3d       := -DSINGLE_PRECISION -DN_GP=64 -DDIM=4 -Is3d   # grid points per launch, as S3D.cpp
 CLDEFS_md5hash   := -Dinline=static   # C99 `inline` without extern: clang drops the (uninlined) body otherwise

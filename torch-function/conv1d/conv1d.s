@@ -52,80 +52,69 @@ net_kernel_2_wt:
     vadd vv0, vv0, vs63
     vand vv1, vv0, vs49
     vsrl vv2, vv0, vs48
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs50, vv3
-    vmul vv2, vv2, vs46
-    vlxw vv5, vs61, vv2
-    vlw vv6, va0
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs45
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs52, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs44
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs54, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs43
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs51, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs42
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs58, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs46
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs55, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs41
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs60, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs40
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs57, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs39
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs62, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs38
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs53, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs37
-    vsll vv3, vv1, vs47
-    vlxw vv4, vs2, vv3
-    vlxw vv5, vs59, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vadd vs2, vs50, vs36
     vsll vv1, vv1, vs47
-    vlxw vv4, vs2, vv1
-    vlxw vv5, vs56, vv2
-    vfmul.s vv5, vv4, vv5
-    vfadd.s vv6, vv6, vv5
-    vsw vv6, va0
+    vlxw vv3, vs50, vv1
+    vmul vv2, vv2, vs46
+    vlxw vv4, vs61, vv2
+    vlw vv5, va0
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs45
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs52, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs44
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs55, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs43
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs51, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs42
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs54, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs46
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs56, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs41
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs60, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs40
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs58, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs39
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs62, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs38
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs53, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs37
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs59, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vadd vs2, vs50, vs36
+    vlxw vv3, vs2, vv1
+    vlxw vv4, vs57, vv2
+    vfmul.s vv4, vv3, vv4
+    vfadd.s vv5, vv5, vv4
+    vsw vv5, va0
     vstop
 
 # ---- control threads (from llc) ----
@@ -393,7 +382,7 @@ net_kernel_2_ct:                        # @net_kernel_2_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a3, 1048552
-	addi	a3, a3, -1033
+	addi	a3, a3, -1031
 .Lpcrel_hi10:
 	auipc	a4, %pcrel_hi(__constant_8x4x3xf32)
 	srli	a3, a3, 1
@@ -417,23 +406,23 @@ net_kernel_2_ct:                        # @net_kernel_2_ct
 	#APP
 	vmcs vs59, a3
 	#NO_APP
-	addi	a3, a4, 16
+	addi	a3, a4, 28
 	#APP
 	vmcs vs58, a3
 	#NO_APP
-	addi	a3, a4, 28
+	addi	a3, a4, 44
 	#APP
 	vmcs vs57, a3
 	#NO_APP
-	addi	a3, a4, 44
+	addi	a3, a4, 20
 	#APP
 	vmcs vs56, a3
 	#NO_APP
-	addi	a3, a4, 20
+	addi	a3, a4, 8
 	#APP
 	vmcs vs55, a3
 	#NO_APP
-	addi	a3, a4, 8
+	addi	a3, a4, 16
 	#APP
 	vmcs vs54, a3
 	#NO_APP

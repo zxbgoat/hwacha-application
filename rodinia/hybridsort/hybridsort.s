@@ -23,7 +23,7 @@ histogram1024Kernel_wt:
     @vp1 vand vv4, vv3, vs49
     @vp1 vsll vv5, vv4, vs50
     vaddw vv9, vs0, vs0
-    @vp1 vsxw vv9, vs59, vv5
+    @vp1 vsxw vv9, vs60, vv5
     @vp1 vadd vv3, vs62, vv4
     vcmpltu vp2, vv3, vs48
     vpop vp5, vp1, vp2, vp2, 0x80
@@ -50,7 +50,7 @@ histogram1024Kernel_wt:
     @vp1 vsll vv5, vv4, vs46
     @vp1 vsra vv5, vv5, vs46
     @vp1 vsll vv6, vv5, vs50
-    @vp1 vlxw vv8, vs60, vv6
+    @vp1 vlxw vv8, vs59, vv6
     @vp1 vfsub.s vv8, vv8, vs51
     @vp1 vfdiv.s vv8, vv8, vv9
     @vp1 vfmul.s vv8, vv8, vs45
@@ -63,12 +63,12 @@ histogram1024Kernel_wt:
     vpop vp3, vp1, vp1, vp1, 0xAA
     vpclear vp5
 .Lhistogram1024Kernel_loop4:
-    @vp3 vlxw vv8, vs59, vv6
+    @vp3 vlxw vv8, vs60, vv6
     @vp3 vand vv8, vv8, vs43
     @vp3 vaddw vv8, vv8, vs42
     @vp3 vor vv8, vv8, vv7
-    @vp3 vsxw vv8, vs59, vv6
-    @vp3 vlxw vv10, vs59, vv6
+    @vp3 vsxw vv8, vs60, vv6
+    @vp3 vlxw vv10, vs60, vv6
     vcmpeq vp6, vv10, vv8
     vpop vp7, vp3, vp6, vp6, 0x80
     vpop vp8, vp3, vp6, vp6, 0x02
@@ -107,7 +107,7 @@ histogram1024Kernel_wt:
     vpclear vp5
 .Lhistogram1024Kernel_loop8:
     vsll vs4, vs2, vs38
-    vadd vs4, vs59, vs4
+    vadd vs4, vs60, vs4
     @vp3 vlxw vv8, vs4, vv5
     @vp3 vand vv8, vv8, vs43
     @vp3 vaddw vv7, vv8, vv7
@@ -164,7 +164,7 @@ bucketcount_wt:
     @vp1 vsra vv4, vv4, vs49
     @vp1 vsll vv5, vv4, vs48
     vaddw vv9, vs0, vs0
-    @vp1 vsxw vv9, vs59, vv5
+    @vp1 vsxw vv9, vs58, vv5
     @vp1 vadd vv3, vs61, vv4
     vcmplt vp2, vv3, vs47
     vpop vp5, vp1, vp2, vp2, 0x80
@@ -181,7 +181,7 @@ bucketcount_wt:
     vpop vp3, vp1, vp2, vp2, 0x80
     vpop vp4, vp1, vp2, vp2, 0x02
     @!vp3 vcjal 0, vs1, .Lbucketcount_skip2
-    vadd vs2, vs57, vs50
+    vadd vs2, vs59, vs50
     vlsw vs2, vs2
     vsll vs3, vs63, vs49
     vsra vs3, vs3, vs49
@@ -211,23 +211,21 @@ bucketcount_wt:
     @vp3 vaddw vv10, vv11, vv10
     vsrlw vs7, vs7, vs41
     @vp3 vsll vv6, vv10, vs48
-    @vp3 vlxw vv9, vs57, vv6
+    @vp3 vlxw vv9, vs59, vv6
     vaddw vv11, vs7, vs0
     vcmpeq vp6, vv11, vs0
     vpop vp7, vp3, vp6, vp6, 0x80
     vpop vp8, vp3, vp6, vp6, 0x02
-    @vp7 vaddw vv11, vv10, vs0
-    @vp7 vaddw vv12, vv9, vs0
     vpop vp5, vp5, vp7, vp7, 0xEE
     vpop vp3, vp3, vp7, vp7, 0x02
     @vp8 vcjal 1, vs1, .Lbucketcount_loop4
     @!vp5 vcjal 0, vs1, .Lbucketcount_skip5
-    vcmpflt.s vp3, vv8, vv12
+    vcmpflt.s vp3, vv8, vv9
     vpop vp3, vp3, vp3, vp3, 0x55
     vaddw vv8, vs0, vs0
     @vp3 vaddw vv8, vs0, vs39
-    @vp5 vaddw vv11, vv11, vv8
-    vsll vv6, vv11, vs49
+    @vp5 vaddw vv8, vv10, vv8
+    vsll vv6, vv8, vs49
     vsrl vv6, vv6, vs49
     @vp5 vsll vv6, vv6, vs48
     @vp5 vadd vv6, vv4, vv6
@@ -235,23 +233,23 @@ bucketcount_wt:
     vpop vp3, vp5, vp5, vp5, 0xAA
     vpclear vp6
 .Lbucketcount_loop6:
-    @vp3 vlxw vv8, vs59, vv6
-    @vp3 vand vv9, vv8, vs40
-    @vp3 vaddw vv9, vv9, vs41
-    @vp3 vor vv9, vv9, vv7
-    @vp3 vsxw vv9, vs59, vv6
-    @vp3 vlxw vv10, vs59, vv6
-    vcmpeq vp5, vv10, vv9
+    @vp3 vlxw vv9, vs58, vv6
+    @vp3 vand vv10, vv9, vs40
+    @vp3 vaddw vv10, vv10, vs41
+    @vp3 vor vv10, vv10, vv7
+    @vp3 vsxw vv10, vs58, vv6
+    @vp3 vlxw vv11, vs58, vv6
+    vcmpeq vp5, vv11, vv10
     vpop vp7, vp3, vp5, vp5, 0x80
     vpop vp8, vp3, vp5, vp5, 0x02
-    @vp7 vaddw vv9, vv8, vs0
+    @vp7 vaddw vv10, vv9, vs0
     vpop vp6, vp6, vp7, vp7, 0xEE
     vpop vp3, vp3, vp7, vp7, 0x02
     @vp8 vcjal 1, vs1, .Lbucketcount_loop6
     @!vp6 vcjal 0, vs1, .Lbucketcount_skip7
-    @vp6 vsllw vv9, vv9, vs46
-    @vp6 vaddw vv9, vv9, vv11
-    @vp6 vsxw vv9, vs6, vv3
+    @vp6 vsllw vv10, vv10, vs46
+    @vp6 vaddw vv10, vv10, vv8
+    @vp6 vsxw vv10, vs6, vv3
     @vp6 vadd vv5, vv5, vs3
     vcmplt vp3, vv5, vs51
     vadd vs5, vs5, vs39
@@ -280,11 +278,11 @@ bucketcount_wt:
     @vp1 vsll vv4, vv3, vs49
     @vp1 vsra vv4, vv4, vs49
     @vp1 vsll vv5, vv4, vs48
-    @vp1 vlxw vv8, vs59, vv5
+    @vp1 vlxw vv8, vs58, vv5
     @vp1 vand vv8, vv8, vs40
     @vp1 vaddw vv9, vv7, vs2
     @vp1 vsll vv5, vv9, vs48
-    @vp1 vsxw vv8, vs58, vv5
+    @vp1 vsxw vv8, vs57, vv5
     @vp1 vadd vv3, vs61, vv4
     vcmplt vp3, vv3, vs47
     vpop vp5, vp1, vp3, vp3, 0x80
@@ -345,34 +343,34 @@ bucketsort_wt:
     veidx vv1
     vadd vv1, vv1, vs61
     vsllw vs2, vs63, vs55
-    vsllw vv5, vv0, vs54
-    vand vv6, vv5, vs53
+    vsllw vv6, vv0, vs54
+    vand vv7, vv6, vs53
     vcmpltu vp1, vv0, vs52
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     vpop vp1, vp2, vp2, vp2, 0xAA
-    @vp2 vaddw vv5, vv0, vs0
+    @vp2 vaddw vv6, vv0, vs0
     @vp2 vadd vv2, vv0, vs0
     vpclear vp4
 .Lbucketsort_loop0:
     @vp1 vand vv3, vv2, vs47
     @vp1 vsll vv3, vv3, vs48
-    @vp1 vlxw vv7, vs56, vv3
-    @vp1 vaddw vv8, vv5, vs2
-    @vp1 vsll vv3, vv8, vs48
-    @vp1 vlxw vv8, vs59, vv3
-    @vp1 vaddw vv8, vv8, vv7
+    @vp1 vlxw vv8, vs58, vv3
+    @vp1 vaddw vv9, vv6, vs2
+    @vp1 vsll vv3, vv9, vs48
+    @vp1 vlxw vv9, vs57, vv3
+    @vp1 vaddw vv9, vv9, vv8
     @vp1 vsll vv3, vv2, vs49
     @vp1 vsra vv3, vv3, vs49
     @vp1 vsll vv4, vv3, vs48
-    @vp1 vsxw vv8, vs57, vv4
+    @vp1 vsxw vv9, vs59, vv4
     @vp1 vadd vv2, vs60, vv3
     vcmplt vp2, vv2, vs46
     vpop vp5, vp1, vp2, vp2, 0x80
     vpop vp6, vp1, vp2, vp2, 0x02
     vpop vp4, vp4, vp6, vp6, 0xEE
     vpop vp1, vp1, vp6, vp6, 0x02
-    @vp5 vaddw vv5, vv2, vs0
+    @vp5 vaddw vv6, vv2, vs0
     @vp5 vcjal 1, vs1, .Lbucketsort_loop0
     vpop vp1, vp4, vp4, vp4, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
@@ -396,18 +394,18 @@ bucketsort_wt:
     vmul vs5, vs3, vs4
     vadd vs6, vs45, vs5
     vadd vs5, vs44, vs5
-    @vp1 vlxw vv5, vs6, vv2
-    @vp1 vlxw vv7, vs5, vv2
-    @vp1 vand vv8, vv7, vs43
-    @vp1 vor vv8, vv8, vv6
-    @vp1 vsll vv4, vv8, vs48
-    @vp1 vlxw vv9, vs57, vv4
-    @vp1 vsraw vv7, vv7, vs55
-    @vp1 vaddw vv9, vv9, vv7
-    vsll vv4, vv9, vs49
-    vsrl vv4, vv4, vs49
-    @vp1 vsll vv4, vv4, vs48
-    @vp1 vsxw vv5, vs58, vv4
+    @vp1 vlxw vv6, vs6, vv2
+    @vp1 vlxw vv8, vs5, vv2
+    @vp1 vand vv9, vv8, vs43
+    @vp1 vor vv9, vv9, vv7
+    @vp1 vsll vv4, vv9, vs48
+    @vp1 vlxw vv9, vs59, vv4
+    @vp1 vsraw vv8, vv8, vs55
+    @vp1 vaddw vv9, vv9, vv8
+    vsll vv5, vv9, vs49
+    vsrl vv5, vv5, vs49
+    @vp1 vsll vv5, vv5, vs48
+    @vp1 vsxw vv6, vs56, vv5
     @vp1 vadd vv3, vv3, vs2
     vcmplt vp3, vv3, vs50
     vadd vs4, vs4, vs42
@@ -440,10 +438,10 @@ histogram1024Kernel_ct:                 # @histogram1024Kernel_ct
 	#NO_APP
 	addi	a4, a5, %pcrel_lo(.Lpcrel_hi0)
 	#APP
-	vmcs vs60, a2
+	vmcs vs60, a4
 	#NO_APP
 	#APP
-	vmcs vs59, a4
+	vmcs vs59, a2
 	#NO_APP
 	li	a2, 5
 	li	a4, -1024
@@ -610,7 +608,7 @@ histogram1024Kernel_ct:                 # @histogram1024Kernel_ct
 bucketcount_ct:                         # @bucketcount_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a6, 1048526
+	lui	a6, 1048534
 	addi	a6, a6, -1039
 	srli	a6, a6, 1
 	not	a6, a6
@@ -621,13 +619,13 @@ bucketcount_ct:                         # @bucketcount_ct
 	#NO_APP
 	addi	a6, a7, %pcrel_lo(.Lpcrel_hi4)
 	#APP
-	vmcs vs59, a6
+	vmcs vs59, a5
 	#NO_APP
 	#APP
-	vmcs vs58, a3
+	vmcs vs58, a6
 	#NO_APP
 	#APP
-	vmcs vs57, a5
+	vmcs vs57, a3
 	#NO_APP
 	li	a3, 27
 	#APP
@@ -869,31 +867,31 @@ bucketprefixoffset_ct:                  # @bucketprefixoffset_ct
 bucketsort_ct:                          # @bucketsort_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a7, 1048534
-	addi	a7, a7, 1013
+	lui	a7, 1048542
+	addi	a7, a7, 1011
 	srli	a7, a7, 1
 	not	a7, a7
+.Lpcrel_hi11:
+	auipc	t0, %pcrel_hi(bucketsort.s_offset)
 	#APP
 	vsetcfg a7
 	#NO_APP
+	addi	a7, t0, %pcrel_lo(.Lpcrel_hi11)
 	#APP
-	vmcs vs59, a5
-	#NO_APP
-.Lpcrel_hi11:
-	auipc	a5, %pcrel_hi(bucketsort.s_offset)
-	#APP
-	vmcs vs58, a3
-	#NO_APP
-	addi	a3, a5, %pcrel_lo(.Lpcrel_hi11)
-	#APP
-	vmcs vs57, a3
-	#NO_APP
-	li	a3, 10
-	#APP
-	vmcs vs56, a6
+	vmcs vs59, a7
 	#NO_APP
 	#APP
-	vmcs vs55, a3
+	vmcs vs58, a6
+	#NO_APP
+	#APP
+	vmcs vs57, a5
+	#NO_APP
+	li	a5, 10
+	#APP
+	vmcs vs56, a3
+	#NO_APP
+	#APP
+	vmcs vs55, a5
 	#NO_APP
 	li	a3, 5
 	li	a5, -1024

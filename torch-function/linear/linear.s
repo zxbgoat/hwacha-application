@@ -36,8 +36,8 @@ net_kernel_1_wt:
     vstop
     .globl net_kernel_1_wt_r0_b0
 net_kernel_1_wt_r0_b0:
-    vlw vv2, va1
-    vfmul.s vv2, vs2, vv2
+    vlw vv0, va1
+    vfmul.s vv2, vs2, vv0
     vfadd.s vv1, vv1, vv2
     vstop
     .globl net_kernel_1_wt_a0

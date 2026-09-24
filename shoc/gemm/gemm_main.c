@@ -4,13 +4,12 @@
 // [0.5, 2). SHOC only times these kernels; here the result is checked against a scalar reference
 // (1e-4 relative, the accumulation order differs). N scaled from 256 to 128.
 //
-// KNOWN LIMIT: the kernels need a 64-lane work-group (the 16 x 4 tile mapping is hard-coded, the B
-// tile is shared through __local memory across barriers), which on Hwacha requires <= 32 vector
-// registers (maxvl = 8 * 256 / registers), but the k loop keeps 16 C accumulators, 4 A values and
-// the tile addresses live: hwacha-cc allocates 65 vector registers (maxvl 24) and its spiller cannot
-// evict values that stay live across the loop (-vregs 32 ends in "nothing to spill"). The group is
-// therefore split over three stripmines and the barrier-separated tile loads see the wrong lanes;
-// the host reports the mismatch and hwacha_vl_short. Kept as a documented FAIL.
+// The kernels need a 64-lane work-group (the 16 x 4 tile mapping is hard-coded, the B tile is shared
+// through __local memory across barriers), which on Hwacha means <= 32 vector registers (maxvl =
+// 8 * 256 / registers): built with -vregs 32. The k loop keeps 16 C accumulators, 4 A values and the
+// tile addresses live; hwacha-cc computes each accumulator's FMA chain in place, shares the gather
+// offsets of the A loads, and aliases the loop-exit values instead of copying them, so the kernels
+// fit (NN 32, NT 32 registers with a few spills).
 #include "common.h"
 #define N 128
 #define LX 16

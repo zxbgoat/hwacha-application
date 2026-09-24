@@ -11,29 +11,29 @@ reduce_wt:
     vmul vs3, vs2, vs63
     vadd vv1, vs3, vv0
     vmul vs2, vs2, vs61
-    vaddw vv4, vs0, vs0
-    vsw vv4, va0
+    vaddw vv3, vs0, vs0
+    vsw vv3, va0
     vcmpltu vp1, vv1, vs57
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
-    @vp2 vaddw vv4, vs62, vv1
+    @vp2 vaddw vv3, vs62, vv1
     vpop vp1, vp2, vp2, vp2, 0xAA
     @vp2 vaddw vs3, vs0, vs0
-    @vp2 vaddw vv5, vs0, vs0
-    @vp2 vaddw vv6, vv1, vs0
+    @vp2 vaddw vv4, vs0, vs0
+    @vp2 vaddw vv5, vv1, vs0
     vpclear vp4
 .Lreduce_loop0:
-    @vp1 vsll vv2, vv6, vs56
+    @vp1 vsll vv1, vv5, vs56
     vmulw vs4, vs2, vs3
-    @vp1 vaddw vv7, vv4, vs4
-    @vp1 vsll vv3, vv7, vs56
-    @vp1 vlxw vv7, vs59, vv2
-    @vp1 vlxw vv8, vs59, vv3
-    @vp1 vfadd.s vv7, vv7, vv8
-    @vp1 vfadd.s vv5, vv5, vv7
-    @vp1 vsw vv5, va0
-    @vp1 vaddw vv6, vv6, vs2
-    vcmpltu vp2, vv6, vs57
+    @vp1 vaddw vv6, vv3, vs4
+    @vp1 vsll vv2, vv6, vs56
+    @vp1 vlxw vv6, vs60, vv1
+    @vp1 vlxw vv7, vs60, vv2
+    @vp1 vfadd.s vv6, vv6, vv7
+    @vp1 vfadd.s vv4, vv4, vv6
+    @vp1 vsw vv4, va0
+    @vp1 vaddw vv5, vv5, vs2
+    vcmpltu vp2, vv5, vs57
     vaddw vs3, vs3, vs55
     vpop vp5, vp1, vp2, vp2, 0x80
     vpop vp6, vp1, vp2, vp2, 0x02
@@ -45,8 +45,8 @@ reduce_wt:
     @!vp1 vcjal 0, vs1, .Lreduce_skip1
     vfence
     vsrlw vs2, vs62, vs55
-    vaddw vv4, vs2, vs0
-    vcmpeq vp2, vv4, vs0
+    vaddw vv3, vs2, vs0
+    vcmpeq vp2, vv3, vs0
 .Lreduce_skip1:
     vpop vp3, vp1, vp2, vp2, 0x80
     vpop vp4, vp1, vp2, vp2, 0x02
@@ -58,22 +58,22 @@ reduce_wt:
     vpop vp5, vp1, vp4, vp4, 0x80
     vpop vp6, vp1, vp4, vp4, 0x02
     @!vp5 vcjal 0, vs1, .Lreduce_skip3
-    @vp5 vaddw vv4, vs3, vv0
-    vsll vv1, vv4, vs53
+    @vp5 vaddw vv3, vs3, vv0
+    vsll vv1, vv3, vs53
     vsrl vv1, vv1, vs53
     @vp5 vsll vv1, vv1, vs56
-    @vp5 vlxw vv4, vs60, vv1
-    @vp5 vlw vv5, va0
-    @vp5 vfadd.s vv5, vv4, vv5
-    @vp5 vsw vv5, va0
+    @vp5 vlxw vv3, vs59, vv1
+    @vp5 vlw vv4, va0
+    @vp5 vfadd.s vv4, vv3, vv4
+    @vp5 vsw vv4, va0
 .Lreduce_skip3:
     vpop vp4, vp5, vp5, vp5, 0xAA
     vpop vp4, vp4, vp6, vp6, 0xEE
     @!vp4 vcjal 0, vs1, .Lreduce_skip4
     vfence
     vsrlw vs3, vs3, vs55
-    vaddw vv4, vs3, vs0
-    vcmpeq vp5, vv4, vs0
+    vaddw vv3, vs3, vs0
+    vcmpeq vp5, vv3, vs0
 .Lreduce_skip4:
     vpop vp6, vp4, vp5, vp5, 0x80
     vpop vp7, vp4, vp5, vp5, 0x02
@@ -88,7 +88,7 @@ reduce_wt:
     vpop vp3, vp2, vp1, vp1, 0x80
     vpop vp4, vp2, vp1, vp1, 0x02
     @!vp3 vcjal 0, vs1, .Lreduce_skip5
-    vlsw vs2, vs60
+    vlsw vs2, vs59
     vmul vs4, vs63, vs52
     vadd vs3, vs54, vs4
     vssw vs3, vs2
@@ -138,7 +138,7 @@ reduce_ct:                              # @reduce_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a5, 1048534
-	addi	a5, a5, -9
+	addi	a5, a5, -7
 	srli	a5, a5, 1
 	not	a6, a5
 .Lpcrel_hi0:
@@ -163,10 +163,10 @@ reduce_ct:                              # @reduce_ct
 	vmcs vs61, a7
 	#NO_APP
 	#APP
-	vmcs vs60, a3
+	vmcs vs60, a1
 	#NO_APP
 	#APP
-	vmcs vs59, a1
+	vmcs vs59, a3
 	#NO_APP
 	#APP
 	vmcs vs58, a6

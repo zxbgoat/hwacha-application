@@ -30,7 +30,6 @@ Fan1_wt:
     @vp2 vfdiv.s vv4, vv2, vs3
     vsll vs2, vs62, vs58
     vadd vs2, vs56, vs2
-    @vp2 vsll vv1, vv3, vs58
     @vp2 vsxw vv4, vs2, vv1
 .LFan1_skip0:
     vpop vp1, vp2, vp2, vp2, 0xAA
@@ -73,7 +72,7 @@ Fan2_wt:
     @vp2 vmulw vv6, vv5, vs54
     @vp2 vaddw vv7, vv6, vs56
     @vp2 vsll vv1, vv7, vs52
-    @vp2 vlxw vv7, vs61, vv1
+    @vp2 vlxw vv7, vs60, vv1
     vmulw vs2, vs56, vs54
     @vp2 vaddw vv8, vs56, vv2
     @vp2 vaddw vv9, vv8, vs2
@@ -90,16 +89,15 @@ Fan2_wt:
     vpop vp5, vp2, vp3, vp3, 0x80
     vpop vp6, vp2, vp3, vp3, 0x02
     @!vp5 vcjal 0, vs1, .LFan2_skip1
-    @vp5 vsll vv1, vv6, vs52
-    @vp5 vlxw vv6, vs61, vv1
+    @vp5 vlxw vv6, vs60, vv1
     vmul vs3, vs56, vs51
-    vadd vs2, vs60, vs3
+    vadd vs2, vs61, vs3
     vlsw vs2, vs2
     @vp5 vsll vv1, vv5, vs52
-    @vp5 vlxw vv5, vs60, vv1
+    @vp5 vlxw vv5, vs61, vv1
     @vp5 vfsgnjn.s vv6, vv6, vv6
     @vp5 vfmadd.s vv6, vv6, vs2, vv5
-    @vp5 vsxw vv6, vs60, vv1
+    @vp5 vsxw vv6, vs61, vv1
 .LFan2_skip1:
     vpop vp2, vp5, vp5, vp5, 0xAA
     vpop vp2, vp2, vp6, vp6, 0xEE
@@ -225,14 +223,14 @@ Fan2_ct:                                # @Fan2_ct
 .Lpcrel_hi3:
 	auipc	a2, %pcrel_hi(hwacha_ls0)
 	#APP
-	vmcs vs61, a1
+	vmcs vs61, a3
 	#NO_APP
-	addi	a1, a2, %pcrel_lo(.Lpcrel_hi3)
+	addi	a2, a2, %pcrel_lo(.Lpcrel_hi3)
 	#APP
-	vmcs vs60, a3
+	vmcs vs60, a1
 	#NO_APP
 	#APP
-	vmcs vs59, a1
+	vmcs vs59, a2
 	#NO_APP
 .Lpcrel_hi4:
 	auipc	a1, %pcrel_hi(hwacha_ls1)

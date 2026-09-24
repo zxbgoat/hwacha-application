@@ -63,24 +63,23 @@ Convolution2D_kernel_wt:
     @vp1 vlxw vv10, vs62, vv1
     @vp1 vfmadd.s vv10, vv10, vs48, vv9
     @vp1 vaddw vv7, vv7, vv8
-    @vp1 vsll vv1, vv7, vs54
-    @vp1 vlxw vv7, vs62, vv1
+    @vp1 vsll vv3, vv7, vs54
+    @vp1 vlxw vv7, vs62, vv3
     @vp1 vfmadd.s vv7, vv7, vs47, vv10
     @vp1 vaddw vv9, vv2, vs51
     @vp1 vmulw vv9, vv9, vs55
     @vp1 vaddw vv10, vv9, vv5
-    @vp1 vsll vv1, vv10, vs54
-    @vp1 vlxw vv5, vs62, vv1
+    @vp1 vsll vv2, vv10, vs54
+    @vp1 vlxw vv5, vs62, vv2
     @vp1 vfmadd.s vv7, vv5, vs46, vv7
     @vp1 vaddw vv5, vv9, vv4
-    @vp1 vsll vv1, vv5, vs54
-    @vp1 vlxw vv5, vs62, vv1
+    @vp1 vsll vv2, vv5, vs54
+    @vp1 vlxw vv5, vs62, vv2
     @vp1 vfmadd.s vv7, vv5, vs45, vv7
     @vp1 vaddw vv9, vv9, vv8
-    @vp1 vsll vv1, vv9, vs54
-    @vp1 vlxw vv5, vs62, vv1
+    @vp1 vsll vv2, vv9, vs54
+    @vp1 vlxw vv5, vs62, vv2
     @vp1 vfmadd.s vv7, vv5, vs44, vv7
-    @vp1 vsll vv1, vv6, vs54
     @vp1 vsxw vv7, vs61, vv1
 .LConvolution2D_kernel_skip1:
     vpop vp2, vp1, vp1, vp1, 0xAA

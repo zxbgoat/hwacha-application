@@ -30,9 +30,9 @@ make gen-triad      # 从 .cl 重新生成汇编（需要 hwacha-cc）
 |---|---|
 | triad 64 KB block / : scalar | 131,086 |
 | triad 64 KB block / hwacha-cc | 2,974 |
-| 0 mismatches triad 128 KB block / : scalar | 262,158 |
-| 0 mismatches triad 128 KB block / hwacha-cc | 5,918 |
-| 0 mismatches triad 256 KB block / : scalar | 524,302 |
-| 0 mismatches triad 256 KB block / hwacha-cc | 11,806 |
+| triad 128 KB block / : scalar | 262,158 |
+| triad 128 KB block / hwacha-cc | 5,918 |
+| triad 256 KB block / : scalar | 524,302 |
+| triad 256 KB block / hwacha-cc | 11,806 |
 
 结果：triad **PASS**。

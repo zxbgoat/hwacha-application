@@ -41,50 +41,20 @@ net_kernel_1_wt:
     vsll vv5, vv1, vs60
     vadd vv4, vv4, vv5
     vlxw vv7, vs61, vv4
-    vadd vv4, vv2, vv3
-    vsll vv5, vv1, vs59
-    vadd vv4, vv4, vv5
-    vlxw vv8, vs62, vv4
-    vfadd.s vv8, vv7, vv8
-    vadd vs2, vs61, vs56
-    vsrl vv4, vv0, vs56
-    vsll vv4, vv4, vs55
-    vsrl vv5, vv0, vs59
-    vsll vv6, vv5, vs51
-    vsrl vv6, vv6, vs51
-    vsll vv6, vv6, vs54
-    vadd vv4, vv4, vv6
-    vsll vv5, vv1, vs60
-    vadd vv4, vv4, vv5
-    vlxw vv7, vs2, vv4
-    vfadd.s vv8, vv8, vv7
-    vadd vs2, vs61, vs53
-    vsrl vv4, vv0, vs56
-    vsll vv4, vv4, vs55
-    vsrl vv5, vv0, vs59
-    vsll vv6, vv5, vs51
-    vsrl vv6, vv6, vs51
-    vsll vv6, vv6, vs54
-    vadd vv4, vv4, vv6
-    vsll vv5, vv1, vs60
-    vadd vv4, vv4, vv5
-    vlxw vv7, vs2, vv4
-    vfadd.s vv8, vv8, vv7
-    vadd vs2, vs61, vs52
-    vsrl vv4, vv0, vs56
-    vsll vv4, vv4, vs55
-    vsrl vv5, vv0, vs59
-    vsll vv6, vv5, vs51
-    vsrl vv6, vv6, vs51
-    vsll vv6, vv6, vs54
-    vadd vv4, vv4, vv6
-    vsll vv5, vv1, vs60
-    vadd vv4, vv4, vv5
-    vlxw vv7, vs2, vv4
-    vfadd.s vv8, vv8, vv7
     vadd vv2, vv2, vv3
     vsll vv1, vv1, vs59
     vadd vv2, vv2, vv1
+    vlxw vv8, vs62, vv2
+    vfadd.s vv8, vv7, vv8
+    vadd vs2, vs61, vs56
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
+    vadd vs2, vs61, vs53
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
+    vadd vs2, vs61, vs52
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
     vsxw vv8, vs62, vv2
     vstop
 

@@ -45,7 +45,7 @@ BFS_kernel_warp_wt:
     vpclear vp2
 .LBFS_kernel_warp_loop2:
     vsll vs4, vs3, vs54
-    vadd vs5, vs62, vs4
+    vadd vs5, vs61, vs4
     vadd vs6, vs4, vs53
     vadd vs6, vs52, vs6
     vadd vs4, vs52, vs4
@@ -55,38 +55,37 @@ BFS_kernel_warp_wt:
     vpop vp6, vp1, vp3, vp3, 0x02
     @!vp5 vcjal 0, vs1, .LBFS_kernel_warp_skip3
     @vp5 vlxw vv4, vs6, vv1
-    @vp5 vlxw vv8, vs4, vv1
-    @vp5 vsubw vv9, vv4, vv8
-    vcmpltu vp3, vv6, vv9
+    @vp5 vlxw vv7, vs4, vv1
+    @vp5 vsubw vv8, vv4, vv7
+    vcmpltu vp3, vv6, vv8
 .LBFS_kernel_warp_skip3:
     vpop vp7, vp5, vp3, vp3, 0x80
     vpop vp8, vp5, vp3, vp3, 0x02
-    @vp7 vaddw vv4, vv5, vv8
+    @vp7 vaddw vv4, vv5, vv7
     vpop vp3, vp7, vp7, vp7, 0xAA
     @vp7 vaddw vs4, vs0, vs0
-    @vp7 vaddw vv11, vv6, vs0
+    @vp7 vaddw vv9, vv6, vs0
     vpclear vp5
 .LBFS_kernel_warp_loop4:
     vmulw vs5, vs60, vs4
-    @vp3 vaddw vv12, vv4, vs5
-    @vp3 vsll vv3, vv12, vs54
-    @vp3 vlxw vv12, vs61, vv3
-    @vp3 vsll vv3, vv12, vs54
-    @vp3 vlxw vv13, vs62, vv3
-    vcmpeq vp7, vv13, vs56
+    @vp3 vaddw vv11, vv4, vs5
+    @vp3 vsll vv3, vv11, vs54
+    @vp3 vlxw vv11, vs62, vv3
+    @vp3 vsll vv3, vv11, vs54
+    @vp3 vlxw vv11, vs61, vv3
+    vcmpeq vp7, vv11, vs56
     vpop vp9, vp3, vp7, vp7, 0x80
     vpop vp10, vp3, vp7, vp7, 0x02
     @!vp9 vcjal 0, vs1, .LBFS_kernel_warp_skip5
-    @vp9 vsll vv3, vv12, vs54
-    vaddw vv12, vs2, vs0
-    @vp9 vsxw vv12, vs62, vv3
+    vaddw vv11, vs2, vs0
+    @vp9 vsxw vv11, vs61, vv3
     vssw vs51, vs57
 .LBFS_kernel_warp_skip5:
     vpop vp7, vp9, vp9, vp9, 0xAA
     vpop vp7, vp7, vp10, vp10, 0xEE
     @!vp7 vcjal 0, vs1, .LBFS_kernel_warp_skip6
-    @vp7 vaddw vv11, vv11, vs60
-    vcmpltu vp9, vv11, vv9
+    @vp7 vaddw vv9, vv9, vs60
+    vcmpltu vp9, vv9, vv8
     vaddw vs4, vs4, vs57
 .LBFS_kernel_warp_skip6:
     vpop vp10, vp7, vp9, vp9, 0x80
@@ -125,8 +124,8 @@ BFS_kernel_one_block_wt:
     vpop vp2, vp0, vp1, vp1, 0x80
     vpop vp3, vp0, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .LBFS_kernel_one_block_skip0
-    @vp2 vlw vv8, va0
-    @vp2 vsw vv8, va1
+    @vp2 vlw vv7, va0
+    @vp2 vsw vv7, va1
 .LBFS_kernel_one_block_skip0:
     vpop vp1, vp2, vp2, vp2, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
@@ -155,62 +154,61 @@ BFS_kernel_one_block_wt:
     vpop vp7, vp8, vp1, vp1, 0x80
     vpop vp9, vp8, vp1, vp1, 0x02
     @!vp7 vcjal 0, vs1, .LBFS_kernel_one_block_skip5
-    @vp7 vlw vv8, va1
-    vsll vv1, vv8, vs47
+    @vp7 vlw vv7, va1
+    vsll vv1, vv7, vs47
     vsrl vv1, vv1, vs47
     @vp7 vsll vv2, vv1, vs53
-    vaddw vv9, vs0, vs0
-    @vp7 vsxw vv9, vs59, vv2
-    @vp7 vlxw vv9, vs62, vv2
-    @vp7 vaddw vv10, vv8, vs52
-    vsll vv2, vv10, vs47
-    vsrl vv2, vv2, vs47
-    @vp7 vsll vv2, vv2, vs53
-    @vp7 vlxw vv8, vs62, vv2
-    vcmpltu vp1, vv9, vv8
+    vaddw vv8, vs0, vs0
+    @vp7 vsxw vv8, vs59, vv2
+    @vp7 vlxw vv8, vs61, vv2
+    @vp7 vaddw vv9, vv7, vs52
+    vsll vv3, vv9, vs47
+    vsrl vv3, vv3, vs47
+    @vp7 vsll vv3, vv3, vs53
+    @vp7 vlxw vv7, vs61, vv3
+    vcmpltu vp1, vv8, vv7
 .LBFS_kernel_one_block_skip5:
     vpop vp8, vp7, vp1, vp1, 0x80
     vpop vp10, vp7, vp1, vp1, 0x02
     @!vp8 vcjal 0, vs1, .LBFS_kernel_one_block_skip6
-    vsll vv2, vv9, vs47
-    vsrl vv2, vv2, vs47
-    @vp8 vsll vv3, vv2, vs53
-    @vp8 vsll vv1, vv1, vs53
+    vsll vv1, vv8, vs47
+    vsrl vv1, vv1, vs47
+    @vp8 vsll vv3, vv1, vs53
 .LBFS_kernel_one_block_skip6:
-    vaddw vv9, vs0, vs0
-    @vp9 vaddw vv9, vs0, vs49
+    vaddw vv8, vs0, vs0
+    @vp9 vaddw vv8, vs0, vs49
     vpop vp1, vp8, vp8, vp8, 0xAA
     @vp8 vadd vs3, vs0, vs0
-    @vp8 vadd vv4, vv2, vs0
+    @vp8 vadd vv4, vv1, vs0
     vpclear vp7
 .LBFS_kernel_one_block_loop7:
     vsll vs4, vs3, vs53
     vadd vs4, vs51, vs4
-    @vp1 vlxw vv10, vs4, vv3
-    vsll vv5, vv10, vs47
-    vsrl vv5, vv5, vs47
-    vmul vv7, vv5, vs46
-    vadd vv6, vs60, vv7
-    @vp1 vlxw vv11, vs60, vv1
+    @vp1 vlxw vv9, vs4, vv3
+    vsll vv1, vv9, vs47
+    vsrl vv1, vv1, vs47
+    vmul vv6, vv1, vs46
+    vadd vv5, vs62, vv6
+    @vp1 vlxw vv10, vs62, vv2
+    @vp1 vaddw vv10, vv10, vs52
+    @vp1 vamominu.w vv10, 0(vv5), vv10
+    @vp1 vlxw vv11, vs62, vv2
     @vp1 vaddw vv11, vv11, vs52
-    @vp1 vamominu.w vv11, 0(vv6), vv11
-    @vp1 vlxw vv12, vs60, vv1
-    @vp1 vaddw vv12, vv12, vs52
-    vcmpltu vp8, vv12, vv11
+    vcmpltu vp8, vv11, vv10
     vpop vp9, vp1, vp8, vp8, 0x80
     vpop vp11, vp1, vp8, vp8, 0x02
     @!vp9 vcjal 0, vs1, .LBFS_kernel_one_block_skip8
-    vmul vv6, vv5, vs46
-    vadd vv5, vs59, vv6
-    @vp9 vamoswap.w vv11, 0(vv5), vs52
-    vcmpeq vp8, vv11, vs0
+    vmul vv5, vv1, vs46
+    vadd vv1, vs59, vv5
+    @vp9 vamoswap.w vv10, 0(vv1), vs52
+    vcmpeq vp8, vv10, vs0
 .LBFS_kernel_one_block_skip8:
     vpop vp12, vp9, vp8, vp8, 0x80
     vpop vp13, vp9, vp8, vp8, 0x02
     @!vp12 vcjal 0, vs1, .LBFS_kernel_one_block_skip9
     @vp12 vamoadd.w vs4, 0(vs55), vs52
-    vaddw vv11, vs4, vs0
-    vcmpltu vp8, vv11, vs56
+    vaddw vv10, vs4, vs0
+    vcmpltu vp8, vv10, vs56
 .LBFS_kernel_one_block_skip9:
     vpop vp9, vp12, vp8, vp8, 0x80
     vpop vp14, vp12, vp8, vp8, 0x02
@@ -219,15 +217,15 @@ BFS_kernel_one_block_wt:
     vsrl vs4, vs4, vs47
     vmul vs5, vs4, vs46
     vadd vs4, vs50, vs5
-    vadd vv5, vs4, vs0
-    @vp9 vsxw vv10, vs0, vv5
+    vadd vv1, vs4, vs0
+    @vp9 vsxw vv9, vs0, vv1
 .LBFS_kernel_one_block_skip10:
     @!vp14 vcjal 0, vs1, .LBFS_kernel_one_block_skip11
     @vp14 vamoadd.w vs4, 0(vs54), vs52
     vmul vs6, vs4, vs46
-    vadd vs5, vs61, vs6
-    vadd vv5, vs5, vs0
-    @vp14 vsxw vv10, vs0, vv5
+    vadd vs5, vs60, vs6
+    vadd vv1, vs5, vs0
+    @vp14 vsxw vv9, vs0, vv1
 .LBFS_kernel_one_block_skip11:
     vpop vp8, vp14, vp14, vp14, 0xAA
     vpop vp8, vp8, vp9, vp9, 0xEE
@@ -235,7 +233,7 @@ BFS_kernel_one_block_wt:
     vpop vp8, vp8, vp11, vp11, 0xEE
     @!vp8 vcjal 0, vs1, .LBFS_kernel_one_block_skip12
     @vp8 vadd vv4, vv4, vs49
-    vcmpeq vp9, vv8, vv4
+    vcmpeq vp9, vv7, vv4
     vadd vs3, vs3, vs49
 .LBFS_kernel_one_block_skip12:
     vpop vp11, vp8, vp9, vp9, 0x80
@@ -245,7 +243,7 @@ BFS_kernel_one_block_wt:
     @vp12 vcjal 1, vs1, .LBFS_kernel_one_block_loop7
     vpop vp1, vp11, vp11, vp11, 0xAA
     vpop vp1, vp1, vp7, vp7, 0xEE
-    vcmpeq vp7, vv9, vs0
+    vcmpeq vp7, vv8, vs0
     vpop vp7, vp7, vp7, vp7, 0x55
     vpop vp8, vp1, vp1, vp1, 0xAA
     vpop vp8, vp8, vp10, vp10, 0xEE
@@ -254,16 +252,16 @@ BFS_kernel_one_block_wt:
     vpop vp1, vp8, vp3, vp3, 0x80
     vpop vp7, vp8, vp3, vp3, 0x02
     @!vp1 vcjal 0, vs1, .LBFS_kernel_one_block_skip13
-    @vp1 vlw vv8, va2
-    @vp1 vsw vv8, va1
+    @vp1 vlw vv7, va2
+    @vp1 vsw vv7, va1
 .LBFS_kernel_one_block_skip13:
     vpop vp8, vp1, vp1, vp1, 0xAA
     vpop vp8, vp8, vp7, vp7, 0xEE
     @!vp8 vcjal 0, vs1, .LBFS_kernel_one_block_skip14
     vfence
     vlsw vs3, vs55
-    vaddw vv8, vs3, vs0
-    vcmpeq vp1, vv8, vs0
+    vaddw vv7, vs3, vs0
+    vcmpeq vp1, vv7, vs0
 .LBFS_kernel_one_block_skip14:
     vpop vp7, vp8, vp1, vp1, 0x80
     vpop vp9, vp8, vp1, vp1, 0x02
@@ -280,8 +278,8 @@ BFS_kernel_one_block_wt:
     vpop vp4, vp4, vp8, vp8, 0x02
     @!vp10 vcjal 0, vs1, .LBFS_kernel_one_block_skip16
     vlsw vs3, vs55
-    vaddw vv8, vs56, vs0
-    vcmpltu vp1, vv8, vs3
+    vaddw vv7, vs56, vs0
+    vcmpltu vp1, vv7, vs3
 .LBFS_kernel_one_block_skip16:
     vpop vp9, vp10, vp1, vp1, 0x80
     vpop vp11, vp10, vp1, vp1, 0x02
@@ -308,13 +306,13 @@ BFS_kernel_one_block_wt:
     vpop vp6, vp1, vp5, vp5, 0x80
     vpop vp7, vp1, vp5, vp5, 0x02
     @!vp6 vcjal 0, vs1, .LBFS_kernel_one_block_skip19
-    @vp6 vlw vv8, va1
+    @vp6 vlw vv7, va1
     vlsw vs2, vs54
-    @vp6 vaddw vv9, vs2, vv0
-    vsll vv1, vv9, vs47
+    @vp6 vaddw vv8, vs2, vv0
+    vsll vv1, vv8, vs47
     vsrl vv1, vv1, vs47
     @vp6 vsll vv1, vv1, vs53
-    @vp6 vsxw vv8, vs61, vv1
+    @vp6 vsxw vv7, vs60, vv1
 .LBFS_kernel_one_block_skip19:
     vpop vp1, vp6, vp6, vp6, 0xAA
     vpop vp1, vp1, vp7, vp7, 0xEE
@@ -325,11 +323,11 @@ BFS_kernel_one_block_wt:
 .LBFS_kernel_one_block_skip20:
     vpop vp1, vp5, vp5, vp5, 0xAA
     vpop vp1, vp1, vp3, vp3, 0xEE
-    @vp5 vaddw vv8, vs2, vs0
-    @vp3 vaddw vv8, vs0, vs0
+    @vp5 vaddw vv7, vs2, vs0
+    @vp3 vaddw vv7, vs0, vs0
     @!vp1 vcjal 0, vs1, .LBFS_kernel_one_block_skip21
     vadd vv1, vs48, vs0
-    @vp1 vsxw vv8, vs0, vv1
+    @vp1 vsxw vv7, vs0, vv1
 .LBFS_kernel_one_block_skip21:
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp6, vp6, 0xEE
@@ -371,98 +369,97 @@ BFS_kernel_SM_block_wt:
     vpop vp6, vp7, vp5, vp5, 0x80
     vpop vp8, vp7, vp5, vp5, 0x02
     @!vp6 vcjal 0, vs1, .LBFS_kernel_SM_block_skip3
-    vaddw vv11, vs5, vs0
-    vcmpeq vp5, vv11, vs0
+    vaddw vv10, vs5, vs0
+    vcmpeq vp5, vv10, vs0
 .LBFS_kernel_SM_block_skip3:
     vpop vp7, vp6, vp5, vp5, 0x80
     vpop vp9, vp6, vp5, vp5, 0x02
-    @vp7 vlw vv11, va0
-    @vp9 vlw vv12, va1
+    @vp7 vlw vv10, va0
+    @vp9 vlw vv11, va1
     vpop vp6, vp9, vp9, vp9, 0xAA
     vpop vp6, vp6, vp7, vp7, 0xEE
-    @vp7 vaddw vv13, vv11, vs0
-    @vp9 vaddw vv13, vv12, vs0
+    @vp7 vaddw vv12, vv10, vs0
+    @vp9 vaddw vv12, vv11, vs0
     @!vp6 vcjal 0, vs1, .LBFS_kernel_SM_block_skip4
-    vsll vv4, vv13, vs39
+    vsll vv4, vv12, vs39
     vsrl vv4, vv4, vs39
     @vp6 vsll vv5, vv4, vs49
-    vaddw vv11, vs0, vs0
-    @vp6 vsxw vv11, vs55, vv5
-    @vp6 vlxw vv11, vs57, vv5
-    @vp6 vaddw vv13, vv13, vs48
-    vsll vv5, vv13, vs39
-    vsrl vv5, vv5, vs39
-    @vp6 vsll vv5, vv5, vs49
-    @vp6 vlxw vv12, vs57, vv5
-    vcmpltu vp7, vv11, vv12
+    vaddw vv10, vs0, vs0
+    @vp6 vsxw vv10, vs56, vv5
+    @vp6 vlxw vv10, vs59, vv5
+    @vp6 vaddw vv12, vv12, vs48
+    vsll vv6, vv12, vs39
+    vsrl vv6, vv6, vs39
+    @vp6 vsll vv6, vv6, vs49
+    @vp6 vlxw vv11, vs59, vv6
+    vcmpltu vp7, vv10, vv11
 .LBFS_kernel_SM_block_skip4:
     vpop vp9, vp6, vp7, vp7, 0x80
     vpop vp10, vp6, vp7, vp7, 0x02
     @!vp9 vcjal 0, vs1, .LBFS_kernel_SM_block_skip5
-    vsll vv5, vv11, vs39
-    vsrl vv5, vv5, vs39
-    @vp9 vsll vv6, vv5, vs49
-    @vp9 vsll vv4, vv4, vs49
+    vsll vv4, vv10, vs39
+    vsrl vv4, vv4, vs39
+    @vp9 vsll vv6, vv4, vs49
 .LBFS_kernel_SM_block_skip5:
-    vaddw vv11, vs0, vs0
-    @vp8 vaddw vv11, vs0, vs43
+    vaddw vv10, vs0, vs0
+    @vp8 vaddw vv10, vs0, vs43
     vpop vp6, vp9, vp9, vp9, 0xAA
-    @vp9 vadd vs6, vs0, vs0
-    @vp9 vadd vv7, vv5, vs0
+    @vp9 vadd vs2, vs0, vs0
+    @vp9 vadd vv7, vv4, vs0
     vpclear vp7
 .LBFS_kernel_SM_block_loop6:
-    vsll vs7, vs6, vs49
-    vadd vs7, vs47, vs7
-    @vp6 vlxw vv13, vs7, vv6
-    vsll vv8, vv13, vs39
-    vsrl vv8, vv8, vs39
-    vmul vv10, vv8, vs38
-    vadd vv9, vs58, vv10
-    @vp6 vlxw vv14, vs58, vv4
+    vsll vs6, vs2, vs49
+    vadd vs6, vs47, vs6
+    @vp6 vlxw vv12, vs6, vv6
+    vsll vv4, vv12, vs39
+    vsrl vv4, vv4, vs39
+    vmul vv9, vv4, vs38
+    vadd vv8, vs58, vv9
+    @vp6 vlxw vv13, vs58, vv5
+    @vp6 vaddw vv13, vv13, vs48
+    @vp6 vamominu.w vv13, 0(vv8), vv13
+    @vp6 vlxw vv14, vs58, vv5
     @vp6 vaddw vv14, vv14, vs48
-    @vp6 vamominu.w vv14, 0(vv9), vv14
-    @vp6 vlxw vv15, vs58, vv4
-    @vp6 vaddw vv15, vv15, vs48
-    vcmpltu vp8, vv15, vv14
+    vcmpltu vp8, vv14, vv13
     vpop vp9, vp6, vp8, vp8, 0x80
     vpop vp11, vp6, vp8, vp8, 0x02
     @!vp9 vcjal 0, vs1, .LBFS_kernel_SM_block_skip7
-    vmul vv9, vv8, vs38
-    vadd vv8, vs55, vv9
-    @vp9 vamoswap.w vv14, 0(vv8), vs48
-    vcmpeq vp8, vv14, vs0
+    vmul vv8, vv4, vs38
+    vadd vv4, vs56, vv8
+    @vp9 vamoswap.w vv13, 0(vv4), vs48
+    vcmpeq vp8, vv13, vs0
 .LBFS_kernel_SM_block_skip7:
     vpop vp12, vp9, vp8, vp8, 0x80
     vpop vp13, vp9, vp8, vp8, 0x02
     @!vp12 vcjal 0, vs1, .LBFS_kernel_SM_block_skip8
-    @vp12 vamoadd.w vs7, 0(vs51), vs48
-    vaddw vv14, vs7, vs0
-    vcmpltu vp8, vv14, vs46
+    @vp12 vamoadd.w vs6, 0(vs51), vs48
+    vaddw vv13, vs6, vs0
+    vcmpltu vp8, vv13, vs46
 .LBFS_kernel_SM_block_skip8:
     vpop vp9, vp12, vp8, vp8, 0x80
     vpop vp14, vp12, vp8, vp8, 0x02
     @!vp9 vcjal 0, vs1, .LBFS_kernel_SM_block_skip9
-    vsll vs7, vs7, vs39
-    vsrl vs7, vs7, vs39
-    vmul vs8, vs7, vs38
-    vadd vs7, vs45, vs8
-    vadd vv8, vs7, vs0
-    @vp9 vsxw vv13, vs0, vv8
+    vsll vs6, vs6, vs39
+    vsrl vs6, vs6, vs39
+    vmul vs7, vs6, vs38
+    vadd vs6, vs45, vs7
+    vadd vv4, vs6, vs0
+    @vp9 vsxw vv12, vs0, vv4
 .LBFS_kernel_SM_block_skip9:
-    @vp14 vamoadd.w vs7, 0(vs44), vs48
+    @vp14 vamoadd.w vs6, 0(vs44), vs48
     vpop vp8, vp14, vp5, vp5, 0x80
     vpop vp12, vp14, vp5, vp5, 0x02
     @!vp8 vcjal 0, vs1, .LBFS_kernel_SM_block_skip10
-    vmul vs9, vs7, vs38
-    vadd vs8, vs56, vs9
-    vadd vv8, vs8, vs0
-    @vp8 vsxw vv13, vs0, vv8
+    vmul vs8, vs6, vs38
+    vadd vs7, vs57, vs8
+    vadd vv4, vs7, vs0
+    @vp8 vsxw vv12, vs0, vv4
 .LBFS_kernel_SM_block_skip10:
     @!vp12 vcjal 0, vs1, .LBFS_kernel_SM_block_skip11
-    vmul vs9, vs7, vs38
-    vadd vs8, vs59, vs9
-    vadd vv8, vs8, vs0
-    @vp12 vsxw vv13, vs0, vv8
+    vmul vs8, vs6, vs38
+    vadd vs7, vs55, vs8
+    vadd vv4, vs7, vs0
+    @vp12 vsxw vv12, vs0, vv4
 .LBFS_kernel_SM_block_skip11:
     vpop vp14, vp12, vp12, vp12, 0xAA
     vpop vp14, vp14, vp8, vp8, 0xEE
@@ -471,8 +468,8 @@ BFS_kernel_SM_block_wt:
     vpop vp14, vp14, vp11, vp11, 0xEE
     @!vp14 vcjal 0, vs1, .LBFS_kernel_SM_block_skip12
     @vp14 vadd vv7, vv7, vs43
-    vcmpeq vp8, vv12, vv7
-    vadd vs6, vs6, vs43
+    vcmpeq vp8, vv11, vv7
+    vadd vs2, vs2, vs43
 .LBFS_kernel_SM_block_skip12:
     vpop vp9, vp14, vp8, vp8, 0x80
     vpop vp11, vp14, vp8, vp8, 0x02
@@ -481,7 +478,7 @@ BFS_kernel_SM_block_wt:
     @vp11 vcjal 1, vs1, .LBFS_kernel_SM_block_loop6
     vpop vp5, vp9, vp9, vp9, 0xAA
     vpop vp5, vp5, vp7, vp7, 0xEE
-    vcmpeq vp6, vv11, vs0
+    vcmpeq vp6, vv10, vs0
     vpop vp6, vp6, vp6, vp6, 0x55
     vpop vp7, vp5, vp5, vp5, 0xAA
     vpop vp7, vp7, vp10, vp10, 0xEE
@@ -490,9 +487,9 @@ BFS_kernel_SM_block_wt:
     vpop vp5, vp7, vp1, vp1, 0x80
     vpop vp6, vp7, vp1, vp1, 0x02
     @!vp5 vcjal 0, vs1, .LBFS_kernel_SM_block_skip13
-    vlsw vs6, vs51
-    vaddw vv11, vs46, vs0
-    vcmpltu vp7, vv11, vs6
+    vlsw vs2, vs51
+    vaddw vv10, vs46, vs0
+    vcmpltu vp7, vv10, vs2
 .LBFS_kernel_SM_block_skip13:
     vpop vp8, vp5, vp7, vp7, 0x80
     vpop vp9, vp5, vp7, vp7, 0x02
@@ -502,28 +499,28 @@ BFS_kernel_SM_block_wt:
     vpop vp5, vp8, vp8, vp8, 0xAA
     vpop vp5, vp5, vp9, vp9, 0xEE
     @!vp5 vcjal 0, vs1, .LBFS_kernel_SM_block_skip15
-    vlsw vs6, vs51
-    @vp5 vamoadd.w vs6, 0(vs44), vs6
-    vssw vs50, vs6
+    vlsw vs2, vs51
+    @vp5 vamoadd.w vs2, 0(vs44), vs2
+    vssw vs50, vs2
 .LBFS_kernel_SM_block_skip15:
     vpop vp7, vp5, vp5, vp5, 0xAA
     vpop vp7, vp7, vp6, vp6, 0xEE
     @!vp7 vcjal 0, vs1, .LBFS_kernel_SM_block_skip16
     vfence
-    vaddw vs6, vs4, vs62
+    vaddw vs2, vs4, vs62
     vfence
     vcmpeq vp5, vv2, vs0
 .LBFS_kernel_SM_block_skip16:
     vpop vp6, vp7, vp5, vp5, 0x80
     vpop vp8, vp7, vp5, vp5, 0x02
-    @vp6 vamoadd.w vs7, 0(vs42), vs48
+    @vp6 vamoadd.w vs6, 0(vs42), vs48
     vpop vp5, vp6, vp6, vp6, 0xAA
     vpclear vp7
 .LBFS_kernel_SM_block_loop17:
     @!vp5 vcjal 0, vs1, .LBFS_kernel_SM_block_skip18
-    vlsw vs8, vs42
-    vaddw vv11, vs8, vs0
-    vcmpltu vp6, vv11, vs6
+    vlsw vs7, vs42
+    vaddw vv10, vs7, vs0
+    vcmpltu vp6, vv10, vs2
 .LBFS_kernel_SM_block_skip18:
     vpop vp9, vp5, vp6, vp6, 0x80
     vpop vp10, vp5, vp6, vp6, 0x02
@@ -536,49 +533,49 @@ BFS_kernel_SM_block_wt:
     vpop vp6, vp5, vp2, vp2, 0x80
     vpop vp7, vp5, vp2, vp2, 0x02
     @!vp6 vcjal 0, vs1, .LBFS_kernel_SM_block_skip19
-    vlsw vs8, vs44
-    vssw vs41, vs8
+    vlsw vs7, vs44
+    vssw vs41, vs7
     vssw vs44, vs0
 .LBFS_kernel_SM_block_skip19:
     vpop vp5, vp6, vp6, vp6, 0xAA
     vpop vp5, vp5, vp7, vp7, 0xEE
     @!vp5 vcjal 0, vs1, .LBFS_kernel_SM_block_skip20
-    vlsw vs8, vs51
-    vcmpltu vp6, vv1, vs8
+    vlsw vs7, vs51
+    vcmpltu vp6, vv1, vs7
 .LBFS_kernel_SM_block_skip20:
     vpop vp7, vp5, vp6, vp6, 0x80
     vpop vp8, vp5, vp6, vp6, 0x02
     @!vp7 vcjal 0, vs1, .LBFS_kernel_SM_block_skip21
-    vaddw vv11, vs5, vs0
-    vcmpeq vp5, vv11, vs0
-    @vp7 vlw vv11, va2
-    vlsw vs8, vs50
-    @vp7 vaddw vv12, vs8, vv1
-    vsll vv4, vv12, vs39
+    vaddw vv10, vs5, vs0
+    vcmpeq vp5, vv10, vs0
+    @vp7 vlw vv10, va2
+    vlsw vs7, vs50
+    @vp7 vaddw vv11, vs7, vv1
+    vsll vv4, vv11, vs39
     vsrl vv4, vv4, vs39
-    @vp5 vadd vv5, vs56, vs0
-    @!vp5 vadd vv5, vs59, vs0
+    @vp5 vadd vv5, vs57, vs0
+    @!vp5 vadd vv5, vs55, vs0
     @vp7 vsll vv4, vv4, vs49
     @vp7 vadd vv6, vv5, vv4
-    @vp7 vsxw vv11, vs0, vv6
+    @vp7 vsxw vv10, vs0, vv6
 .LBFS_kernel_SM_block_skip21:
     vpop vp5, vp7, vp7, vp7, 0xAA
     vpop vp5, vp5, vp8, vp8, 0xEE
     @!vp5 vcjal 0, vs1, .LBFS_kernel_SM_block_skip22
-    vaddw vs4, vs6, vs62
+    vaddw vs4, vs2, vs62
     vfence
     vcmpeq vp6, vv3, vs0
 .LBFS_kernel_SM_block_skip22:
     vpop vp7, vp5, vp6, vp6, 0x80
     vpop vp8, vp5, vp6, vp6, 0x02
-    @vp7 vamoadd.w vs6, 0(vs42), vs48
+    @vp7 vamoadd.w vs2, 0(vs42), vs48
     vpop vp5, vp7, vp7, vp7, 0xAA
     vpclear vp6
 .LBFS_kernel_SM_block_loop23:
     @!vp5 vcjal 0, vs1, .LBFS_kernel_SM_block_skip24
-    vlsw vs8, vs42
-    vaddw vv11, vs8, vs0
-    vcmpltu vp7, vv11, vs4
+    vlsw vs7, vs42
+    vaddw vv10, vs7, vs0
+    vcmpltu vp7, vv10, vs4
 .LBFS_kernel_SM_block_skip24:
     vpop vp9, vp5, vp7, vp7, 0x80
     vpop vp10, vp5, vp7, vp7, 0x02
@@ -589,24 +586,24 @@ BFS_kernel_SM_block_wt:
     vpop vp5, vp5, vp8, vp8, 0xEE
     @!vp5 vcjal 0, vs1, .LBFS_kernel_SM_block_skip25
     vfence
-    vlswu vs8, vs41
-    vadd vv4, vs8, vs0
+    vlswu vs7, vs41
+    vadd vv4, vs7, vs0
     vcmpltu vp6, vv4, vs61
 .LBFS_kernel_SM_block_skip25:
     vpop vp7, vp5, vp6, vp6, 0x80
     vpop vp8, vp5, vp6, vp6, 0x02
-    @vp7 vaddw vv11, vs5, vs0
+    @vp7 vaddw vv10, vs5, vs0
     vpop vp4, vp4, vp7, vp7, 0xEE
     vpop vp3, vp3, vp7, vp7, 0x02
     @!vp8 vcjal 0, vs1, .LBFS_kernel_SM_block_skip26
-    vlswu vs8, vs41
-    vmul vs9, vs62, vs61
-    vadd vv4, vs9, vs0
-    vcmpltu vp5, vv4, vs8
+    vlswu vs7, vs41
+    vmul vs8, vs62, vs61
+    vadd vv4, vs8, vs0
+    vcmpltu vp5, vv4, vs7
 .LBFS_kernel_SM_block_skip26:
     vpop vp6, vp8, vp5, vp5, 0x80
     vpop vp9, vp8, vp5, vp5, 0x02
-    @vp6 vaddw vv11, vs5, vs0
+    @vp6 vaddw vv10, vs5, vs0
     vpop vp4, vp4, vp6, vp6, 0xEE
     vpop vp3, vp3, vp6, vp6, 0x02
     @!vp9 vcjal 0, vs1, .LBFS_kernel_SM_block_skip27
@@ -617,26 +614,26 @@ BFS_kernel_SM_block_wt:
     vpop vp1, vp6, vp6, vp6, 0xAA
     vpop vp1, vp1, vp7, vp7, 0xEE
     vpop vp1, vp1, vp4, vp4, 0xEE
-    vcmpeq vp3, vv11, vs0
+    vcmpeq vp3, vv10, vs0
     vpop vp4, vp1, vp3, vp3, 0x80
     vpop vp5, vp1, vp3, vp3, 0x02
     @!vp4 vcjal 0, vs1, .LBFS_kernel_SM_block_skip28
-    vlsw vs2, vs41
-    vcmpltu vp1, vv0, vs2
+    vlsw vs3, vs41
+    vcmpltu vp1, vv0, vs3
 .LBFS_kernel_SM_block_skip28:
     vpop vp3, vp4, vp1, vp1, 0x80
     vpop vp6, vp4, vp1, vp1, 0x02
     vpop vp1, vp3, vp3, vp3, 0xAA
-    @vp3 vaddw vv11, vv0, vs0
+    @vp3 vaddw vv10, vv0, vs0
     vpclear vp4
 .LBFS_kernel_SM_block_loop29:
     @!vp1 vcjal 0, vs1, .LBFS_kernel_SM_block_skip30
-    @vp1 vsll vv4, vv11, vs49
-    @vp1 vlxw vv12, vs56, vv4
-    @vp1 vsxw vv12, vs59, vv4
-    @vp1 vaddw vv11, vv11, vs60
-    vlsw vs2, vs41
-    vcmpltu vp3, vv11, vs2
+    @vp1 vsll vv4, vv10, vs49
+    @vp1 vlxw vv11, vs57, vv4
+    @vp1 vsxw vv11, vs55, vv4
+    @vp1 vaddw vv10, vv10, vs60
+    vlsw vs3, vs41
+    vcmpltu vp3, vv10, vs3
 .LBFS_kernel_SM_block_skip30:
     vpop vp7, vp1, vp3, vp3, 0x80
     vpop vp8, vp1, vp3, vp3, 0x02
@@ -649,8 +646,8 @@ BFS_kernel_SM_block_wt:
     vpop vp3, vp1, vp2, vp2, 0x80
     vpop vp4, vp1, vp2, vp2, 0x02
     @!vp3 vcjal 0, vs1, .LBFS_kernel_SM_block_skip31
-    vlsw vs2, vs41
-    vssw vs40, vs2
+    vlsw vs3, vs41
+    vssw vs40, vs3
 .LBFS_kernel_SM_block_skip31:
     vpop vp1, vp3, vp3, vp3, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
@@ -680,60 +677,59 @@ BFS_kernel_multi_block_wt:
     vpop vp3, vp4, vp2, vp2, 0x80
     vpop vp5, vp4, vp2, vp2, 0x02
     @!vp3 vcjal 0, vs1, .LBFS_kernel_multi_block_skip2
-    @vp3 vlw vv9, va0
-    vsll vv2, vv9, vs47
+    @vp3 vlw vv8, va0
+    vsll vv2, vv8, vs47
     vsrl vv2, vv2, vs47
     @vp3 vsll vv3, vv2, vs54
-    vaddw vv10, vs0, vs0
-    @vp3 vsxw vv10, vs60, vv3
-    @vp3 vlxw vv10, vs62, vv3
-    @vp3 vaddw vv11, vv9, vs53
-    vsll vv3, vv11, vs47
-    vsrl vv3, vv3, vs47
-    @vp3 vsll vv3, vv3, vs54
+    vaddw vv9, vs0, vs0
+    @vp3 vsxw vv9, vs60, vv3
     @vp3 vlxw vv9, vs62, vv3
-    vcmpltu vp2, vv10, vv9
+    @vp3 vaddw vv10, vv8, vs53
+    vsll vv4, vv10, vs47
+    vsrl vv4, vv4, vs47
+    @vp3 vsll vv4, vv4, vs54
+    @vp3 vlxw vv8, vs62, vv4
+    vcmpltu vp2, vv9, vv8
 .LBFS_kernel_multi_block_skip2:
     vpop vp4, vp3, vp2, vp2, 0x80
     vpop vp6, vp3, vp2, vp2, 0x02
     @!vp4 vcjal 0, vs1, .LBFS_kernel_multi_block_skip3
-    vsll vv3, vv10, vs47
-    vsrl vv3, vv3, vs47
-    @vp4 vsll vv4, vv3, vs54
-    @vp4 vsll vv2, vv2, vs54
+    vsll vv2, vv9, vs47
+    vsrl vv2, vv2, vs47
+    @vp4 vsll vv4, vv2, vs54
 .LBFS_kernel_multi_block_skip3:
     vpop vp2, vp4, vp4, vp4, 0xAA
     @vp4 vadd vs2, vs0, vs0
-    @vp4 vadd vv5, vv3, vs0
+    @vp4 vadd vv5, vv2, vs0
     vpclear vp3
 .LBFS_kernel_multi_block_loop4:
     vsll vs3, vs2, vs54
     vadd vs3, vs52, vs3
-    @vp2 vlxw vv10, vs3, vv4
-    vsll vv6, vv10, vs47
-    vsrl vv6, vv6, vs47
-    vmul vv8, vv6, vs46
-    vadd vv7, vs61, vv8
-    @vp2 vlxw vv11, vs61, vv2
+    @vp2 vlxw vv9, vs3, vv4
+    vsll vv2, vv9, vs47
+    vsrl vv2, vv2, vs47
+    vmul vv7, vv2, vs46
+    vadd vv6, vs59, vv7
+    @vp2 vlxw vv10, vs59, vv3
+    @vp2 vaddw vv10, vv10, vs53
+    @vp2 vamominu.w vv10, 0(vv6), vv10
+    @vp2 vlxw vv11, vs59, vv3
     @vp2 vaddw vv11, vv11, vs53
-    @vp2 vamominu.w vv11, 0(vv7), vv11
-    @vp2 vlxw vv12, vs61, vv2
-    @vp2 vaddw vv12, vv12, vs53
-    vcmpltu vp4, vv12, vv11
+    vcmpltu vp4, vv11, vv10
     vpop vp7, vp2, vp4, vp4, 0x80
     vpop vp8, vp2, vp4, vp4, 0x02
     @!vp7 vcjal 0, vs1, .LBFS_kernel_multi_block_skip5
-    vmul vv7, vv6, vs46
-    vadd vv6, vs60, vv7
-    @vp7 vamoswap.w vv11, 0(vv6), vs53
-    vcmpeq vp4, vv11, vs0
+    vmul vv6, vv2, vs46
+    vadd vv2, vs60, vv6
+    @vp7 vamoswap.w vv10, 0(vv2), vs53
+    vcmpeq vp4, vv10, vs0
 .LBFS_kernel_multi_block_skip5:
     vpop vp9, vp7, vp4, vp4, 0x80
     vpop vp10, vp7, vp4, vp4, 0x02
     @!vp9 vcjal 0, vs1, .LBFS_kernel_multi_block_skip6
     @vp9 vamoadd.w vs3, 0(vs58), vs53
-    vaddw vv11, vs3, vs0
-    vcmpltu vp4, vv11, vs51
+    vaddw vv10, vs3, vs0
+    vcmpltu vp4, vv10, vs51
 .LBFS_kernel_multi_block_skip6:
     vpop vp7, vp9, vp4, vp4, 0x80
     vpop vp11, vp9, vp4, vp4, 0x02
@@ -742,15 +738,15 @@ BFS_kernel_multi_block_wt:
     vsrl vs3, vs3, vs47
     vmul vs4, vs3, vs46
     vadd vs3, vs50, vs4
-    vadd vv6, vs3, vs0
-    @vp7 vsxw vv10, vs0, vv6
+    vadd vv2, vs3, vs0
+    @vp7 vsxw vv9, vs0, vv2
 .LBFS_kernel_multi_block_skip7:
     @!vp11 vcjal 0, vs1, .LBFS_kernel_multi_block_skip8
     @vp11 vamoadd.w vs3, 0(vs49), vs53
     vmul vs5, vs3, vs46
-    vadd vs4, vs59, vs5
-    vadd vv6, vs4, vs0
-    @vp11 vsxw vv10, vs0, vv6
+    vadd vs4, vs61, vs5
+    vadd vv2, vs4, vs0
+    @vp11 vsxw vv9, vs0, vv2
 .LBFS_kernel_multi_block_skip8:
     vpop vp4, vp11, vp11, vp11, 0xAA
     vpop vp4, vp4, vp7, vp7, 0xEE
@@ -758,7 +754,7 @@ BFS_kernel_multi_block_wt:
     vpop vp4, vp4, vp8, vp8, 0xEE
     @!vp4 vcjal 0, vs1, .LBFS_kernel_multi_block_skip9
     @vp4 vadd vv5, vv5, vs48
-    vcmpeq vp7, vv9, vv5
+    vcmpeq vp7, vv8, vv5
     vadd vs2, vs2, vs48
 .LBFS_kernel_multi_block_skip9:
     vpop vp8, vp4, vp7, vp7, 0x80
@@ -776,8 +772,8 @@ BFS_kernel_multi_block_wt:
     vpop vp4, vp3, vp1, vp1, 0x02
     @!vp2 vcjal 0, vs1, .LBFS_kernel_multi_block_skip10
     vlsw vs2, vs58
-    vaddw vv9, vs51, vs0
-    vcmpltu vp1, vv9, vs2
+    vaddw vv8, vs51, vs0
+    vcmpltu vp1, vv8, vs2
 .LBFS_kernel_multi_block_skip10:
     vpop vp3, vp2, vp1, vp1, 0x80
     vpop vp5, vp2, vp1, vp1, 0x02
@@ -801,13 +797,13 @@ BFS_kernel_multi_block_wt:
     vpop vp3, vp2, vp1, vp1, 0x80
     vpop vp4, vp2, vp1, vp1, 0x02
     @!vp3 vcjal 0, vs1, .LBFS_kernel_multi_block_skip14
-    @vp3 vlw vv9, va1
+    @vp3 vlw vv8, va1
     vlsw vs2, vs57
-    @vp3 vaddw vv10, vs2, vv1
-    vsll vv2, vv10, vs47
+    @vp3 vaddw vv9, vs2, vv1
+    vsll vv2, vv9, vs47
     vsrl vv2, vv2, vs47
     @vp3 vsll vv2, vv2, vs54
-    @vp3 vsxw vv9, vs59, vv2
+    @vp3 vsxw vv8, vs61, vv2
 .LBFS_kernel_multi_block_skip14:
     vpop vp1, vp3, vp3, vp3, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
@@ -853,7 +849,7 @@ Frontier_copy_wt:
 BFS_kernel_warp_ct:                     # @BFS_kernel_warp_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	t0, 1048493
+	lui	t0, 1048509
 	addi	t0, t0, -9
 	srli	t0, t0, 1
 	ld	t1, 0(sp)
@@ -862,10 +858,10 @@ BFS_kernel_warp_ct:                     # @BFS_kernel_warp_ct
 	vsetcfg t0
 	#NO_APP
 	#APP
-	vmcs vs62, a1
+	vmcs vs62, a3
 	#NO_APP
 	#APP
-	vmcs vs61, a3
+	vmcs vs61, a1
 	#NO_APP
 	sext.w	a4, a4
 	#APP
@@ -969,7 +965,7 @@ BFS_kernel_one_block_ct:                # @BFS_kernel_one_block_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a7, 1048532
-	addi	t0, a7, 1007
+	addi	t0, a7, 1009
 	ld	a7, 32(sp)
 	srli	t0, t0, 1
 	ld	t1, 8(sp)
@@ -979,13 +975,13 @@ BFS_kernel_one_block_ct:                # @BFS_kernel_one_block_ct
 	vsetcfg t0
 	#NO_APP
 	#APP
-	vmcs vs62, a5
+	vmcs vs62, a4
 	#NO_APP
 	#APP
-	vmcs vs61, a1
+	vmcs vs61, a5
 	#NO_APP
 	#APP
-	vmcs vs60, a4
+	vmcs vs60, a1
 	#NO_APP
 	sext.w	a2, a2
 	#APP
@@ -1122,7 +1118,7 @@ BFS_kernel_SM_block_ct:                 # @BFS_kernel_SM_block_ct
 	ld	t3, 80(sp)
 	lui	t1, 1048532
 	ld	t4, 56(sp)
-	addi	t1, t1, 1001
+	addi	t1, t1, 1003
 	ld	t5, 72(sp)
 	srli	t1, t1, 1
 	not	t6, t1
@@ -1150,19 +1146,19 @@ BFS_kernel_SM_block_ct:                 # @BFS_kernel_SM_block_ct
 	vmcs vs62, s2
 	#NO_APP
 	#APP
-	vmcs vs59, a1
+	vmcs vs59, a6
 	#NO_APP
 	#APP
 	vmcs vs58, a5
 	#NO_APP
 	#APP
-	vmcs vs57, a6
+	vmcs vs57, a3
 	#NO_APP
 	#APP
-	vmcs vs56, a3
+	vmcs vs56, a4
 	#NO_APP
 	#APP
-	vmcs vs55, a4
+	vmcs vs55, a1
 	#NO_APP
 	#APP
 	vmcs vs54, s1
@@ -1314,7 +1310,7 @@ BFS_kernel_multi_block_ct:              # @BFS_kernel_multi_block_ct
 # %bb.0:                                # %entry
 	lui	t1, 1048541
 	ld	t0, 32(sp)
-	addi	t1, t1, -19
+	addi	t1, t1, -17
 	ld	t2, 16(sp)
 	srli	t1, t1, 1
 	lw	t3, 24(sp)
@@ -1326,24 +1322,24 @@ BFS_kernel_multi_block_ct:              # @BFS_kernel_multi_block_ct
 	vmcs vs62, a6
 	#NO_APP
 	#APP
-	vmcs vs61, a5
+	vmcs vs61, a3
 	#NO_APP
 .Lpcrel_hi11:
-	auipc	a5, %pcrel_hi(.L_MergedGlobals)
+	auipc	a3, %pcrel_hi(.L_MergedGlobals)
 	#APP
 	vmcs vs60, a4
 	#NO_APP
-	addi	a4, a5, %pcrel_lo(.Lpcrel_hi11)
+	addi	a3, a3, %pcrel_lo(.Lpcrel_hi11)
 	#APP
-	vmcs vs59, a3
+	vmcs vs59, a5
 	#NO_APP
-	addi	a3, a4, 16
+	addi	a4, a3, 16
 	#APP
-	vmcs vs58, a3
+	vmcs vs58, a4
 	#NO_APP
-	addi	a4, a4, 20
+	addi	a3, a3, 20
 	#APP
-	vmcs vs57, a4
+	vmcs vs57, a3
 	#NO_APP
 	li	a3, 3
 	#APP

@@ -32,6 +32,6 @@ make gen-fft      # 从 .cl 重新生成汇编（需要 hwacha-cc）
 |---|---|
 | fft scalar /  | 266,426,419 |
 | fft hwacha-cc forward | 10,727 |
-| 0 mismatches fft hwacha-cc inverse | 11,468 |
+| fft hwacha-cc inverse | 11,468 |
 
 结果：fft **PASS**。

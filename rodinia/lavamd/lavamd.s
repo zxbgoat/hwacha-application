@@ -213,96 +213,92 @@ kernel_gpu_opencl_wt:
     vmul vs13, vs11, vs60
     vadd vs12, vs41, vs13
     vlsw vs13, vs12
-    @vp7 vfadd.s vv21, vv8, vs13
+    @vp7 vfadd.s vv13, vv8, vs13
     vadd vs13, vs12, vs54
     vlsw vs13, vs13
     vadd vs14, vs12, vs53
     vlsw vs14, vs14
-    @vp7 vfmul.s vv22, vv11, vs14
-    @vp7 vfmadd.s vv22, vv10, vs13, vv22
+    @vp7 vfmul.s vv14, vv11, vs14
+    @vp7 vfmadd.s vv14, vv10, vs13, vv14
     vadd vs12, vs12, vs52
     vlsw vs12, vs12
-    @vp7 vfmadd.s vv22, vv12, vs12, vv22
-    @vp7 vfsub.s vv21, vv21, vv22
-    @vp7 vfsgnjn.s vv21, vv21, vv21
-    @vp7 vfmul.s vv21, vv9, vv21
-    @vp7 vfmax.s vv21, vv21, vs37
-    @vp7 vfmin.s vv21, vv21, vs36
-    @vp7 vfmul.s vv22, vv21, vs35
-    @vp7 vfadd.s vv22, vv22, vs34
-    @vp7 vfadd.s vv23, vv22, vs33
+    @vp7 vfmadd.s vv14, vv12, vs12, vv14
+    @vp7 vfsub.s vv13, vv13, vv14
+    @vp7 vfsgnjn.s vv13, vv13, vv13
+    @vp7 vfmul.s vv13, vv9, vv13
+    @vp7 vfmax.s vv13, vv13, vs37
+    @vp7 vfmin.s vv13, vv13, vs36
+    @vp7 vfmul.s vv14, vv13, vs35
+    @vp7 vfadd.s vv14, vv14, vs34
+    @vp7 vfadd.s vv15, vv14, vs33
     vaddi vs18, vs32, 0
     vlsd vs18, vs18
-    @vp7 vfmul.s vv24, vv23, vs18
-    @vp7 vfsub.s vv21, vv21, vv24
+    @vp7 vfmul.s vv16, vv15, vs18
+    @vp7 vfsub.s vv13, vv13, vv16
     vaddi vs18, vs32, 8
     vlsd vs18, vs18
-    @vp7 vfmul.s vv23, vv23, vs18
-    @vp7 vfsub.s vv21, vv21, vv23
+    @vp7 vfmul.s vv15, vv15, vs18
+    @vp7 vfsub.s vv13, vv13, vv15
     vaddi vs18, vs32, 16
     vlsd vs18, vs18
-    @vp7 vfmul.s vv23, vv21, vs18
+    @vp7 vfmul.s vv15, vv13, vs18
     vaddi vs18, vs32, 24
     vlsd vs18, vs18
-    @vp7 vfadd.s vv23, vv23, vs18
-    @vp7 vfmul.s vv23, vv23, vv21
+    @vp7 vfadd.s vv15, vv15, vs18
+    @vp7 vfmul.s vv15, vv15, vv13
     vaddi vs18, vs32, 32
     vlsd vs18, vs18
-    @vp7 vfadd.s vv23, vv23, vs18
-    @vp7 vfmul.s vv23, vv23, vv21
+    @vp7 vfadd.s vv15, vv15, vs18
+    @vp7 vfmul.s vv15, vv15, vv13
     vaddi vs18, vs32, 40
     vlsd vs18, vs18
-    @vp7 vfadd.s vv23, vv23, vs18
-    @vp7 vfmul.s vv23, vv23, vv21
+    @vp7 vfadd.s vv15, vv15, vs18
+    @vp7 vfmul.s vv15, vv15, vv13
     vaddi vs18, vs32, 48
     vlsd vs18, vs18
-    @vp7 vfadd.s vv23, vv23, vs18
-    @vp7 vfmul.s vv23, vv23, vv21
+    @vp7 vfadd.s vv15, vv15, vs18
+    @vp7 vfmul.s vv15, vv15, vv13
     vaddi vs18, vs32, 56
     vlsd vs18, vs18
-    @vp7 vfadd.s vv23, vv23, vs18
-    @vp7 vfmul.s vv24, vv21, vv21
-    @vp7 vfmul.s vv23, vv23, vv24
-    @vp7 vfadd.s vv23, vv23, vv21
+    @vp7 vfadd.s vv15, vv15, vs18
+    @vp7 vfmul.s vv16, vv13, vv13
+    @vp7 vfmul.s vv15, vv15, vv16
+    @vp7 vfadd.s vv15, vv15, vv13
     vaddi vs18, vs32, 64
     vlsd vs18, vs18
-    @vp7 vfadd.s vv23, vv23, vs18
+    @vp7 vfadd.s vv15, vv15, vs18
     vaddi vs18, vs32, 72
     vlsd vs18, vs18
-    @vp7 vsllw vv21, vv22, vs18
-    @vp7 vaddw vv21, vv21, vv23
-    @vp7 vfmul.s vv22, vv21, vs58
-    @vp7 vfsub.s vv23, vv10, vs13
-    @vp7 vfmul.s vv23, vv23, vv22
-    @vp7 vfsub.s vv24, vv11, vs14
-    @vp7 vfmul.s vv24, vv24, vv22
-    @vp7 vfsub.s vv25, vv12, vs12
-    @vp7 vfmul.s vv25, vv25, vv22
+    @vp7 vsllw vv13, vv14, vs18
+    @vp7 vaddw vv13, vv13, vv15
+    @vp7 vfmul.s vv14, vv13, vs58
+    @vp7 vfsub.s vv15, vv10, vs13
+    @vp7 vfmul.s vv15, vv15, vv14
+    @vp7 vfsub.s vv16, vv11, vs14
+    @vp7 vfmul.s vv16, vv16, vv14
+    @vp7 vfsub.s vv21, vv12, vs12
+    @vp7 vfmul.s vv21, vv21, vv14
     vmul vs13, vs11, vs54
     vadd vs12, vs39, vs13
     vlsw vs12, vs12
-    @vp7 vfmadd.s vv17, vs12, vv21, vv17
-    @vp7 vfmadd.s vv18, vs12, vv23, vv18
-    @vp7 vfmadd.s vv19, vs12, vv24, vv19
-    @vp7 vfmadd.s vv20, vs12, vv25, vv20
+    @vp7 vfmadd.s vv17, vs12, vv13, vv17
+    @vp7 vfmadd.s vv18, vs12, vv15, vv18
+    @vp7 vfmadd.s vv19, vs12, vv16, vv19
+    @vp7 vfmadd.s vv20, vs12, vv21, vv20
     vadd vs11, vs11, vs46
     vadd vv4, vs11, vs0
     vcmpeq vp11, vv4, vs56
 .Lkernel_gpu_opencl_skip11:
     vpop vp12, vp7, vp11, vp11, 0x80
     vpop vp13, vp7, vp11, vp11, 0x02
-    @vp12 vaddw vv21, vv17, vs0
-    @vp12 vaddw vv22, vv18, vs0
-    @vp12 vaddw vv23, vv19, vs0
-    @vp12 vaddw vv24, vv20, vs0
     vpop vp10, vp10, vp12, vp12, 0xEE
     vpop vp7, vp7, vp12, vp12, 0x02
     @vp13 vcjal 1, vs1, .Lkernel_gpu_opencl_loop10
     @!vp10 vcjal 0, vs1, .Lkernel_gpu_opencl_skip12
-    @vp10 vsxw vv21, vs15, vv1
-    @vp10 vsxw vv22, vs16, vv1
-    @vp10 vsxw vv23, vs17, vv1
-    @vp10 vsxw vv24, vs10, vv1
+    @vp10 vsxw vv17, vs15, vv1
+    @vp10 vsxw vv18, vs16, vv1
+    @vp10 vsxw vv19, vs17, vv1
+    @vp10 vsxw vv20, vs10, vv1
     @vp10 vadd vv4, vv3, vs48
     vcmpltu vp7, vv3, vs47
     vadd vs9, vs9, vs46
@@ -346,7 +342,7 @@ kernel_gpu_opencl_wt:
 kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	a7, 1048428
+	lui	a7, 1048460
 	addi	a7, a7, 2031
 	srli	a7, a7, 1
 	not	a7, a7

@@ -67,142 +67,38 @@ net_kernel_1_wt:
     vadd vv4, vv4, vv5
     vsll vv5, vv1, vs59
     vadd vv4, vv4, vv5
-    vlxw vv8, vs61, vv4
-    vsll vv4, vv2, vs56
+    vlxw vv7, vs61, vv4
+    vsll vv2, vv2, vs56
     vsrl vv5, vv0, vs56
     vsll vv5, vv5, vs52
     vadd vv5, vv5, vv3
-    vadd vv5, vv5, vv4
-    vsll vv6, vv1, vs59
-    vadd vv5, vv5, vv6
-    vlxw vv9, vs62, vv5
-    vfadd.s vv9, vv8, vv9
-    vadd vs2, vs61, vs51
-    vsrl vv5, vv0, vs56
-    vsll vv5, vv5, vs55
-    vsrl vv6, vv0, vs60
-    vand vv7, vv6, vs58
-    vcmpeq vp1, vv7, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv6, vs0, vs0
-    @vp1 vadd vv6, vs0, vs58
-    vsll vv6, vv6, vs54
-    vadd vv5, vv5, vv6
-    vsll vv6, vv2, vs53
-    vadd vv5, vv5, vv6
-    vsll vv6, vv1, vs59
-    vadd vv5, vv5, vv6
-    vlxw vv8, vs2, vv5
-    vfadd.s vv9, vv9, vv8
-    vadd vs2, vs61, vs50
-    vsrl vv5, vv0, vs56
-    vsll vv5, vv5, vs55
-    vsrl vv6, vv0, vs60
-    vand vv7, vv6, vs58
-    vcmpeq vp1, vv7, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv6, vs0, vs0
-    @vp1 vadd vv6, vs0, vs58
-    vsll vv6, vv6, vs54
-    vadd vv5, vv5, vv6
-    vsll vv6, vv2, vs53
-    vadd vv5, vv5, vv6
-    vsll vv6, vv1, vs59
-    vadd vv5, vv5, vv6
-    vlxw vv8, vs2, vv5
-    vfadd.s vv9, vv9, vv8
-    vadd vs2, vs61, vs49
-    vsrl vv5, vv0, vs56
-    vsll vv5, vv5, vs55
-    vsrl vv6, vv0, vs60
-    vand vv7, vv6, vs58
-    vcmpeq vp1, vv7, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv6, vs0, vs0
-    @vp1 vadd vv6, vs0, vs58
-    vsll vv6, vv6, vs54
-    vadd vv5, vv5, vv6
-    vsll vv6, vv2, vs53
-    vadd vv5, vv5, vv6
-    vsll vv6, vv1, vs59
-    vadd vv5, vv5, vv6
-    vlxw vv8, vs2, vv5
-    vfadd.s vv9, vv9, vv8
-    vadd vs2, vs61, vs48
-    vsrl vv5, vv0, vs56
-    vsll vv5, vv5, vs55
-    vsrl vv6, vv0, vs60
-    vand vv7, vv6, vs58
-    vcmpeq vp1, vv7, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv6, vs0, vs0
-    @vp1 vadd vv6, vs0, vs58
-    vsll vv6, vv6, vs54
-    vadd vv5, vv5, vv6
-    vsll vv6, vv2, vs53
-    vadd vv5, vv5, vv6
-    vsll vv6, vv1, vs59
-    vadd vv5, vv5, vv6
-    vlxw vv8, vs2, vv5
-    vfadd.s vv9, vv9, vv8
-    vadd vs2, vs61, vs47
-    vsrl vv5, vv0, vs56
-    vsll vv5, vv5, vs55
-    vsrl vv6, vv0, vs60
-    vand vv7, vv6, vs58
-    vcmpeq vp1, vv7, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv6, vs0, vs0
-    @vp1 vadd vv6, vs0, vs58
-    vsll vv6, vv6, vs54
-    vadd vv5, vv5, vv6
-    vsll vv6, vv2, vs53
-    vadd vv5, vv5, vv6
-    vsll vv6, vv1, vs59
-    vadd vv5, vv5, vv6
-    vlxw vv8, vs2, vv5
-    vfadd.s vv9, vv9, vv8
-    vadd vs2, vs61, vs46
-    vsrl vv5, vv0, vs56
-    vsll vv5, vv5, vs55
-    vsrl vv6, vv0, vs60
-    vand vv7, vv6, vs58
-    vcmpeq vp1, vv7, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv6, vs0, vs0
-    @vp1 vadd vv6, vs0, vs58
-    vsll vv6, vv6, vs54
-    vadd vv5, vv5, vv6
-    vsll vv6, vv2, vs53
-    vadd vv5, vv5, vv6
-    vsll vv6, vv1, vs59
-    vadd vv5, vv5, vv6
-    vlxw vv8, vs2, vv5
-    vfadd.s vv9, vv9, vv8
-    vadd vs2, vs61, vs45
-    vsrl vv5, vv0, vs56
-    vsll vv5, vv5, vs55
-    vsrl vv6, vv0, vs60
-    vand vv7, vv6, vs58
-    vcmpeq vp1, vv7, vs0
-    vpop vp1, vp1, vp1, vp1, 0x55
-    vadd vv6, vs0, vs0
-    @vp1 vadd vv6, vs0, vs58
-    vsll vv6, vv6, vs54
-    vadd vv5, vv5, vv6
-    vsll vv2, vv2, vs53
     vadd vv5, vv5, vv2
     vsll vv2, vv1, vs59
     vadd vv5, vv5, vv2
-    vlxw vv8, vs2, vv5
-    vfadd.s vv9, vv9, vv8
-    vsrl vv2, vv0, vs56
-    vsll vv2, vv2, vs52
-    vadd vv2, vv2, vv3
-    vadd vv2, vv2, vv4
-    vsll vv1, vv1, vs59
-    vadd vv2, vv2, vv1
-    vsxw vv9, vs62, vv2
+    vlxw vv8, vs62, vv5
+    vfadd.s vv8, vv7, vv8
+    vadd vs2, vs61, vs51
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
+    vadd vs2, vs61, vs50
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
+    vadd vs2, vs61, vs49
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
+    vadd vs2, vs61, vs48
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
+    vadd vs2, vs61, vs47
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
+    vadd vs2, vs61, vs46
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
+    vadd vs2, vs61, vs45
+    vlxw vv7, vs2, vv4
+    vfadd.s vv8, vv8, vv7
+    vsxw vv8, vs62, vv5
     vstop
 
     .text
@@ -421,7 +317,7 @@ net_kernel_1_ct:                        # @net_kernel_1_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a3, 1048559
-	addi	a3, a3, 2031
+	addi	a3, a3, 2033
 	srli	a3, a3, 1
 	not	a3, a3
 	#APP

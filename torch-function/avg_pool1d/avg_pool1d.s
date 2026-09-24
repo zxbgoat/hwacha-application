@@ -27,12 +27,6 @@ net_kernel_0_wt:
     vlw vv4, va0
     vfadd.s vv4, vv3, vv4
     vadd vs2, vs62, vs58
-    vsrl vv1, vv0, vs61
-    vsll vv1, vv1, vs60
-    vsll vv2, vv0, vs57
-    vsrl vv2, vv2, vs57
-    vsll vv2, vv2, vs59
-    vadd vv1, vv1, vv2
     vlxw vv3, vs2, vv1
     vfadd.s vv4, vv4, vv3
     vsw vv4, va0

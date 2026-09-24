@@ -88,75 +88,56 @@ net_kernel_4_wt:
     veidx vv0
     vadd vv0, vv0, vs63
     vand vv1, vv0, vs60
-    vsll vv2, vv1, vs59
-    vlxw vv4, vs61, vv2
+    vsll vv1, vv1, vs59
+    vlxw vv4, vs62, vv1
     vsrl vv2, vv0, vs58
     vsrl vv3, vv0, vs57
     vsll vv3, vv3, vs56
-    vlxw vv5, vs62, vv3
+    vlxw vv5, vs61, vv3
     vlw vv6, va0
     vfmul.s vv5, vv4, vv5
     vfadd.s vv6, vv6, vv5
-    vadd vs2, vs61, vs57
-    vsll vv3, vv1, vs59
-    vlxw vv4, vs2, vv3
     vadd vs2, vs62, vs57
-    vsrl vv3, vv0, vs57
-    vsll vv3, vv3, vs56
+    vlxw vv4, vs2, vv1
+    vadd vs2, vs61, vs57
     vlxw vv5, vs2, vv3
     vfmul.s vv5, vv4, vv5
     vfadd.s vv6, vv6, vv5
-    vadd vs2, vs61, vs55
-    vsll vv3, vv1, vs59
-    vlxw vv4, vs2, vv3
-    vadd vs2, vs62, vs54
-    vsrl vv3, vv0, vs57
-    vsll vv3, vv3, vs56
+    vadd vs2, vs62, vs55
+    vlxw vv4, vs2, vv1
+    vadd vs2, vs61, vs54
     vlxw vv5, vs2, vv3
     vfmul.s vv5, vv4, vv5
     vfadd.s vv6, vv6, vv5
-    vadd vs2, vs61, vs53
-    vsll vv3, vv1, vs59
-    vlxw vv4, vs2, vv3
-    vadd vs2, vs62, vs52
-    vsrl vv3, vv0, vs57
-    vsll vv3, vv3, vs56
+    vadd vs2, vs62, vs53
+    vlxw vv4, vs2, vv1
+    vadd vs2, vs61, vs52
     vlxw vv5, vs2, vv3
     vfmul.s vv5, vv4, vv5
     vfadd.s vv6, vv6, vv5
-    vadd vs2, vs61, vs51
-    vsll vv3, vv1, vs59
-    vlxw vv4, vs2, vv3
-    vadd vs2, vs62, vs50
-    vsrl vv3, vv0, vs57
-    vsll vv3, vv3, vs56
+    vadd vs2, vs62, vs51
+    vlxw vv4, vs2, vv1
+    vadd vs2, vs61, vs50
     vlxw vv5, vs2, vv3
     vfmul.s vv5, vv4, vv5
     vfadd.s vv6, vv6, vv5
-    vadd vs2, vs61, vs49
-    vsll vv3, vv1, vs59
-    vlxw vv4, vs2, vv3
-    vadd vs2, vs62, vs48
-    vsrl vv3, vv0, vs57
-    vsll vv3, vv3, vs56
+    vadd vs2, vs62, vs49
+    vlxw vv4, vs2, vv1
+    vadd vs2, vs61, vs48
     vlxw vv5, vs2, vv3
     vfmul.s vv5, vv4, vv5
     vfadd.s vv6, vv6, vv5
-    vadd vs2, vs61, vs47
-    vsll vv3, vv1, vs59
-    vlxw vv4, vs2, vv3
-    vadd vs2, vs62, vs46
-    vsrl vv3, vv0, vs57
-    vsll vv3, vv3, vs56
+    vadd vs2, vs62, vs47
+    vlxw vv4, vs2, vv1
+    vadd vs2, vs61, vs46
     vlxw vv5, vs2, vv3
     vfmul.s vv5, vv4, vv5
     vfadd.s vv6, vv6, vv5
-    vadd vs2, vs61, vs45
-    vsll vv1, vv1, vs59
+    vadd vs2, vs62, vs45
     vlxw vv4, vs2, vv1
     vor vv2, vv2, vs44
     vsll vv2, vv2, vs59
-    vlxw vv5, vs62, vv2
+    vlxw vv5, vs61, vv2
     vfmul.s vv5, vv4, vv5
     vfadd.s vv6, vv6, vv5
     vsw vv6, va0
@@ -598,14 +579,14 @@ net_kernel_4_ct:                        # @net_kernel_4_ct
 	vsetcfg a4
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a1
 	#NO_APP
-	li	a2, 15
+	li	a1, 15
 	#APP
-	vmcs vs61, a1
+	vmcs vs61, a2
 	#NO_APP
 	#APP
-	vmcs vs60, a2
+	vmcs vs60, a1
 	#NO_APP
 	li	a1, 2
 	li	a2, 1

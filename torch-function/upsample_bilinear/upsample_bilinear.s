@@ -130,11 +130,11 @@ net_kernel_10_wt:
     vsrl vv3, vv0, vs56
     vlsd vs2, vs55
     vsll vv4, vv3, vs57
-    vlxd vv5, vs62, vv4
+    vlxd vv5, vs61, vv4
     vsll vv4, vv2, vs57
-    vlxd vv6, vs61, vv4
+    vlxd vv6, vs60, vv4
     vsll vv4, vv1, vs57
-    vlxd vv7, vs59, vv4
+    vlxd vv7, vs62, vv4
     vsrl vs3, vs2, vs54
     vadd vs3, vs3, vs2
     vsll vs3, vs3, vs53
@@ -159,58 +159,13 @@ net_kernel_10_wt:
     vadd vv3, vv3, vv2
     vsll vv1, vv1, vs50
     vadd vv3, vv3, vv1
-    vsxw vv8, vs60, vv3
+    vsxw vv8, vs59, vv3
     vstop
 
     .text
     .align 3
     .globl net_kernel_11_wt
 net_kernel_11_wt:
-    vpset vp0
-    veidx vv0
-    vadd vv0, vv0, vs63
-    vand vv1, vv0, vs58
-    vsrl vv2, vv0, vs57
-    vand vv2, vv2, vs58
-    vsrl vv3, vv0, vs56
-    vlsd vs2, vs55
-    vsll vv4, vv3, vs57
-    vlxd vv5, vs62, vv4
-    vsll vv4, vv2, vs57
-    vlxd vv6, vs61, vv4
-    vsll vv4, vv1, vs57
-    vlxd vv7, vs59, vv4
-    vsrl vs3, vs2, vs54
-    vadd vs3, vs3, vs2
-    vsll vs3, vs3, vs53
-    vadd vs3, vs52, vs3
-    vsrl vv4, vv5, vs54
-    vsll vv4, vv4, vs53
-    vsll vv5, vv5, vs56
-    vadd vv4, vv4, vv5
-    vsrl vv5, vv6, vs54
-    vsll vv5, vv5, vs56
-    vadd vv4, vv4, vv5
-    vsll vv6, vv6, vs51
-    vadd vv4, vv4, vv6
-    vsrl vv5, vv7, vs54
-    vsll vv5, vv5, vs51
-    vadd vv4, vv4, vv5
-    vsll vv7, vv7, vs50
-    vadd vv4, vv4, vv7
-    vlxw vv8, vs3, vv4
-    vsll vv2, vv2, vs49
-    vsll vv3, vv3, vs53
-    vadd vv3, vv3, vv2
-    vsll vv1, vv1, vs50
-    vadd vv3, vv3, vv1
-    vsxw vv8, vs60, vv3
-    vstop
-
-    .text
-    .align 3
-    .globl net_kernel_12_wt
-net_kernel_12_wt:
     vpset vp0
     veidx vv0
     vadd vv0, vv0, vs63
@@ -250,6 +205,51 @@ net_kernel_12_wt:
     vsll vv1, vv1, vs50
     vadd vv3, vv3, vv1
     vsxw vv8, vs59, vv3
+    vstop
+
+    .text
+    .align 3
+    .globl net_kernel_12_wt
+net_kernel_12_wt:
+    vpset vp0
+    veidx vv0
+    vadd vv0, vv0, vs63
+    vand vv1, vv0, vs58
+    vsrl vv2, vv0, vs57
+    vand vv2, vv2, vs58
+    vsrl vv3, vv0, vs56
+    vlsd vs2, vs55
+    vsll vv4, vv3, vs57
+    vlxd vv5, vs62, vv4
+    vsll vv4, vv2, vs57
+    vlxd vv6, vs60, vv4
+    vsll vv4, vv1, vs57
+    vlxd vv7, vs59, vv4
+    vsrl vs3, vs2, vs54
+    vadd vs3, vs3, vs2
+    vsll vs3, vs3, vs53
+    vadd vs3, vs52, vs3
+    vsrl vv4, vv5, vs54
+    vsll vv4, vv4, vs53
+    vsll vv5, vv5, vs56
+    vadd vv4, vv4, vv5
+    vsrl vv5, vv6, vs54
+    vsll vv5, vv5, vs56
+    vadd vv4, vv4, vv5
+    vsll vv6, vv6, vs51
+    vadd vv4, vv4, vv6
+    vsrl vv5, vv7, vs54
+    vsll vv5, vv5, vs51
+    vadd vv4, vv4, vv5
+    vsll vv7, vv7, vs50
+    vadd vv4, vv4, vv7
+    vlxw vv8, vs3, vv4
+    vsll vv2, vv2, vs49
+    vsll vv3, vv3, vs53
+    vadd vv3, vv3, vv2
+    vsll vv1, vv1, vs50
+    vadd vv3, vv3, vv1
+    vsxw vv8, vs61, vv3
     vstop
 
     .text
@@ -267,7 +267,7 @@ net_kernel_13_wt:
     vsll vv4, vv3, vs57
     vlxd vv5, vs61, vv4
     vsll vv4, vv2, vs57
-    vlxd vv6, vs60, vv4
+    vlxd vv6, vs59, vv4
     vsll vv4, vv1, vs57
     vlxd vv7, vs62, vv4
     vsrl vs3, vs2, vs54
@@ -294,7 +294,7 @@ net_kernel_13_wt:
     vadd vv3, vv3, vv2
     vsll vv1, vv1, vs50
     vadd vv3, vv3, vv1
-    vsxw vv8, vs59, vv3
+    vsxw vv8, vs60, vv3
     vstop
 
     .text
@@ -445,15 +445,13 @@ net_kernel_25_wt:
     vand vv1, vv1, vs59
     vand vv2, vv0, vs58
     vsll vv3, vv1, vs57
-    vsll vv4, vv2, vs56
-    vadd vv4, vv3, vv4
-    vlxw vv5, vs62, vv4
-    vsll vv1, vv1, vs56
-    vlxw vv6, vs61, vv1
-    vfmul.s vv6, vv5, vv6
     vsll vv2, vv2, vs56
     vadd vv3, vv3, vv2
-    vsxw vv6, vs62, vv3
+    vlxw vv4, vs62, vv3
+    vsll vv1, vv1, vs56
+    vlxw vv5, vs61, vv1
+    vfmul.s vv5, vv4, vv5
+    vsxw vv5, vs62, vv3
     vstop
 
     .text
@@ -1273,17 +1271,17 @@ net_kernel_10_ct:                       # @net_kernel_10_ct
 	vsetcfg a7
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a4
 	#NO_APP
 	#APP
-	vmcs vs61, a3
+	vmcs vs61, a2
 	#NO_APP
 	#APP
-	vmcs vs60, a6
+	vmcs vs60, a3
 	#NO_APP
 	li	a2, 7
 	#APP
-	vmcs vs59, a4
+	vmcs vs59, a6
 	#NO_APP
 	#APP
 	vmcs vs58, a2
@@ -1390,17 +1388,17 @@ net_kernel_11_ct:                       # @net_kernel_11_ct
 	vsetcfg a7
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a4
 	#NO_APP
 	#APP
-	vmcs vs61, a3
+	vmcs vs61, a2
 	#NO_APP
 	#APP
-	vmcs vs60, a6
+	vmcs vs60, a3
 	#NO_APP
 	li	a2, 7
 	#APP
-	vmcs vs59, a4
+	vmcs vs59, a6
 	#NO_APP
 	#APP
 	vmcs vs58, a2
@@ -1507,17 +1505,17 @@ net_kernel_12_ct:                       # @net_kernel_12_ct
 	vsetcfg a7
 	#NO_APP
 	#APP
-	vmcs vs62, a4
+	vmcs vs62, a2
 	#NO_APP
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a6
 	#NO_APP
 	#APP
 	vmcs vs60, a3
 	#NO_APP
 	li	a2, 7
 	#APP
-	vmcs vs59, a6
+	vmcs vs59, a4
 	#NO_APP
 	#APP
 	vmcs vs58, a2
@@ -1630,11 +1628,11 @@ net_kernel_13_ct:                       # @net_kernel_13_ct
 	vmcs vs61, a2
 	#NO_APP
 	#APP
-	vmcs vs60, a3
+	vmcs vs60, a6
 	#NO_APP
 	li	a2, 7
 	#APP
-	vmcs vs59, a6
+	vmcs vs59, a3
 	#NO_APP
 	#APP
 	vmcs vs58, a2
@@ -2557,7 +2555,7 @@ net_kernel_25_ct:                       # @net_kernel_25_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
 	lui	a3, 1048560
-	addi	a3, a3, -1035
+	addi	a3, a3, -1033
 	srli	a3, a3, 1
 	not	a3, a3
 	#APP

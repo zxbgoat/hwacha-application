@@ -38,39 +38,39 @@ BFS_1_wt:
 .LBFS_1_loop3:
     vsll vs3, vs2, vs58
     vadd vs3, vs57, vs3
-    @vp1 vlxw vv8, vs3, vv1
-    @vp1 vlxb vv9, vs60, vv8
-    vcmpeq vp2, vv9, vs0
+    @vp1 vlxw vv4, vs3, vv1
+    @vp1 vlxb vv5, vs61, vv4
+    vcmpeq vp2, vv5, vs0
     vpop vp7, vp1, vp2, vp2, 0x80
     vpop vp8, vp1, vp2, vp2, 0x02
     @!vp7 vcjal 0, vs1, .LBFS_1_skip4
-    @vp7 vlw vv9, va3
-    @vp7 vaddw vv9, vv9, vs56
-    @vp7 vsll vv3, vv8, vs58
-    @vp7 vsxw vv9, vs62, vv3
-    vaddw vv9, vs55, vs0
-    @vp7 vsxb vv9, vs61, vv8
-    @vp7 vlstw vv8, va1, va4
-    @vp7 vlstw vv9, va2, va5
+    @vp7 vlw vv5, va3
+    @vp7 vaddw vv5, vv5, vs56
+    @vp7 vsll vv3, vv4, vs58
+    @vp7 vsxw vv5, vs62, vv3
+    vaddw vv5, vs55, vs0
+    @vp7 vsxb vv5, vs60, vv4
+    @vp7 vlstw vv4, va1, va4
+    @vp7 vlstw vv5, va2, va5
 .LBFS_1_skip4:
     vpop vp2, vp7, vp7, vp7, 0xAA
     vpop vp2, vp2, vp8, vp8, 0xEE
-    @vp7 vaddw vv10, vv9, vs0
-    @vp8 vaddw vv10, vv6, vs0
-    @vp7 vaddw vv11, vv8, vs0
-    @vp8 vaddw vv11, vv7, vs0
+    @vp7 vaddw vv8, vv5, vs0
+    @vp8 vaddw vv8, vv6, vs0
+    @vp7 vaddw vv9, vv4, vs0
+    @vp8 vaddw vv9, vv7, vs0
     @!vp2 vcjal 0, vs1, .LBFS_1_skip5
     @vp2 vadd vv2, vv2, vs54
-    @vp2 vaddw vv8, vv10, vv11
-    vcmplt vp7, vv2, vv8
+    @vp2 vaddw vv4, vv8, vv9
+    vcmplt vp7, vv2, vv4
     vadd vs2, vs2, vs54
 .LBFS_1_skip5:
     vpop vp8, vp2, vp7, vp7, 0x80
     vpop vp9, vp2, vp7, vp7, 0x02
     vpop vp5, vp5, vp9, vp9, 0xEE
     vpop vp1, vp1, vp9, vp9, 0x02
-    @vp8 vaddw vv6, vv10, vs0
-    @vp8 vaddw vv7, vv11, vs0
+    @vp8 vaddw vv6, vv8, vs0
+    @vp8 vaddw vv7, vv9, vs0
     @vp8 vcjal 1, vs1, .LBFS_1_loop3
     vpop vp1, vp9, vp9, vp9, 0xAA
     vpop vp1, vp1, vp5, vp5, 0xEE
@@ -119,7 +119,7 @@ BFS_2_wt:
 BFS_1_ct:                               # @BFS_1_ct
 	.cfi_startproc
 # %bb.0:                                # %entry
-	lui	t0, 1048509
+	lui	t0, 1048525
 	addi	t0, t0, 2039
 	srli	t0, t0, 1
 	not	t0, t0
@@ -130,10 +130,10 @@ BFS_1_ct:                               # @BFS_1_ct
 	vmcs vs62, a6
 	#NO_APP
 	#APP
-	vmcs vs61, a4
+	vmcs vs61, a5
 	#NO_APP
 	#APP
-	vmcs vs60, a5
+	vmcs vs60, a4
 	#NO_APP
 	sext.w	a7, a7
 	li	a4, 2

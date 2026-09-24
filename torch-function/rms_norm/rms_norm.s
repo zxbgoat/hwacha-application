@@ -30,8 +30,8 @@ net_kernel_1_wt:
     vstop
     .globl net_kernel_1_wt_r0_b0
 net_kernel_1_wt_r0_b0:
-    vlstw vv2, va1, va2
-    vfadd.s vv1, vv2, vv1
+    vlstw vv0, va1, va2
+    vfadd.s vv1, vv0, vv1
     vstop
     .globl net_kernel_1_wt_a0
 net_kernel_1_wt_a0:
@@ -238,7 +238,7 @@ net_kernel_1_ct:                        # @net_kernel_1_ct
 # %bb.0:                                # %entry
 	li	a3, -1
 	slli	a3, a3, 54
-	addi	a3, a3, 97
+	addi	a3, a3, 65
 	li	a4, 1
 	slli	a3, a3, 9
 	#APP

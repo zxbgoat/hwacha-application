@@ -31,9 +31,9 @@ net_kernel_1_wt:
     vand vv1, vv0, vs60
     vsrl vv2, vv0, vs59
     vsll vv2, vv2, vs59
-    vlxd vv3, vs61, vv2
+    vlxd vv3, vs62, vv2
     vsll vv1, vv1, vs59
-    vlxd vv2, vs62, vv1
+    vlxd vv2, vs61, vv1
     vcmpeq vp1, vv3, vv2
     vaddw vv4, vs0, vs0
     @vp1 vaddw vv4, vs0, vs58
@@ -223,14 +223,14 @@ net_kernel_1_ct:                        # @net_kernel_1_ct
 	vsetcfg a4
 	#NO_APP
 	#APP
-	vmcs vs62, a2
+	vmcs vs62, a1
 	#NO_APP
-	li	a2, 7
+	li	a1, 7
 	#APP
-	vmcs vs61, a1
+	vmcs vs61, a2
 	#NO_APP
 	#APP
-	vmcs vs60, a2
+	vmcs vs60, a1
 	#NO_APP
 	li	a1, 3
 	li	a2, 1

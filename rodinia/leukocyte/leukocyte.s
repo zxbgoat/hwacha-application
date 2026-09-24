@@ -166,7 +166,6 @@ dilate_kernel_wt:
 .Ldilate_kernel_skip7:
     vpop vp11, vp8, vp10, vp10, 0x80
     vpop vp12, vp8, vp10, vp10, 0x02
-    @vp11 vaddw vv9, vv10, vs0
     vpop vp9, vp9, vp11, vp11, 0xEE
     vpop vp4, vp4, vp11, vp11, 0x02
     @vp12 vaddw vv8, vv10, vs0
@@ -176,7 +175,7 @@ dilate_kernel_wt:
     vpop vp8, vp4, vp4, vp4, 0xAA
     vpop vp8, vp8, vp7, vp7, 0xEE
     @vp7 vaddw vv8, vv7, vs0
-    @vp4 vaddw vv8, vv9, vs0
+    @vp4 vaddw vv8, vv10, vs0
     @!vp8 vcjal 0, vs1, .Ldilate_kernel_skip8
     vadd vs5, vs5, vs51
     vadd vv2, vs5, vs0
@@ -184,7 +183,6 @@ dilate_kernel_wt:
 .Ldilate_kernel_skip8:
     vpop vp7, vp8, vp4, vp4, 0x80
     vpop vp9, vp8, vp4, vp4, 0x02
-    @vp7 vaddw vv9, vv8, vs0
     vpop vp6, vp6, vp7, vp7, 0xEE
     vpop vp2, vp2, vp7, vp7, 0x02
     @vp9 vaddw vv7, vv8, vs0
@@ -194,7 +192,7 @@ dilate_kernel_wt:
     vpop vp2, vp1, vp1, vp1, 0xAA
     vpop vp2, vp2, vp5, vp5, 0xEE
     @vp5 vaddw vv5, vs0, vs0
-    @vp1 vaddw vv5, vv9, vs0
+    @vp1 vaddw vv5, vv8, vs0
     @!vp2 vcjal 0, vs1, .Ldilate_kernel_skip9
     @vp2 vmulw vv4, vv4, vs57
     @vp2 vaddw vv4, vv4, vv3

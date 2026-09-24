@@ -36,14 +36,14 @@ net_kernel_wt:
     vadd vv4, vv3, vv4
     vsll vv5, vv5, vs53
     vadd vv4, vv4, vv5
-    vlxw vv6, vs62, vv4
+    vlxw vv6, vs61, vv4
     vsll vv2, vv2, vs52
     vsrl vv3, vv0, vs51
     vsll vv3, vv3, vs50
     vadd vv3, vv3, vv2
     vsll vv1, vv1, vs53
     vadd vv3, vv3, vv1
-    vsxw vv6, vs61, vv3
+    vsxw vv6, vs62, vv3
     vstop
 
 # ---- control threads (from llc) ----
@@ -64,10 +64,10 @@ net_kernel_ct:                          # @net_kernel_ct
 	#NO_APP
 	li	a3, 7
 	#APP
-	vmcs vs62, a1
+	vmcs vs62, a2
 	#NO_APP
 	#APP
-	vmcs vs61, a2
+	vmcs vs61, a1
 	#NO_APP
 	#APP
 	vmcs vs60, a3

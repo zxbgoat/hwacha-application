@@ -12,8 +12,8 @@ kernel_gpu_opencl_wt:
     vpclear vp1
     vadd vs2, vs55, vs54
     vlsw vs2, vs2
-    vaddw vv16, vs57, vs0
-    vcmplt vp2, vv16, vs2
+    vaddw vv17, vs57, vs0
+    vcmplt vp2, vv17, vs2
     vpop vp3, vp0, vp2, vp2, 0x80
     vpop vp4, vp0, vp2, vp2, 0x02
     @!vp3 vcjal 0, vs1, .Lkernel_gpu_opencl_skip0
@@ -40,10 +40,10 @@ kernel_gpu_opencl_wt:
     vpop vp2, vp2, vp3, vp3, 0xEE
     @vp4 vadd vv2, vs5, vs0
     @vp3 vadd vv2, vs3, vs0
-    @vp4 vaddw vv16, vs2, vs0
-    @vp3 vaddw vv16, vs57, vs0
+    @vp4 vaddw vv17, vs2, vs0
+    @vp3 vaddw vv17, vs57, vs0
     vaddi vs58, vs60, 0
-    vsxw vv16, vs58, vv0
+    vsxw vv17, vs58, vv0
     @vp4 vadd vv3, vs50, vs0
     @vp3 vadd vv3, vs49, vs0
     @vp4 vadd vv4, vs48, vs0
@@ -295,8 +295,8 @@ kernel_gpu_opencl_wt:
     vssd vs62, vs25
     vaddi vs6, vs32, 136
     vlsd vs6, vs6
-    vaddw vv17, vs6, vs0
-    vcmpeq vp3, vv17, vs0
+    vaddw vv18, vs6, vs0
+    vcmpeq vp3, vv18, vs0
 .Lkernel_gpu_opencl_skip2:
     vpop vp4, vp2, vp3, vp3, 0x80
     vpop vp5, vp2, vp3, vp3, 0x02
@@ -310,10 +310,8 @@ kernel_gpu_opencl_wt:
     vfence
     vaddi vs6, vs32, 624
     vlsd vs6, vs6
-    vmul vv9, vv16, vs6
+    vmul vv9, vv17, vs6
     vadd vv8, vv3, vv9
-    vaddi vs58, vs60, 40
-    vsxd vv8, vs58, vv0
     vaddi vs27, vs32, 208
     vlsd vs27, vs27
     vadd vs6, vs55, vs27
@@ -321,10 +319,8 @@ kernel_gpu_opencl_wt:
     vssd vs62, vs6
     vaddi vs27, vs32, 624
     vlsd vs27, vs27
-    vmul vv10, vv16, vs27
+    vmul vv10, vv17, vs27
     vadd vv9, vv4, vv10
-    vaddi vs58, vs60, 48
-    vsxd vv9, vs58, vv0
     vlsw vs2, vs2
     vcmplt vp2, vv1, vs2
 .Lkernel_gpu_opencl_skip4:
@@ -335,32 +331,32 @@ kernel_gpu_opencl_wt:
     vlsd vs29, vs29
     vadd vs27, vs55, vs29
     vlsw vs27, vs27
-    @vp3 vmulw vv17, vs27, vv16
+    @vp3 vmulw vv18, vs27, vv17
     vaddi vs27, vs32, 624
     vlsd vs27, vs27
-    vmul vv11, vv16, vs27
+    vmul vv11, vv17, vs27
     vadd vv10, vv3, vv11
-    @vp3 vlxw vv18, vs0, vv10
+    @vp3 vlxw vv19, vs0, vv10
     vaddi vs27, vs32, 624
     vlsd vs27, vs27
-    vmul vv11, vv17, vs27
+    vmul vv11, vv18, vs27
     vadd vv10, vv5, vv11
-    @vp3 vsxw vv18, vs0, vv10
-    vaddi vs27, vs32, 624
-    vlsd vs27, vs27
-    vmul vv11, vv16, vs27
-    vadd vv10, vv4, vv11
-    @vp3 vlxw vv18, vs0, vv10
+    @vp3 vsxw vv19, vs0, vv10
     vaddi vs27, vs32, 624
     vlsd vs27, vs27
     vmul vv11, vv17, vs27
+    vadd vv10, vv4, vv11
+    @vp3 vlxw vv19, vs0, vv10
+    vaddi vs27, vs32, 624
+    vlsd vs27, vs27
+    vmul vv11, vv18, vs27
     vadd vv10, vv6, vv11
-    @vp3 vsxw vv18, vs0, vv10
+    @vp3 vsxw vv19, vs0, vv10
 .Lkernel_gpu_opencl_skip5:
     @!vp4 vcjal 0, vs1, .Lkernel_gpu_opencl_skip6
-    @vp4 vlxw vv17, vs0, vv9
+    @vp4 vlxw vv18, vs0, vv9
     vlsw vs27, vs6
-    @vp4 vlxw vv18, vs0, vv8
+    @vp4 vlxw vv19, vs0, vv8
     vaddi vs6, vs32, 216
     vlsd vs6, vs6
     vadd vs29, vs55, vs6
@@ -368,15 +364,15 @@ kernel_gpu_opencl_wt:
     vaddi vs6, vs32, 184
     vlsd vs6, vs6
     vxor vs18, vs27, vs6
-    @vp4 vaddw vv17, vv17, vs18
+    @vp4 vaddw vv18, vv18, vs18
     vaddi vs18, vs32, 168
     vlsd vs18, vs18
     vadd vs6, vs55, vs18
     vlsw vs6, vs6
     vaddi vs18, vs32, 224
     vlsd vs18, vs18
-    @vp4 vaddw vv18, vv18, vs18
-    @vp4 vsubw vv18, vv18, vs27
+    @vp4 vaddw vv19, vv19, vs18
+    @vp4 vsubw vv19, vv19, vs27
     vaddi vs18, vs32, 192
     vlsd vs18, vs18
     vsll vs27, vs3, vs18
@@ -406,26 +402,26 @@ kernel_gpu_opencl_wt:
     vadd vs16, vs41, vs16
     vaddi vs14, vs32, 176
     vlsd vs14, vs14
-    @vp2 vaddw vv19, vv11, vs14
-    @vp2 vdivw vv20, vv19, vs29
-    @vp2 vmulw vv21, vv20, vs29
-    @vp2 vsubw vv22, vv19, vv21
-    vcmpeq vp4, vv19, vv21
-    vaddw vv19, vs0, vs0
+    @vp2 vaddw vv20, vv11, vs14
+    @vp2 vdivw vv21, vv20, vs29
+    @vp2 vmulw vv22, vv21, vs29
+    @vp2 vsubw vv23, vv20, vv22
+    vcmpeq vp4, vv20, vv22
+    vaddw vv20, vs0, vs0
     vaddi vs14, vs32, 304
     vlsd vs14, vs14
-    @vp4 vaddw vv19, vs0, vs14
-    @vp4 vaddw vv22, vs29, vs0
-    @vp2 vaddw vv20, vv17, vv20
-    @vp2 vaddw vv20, vv20, vv19
-    @vp2 vmulw vv20, vv20, vs6
-    @vp2 vaddw vv22, vv18, vv22
-    @vp2 vaddw vv22, vv22, vv20
+    @vp4 vaddw vv20, vs0, vs14
+    @vp4 vaddw vv23, vs29, vs0
+    @vp2 vaddw vv21, vv18, vv21
+    @vp2 vaddw vv21, vv21, vv20
+    @vp2 vmulw vv21, vv21, vs6
+    @vp2 vaddw vv23, vv19, vv23
+    @vp2 vaddw vv23, vv23, vv21
     vaddi vs14, vs32, 192
     vlsd vs14, vs14
-    @vp2 vsll vv12, vv22, vs14
-    @vp2 vlxw vv19, vs56, vv12
-    @vp2 vsxw vv19, vs16, vv10
+    @vp2 vsll vv12, vv23, vs14
+    @vp2 vlxw vv20, vs56, vv12
+    @vp2 vsxw vv20, vs16, vv10
     vaddi vs14, vs32, 240
     vlsd vs14, vs14
     @vp2 vadd vv11, vv11, vs14
@@ -443,64 +439,64 @@ kernel_gpu_opencl_wt:
     vlsw vs2, vs2
     vaddi vs5, vs32, 624
     vlsd vs5, vs5
-    vmul vv10, vv16, vs5
+    vmul vv10, vv17, vs5
     vadd vv3, vv3, vv10
-    @vp5 vlxw vv17, vs0, vv3
+    @vp5 vlxw vv18, vs0, vv3
     vaddi vs5, vs32, 624
     vlsd vs5, vs5
-    vmul vv3, vv16, vs5
+    vmul vv3, vv17, vs5
     vadd vv4, vv4, vv3
-    @vp5 vlxw vv18, vs0, vv4
+    @vp5 vlxw vv19, vs0, vv4
     vaddi vs5, vs32, 160
     vlsd vs5, vs5
-    @vp5 vaddw vv18, vv18, vs5
+    @vp5 vaddw vv19, vv19, vs5
     vaddi vs6, vs32, 168
     vlsd vs6, vs6
     vadd vs5, vs55, vs6
     vlsw vs5, vs5
     vaddi vs6, vs32, 160
     vlsd vs6, vs6
-    @vp5 vaddw vv17, vv17, vs6
+    @vp5 vaddw vv18, vv18, vs6
 .Lkernel_gpu_opencl_skip9:
     vpop vp2, vp5, vp5, vp5, 0xAA
-    @vp5 vaddw vv19, vv1, vs0
+    @vp5 vaddw vv20, vv1, vs0
     vpclear vp4
 .Lkernel_gpu_opencl_loop10:
     vaddi vs6, vs32, 176
     vlsd vs6, vs6
-    @vp2 vaddw vv20, vv19, vs6
-    @vp2 vdivw vv21, vv20, vs2
-    @vp2 vmulw vv22, vv21, vs2
-    @vp2 vsubw vv23, vv20, vv22
-    vcmpeq vp5, vv20, vv22
-    vaddw vv20, vs0, vs0
+    @vp2 vaddw vv21, vv20, vs6
+    @vp2 vdivw vv22, vv21, vs2
+    @vp2 vmulw vv23, vv22, vs2
+    @vp2 vsubw vv24, vv21, vv23
+    vcmpeq vp5, vv21, vv23
+    vaddw vv21, vs0, vs0
     vaddi vs6, vs32, 304
     vlsd vs6, vs6
-    @vp5 vaddw vv20, vs0, vs6
-    @vp2 vaddw vv21, vv21, vv20
-    @vp5 vaddw vv23, vs2, vs0
+    @vp5 vaddw vv21, vs0, vs6
+    @vp2 vaddw vv22, vv22, vv21
+    @vp5 vaddw vv24, vs2, vs0
     vaddi vs6, vs32, 184
     vlsd vs6, vs6
-    @vp2 vaddw vv23, vv23, vs6
-    @vp2 vaddw vv20, vv18, vv21
-    @vp2 vmulw vv20, vv20, vs5
-    @vp2 vaddw vv22, vv17, vv23
-    @vp2 vaddw vv22, vv22, vv20
+    @vp2 vaddw vv24, vv24, vs6
+    @vp2 vaddw vv21, vv19, vv22
+    @vp2 vmulw vv21, vv21, vs5
+    @vp2 vaddw vv23, vv18, vv24
+    @vp2 vaddw vv23, vv23, vv21
+    vaddi vs6, vs32, 192
+    vlsd vs6, vs6
+    @vp2 vsll vv3, vv23, vs6
+    @vp2 vlxw vv21, vs56, vv3
+    @vp2 vmulw vv22, vv22, vs2
+    @vp2 vaddw vv22, vv22, vv24
     vaddi vs6, vs32, 192
     vlsd vs6, vs6
     @vp2 vsll vv3, vv22, vs6
-    @vp2 vlxw vv20, vs56, vv3
-    @vp2 vmulw vv21, vv21, vs2
-    @vp2 vaddw vv21, vv21, vv23
-    vaddi vs6, vs32, 192
-    vlsd vs6, vs6
-    @vp2 vsll vv3, vv21, vs6
     @vp2 vadd vv4, vv7, vv3
-    @vp2 vsxw vv20, vs0, vv4
+    @vp2 vsxw vv21, vs0, vv4
     vaddi vs6, vs32, 200
     vlsd vs6, vs6
-    @vp2 vaddw vv19, vv19, vs6
-    vcmplt vp5, vv19, vs18
+    @vp2 vaddw vv20, vv20, vs6
+    vcmplt vp5, vv20, vs18
     vpop vp8, vp2, vp5, vp5, 0x80
     vpop vp9, vp2, vp5, vp5, 0x02
     vpop vp4, vp4, vp9, vp9, 0xEE
@@ -546,37 +542,37 @@ kernel_gpu_opencl_wt:
     vaddi vs14, vs32, 232
     vlsd vs14, vs14
     vsll vs16, vs6, vs14
-    @vp3 vadd vv12, vv4, vs16
+    @vp3 vadd vv3, vv4, vs16
     vaddi vs14, vs32, 248
     vlsd vs14, vs14
-    vadd vv12, vs14, vv12
+    vadd vv3, vs14, vv3
     vaddi vs14, vs32, 176
     vlsd vs14, vs14
-    @vp3 vaddw vv17, vv11, vs14
-    @vp3 vdivw vv18, vv17, vs5
-    @vp3 vmulw vv19, vv18, vs5
-    @vp3 vsubw vv20, vv19, vv17
-    vcmpeq vp5, vv17, vv19
-    vaddw vv17, vs0, vs0
+    @vp3 vaddw vv18, vv11, vs14
+    @vp3 vdivw vv19, vv18, vs5
+    @vp3 vmulw vv20, vv19, vs5
+    @vp3 vsubw vv21, vv20, vv18
+    vcmpeq vp5, vv18, vv20
+    vaddw vv18, vs0, vs0
     vaddi vs14, vs32, 304
     vlsd vs14, vs14
-    @vp5 vaddw vv17, vs0, vs14
-    @vp3 vaddw vv18, vv18, vv17
-    @!vp5 vaddw vv17, vv20, vs5
-    @vp5 vaddw vv17, vs0, vs0
+    @vp5 vaddw vv18, vs0, vs14
+    @vp3 vaddw vv19, vv19, vv18
+    @!vp5 vaddw vv18, vv21, vs5
+    @vp5 vaddw vv18, vs0, vs0
     vaddi vs14, vs32, 184
     vlsd vs14, vs14
-    @vp3 vxor vv18, vv18, vs14
-    @vp3 vaddw vv18, vs5, vv18
-    @vp3 vmulw vv18, vv18, vs5
-    @vp3 vaddw vv18, vv18, vv17
+    @vp3 vxor vv19, vv19, vs14
+    @vp3 vaddw vv19, vs5, vv19
+    @vp3 vmulw vv19, vv19, vs5
+    @vp3 vaddw vv19, vv19, vv18
     vaddi vs14, vs32, 192
     vlsd vs14, vs14
-    @vp3 vsll vv13, vv18, vs14
-    @vp3 vadd vv14, vv7, vv13
-    @vp3 vlxw vv17, vs0, vv14
-    @vp3 vadd vv13, vv12, vv10
-    @vp3 vsxw vv17, vs0, vv13
+    @vp3 vsll vv12, vv19, vs14
+    @vp3 vadd vv13, vv7, vv12
+    @vp3 vlxw vv18, vs0, vv13
+    @vp3 vadd vv12, vv3, vv10
+    @vp3 vsxw vv18, vs0, vv12
     vaddi vs14, vs32, 240
     vlsd vs14, vs14
     @vp3 vadd vv11, vv11, vs14
@@ -676,169 +672,169 @@ kernel_gpu_opencl_wt:
     vadd vs9, vs8, vs9
     vaddi vs8, vs32, 176
     vlsd vs8, vs8
-    @vp3 vaddw vv17, vv10, vs8
-    @vp3 vdivw vv18, vv17, vs5
-    @vp3 vmulw vv19, vv18, vs5
-    @vp3 vsubw vv20, vv17, vv19
-    vcmpeq vp5, vv17, vv19
+    @vp3 vaddw vv18, vv10, vs8
+    @vp3 vdivw vv19, vv18, vs5
+    @vp3 vmulw vv20, vv19, vs5
+    @vp3 vsubw vv21, vv18, vv20
+    vcmpeq vp5, vv18, vv20
     vpop vp5, vp5, vp5, vp5, 0x55
-    vaddw vv17, vs0, vs0
-    @vp5 vaddw vv17, vs0, vs61
-    @vp3 vaddw vv19, vv18, vv17
-    @!vp5 vaddw vv20, vs5, vs0
-    @vp3 vaddw vv19, vv19, vs6
-    vcmplt vp5, vv19, vs14
-    @vp3 vsubw vv21, vv19, vs14
+    vaddw vv18, vs0, vs0
+    @vp5 vaddw vv18, vs0, vs61
+    @vp3 vaddw vv20, vv19, vv18
+    @!vp5 vaddw vv21, vs5, vs0
+    @vp3 vaddw vv20, vv20, vs6
+    vcmplt vp5, vv20, vs14
+    @vp3 vsubw vv22, vv20, vs14
     vaddi vs8, vs32, 176
     vlsd vs8, vs8
-    @!vp5 vaddw vv22, vv21, vs8
+    @!vp5 vaddw vv23, vv22, vs8
     vaddi vs8, vs32, 176
     vlsd vs8, vs8
-    @vp5 vaddw vv22, vs8, vs0
-    vcmplt vp5, vs16, vv19
-    @vp5 vaddw vv21, vs16, vs0
-    @!vp5 vaddw vv21, vv19, vs0
+    @vp5 vaddw vv23, vs8, vs0
+    vcmplt vp5, vs16, vv20
+    @vp5 vaddw vv22, vs16, vs0
+    @!vp5 vaddw vv22, vv20, vs0
     vaddi vs58, vs60, 24
-    vsxw vv21, vs58, vv0
-    @vp3 vaddw vv23, vs17, vv20
+    vsxw vv22, vs58, vv0
+    @vp3 vaddw vv24, vs17, vv21
     vaddi vs8, vs32, 176
     vlsd vs8, vs8
-    @vp3 vaddw vv24, vv23, vs8
-    vcmplt vp5, vv21, vv22
+    @vp3 vaddw vv25, vv24, vs8
+    vcmplt vp5, vv22, vv23
     vpop vp7, vp3, vp5, vp5, 0x80
     vpop vp8, vp3, vp5, vp5, 0x02
     @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip17
-    vcmplt vp5, vs21, vv23
-    @vp5 vaddw vv25, vs21, vs0
-    @!vp5 vaddw vv25, vv23, vs0
+    vcmplt vp5, vs21, vv24
+    @vp5 vaddw vv26, vs21, vs0
+    @!vp5 vaddw vv26, vv24, vs0
     vaddi vs58, vs60, 16
-    vsxw vv25, vs58, vv0
-    vcmplt vp5, vv23, vs18
-    @!vp5 vsubw vv26, vv24, vs18
+    vsxw vv26, vs58, vv0
+    vcmplt vp5, vv24, vs18
+    @!vp5 vsubw vv27, vv25, vs18
     vaddi vs8, vs32, 176
     vlsd vs8, vs8
-    @vp5 vaddw vv26, vs8, vs0
-    vcmplt vp5, vv25, vv26
+    @vp5 vaddw vv27, vs8, vs0
+    vcmplt vp5, vv26, vv27
     vaddi vs58, vs60, 24
-    vsxw vv21, vs58, vv0
+    vsxw vv22, vs58, vv0
     vaddi vs58, vs60, 16
-    vsxw vv25, vs58, vv0
+    vsxw vv26, vs58, vv0
     vaddi vs8, vs32, 304
     vlsd vs8, vs8
-    @vp8 vadd vv11, vv22, vs8
-    @vp8 vmul vv11, vs25, vv11
+    @vp8 vadd vv3, vv23, vs8
+    @vp8 vmul vv3, vs25, vv3
     vaddi vs8, vs32, 192
     vlsd vs8, vs8
-    @vp8 vsll vv12, vv26, vs8
-    @vp8 vadd vv11, vv11, vv12
-    @vp8 vaddw vv20, vs17, vv20
-    @vp8 vaddw vv18, vs23, vv18
-    @vp8 vaddw vv18, vv18, vv17
-    vcmplt vp9, vs14, vv19
-    @vp9 vaddw vv17, vv19, vs0
-    @!vp9 vaddw vv17, vs14, vs0
-    @vp8 vsubw vv18, vv18, vv17
-    @vp8 vmulw vv18, vs18, vv18
-    @vp8 vaddw vv20, vv20, vv18
-    vcmplt vp9, vs18, vv23
-    @vp9 vaddw vv23, vv23, vs0
-    @!vp9 vaddw vv23, vs18, vs0
-    @vp8 vsubw vv20, vv20, vv23
+    @vp8 vsll vv11, vv27, vs8
+    @vp8 vadd vv3, vv3, vv11
+    @vp8 vaddw vv21, vs17, vv21
+    @vp8 vaddw vv19, vs23, vv19
+    @vp8 vaddw vv19, vv19, vv18
+    vcmplt vp9, vs14, vv20
+    @vp9 vaddw vv18, vv20, vs0
+    @!vp9 vaddw vv18, vs14, vs0
+    @vp8 vsubw vv19, vv19, vv18
+    @vp8 vmulw vv19, vs18, vv19
+    @vp8 vaddw vv21, vv21, vv19
+    vcmplt vp9, vs18, vv24
+    @vp9 vaddw vv24, vv24, vs0
+    @!vp9 vaddw vv24, vs18, vs0
+    @vp8 vsubw vv21, vv21, vv24
 .Lkernel_gpu_opencl_skip17:
-    vaddw vv17, vs0, vs0
-    @vp7 vaddw vv17, vs0, vs61
+    vaddw vv18, vs0, vs0
+    @vp7 vaddw vv18, vs0, vs61
     vpop vp7, vp8, vp8, vp8, 0xAA
     @vp8 vadd vs4, vs0, vs0
-    @vp8 vadd vv12, vv22, vs0
-    @vp8 vaddw vv16, vs0, vs0
+    @vp8 vadd vv11, vv23, vs0
+    @vp8 vaddw vv19, vs0, vs0
     vaddi vs58, vs60, 8
-    vsxw vv16, vs58, vv0
+    vsxw vv19, vs58, vv0
     vpclear vp9
 .Lkernel_gpu_opencl_loop18:
     vmul vs8, vs24, vs4
-    @vp7 vadd vv13, vv2, vs8
+    @vp7 vadd vv12, vv2, vs8
     vmul vs8, vs27, vs4
-    @vp7 vadd vv14, vv20, vs8
+    @vp7 vadd vv13, vv21, vs8
     vpop vp8, vp7, vp5, vp5, 0x80
     vpop vp10, vp7, vp5, vp5, 0x02
-    vaddw vv18, vs0, vs0
-    @vp8 vaddw vv18, vs0, vs61
     vaddw vv23, vs0, vs0
-    @vp10 vaddw vv23, vs0, vs61
-    vcmpeq vp8, vv23, vs0
+    @vp8 vaddw vv23, vs0, vs61
+    vaddw vv24, vs0, vs0
+    @vp10 vaddw vv24, vs0, vs61
+    vcmpeq vp8, vv24, vs0
     vpop vp8, vp8, vp8, vp8, 0x55
     vpop vp10, vp8, vp8, vp8, 0xAA
     @vp8 vadd vs3, vs0, vs0
-    @vp8 vadd vv7, vv26, vs0
+    @vp8 vadd vv7, vv27, vs0
     vaddi vs58, vs60, 8
-    vlxw vv21, vs58, vv0
-    @vp8 vaddw vv16, vv21, vs0
+    vlxw vv19, vs58, vv0
+    @vp8 vaddw vv17, vv19, vs0
     vpclear vp11
 .Lkernel_gpu_opencl_loop19:
     vaddi vs8, vs32, 192
     vlsd vs8, vs8
     vsll vs10, vs3, vs8
-    @vp10 vadd vv8, vv13, vs10
+    @vp10 vadd vv14, vv12, vs10
     vaddi vs8, vs32, 248
     vlsd vs8, vs8
-    vadd vv8, vs8, vv8
+    vadd vv14, vs8, vv14
     vaddi vs8, vs32, 304
     vlsd vs8, vs8
     vmul vs10, vs3, vs8
-    @vp10 vadd vv9, vv14, vs10
+    @vp10 vadd vv15, vv13, vs10
     vaddi vs8, vs32, 192
     vlsd vs8, vs8
-    @vp10 vsll vv15, vv9, vs8
-    @vp10 vadd vv9, vv8, vv11
-    @vp10 vlxw vv21, vs0, vv9
-    @vp10 vlxw vv23, vs26, vv15
-    @vp10 vfmadd.s vv16, vv21, vv23, vv16
-    @vp10 vadd vv8, vv7, vs61
+    @vp10 vsll vv16, vv15, vs8
+    @vp10 vadd vv15, vv14, vv3
+    @vp10 vlxw vv19, vs0, vv15
+    @vp10 vlxw vv22, vs26, vv16
+    @vp10 vfmadd.s vv17, vv19, vv22, vv17
+    @vp10 vadd vv14, vv7, vs61
     vaddi vs58, vs60, 16
-    vlxd vv9, vs58, vv0
-    vcmplt vp8, vv7, vv9
+    vlxd vv15, vs58, vv0
+    vcmplt vp8, vv7, vv15
     vadd vs3, vs3, vs61
     vpop vp12, vp10, vp8, vp8, 0x80
     vpop vp13, vp10, vp8, vp8, 0x02
-    @vp13 vaddw vv21, vv16, vs0
+    @vp13 vaddw vv19, vv17, vs0
     vpop vp11, vp11, vp13, vp13, 0xEE
     vpop vp10, vp10, vp13, vp13, 0x02
-    @vp12 vadd vv7, vv8, vs0
+    @vp12 vadd vv7, vv14, vs0
     @vp12 vcjal 1, vs1, .Lkernel_gpu_opencl_loop19
-    vcmpeq vp8, vv18, vs0
+    vcmpeq vp8, vv23, vs0
     vpop vp8, vp8, vp8, vp8, 0x55
     vpop vp10, vp11, vp11, vp11, 0xAA
     vpop vp10, vp10, vp8, vp8, 0xEE
     vaddi vs58, vs60, 8
-    vlxw vv18, vs58, vv0
-    @vp8 vaddw vv16, vv18, vs0
-    @vp11 vaddw vv16, vv21, vs0
+    vlxw vv22, vs58, vv0
+    @vp8 vaddw vv17, vv22, vs0
+    @vp11 vaddw vv17, vv19, vs0
     @!vp10 vcjal 0, vs1, .Lkernel_gpu_opencl_skip20
-    @vp10 vadd vv7, vv12, vs61
+    @vp10 vadd vv7, vv11, vs61
     vaddi vs58, vs60, 24
-    vlxd vv8, vs58, vv0
-    vcmplt vp8, vv12, vv8
+    vlxd vv12, vs58, vv0
+    vcmplt vp8, vv11, vv12
     vadd vs4, vs4, vs61
 .Lkernel_gpu_opencl_skip20:
     vpop vp11, vp10, vp8, vp8, 0x80
     vpop vp12, vp10, vp8, vp8, 0x02
-    @vp12 vaddw vv18, vv16, vs0
+    @vp12 vaddw vv19, vv17, vs0
     vpop vp9, vp9, vp12, vp12, 0xEE
     vpop vp7, vp7, vp12, vp12, 0x02
-    @vp11 vadd vv12, vv7, vs0
+    @vp11 vadd vv11, vv7, vs0
     vaddi vs58, vs60, 8
-    @vp11 vsxw vv16, vs58, vv0
+    @vp11 vsxw vv17, vs58, vv0
     @vp11 vcjal 1, vs1, .Lkernel_gpu_opencl_loop18
     vpop vp5, vp12, vp12, vp12, 0xAA
     vpop vp5, vp5, vp9, vp9, 0xEE
-    vcmpeq vp7, vv17, vs0
+    vcmpeq vp7, vv18, vs0
     vpop vp7, vp7, vp7, vp7, 0x55
     vpop vp8, vp5, vp5, vp5, 0xAA
     vpop vp8, vp8, vp7, vp7, 0xEE
-    @vp7 vaddw vv16, vs0, vs0
-    @vp5 vaddw vv16, vv18, vs0
+    @vp7 vaddw vv17, vs0, vs0
+    @vp5 vaddw vv17, vv19, vs0
     @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip21
-    @vp8 vsxw vv16, vs9, vv4
+    @vp8 vsxw vv17, vs9, vv4
     vaddi vs3, vs32, 240
     vlsd vs3, vs3
     @vp8 vadd vv10, vv10, vs3
@@ -916,46 +912,46 @@ kernel_gpu_opencl_wt:
     vadd vs13, vs38, vs13
     vaddi vs11, vs32, 176
     vlsd vs11, vs11
-    @vp3 vaddw vv16, vv4, vs11
-    @vp3 vdivw vv17, vv16, vs3
-    @vp3 vmulw vv18, vv17, vs3
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs11
+    @vp3 vdivw vv18, vv17, vs3
+    @vp3 vmulw vv19, vv18, vs3
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs11, vs32, 304
     vlsd vs11, vs11
-    @vp5 vaddw vv16, vs0, vs11
-    @vp3 vaddw vv17, vv17, vv16
-    @vp5 vaddw vv19, vs3, vs0
-    vcmplt vp5, vs4, vv19
-    vcmplt vp7, vs6, vv19
+    @vp5 vaddw vv17, vs0, vs11
+    @vp3 vaddw vv18, vv18, vv17
+    @vp5 vaddw vv20, vs3, vs0
+    vcmplt vp5, vs4, vv20
+    vcmplt vp7, vs6, vv20
     vpop vp7, vp7, vp7, vp7, 0x55
     vpop vp7, vp5, vp7, vp1, 0xD8
-    vcmplt vp5, vv17, vs7
+    vcmplt vp5, vv18, vs7
     vpop vp5, vp5, vp5, vp5, 0x55
     vpop vp5, vp7, vp5, vp1, 0xD8
-    vcmplt vp7, vv17, vs8
+    vcmplt vp7, vv18, vs8
     vpop vp7, vp5, vp7, vp1, 0xD8
     vpop vp5, vp3, vp7, vp7, 0x80
     vpop vp8, vp3, vp7, vp7, 0x02
     @!vp5 vcjal 0, vs1, .Lkernel_gpu_opencl_skip25
-    @vp5 vaddw vv19, vv19, vs10
-    @vp5 vsubw vv17, vv17, vs7
-    @vp5 vmulw vv17, vv17, vs5
-    @vp5 vaddw vv19, vv19, vv17
+    @vp5 vaddw vv20, vv20, vs10
+    @vp5 vsubw vv18, vv18, vs7
+    @vp5 vmulw vv18, vv18, vs5
+    @vp5 vaddw vv20, vv20, vv18
     vaddi vs11, vs32, 192
     vlsd vs11, vs11
-    @vp5 vsll vv7, vv19, vs11
+    @vp5 vsll vv2, vv20, vs11
     vaddi vs11, vs63, 296
     vlsd vs11, vs11
-    @vp5 vlxw vv16, vs11, vv7
+    @vp5 vlxw vv17, vs11, vv2
 .Lkernel_gpu_opencl_skip25:
     vpop vp7, vp5, vp5, vp5, 0xAA
     vpop vp7, vp7, vp8, vp8, 0xEE
-    @vp5 vaddw vv17, vv16, vs0
-    @vp8 vaddw vv17, vs0, vs0
+    @vp5 vaddw vv18, vv17, vs0
+    @vp8 vaddw vv18, vs0, vs0
     @!vp7 vcjal 0, vs1, .Lkernel_gpu_opencl_skip26
-    @vp7 vsxw vv17, vs13, vv3
+    @vp7 vsxw vv18, vs13, vv3
     vaddi vs11, vs32, 240
     vlsd vs11, vs11
     @vp7 vadd vv4, vv4, vs11
@@ -986,7 +982,7 @@ kernel_gpu_opencl_wt:
     vlsd vs5, vs5
     vadd vs4, vs55, vs5
     vlsw vs4, vs4
-    @vp5 vmulw vv16, vs4, vv1
+    @vp5 vmulw vv17, vs4, vv1
     vaddi vs5, vs32, 344
     vlsd vs5, vs5
     vsllw vs6, vs4, vs5
@@ -996,8 +992,8 @@ kernel_gpu_opencl_wt:
     vaddi vs5, vs32, 104
     vlsd vs5, vs5
     @vp5 vsra vv2, vv2, vs5
-    vaddw vv17, vs0, vs0
-    vcmplt vp3, vv17, vs4
+    vaddw vv18, vs0, vs0
+    vcmplt vp3, vv18, vs4
     vaddi vs5, vs63, 272
     vlsd vs5, vs5
     vaddi vs7, vs32, 192
@@ -1006,21 +1002,21 @@ kernel_gpu_opencl_wt:
 .Lkernel_gpu_opencl_skip28:
     vpop vp4, vp5, vp5, vp5, 0xAA
     @vp5 vadd vv3, vv2, vs0
-    @vp5 vaddw vv17, vv16, vs0
+    @vp5 vaddw vv18, vv17, vs0
     vpclear vp7
 .Lkernel_gpu_opencl_loop29:
     vaddi vs5, vs32, 192
     vlsd vs5, vs5
-    @vp4 vsll vv4, vv17, vs5
-    @vp4 vadd vv7, vv3, vs61
-    @vp4 vmul vv7, vv7, vs4
+    @vp4 vsll vv2, vv18, vs5
+    @vp4 vadd vv4, vv3, vs61
+    @vp4 vmul vv4, vv4, vs4
     vpop vp5, vp4, vp3, vp3, 0x80
     vpop vp8, vp4, vp3, vp3, 0x02
-    vaddw vv18, vs0, vs0
-    @vp8 vaddw vv18, vs0, vs61
+    vaddw vv17, vs0, vs0
+    @vp8 vaddw vv17, vs0, vs61
     vpop vp8, vp5, vp5, vp5, 0xAA
     @vp5 vadd vs5, vs0, vs0
-    @vp5 vadd vv8, vv17, vs0
+    @vp5 vadd vv7, vv18, vs0
     @vp5 vaddw vv19, vs0, vs0
     vpclear vp9
 .Lkernel_gpu_opencl_loop30:
@@ -1029,18 +1025,18 @@ kernel_gpu_opencl_wt:
     vsll vs9, vs5, vs7
     vadd vs9, vs8, vs9
     vadd vs9, vs38, vs9
-    @vp8 vlxw vv20, vs9, vv4
+    @vp8 vlxw vv20, vs9, vv2
     @vp8 vfadd.s vv19, vv19, vv20
-    @vp8 vsxw vv19, vs9, vv4
-    @vp8 vadd vv8, vv8, vs61
-    vcmplt vp5, vv8, vv7
+    @vp8 vsxw vv19, vs9, vv2
+    @vp8 vadd vv7, vv7, vs61
+    vcmplt vp5, vv7, vv4
     vadd vs5, vs5, vs61
     vpop vp10, vp8, vp5, vp5, 0x80
     vpop vp11, vp8, vp5, vp5, 0x02
     vpop vp9, vp9, vp11, vp11, 0xEE
     vpop vp8, vp8, vp11, vp11, 0x02
     @vp10 vcjal 1, vs1, .Lkernel_gpu_opencl_loop30
-    vcmpeq vp5, vv18, vs0
+    vcmpeq vp5, vv17, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
     vpop vp8, vp9, vp9, vp9, 0xAA
     vpop vp8, vp8, vp5, vp5, 0xEE
@@ -1049,7 +1045,7 @@ kernel_gpu_opencl_wt:
     vlsd vs5, vs5
     @vp8 vadd vv3, vv3, vs5
     vcmplt vp5, vv3, vs3
-    @vp8 vaddw vv17, vv17, vs6
+    @vp8 vaddw vv18, vv18, vs6
 .Lkernel_gpu_opencl_skip31:
     vpop vp9, vp8, vp5, vp5, 0x80
     vpop vp10, vp8, vp5, vp5, 0x02
@@ -1118,31 +1114,31 @@ kernel_gpu_opencl_wt:
     vadd vs11, vs9, vs11
     vaddi vs9, vs32, 176
     vlsd vs9, vs9
-    @vp3 vaddw vv16, vv4, vs9
-    @vp3 vdivw vv17, vv16, vs4
-    @vp3 vmulw vv18, vv17, vs4
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs9
+    @vp3 vdivw vv18, vv17, vs4
+    @vp3 vmulw vv19, vv18, vs4
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs9, vs32, 304
     vlsd vs9, vs9
-    @vp5 vaddw vv16, vs0, vs9
-    @vp5 vaddw vv19, vs4, vs0
+    @vp5 vaddw vv17, vs0, vs9
+    @vp5 vaddw vv20, vs4, vs0
     vaddi vs9, vs32, 184
     vlsd vs9, vs9
-    @vp3 vaddw vv17, vv17, vs9
-    @vp3 vaddw vv17, vv17, vv16
-    @vp3 vaddw vv17, vv17, vs6
-    @vp3 vmulw vv17, vv17, vs7
-    @vp3 vaddw vv19, vv19, vs5
-    @vp3 vaddw vv19, vv19, vv17
+    @vp3 vaddw vv18, vv18, vs9
+    @vp3 vaddw vv18, vv18, vv17
+    @vp3 vaddw vv18, vv18, vs6
+    @vp3 vmulw vv18, vv18, vs7
+    @vp3 vaddw vv20, vv20, vs5
+    @vp3 vaddw vv20, vv20, vv18
     vaddi vs9, vs32, 192
     vlsd vs9, vs9
-    @vp3 vsll vv7, vv19, vs9
+    @vp3 vsll vv2, vv20, vs9
     vaddi vs9, vs63, 256
     vlsd vs9, vs9
-    @vp3 vlxw vv16, vs9, vv7
-    @vp3 vsxw vv16, vs11, vv3
+    @vp3 vlxw vv17, vs9, vv2
+    @vp3 vsxw vv17, vs11, vv3
     vaddi vs9, vs32, 240
     vlsd vs9, vs9
     @vp3 vadd vv4, vv4, vs9
@@ -1211,31 +1207,31 @@ kernel_gpu_opencl_wt:
     vadd vs11, vs35, vs11
     vaddi vs9, vs32, 176
     vlsd vs9, vs9
-    @vp3 vaddw vv16, vv4, vs9
-    @vp3 vdivw vv17, vv16, vs4
-    @vp3 vmulw vv18, vv17, vs4
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs9
+    @vp3 vdivw vv18, vv17, vs4
+    @vp3 vmulw vv19, vv18, vs4
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs9, vs32, 304
     vlsd vs9, vs9
-    @vp5 vaddw vv16, vs0, vs9
-    @vp5 vaddw vv19, vs4, vs0
+    @vp5 vaddw vv17, vs0, vs9
+    @vp5 vaddw vv20, vs4, vs0
     vaddi vs9, vs32, 184
     vlsd vs9, vs9
-    @vp3 vaddw vv17, vv17, vs9
-    @vp3 vaddw vv17, vv17, vv16
-    @vp3 vaddw vv17, vv17, vs6
-    @vp3 vmulw vv17, vv17, vs7
-    @vp3 vaddw vv19, vv19, vs5
-    @vp3 vaddw vv19, vv19, vv17
+    @vp3 vaddw vv18, vv18, vs9
+    @vp3 vaddw vv18, vv18, vv17
+    @vp3 vaddw vv18, vv18, vs6
+    @vp3 vmulw vv18, vv18, vs7
+    @vp3 vaddw vv20, vv20, vs5
+    @vp3 vaddw vv20, vv20, vv18
     vaddi vs9, vs32, 192
     vlsd vs9, vs9
-    @vp3 vsll vv7, vv19, vs9
+    @vp3 vsll vv2, vv20, vs9
     vaddi vs9, vs63, 256
     vlsd vs9, vs9
-    @vp3 vlxw vv16, vs9, vv7
-    @vp3 vsxw vv16, vs11, vv3
+    @vp3 vlxw vv17, vs9, vv2
+    @vp3 vsxw vv17, vs11, vv3
     vaddi vs9, vs32, 240
     vlsd vs9, vs9
     @vp3 vadd vv4, vv4, vs9
@@ -1293,10 +1289,10 @@ kernel_gpu_opencl_wt:
     vadd vs5, vs9, vs5
     vadd vs8, vs7, vs8
     vadd vs8, vs35, vs8
-    @vp3 vlxw vv16, vs5, vv3
-    @vp3 vlxw vv17, vs8, vv3
-    @vp3 vfsub.s vv17, vv16, vv17
-    @vp3 vsxw vv17, vs8, vv3
+    @vp3 vlxw vv17, vs5, vv3
+    @vp3 vlxw vv18, vs8, vv3
+    @vp3 vfsub.s vv18, vv17, vv18
+    @vp3 vsxw vv18, vs8, vv3
     vaddi vs5, vs32, 240
     vlsd vs5, vs5
     @vp3 vadd vv4, vv4, vs5
@@ -1329,8 +1325,8 @@ kernel_gpu_opencl_wt:
     vaddi vs6, vs32, 104
     vlsd vs6, vs6
     @vp5 vsra vv2, vv2, vs6
-    vaddw vv16, vs0, vs0
-    vcmplt vp3, vv16, vs5
+    vaddw vv17, vs0, vs0
+    vcmplt vp3, vv17, vs5
     vaddi vs6, vs63, 232
     vlsd vs6, vs6
     vaddi vs7, vs32, 192
@@ -1352,32 +1348,32 @@ kernel_gpu_opencl_wt:
     vlsd vs9, vs9
     vsll vs10, vs6, vs9
     vadd vs10, vs8, vs10
-    @vp4 vadd vv7, vv4, vs5
+    @vp4 vadd vv2, vv4, vs5
     vpop vp5, vp4, vp3, vp3, 0x80
     vpop vp8, vp4, vp3, vp3, 0x02
-    vaddw vv16, vs0, vs0
-    @vp8 vaddw vv16, vs0, vs61
+    vaddw vv17, vs0, vs0
+    @vp8 vaddw vv17, vs0, vs61
     vpop vp8, vp5, vp5, vp5, 0xAA
     @vp5 vadd vs9, vs0, vs0
-    @vp5 vadd vv8, vv4, vs0
-    @vp5 vaddw vv17, vs0, vs0
+    @vp5 vadd vv7, vv4, vs0
+    @vp5 vaddw vv18, vs0, vs0
     vpclear vp9
 .Lkernel_gpu_opencl_loop44:
     vmul vs11, vs7, vs9
     vadd vs11, vs10, vs11
     vadd vs11, vs35, vs11
-    @vp8 vlxw vv18, vs11, vv3
-    @vp8 vfadd.s vv17, vv17, vv18
-    @vp8 vsxw vv17, vs11, vv3
-    @vp8 vadd vv8, vv8, vs4
-    vcmplt vp5, vv8, vv7
+    @vp8 vlxw vv19, vs11, vv3
+    @vp8 vfadd.s vv18, vv18, vv19
+    @vp8 vsxw vv18, vs11, vv3
+    @vp8 vadd vv7, vv7, vs4
+    vcmplt vp5, vv7, vv2
     vadd vs9, vs9, vs61
     vpop vp10, vp8, vp5, vp5, 0x80
     vpop vp11, vp8, vp5, vp5, 0x02
     vpop vp9, vp9, vp11, vp11, 0xEE
     vpop vp8, vp8, vp11, vp11, 0x02
     @vp10 vcjal 1, vs1, .Lkernel_gpu_opencl_loop44
-    vcmpeq vp5, vv16, vs0
+    vcmpeq vp5, vv17, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
     vpop vp8, vp9, vp9, vp9, 0xAA
     vpop vp8, vp8, vp5, vp5, 0xEE
@@ -1452,31 +1448,31 @@ kernel_gpu_opencl_wt:
     vadd vs12, vs10, vs12
     vaddi vs10, vs32, 176
     vlsd vs10, vs10
-    @vp3 vaddw vv16, vv4, vs10
-    @vp3 vdivw vv17, vv16, vs5
-    @vp3 vmulw vv18, vv17, vs5
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs10
+    @vp3 vdivw vv18, vv17, vs5
+    @vp3 vmulw vv19, vv18, vs5
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs10, vs32, 304
     vlsd vs10, vs10
-    @vp5 vaddw vv16, vs0, vs10
-    @vp5 vaddw vv19, vs5, vs0
+    @vp5 vaddw vv17, vs0, vs10
+    @vp5 vaddw vv20, vs5, vs0
     vaddi vs10, vs32, 184
     vlsd vs10, vs10
-    @vp3 vaddw vv17, vv17, vs10
-    @vp3 vaddw vv17, vv17, vv16
-    @vp3 vaddw vv17, vv17, vs7
-    @vp3 vmulw vv17, vv17, vs8
-    @vp3 vaddw vv19, vv19, vs6
-    @vp3 vaddw vv19, vv19, vv17
+    @vp3 vaddw vv18, vv18, vs10
+    @vp3 vaddw vv18, vv18, vv17
+    @vp3 vaddw vv18, vv18, vs7
+    @vp3 vmulw vv18, vv18, vs8
+    @vp3 vaddw vv20, vv20, vs6
+    @vp3 vaddw vv20, vv20, vv18
     vaddi vs10, vs32, 192
     vlsd vs10, vs10
-    @vp3 vsll vv7, vv19, vs10
+    @vp3 vsll vv2, vv20, vs10
     vaddi vs10, vs63, 216
     vlsd vs10, vs10
-    @vp3 vlxw vv16, vs10, vv7
-    @vp3 vsxw vv16, vs12, vv3
+    @vp3 vlxw vv17, vs10, vv2
+    @vp3 vsxw vv17, vs12, vv3
     vaddi vs10, vs32, 240
     vlsd vs10, vs10
     @vp3 vadd vv4, vv4, vs10
@@ -1544,31 +1540,31 @@ kernel_gpu_opencl_wt:
     vadd vs12, vs10, vs12
     vaddi vs10, vs32, 176
     vlsd vs10, vs10
-    @vp3 vaddw vv16, vv4, vs10
-    @vp3 vdivw vv17, vv16, vs5
-    @vp3 vmulw vv18, vv17, vs5
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs10
+    @vp3 vdivw vv18, vv17, vs5
+    @vp3 vmulw vv19, vv18, vs5
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs10, vs32, 304
     vlsd vs10, vs10
-    @vp5 vaddw vv16, vs0, vs10
-    @vp5 vaddw vv19, vs5, vs0
+    @vp5 vaddw vv17, vs0, vs10
+    @vp5 vaddw vv20, vs5, vs0
     vaddi vs10, vs32, 184
     vlsd vs10, vs10
-    @vp3 vaddw vv17, vv17, vs10
-    @vp3 vaddw vv17, vv17, vv16
-    @vp3 vaddw vv17, vv17, vs7
-    @vp3 vmulw vv17, vv17, vs8
-    @vp3 vaddw vv19, vv19, vs6
-    @vp3 vaddw vv19, vv19, vv17
+    @vp3 vaddw vv18, vv18, vs10
+    @vp3 vaddw vv18, vv18, vv17
+    @vp3 vaddw vv18, vv18, vs7
+    @vp3 vmulw vv18, vv18, vs8
+    @vp3 vaddw vv20, vv20, vs6
+    @vp3 vaddw vv20, vv20, vv18
     vaddi vs10, vs32, 192
     vlsd vs10, vs10
-    @vp3 vsll vv7, vv19, vs10
+    @vp3 vsll vv2, vv20, vs10
     vaddi vs10, vs63, 216
     vlsd vs10, vs10
-    @vp3 vlxw vv16, vs10, vv7
-    @vp3 vsxw vv16, vs12, vv3
+    @vp3 vlxw vv17, vs10, vv2
+    @vp3 vsxw vv17, vs12, vv3
     vaddi vs10, vs32, 240
     vlsd vs10, vs10
     @vp3 vadd vv4, vv4, vs10
@@ -1627,10 +1623,10 @@ kernel_gpu_opencl_wt:
     vaddi vs10, vs32, 464
     vlsd vs10, vs10
     vadd vs9, vs10, vs9
-    @vp3 vlxw vv16, vs6, vv3
-    @vp3 vlxw vv17, vs9, vv3
-    @vp3 vfsub.s vv17, vv16, vv17
-    @vp3 vsxw vv17, vs9, vv3
+    @vp3 vlxw vv17, vs6, vv3
+    @vp3 vlxw vv18, vs9, vv3
+    @vp3 vfsub.s vv18, vv17, vv18
+    @vp3 vsxw vv18, vs9, vv3
     vaddi vs6, vs32, 240
     vlsd vs6, vs6
     @vp3 vadd vv4, vv4, vs6
@@ -1685,9 +1681,9 @@ kernel_gpu_opencl_wt:
     vaddi vs9, vs32, 8
     vlsd vs9, vs9
     vadd vs8, vs9, vs8
-    @vp3 vlxw vv16, vs5, vv3
-    @vp3 vfmul.s vv17, vv16, vv16
-    @vp3 vsxw vv17, vs8, vv3
+    @vp3 vlxw vv17, vs5, vv3
+    @vp3 vfmul.s vv18, vv17, vv17
+    @vp3 vsxw vv18, vs8, vv3
     vaddi vs5, vs32, 240
     vlsd vs5, vs5
     @vp3 vadd vv4, vv4, vs5
@@ -1762,46 +1758,46 @@ kernel_gpu_opencl_wt:
     vadd vs15, vs38, vs15
     vaddi vs13, vs32, 176
     vlsd vs13, vs13
-    @vp3 vaddw vv16, vv4, vs13
-    @vp3 vdivw vv17, vv16, vs5
-    @vp3 vmulw vv18, vv17, vs5
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs13
+    @vp3 vdivw vv18, vv17, vs5
+    @vp3 vmulw vv19, vv18, vs5
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs13, vs32, 304
     vlsd vs13, vs13
-    @vp5 vaddw vv16, vs0, vs13
-    @vp3 vaddw vv17, vv17, vv16
-    @vp5 vaddw vv19, vs5, vs0
-    vcmplt vp5, vs6, vv19
-    vcmplt vp7, vs8, vv19
+    @vp5 vaddw vv17, vs0, vs13
+    @vp3 vaddw vv18, vv18, vv17
+    @vp5 vaddw vv20, vs5, vs0
+    vcmplt vp5, vs6, vv20
+    vcmplt vp7, vs8, vv20
     vpop vp7, vp7, vp7, vp7, 0x55
     vpop vp7, vp5, vp7, vp1, 0xD8
-    vcmplt vp5, vv17, vs9
+    vcmplt vp5, vv18, vs9
     vpop vp5, vp5, vp5, vp5, 0x55
     vpop vp5, vp7, vp5, vp1, 0xD8
-    vcmplt vp7, vv17, vs10
+    vcmplt vp7, vv18, vs10
     vpop vp7, vp5, vp7, vp1, 0xD8
     vpop vp5, vp3, vp7, vp7, 0x80
     vpop vp8, vp3, vp7, vp7, 0x02
     @!vp5 vcjal 0, vs1, .Lkernel_gpu_opencl_skip61
-    @vp5 vaddw vv19, vv19, vs12
-    @vp5 vsubw vv17, vv17, vs9
-    @vp5 vmulw vv17, vv17, vs7
-    @vp5 vaddw vv19, vv19, vv17
+    @vp5 vaddw vv20, vv20, vs12
+    @vp5 vsubw vv18, vv18, vs9
+    @vp5 vmulw vv18, vv18, vs7
+    @vp5 vaddw vv20, vv20, vv18
     vaddi vs13, vs32, 192
     vlsd vs13, vs13
-    @vp5 vsll vv7, vv19, vs13
+    @vp5 vsll vv2, vv20, vs13
     vaddi vs13, vs63, 280
     vlsd vs13, vs13
-    @vp5 vlxw vv16, vs13, vv7
+    @vp5 vlxw vv17, vs13, vv2
 .Lkernel_gpu_opencl_skip61:
     vpop vp7, vp5, vp5, vp5, 0xAA
     vpop vp7, vp7, vp8, vp8, 0xEE
-    @vp5 vaddw vv17, vv16, vs0
-    @vp8 vaddw vv17, vs0, vs0
+    @vp5 vaddw vv18, vv17, vs0
+    @vp8 vaddw vv18, vs0, vs0
     @!vp7 vcjal 0, vs1, .Lkernel_gpu_opencl_skip62
-    @vp7 vsxw vv17, vs15, vv3
+    @vp7 vsxw vv18, vs15, vv3
     vaddi vs13, vs32, 240
     vlsd vs13, vs13
     @vp7 vadd vv4, vv4, vs13
@@ -1829,7 +1825,7 @@ kernel_gpu_opencl_wt:
     vlsd vs5, vs5
     vadd vs4, vs55, vs5
     vlsw vs4, vs4
-    @vp5 vmulw vv16, vs4, vv1
+    @vp5 vmulw vv17, vs4, vv1
     vaddi vs5, vs32, 344
     vlsd vs5, vs5
     vsllw vs6, vs4, vs5
@@ -1839,8 +1835,8 @@ kernel_gpu_opencl_wt:
     vaddi vs5, vs32, 104
     vlsd vs5, vs5
     @vp5 vsra vv2, vv2, vs5
-    vaddw vv17, vs0, vs0
-    vcmplt vp3, vv17, vs4
+    vaddw vv18, vs0, vs0
+    vcmplt vp3, vv18, vs4
     vaddi vs5, vs63, 272
     vlsd vs5, vs5
     vaddi vs7, vs32, 192
@@ -1849,21 +1845,21 @@ kernel_gpu_opencl_wt:
 .Lkernel_gpu_opencl_skip64:
     vpop vp4, vp5, vp5, vp5, 0xAA
     @vp5 vadd vv3, vv2, vs0
-    @vp5 vaddw vv17, vv16, vs0
+    @vp5 vaddw vv18, vv17, vs0
     vpclear vp7
 .Lkernel_gpu_opencl_loop65:
     vaddi vs5, vs32, 192
     vlsd vs5, vs5
-    @vp4 vsll vv4, vv17, vs5
-    @vp4 vadd vv7, vv3, vs61
-    @vp4 vmul vv7, vv7, vs4
+    @vp4 vsll vv2, vv18, vs5
+    @vp4 vadd vv4, vv3, vs61
+    @vp4 vmul vv4, vv4, vs4
     vpop vp5, vp4, vp3, vp3, 0x80
     vpop vp8, vp4, vp3, vp3, 0x02
-    vaddw vv18, vs0, vs0
-    @vp8 vaddw vv18, vs0, vs61
+    vaddw vv17, vs0, vs0
+    @vp8 vaddw vv17, vs0, vs61
     vpop vp8, vp5, vp5, vp5, 0xAA
     @vp5 vadd vs5, vs0, vs0
-    @vp5 vadd vv8, vv17, vs0
+    @vp5 vadd vv7, vv18, vs0
     @vp5 vaddw vv19, vs0, vs0
     vpclear vp9
 .Lkernel_gpu_opencl_loop66:
@@ -1872,18 +1868,18 @@ kernel_gpu_opencl_wt:
     vsll vs9, vs5, vs7
     vadd vs9, vs8, vs9
     vadd vs9, vs38, vs9
-    @vp8 vlxw vv20, vs9, vv4
+    @vp8 vlxw vv20, vs9, vv2
     @vp8 vfadd.s vv19, vv19, vv20
-    @vp8 vsxw vv19, vs9, vv4
-    @vp8 vadd vv8, vv8, vs61
-    vcmplt vp5, vv8, vv7
+    @vp8 vsxw vv19, vs9, vv2
+    @vp8 vadd vv7, vv7, vs61
+    vcmplt vp5, vv7, vv4
     vadd vs5, vs5, vs61
     vpop vp10, vp8, vp5, vp5, 0x80
     vpop vp11, vp8, vp5, vp5, 0x02
     vpop vp9, vp9, vp11, vp11, 0xEE
     vpop vp8, vp8, vp11, vp11, 0x02
     @vp10 vcjal 1, vs1, .Lkernel_gpu_opencl_loop66
-    vcmpeq vp5, vv18, vs0
+    vcmpeq vp5, vv17, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
     vpop vp8, vp9, vp9, vp9, 0xAA
     vpop vp8, vp8, vp5, vp5, 0xEE
@@ -1892,7 +1888,7 @@ kernel_gpu_opencl_wt:
     vlsd vs5, vs5
     @vp8 vadd vv3, vv3, vs5
     vcmplt vp5, vv3, vs2
-    @vp8 vaddw vv17, vv17, vs6
+    @vp8 vaddw vv18, vv18, vs6
 .Lkernel_gpu_opencl_skip67:
     vpop vp9, vp8, vp5, vp5, 0x80
     vpop vp10, vp8, vp5, vp5, 0x02
@@ -1961,31 +1957,31 @@ kernel_gpu_opencl_wt:
     vadd vs11, vs9, vs11
     vaddi vs9, vs32, 176
     vlsd vs9, vs9
-    @vp3 vaddw vv16, vv4, vs9
-    @vp3 vdivw vv17, vv16, vs4
-    @vp3 vmulw vv18, vv17, vs4
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs9
+    @vp3 vdivw vv18, vv17, vs4
+    @vp3 vmulw vv19, vv18, vs4
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs9, vs32, 304
     vlsd vs9, vs9
-    @vp5 vaddw vv16, vs0, vs9
-    @vp5 vaddw vv19, vs4, vs0
+    @vp5 vaddw vv17, vs0, vs9
+    @vp5 vaddw vv20, vs4, vs0
     vaddi vs9, vs32, 184
     vlsd vs9, vs9
-    @vp3 vaddw vv17, vv17, vs9
-    @vp3 vaddw vv17, vv17, vv16
-    @vp3 vaddw vv17, vv17, vs6
-    @vp3 vmulw vv17, vv17, vs7
-    @vp3 vaddw vv19, vv19, vs5
-    @vp3 vaddw vv19, vv19, vv17
+    @vp3 vaddw vv18, vv18, vs9
+    @vp3 vaddw vv18, vv18, vv17
+    @vp3 vaddw vv18, vv18, vs6
+    @vp3 vmulw vv18, vv18, vs7
+    @vp3 vaddw vv20, vv20, vs5
+    @vp3 vaddw vv20, vv20, vv18
     vaddi vs9, vs32, 192
     vlsd vs9, vs9
-    @vp3 vsll vv7, vv19, vs9
+    @vp3 vsll vv2, vv20, vs9
     vaddi vs9, vs63, 256
     vlsd vs9, vs9
-    @vp3 vlxw vv16, vs9, vv7
-    @vp3 vsxw vv16, vs11, vv3
+    @vp3 vlxw vv17, vs9, vv2
+    @vp3 vsxw vv17, vs11, vv3
     vaddi vs9, vs32, 240
     vlsd vs9, vs9
     @vp3 vadd vv4, vv4, vs9
@@ -2051,31 +2047,31 @@ kernel_gpu_opencl_wt:
     vadd vs11, vs35, vs11
     vaddi vs9, vs32, 176
     vlsd vs9, vs9
-    @vp3 vaddw vv16, vv4, vs9
-    @vp3 vdivw vv17, vv16, vs4
-    @vp3 vmulw vv18, vv17, vs4
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs9
+    @vp3 vdivw vv18, vv17, vs4
+    @vp3 vmulw vv19, vv18, vs4
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs9, vs32, 304
     vlsd vs9, vs9
-    @vp5 vaddw vv16, vs0, vs9
-    @vp5 vaddw vv19, vs4, vs0
+    @vp5 vaddw vv17, vs0, vs9
+    @vp5 vaddw vv20, vs4, vs0
     vaddi vs9, vs32, 184
     vlsd vs9, vs9
-    @vp3 vaddw vv17, vv17, vs9
-    @vp3 vaddw vv17, vv17, vv16
-    @vp3 vaddw vv17, vv17, vs6
-    @vp3 vmulw vv17, vv17, vs7
-    @vp3 vaddw vv19, vv19, vs5
-    @vp3 vaddw vv19, vv19, vv17
+    @vp3 vaddw vv18, vv18, vs9
+    @vp3 vaddw vv18, vv18, vv17
+    @vp3 vaddw vv18, vv18, vs6
+    @vp3 vmulw vv18, vv18, vs7
+    @vp3 vaddw vv20, vv20, vs5
+    @vp3 vaddw vv20, vv20, vv18
     vaddi vs9, vs32, 192
     vlsd vs9, vs9
-    @vp3 vsll vv7, vv19, vs9
+    @vp3 vsll vv2, vv20, vs9
     vaddi vs9, vs63, 256
     vlsd vs9, vs9
-    @vp3 vlxw vv16, vs9, vv7
-    @vp3 vsxw vv16, vs11, vv3
+    @vp3 vlxw vv17, vs9, vv2
+    @vp3 vsxw vv17, vs11, vv3
     vaddi vs9, vs32, 240
     vlsd vs9, vs9
     @vp3 vadd vv4, vv4, vs9
@@ -2132,10 +2128,10 @@ kernel_gpu_opencl_wt:
     vadd vs5, vs9, vs5
     vadd vs8, vs7, vs8
     vadd vs8, vs35, vs8
-    @vp3 vlxw vv16, vs5, vv3
-    @vp3 vlxw vv17, vs8, vv3
-    @vp3 vfsub.s vv17, vv16, vv17
-    @vp3 vsxw vv17, vs8, vv3
+    @vp3 vlxw vv17, vs5, vv3
+    @vp3 vlxw vv18, vs8, vv3
+    @vp3 vfsub.s vv18, vv17, vv18
+    @vp3 vsxw vv18, vs8, vv3
     vaddi vs5, vs32, 240
     vlsd vs5, vs5
     @vp3 vadd vv4, vv4, vs5
@@ -2165,8 +2161,8 @@ kernel_gpu_opencl_wt:
     vaddi vs5, vs32, 104
     vlsd vs5, vs5
     @vp5 vsra vv2, vv2, vs5
-    vaddw vv16, vs0, vs0
-    vcmplt vp3, vv16, vs4
+    vaddw vv17, vs0, vs0
+    vcmplt vp3, vv17, vs4
     vaddi vs5, vs63, 232
     vlsd vs5, vs5
     vaddi vs6, vs32, 192
@@ -2188,32 +2184,32 @@ kernel_gpu_opencl_wt:
     vlsd vs8, vs8
     vsll vs9, vs5, vs8
     vadd vs9, vs7, vs9
-    @vp4 vadd vv7, vv4, vs4
+    @vp4 vadd vv2, vv4, vs4
     vpop vp5, vp4, vp3, vp3, 0x80
     vpop vp8, vp4, vp3, vp3, 0x02
-    vaddw vv16, vs0, vs0
-    @vp8 vaddw vv16, vs0, vs61
+    vaddw vv17, vs0, vs0
+    @vp8 vaddw vv17, vs0, vs61
     vpop vp8, vp5, vp5, vp5, 0xAA
     @vp5 vadd vs8, vs0, vs0
-    @vp5 vadd vv8, vv4, vs0
-    @vp5 vaddw vv17, vs0, vs0
+    @vp5 vadd vv7, vv4, vs0
+    @vp5 vaddw vv18, vs0, vs0
     vpclear vp9
 .Lkernel_gpu_opencl_loop80:
     vmul vs10, vs6, vs8
     vadd vs10, vs9, vs10
     vadd vs10, vs35, vs10
-    @vp8 vlxw vv18, vs10, vv3
-    @vp8 vfadd.s vv17, vv17, vv18
-    @vp8 vsxw vv17, vs10, vv3
-    @vp8 vadd vv8, vv8, vs2
-    vcmplt vp5, vv8, vv7
+    @vp8 vlxw vv19, vs10, vv3
+    @vp8 vfadd.s vv18, vv18, vv19
+    @vp8 vsxw vv18, vs10, vv3
+    @vp8 vadd vv7, vv7, vs2
+    vcmplt vp5, vv7, vv2
     vadd vs8, vs8, vs61
     vpop vp10, vp8, vp5, vp5, 0x80
     vpop vp11, vp8, vp5, vp5, 0x02
     vpop vp9, vp9, vp11, vp11, 0xEE
     vpop vp8, vp8, vp11, vp11, 0x02
     @vp10 vcjal 1, vs1, .Lkernel_gpu_opencl_loop80
-    vcmpeq vp5, vv16, vs0
+    vcmpeq vp5, vv17, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
     vpop vp8, vp9, vp9, vp9, 0xAA
     vpop vp8, vp8, vp5, vp5, 0xEE
@@ -2288,31 +2284,31 @@ kernel_gpu_opencl_wt:
     vadd vs11, vs9, vs11
     vaddi vs9, vs32, 176
     vlsd vs9, vs9
-    @vp3 vaddw vv16, vv4, vs9
-    @vp3 vdivw vv17, vv16, vs4
-    @vp3 vmulw vv18, vv17, vs4
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs9
+    @vp3 vdivw vv18, vv17, vs4
+    @vp3 vmulw vv19, vv18, vs4
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs9, vs32, 304
     vlsd vs9, vs9
-    @vp5 vaddw vv16, vs0, vs9
-    @vp5 vaddw vv19, vs4, vs0
+    @vp5 vaddw vv17, vs0, vs9
+    @vp5 vaddw vv20, vs4, vs0
     vaddi vs9, vs32, 184
     vlsd vs9, vs9
-    @vp3 vaddw vv17, vv17, vs9
-    @vp3 vaddw vv17, vv17, vv16
-    @vp3 vaddw vv17, vv17, vs6
-    @vp3 vmulw vv17, vv17, vs7
-    @vp3 vaddw vv19, vv19, vs5
-    @vp3 vaddw vv19, vv19, vv17
+    @vp3 vaddw vv18, vv18, vs9
+    @vp3 vaddw vv18, vv18, vv17
+    @vp3 vaddw vv18, vv18, vs6
+    @vp3 vmulw vv18, vv18, vs7
+    @vp3 vaddw vv20, vv20, vs5
+    @vp3 vaddw vv20, vv20, vv18
     vaddi vs9, vs32, 192
     vlsd vs9, vs9
-    @vp3 vsll vv7, vv19, vs9
+    @vp3 vsll vv2, vv20, vs9
     vaddi vs9, vs63, 216
     vlsd vs9, vs9
-    @vp3 vlxw vv16, vs9, vv7
-    @vp3 vsxw vv16, vs11, vv3
+    @vp3 vlxw vv17, vs9, vv2
+    @vp3 vsxw vv17, vs11, vv3
     vaddi vs9, vs32, 240
     vlsd vs9, vs9
     @vp3 vadd vv4, vv4, vs9
@@ -2380,31 +2376,31 @@ kernel_gpu_opencl_wt:
     vadd vs10, vs8, vs10
     vaddi vs8, vs32, 176
     vlsd vs8, vs8
-    @vp3 vaddw vv16, vv4, vs8
-    @vp3 vdivw vv17, vv16, vs4
-    @vp3 vmulw vv18, vv17, vs4
-    @vp3 vsubw vv19, vv16, vv18
-    vcmpeq vp5, vv16, vv18
-    vaddw vv16, vs0, vs0
+    @vp3 vaddw vv17, vv4, vs8
+    @vp3 vdivw vv18, vv17, vs4
+    @vp3 vmulw vv19, vv18, vs4
+    @vp3 vsubw vv20, vv17, vv19
+    vcmpeq vp5, vv17, vv19
+    vaddw vv17, vs0, vs0
     vaddi vs8, vs32, 304
     vlsd vs8, vs8
-    @vp5 vaddw vv16, vs0, vs8
-    @vp5 vaddw vv19, vs4, vs0
+    @vp5 vaddw vv17, vs0, vs8
+    @vp5 vaddw vv20, vs4, vs0
     vaddi vs8, vs32, 184
     vlsd vs8, vs8
-    @vp3 vaddw vv17, vv17, vs8
-    @vp3 vaddw vv17, vv17, vv16
-    @vp3 vaddw vv17, vv17, vs6
-    @vp3 vmulw vv17, vv17, vs3
-    @vp3 vaddw vv19, vv19, vs5
-    @vp3 vaddw vv19, vv19, vv17
+    @vp3 vaddw vv18, vv18, vs8
+    @vp3 vaddw vv18, vv18, vv17
+    @vp3 vaddw vv18, vv18, vs6
+    @vp3 vmulw vv18, vv18, vs3
+    @vp3 vaddw vv20, vv20, vs5
+    @vp3 vaddw vv20, vv20, vv18
     vaddi vs8, vs32, 192
     vlsd vs8, vs8
-    @vp3 vsll vv7, vv19, vs8
+    @vp3 vsll vv2, vv20, vs8
     vaddi vs8, vs63, 216
     vlsd vs8, vs8
-    @vp3 vlxw vv16, vs8, vv7
-    @vp3 vsxw vv16, vs10, vv3
+    @vp3 vlxw vv17, vs8, vv2
+    @vp3 vsxw vv17, vs10, vv3
     vaddi vs8, vs32, 240
     vlsd vs8, vs8
     @vp3 vadd vv4, vv4, vs8
@@ -2463,10 +2459,10 @@ kernel_gpu_opencl_wt:
     vaddi vs8, vs32, 488
     vlsd vs8, vs8
     vadd vs7, vs8, vs7
-    @vp3 vlxw vv16, vs4, vv3
-    @vp3 vlxw vv17, vs7, vv3
-    @vp3 vfsub.s vv17, vv16, vv17
-    @vp3 vsxw vv17, vs7, vv3
+    @vp3 vlxw vv17, vs4, vv3
+    @vp3 vlxw vv18, vs7, vv3
+    @vp3 vfsub.s vv18, vv17, vv18
+    @vp3 vsxw vv18, vs7, vv3
     vaddi vs4, vs32, 240
     vlsd vs4, vs4
     @vp3 vadd vv4, vv4, vs4
@@ -2492,7 +2488,7 @@ kernel_gpu_opencl_wt:
     vaddi vs4, vs63, 0
     vlsd vs4, vs4
     vlsw vs3, vs4
-    vfcvt.s.w vv16, vs3
+    vfcvt.s.w vv17, vs3
     vaddi vs3, vs32, 104
     vlsd vs3, vs3
     @vp5 vsll vv2, vv1, vs3
@@ -2529,15 +2525,15 @@ kernel_gpu_opencl_wt:
     vaddi vs8, vs32, 488
     vlsd vs8, vs8
     vadd vs7, vs8, vs7
-    @vp3 vlxw vv17, vs4, vv3
-    @vp3 vlxw vv18, vs7, vv3
-    @vp3 vfmul.s vv17, vv17, vv17
-    @vp3 vfdiv.s vv17, vv17, vv16
-    @vp3 vfsub.s vv18, vv18, vv17
-    vcmpflt.s vp5, vv18, vs0
-    @vp5 vaddw vv18, vs0, vs0
-    @vp3 vfsqrt.s vv18, vv18
-    @vp3 vsxw vv18, vs7, vv3
+    @vp3 vlxw vv18, vs4, vv3
+    @vp3 vlxw vv19, vs7, vv3
+    @vp3 vfmul.s vv18, vv18, vv18
+    @vp3 vfdiv.s vv18, vv18, vv17
+    @vp3 vfsub.s vv19, vv19, vv18
+    vcmpflt.s vp5, vv19, vs0
+    @vp5 vaddw vv19, vs0, vs0
+    @vp3 vfsqrt.s vv19, vv19
+    @vp3 vsxw vv19, vs7, vv3
     vaddi vs4, vs32, 240
     vlsd vs4, vs4
     @vp3 vadd vv4, vv4, vs4
@@ -2584,16 +2580,16 @@ kernel_gpu_opencl_wt:
     vlsd vs4, vs4
     vsll vs6, vs3, vs4
     vaddi vs58, vs60, 32
-    vlxd vv7, vs58, vv0
-    vadd vv8, vv7, vs6
+    vlxd vv2, vs58, vv0
+    vadd vv7, vv2, vs6
     vadd vs6, vs5, vs6
     vaddi vs4, vs32, 496
     vlsd vs4, vs4
     vadd vs6, vs4, vs6
-    @vp3 vadd vv7, vv8, vv3
-    @vp3 vlxw vv16, vs0, vv7
-    @vp3 vfmul.s vv17, vv16, vv16
-    @vp3 vsxw vv17, vs6, vv3
+    @vp3 vadd vv2, vv7, vv3
+    @vp3 vlxw vv17, vs0, vv2
+    @vp3 vfmul.s vv18, vv17, vv17
+    @vp3 vsxw vv18, vs6, vv3
     vaddi vs4, vs32, 240
     vlsd vs4, vs4
     @vp3 vadd vv4, vv4, vs4
@@ -2620,8 +2616,8 @@ kernel_gpu_opencl_wt:
     vlsd vs4, vs4
     vadd vs3, vs55, vs4
     vlsw vs3, vs3
-    vaddw vv16, vs0, vs0
-    vcmplt vp3, vv16, vs3
+    vaddw vv17, vs0, vs0
+    vcmplt vp3, vv17, vs3
     vaddi vs4, vs32, 104
     vlsd vs4, vs4
     @vp5 vsll vv2, vv1, vs4
@@ -2663,11 +2659,11 @@ kernel_gpu_opencl_wt:
     vadd vs10, vs9, vs10
     vpop vp5, vp4, vp3, vp3, 0x80
     vpop vp8, vp4, vp3, vp3, 0x02
-    vaddw vv16, vs0, vs0
-    @vp8 vaddw vv16, vs0, vs61
+    vaddw vv17, vs0, vs0
+    @vp8 vaddw vv17, vs0, vs61
     vpop vp8, vp5, vp5, vp5, 0xAA
     @vp5 vadd vs9, vs0, vs0
-    @vp5 vaddw vv17, vs0, vs0
+    @vp5 vaddw vv18, vs0, vs0
     vpclear vp9
 .Lkernel_gpu_opencl_loop100:
     vaddi vs11, vs32, 192
@@ -2675,28 +2671,27 @@ kernel_gpu_opencl_wt:
     vsll vs12, vs9, vs11
     vadd vs12, vs7, vs12
     vaddi vs58, vs60, 32
-    vlxd vv8, vs58, vv0
-    vadd vv9, vv8, vs12
-    @vp8 vadd vv8, vv9, vv3
-    @vp8 vlxw vv18, vs0, vv8
-    @vp8 vfadd.s vv17, vv17, vv18
+    vlxd vv2, vs58, vv0
+    vadd vv10, vv2, vs12
+    @vp8 vadd vv2, vv10, vv3
+    @vp8 vlxw vv19, vs0, vv2
+    @vp8 vfadd.s vv18, vv18, vv19
     vadd vs9, vs9, vs61
-    vadd vv8, vs9, vs0
-    vcmpeq vp5, vv8, vs4
+    vadd vv2, vs9, vs0
+    vcmpeq vp5, vv2, vs4
     vpop vp10, vp8, vp5, vp5, 0x80
     vpop vp11, vp8, vp5, vp5, 0x02
-    @vp10 vaddw vv18, vv17, vs0
     vpop vp9, vp9, vp10, vp10, 0xEE
     vpop vp8, vp8, vp10, vp10, 0x02
     @vp11 vcjal 1, vs1, .Lkernel_gpu_opencl_loop100
-    vcmpeq vp5, vv16, vs0
+    vcmpeq vp5, vv17, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
     vpop vp8, vp9, vp9, vp9, 0xAA
     vpop vp8, vp8, vp5, vp5, 0xEE
-    @vp5 vaddw vv16, vs0, vs0
-    @vp9 vaddw vv16, vv18, vs0
+    @vp5 vaddw vv17, vs0, vs0
+    @vp9 vaddw vv17, vv18, vs0
     @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip101
-    @vp8 vsxw vv16, vs10, vv4
+    @vp8 vsxw vv17, vs10, vv4
     vaddi vs7, vs32, 240
     vlsd vs7, vs7
     @vp8 vadd vv7, vv7, vs7
@@ -2726,8 +2721,8 @@ kernel_gpu_opencl_wt:
     vlsd vs4, vs4
     vadd vs3, vs55, vs4
     vlsw vs3, vs3
-    vaddw vv16, vs0, vs0
-    vcmplt vp3, vv16, vs3
+    vaddw vv17, vs0, vs0
+    vcmplt vp3, vv17, vs3
     vaddi vs4, vs32, 104
     vlsd vs4, vs4
     @vp5 vsll vv2, vv1, vs4
@@ -2770,11 +2765,11 @@ kernel_gpu_opencl_wt:
     vadd vs9, vs10, vs9
     vpop vp5, vp4, vp3, vp3, 0x80
     vpop vp8, vp4, vp3, vp3, 0x02
-    vaddw vv16, vs0, vs0
-    @vp8 vaddw vv16, vs0, vs61
+    vaddw vv17, vs0, vs0
+    @vp8 vaddw vv17, vs0, vs61
     vpop vp8, vp5, vp5, vp5, 0xAA
     @vp5 vadd vs10, vs0, vs0
-    @vp5 vaddw vv17, vs0, vs0
+    @vp5 vaddw vv18, vs0, vs0
     vpclear vp9
 .Lkernel_gpu_opencl_loop105:
     vmul vs11, vs5, vs10
@@ -2782,25 +2777,24 @@ kernel_gpu_opencl_wt:
     vaddi vs12, vs32, 496
     vlsd vs12, vs12
     vadd vs11, vs12, vs11
-    @vp8 vlxw vv18, vs11, vv3
-    @vp8 vfadd.s vv17, vv17, vv18
+    @vp8 vlxw vv19, vs11, vv3
+    @vp8 vfadd.s vv18, vv18, vv19
     vadd vs10, vs10, vs61
-    vadd vv7, vs10, vs0
-    vcmpeq vp5, vv7, vs3
+    vadd vv2, vs10, vs0
+    vcmpeq vp5, vv2, vs3
     vpop vp10, vp8, vp5, vp5, 0x80
     vpop vp11, vp8, vp5, vp5, 0x02
-    @vp10 vaddw vv18, vv17, vs0
     vpop vp9, vp9, vp10, vp10, 0xEE
     vpop vp8, vp8, vp10, vp10, 0x02
     @vp11 vcjal 1, vs1, .Lkernel_gpu_opencl_loop105
-    vcmpeq vp5, vv16, vs0
+    vcmpeq vp5, vv17, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
     vpop vp8, vp9, vp9, vp9, 0xAA
     vpop vp8, vp8, vp5, vp5, 0xEE
-    @vp5 vaddw vv16, vs0, vs0
-    @vp9 vaddw vv16, vv18, vs0
+    @vp5 vaddw vv17, vs0, vs0
+    @vp9 vaddw vv17, vv18, vs0
     @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip106
-    @vp8 vsxw vv16, vs9, vv3
+    @vp8 vsxw vv17, vs9, vv3
     vaddi vs7, vs32, 240
     vlsd vs7, vs7
     @vp8 vadd vv4, vv4, vs7
@@ -2829,8 +2823,8 @@ kernel_gpu_opencl_wt:
     vaddi vs3, vs63, 8
     vlsd vs3, vs3
     vlsw vs2, vs3
-    vaddw vv16, vs0, vs0
-    vcmplt vp4, vv16, vs2
+    vaddw vv17, vs0, vs0
+    vcmplt vp4, vv17, vs2
 .Lkernel_gpu_opencl_skip108:
     vpop vp7, vp5, vp4, vp4, 0x80
     vpop vp8, vp5, vp4, vp4, 0x02
@@ -2851,16 +2845,16 @@ kernel_gpu_opencl_wt:
     vlsd vs4, vs4
     vadd vs3, vs55, vs4
     vlsw vs3, vs3
-    vaddw vv16, vs0, vs0
-    vcmplt vp4, vv16, vs3
+    vaddw vv17, vs0, vs0
+    vcmplt vp4, vv17, vs3
 .Lkernel_gpu_opencl_skip110:
     vpop vp6, vp5, vp4, vp4, 0x80
     vpop vp10, vp5, vp4, vp4, 0x02
-    vaddw vv16, vs0, vs0
-    @vp2 vaddw vv16, vs0, vs61
+    vaddw vv17, vs0, vs0
+    @vp2 vaddw vv17, vs0, vs61
     vpop vp2, vp7, vp7, vp7, 0xAA
     @vp7 vadd vs4, vs0, vs0
-    @vp7 vaddw vv17, vs0, vs0
+    @vp7 vaddw vv18, vs0, vs0
     vpclear vp4
 .Lkernel_gpu_opencl_loop111:
     @!vp2 vcjal 0, vs1, .Lkernel_gpu_opencl_skip112
@@ -2871,11 +2865,11 @@ kernel_gpu_opencl_wt:
     vmul vs7, vs4, vs8
     vadd vs6, vs5, vs7
     vlsw vs6, vs6
-    @vp2 vfadd.s vv17, vv17, vs6
+    @vp2 vfadd.s vv18, vv18, vs6
     vaddi vs5, vs63, 104
     vlsd vs5, vs5
     vadd vv2, vs5, vs0
-    @vp2 vsxw vv17, vs0, vv2
+    @vp2 vsxw vv18, vs0, vv2
     vadd vs4, vs4, vs61
     vadd vv2, vs4, vs0
     vcmpeq vp5, vv2, vs2
@@ -2893,7 +2887,7 @@ kernel_gpu_opencl_wt:
 .Lkernel_gpu_opencl_skip113:
     vpop vp2, vp6, vp6, vp6, 0xAA
     @vp6 vadd vs2, vs0, vs0
-    @vp6 vaddw vv17, vs0, vs0
+    @vp6 vaddw vv18, vs0, vs0
     vpclear vp5
 .Lkernel_gpu_opencl_loop114:
     @!vp2 vcjal 0, vs1, .Lkernel_gpu_opencl_skip115
@@ -2904,11 +2898,11 @@ kernel_gpu_opencl_wt:
     vmul vs6, vs2, vs7
     vadd vs5, vs4, vs6
     vlsw vs5, vs5
-    @vp2 vfadd.s vv17, vv17, vs5
+    @vp2 vfadd.s vv18, vv18, vs5
     vaddi vs4, vs63, 144
     vlsd vs4, vs4
     vadd vv2, vs4, vs0
-    @vp2 vsxw vv17, vs0, vv2
+    @vp2 vsxw vv18, vs0, vv2
     vadd vs2, vs2, vs61
     vadd vv2, vs2, vs0
     vcmpeq vp6, vv2, vs3
@@ -2933,25 +2927,25 @@ kernel_gpu_opencl_wt:
     vaddi vs4, vs63, 0
     vlsd vs4, vs4
     vlsw vs3, vs4
-    vfcvt.s.w vv17, vs3
-    @vp4 vfdiv.s vv18, vs2, vv17
-    @vp4 vfmul.s vv18, vv18, vv18
+    vfcvt.s.w vv18, vs3
+    @vp4 vfdiv.s vv19, vs2, vv18
+    @vp4 vfmul.s vv19, vv19, vv19
     vaddi vs4, vs63, 144
     vlsd vs4, vs4
     vlsw vs2, vs4
-    @vp4 vfdiv.s vv17, vs2, vv17
-    @vp4 vfsub.s vv17, vv17, vv18
-    @vp4 vfsqrt.s vv17, vv17
+    @vp4 vfdiv.s vv18, vs2, vv18
+    @vp4 vfsub.s vv18, vv18, vv19
+    @vp4 vfsqrt.s vv18, vv18
     vaddi vs2, vs32, 184
     vlsd vs2, vs2
     vaddw vs3, vs3, vs2
-    vfcvt.s.w vv18, vs3
-    @vp4 vfsqrt.s vv18, vv18
-    @vp4 vfmul.s vv17, vv17, vv18
+    vfcvt.s.w vv19, vs3
+    @vp4 vfsqrt.s vv19, vv19
+    @vp4 vfmul.s vv18, vv18, vv19
     vaddi vs2, vs63, 136
     vlsd vs2, vs2
     vadd vv2, vs2, vs0
-    @vp4 vsxw vv17, vs0, vv2
+    @vp4 vsxw vv18, vs0, vv2
 .Lkernel_gpu_opencl_skip116:
     vpop vp2, vp4, vp4, vp4, 0xAA
     vpop vp2, vp2, vp5, vp5, 0xEE
@@ -2993,12 +2987,12 @@ kernel_gpu_opencl_wt:
     vaddi vs4, vs32, 488
     vlsd vs4, vs4
     vadd vs6, vs4, vs6
-    @vp2 vlxw vv17, vs6, vv3
+    @vp2 vlxw vv18, vs6, vv3
     vaddi vs7, vs63, 136
     vlsd vs7, vs7
     vlsw vs4, vs7
-    @vp2 vfmul.s vv17, vv17, vs4
-    @vp2 vsxw vv17, vs6, vv3
+    @vp2 vfmul.s vv18, vv18, vs4
+    @vp2 vsxw vv18, vs6, vv3
     vaddi vs4, vs32, 240
     vlsd vs4, vs4
     @vp2 vadd vv4, vv4, vs4
@@ -3025,7 +3019,7 @@ kernel_gpu_opencl_wt:
     vaddi vs4, vs63, 0
     vlsd vs4, vs4
     vlsw vs3, vs4
-    vfcvt.s.w vv17, vs3
+    vfcvt.s.w vv18, vs3
     vaddi vs3, vs32, 104
     vlsd vs3, vs3
     @vp5 vsll vv2, vv1, vs3
@@ -3063,15 +3057,15 @@ kernel_gpu_opencl_wt:
     vaddi vs8, vs32, 464
     vlsd vs8, vs8
     vadd vs7, vs8, vs7
-    @vp2 vlxw vv18, vs4, vv3
-    @vp2 vlxw vv19, vs7, vv3
+    @vp2 vlxw vv19, vs4, vv3
+    @vp2 vlxw vv20, vs7, vv3
     vaddi vs8, vs63, 104
     vlsd vs8, vs8
     vlsw vs7, vs8
-    @vp2 vfmul.s vv19, vv19, vs7
-    @vp2 vfdiv.s vv19, vv19, vv17
-    @vp2 vfsub.s vv18, vv18, vv19
-    @vp2 vsxw vv18, vs4, vv3
+    @vp2 vfmul.s vv20, vv20, vs7
+    @vp2 vfdiv.s vv20, vv20, vv18
+    @vp2 vfsub.s vv19, vv19, vv20
+    @vp2 vsxw vv19, vs4, vv3
     vaddi vs4, vs32, 240
     vlsd vs4, vs4
     @vp2 vadd vv4, vv4, vs4
@@ -3131,10 +3125,10 @@ kernel_gpu_opencl_wt:
     vaddi vs8, vs32, 488
     vlsd vs8, vs8
     vadd vs7, vs8, vs7
-    @vp2 vlxw vv17, vs4, vv3
-    @vp2 vlxw vv18, vs7, vv3
-    @vp2 vfdiv.s vv17, vv17, vv18
-    @vp2 vsxw vv17, vs7, vv3
+    @vp2 vlxw vv18, vs4, vv3
+    @vp2 vlxw vv19, vs7, vv3
+    @vp2 vfdiv.s vv18, vv18, vv19
+    @vp2 vsxw vv18, vs7, vv3
     vaddi vs4, vs32, 240
     vlsd vs4, vs4
     @vp2 vadd vv4, vv4, vs4
@@ -3170,14 +3164,14 @@ kernel_gpu_opencl_wt:
     vaddw vs7, vs5, vs6
     vlsw vs5, vs3
     vaddi vs58, vs60, 0
-    vlxw vv17, vs58, vv0
-    @vp5 vmulw vv18, vs5, vv17
-    @vp5 vaddw vv18, vs7, vv18
+    vlxw vv18, vs58, vv0
+    @vp5 vmulw vv19, vs5, vv18
+    @vp5 vaddw vv19, vs7, vv19
     vaddi vs5, vs32, 624
     vlsd vs5, vs5
-    vmul vv3, vv18, vs5
+    vmul vv3, vv19, vs5
     vadd vv2, vv6, vv3
-    @vp5 vlxw vv17, vs0, vv2
+    @vp5 vlxw vv18, vs0, vv2
     vaddi vs6, vs63, 112
     vlsd vs6, vs6
     vlsw vs5, vs6
@@ -3186,33 +3180,29 @@ kernel_gpu_opencl_wt:
     vaddw vs5, vs5, vs6
     vlsw vs6, vs2
     vaddw vs5, vs5, vs6
-    @vp5 vaddw vv17, vv17, vs5
-    vaddi vs58, vs60, 48
-    vlxd vv2, vs58, vv0
-    @vp5 vlxw vv19, vs0, vv2
+    @vp5 vaddw vv18, vv18, vs5
+    @vp5 vlxw vv20, vs0, vv9
     vaddi vs6, vs32, 184
     vlsd vs6, vs6
-    @vp5 vxor vv19, vv19, vs6
-    @vp5 vaddw vv17, vv17, vv19
+    @vp5 vxor vv20, vv20, vs6
+    @vp5 vaddw vv18, vv18, vv20
     vaddi vs6, vs32, 624
     vlsd vs6, vs6
-    vmul vv3, vv18, vs6
+    vmul vv3, vv19, vs6
     vadd vv2, vv5, vv3
-    @vp5 vlxw vv18, vs0, vv2
-    @vp5 vaddw vv18, vv18, vs5
-    vaddi vs58, vs60, 40
-    vlxd vv2, vs58, vv0
     @vp5 vlxw vv19, vs0, vv2
+    @vp5 vaddw vv19, vv19, vs5
+    @vp5 vlxw vv20, vs0, vv8
     vaddi vs5, vs32, 184
     vlsd vs5, vs5
-    @vp5 vxor vv19, vv19, vs5
-    @vp5 vaddw vv18, vv18, vv19
+    @vp5 vxor vv20, vv20, vs5
+    @vp5 vaddw vv19, vv19, vv20
     vaddi vs6, vs32, 520
     vlsd vs6, vs6
     vadd vs5, vs55, vs6
     vlsw vs5, vs5
-    @vp5 vmulw vv17, vs5, vv17
-    @vp5 vaddw vv18, vv18, vv17
+    @vp5 vmulw vv18, vs5, vv18
+    @vp5 vaddw vv19, vv19, vv18
     vaddi vs5, vs32, 104
     vlsd vs5, vs5
     @vp5 vsll vv2, vv1, vs5
@@ -3240,12 +3230,12 @@ kernel_gpu_opencl_wt:
     vaddi vs6, vs32, 528
     vlsd vs6, vs6
     vadd vs8, vs6, vs8
-    vcmpeq vp5, vv4, vv18
+    vcmpeq vp5, vv4, vv19
     vaddi vs6, vs32, 536
     vlsd vs6, vs6
-    @vp5 vaddw vv17, vs6, vs0
-    @!vp5 vaddw vv17, vs0, vs0
-    @vp2 vsxw vv17, vs8, vv3
+    @vp5 vaddw vv18, vs6, vs0
+    @!vp5 vaddw vv18, vs0, vs0
+    @vp2 vsxw vv18, vs8, vv3
     vaddi vs6, vs32, 240
     vlsd vs6, vs6
     @vp2 vadd vv4, vv4, vs6
@@ -3351,76 +3341,76 @@ kernel_gpu_opencl_wt:
     vssd vs62, vs19
     vaddi vs20, vs32, 176
     vlsd vs20, vs20
-    @vp2 vaddw vv17, vv4, vs20
-    @vp2 vdivw vv18, vv17, vs5
-    @vp2 vmulw vv19, vv18, vs5
-    vcmpeq vp5, vv17, vv19
+    @vp2 vaddw vv18, vv4, vs20
+    @vp2 vdivw vv19, vv18, vs5
+    @vp2 vmulw vv20, vv19, vs5
+    vcmpeq vp5, vv18, vv20
     vpop vp5, vp5, vp5, vp5, 0x55
-    vaddw vv20, vs0, vs0
-    @vp5 vaddw vv20, vs0, vs61
-    @vp2 vaddw vv18, vv18, vv20
-    @vp2 vaddw vv18, vv18, vs6
-    vcmplt vp7, vv18, vs7
-    @vp2 vsubw vv20, vv18, vs7
+    vaddw vv21, vs0, vs0
+    @vp5 vaddw vv21, vs0, vs61
+    @vp2 vaddw vv19, vv19, vv21
+    @vp2 vaddw vv19, vv19, vs6
+    vcmplt vp7, vv19, vs7
+    @vp2 vsubw vv21, vv19, vs7
     vaddi vs20, vs32, 176
     vlsd vs20, vs20
-    @!vp7 vaddw vv21, vv20, vs20
+    @!vp7 vaddw vv22, vv21, vs20
     vaddi vs20, vs32, 176
     vlsd vs20, vs20
-    @vp7 vaddw vv21, vs20, vs0
-    vcmplt vp7, vs8, vv18
-    @vp7 vaddw vv18, vs8, vs0
-    @!vp7 vaddw vv18, vv18, vs0
-    vcmplt vp7, vv18, vv21
+    @vp7 vaddw vv22, vs20, vs0
+    vcmplt vp7, vs8, vv19
+    @vp7 vaddw vv19, vs8, vs0
+    @!vp7 vaddw vv19, vv19, vs0
+    vcmplt vp7, vv19, vv22
     vpop vp8, vp2, vp7, vp7, 0x80
     vpop vp9, vp2, vp7, vp7, 0x02
     @!vp9 vcjal 0, vs1, .Lkernel_gpu_opencl_skip134
-    @vp5 vsubw vv20, vv17, vv19
-    @!vp5 vaddw vv20, vs5, vs0
-    @vp9 vaddw vv20, vs9, vv20
-    vcmplt vp5, vs11, vv20
-    @vp5 vaddw vv17, vs11, vs0
-    @!vp5 vaddw vv17, vv20, vs0
-    vcmplt vp5, vv20, vs10
-    @vp9 vsubw vv20, vv20, vs10
+    @vp5 vsubw vv21, vv18, vv20
+    @!vp5 vaddw vv21, vs5, vs0
+    @vp9 vaddw vv21, vs9, vv21
+    vcmplt vp5, vs11, vv21
+    @vp5 vaddw vv18, vs11, vs0
+    @!vp5 vaddw vv18, vv21, vs0
+    vcmplt vp5, vv21, vs10
+    @vp9 vsubw vv21, vv21, vs10
     vaddi vs20, vs32, 176
     vlsd vs20, vs20
-    @!vp5 vaddw vv19, vv20, vs20
+    @!vp5 vaddw vv20, vv21, vs20
     vaddi vs20, vs32, 176
     vlsd vs20, vs20
-    @vp5 vaddw vv19, vs20, vs0
-    vcmplt vp5, vv17, vv19
+    @vp5 vaddw vv20, vs20, vs0
+    vcmplt vp5, vv18, vv20
     vaddi vs20, vs32, 304
     vlsd vs20, vs20
-    @vp9 vadd vv7, vv21, vs20
-    @vp9 vmul vv7, vs15, vv7
+    @vp9 vadd vv2, vv22, vs20
+    @vp9 vmul vv2, vs15, vv2
     vaddi vs20, vs32, 192
     vlsd vs20, vs20
-    @vp9 vsll vv8, vv19, vs20
-    @vp9 vadd vv7, vv7, vv8
+    @vp9 vsll vv7, vv20, vs20
+    @vp9 vadd vv2, vv2, vv7
 .Lkernel_gpu_opencl_skip134:
-    vaddw vv20, vs0, vs0
-    @vp8 vaddw vv20, vs0, vs61
+    vaddw vv21, vs0, vs0
+    @vp8 vaddw vv21, vs0, vs61
     vpop vp7, vp9, vp9, vp9, 0xAA
     @vp9 vadd vs20, vs0, vs0
-    @vp9 vadd vv8, vv21, vs0
-    @vp9 vaddw vv22, vs0, vs0
+    @vp9 vadd vv7, vv22, vs0
+    @vp9 vaddw vv23, vs0, vs0
     vpclear vp8
 .Lkernel_gpu_opencl_loop135:
     vmul vs21, vs13, vs20
     vadd vs21, vs14, vs21
     vpop vp9, vp7, vp5, vp5, 0x80
     vpop vp10, vp7, vp5, vp5, 0x02
-    vaddw vv23, vs0, vs0
-    @vp9 vaddw vv23, vs0, vs61
+    vaddw vv22, vs0, vs0
+    @vp9 vaddw vv22, vs0, vs61
     vaddw vv24, vs0, vs0
     @vp10 vaddw vv24, vs0, vs61
     vcmpeq vp9, vv24, vs0
     vpop vp9, vp9, vp9, vp9, 0x55
     vpop vp10, vp9, vp9, vp9, 0xAA
     @vp9 vadd vs16, vs0, vs0
-    @vp9 vadd vv9, vv19, vs0
-    @vp9 vaddw vv24, vv22, vs0
+    @vp9 vadd vv10, vv20, vs0
+    @vp9 vaddw vv24, vv23, vs0
     vpclear vp11
 .Lkernel_gpu_opencl_loop136:
     vaddi vs19, vs32, 192
@@ -3430,53 +3420,53 @@ kernel_gpu_opencl_wt:
     vaddi vs19, vs32, 528
     vlsd vs19, vs19
     vadd vs22, vs19, vs22
-    @vp10 vlxw vv25, vs22, vv7
+    @vp10 vlxw vv25, vs22, vv2
     @vp10 vfadd.s vv24, vv24, vv25
-    @vp10 vadd vv10, vv9, vs61
-    vcmplt vp9, vv9, vv17
+    @vp10 vadd vv11, vv10, vs61
+    vcmplt vp9, vv10, vv18
     vadd vs16, vs16, vs61
     vpop vp12, vp10, vp9, vp9, 0x80
     vpop vp13, vp10, vp9, vp9, 0x02
     @vp13 vaddw vv25, vv24, vs0
     vpop vp11, vp11, vp13, vp13, 0xEE
     vpop vp10, vp10, vp13, vp13, 0x02
-    @vp12 vadd vv9, vv10, vs0
+    @vp12 vadd vv10, vv11, vs0
     @vp12 vcjal 1, vs1, .Lkernel_gpu_opencl_loop136
-    vcmpeq vp9, vv23, vs0
+    vcmpeq vp9, vv22, vs0
     vpop vp9, vp9, vp9, vp9, 0x55
     vpop vp10, vp11, vp11, vp11, 0xAA
     vpop vp10, vp10, vp9, vp9, 0xEE
-    @vp9 vaddw vv23, vv22, vs0
-    @vp11 vaddw vv23, vv25, vs0
+    @vp9 vaddw vv22, vv23, vs0
+    @vp11 vaddw vv22, vv25, vs0
     @!vp10 vcjal 0, vs1, .Lkernel_gpu_opencl_skip137
-    @vp10 vadd vv9, vv8, vs61
-    vcmplt vp9, vv8, vv18
+    @vp10 vadd vv10, vv7, vs61
+    vcmplt vp9, vv7, vv19
     vadd vs20, vs20, vs61
 .Lkernel_gpu_opencl_skip137:
     vpop vp11, vp10, vp9, vp9, 0x80
     vpop vp12, vp10, vp9, vp9, 0x02
-    @vp12 vaddw vv24, vv23, vs0
+    @vp12 vaddw vv24, vv22, vs0
     vpop vp8, vp8, vp12, vp12, 0xEE
     vpop vp7, vp7, vp12, vp12, 0x02
-    @vp11 vadd vv8, vv9, vs0
-    @vp11 vaddw vv22, vv23, vs0
+    @vp11 vadd vv7, vv10, vs0
+    @vp11 vaddw vv23, vv22, vs0
     @vp11 vcjal 1, vs1, .Lkernel_gpu_opencl_loop135
     vpop vp5, vp12, vp12, vp12, 0xAA
     vpop vp5, vp5, vp8, vp8, 0xEE
-    vcmpeq vp7, vv20, vs0
+    vcmpeq vp7, vv21, vs0
     vpop vp7, vp7, vp7, vp7, 0x55
     vpop vp8, vp5, vp5, vp5, 0xAA
     vpop vp8, vp8, vp7, vp7, 0xEE
-    @vp7 vaddw vv17, vs0, vs0
-    @vp5 vaddw vv17, vv24, vs0
+    @vp7 vaddw vv18, vs0, vs0
+    @vp5 vaddw vv18, vv24, vs0
     @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip138
     vaddi vs16, vs63, 328
     vlsd vs16, vs16
-    @vp8 vlxw vv18, vs16, vv3
-    @vp8 vfmul.s vv17, vv17, vv18
+    @vp8 vlxw vv19, vs16, vv3
+    @vp8 vfmul.s vv18, vv18, vv19
     vaddi vs16, vs63, 320
     vlsd vs16, vs16
-    @vp8 vsxw vv17, vs16, vv3
+    @vp8 vsxw vv18, vs16, vv3
     vaddi vs16, vs32, 240
     vlsd vs16, vs16
     @vp8 vadd vv4, vv4, vs16
@@ -3506,8 +3496,8 @@ kernel_gpu_opencl_wt:
     vlsd vs6, vs6
     vadd vs5, vs55, vs6
     vlsw vs5, vs5
-    vaddw vv17, vs0, vs0
-    vcmplt vp2, vv17, vs5
+    vaddw vv18, vs0, vs0
+    vcmplt vp2, vv18, vs5
     vaddi vs6, vs32, 104
     vlsd vs6, vs6
     @vp5 vsll vv2, vv1, vs6
@@ -3542,8 +3532,8 @@ kernel_gpu_opencl_wt:
     vpop vp4, vp5, vp5, vp5, 0xAA
     @vp5 vadd vs6, vs0, vs0
     @vp5 vadd vv7, vv2, vs0
-    @vp5 vaddw vv17, vs0, vs0
     @vp5 vaddw vv18, vs0, vs0
+    @vp5 vaddw vv19, vs0, vs0
     vpclear vp7
 .Lkernel_gpu_opencl_loop141:
     vmul vs9, vs7, vs6
@@ -3560,13 +3550,13 @@ kernel_gpu_opencl_wt:
     vadd vs12, vs11, vs12
     vpop vp5, vp4, vp2, vp2, 0x80
     vpop vp8, vp4, vp2, vp2, 0x02
-    @vp5 vmul vv8, vv7, vs4
-    vaddw vv19, vs0, vs0
-    @vp8 vaddw vv19, vs0, vs61
+    @vp5 vmul vv2, vv7, vs4
+    vaddw vv20, vs0, vs0
+    @vp8 vaddw vv20, vs0, vs61
     vpop vp8, vp5, vp5, vp5, 0xAA
     @vp5 vadd vs11, vs0, vs0
-    @vp5 vaddw vv20, vv17, vs0
     @vp5 vaddw vv21, vv18, vs0
+    @vp5 vaddw vv22, vv19, vs0
     vpclear vp9
 .Lkernel_gpu_opencl_loop142:
     vaddi vs14, vs32, 192
@@ -3576,33 +3566,31 @@ kernel_gpu_opencl_wt:
     vaddi vs14, vs32, 584
     vlsd vs14, vs14
     vadd vs15, vs14, vs15
-    @vp8 vadd vv9, vs11, vv8
-    @vp8 vlxw vv22, vs15, vv3
-    @vp8 vfsgnjx.s vv22, vv22, vv22
-    vcmpflt.s vp5, vv20, vv22
-    @vp5 vaddw vv21, vv9, vs0
-    @vp5 vaddw vv20, vv22, vs0
+    @vp8 vadd vv10, vs11, vv2
+    @vp8 vlxw vv23, vs15, vv3
+    @vp8 vfsgnjx.s vv23, vv23, vv23
+    vcmpflt.s vp5, vv21, vv23
+    @vp5 vaddw vv22, vv10, vs0
+    @vp5 vaddw vv21, vv23, vs0
     vadd vs11, vs11, vs61
-    vadd vv9, vs11, vs0
-    vcmpeq vp5, vv9, vs5
+    vadd vv10, vs11, vs0
+    vcmpeq vp5, vv10, vs5
     vpop vp10, vp8, vp5, vp5, 0x80
     vpop vp11, vp8, vp5, vp5, 0x02
-    @vp10 vaddw vv22, vv21, vs0
-    @vp10 vaddw vv23, vv20, vs0
     vpop vp9, vp9, vp10, vp10, 0xEE
     vpop vp8, vp8, vp10, vp10, 0x02
     @vp11 vcjal 1, vs1, .Lkernel_gpu_opencl_loop142
-    vcmpeq vp5, vv19, vs0
+    vcmpeq vp5, vv20, vs0
     vpop vp5, vp5, vp5, vp5, 0x55
     vpop vp8, vp9, vp9, vp9, 0xAA
     vpop vp8, vp8, vp5, vp5, 0xEE
-    @vp5 vaddw vv19, vv18, vs0
-    @vp9 vaddw vv19, vv22, vs0
-    @vp5 vaddw vv20, vv17, vs0
-    @vp9 vaddw vv20, vv23, vs0
+    @vp5 vaddw vv20, vv19, vs0
+    @vp9 vaddw vv20, vv22, vs0
+    @vp5 vaddw vv23, vv18, vs0
+    @vp9 vaddw vv23, vv21, vs0
     @!vp8 vcjal 0, vs1, .Lkernel_gpu_opencl_skip143
-    @vp8 vsxw vv19, vs13, vv4
-    @vp8 vsxw vv20, vs12, vv4
+    @vp8 vsxw vv20, vs13, vv4
+    @vp8 vsxw vv23, vs12, vv4
     vaddi vs9, vs32, 240
     vlsd vs9, vs9
     @vp8 vadd vv7, vv7, vs9
@@ -3613,8 +3601,8 @@ kernel_gpu_opencl_wt:
     vpop vp10, vp8, vp5, vp5, 0x02
     vpop vp7, vp7, vp10, vp10, 0xEE
     vpop vp4, vp4, vp10, vp10, 0x02
-    @vp9 vaddw vv17, vv20, vs0
-    @vp9 vaddw vv18, vv19, vs0
+    @vp9 vaddw vv18, vv23, vs0
+    @vp9 vaddw vv19, vv20, vs0
     @vp9 vcjal 1, vs1, .Lkernel_gpu_opencl_loop141
     vpop vp2, vp10, vp10, vp10, 0xAA
     vpop vp2, vp2, vp7, vp7, 0xEE
@@ -3627,8 +3615,8 @@ kernel_gpu_opencl_wt:
     vaddi vs5, vs63, 56
     vlsd vs5, vs5
     vlsw vs4, vs5
-    vaddw vv17, vs0, vs0
-    vcmplt vp3, vv17, vs4
+    vaddw vv18, vs0, vs0
+    vcmplt vp3, vv18, vs4
 .Lkernel_gpu_opencl_skip144:
     vpop vp4, vp2, vp3, vp3, 0x80
     vpop vp6, vp2, vp3, vp3, 0x02
@@ -3638,48 +3626,48 @@ kernel_gpu_opencl_wt:
     vsll vs5, vs4, vs6
     vsrl vs5, vs5, vs6
 .Lkernel_gpu_opencl_skip145:
-    @vp4 vaddw vv17, vs0, vs0
     @vp4 vaddw vv18, vs0, vs0
+    @vp4 vaddw vv19, vs0, vs0
     vstop
     .globl kernel_gpu_opencl_wt_r0_b0
 kernel_gpu_opencl_wt_r0_b0:
-    vaddw vv19, vv18, vs0
-    vaddw vv20, vv17, vs0
+    vaddw vv20, vv19, vs0
+    vaddw vv21, vv18, vs0
     vstop
     .globl kernel_gpu_opencl_wt_r0_b1
 kernel_gpu_opencl_wt_r0_b1:
-    vaddw vv19, vs6, vs0
-    vaddw vv20, vs7, vs0
+    vaddw vv20, vs6, vs0
+    vaddw vv21, vs7, vs0
     vstop
     .globl kernel_gpu_opencl_wt_r0_b2
 kernel_gpu_opencl_wt_r0_b2:
-    vaddw vv21, vv20, vs0
-    vaddw vv17, vv20, vs0
-    vaddw vv18, vv19, vs0
+    vaddw vv22, vv21, vs0
+    vaddw vv18, vv21, vs0
+    vaddw vv19, vv20, vs0
     vstop
     .globl kernel_gpu_opencl_wt_a0
 kernel_gpu_opencl_wt_a0:
     @!vp4 vcjal 0, vs1, .Lkernel_gpu_opencl_skip146
     vaddi vs5, vs32, 176
     vlsd vs5, vs5
-    @vp4 vaddw vv21, vv21, vs5
+    @vp4 vaddw vv22, vv22, vs5
 .Lkernel_gpu_opencl_skip146:
     vpop vp2, vp4, vp4, vp4, 0xAA
     vpop vp2, vp2, vp6, vp6, 0xEE
     vaddi vs5, vs32, 176
     vlsd vs5, vs5
-    @vp6 vaddw vv17, vs5, vs0
-    @vp4 vaddw vv17, vv21, vs0
+    @vp6 vaddw vv18, vs5, vs0
+    @vp4 vaddw vv18, vv22, vs0
     @!vp2 vcjal 0, vs1, .Lkernel_gpu_opencl_skip147
-    @vp2 vdivw vv18, vv17, vs4
-    @vp2 vmulw vv19, vv18, vs4
-    @vp2 vsubw vv20, vv17, vv19
-    vcmpeq vp3, vv17, vv19
-    @vp3 vaddw vv20, vs4, vs0
-    vaddw vv17, vs0, vs0
+    @vp2 vdivw vv19, vv18, vs4
+    @vp2 vmulw vv20, vv19, vs4
+    @vp2 vsubw vv21, vv18, vv20
+    vcmpeq vp3, vv18, vv20
+    @vp3 vaddw vv21, vs4, vs0
+    vaddw vv18, vs0, vs0
     vaddi vs4, vs32, 304
     vlsd vs4, vs4
-    @vp3 vaddw vv17, vs0, vs4
+    @vp3 vaddw vv18, vs0, vs4
     vaddi vs5, vs32, 152
     vlsd vs5, vs5
     vadd vs4, vs55, vs5
@@ -3694,37 +3682,33 @@ kernel_gpu_opencl_wt_a0:
     vlsw vs5, vs6
     vlsw vs6, vs3
     vaddi vs58, vs60, 0
-    vlxw vv19, vs58, vv0
-    @vp2 vmulw vv21, vs6, vv19
+    vlxw vv20, vs58, vv0
+    @vp2 vmulw vv22, vs6, vv20
     vaddi vs6, vs32, 136
     vlsd vs6, vs6
-    @vp2 vaddw vv21, vv21, vs6
-    vaddi vs58, vs60, 40
-    vlxd vv2, vs58, vv0
-    @vp2 vlxw vv19, vs0, vv2
-    @vp2 vsubw vv20, vv20, vs4
-    @vp2 vaddw vv20, vv20, vs2
-    @vp2 vaddw vv20, vv20, vv19
+    @vp2 vaddw vv22, vv22, vs6
+    @vp2 vlxw vv20, vs0, vv8
+    @vp2 vsubw vv21, vv21, vs4
+    @vp2 vaddw vv21, vv21, vs2
+    @vp2 vaddw vv21, vv21, vv20
     vaddi vs4, vs32, 624
     vlsd vs4, vs4
-    vmul vv3, vv21, vs4
+    vmul vv3, vv22, vs4
     vadd vv2, vv5, vv3
-    @vp2 vsxw vv20, vs0, vv2
-    vaddi vs58, vs60, 48
-    vlxd vv2, vs58, vv0
-    @vp2 vlxw vv19, vs0, vv2
+    @vp2 vsxw vv21, vs0, vv2
+    @vp2 vlxw vv20, vs0, vv9
     vaddi vs4, vs32, 176
     vlsd vs4, vs4
-    @vp2 vaddw vv18, vv18, vs4
-    @vp2 vaddw vv18, vv18, vv17
-    @vp2 vaddw vv18, vv18, vs2
-    @vp2 vsubw vv18, vv18, vs5
-    @vp2 vaddw vv18, vv18, vv19
+    @vp2 vaddw vv19, vv19, vs4
+    @vp2 vaddw vv19, vv19, vv18
+    @vp2 vaddw vv19, vv19, vs2
+    @vp2 vsubw vv19, vv19, vs5
+    @vp2 vaddw vv19, vv19, vv20
     vaddi vs2, vs32, 624
     vlsd vs2, vs2
-    vmul vv3, vv21, vs2
+    vmul vv3, vv22, vs2
     vadd vv2, vv6, vv3
-    @vp2 vsxw vv18, vs0, vv2
+    @vp2 vsxw vv19, vs0, vv2
 .Lkernel_gpu_opencl_skip147:
     vpop vp3, vp2, vp2, vp2, 0xAA
     vpop vp3, vp3, vp5, vp5, 0xEE
@@ -3735,8 +3719,8 @@ kernel_gpu_opencl_wt_a0:
     vaddi vs4, vs32, 600
     vlsd vs4, vs4
     vremw vs5, vs2, vs4
-    vaddw vv17, vs5, vs0
-    vcmpeq vp2, vv17, vs0
+    vaddw vv18, vs5, vs0
+    vcmpeq vp2, vv18, vs0
 .Lkernel_gpu_opencl_skip148:
     vpop vp4, vp3, vp2, vp2, 0x80
     vpop vp5, vp3, vp2, vp2, 0x02
@@ -3744,27 +3728,23 @@ kernel_gpu_opencl_wt_a0:
     vfence
     vlsw vs3, vs3
     vaddi vs58, vs60, 0
-    vlxw vv17, vs58, vv0
-    @vp4 vmulw vv18, vs3, vv17
+    vlxw vv18, vs58, vv0
+    @vp4 vmulw vv19, vs3, vv18
     vaddi vs2, vs32, 136
     vlsd vs2, vs2
-    @vp4 vaddw vv18, vv18, vs2
+    @vp4 vaddw vv19, vv19, vs2
     vaddi vs2, vs32, 624
     vlsd vs2, vs2
-    vmul vv2, vv18, vs2
+    vmul vv2, vv19, vs2
     vadd vv5, vv5, vv2
-    @vp4 vlxw vv17, vs0, vv5
-    vaddi vs58, vs60, 40
-    vlxd vv2, vs58, vv0
-    @vp4 vsxw vv17, vs0, vv2
+    @vp4 vlxw vv18, vs0, vv5
+    @vp4 vsxw vv18, vs0, vv8
     vaddi vs2, vs32, 624
     vlsd vs2, vs2
-    vmul vv2, vv18, vs2
+    vmul vv2, vv19, vs2
     vadd vv6, vv6, vv2
-    @vp4 vlxw vv17, vs0, vv6
-    vaddi vs58, vs60, 48
-    vlxd vv2, vs58, vv0
-    @vp4 vsxw vv17, vs0, vv2
+    @vp4 vlxw vv18, vs0, vv6
+    @vp4 vsxw vv18, vs0, vv9
     vaddi vs3, vs63, 0
     vlsd vs3, vs3
     vlsw vs2, vs3
@@ -3777,26 +3757,24 @@ kernel_gpu_opencl_wt_a0:
     vlsd vs4, vs4
     vadd vs3, vs55, vs4
     vlsw vs3, vs3
-    vaddi vs58, vs60, 40
-    vlxd vv2, vs58, vv0
-    @vp3 vlxw vv18, vs0, vv2
+    @vp3 vlxw vv19, vs0, vv8
     vaddi vs4, vs32, 160
     vlsd vs4, vs4
-    @vp3 vaddw vv17, vv17, vs4
+    @vp3 vaddw vv18, vv18, vs4
     vaddi vs5, vs32, 168
     vlsd vs5, vs5
     vadd vs4, vs55, vs5
     vlsw vs4, vs4
     vaddi vs5, vs32, 608
     vlsd vs5, vs5
-    @vp3 vaddw vv18, vv18, vs5
+    @vp3 vaddw vv19, vv19, vs5
     vaddi vs6, vs32, 616
     vlsd vs6, vs6
     vadd vs5, vs55, vs6
     vlsw vs5, vs5
     vaddi vs6, vs32, 536
     vlsd vs6, vs6
-    @vp3 vfsub.s vv19, vs6, vs5
+    @vp3 vfsub.s vv20, vs6, vs5
     vaddi vs6, vs32, 104
     vlsd vs6, vs6
     @vp3 vsll vv2, vv1, vs6
@@ -3816,35 +3794,35 @@ kernel_gpu_opencl_wt_a0:
     vlsd vs7, vs7
     vsll vs8, vs6, vs7
     vaddi vs58, vs60, 32
-    vlxd vv5, vs58, vv0
-    vadd vv6, vv5, vs8
+    vlxd vv2, vs58, vv0
+    vadd vv5, vv2, vs8
     vaddi vs7, vs32, 176
     vlsd vs7, vs7
-    @vp2 vaddw vv20, vv4, vs7
-    @vp2 vdivw vv21, vv20, vs3
-    @vp2 vmulw vv22, vv21, vs3
-    @vp2 vsubw vv23, vv20, vv22
-    vcmpeq vp3, vv20, vv22
-    vaddw vv20, vs0, vs0
+    @vp2 vaddw vv21, vv4, vs7
+    @vp2 vdivw vv22, vv21, vs3
+    @vp2 vmulw vv23, vv22, vs3
+    @vp2 vsubw vv24, vv21, vv23
+    vcmpeq vp3, vv21, vv23
+    vaddw vv21, vs0, vs0
     vaddi vs7, vs32, 304
     vlsd vs7, vs7
-    @vp3 vaddw vv20, vs0, vs7
-    @vp3 vaddw vv23, vs3, vs0
-    @vp2 vaddw vv21, vv17, vv21
-    @vp2 vaddw vv21, vv21, vv20
-    @vp2 vmulw vv21, vv21, vs4
-    @vp2 vaddw vv23, vv23, vv18
-    @vp2 vaddw vv23, vv23, vv21
-    @vp2 vadd vv5, vv6, vv3
-    @vp2 vlxw vv20, vs0, vv5
+    @vp3 vaddw vv21, vs0, vs7
+    @vp3 vaddw vv24, vs3, vs0
+    @vp2 vaddw vv22, vv18, vv22
+    @vp2 vaddw vv22, vv22, vv21
+    @vp2 vmulw vv22, vv22, vs4
+    @vp2 vaddw vv24, vv24, vv19
+    @vp2 vaddw vv24, vv24, vv22
+    @vp2 vadd vv2, vv5, vv3
+    @vp2 vlxw vv21, vs0, vv2
     vaddi vs7, vs32, 192
     vlsd vs7, vs7
-    @vp2 vsll vv5, vv23, vs7
-    @vp2 vlxw vv21, vs56, vv5
-    @vp2 vfmul.s vv21, vv19, vv21
-    @vp2 vfmadd.s vv20, vs5, vv20, vv21
-    @vp2 vadd vv5, vv6, vv3
-    @vp2 vsxw vv20, vs0, vv5
+    @vp2 vsll vv2, vv24, vs7
+    @vp2 vlxw vv22, vs56, vv2
+    @vp2 vfmul.s vv22, vv20, vv22
+    @vp2 vfmadd.s vv21, vs5, vv21, vv22
+    @vp2 vadd vv2, vv5, vv3
+    @vp2 vsxw vv21, vs0, vv2
     vaddi vs7, vs32, 240
     vlsd vs7, vs7
     @vp2 vadd vv4, vv4, vs7
@@ -3858,7 +3836,7 @@ kernel_gpu_opencl_wt_a0:
     vpop vp2, vp4, vp4, vp4, 0xAA
     vpop vp2, vp2, vp6, vp6, 0xEE
     vfence
-    vcmpeq vp3, vv16, vs0
+    vcmpeq vp3, vv17, vs0
     vpop vp3, vp3, vp3, vp3, 0x55
     vpop vp4, vp2, vp2, vp2, 0xAA
     vpop vp4, vp4, vp5, vp5, 0xEE
@@ -3883,7 +3861,7 @@ kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	ld	t1, 88(sp)
 	lui	t3, 1048484
 	ld	t4, 176(sp)
-	addi	t3, t3, 2015
+	addi	t3, t3, 2013
 	ld	t5, 120(sp)
 	srli	t3, t3, 1
 	ld	t6, 168(sp)
@@ -3934,7 +3912,7 @@ kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 	#APP
 	vmcs vs60, a3
 	#NO_APP
-	li	a3, 56
+	li	a3, 40
 .Lpcrel_hi2:
 	auipc	t3, %pcrel_hi(.Lkernel_gpu_opencl_spill)
 	#APP
@@ -4258,7 +4236,7 @@ kernel_gpu_opencl_ct:                   # @kernel_gpu_opencl_ct
 
 	.type	.Lkernel_gpu_opencl_vspill,@object # @kernel_gpu_opencl_vspill
 	.local	.Lkernel_gpu_opencl_vspill
-	.comm	.Lkernel_gpu_opencl_vspill,4032,8
+	.comm	.Lkernel_gpu_opencl_vspill,2880,8
 	.type	.Lkernel_gpu_opencl_spill,@object # @kernel_gpu_opencl_spill
 	.local	.Lkernel_gpu_opencl_spill
 	.comm	.Lkernel_gpu_opencl_spill,336,8

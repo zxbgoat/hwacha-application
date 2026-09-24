@@ -107,7 +107,6 @@ findK_wt:
     vpop vp4, vp2, vp1, vp1, 0x02
     @!vp3 vcjal 0, vs1, .LfindK_skip9
     vadd vs3, vs3, vs51
-    @vp3 vsll vv1, vv0, vs58
     @vp3 vlxw vv3, vs3, vv1
     @vp3 vsll vv1, vv3, vs58
     @vp3 vlxw vv3, vs62, vv1
@@ -266,12 +265,11 @@ findRangeK_wt:
     vpop vp4, vp2, vp1, vp1, 0x02
     @!vp3 vcjal 0, vs1, .LfindRangeK_skip13
     vadd vs3, vs3, vs49
-    @vp3 vsll vv1, vv0, vs59
     @vp3 vlxw vv3, vs3, vv1
     vmul vs4, vs2, vs49
     vadd vs3, vs45, vs4
-    vadd vv1, vs3, vs0
-    @vp3 vsxw vv3, vs0, vv1
+    vadd vv2, vs3, vs0
+    @vp3 vsxw vv3, vs0, vv2
 .LfindRangeK_skip13:
     vpop vp1, vp3, vp3, vp3, 0xAA
     vpop vp1, vp1, vp4, vp4, 0xEE
@@ -283,7 +281,6 @@ findRangeK_wt:
     vmul vs4, vs3, vs50
     vadd vs3, vs53, vs4
     vadd vs4, vs3, vs51
-    @vp1 vsll vv1, vv0, vs59
     @vp1 vlxw vv3, vs4, vv1
     vmul vs5, vs2, vs49
     vadd vs4, vs55, vs5
@@ -294,7 +291,6 @@ findRangeK_wt:
     vpop vp4, vp1, vp2, vp2, 0x02
     @!vp3 vcjal 0, vs1, .LfindRangeK_skip15
     vadd vs3, vs3, vs49
-    @vp3 vsll vv1, vv0, vs59
     @vp3 vlxw vv3, vs3, vv1
     vmul vs4, vs2, vs49
     vadd vs3, vs45, vs4

@@ -35,8 +35,8 @@ net_kernel_1_wt:
 net_kernel_2_wt:
     vpset vp0
     veidx vv0
-    vadd vv0, vv0, vs63
-    vsll vv1, vv0, vs62
+    vadd vv0, vv0, vs60
+    vsll vv1, vv0, vs59
     vlstd vv2, va0, va15
     vld vv3, va1
     vfadd.d vv2, vv2, vv3
@@ -66,154 +66,204 @@ net_kernel_2_wt:
     vfadd.d vv2, vv2, vv3
     vlstd vv3, va14, va28
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs60
+    vadd vs2, vs58, vs57
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs59
+    vadd vs2, vs58, vs56
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs58
+    vadd vs2, vs58, vs55
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs57
+    vadd vs2, vs58, vs54
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs56
+    vadd vs2, vs58, vs53
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs55
+    vadd vs2, vs58, vs52
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs54
+    vadd vs2, vs58, vs51
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs53
+    vadd vs2, vs58, vs50
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs52
+    vadd vs2, vs58, vs49
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs51
+    vadd vs2, vs58, vs48
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs50
+    vadd vs2, vs58, vs47
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs49
+    vadd vs2, vs58, vs46
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs48
+    vadd vs2, vs58, vs45
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs47
+    vadd vs2, vs58, vs44
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs46
+    vadd vs2, vs58, vs43
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs45
+    vadd vs2, vs58, vs42
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs44
+    vadd vs2, vs58, vs41
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs43
+    vadd vs2, vs58, vs40
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs42
+    vadd vs2, vs58, vs39
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs41
+    vadd vs2, vs58, vs38
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs40
+    vadd vs2, vs58, vs37
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs39
+    vadd vs2, vs58, vs36
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs38
+    vadd vs2, vs58, vs35
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs37
+    vadd vs2, vs58, vs34
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs36
+    vadd vs2, vs58, vs33
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs35
+    vaddi vs3, vs32, 0
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs34
+    vaddi vs3, vs32, 8
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs33
+    vaddi vs3, vs32, 16
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs32
+    vaddi vs3, vs32, 24
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs31
+    vaddi vs3, vs32, 32
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs30
+    vaddi vs3, vs32, 40
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs29
+    vaddi vs3, vs32, 48
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs28
+    vaddi vs3, vs32, 56
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs27
+    vaddi vs3, vs32, 64
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs26
+    vaddi vs3, vs32, 72
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs25
+    vaddi vs3, vs32, 80
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs24
+    vaddi vs3, vs32, 88
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs23
+    vaddi vs3, vs32, 96
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs22
+    vaddi vs3, vs32, 104
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs21
+    vaddi vs3, vs32, 112
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs20
+    vaddi vs3, vs32, 120
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs19
+    vaddi vs3, vs32, 128
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs18
+    vaddi vs3, vs32, 136
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs17
+    vaddi vs3, vs32, 144
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs16
+    vaddi vs3, vs32, 152
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs15
+    vaddi vs3, vs32, 160
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs14
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs13
+    vaddi vs3, vs32, 176
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs12
+    vaddi vs3, vs32, 184
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs11
+    vaddi vs3, vs32, 192
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
     vsd vv2, va1
@@ -260,8 +310,8 @@ net_kernel_5_wt:
 net_kernel_6_wt:
     vpset vp0
     veidx vv0
-    vadd vv0, vv0, vs63
-    vsll vv1, vv0, vs62
+    vadd vv0, vv0, vs60
+    vsll vv1, vv0, vs59
     vlstd vv2, va0, va15
     vld vv3, va1
     vfadd.d vv2, vv2, vv3
@@ -291,154 +341,204 @@ net_kernel_6_wt:
     vfadd.d vv2, vv2, vv3
     vlstd vv3, va14, va28
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs60
+    vadd vs2, vs58, vs57
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs59
+    vadd vs2, vs58, vs56
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs58
+    vadd vs2, vs58, vs55
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs57
+    vadd vs2, vs58, vs54
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs56
+    vadd vs2, vs58, vs53
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs55
+    vadd vs2, vs58, vs52
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs54
+    vadd vs2, vs58, vs51
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs53
+    vadd vs2, vs58, vs50
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs52
+    vadd vs2, vs58, vs49
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs51
+    vadd vs2, vs58, vs48
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs50
+    vadd vs2, vs58, vs47
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs49
+    vadd vs2, vs58, vs46
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs48
+    vadd vs2, vs58, vs45
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs47
+    vadd vs2, vs58, vs44
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs46
+    vadd vs2, vs58, vs43
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs45
+    vadd vs2, vs58, vs42
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs44
+    vadd vs2, vs58, vs41
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs43
+    vadd vs2, vs58, vs40
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs42
+    vadd vs2, vs58, vs39
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs41
+    vadd vs2, vs58, vs38
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs40
+    vadd vs2, vs58, vs37
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs39
+    vadd vs2, vs58, vs36
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs38
+    vadd vs2, vs58, vs35
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs37
+    vadd vs2, vs58, vs34
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs36
+    vadd vs2, vs58, vs33
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs35
+    vaddi vs3, vs32, 0
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs34
+    vaddi vs3, vs32, 8
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs33
+    vaddi vs3, vs32, 16
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs32
+    vaddi vs3, vs32, 24
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs31
+    vaddi vs3, vs32, 32
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs30
+    vaddi vs3, vs32, 40
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs29
+    vaddi vs3, vs32, 48
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs28
+    vaddi vs3, vs32, 56
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs27
+    vaddi vs3, vs32, 64
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs26
+    vaddi vs3, vs32, 72
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs25
+    vaddi vs3, vs32, 80
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs24
+    vaddi vs3, vs32, 88
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs23
+    vaddi vs3, vs32, 96
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs22
+    vaddi vs3, vs32, 104
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs21
+    vaddi vs3, vs32, 112
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs20
+    vaddi vs3, vs32, 120
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs19
+    vaddi vs3, vs32, 128
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs18
+    vaddi vs3, vs32, 136
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs17
+    vaddi vs3, vs32, 144
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs16
+    vaddi vs3, vs32, 152
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs15
+    vaddi vs3, vs32, 160
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs14
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs13
+    vaddi vs3, vs32, 176
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs12
+    vaddi vs3, vs32, 184
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
-    vadd vs2, vs61, vs11
+    vaddi vs3, vs32, 192
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxd vv3, vs2, vv1
     vfadd.d vv2, vv2, vv3
     vsd vv2, va1
@@ -479,8 +579,8 @@ net_kernel_9_wt:
 net_kernel_10_wt:
     vpset vp0
     veidx vv0
-    vadd vv0, vv0, vs63
-    vsll vv1, vv0, vs62
+    vadd vv0, vv0, vs60
+    vsll vv1, vv0, vs59
     vlstw vv2, va0, va15
     vlw vv3, va1
     vfadd.s vv3, vv2, vv3
@@ -510,154 +610,204 @@ net_kernel_10_wt:
     vfadd.s vv3, vv3, vv2
     vlstw vv2, va14, va28
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs60
+    vadd vs2, vs58, vs57
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs59
+    vadd vs2, vs58, vs56
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs58
+    vadd vs2, vs58, vs55
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs57
+    vadd vs2, vs58, vs54
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs56
+    vadd vs2, vs58, vs53
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs55
+    vadd vs2, vs58, vs52
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs54
+    vadd vs2, vs58, vs51
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs53
+    vadd vs2, vs58, vs50
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs52
+    vadd vs2, vs58, vs49
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs51
+    vadd vs2, vs58, vs48
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs50
+    vadd vs2, vs58, vs47
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs49
+    vadd vs2, vs58, vs46
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs48
+    vadd vs2, vs58, vs45
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs47
+    vadd vs2, vs58, vs44
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs46
+    vadd vs2, vs58, vs43
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs45
+    vadd vs2, vs58, vs42
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs44
+    vadd vs2, vs58, vs41
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs43
+    vadd vs2, vs58, vs40
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs42
+    vadd vs2, vs58, vs39
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs41
+    vadd vs2, vs58, vs38
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs40
+    vadd vs2, vs58, vs37
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs39
+    vadd vs2, vs58, vs36
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs38
+    vadd vs2, vs58, vs35
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs37
+    vadd vs2, vs58, vs34
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs36
+    vadd vs2, vs58, vs33
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs35
+    vaddi vs3, vs32, 0
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs34
+    vaddi vs3, vs32, 8
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs33
+    vaddi vs3, vs32, 16
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs32
+    vaddi vs3, vs32, 24
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs31
+    vaddi vs3, vs32, 32
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs30
+    vaddi vs3, vs32, 40
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs29
+    vaddi vs3, vs32, 48
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs28
+    vaddi vs3, vs32, 56
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs27
+    vaddi vs3, vs32, 64
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs26
+    vaddi vs3, vs32, 72
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs25
+    vaddi vs3, vs32, 80
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs24
+    vaddi vs3, vs32, 88
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs23
+    vaddi vs3, vs32, 96
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs22
+    vaddi vs3, vs32, 104
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs21
+    vaddi vs3, vs32, 112
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs20
+    vaddi vs3, vs32, 120
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs19
+    vaddi vs3, vs32, 128
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs18
+    vaddi vs3, vs32, 136
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs17
+    vaddi vs3, vs32, 144
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs16
+    vaddi vs3, vs32, 152
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs15
+    vaddi vs3, vs32, 160
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs14
+    vaddi vs3, vs32, 168
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs13
+    vaddi vs3, vs32, 176
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs12
+    vaddi vs3, vs32, 184
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
-    vadd vs2, vs61, vs11
+    vaddi vs3, vs32, 192
+    vlsd vs3, vs3
+    vadd vs2, vs58, vs3
     vlxw vv2, vs2, vv1
     vfadd.s vv3, vv3, vv2
     vsw vv3, va1
@@ -974,215 +1124,131 @@ net_kernel_2_ct:                        # @net_kernel_2_ct
 	li	a3, -1
 	slli	a3, a3, 63
 	addi	a3, a3, 516
-	li	a4, 9
+.Lpcrel_hi9:
+	auipc	a4, %pcrel_hi(.Lnet_kernel_2_cpool)
 	#APP
 	vsetcfg a3
 	#NO_APP
+.Lpcrel_hi10:
+	auipc	a3, %pcrel_hi(.Lnet_kernel_2_spill)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi9)
+	addi	a3, a3, %pcrel_lo(.Lpcrel_hi10)
 	#APP
-	vmcs vs62, a4
+	vmcs vs32, a4
 	#NO_APP
 	#APP
-	vmcs vs61, a1
+	vmcs vs63, a3
+	#NO_APP
+	li	a3, 1
+	li	a4, 9
+	#APP
+	vmcs vs61, a3
+	#NO_APP
+	#APP
+	vmcs vs59, a4
+	#NO_APP
+	#APP
+	vmcs vs58, a1
 	#NO_APP
 	li	a3, 112
 	#APP
-	vmcs vs60, a3
+	vmcs vs57, a3
 	#NO_APP
 	li	a3, 120
 	#APP
-	vmcs vs59, a3
+	vmcs vs56, a3
 	#NO_APP
 	li	a3, 128
 	#APP
-	vmcs vs58, a3
+	vmcs vs55, a3
 	#NO_APP
 	li	a3, 136
 	#APP
-	vmcs vs57, a3
+	vmcs vs54, a3
 	#NO_APP
 	li	a3, 144
 	#APP
-	vmcs vs56, a3
+	vmcs vs53, a3
 	#NO_APP
 	li	a3, 152
 	#APP
-	vmcs vs55, a3
+	vmcs vs52, a3
 	#NO_APP
 	li	a3, 160
 	#APP
-	vmcs vs54, a3
+	vmcs vs51, a3
 	#NO_APP
 	li	a3, 168
 	#APP
-	vmcs vs53, a3
+	vmcs vs50, a3
 	#NO_APP
 	li	a3, 176
 	#APP
-	vmcs vs52, a3
+	vmcs vs49, a3
 	#NO_APP
 	li	a3, 184
 	#APP
-	vmcs vs51, a3
+	vmcs vs48, a3
 	#NO_APP
 	li	a3, 192
 	#APP
-	vmcs vs50, a3
+	vmcs vs47, a3
 	#NO_APP
 	li	a3, 200
 	#APP
-	vmcs vs49, a3
+	vmcs vs46, a3
 	#NO_APP
 	li	a3, 208
 	#APP
-	vmcs vs48, a3
+	vmcs vs45, a3
 	#NO_APP
 	li	a3, 216
 	#APP
-	vmcs vs47, a3
+	vmcs vs44, a3
 	#NO_APP
 	li	a3, 224
 	#APP
-	vmcs vs46, a3
+	vmcs vs43, a3
 	#NO_APP
 	li	a3, 232
 	#APP
-	vmcs vs45, a3
+	vmcs vs42, a3
 	#NO_APP
 	li	a3, 240
 	#APP
-	vmcs vs44, a3
+	vmcs vs41, a3
 	#NO_APP
 	li	a3, 248
 	#APP
-	vmcs vs43, a3
+	vmcs vs40, a3
 	#NO_APP
 	li	a3, 256
 	#APP
-	vmcs vs42, a3
+	vmcs vs39, a3
 	#NO_APP
 	li	a3, 264
 	#APP
-	vmcs vs41, a3
+	vmcs vs38, a3
 	#NO_APP
 	li	a3, 272
 	#APP
-	vmcs vs40, a3
+	vmcs vs37, a3
 	#NO_APP
 	li	a3, 280
 	#APP
-	vmcs vs39, a3
+	vmcs vs36, a3
 	#NO_APP
 	li	a3, 288
 	#APP
-	vmcs vs38, a3
+	vmcs vs35, a3
 	#NO_APP
 	li	a3, 296
 	#APP
-	vmcs vs37, a3
+	vmcs vs34, a3
 	#NO_APP
 	li	a3, 304
 	#APP
-	vmcs vs36, a3
-	#NO_APP
-	li	a3, 312
-	#APP
-	vmcs vs35, a3
-	#NO_APP
-	li	a3, 320
-	#APP
-	vmcs vs34, a3
-	#NO_APP
-	li	a3, 328
-	#APP
 	vmcs vs33, a3
-	#NO_APP
-	li	a3, 336
-	#APP
-	vmcs vs32, a3
-	#NO_APP
-	li	a3, 344
-	#APP
-	vmcs vs31, a3
-	#NO_APP
-	li	a3, 352
-	#APP
-	vmcs vs30, a3
-	#NO_APP
-	li	a3, 360
-	#APP
-	vmcs vs29, a3
-	#NO_APP
-	li	a3, 368
-	#APP
-	vmcs vs28, a3
-	#NO_APP
-	li	a3, 376
-	#APP
-	vmcs vs27, a3
-	#NO_APP
-	li	a3, 384
-	#APP
-	vmcs vs26, a3
-	#NO_APP
-	li	a3, 392
-	#APP
-	vmcs vs25, a3
-	#NO_APP
-	li	a3, 400
-	#APP
-	vmcs vs24, a3
-	#NO_APP
-	li	a3, 408
-	#APP
-	vmcs vs23, a3
-	#NO_APP
-	li	a3, 416
-	#APP
-	vmcs vs22, a3
-	#NO_APP
-	li	a3, 424
-	#APP
-	vmcs vs21, a3
-	#NO_APP
-	li	a3, 432
-	#APP
-	vmcs vs20, a3
-	#NO_APP
-	li	a3, 440
-	#APP
-	vmcs vs19, a3
-	#NO_APP
-	li	a3, 448
-	#APP
-	vmcs vs18, a3
-	#NO_APP
-	li	a3, 456
-	#APP
-	vmcs vs17, a3
-	#NO_APP
-	li	a3, 464
-	#APP
-	vmcs vs16, a3
-	#NO_APP
-	li	a3, 472
-	#APP
-	vmcs vs15, a3
-	#NO_APP
-	li	a3, 480
-	#APP
-	vmcs vs14, a3
-	#NO_APP
-	li	a3, 488
-	#APP
-	vmcs vs13, a3
-	#NO_APP
-	li	a3, 496
-	#APP
-	vmcs vs12, a3
-	#NO_APP
-	li	a3, 504
-	#APP
-	vmcs vs11, a3
 	#NO_APP
 	li	a3, 512
 	#APP
@@ -1260,15 +1326,15 @@ net_kernel_2_ct:                        # @net_kernel_2_ct
 	j	.LBB3_3
 .LBB3_2:                                # %stripmine
                                         #   in Loop: Header=BB3_3 Depth=1
-.Lpcrel_hi10:
+.Lpcrel_hi12:
 	auipc	s3, %pcrel_hi(hwacha_vl_short)
 	#APP
 	vsetvl s4, s2
 	#NO_APP
-	ld	s5, %pcrel_lo(.Lpcrel_hi10)(s3)
+	ld	s5, %pcrel_lo(.Lpcrel_hi12)(s3)
 	sltu	s2, s4, s2
 	or	s2, s5, s2
-	sd	s2, %pcrel_lo(.Lpcrel_hi10)(s3)
+	sd	s2, %pcrel_lo(.Lpcrel_hi12)(s3)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -1314,12 +1380,12 @@ net_kernel_2_ct:                        # @net_kernel_2_ct
 	#APP
 	vmca va14, s1
 	#NO_APP
-.Lpcrel_hi11:
+.Lpcrel_hi13:
 	auipc	s2, %pcrel_hi(net_kernel_2_wt)
 	#APP
-	vmcs vs63, a3
+	vmcs vs60, a3
 	#NO_APP
-	addi	s2, s2, %pcrel_lo(.Lpcrel_hi11)
+	addi	s2, s2, %pcrel_lo(.Lpcrel_hi13)
 	#APP
 	vf 0(s2)
 	#NO_APP
@@ -1345,9 +1411,9 @@ net_kernel_2_ct:                        # @net_kernel_2_ct
 	beqz	a0, .LBB3_7
 .LBB3_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-.Lpcrel_hi9:
+.Lpcrel_hi11:
 	auipc	s2, %pcrel_hi(hwacha_group_size)
-	ld	s2, %pcrel_lo(.Lpcrel_hi9)(s2)
+	ld	s2, %pcrel_lo(.Lpcrel_hi11)(s2)
 	mv	s3, a0
 	beqz	s2, .LBB3_5
 # %bb.4:                                # %stripmine
@@ -1404,25 +1470,25 @@ net_kernel_3_ct:                        # @net_kernel_3_ct
 	#NO_APP
 	beqz	a0, .LBB4_7
 # %bb.1:                                # %stripmine.preheader
-.Lpcrel_hi12:
-	auipc	a3, %pcrel_hi(hwacha_group_size)
 .Lpcrel_hi14:
+	auipc	a3, %pcrel_hi(hwacha_group_size)
+.Lpcrel_hi16:
 	auipc	a5, %pcrel_hi(net_kernel_3_wt)
-.Lpcrel_hi13:
+.Lpcrel_hi15:
 	auipc	a4, %pcrel_hi(hwacha_vl_short)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi14)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi16)
 	j	.LBB4_3
 .LBB4_2:                                # %stripmine
                                         #   in Loop: Header=BB4_3 Depth=1
 	#APP
 	vsetvl a6, a7
 	#NO_APP
-	ld	t0, %pcrel_lo(.Lpcrel_hi13)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi15)(a4)
 	sltu	a7, a6, a7
 	sub	a0, a0, a6
 	slli	a6, a6, 3
 	or	a7, t0, a7
-	sd	a7, %pcrel_lo(.Lpcrel_hi13)(a4)
+	sd	a7, %pcrel_lo(.Lpcrel_hi15)(a4)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -1437,7 +1503,7 @@ net_kernel_3_ct:                        # @net_kernel_3_ct
 	beqz	a0, .LBB4_7
 .LBB4_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a7, %pcrel_lo(.Lpcrel_hi12)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi14)(a3)
 	mv	a6, a0
 	beqz	a7, .LBB4_5
 # %bb.4:                                # %stripmine
@@ -1486,25 +1552,25 @@ net_kernel_4_ct:                        # @net_kernel_4_ct
 	beqz	a0, .LBB5_7
 # %bb.1:                                # %stripmine.preheader
 	li	a2, 0
-.Lpcrel_hi15:
-	auipc	a3, %pcrel_hi(hwacha_group_size)
 .Lpcrel_hi17:
+	auipc	a3, %pcrel_hi(hwacha_group_size)
+.Lpcrel_hi19:
 	auipc	a5, %pcrel_hi(net_kernel_4_wt)
-.Lpcrel_hi16:
+.Lpcrel_hi18:
 	auipc	a4, %pcrel_hi(hwacha_vl_short)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi17)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi19)
 	j	.LBB5_3
 .LBB5_2:                                # %stripmine
                                         #   in Loop: Header=BB5_3 Depth=1
 	#APP
 	vsetvl a6, a7
 	#NO_APP
-	ld	t0, %pcrel_lo(.Lpcrel_hi16)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi18)(a4)
 	sltu	a7, a6, a7
 	sub	a0, a0, a6
 	or	a7, t0, a7
 	slli	t0, a6, 3
-	sd	a7, %pcrel_lo(.Lpcrel_hi16)(a4)
+	sd	a7, %pcrel_lo(.Lpcrel_hi18)(a4)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -1519,7 +1585,7 @@ net_kernel_4_ct:                        # @net_kernel_4_ct
 	beqz	a0, .LBB5_7
 .LBB5_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a7, %pcrel_lo(.Lpcrel_hi15)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi17)(a3)
 	mv	a6, a0
 	beqz	a7, .LBB5_5
 # %bb.4:                                # %stripmine
@@ -1556,25 +1622,25 @@ net_kernel_5_ct:                        # @net_kernel_5_ct
 	#NO_APP
 	beqz	a0, .LBB6_7
 # %bb.1:                                # %stripmine.preheader
-.Lpcrel_hi18:
-	auipc	a2, %pcrel_hi(hwacha_group_size)
 .Lpcrel_hi20:
+	auipc	a2, %pcrel_hi(hwacha_group_size)
+.Lpcrel_hi22:
 	auipc	a4, %pcrel_hi(net_kernel_5_wt)
-.Lpcrel_hi19:
+.Lpcrel_hi21:
 	auipc	a3, %pcrel_hi(hwacha_vl_short)
-	addi	a4, a4, %pcrel_lo(.Lpcrel_hi20)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi22)
 	j	.LBB6_3
 .LBB6_2:                                # %stripmine
                                         #   in Loop: Header=BB6_3 Depth=1
 	#APP
 	vsetvl a5, a6
 	#NO_APP
-	ld	a7, %pcrel_lo(.Lpcrel_hi19)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi21)(a3)
 	sltu	a6, a5, a6
 	sub	a0, a0, a5
 	slli	a5, a5, 3
 	or	a6, a7, a6
-	sd	a6, %pcrel_lo(.Lpcrel_hi19)(a3)
+	sd	a6, %pcrel_lo(.Lpcrel_hi21)(a3)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -1585,7 +1651,7 @@ net_kernel_5_ct:                        # @net_kernel_5_ct
 	beqz	a0, .LBB6_7
 .LBB6_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a6, %pcrel_lo(.Lpcrel_hi18)(a2)
+	ld	a6, %pcrel_lo(.Lpcrel_hi20)(a2)
 	mv	a5, a0
 	beqz	a6, .LBB6_5
 # %bb.4:                                # %stripmine
@@ -1617,215 +1683,131 @@ net_kernel_6_ct:                        # @net_kernel_6_ct
 	li	a3, -1
 	slli	a3, a3, 63
 	addi	a3, a3, 516
-	li	a4, 9
+.Lpcrel_hi23:
+	auipc	a4, %pcrel_hi(.Lnet_kernel_6_cpool)
 	#APP
 	vsetcfg a3
 	#NO_APP
+.Lpcrel_hi24:
+	auipc	a3, %pcrel_hi(.Lnet_kernel_6_spill)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi23)
+	addi	a3, a3, %pcrel_lo(.Lpcrel_hi24)
 	#APP
-	vmcs vs62, a4
+	vmcs vs32, a4
 	#NO_APP
 	#APP
-	vmcs vs61, a1
+	vmcs vs63, a3
+	#NO_APP
+	li	a3, 1
+	li	a4, 9
+	#APP
+	vmcs vs61, a3
+	#NO_APP
+	#APP
+	vmcs vs59, a4
+	#NO_APP
+	#APP
+	vmcs vs58, a1
 	#NO_APP
 	li	a3, 112
 	#APP
-	vmcs vs60, a3
+	vmcs vs57, a3
 	#NO_APP
 	li	a3, 120
 	#APP
-	vmcs vs59, a3
+	vmcs vs56, a3
 	#NO_APP
 	li	a3, 128
 	#APP
-	vmcs vs58, a3
+	vmcs vs55, a3
 	#NO_APP
 	li	a3, 136
 	#APP
-	vmcs vs57, a3
+	vmcs vs54, a3
 	#NO_APP
 	li	a3, 144
 	#APP
-	vmcs vs56, a3
+	vmcs vs53, a3
 	#NO_APP
 	li	a3, 152
 	#APP
-	vmcs vs55, a3
+	vmcs vs52, a3
 	#NO_APP
 	li	a3, 160
 	#APP
-	vmcs vs54, a3
+	vmcs vs51, a3
 	#NO_APP
 	li	a3, 168
 	#APP
-	vmcs vs53, a3
+	vmcs vs50, a3
 	#NO_APP
 	li	a3, 176
 	#APP
-	vmcs vs52, a3
+	vmcs vs49, a3
 	#NO_APP
 	li	a3, 184
 	#APP
-	vmcs vs51, a3
+	vmcs vs48, a3
 	#NO_APP
 	li	a3, 192
 	#APP
-	vmcs vs50, a3
+	vmcs vs47, a3
 	#NO_APP
 	li	a3, 200
 	#APP
-	vmcs vs49, a3
+	vmcs vs46, a3
 	#NO_APP
 	li	a3, 208
 	#APP
-	vmcs vs48, a3
+	vmcs vs45, a3
 	#NO_APP
 	li	a3, 216
 	#APP
-	vmcs vs47, a3
+	vmcs vs44, a3
 	#NO_APP
 	li	a3, 224
 	#APP
-	vmcs vs46, a3
+	vmcs vs43, a3
 	#NO_APP
 	li	a3, 232
 	#APP
-	vmcs vs45, a3
+	vmcs vs42, a3
 	#NO_APP
 	li	a3, 240
 	#APP
-	vmcs vs44, a3
+	vmcs vs41, a3
 	#NO_APP
 	li	a3, 248
 	#APP
-	vmcs vs43, a3
+	vmcs vs40, a3
 	#NO_APP
 	li	a3, 256
 	#APP
-	vmcs vs42, a3
+	vmcs vs39, a3
 	#NO_APP
 	li	a3, 264
 	#APP
-	vmcs vs41, a3
+	vmcs vs38, a3
 	#NO_APP
 	li	a3, 272
 	#APP
-	vmcs vs40, a3
+	vmcs vs37, a3
 	#NO_APP
 	li	a3, 280
 	#APP
-	vmcs vs39, a3
+	vmcs vs36, a3
 	#NO_APP
 	li	a3, 288
 	#APP
-	vmcs vs38, a3
+	vmcs vs35, a3
 	#NO_APP
 	li	a3, 296
 	#APP
-	vmcs vs37, a3
+	vmcs vs34, a3
 	#NO_APP
 	li	a3, 304
 	#APP
-	vmcs vs36, a3
-	#NO_APP
-	li	a3, 312
-	#APP
-	vmcs vs35, a3
-	#NO_APP
-	li	a3, 320
-	#APP
-	vmcs vs34, a3
-	#NO_APP
-	li	a3, 328
-	#APP
 	vmcs vs33, a3
-	#NO_APP
-	li	a3, 336
-	#APP
-	vmcs vs32, a3
-	#NO_APP
-	li	a3, 344
-	#APP
-	vmcs vs31, a3
-	#NO_APP
-	li	a3, 352
-	#APP
-	vmcs vs30, a3
-	#NO_APP
-	li	a3, 360
-	#APP
-	vmcs vs29, a3
-	#NO_APP
-	li	a3, 368
-	#APP
-	vmcs vs28, a3
-	#NO_APP
-	li	a3, 376
-	#APP
-	vmcs vs27, a3
-	#NO_APP
-	li	a3, 384
-	#APP
-	vmcs vs26, a3
-	#NO_APP
-	li	a3, 392
-	#APP
-	vmcs vs25, a3
-	#NO_APP
-	li	a3, 400
-	#APP
-	vmcs vs24, a3
-	#NO_APP
-	li	a3, 408
-	#APP
-	vmcs vs23, a3
-	#NO_APP
-	li	a3, 416
-	#APP
-	vmcs vs22, a3
-	#NO_APP
-	li	a3, 424
-	#APP
-	vmcs vs21, a3
-	#NO_APP
-	li	a3, 432
-	#APP
-	vmcs vs20, a3
-	#NO_APP
-	li	a3, 440
-	#APP
-	vmcs vs19, a3
-	#NO_APP
-	li	a3, 448
-	#APP
-	vmcs vs18, a3
-	#NO_APP
-	li	a3, 456
-	#APP
-	vmcs vs17, a3
-	#NO_APP
-	li	a3, 464
-	#APP
-	vmcs vs16, a3
-	#NO_APP
-	li	a3, 472
-	#APP
-	vmcs vs15, a3
-	#NO_APP
-	li	a3, 480
-	#APP
-	vmcs vs14, a3
-	#NO_APP
-	li	a3, 488
-	#APP
-	vmcs vs13, a3
-	#NO_APP
-	li	a3, 496
-	#APP
-	vmcs vs12, a3
-	#NO_APP
-	li	a3, 504
-	#APP
-	vmcs vs11, a3
 	#NO_APP
 	li	a3, 512
 	#APP
@@ -1903,15 +1885,15 @@ net_kernel_6_ct:                        # @net_kernel_6_ct
 	j	.LBB7_3
 .LBB7_2:                                # %stripmine
                                         #   in Loop: Header=BB7_3 Depth=1
-.Lpcrel_hi22:
+.Lpcrel_hi26:
 	auipc	s3, %pcrel_hi(hwacha_vl_short)
 	#APP
 	vsetvl s4, s2
 	#NO_APP
-	ld	s5, %pcrel_lo(.Lpcrel_hi22)(s3)
+	ld	s5, %pcrel_lo(.Lpcrel_hi26)(s3)
 	sltu	s2, s4, s2
 	or	s2, s5, s2
-	sd	s2, %pcrel_lo(.Lpcrel_hi22)(s3)
+	sd	s2, %pcrel_lo(.Lpcrel_hi26)(s3)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -1957,12 +1939,12 @@ net_kernel_6_ct:                        # @net_kernel_6_ct
 	#APP
 	vmca va14, s1
 	#NO_APP
-.Lpcrel_hi23:
+.Lpcrel_hi27:
 	auipc	s2, %pcrel_hi(net_kernel_6_wt)
 	#APP
-	vmcs vs63, a3
+	vmcs vs60, a3
 	#NO_APP
-	addi	s2, s2, %pcrel_lo(.Lpcrel_hi23)
+	addi	s2, s2, %pcrel_lo(.Lpcrel_hi27)
 	#APP
 	vf 0(s2)
 	#NO_APP
@@ -1988,9 +1970,9 @@ net_kernel_6_ct:                        # @net_kernel_6_ct
 	beqz	a0, .LBB7_7
 .LBB7_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-.Lpcrel_hi21:
+.Lpcrel_hi25:
 	auipc	s2, %pcrel_hi(hwacha_group_size)
-	ld	s2, %pcrel_lo(.Lpcrel_hi21)(s2)
+	ld	s2, %pcrel_lo(.Lpcrel_hi25)(s2)
 	mv	s3, a0
 	beqz	s2, .LBB7_5
 # %bb.4:                                # %stripmine
@@ -2047,25 +2029,25 @@ net_kernel_7_ct:                        # @net_kernel_7_ct
 	#NO_APP
 	beqz	a0, .LBB8_7
 # %bb.1:                                # %stripmine.preheader
-.Lpcrel_hi24:
+.Lpcrel_hi28:
 	auipc	a3, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi26:
+.Lpcrel_hi30:
 	auipc	a5, %pcrel_hi(net_kernel_7_wt)
-.Lpcrel_hi25:
+.Lpcrel_hi29:
 	auipc	a4, %pcrel_hi(hwacha_vl_short)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi26)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi30)
 	j	.LBB8_3
 .LBB8_2:                                # %stripmine
                                         #   in Loop: Header=BB8_3 Depth=1
 	#APP
 	vsetvl a6, a7
 	#NO_APP
-	ld	t0, %pcrel_lo(.Lpcrel_hi25)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi29)(a4)
 	sltu	a7, a6, a7
 	sub	a0, a0, a6
 	slli	a6, a6, 3
 	or	a7, t0, a7
-	sd	a7, %pcrel_lo(.Lpcrel_hi25)(a4)
+	sd	a7, %pcrel_lo(.Lpcrel_hi29)(a4)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -2080,7 +2062,7 @@ net_kernel_7_ct:                        # @net_kernel_7_ct
 	beqz	a0, .LBB8_7
 .LBB8_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a7, %pcrel_lo(.Lpcrel_hi24)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi28)(a3)
 	mv	a6, a0
 	beqz	a7, .LBB8_5
 # %bb.4:                                # %stripmine
@@ -2118,26 +2100,26 @@ net_kernel_8_ct:                        # @net_kernel_8_ct
 	#NO_APP
 	beqz	a0, .LBB9_7
 # %bb.1:                                # %stripmine.preheader
-.Lpcrel_hi27:
+.Lpcrel_hi31:
 	auipc	a3, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi29:
+.Lpcrel_hi33:
 	auipc	a5, %pcrel_hi(net_kernel_8_wt)
-.Lpcrel_hi28:
+.Lpcrel_hi32:
 	auipc	a4, %pcrel_hi(hwacha_vl_short)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi29)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi33)
 	j	.LBB9_3
 .LBB9_2:                                # %stripmine
                                         #   in Loop: Header=BB9_3 Depth=1
 	#APP
 	vsetvl a6, a7
 	#NO_APP
-	ld	t0, %pcrel_lo(.Lpcrel_hi28)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi32)(a4)
 	sltu	a7, a6, a7
 	sub	a0, a0, a6
 	or	a7, t0, a7
 	slli	t0, a6, 3
 	slli	a6, a6, 2
-	sd	a7, %pcrel_lo(.Lpcrel_hi28)(a4)
+	sd	a7, %pcrel_lo(.Lpcrel_hi32)(a4)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -2152,7 +2134,7 @@ net_kernel_8_ct:                        # @net_kernel_8_ct
 	beqz	a0, .LBB9_7
 .LBB9_3:                                # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a7, %pcrel_lo(.Lpcrel_hi27)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi31)(a3)
 	mv	a6, a0
 	beqz	a7, .LBB9_5
 # %bb.4:                                # %stripmine
@@ -2190,25 +2172,25 @@ net_kernel_9_ct:                        # @net_kernel_9_ct
 	#NO_APP
 	beqz	a0, .LBB10_7
 # %bb.1:                                # %stripmine.preheader
-.Lpcrel_hi30:
+.Lpcrel_hi34:
 	auipc	a2, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi32:
+.Lpcrel_hi36:
 	auipc	a4, %pcrel_hi(net_kernel_9_wt)
-.Lpcrel_hi31:
+.Lpcrel_hi35:
 	auipc	a3, %pcrel_hi(hwacha_vl_short)
-	addi	a4, a4, %pcrel_lo(.Lpcrel_hi32)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi36)
 	j	.LBB10_3
 .LBB10_2:                               # %stripmine
                                         #   in Loop: Header=BB10_3 Depth=1
 	#APP
 	vsetvl a5, a6
 	#NO_APP
-	ld	a7, %pcrel_lo(.Lpcrel_hi31)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi35)(a3)
 	sltu	a6, a5, a6
 	sub	a0, a0, a5
 	slli	a5, a5, 2
 	or	a6, a7, a6
-	sd	a6, %pcrel_lo(.Lpcrel_hi31)(a3)
+	sd	a6, %pcrel_lo(.Lpcrel_hi35)(a3)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -2219,7 +2201,7 @@ net_kernel_9_ct:                        # @net_kernel_9_ct
 	beqz	a0, .LBB10_7
 .LBB10_3:                               # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a6, %pcrel_lo(.Lpcrel_hi30)(a2)
+	ld	a6, %pcrel_lo(.Lpcrel_hi34)(a2)
 	mv	a5, a0
 	beqz	a6, .LBB10_5
 # %bb.4:                                # %stripmine
@@ -2251,216 +2233,132 @@ net_kernel_10_ct:                       # @net_kernel_10_ct
 	lui	a3, 1048560
 	addi	a3, a3, -1029
 	srli	a3, a3, 1
-	li	a4, 8
+.Lpcrel_hi37:
+	auipc	a4, %pcrel_hi(.Lnet_kernel_10_cpool)
 	not	a3, a3
 	#APP
 	vsetcfg a3
 	#NO_APP
+.Lpcrel_hi38:
+	auipc	a3, %pcrel_hi(.Lnet_kernel_10_spill)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi37)
+	addi	a3, a3, %pcrel_lo(.Lpcrel_hi38)
 	#APP
-	vmcs vs62, a4
+	vmcs vs32, a4
 	#NO_APP
 	#APP
-	vmcs vs61, a1
+	vmcs vs63, a3
+	#NO_APP
+	li	a3, 1
+	li	a4, 8
+	#APP
+	vmcs vs61, a3
+	#NO_APP
+	#APP
+	vmcs vs59, a4
+	#NO_APP
+	#APP
+	vmcs vs58, a1
 	#NO_APP
 	li	a3, 56
 	#APP
-	vmcs vs60, a3
+	vmcs vs57, a3
 	#NO_APP
 	li	a3, 60
 	#APP
-	vmcs vs59, a3
+	vmcs vs56, a3
 	#NO_APP
 	li	a3, 64
 	#APP
-	vmcs vs58, a3
+	vmcs vs55, a3
 	#NO_APP
 	li	a3, 68
 	#APP
-	vmcs vs57, a3
+	vmcs vs54, a3
 	#NO_APP
 	li	a3, 72
 	#APP
-	vmcs vs56, a3
+	vmcs vs53, a3
 	#NO_APP
 	li	a3, 76
 	#APP
-	vmcs vs55, a3
+	vmcs vs52, a3
 	#NO_APP
 	li	a3, 80
 	#APP
-	vmcs vs54, a3
+	vmcs vs51, a3
 	#NO_APP
 	li	a3, 84
 	#APP
-	vmcs vs53, a3
+	vmcs vs50, a3
 	#NO_APP
 	li	a3, 88
 	#APP
-	vmcs vs52, a3
+	vmcs vs49, a3
 	#NO_APP
 	li	a3, 92
 	#APP
-	vmcs vs51, a3
+	vmcs vs48, a3
 	#NO_APP
 	li	a3, 96
 	#APP
-	vmcs vs50, a3
+	vmcs vs47, a3
 	#NO_APP
 	li	a3, 100
 	#APP
-	vmcs vs49, a3
+	vmcs vs46, a3
 	#NO_APP
 	li	a3, 104
 	#APP
-	vmcs vs48, a3
+	vmcs vs45, a3
 	#NO_APP
 	li	a3, 108
 	#APP
-	vmcs vs47, a3
+	vmcs vs44, a3
 	#NO_APP
 	li	a3, 112
 	#APP
-	vmcs vs46, a3
+	vmcs vs43, a3
 	#NO_APP
 	li	a3, 116
 	#APP
-	vmcs vs45, a3
+	vmcs vs42, a3
 	#NO_APP
 	li	a3, 120
 	#APP
-	vmcs vs44, a3
+	vmcs vs41, a3
 	#NO_APP
 	li	a3, 124
 	#APP
-	vmcs vs43, a3
+	vmcs vs40, a3
 	#NO_APP
 	li	a3, 128
 	#APP
-	vmcs vs42, a3
+	vmcs vs39, a3
 	#NO_APP
 	li	a3, 132
 	#APP
-	vmcs vs41, a3
+	vmcs vs38, a3
 	#NO_APP
 	li	a3, 136
 	#APP
-	vmcs vs40, a3
+	vmcs vs37, a3
 	#NO_APP
 	li	a3, 140
 	#APP
-	vmcs vs39, a3
+	vmcs vs36, a3
 	#NO_APP
 	li	a3, 144
 	#APP
-	vmcs vs38, a3
+	vmcs vs35, a3
 	#NO_APP
 	li	a3, 148
 	#APP
-	vmcs vs37, a3
+	vmcs vs34, a3
 	#NO_APP
 	li	a3, 152
 	#APP
-	vmcs vs36, a3
-	#NO_APP
-	li	a3, 156
-	#APP
-	vmcs vs35, a3
-	#NO_APP
-	li	a3, 160
-	#APP
-	vmcs vs34, a3
-	#NO_APP
-	li	a3, 164
-	#APP
 	vmcs vs33, a3
-	#NO_APP
-	li	a3, 168
-	#APP
-	vmcs vs32, a3
-	#NO_APP
-	li	a3, 172
-	#APP
-	vmcs vs31, a3
-	#NO_APP
-	li	a3, 176
-	#APP
-	vmcs vs30, a3
-	#NO_APP
-	li	a3, 180
-	#APP
-	vmcs vs29, a3
-	#NO_APP
-	li	a3, 184
-	#APP
-	vmcs vs28, a3
-	#NO_APP
-	li	a3, 188
-	#APP
-	vmcs vs27, a3
-	#NO_APP
-	li	a3, 192
-	#APP
-	vmcs vs26, a3
-	#NO_APP
-	li	a3, 196
-	#APP
-	vmcs vs25, a3
-	#NO_APP
-	li	a3, 200
-	#APP
-	vmcs vs24, a3
-	#NO_APP
-	li	a3, 204
-	#APP
-	vmcs vs23, a3
-	#NO_APP
-	li	a3, 208
-	#APP
-	vmcs vs22, a3
-	#NO_APP
-	li	a3, 212
-	#APP
-	vmcs vs21, a3
-	#NO_APP
-	li	a3, 216
-	#APP
-	vmcs vs20, a3
-	#NO_APP
-	li	a3, 220
-	#APP
-	vmcs vs19, a3
-	#NO_APP
-	li	a3, 224
-	#APP
-	vmcs vs18, a3
-	#NO_APP
-	li	a3, 228
-	#APP
-	vmcs vs17, a3
-	#NO_APP
-	li	a3, 232
-	#APP
-	vmcs vs16, a3
-	#NO_APP
-	li	a3, 236
-	#APP
-	vmcs vs15, a3
-	#NO_APP
-	li	a3, 240
-	#APP
-	vmcs vs14, a3
-	#NO_APP
-	li	a3, 244
-	#APP
-	vmcs vs13, a3
-	#NO_APP
-	li	a3, 248
-	#APP
-	vmcs vs12, a3
-	#NO_APP
-	li	a3, 252
-	#APP
-	vmcs vs11, a3
 	#NO_APP
 	li	a3, 256
 	#APP
@@ -2538,15 +2436,15 @@ net_kernel_10_ct:                       # @net_kernel_10_ct
 	j	.LBB11_3
 .LBB11_2:                               # %stripmine
                                         #   in Loop: Header=BB11_3 Depth=1
-.Lpcrel_hi34:
+.Lpcrel_hi40:
 	auipc	s3, %pcrel_hi(hwacha_vl_short)
 	#APP
 	vsetvl s4, s2
 	#NO_APP
-	ld	s5, %pcrel_lo(.Lpcrel_hi34)(s3)
+	ld	s5, %pcrel_lo(.Lpcrel_hi40)(s3)
 	sltu	s2, s4, s2
 	or	s2, s5, s2
-	sd	s2, %pcrel_lo(.Lpcrel_hi34)(s3)
+	sd	s2, %pcrel_lo(.Lpcrel_hi40)(s3)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -2592,12 +2490,12 @@ net_kernel_10_ct:                       # @net_kernel_10_ct
 	#APP
 	vmca va14, s1
 	#NO_APP
-.Lpcrel_hi35:
+.Lpcrel_hi41:
 	auipc	s2, %pcrel_hi(net_kernel_10_wt)
 	#APP
-	vmcs vs63, a3
+	vmcs vs60, a3
 	#NO_APP
-	addi	s2, s2, %pcrel_lo(.Lpcrel_hi35)
+	addi	s2, s2, %pcrel_lo(.Lpcrel_hi41)
 	#APP
 	vf 0(s2)
 	#NO_APP
@@ -2623,9 +2521,9 @@ net_kernel_10_ct:                       # @net_kernel_10_ct
 	beqz	a0, .LBB11_7
 .LBB11_3:                               # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-.Lpcrel_hi33:
+.Lpcrel_hi39:
 	auipc	s2, %pcrel_hi(hwacha_group_size)
-	ld	s2, %pcrel_lo(.Lpcrel_hi33)(s2)
+	ld	s2, %pcrel_lo(.Lpcrel_hi39)(s2)
 	mv	s3, a0
 	beqz	s2, .LBB11_5
 # %bb.4:                                # %stripmine
@@ -2682,25 +2580,25 @@ net_kernel_11_ct:                       # @net_kernel_11_ct
 	#NO_APP
 	beqz	a0, .LBB12_7
 # %bb.1:                                # %stripmine.preheader
-.Lpcrel_hi36:
+.Lpcrel_hi42:
 	auipc	a3, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi38:
+.Lpcrel_hi44:
 	auipc	a5, %pcrel_hi(net_kernel_11_wt)
-.Lpcrel_hi37:
+.Lpcrel_hi43:
 	auipc	a4, %pcrel_hi(hwacha_vl_short)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi38)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi44)
 	j	.LBB12_3
 .LBB12_2:                               # %stripmine
                                         #   in Loop: Header=BB12_3 Depth=1
 	#APP
 	vsetvl a6, a7
 	#NO_APP
-	ld	t0, %pcrel_lo(.Lpcrel_hi37)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi43)(a4)
 	sltu	a7, a6, a7
 	sub	a0, a0, a6
 	slli	a6, a6, 2
 	or	a7, t0, a7
-	sd	a7, %pcrel_lo(.Lpcrel_hi37)(a4)
+	sd	a7, %pcrel_lo(.Lpcrel_hi43)(a4)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -2715,7 +2613,7 @@ net_kernel_11_ct:                       # @net_kernel_11_ct
 	beqz	a0, .LBB12_7
 .LBB12_3:                               # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a7, %pcrel_lo(.Lpcrel_hi36)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi42)(a3)
 	mv	a6, a0
 	beqz	a7, .LBB12_5
 # %bb.4:                                # %stripmine
@@ -2758,25 +2656,25 @@ net_kernel_12_ct:                       # @net_kernel_12_ct
 	#NO_APP
 	beqz	a0, .LBB13_7
 # %bb.1:                                # %stripmine.preheader
-.Lpcrel_hi39:
+.Lpcrel_hi45:
 	auipc	a3, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi41:
+.Lpcrel_hi47:
 	auipc	a5, %pcrel_hi(net_kernel_12_wt)
-.Lpcrel_hi40:
+.Lpcrel_hi46:
 	auipc	a4, %pcrel_hi(hwacha_vl_short)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi41)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi47)
 	j	.LBB13_3
 .LBB13_2:                               # %stripmine
                                         #   in Loop: Header=BB13_3 Depth=1
 	#APP
 	vsetvl a6, a7
 	#NO_APP
-	ld	t0, %pcrel_lo(.Lpcrel_hi40)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi46)(a4)
 	sltu	a7, a6, a7
 	sub	a0, a0, a6
 	slli	a6, a6, 2
 	or	a7, t0, a7
-	sd	a7, %pcrel_lo(.Lpcrel_hi40)(a4)
+	sd	a7, %pcrel_lo(.Lpcrel_hi46)(a4)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -2791,7 +2689,7 @@ net_kernel_12_ct:                       # @net_kernel_12_ct
 	beqz	a0, .LBB13_7
 .LBB13_3:                               # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a7, %pcrel_lo(.Lpcrel_hi39)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi45)(a3)
 	mv	a6, a0
 	beqz	a7, .LBB13_5
 # %bb.4:                                # %stripmine
@@ -2833,25 +2731,25 @@ net_kernel_13_ct:                       # @net_kernel_13_ct
 	#NO_APP
 	beqz	a0, .LBB14_7
 # %bb.1:                                # %stripmine.preheader
-.Lpcrel_hi42:
+.Lpcrel_hi48:
 	auipc	a2, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi44:
+.Lpcrel_hi50:
 	auipc	a4, %pcrel_hi(net_kernel_13_wt)
-.Lpcrel_hi43:
+.Lpcrel_hi49:
 	auipc	a3, %pcrel_hi(hwacha_vl_short)
-	addi	a4, a4, %pcrel_lo(.Lpcrel_hi44)
+	addi	a4, a4, %pcrel_lo(.Lpcrel_hi50)
 	j	.LBB14_3
 .LBB14_2:                               # %stripmine
                                         #   in Loop: Header=BB14_3 Depth=1
 	#APP
 	vsetvl a5, a6
 	#NO_APP
-	ld	a7, %pcrel_lo(.Lpcrel_hi43)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi49)(a3)
 	sltu	a6, a5, a6
 	sub	a0, a0, a5
 	slli	a5, a5, 2
 	or	a6, a7, a6
-	sd	a6, %pcrel_lo(.Lpcrel_hi43)(a3)
+	sd	a6, %pcrel_lo(.Lpcrel_hi49)(a3)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -2862,7 +2760,7 @@ net_kernel_13_ct:                       # @net_kernel_13_ct
 	beqz	a0, .LBB14_7
 .LBB14_3:                               # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a6, %pcrel_lo(.Lpcrel_hi42)(a2)
+	ld	a6, %pcrel_lo(.Lpcrel_hi48)(a2)
 	mv	a5, a0
 	beqz	a6, .LBB14_5
 # %bb.4:                                # %stripmine
@@ -2912,25 +2810,25 @@ net_kernel_14_ct:                       # @net_kernel_14_ct
 	beqz	a0, .LBB15_7
 # %bb.1:                                # %stripmine.preheader
 	li	a2, 0
-.Lpcrel_hi45:
+.Lpcrel_hi51:
 	auipc	a4, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi47:
+.Lpcrel_hi53:
 	auipc	a6, %pcrel_hi(net_kernel_14_wt)
-.Lpcrel_hi46:
+.Lpcrel_hi52:
 	auipc	a5, %pcrel_hi(hwacha_vl_short)
-	addi	a6, a6, %pcrel_lo(.Lpcrel_hi47)
+	addi	a6, a6, %pcrel_lo(.Lpcrel_hi53)
 	j	.LBB15_3
 .LBB15_2:                               # %stripmine
                                         #   in Loop: Header=BB15_3 Depth=1
 	#APP
 	vsetvl a7, t0
 	#NO_APP
-	ld	t1, %pcrel_lo(.Lpcrel_hi46)(a5)
+	ld	t1, %pcrel_lo(.Lpcrel_hi52)(a5)
 	sltu	t0, a7, t0
 	sub	a0, a0, a7
 	or	t0, t1, t0
 	slli	t1, a7, 2
-	sd	t0, %pcrel_lo(.Lpcrel_hi46)(a5)
+	sd	t0, %pcrel_lo(.Lpcrel_hi52)(a5)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -2949,7 +2847,7 @@ net_kernel_14_ct:                       # @net_kernel_14_ct
 	beqz	a0, .LBB15_7
 .LBB15_3:                               # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	t0, %pcrel_lo(.Lpcrel_hi45)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi51)(a4)
 	mv	a7, a0
 	beqz	t0, .LBB15_5
 # %bb.4:                                # %stripmine
@@ -2999,25 +2897,25 @@ net_kernel_15_ct:                       # @net_kernel_15_ct
 	beqz	a0, .LBB16_7
 # %bb.1:                                # %stripmine.preheader
 	li	a2, 0
-.Lpcrel_hi48:
+.Lpcrel_hi54:
 	auipc	a3, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi50:
+.Lpcrel_hi56:
 	auipc	a5, %pcrel_hi(net_kernel_15_wt)
-.Lpcrel_hi49:
+.Lpcrel_hi55:
 	auipc	a4, %pcrel_hi(hwacha_vl_short)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi50)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi56)
 	j	.LBB16_3
 .LBB16_2:                               # %stripmine
                                         #   in Loop: Header=BB16_3 Depth=1
 	#APP
 	vsetvl a6, a7
 	#NO_APP
-	ld	t0, %pcrel_lo(.Lpcrel_hi49)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi55)(a4)
 	sltu	a7, a6, a7
 	sub	a0, a0, a6
 	or	a7, t0, a7
 	slli	t0, a6, 2
-	sd	a7, %pcrel_lo(.Lpcrel_hi49)(a4)
+	sd	a7, %pcrel_lo(.Lpcrel_hi55)(a4)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -3032,7 +2930,7 @@ net_kernel_15_ct:                       # @net_kernel_15_ct
 	beqz	a0, .LBB16_7
 .LBB16_3:                               # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a7, %pcrel_lo(.Lpcrel_hi48)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi54)(a3)
 	mv	a6, a0
 	beqz	a7, .LBB16_5
 # %bb.4:                                # %stripmine
@@ -3082,25 +2980,25 @@ net_kernel_16_ct:                       # @net_kernel_16_ct
 	beqz	a0, .LBB17_7
 # %bb.1:                                # %stripmine.preheader
 	li	a2, 0
-.Lpcrel_hi51:
+.Lpcrel_hi57:
 	auipc	a3, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi53:
+.Lpcrel_hi59:
 	auipc	a5, %pcrel_hi(net_kernel_16_wt)
-.Lpcrel_hi52:
+.Lpcrel_hi58:
 	auipc	a4, %pcrel_hi(hwacha_vl_short)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi53)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi59)
 	j	.LBB17_3
 .LBB17_2:                               # %stripmine
                                         #   in Loop: Header=BB17_3 Depth=1
 	#APP
 	vsetvl a6, a7
 	#NO_APP
-	ld	t0, %pcrel_lo(.Lpcrel_hi52)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi58)(a4)
 	sltu	a7, a6, a7
 	sub	a0, a0, a6
 	or	a7, t0, a7
 	slli	t0, a6, 2
-	sd	a7, %pcrel_lo(.Lpcrel_hi52)(a4)
+	sd	a7, %pcrel_lo(.Lpcrel_hi58)(a4)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -3115,7 +3013,7 @@ net_kernel_16_ct:                       # @net_kernel_16_ct
 	beqz	a0, .LBB17_7
 .LBB17_3:                               # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a7, %pcrel_lo(.Lpcrel_hi51)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi57)(a3)
 	mv	a6, a0
 	beqz	a7, .LBB17_5
 # %bb.4:                                # %stripmine
@@ -3165,25 +3063,25 @@ net_kernel_17_ct:                       # @net_kernel_17_ct
 	beqz	a0, .LBB18_7
 # %bb.1:                                # %stripmine.preheader
 	li	a2, 0
-.Lpcrel_hi54:
+.Lpcrel_hi60:
 	auipc	a3, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi56:
+.Lpcrel_hi62:
 	auipc	a5, %pcrel_hi(net_kernel_17_wt)
-.Lpcrel_hi55:
+.Lpcrel_hi61:
 	auipc	a4, %pcrel_hi(hwacha_vl_short)
-	addi	a5, a5, %pcrel_lo(.Lpcrel_hi56)
+	addi	a5, a5, %pcrel_lo(.Lpcrel_hi62)
 	j	.LBB18_3
 .LBB18_2:                               # %stripmine
                                         #   in Loop: Header=BB18_3 Depth=1
 	#APP
 	vsetvl a6, a7
 	#NO_APP
-	ld	t0, %pcrel_lo(.Lpcrel_hi55)(a4)
+	ld	t0, %pcrel_lo(.Lpcrel_hi61)(a4)
 	sltu	a7, a6, a7
 	sub	a0, a0, a6
 	or	a7, t0, a7
 	slli	t0, a6, 2
-	sd	a7, %pcrel_lo(.Lpcrel_hi55)(a4)
+	sd	a7, %pcrel_lo(.Lpcrel_hi61)(a4)
 	#APP
 	vmca va0, a1
 	#NO_APP
@@ -3198,7 +3096,7 @@ net_kernel_17_ct:                       # @net_kernel_17_ct
 	beqz	a0, .LBB18_7
 .LBB18_3:                               # %stripmine
                                         # =>This Inner Loop Header: Depth=1
-	ld	a7, %pcrel_lo(.Lpcrel_hi54)(a3)
+	ld	a7, %pcrel_lo(.Lpcrel_hi60)(a3)
 	mv	a6, a0
 	beqz	a7, .LBB18_5
 # %bb.4:                                # %stripmine
@@ -3260,15 +3158,15 @@ net:                                    # @net
 	addi	a0, a0, -1984
 	call	malloc
 	sd	a0, 16(sp)                      # 8-byte Folded Spill
-.Lpcrel_hi57:
+.Lpcrel_hi63:
 	auipc	s0, %pcrel_hi(hwacha_group_size)
-.Lpcrel_hi58:
+.Lpcrel_hi64:
 	auipc	s1, %pcrel_hi(hwacha_grid_size)
 	addi	a1, a0, 63
 	li	s2, 256
 	andi	s5, a1, -64
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s2, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s2, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 256
 	mv	a1, s3
 	mv	a2, s5
@@ -3284,53 +3182,53 @@ net:                                    # @net
 	li	s11, 4
 	addi	a1, a0, 63
 	andi	s6, a1, -64
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s6
 	call	net_kernel_0_ct
 	li	a0, 96
 	call	malloc
 	mv	s4, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
 	addi	a0, a0, 63
 	andi	s8, a0, -64
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s6
 	mv	a2, s8
 	call	net_kernel_1_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s5
 	mv	a2, s8
 	call	net_kernel_2_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s8
 	mv	a2, s7
 	call	net_kernel_3_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s2, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s2, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 256
 	mv	a1, s5
 	mv	a2, s7
 	call	net_kernel_4_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s2, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s2, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 256
 	mv	a1, s5
 	call	net_kernel_5_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s5
 	mv	a2, s6
 	call	net_kernel_6_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s6
 	mv	a2, s7
@@ -3343,21 +3241,21 @@ net:                                    # @net
 	li	a0, 80
 	call	malloc
 	mv	s6, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
 	addi	a0, a0, 63
 	andi	s9, a0, -64
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s7
 	mv	a2, s9
 	call	net_kernel_8_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s8
 	call	net_kernel_9_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s3
 	mv	a2, s8
@@ -3365,56 +3263,56 @@ net:                                    # @net
 	li	a0, 80
 	call	malloc
 	mv	s7, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
 	addi	a0, a0, 63
 	andi	s10, a0, -64
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s8
 	mv	a2, s10
 	call	net_kernel_11_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s9
 	mv	a2, s8
 	call	net_kernel_12_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s11, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s11, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 4
 	mv	a1, s8
 	call	net_kernel_13_ct
 	li	a0, 1088
 	call	malloc
 	mv	s9, a0
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
 	addi	a0, a0, 63
 	andi	s11, a0, -64
-	sd	s2, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	s2, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 256
 	mv	a1, s3
 	mv	a2, s10
 	mv	a3, s11
 	call	net_kernel_14_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s2, %pcrel_lo(.Lpcrel_hi58)(s1)
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s2, %pcrel_lo(.Lpcrel_hi64)(s1)
 	li	a0, 256
 	mv	a1, s11
 	mv	a2, s8
 	call	net_kernel_15_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s2, %pcrel_lo(.Lpcrel_hi58)(s1)
-.Lpcrel_hi59:
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s2, %pcrel_lo(.Lpcrel_hi64)(s1)
+.Lpcrel_hi65:
 	auipc	a2, %pcrel_hi(.L__constant_4xf32_0)
-	addi	a2, a2, %pcrel_lo(.Lpcrel_hi59)
+	addi	a2, a2, %pcrel_lo(.Lpcrel_hi65)
 	li	a0, 256
 	mv	a1, s11
 	call	net_kernel_16_ct
-	sd	zero, %pcrel_lo(.Lpcrel_hi57)(s0)
-	sd	s2, %pcrel_lo(.Lpcrel_hi58)(s1)
-.Lpcrel_hi60:
+	sd	zero, %pcrel_lo(.Lpcrel_hi63)(s0)
+	sd	s2, %pcrel_lo(.Lpcrel_hi64)(s1)
+.Lpcrel_hi66:
 	auipc	a2, %pcrel_hi(.L__constant_4xf32)
-	addi	a2, a2, %pcrel_lo(.Lpcrel_hi60)
+	addi	a2, a2, %pcrel_lo(.Lpcrel_hi66)
 	li	a0, 256
 	mv	a1, s11
 	call	net_kernel_17_ct
@@ -3474,7 +3372,108 @@ hwacha_vl_short:
 	.quad	0                               # 0x0
 	.size	hwacha_vl_short, 8
 
+	.type	.Lnet_kernel_2_cpool,@object    # @net_kernel_2_cpool
+	.section	.rodata,"a",@progbits
+	.p2align	3, 0x0
+.Lnet_kernel_2_cpool:
+	.quad	312                             # 0x138
+	.quad	320                             # 0x140
+	.quad	328                             # 0x148
+	.quad	336                             # 0x150
+	.quad	344                             # 0x158
+	.quad	352                             # 0x160
+	.quad	360                             # 0x168
+	.quad	368                             # 0x170
+	.quad	376                             # 0x178
+	.quad	384                             # 0x180
+	.quad	392                             # 0x188
+	.quad	400                             # 0x190
+	.quad	408                             # 0x198
+	.quad	416                             # 0x1a0
+	.quad	424                             # 0x1a8
+	.quad	432                             # 0x1b0
+	.quad	440                             # 0x1b8
+	.quad	448                             # 0x1c0
+	.quad	456                             # 0x1c8
+	.quad	464                             # 0x1d0
+	.quad	472                             # 0x1d8
+	.quad	480                             # 0x1e0
+	.quad	488                             # 0x1e8
+	.quad	496                             # 0x1f0
+	.quad	504                             # 0x1f8
+	.size	.Lnet_kernel_2_cpool, 200
+
+	.type	.Lnet_kernel_2_spill,@object    # @net_kernel_2_spill
+	.local	.Lnet_kernel_2_spill
+	.comm	.Lnet_kernel_2_spill,8,8
+	.type	.Lnet_kernel_6_cpool,@object    # @net_kernel_6_cpool
+	.p2align	3, 0x0
+.Lnet_kernel_6_cpool:
+	.quad	312                             # 0x138
+	.quad	320                             # 0x140
+	.quad	328                             # 0x148
+	.quad	336                             # 0x150
+	.quad	344                             # 0x158
+	.quad	352                             # 0x160
+	.quad	360                             # 0x168
+	.quad	368                             # 0x170
+	.quad	376                             # 0x178
+	.quad	384                             # 0x180
+	.quad	392                             # 0x188
+	.quad	400                             # 0x190
+	.quad	408                             # 0x198
+	.quad	416                             # 0x1a0
+	.quad	424                             # 0x1a8
+	.quad	432                             # 0x1b0
+	.quad	440                             # 0x1b8
+	.quad	448                             # 0x1c0
+	.quad	456                             # 0x1c8
+	.quad	464                             # 0x1d0
+	.quad	472                             # 0x1d8
+	.quad	480                             # 0x1e0
+	.quad	488                             # 0x1e8
+	.quad	496                             # 0x1f0
+	.quad	504                             # 0x1f8
+	.size	.Lnet_kernel_6_cpool, 200
+
+	.type	.Lnet_kernel_6_spill,@object    # @net_kernel_6_spill
+	.local	.Lnet_kernel_6_spill
+	.comm	.Lnet_kernel_6_spill,8,8
+	.type	.Lnet_kernel_10_cpool,@object   # @net_kernel_10_cpool
+	.p2align	3, 0x0
+.Lnet_kernel_10_cpool:
+	.quad	156                             # 0x9c
+	.quad	160                             # 0xa0
+	.quad	164                             # 0xa4
+	.quad	168                             # 0xa8
+	.quad	172                             # 0xac
+	.quad	176                             # 0xb0
+	.quad	180                             # 0xb4
+	.quad	184                             # 0xb8
+	.quad	188                             # 0xbc
+	.quad	192                             # 0xc0
+	.quad	196                             # 0xc4
+	.quad	200                             # 0xc8
+	.quad	204                             # 0xcc
+	.quad	208                             # 0xd0
+	.quad	212                             # 0xd4
+	.quad	216                             # 0xd8
+	.quad	220                             # 0xdc
+	.quad	224                             # 0xe0
+	.quad	228                             # 0xe4
+	.quad	232                             # 0xe8
+	.quad	236                             # 0xec
+	.quad	240                             # 0xf0
+	.quad	244                             # 0xf4
+	.quad	248                             # 0xf8
+	.quad	252                             # 0xfc
+	.size	.Lnet_kernel_10_cpool, 200
+
+	.type	.Lnet_kernel_10_spill,@object   # @net_kernel_10_spill
+	.local	.Lnet_kernel_10_spill
+	.comm	.Lnet_kernel_10_spill,8,8
 	.type	hwacha_grid_size,@object        # @hwacha_grid_size
+	.bss
 	.weak	hwacha_grid_size
 	.p2align	3, 0x0
 hwacha_grid_size:
