@@ -116,6 +116,29 @@ def build(fn):
     def roll_idx(n, k): return (torch.arange(n) - k) % n            # index_select(i) = x[(i - k) mod n] = roll by k
     rcase('fftshift', lambda s, x: x.index_select(0, s.i0).index_select(1, s.i1), lambda s, x: fr.fftshift(x), R(5, 7), i0=roll_idx(5, 2), i1=roll_idx(7, 3))
     rcase('ifftshift', lambda s, x: x.index_select(0, s.i0).index_select(1, s.i1), lambda s, x: fr.ifftshift(x), R(5, 7), i0=roll_idx(5, -2), i1=roll_idx(7, -3))
+    # ---- torch.signal.windows (docs.pytorch.org/docs/2.14/signal.html): the window functions take no
+    # tensor, so every case windows a signal, net(x) = x * window(16) (4 rows of 16). The window is
+    # computed inside the exported graph (torch-mlir lowers the cos / sin / exp / pow / abs of the
+    # definitions); kaiser needs I0 (torch.i0 has no lowering), evaluated as its power series
+    # I0(z) = sum_k (z/2)^2k / (k!)^2 by Horner's rule (30 terms; beta = 12 -> z/2 <= 6).
+    import torch.signal.windows as W
+    M = 16
+    wins = {'bartlett': lambda: W.bartlett(M), 'blackman': lambda: W.blackman(M), 'cosine': lambda: W.cosine(M),
+            'exponential': lambda: W.exponential(M, tau=3.0), 'gaussian': lambda: W.gaussian(M, std=3.0),
+            'general_cosine': lambda: W.general_cosine(M, a=[0.42, 0.5, 0.08]), 'general_hamming': lambda: W.general_hamming(M, alpha=0.6),
+            'hamming': lambda: W.hamming(M), 'hann': lambda: W.hann(M), 'nuttall': lambda: W.nuttall(M)}
+    for n, w in wins.items(): case(n, (lambda w: lambda s, x: x * w())(w), R(4, M))
+    beta = 12.0
+    def i0_series(t, K=30):   # t = (z/2)^2; sum_k t^k / (k!)^2 = 1 + t/1^2 (1 + t/2^2 (1 + ...))
+        acc = torch.ones_like(t)
+        for k in range(K, 0, -1): acc = 1 + acc * t / float(k * k)
+        return acc
+    i0_beta = float(torch.i0(torch.tensor(beta, dtype=torch.float64)))
+    def kaiser_body(s, x):
+        r = (s.n - (M - 1) / 2) / ((M - 1) / 2)                          # -1 .. 1 across the window
+        t = (beta / 2) ** 2 * (1 - r * r)                                # (z/2)^2 with z = beta sqrt(1 - r^2)
+        return x * (i0_series(t) / i0_beta)
+    rcase('kaiser', kaiser_body, lambda s, x: x * W.kaiser(M, beta=beta), R(4, M), n=torch.arange(M).float())
     if fn == '--list': return sorted(C)
     if fn not in C: raise SystemExit('unknown function ' + fn)
     return C[fn]()

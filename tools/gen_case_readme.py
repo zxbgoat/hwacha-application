@@ -457,6 +457,11 @@ elif d == 'torchintf':
                'F = C - iS（正变换）或 (C + iS) / N（逆变换），C、S = cos / sin(2πnk/N)。rfft 取前 N/2+1 列；irfft 是带厄米权重 (1, 2, ..., 2, 1) / N 的 C2R 求和；'
                'hfft(x) = N·irfft(conj x)，ihfft(x) = conj(rfft x) / N（n 维同理，N 为各维长度之积）。矩阵在 float64 里生成再转 float32。')
     rewritten = {f: fftnote for f in ('fft', 'ifft', 'rfft', 'irfft', 'hfft', 'ihfft', 'fft2', 'ifft2', 'rfft2', 'irfft2', 'hfft2', 'ihfft2', 'fftn', 'ifftn', 'rfftn', 'irfftn', 'hfftn', 'ihfftn')}
+    wincalls = {'bartlett': 'bartlett(16)', 'blackman': 'blackman(16)', 'cosine': 'cosine(16)', 'exponential': 'exponential(16, tau=3.0)', 'gaussian': 'gaussian(16, std=3.0)',
+                'general_cosine': 'general_cosine(16, a=[0.42, 0.5, 0.08])', 'general_hamming': 'general_hamming(16, alpha=0.6)', 'hamming': 'hamming(16)', 'hann': 'hann(16)',
+                'kaiser': 'kaiser(16, beta=12.0)', 'nuttall': 'nuttall(16)'}
+    for w, c in wincalls.items(): calls[w] = (f'x * torch.signal.windows.{c}', '给 4 行、长 16 的信号加窗；窗函数没有张量输入，窗在导出图里按定义计算（cos / sin / exp / pow / abs 在 Hwacha 上求值）')
+    rewritten['kaiser'] = '`torch.i0`（零阶修正贝塞尔函数）在 torch-mlir 中没有 lowering。导出图用幂级数 I0(z) = Σ_k (z/2)^{2k} / (k!)^2 按 Horner 法则算 30 项（beta = 12 时 z/2 <= 6，float32 下与 torch.i0 相差 < 1e-6），分母 I0(beta) 是常量。'
     rewritten['fftfreq'] = rewritten['rfftfreq'] = '`aten.fft_fftfreq` / `aten.fft_rfftfreq` 在 torch-mlir 中没有 lowering。频率向量本就是常量，导出图把它作为 buffer 加到输入上。'
     rewritten['fftshift'] = rewritten['ifftshift'] = '`torch.roll` 会 lower 成 slice + concat；导出图用常量下标向量的 `index_select` 逐维做同样的循环移位。'
     rewritten['topk'] = '`aten.topk` 在 torch-mlir 中 lower 成 `tm_tensor.sort`，hwacha-mlir 不接受（与 `../torchfunc` 的 fold / max_unpool 同一限制）。导出图用等价的 linalg 组合：每个元素的名次 = 本行中严格大于它的元素个数（随机数据无并列），名次为 i 的元素用 one-hot 求和选出：`values_i = sum_j x_j [rank_j == i]`，`indices_i = sum_j j [rank_j == i]`。每行 O(N^2) 次比较而不是排序，值与下标都精确。'
@@ -466,7 +471,7 @@ elif d == 'torchintf':
         with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
         call, note = calls.get(case, (f'torch.{case}(x)', ''))
         t = f'# {case}\n\n'
-        qual = f'fft.{case}' if case in rewritten and rewritten[case] is fftnote or case in ('fftshift', 'ifftshift', 'fftfreq', 'rfftfreq') else case
+        qual = f'fft.{case}' if case in rewritten and rewritten[case] is fftnote or case in ('fftshift', 'ifftshift', 'fftfreq', 'rfftfreq') else f'signal.windows.{case}' if case in wincalls else case
         t += f'`torch.{qual}` 的单函数测试，一次调用，与 PyTorch 逐元素比对。文档：{docs % qual}\n\n'
         t += f'调用：`{call}`' + (f'（{note}）' if note else '') + '\n\n'
         if case in rewritten: t += f'**注意**：本 case 的导出图与参考不是同一段代码。{rewritten[case]} `check.bin` 中的参考值仍由真正的 `torch.{qual}` 算出，导出前脚本断言两者一致。\n\n'

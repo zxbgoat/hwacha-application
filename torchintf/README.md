@@ -14,7 +14,7 @@ mlir-opt and the torch-mlir venv `../.tmenv`), `make gen-all` every missing one.
 Every case is a single-input module `net(x)` returning one float tensor: second operands are constant
 buffers, integer results (indices) are cast to float.
 
-## Cases: 23, all PASS
+## Cases: 34, all PASS
 
 | function | call | input | output | Hwacha |
 |---|---|---|---|---|
@@ -42,6 +42,18 @@ buffers, integer results (indices) are cast to float.
 | fftshift | `torch.fft.fftshift(x)` | 5x7 | 5x7 | PASS, max\|diff\| 0, 171 周期 |
 | ifftshift | `torch.fft.ifftshift(x)` | 5x7 | 5x7 | PASS, max\|diff\| 0, 171 周期 |
 
+| bartlett | `x * torch.signal.windows.bartlett(16)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 655 周期 |
+| blackman | `x * torch.signal.windows.blackman(16)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 1,008 周期 |
+| cosine | `x * torch.signal.windows.cosine(16)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 667 周期 |
+| exponential | `x * torch.signal.windows.exponential(16, tau=3.0)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 729 周期 |
+| gaussian | `x * torch.signal.windows.gaussian(16, std=3.0)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 731 周期 |
+| general_cosine | `x * torch.signal.windows.general_cosine(16, a=[0.42, 0.5, 0.08])` | 4x16 | 4x16 | PASS, max\|diff\| 0, 1,008 周期 |
+| general_hamming | `x * torch.signal.windows.general_hamming(16, alpha=0.6)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 959 周期 |
+| hamming | `x * torch.signal.windows.hamming(16)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 959 周期 |
+| hann | `x * torch.signal.windows.hann(16)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 959 周期 |
+| kaiser | `x * torch.signal.windows.kaiser(16, beta=12.0)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 3,781 周期 |
+| nuttall | `x * torch.signal.windows.nuttall(16)` | 4x16 | 4x16 | PASS, max\|diff\| 0, 1,033 周期 |
+
 `[a\|b]`: a complex tensor, real and imaginary parts concatenated along the last dim.
 
 **topk**: `aten.topk` lowers in torch-mlir to `tm_tensor.sort`, which hwacha-mlir does not take (the
@@ -65,3 +77,10 @@ agree before exporting. `fftfreq` / `rfftfreq` have no torch-mlir lowering (`ate
 rejected): the vector is a constant buffer added to the input. `fftshift` / `ifftshift` use
 `index_select` with constant index vectors instead of `torch.roll` (slice + concat); 5x7 so the two
 differ.
+
+**torch.signal.windows** (docs.pytorch.org/docs/2.14/signal.html, all 11 window functions): a window
+takes no tensor, so every case windows a signal, `x * window(16)`. The window is computed inside the
+exported graph from its definition (torch-mlir lowers the cos / sin / exp / pow / abs, hwacha-cc
+expands them on the lanes). `kaiser` needs I0, and `torch.i0` has no lowering: the exported graph
+evaluates the power series I0(z) = sum_k (z/2)^2k / (k!)^2 by Horner's rule (30 terms, within 1e-6 of
+`torch.i0` at beta = 12); the reference is the genuine `kaiser`.
