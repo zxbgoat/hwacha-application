@@ -18,10 +18,12 @@ C 参考实现比对并打印两侧周期数。
 | gemm-fp16 | gemm_bench "half"（GemmEx 16F 输入输出、32F 计算） | `gemm_nn/tn/nt`（vlxh + vfcvt.s.h、vfmadd.s、vfcvt.h.s），`gemm_nn_h`（纯 vfmadd.h） | 与 gemm 相同的 6 个 + 2 个纯半精度 | PASS（精确） |
 | conv-fp16 | conv_bench "half"（CUDNN_DATA_HALF 张量，float 计算） | `conv_fwd`, `conv_bwd_data`, `conv_bwd_filter` | 与 conv 相同的 5 层 | PASS（精确） |
 | rnn-lstm-fp16 | rnn_bench "lstm" "half"（half 张量与状态，float 门运算） | `lstm_step` | 与 rnn-lstm 相同的 3 个 | PASS（4e-3） |
+| rnn-vanilla-fp16 | rnn_bench "vanilla" "half"（half 张量与状态，float 运算） | `rnn_relu_step` | 与 rnn-vanilla 相同的 3 个 | PASS（精确） |
+| rnn-gru-fp16 | rnn_bench "gru" "half"（half 张量与状态，float 门运算） | `gru_step` | 与 rnn-gru 相同的 3 个 | PASS（4e-3） |
 
 未迁移：**all-reduce**（`all_reduce_problems.h`，NCCL / MPI 的多设备归约，单个 Hwacha 上没有对应物）；RNN
-只有前向（DeepBench 的 inference 模式；training 模式还计 cudnnRNNBackwardData / Weights）；fp16 只做了
-GEMM、卷积和 LSTM 各一个 case（vanilla / GRU 与 LSTM 走同一条 half 路径）。
+只有前向（DeepBench 的 inference 模式；training 模式还计 cudnnRNNBackwardData / Weights）。fp16 覆盖 GEMM、
+卷积和三种 RNN。
 
 **半精度**：Hwacha 有完整的 half 指令（`vfadd.h` / `vfmadd.h` / `vfcvt.s.h` / `vfcvt.h.s`、混合精度的
 `vfmadd.s.h`），hwacha-cc 对 OpenCL `half`（`cl_khr_fp16`，Makefile 的 CLFLAGS 已开启）生成 `vlxh` +

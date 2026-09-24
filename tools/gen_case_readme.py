@@ -319,6 +319,8 @@ elif d == 'deepbench':
             'gemm-fp16': ('GEMM（fp16）', 'gemm_bench "half" 精度：cublasGemmEx 16F 输入输出、32F 计算（DeepBench 的 "FP16 inputs / FP32 math"）；内核 gemm_nn / gemm_tn / gemm_nt 用 vlxh + vfcvt.s.h 装载、vfmadd.s 累加、vfcvt.h.s 一次舍入写回；gemm_nn_h 是纯半精度算术（vfmadd.h，每步一次舍入），参考按同样的舍入建模，全部精确', '与 gemm 相同的 6 个形状，另加 2 个纯半精度算术'),
             'conv-fp16': ('卷积（fp16）', 'conv_bench "half" 精度：CUDNN_DATA_HALF 张量、float 计算；与 conv 相同的三个方向，半精度装载、单精度累加、写回时一次舍入', '与 conv 相同的 5 个层'),
             'rnn-lstm-fp16': ('LSTM（fp16）', 'rnn_bench "lstm" 的 "half" 精度：x / R / b / h / c 都是 half，门运算在 float 中进行，h_t / c_t 以 half 存回（下一步读回时已量化，与 cuDNN 的 half 状态一致）', '与 rnn-lstm 相同的 3 个形状'),
+            'rnn-vanilla-fp16': ('vanilla RNN（fp16）', 'rnn_bench "vanilla" 的 "half" 精度：x / R / b / h 都是 half，ReLU 单元的运算在 float 中进行，h_t 以 half 存回；比对精确', '与 rnn-vanilla 相同的 3 个形状'),
+            'rnn-gru-fp16': ('GRU（fp16）', 'rnn_bench "gru" 的 "half" 精度：x / R / bW / bR / h 都是 half，门运算在 float 中进行，h_t 以 half 存回', '与 rnn-gru 相同的 3 个形状'),
             'sparse-gemm': ('稀疏 GEMM', 'sparse_bench：cusparseScsrmm，A 为 CSR（稀疏度 0.9 / 0.95，按 DeepBench 的方式由均匀随机数阈值化生成）、B 稠密，alpha = 1/k、beta = 0；内核 csrmm 每个 C 元素一个 work-item，沿行的非零元循环', 'inference server / device 集的 5 个形状缩小 32–64 倍')}
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
