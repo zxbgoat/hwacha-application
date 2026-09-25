@@ -16,6 +16,7 @@ from torch_mlir import fx
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from intf_ops import add_ops
 from intf_utils import add_utils
+from intf_io import add_io
 
 class Case(nn.Module):
     def __init__(s, body, **bufs):
@@ -23,7 +24,7 @@ class Case(nn.Module):
         for k, v in bufs.items(): s.register_buffer(k, v)
     def forward(s, x): return s.body(s, x)
 class Ref(Case):
-    def __init__(s, body, ref, **bufs): super().__init__(body, **bufs); s.ref = ref
+    def __init__(s, body, ref, _atol=1e-4, **bufs): super().__init__(body, **bufs); s.ref = ref; s.atol = _atol   # _atol: agreement with a codec's integer arithmetic
     def reference(s, x): return s.ref(s, x)
 
 def rgb_to_hsv(x):
@@ -130,6 +131,8 @@ def build(name):
     add_ops(case, rcase, lambda *sh: torch.randn(*sh))
     # ---- torchvision.utils (docs.pytorch.org/vision/stable/utils.html): intf_utils.py
     add_utils(case, rcase, lambda *sh: torch.randn(*sh))
+    # ---- torchvision.io (docs.pytorch.org/vision/stable/io.html): intf_io.py
+    add_io(case, rcase, lambda *sh: torch.randn(*sh))
     if name == '--list': return sorted(C)
     if name not in C: raise SystemExit('unknown case ' + name)
     return C[name]()
@@ -139,7 +142,7 @@ if __name__ == '__main__':
     name, mlir_out, bin_out = sys.argv[1:4]
     m, x = build(name); m = m.eval()
     with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
-    with torch.no_grad(): assert torch.allclose(m(x), y, atol=1e-4, rtol=1e-4), 'exported body != reference'
+    with torch.no_grad(): assert torch.allclose(m(x), y, atol=getattr(m, 'atol', 1e-4), rtol=1e-4), 'exported body != reference'
     print('%s: in %s -> out %s' % (name, list(x.shape), list(y.shape)))
     mod = fx.export_and_import(m, x, output_type='linalg-on-tensors', func_name='net')
     open(mlir_out, 'w').write(str(mod))

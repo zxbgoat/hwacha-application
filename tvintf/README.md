@@ -1,9 +1,9 @@
-# torchvision.transforms.v2, torchvision.ops and torchvision.utils on Hwacha
+# torchvision.transforms.v2, torchvision.ops, torchvision.utils and torchvision.io on Hwacha
 
 The image transforms of docs.pytorch.org/vision/stable/transforms.html (v2 API, torchvision 0.24), one
 case per transform, run through PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc and checked on Spike
 against PyTorch (fixed seed). Layout, generic host, `gen.sh` and Makefile are those of `../torchintf`;
-the transform cases live in `export_tvi.py`, the operator cases in `intf_ops.py`, the utility cases in `intf_utils.py`. Every case is a single-input module `net(x)` on a 3x16x16 float image
+the transform cases live in `export_tvi.py`, the operator cases in `intf_ops.py`, the utility cases in `intf_utils.py`, the io cases in `intf_io.py`. Every case is a single-input module `net(x)` on a 3x16x16 float image
 in [0, 1] (a 3x24x24 one, a pair or an 8-frame clip where the transform wants it) returning one float
 tensor.
 
@@ -166,3 +166,36 @@ overlap rule and the alpha blend; `flow_to_image` normalises by the maximum norm
 atan with quadrant fix-ups (no atan2 lowering) and looks the colour wheel up by one-hot;
 `make_grid(normalize=True)` clamps with the tensor's own min / max as python numbers (data
 dependent), rewritten as the same per-image normalisation in tensor ops.
+
+## torchvision.io: 8 cases, all PASS
+
+The page is codecs and file I/O (docs.pytorch.org/vision/stable/io.html); the cases cover what is
+computation: the baseline JPEG encode / decode, the decoders' `ImageReadMode` conversions and the
+lossless PNG round trip, on 3x16x16 uint8 images (carried as 0..255 floats). The reference is the
+genuine codec call on the encoded bytes.
+
+| case | io entry | Hwacha |
+|---|---|---|
+| encode_decode_jpeg | `encode_jpeg + decode_jpeg` | PASS, max\|diff\| 1, 9,718 周期 |
+| encode_decode_jpeg_noise | `encode_jpeg + decode_jpeg` | PASS, max\|diff\| 2, 9,718 周期 |
+| decode_jpeg_gray | `decode_jpeg(mode=GRAY)` | PASS, max\|diff\| 1, 2,032 周期 |
+| encode_decode_png | `encode_png + decode_png` | PASS, max\|diff\| 0, 74 周期 |
+| decode_png_gray | `decode_png(mode=GRAY)` | PASS, max\|diff\| 0, 380 周期 |
+| decode_png_rgb_alpha | `decode_png(mode=RGB_ALPHA)` | PASS, max\|diff\| 0, 123 周期 |
+| decode_image_rgb | `decode_image(mode=RGB)` | PASS, max\|diff\| 0, 101 周期 |
+| write_png_read_image | `write_png + read_image` | PASS, max\|diff\| 0, 380 周期 |
+
+**JPEG** (`encode_jpeg` / `decode_jpeg` are libjpeg, no lowering): the exported graph is a tensor
+re-implementation of libjpeg's baseline pipeline at quality 75 with 4:2:0 subsampling: the 16-bit
+fixed-point RGB -> YCbCr, h2v2 chroma downsampling with libjpeg's alternating 1 / 2 rounding bias,
+8x8 DCT as a matmul with the orthonormal DCT matrix, the standard quantisation tables scaled for
+quality 75, round-half-away quantisation, dequantisation and IDCT, the "fancy" triangle chroma
+upsampling (3:1 weights, 8 / 7 bias) and YCbCr -> RGB. libjpeg uses integer-approximated ("islow")
+DCTs, the export float ones, so the two agree to within 2 levels of 255 (checked on a smooth image and
+on noise; the export script's assertion uses a tolerance of 2.5 for these cases, the host tolerance
+is 2.55). **PNG** is lossless: the round trip is the identity; `mode=GRAY` is libpng's conversion as
+torchvision configures it, fitted exactly against `decode_png` on random images (15-bit fixed-point
+weights 9794 / 19234 / 3740, truncating); `RGB_ALPHA` appends an opaque plane, `RGB` on a gray image
+replicates it. Not cases: `read_file` / `write_file` (bytes), `decode_gif` / `webp` / `avif` / `heic`
+(codecs without a tensor counterpart at this level), the video functions and `VideoReader`
+(ffmpeg / PyAV), `ImageReadMode` itself (an enum).

@@ -755,19 +755,32 @@ elif d == 'tvintf':
               'draw_segmentation_masks': ('draw_segmentation_masks', '2 个重叠的掩码、alpha 0.6，两种颜色', 'torchvision 通过布尔索引赋值（无 lowering）；导出图按同一规则：每个掩码涂色、重叠像素置 0、再与原图按 alpha 混合并截断'),
               'draw_keypoints': ('draw_keypoints', '3 个关键点、radius 2、红色实心圆', 'draw_keypoints 用 PIL 的 ellipse 光栅化；导出图在坐标网格上填充 d² <= (r + 0.5)² 的像素，与 PIL 在 radius 2（和 3）下逐像素一致（radius 1、4 时 PIL 的光栅化不同，本用例未覆盖）'),
               'flow_to_image': ('flow_to_image', '1x2x8x8 的光流 -> uint8 彩色图', 'flow_to_image 用 atan2 和整数下标查色轮；导出图按同一算法：按最大范数归一、atan2 由 atan 加象限修正得到、色轮的两个相邻条目用 one-hot 查表后线性插值、按范数向白色淡化、截断')}
+    iodocs = 'https://docs.pytorch.org/vision/stable/generated/torchvision.io.%s.html'
+    jpegnote = ('encode_jpeg / decode_jpeg 是 libjpeg（C++ 算子），没有 lowering。导出图是张量实现的 baseline JPEG 往返：libjpeg 的 16 位定点 RGB->YCbCr、h2v2 色度下采样（2x2 求和加交替的 1/2 偏置后 >> 2）、'
+                '8x8 DCT 用正交 DCT 矩阵的矩阵乘、quality 75 的标准量化表、系数四舍五入（远离零）、反量化与 IDCT、四舍五入并截断、色度的 "fancy" 三角滤波上采样（3:1 权重加 8/7 偏置）、YCbCr->RGB。'
+                'libjpeg 用整数近似的 islow DCT，导出图用浮点 DCT，两者相差不超过 2 级（host 容差 2.55）；导出前的断言容差为 2.5')
+    ioinfo = {'encode_decode_jpeg': ('encode_jpeg', '3x16x16 的平滑图（渐变加纹理）：decode_jpeg(encode_jpeg(x, quality=75))', jpegnote),
+              'encode_decode_jpeg_noise': ('decode_jpeg', '3x16x16 的随机噪声图：decode_jpeg(encode_jpeg(x, quality=75))（最难的输入，仍在 2 级以内）', jpegnote),
+              'decode_jpeg_gray': ('decode_jpeg', 'decode_jpeg(encode_jpeg(x), mode=GRAY)：解码得到的 Y 平面', jpegnote + '；GRAY 模式即解码后的亮度平面'),
+              'encode_decode_png': ('encode_png', 'decode_png(encode_png(x))：无损往返', 'PNG 无损：导出图是恒等映射（libpng 的 DEFLATE 编解码没有张量对应物）'),
+              'decode_png_gray': ('decode_png', 'decode_png(encode_png(x), mode=GRAY)', 'libpng 的 RGB->灰度按 torchvision 配置的 0.2989 / 0.5870 权重以 15 位定点截断计算：floor((9794 R + 19234 G + 3740 B) / 32768)，在随机图上与 decode_png 逐像素拟合确认'),
+              'decode_png_rgb_alpha': ('decode_png', 'decode_png(encode_png(x), mode=RGB_ALPHA)：补一个全 255 的 alpha 平面', 'RGB_ALPHA 模式给不带 alpha 的图补不透明的 alpha 平面'),
+              'decode_image_rgb': ('decode_image', '单通道 PNG 以 mode=RGB 解码：灰度复制到 3 个通道', 'RGB 模式对灰度图是通道复制'),
+              'write_png_read_image': ('read_image', 'write_png 写到临时文件后 read_image(mode=GRAY) 读回', '同 decode_png_gray 的灰度转换；文件读写本身没有张量计算')}
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
-        isop = case in opsinfo; isut = case in utinfo
-        cls, what, note = opsinfo[case] if isop else utinfo[case] if isut else info.get(case, (case, '', ''))
+        isop = case in opsinfo; isut = case in utinfo; isio = case in ioinfo
+        cls, what, note = opsinfo[case] if isop else utinfo[case] if isut else ioinfo[case] if isio else info.get(case, (case, '', ''))
         m, x = ef.build(case); m = m.eval()
         with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
         t = f'# {case}\n\n'
         if isop: t += f'torchvision 的 `torchvision.ops.{cls}` 在 Hwacha 上的一次调用，与 PyTorch 逐元素比对。文档：{opsdocs % cls}\n\n'
         elif isut: t += f'torchvision 的 `torchvision.utils.{cls}` 在 Hwacha 上的一次调用，与 PyTorch 逐元素比对。文档：{utdocs % cls}\n\n'
+        elif isio: t += f'torchvision 的 `torchvision.io.{cls}` 在 Hwacha 上的一次调用，与 PyTorch 逐元素比对。文档：{iodocs % cls}\n\n'
         else: t += f'torchvision 的 `torchvision.transforms.v2.{cls}` 在 Hwacha 上的一次应用，与 PyTorch 逐元素比对。文档：{docs % cls}\n\n'
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchvision 调用算出，导出前脚本断言两者一致。\n\n'
-        t += ('来源：`export_tvi.py` / `intf_ops.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isop else '来源：`export_tvi.py` / `intf_utils.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isut else '来源：`export_tvi.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机 3x16x16 的 [0, 1] 图像、固定种子。\n\n')
+        t += ('来源：`export_tvi.py` / `intf_ops.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isop else '来源：`export_tvi.py` / `intf_utils.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isut else '来源：`export_tvi.py` / `intf_io.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子；像素以 0..255 的 float 进出。\n\n' if isio else '来源：`export_tvi.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机 3x16x16 的 [0, 1] 图像、固定种子。\n\n')
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
