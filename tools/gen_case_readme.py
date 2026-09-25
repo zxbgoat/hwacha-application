@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / torchvision / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchvision / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -678,6 +678,54 @@ elif d == 'ttmodel':
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchtune 前向算出，导出前脚本断言两者一致。\n\n'
         t += '来源：`export_ttm.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机权重与输入、固定种子。带尺寸的构建函数（7b、0.5b …）是同一组件构建函数加固定超参数，远超 Spike 的规模，这里用微型尺寸实例化同一架构。\n\n'
+        t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
+        has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
+        t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认"}`\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
+elif d == 'tvintf':
+    ef = load(os.path.join(D, 'export_tvi.py'), 'ef')
+    docs = 'https://docs.pytorch.org/vision/stable/generated/torchvision.transforms.v2.%s.html'
+    pinned = '随机变换在 forward 里抽参数、掷是否应用的硬币（即使 p=1、范围退化，对 torch.export 也是数据相关），因此固定为该类实际调用的 functional 算子和一次抽样'
+    info = {   # case -> (class, what the case does, note)
+        'resize': ('Resize', 'Resize(8)：最短边到 8（16x16 -> 8x8），双线性、无抗锯齿', ''), 'resize_bilinear': ('Resize', 'Resize((24, 24), BILINEAR)：放大到 24x24', ''),
+        'center_crop': ('CenterCrop', 'CenterCrop(8)', ''), 'random_crop': ('RandomCrop', 'RandomCrop(8) 的一次抽样：F.crop(x, top=3, left=5, 8, 8)', pinned),
+        'random_resized_crop': ('RandomResizedCrop', 'RandomResizedCrop(16) 的一次抽样：F.resized_crop(2, 3, 10, 12 -> 16x16, BILINEAR)', pinned),
+        'random_horizontal_flip': ('RandomHorizontalFlip', 'F.horizontal_flip', pinned), 'random_vertical_flip': ('RandomVerticalFlip', 'F.vertical_flip', pinned),
+        'pad': ('Pad', 'Pad(2)：常数 0 填充到 20x20', ''), 'pad_reflect': ('Pad', 'Pad(3, padding_mode="reflect")：反射填充到 22x22', ''),
+        'random_zoom_out': ('RandomZoomOut', 'RandomZoomOut 的一次抽样：F.pad(x, [4, 2, 3, 5], fill=0.5)', pinned),
+        'random_rotation': ('RandomRotation', 'RandomRotation(30) 的一次抽样：F.rotate(x, 30°, BILINEAR)', pinned), 'random_rotation_nearest': ('RandomRotation', 'F.rotate(x, 45°, NEAREST)', pinned),
+        'random_affine': ('RandomAffine', 'RandomAffine 的一次抽样：F.affine(angle 15°, scale 1.2, shear 10°, BILINEAR)', pinned),
+        'random_perspective': ('RandomPerspective', 'RandomPerspective 的一次抽样：四角 [(0,0),(15,0),(0,15),(15,15)] -> [(1,2),(13,1),(2,14),(14,12)]，BILINEAR', pinned + '。8 个透视系数的最小二乘（aten.linalg_lstsq 没有 lowering）在 host 上解出，以 coefficients 传入'),
+        'elastic_transform': ('ElasticTransform', 'ElasticTransform 的一次位移场抽样（1x16x16x2，σ 0.05），BILINEAR', pinned),
+        'five_crop': ('FiveCrop', 'FiveCrop(8)：四角 + 中心，堆叠为 5x3x8x8', ''), 'ten_crop': ('TenCrop', 'TenCrop(8)：FiveCrop 及其水平翻转，10x3x8x8', ''),
+        'random_iou_crop': ('RandomIoUCrop', 'RandomIoUCrop 一次被接受的抽样对应的裁剪：F.crop(4, 2, 10, 12)（框的筛选不导出）', pinned),
+        'random_resize': ('RandomResize', 'RandomResize(12, 12)：F.resize 到 12x12', pinned), 'random_shortest_size': ('RandomShortestSize', 'RandomShortestSize(12) 在 24x24 图上的一次抽样：F.resize 到 12x12', pinned),
+        'scale_jitter': ('ScaleJitter', 'ScaleJitter 的一次抽样（比例 1.25）：F.resize 到 20x20', pinned),
+        'color_jitter': ('ColorJitter', 'ColorJitter 的一次抽样按类的顺序：brightness 1.3 -> contrast 0.8 -> saturation 1.4 -> hue 0.1', pinned + '。F.adjust_hue 的 RGB<->HSV 在 torch-mlir 的 lowering 中失败（arith.cmpi 操作数类型不一致）；导出图用无原地操作、无 aminmax 的同一公式（select 用 one-hot 而不是 gather）重写 rgb_to_hsv / hsv_to_rgb'),
+        'grayscale': ('Grayscale', 'Grayscale()：1 通道', ''), 'grayscale_3ch': ('Grayscale', 'Grayscale(num_output_channels=3)', ''), 'random_grayscale': ('RandomGrayscale', 'F.rgb_to_grayscale(x, 3)', pinned),
+        'rgb': ('RGB', 'RGB()：单通道图扩成 3 通道', ''), 'random_channel_permutation': ('RandomChannelPermutation', 'F.permute_channels(x, [2, 0, 1]) 的一次抽样', pinned),
+        'random_photometric_distort': ('RandomPhotometricDistort', 'RandomPhotometricDistort 的一次抽样：brightness 0.9 -> contrast 1.3 -> saturation 0.7 -> hue -0.05', pinned + '。adjust_hue 同 color_jitter 的重写'),
+        'random_adjust_sharpness': ('RandomAdjustSharpness', 'F.adjust_sharpness(x, 2.0)', pinned), 'random_autocontrast': ('RandomAutocontrast', 'F.autocontrast', pinned + '。F.autocontrast 的导出含 tm_tensor.scan / scatter（索引赋值）；导出图用同一公式 (x - min) / (max - min)、torch.where 处理 max == min'),
+        'random_equalize': ('RandomEqualize', 'F.equalize 作用于 uint8 图（x·255），结果除以 255', pinned + '。equalize 的 scatter_add 直方图导出时崩溃；导出图按 torchvision 的算法重写：one-hot 计数得 256 bin 直方图、上三角矩阵乘得累计直方图、step 规则得 LUT、one-hot 查表；整数除法用 float32 上的精确 floor'),
+        'random_invert': ('RandomInvert', 'F.invert', pinned), 'random_posterize': ('RandomPosterize', 'F.posterize(x·255 as uint8, bits=3) / 255', pinned), 'random_solarize': ('RandomSolarize', 'F.solarize(x, 0.5)', pinned),
+        'gaussian_blur': ('GaussianBlur', 'GaussianBlur(5, sigma=1.5)：F.gaussian_blur', 'GaussianBlur 在 forward 里抽 sigma（数据相关）；固定为 F.gaussian_blur(kernel 5, sigma 1.5)'),
+        'gaussian_noise': ('GaussianNoise', 'GaussianNoise(sigma=0.1) 的一次噪声抽样：x + 0.1·n，n 为常量', pinned), 'random_erasing': ('RandomErasing', 'RandomErasing 的一次框抽样：F.erase(3, 4, 6, 7, v=0)', pinned),
+        'normalize': ('Normalize', 'Normalize(ImageNet mean / std)', ''), 'linear_transformation': ('LinearTransformation', '768x768 随机变换矩阵与均值向量', ''),
+        'cutmix': ('CutMix', 'CutMix 的一次框抽样：2 张图，框 [4:12, 2:10] 换成另一张（标签混合不导出）', pinned), 'mixup': ('MixUp', 'MixUp，λ = 0.7：0.7·x + 0.3·x.flip(0)（标签混合不导出）', pinned),
+        'uniform_temporal_subsample': ('UniformTemporalSubsample', 'UniformTemporalSubsample(4) 作用于 8 帧视频', '')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        cls, what, note = info.get(case, (case, '', ''))
+        m, x = ef.build(case); m = m.eval()
+        with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
+        t = f'# {case}\n\n'
+        t += f'torchvision 的 `torchvision.transforms.v2.{cls}` 在 Hwacha 上的一次应用，与 PyTorch 逐元素比对。文档：{docs % cls}\n\n'
+        t += f'用例：{what}。\n\n'
+        if note: t += f'**注意**：{note}。参考值由真正的 torchvision 调用算出，导出前脚本断言两者一致。\n\n'
+        t += '来源：`export_tvi.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机 3x16x16 的 [0, 1] 图像、固定种子。\n\n'
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
