@@ -15,6 +15,7 @@ from torchvision.transforms import InterpolationMode
 from torch_mlir import fx
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from intf_ops import add_ops
+from intf_utils import add_utils
 
 class Case(nn.Module):
     def __init__(s, body, **bufs):
@@ -127,6 +128,8 @@ def build(name):
     case('uniform_temporal_subsample', lambda s, x: T.UniformTemporalSubsample(4)(x), torch.rand(8, 3, 8, 8))
     # ---- torchvision.ops (docs.pytorch.org/vision/stable/ops.html): intf_ops.py
     add_ops(case, rcase, lambda *sh: torch.randn(*sh))
+    # ---- torchvision.utils (docs.pytorch.org/vision/stable/utils.html): intf_utils.py
+    add_utils(case, rcase, lambda *sh: torch.randn(*sh))
     if name == '--list': return sorted(C)
     if name not in C: raise SystemExit('unknown case ' + name)
     return C[name]()

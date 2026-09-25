@@ -1,9 +1,9 @@
-# torchvision.transforms.v2 and torchvision.ops on Hwacha
+# torchvision.transforms.v2, torchvision.ops and torchvision.utils on Hwacha
 
 The image transforms of docs.pytorch.org/vision/stable/transforms.html (v2 API, torchvision 0.24), one
 case per transform, run through PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc and checked on Spike
 against PyTorch (fixed seed). Layout, generic host, `gen.sh` and Makefile are those of `../torchintf`;
-the transform cases live in `export_tvi.py`, the operator cases in `intf_ops.py`. Every case is a single-input module `net(x)` on a 3x16x16 float image
+the transform cases live in `export_tvi.py`, the operator cases in `intf_ops.py`, the utility cases in `intf_utils.py`. Every case is a single-input module `net(x)` on a 3x16x16 float image
 in [0, 1] (a 3x24x24 one, a pair or an 8-frame clip where the transform wants it) returning one float
 tensor.
 
@@ -141,3 +141,28 @@ constants); `ps_roi_align` is the position-sensitive variant of the sampling; `p
 `deform_conv2d` reuse `../deformable/dcn_ops.py`; the three IoU losses are written with `torch.where`
 instead of torchvision's masked assignment (a lowering failure). hwacha-cc gained an `atanf` expansion
 (complete IoU) from this batch.
+
+## torchvision.utils: 7 cases, all PASS
+
+The utilities of docs.pytorch.org/vision/stable/utils.html: `make_grid` (plain and normalized),
+`save_image` (the quantised pixels that go into the PNG, the reference reading the written file back)
+and the visualisation functions on a 16x16 uint8 image.
+
+| case | utils entry | Hwacha |
+|---|---|---|
+| make_grid | `make_grid` | PASS, max\|diff\| 0, 509 周期 |
+| make_grid_normalize | `make_grid` | PASS, max\|diff\| 3e-06, 1,931 周期 |
+| save_image | `save_image` | PASS, max\|diff\| 0, 834 周期 |
+| draw_bounding_boxes | `draw_bounding_boxes` | PASS, max\|diff\| 0, 3,420 周期 |
+| draw_segmentation_masks | `draw_segmentation_masks` | PASS, max\|diff\| 0, 1,120 周期 |
+| draw_keypoints | `draw_keypoints` | PASS, max\|diff\| 0, 1,804 周期 |
+| flow_to_image | `flow_to_image` | PASS, max\|diff\| 0, 5,192 周期 |
+
+**Exports that differ from the reference** (asserted equal before export): the draw_* functions
+rasterise with PIL (or assign through boolean indices), so the exported graphs re-implement the
+rasterisation on coordinate grids: rectangle outlines of a given width, filled circles (PIL's ellipse
+of the (2r + 1)-pixel bbox, matched pixel for pixel at the case's radius 2), mask overlays with the
+overlap rule and the alpha blend; `flow_to_image` normalises by the maximum norm, gets its angle from
+atan with quadrant fix-ups (no atan2 lowering) and looks the colour wheel up by one-hot;
+`make_grid(normalize=True)` clamps with the tensor's own min / max as python numbers (data
+dependent), rewritten as the same per-image normalisation in tensor ops.

@@ -747,18 +747,27 @@ elif d == 'tvintf':
         'stochastic_depth': ('StochasticDepth', "StochasticDepth(0.3, 'row')，eval：恒等", ''), 'drop_block2d_fn': ('drop_block2d', 'drop_block2d(x, 0.3, 3, training=False)：恒等', ''), 'drop_block3d_fn': ('drop_block3d', 'drop_block3d(x, 0.3, 3, training=False)：恒等', ''),
         'stochastic_depth_fn': ('stochastic_depth', "stochastic_depth(x, 0.3, 'row', training=False)：恒等", ''),
         'feature_pyramid_network': ('FeaturePyramidNetwork', "FeaturePyramidNetwork([4, 4], 4) 作用于两个层级（x 与其 2x2 平均池化），输出两级展平后拼接", '')}
+    utdocs = 'https://docs.pytorch.org/vision/stable/generated/torchvision.utils.%s.html'
+    utinfo = {'make_grid': ('make_grid', '4 张 3x8x8 图，nrow 2、padding 1、pad_value 0.5 -> 3x19x19 网格', ''),
+              'make_grid_normalize': ('make_grid', 'normalize=True、scale_each=True：每张图按自身 min / max 归一后拼网格', 'normalize 把张量自身的 min / max 取成 python 数做 clamp 边界（数据相关）；导出图用张量运算做同样的逐图归一化再 make_grid'),
+              'save_image': ('save_image', 'save_image 写入 PNG 的像素：make_grid 后 x·255 + 0.5、clamp、截断为 uint8', '参考值是真正 save_image 写出的 PNG 读回来的像素；导出图算写入前的同一量化'),
+              'draw_bounding_boxes': ('draw_bounding_boxes', '16x16 uint8 图上画 3 个 width 2 的彩色框（后画的覆盖先画的）', 'draw_bounding_boxes 用 PIL 光栅化；导出图在坐标网格上按 PIL 的矩形轮廓规则（外框含、内缩 width 的框不含）逐框覆盖，与 PIL 逐像素一致'),
+              'draw_segmentation_masks': ('draw_segmentation_masks', '2 个重叠的掩码、alpha 0.6，两种颜色', 'torchvision 通过布尔索引赋值（无 lowering）；导出图按同一规则：每个掩码涂色、重叠像素置 0、再与原图按 alpha 混合并截断'),
+              'draw_keypoints': ('draw_keypoints', '3 个关键点、radius 2、红色实心圆', 'draw_keypoints 用 PIL 的 ellipse 光栅化；导出图在坐标网格上填充 d² <= (r + 0.5)² 的像素，与 PIL 在 radius 2（和 3）下逐像素一致（radius 1、4 时 PIL 的光栅化不同，本用例未覆盖）'),
+              'flow_to_image': ('flow_to_image', '1x2x8x8 的光流 -> uint8 彩色图', 'flow_to_image 用 atan2 和整数下标查色轮；导出图按同一算法：按最大范数归一、atan2 由 atan 加象限修正得到、色轮的两个相邻条目用 one-hot 查表后线性插值、按范数向白色淡化、截断')}
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
-        isop = case in opsinfo
-        cls, what, note = opsinfo[case] if isop else info.get(case, (case, '', ''))
+        isop = case in opsinfo; isut = case in utinfo
+        cls, what, note = opsinfo[case] if isop else utinfo[case] if isut else info.get(case, (case, '', ''))
         m, x = ef.build(case); m = m.eval()
         with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
         t = f'# {case}\n\n'
         if isop: t += f'torchvision 的 `torchvision.ops.{cls}` 在 Hwacha 上的一次调用，与 PyTorch 逐元素比对。文档：{opsdocs % cls}\n\n'
+        elif isut: t += f'torchvision 的 `torchvision.utils.{cls}` 在 Hwacha 上的一次调用，与 PyTorch 逐元素比对。文档：{utdocs % cls}\n\n'
         else: t += f'torchvision 的 `torchvision.transforms.v2.{cls}` 在 Hwacha 上的一次应用，与 PyTorch 逐元素比对。文档：{docs % cls}\n\n'
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchvision 调用算出，导出前脚本断言两者一致。\n\n'
-        t += ('来源：`export_tvi.py` / `intf_ops.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isop else '来源：`export_tvi.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机 3x16x16 的 [0, 1] 图像、固定种子。\n\n')
+        t += ('来源：`export_tvi.py` / `intf_ops.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isop else '来源：`export_tvi.py` / `intf_utils.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isut else '来源：`export_tvi.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机 3x16x16 的 [0, 1] 图像、固定种子。\n\n')
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
