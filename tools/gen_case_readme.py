@@ -716,16 +716,49 @@ elif d == 'tvintf':
         'normalize': ('Normalize', 'Normalize(ImageNet mean / std)', ''), 'linear_transformation': ('LinearTransformation', '768x768 随机变换矩阵与均值向量', ''),
         'cutmix': ('CutMix', 'CutMix 的一次框抽样：2 张图，框 [4:12, 2:10] 换成另一张（标签混合不导出）', pinned), 'mixup': ('MixUp', 'MixUp，λ = 0.7：0.7·x + 0.3·x.flip(0)（标签混合不导出）', pinned),
         'uniform_temporal_subsample': ('UniformTemporalSubsample', 'UniformTemporalSubsample(4) 作用于 8 帧视频', '')}
+    opsdocs = 'https://docs.pytorch.org/vision/stable/generated/torchvision.ops.%s.html'
+    nolow = '这是 torchvision 的 C++ 算子（torch.ops.torchvision.*），torch-mlir 没有 lowering'
+    opsinfo = {   # case -> (ops entry, what, note)
+        'box_area': ('box_area', '8 个 xyxy 框的面积', ''), 'box_convert': ('box_convert', "box_convert(x, 'xyxy', 'cxcywh')", ''),
+        'box_iou': ('box_iou', '8 x 8 的 IoU 矩阵，第二组框为常量', ''), 'generalized_box_iou': ('generalized_box_iou', '8 x 8 的 GIoU 矩阵', ''),
+        'distance_box_iou': ('distance_box_iou', '8 x 8 的 DIoU 矩阵', ''), 'complete_box_iou': ('complete_box_iou', '8 x 8 的 CIoU 矩阵', ''),
+        'clip_boxes_to_image': ('clip_boxes_to_image', '裁到 32 x 48 的图像范围', ''),
+        'remove_small_boxes': ('remove_small_boxes', 'min_size 8，输出保留掩码（0/1 向量）', 'remove_small_boxes 返回下标（长度数据相关）；导出图输出等价的保留掩码，参考把下标转成掩码比对'),
+        'masks_to_boxes': ('masks_to_boxes', '3 张 16x16 的 0/1 掩码 -> 3 个 xyxy 框', 'masks_to_boxes 用 nonzero（长度数据相关）；导出图对常量坐标网格按掩码取 min / max'),
+        'nms': ('nms', '8 个框、常量分数、IoU 阈值 0.5，输出输入顺序下的保留掩码', nolow + '。导出图：按分数的名次置换排序，贪心抑制在 8 个框上展开（框 i 被保留当且仅当没有更早保留的框与它 IoU > 阈值）；nms 返回按分数排序的保留下标，参考转成同样的掩码'),
+        'batched_nms': ('batched_nms', '8 个框分 3 类，类内 NMS，输出保留掩码', nolow + '。导出图：框加上 类别 x 100 的偏移后做同样的贪心 NMS（torchvision 的 offset 技巧）'),
+        'sigmoid_focal_loss': ('sigmoid_focal_loss', "4 x 8 logits、0/1 目标，reduction='sum'", ''),
+        'generalized_box_iou_loss': ('generalized_box_iou_loss', "8 对框的 GIoU 损失之和", 'torchvision 的 _loss_inter_union 通过布尔掩码赋值，torch-mlir 的 lowering 失败；导出图用 torch.where 写同一公式'),
+        'distance_box_iou_loss': ('distance_box_iou_loss', "8 对框的 DIoU 损失之和", '同 generalized_box_iou_loss：torch.where 写同一公式'), 'complete_box_iou_loss': ('complete_box_iou_loss', "8 对框的 CIoU 损失之和", '同 generalized_box_iou_loss：torch.where 写同一公式'),
+        'roi_align': ('roi_align', '1x4x16x16 特征图、3 个常量 RoI、输出 2x2、spatial_scale 0.5、sampling_ratio 2、aligned=False', nolow + '（torchvision 的纯张量 _roi_align 同样 lowering 失败）。导出图按 CUDA 内核的采样规则实现：每个 bin 2x2 个双线性采样点求平均，越界一个像素以内的点夹到边界、更远的读 0，用 one-hot 矩阵做 gather'),
+        'roi_align_aligned': ('roi_align', '同 roi_align，spatial_scale 1、aligned=True（坐标减 0.5）', '同 roi_align 的实现'), 'roi_align_module': ('RoIAlign', 'RoIAlign(2, 0.5, 2) 模块', '同 roi_align 的实现'),
+        'roi_pool': ('roi_pool', '1x4x16x16 特征图、3 个常量 RoI、输出 2x2 的最大池化', nolow + '。RoI 是常量，每个 bin 覆盖的像素集合在 host 上按 torchvision 的取整规则算成 0/1 掩码；导出图对掩码内像素取最大'),
+        'roi_pool_module': ('RoIPool', 'RoIPool(2, 1.0) 模块', '同 roi_pool 的实现'),
+        'ps_roi_align': ('ps_roi_align', '1x16x16x16 特征图（C·k·k = 4·2·2）、3 个 RoI、输出 2x2、sampling_ratio 2', nolow + '。导出图：位置敏感版本的双线性采样（bin (i, j) 只读通道 c·k·k + i·k + j），采样点零填充'),
+        'ps_roi_align_module': ('PSRoIAlign', 'PSRoIAlign(2, 1.0, 2) 模块', '同 ps_roi_align 的实现'),
+        'ps_roi_pool': ('ps_roi_pool', '1x16x16x16 特征图、3 个不超过 10 像素的 RoI、输出 2x2', nolow + '。导出图用 `../deformable/dcn_ops.py` 的 ps_roi_pool_ref（每个 bin 读固定 6x6 的候选窗口并掩掉超出部分）'),
+        'ps_roi_pool_module': ('PSRoIPool', 'PSRoIPool(2, 1.0) 模块', '同 ps_roi_pool 的实现'),
+        'multi_scale_roi_align': ('MultiScaleRoIAlign', "单一层级 ['0']、输出 2、sampling_ratio 2，64x64 图像上推断 scale = 1/4", nolow + '。单层级下等于 roi_align(scale 1/4, aligned=False)，同 roi_align 的实现'),
+        'deform_conv2d': ('deform_conv2d', '3x3、padding 1 的可变形卷积（DCN v1）：1x4x16x16 -> 1x6x16x16，偏移为常量', nolow + '。导出图用 `../deformable/dcn_ops.py` 的 deform_conv2d_ref（gather + 双线性 + 矩阵乘）'),
+        'deform_conv2d_mask': ('deform_conv2d', '带调制掩码的可变形卷积（DCN v2）', '同 deform_conv2d 的实现'), 'deform_conv2d_module': ('DeformConv2d', 'DeformConv2d(4, 6, 3, padding=1) 模块', '同 deform_conv2d 的实现'),
+        'conv2d_norm_activation': ('Conv2dNormActivation', 'Conv2dNormActivation(4, 8, 3)：卷积 + BatchNorm（eval）+ ReLU', ''), 'conv3d_norm_activation': ('Conv3dNormActivation', 'Conv3dNormActivation(2, 4, 3)', ''),
+        'frozen_batch_norm2d': ('FrozenBatchNorm2d', 'FrozenBatchNorm2d(4)，随机的仿射参数与统计量', ''), 'mlp': ('MLP', 'MLP(8, [16, 4])', ''), 'permute': ('Permute', 'Permute([0, 2, 3, 1])', ''),
+        'squeeze_excitation': ('SqueezeExcitation', 'SqueezeExcitation(4, 2)', ''), 'drop_block2d': ('DropBlock2d', 'DropBlock2d(0.3, 3)，eval 模式：恒等', ''), 'drop_block3d': ('DropBlock3d', 'DropBlock3d(0.3, 3)，eval：恒等', ''),
+        'stochastic_depth': ('StochasticDepth', "StochasticDepth(0.3, 'row')，eval：恒等", ''), 'drop_block2d_fn': ('drop_block2d', 'drop_block2d(x, 0.3, 3, training=False)：恒等', ''), 'drop_block3d_fn': ('drop_block3d', 'drop_block3d(x, 0.3, 3, training=False)：恒等', ''),
+        'stochastic_depth_fn': ('stochastic_depth', "stochastic_depth(x, 0.3, 'row', training=False)：恒等", ''),
+        'feature_pyramid_network': ('FeaturePyramidNetwork', "FeaturePyramidNetwork([4, 4], 4) 作用于两个层级（x 与其 2x2 平均池化），输出两级展平后拼接", '')}
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
-        cls, what, note = info.get(case, (case, '', ''))
+        isop = case in opsinfo
+        cls, what, note = opsinfo[case] if isop else info.get(case, (case, '', ''))
         m, x = ef.build(case); m = m.eval()
         with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
         t = f'# {case}\n\n'
-        t += f'torchvision 的 `torchvision.transforms.v2.{cls}` 在 Hwacha 上的一次应用，与 PyTorch 逐元素比对。文档：{docs % cls}\n\n'
+        if isop: t += f'torchvision 的 `torchvision.ops.{cls}` 在 Hwacha 上的一次调用，与 PyTorch 逐元素比对。文档：{opsdocs % cls}\n\n'
+        else: t += f'torchvision 的 `torchvision.transforms.v2.{cls}` 在 Hwacha 上的一次应用，与 PyTorch 逐元素比对。文档：{docs % cls}\n\n'
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchvision 调用算出，导出前脚本断言两者一致。\n\n'
-        t += '来源：`export_tvi.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机 3x16x16 的 [0, 1] 图像、固定种子。\n\n'
+        t += ('来源：`export_tvi.py` / `intf_ops.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isop else '来源：`export_tvi.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机 3x16x16 的 [0, 1] 图像、固定种子。\n\n')
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))

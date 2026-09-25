@@ -12,7 +12,7 @@ data) that builds with the RISC-V GNU toolchain and runs on Spike.
 | `torchvision/` | torchvision models (classification, segmentation, detection, video, optical flow) | 107 |
 | `ttmodule/` | the torchtune 0.6 module reference (attention, transformer layers, decoder, ViT, LoRA / DoRA, fusion, losses, kv-cache utilities) | 34 |
 | `ttmodel/` | the torchtune 0.6 model reference: llama2 / code llama / llama3 / 3.1 / 3.2 / 3.3 / 3.2 vision, qwen2 / 2.5, phi3 / 4, mistral, gemma / gemma2, clip, each plain and LoRA, at tiny sizes | 41 |
-| `tvintf/` | torchvision.transforms.v2 image transforms (geometry, color, batch / video), random ones pinned to one draw | 42 |
+| `tvintf/` | torchvision.transforms.v2 image transforms (42, random ones pinned to one draw) and torchvision.ops (41: boxes, NMS, losses, RoI operators, deformable convolution, layers) | 83 |
 | `deformable/` | Deformable ConvNets (deform conv / PS-RoI ops, DeepLab, R-FCN, Faster R-CNN, FPN, each plain and deformable) | 20 |
 | `rodinia/` | Rodinia 3.1 OpenCL benchmarks compiled directly by hwacha-cc, with bare-metal hosts (16 pass, 3 documented compiler limits, 2 without assembly) | 21 |
 

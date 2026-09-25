@@ -9,10 +9,12 @@ with one fixed draw (RandomRotation(30) -> F.rotate(x, 30), RandomCrop(8) -> F.c
 offset). The reference is the genuine
 transform / functional call; the exported body is the same call unless noted (rcase).
 usage: export_tvi.py <name> <mlir_out> <check_out>"""
-import sys, struct, math, numpy as np, torch, torch.nn as nn, torch.nn.functional as NF
+import sys, os, struct, math, numpy as np, torch, torch.nn as nn, torch.nn.functional as NF
 import torchvision.transforms.v2 as T, torchvision.transforms.v2.functional as F
 from torchvision.transforms import InterpolationMode
 from torch_mlir import fx
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from intf_ops import add_ops
 
 class Case(nn.Module):
     def __init__(s, body, **bufs):
@@ -123,6 +125,8 @@ def build(name):
     case('cutmix', lambda s, x: x * s.mask + x.flip(0) * (1 - s.mask), torch.rand(2, 3, 16, 16), mask=(lambda m: (m.__setitem__((slice(None), slice(None), slice(4, 12), slice(2, 10)), 0), m)[1])(torch.ones(1, 1, 16, 16)))   # CutMix: one box draw (label mixing not exported)
     case('mixup', lambda s, x: 0.7 * x + 0.3 * x.flip(0), torch.rand(2, 3, 16, 16))               # MixUp: lambda = 0.7
     case('uniform_temporal_subsample', lambda s, x: T.UniformTemporalSubsample(4)(x), torch.rand(8, 3, 8, 8))
+    # ---- torchvision.ops (docs.pytorch.org/vision/stable/ops.html): intf_ops.py
+    add_ops(case, rcase, lambda *sh: torch.randn(*sh))
     if name == '--list': return sorted(C)
     if name not in C: raise SystemExit('unknown case ' + name)
     return C[name]()
