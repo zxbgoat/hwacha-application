@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / tafunc / torchvision / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / tafunc / torchvision / torchvideo / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -431,6 +431,65 @@ elif d == 'deformable':
         t += '## 形状与规模\n\n| | 值 |\n|---|---|\n' + f'| 输入 | {"x".join(map(str, shape))}' + (f'（{nin:,} 个 float）' if nin else '') + ' |\n'
         if nout: t += f'| 输出元素数 | {nout:,} |\n'
         t += f'| 参数量 | {nparam:.1f}M |\n'
+        if wsz: t += f'| 权重 blob | {wsz / 1048576:.0f} MB |\n'
+        t += '\n## 文件\n\n' + files_table(case, f'{case}_tv.s', [(f'`{case}_tv_weights.bin.S`', '权重的 `.incbin` 桩（`split_weights.py` 分成 `.weights_lo` / `.weights_hi` 两段）'), (f'`{case}_tv_weights.bin`', f'权重 blob（不入 git，`make gen-{case}` 按固定种子重建）'), (f'`{case}_tv_check.bin`', '输入与 PyTorch 参考输出，host 用 `.incbin` 内嵌'), ('`tv_main.c`', '通用 host：调用 `net`，比对 max\\|diff\\|（分类型输出还比对 argmax）'), ('`hwlib.s`', '卷积 / 池化库内核')] + ([('`HWMLIRFLAGS`', '本 case 需要的 hwacha-mlir 映射选项')] if flags(case) else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '_tv.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认（最内维为 lane）"}`。\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
+elif d == 'torchvideo':
+    sys.path.insert(0, D); import export_tvid as E
+    zoo = 'https://pytorchvideo.readthedocs.io/en/latest/model_zoo.html'
+    desc = {
+        'c2d_r50': ('C2D R50', 'Kinetics-400, 8x8', 'ResNet-50 逐帧 2-D 卷积（所有时间核为 1），stem (1,7,7)，stage1 后 MaxPool3d', 'pytorchvideo.models.hub.c2d_r50'),
+        'i3d_r50': ('I3D R50', 'Kinetics-400, 8x8', 'Inflated 3-D ResNet-50：stem (5,7,7)，各 stage 的 conv_a 交替 (3,1,1) / (1,1,1)', 'pytorchvideo.models.hub.i3d_r50'),
+        'slow_r50': ('Slow R50', 'Kinetics-400, 8x8', 'SlowFast 的 Slow 路径单独成网：stem (1,7,7)，res4 / res5 的 conv_a 为 (3,1,1)', 'pytorchvideo.models.hub.slow_r50'),
+        'slow_r50_4x16': ('Slow R50', 'Kinetics-400, 4x16', '同 slow_r50，4 帧输入（4x16 设置）', 'pytorchvideo.models.hub.slow_r50'),
+        'r2plus1d_r50': ('R(2+1)D R50', 'Kinetics-400, 16x4', '每个 3x3x3 卷积分解为 1x3x3 空间卷积 + 3x1x1 时间卷积（中间通道数按论文公式）', 'pytorchvideo.models.hub.r2plus1d_r50'),
+        'csn_r101': ('CSN R101', 'Kinetics-400, 32x2', 'Channel-Separated Network：bottleneck 的 3x3x3 卷积为逐通道（depthwise）卷积，ResNet-101 深度', 'pytorchvideo.models.hub.csn_r101'),
+        'slowfast_r50': ('SlowFast R50', 'Kinetics-400, 8x8', '双路径：Slow（8 帧，通道 64 起）+ Fast（32 帧，通道 8 起，alpha=4），每个 stage 后 Fast 经 (7,1,1) 步长 4 的融合卷积拼到 Slow；两路头部池化后拼接', 'pytorchvideo.models.hub.slowfast_r50'),
+        'slowfast_r50_4x16': ('SlowFast R50', 'Kinetics-400, 4x16', '同 slowfast_r50，Slow 4 帧 + Fast 16 帧', 'pytorchvideo.models.hub.slowfast_r50'),
+        'slowfast_r101': ('SlowFast R101', 'Kinetics-400, 8x8', 'ResNet-101 深度的 SlowFast，融合卷积 (5,1,1)', 'pytorchvideo.models.hub.slowfast_r101'),
+        'slowfast_16x8_r101_50_50': ('SlowFast R101_50_50', 'Kinetics-400, 16x8', 'ResNet-101 的 SlowFast，res4 的 23 个块中前 6 个用 (3,1,1) 时间核；Slow 16 帧 + Fast 64 帧', 'pytorchvideo.models.hub.slowfast_16x8_r101_50_50'),
+        'x3d_xs': ('X3D XS', 'Kinetics-400, 4x12', 'X3D：逐通道 3x3x3 卷积 + SE + Swish 的 bottleneck，宽度因子 2.0、深度因子 2.2；head 为 1x1 卷积 -> 池化 -> 1x1 卷积 -> 线性层', 'pytorchvideo.models.x3d.create_x3d(input_clip_length=4)'),
+        'x3d_s': ('X3D S', 'Kinetics-400, 13x6', '同 x3d_xs，13 帧输入', 'pytorchvideo.models.x3d.create_x3d(input_clip_length=13)'),
+        'x3d_m': ('X3D M', 'Kinetics-400, 16x5', '同 x3d_xs，16 帧输入', 'pytorchvideo.models.x3d.create_x3d(input_clip_length=16)'),
+        'x3d_l': ('X3D L', 'Kinetics-400, 16x5', 'X3D 深度因子 5.0（每 stage 的块数约 2.3 倍），16 帧输入', 'pytorchvideo.models.x3d.create_x3d(input_clip_length=16, depth_factor=5.0)'),
+        'mvit_base_16x4': ('MViT B', 'Kinetics-400, 16x4', 'Multiscale Vision Transformer：3x7x7 卷积 patch 嵌入（步长 2,4,4）、cls token、分离的时空位置编码、16 层 pooling attention（stage 边界 embed 与 head 数翻倍、q 空间步长 2、k/v 自适应步长）', 'pytorchvideo.models.hub.mvit_base_16x4'),
+        'mvit_base_32x3': ('MViT B', 'Kinetics-400, 32x3', '同 mvit_base_16x4，32 帧输入', 'pytorchvideo.models.hub.mvit_base_32x3'),
+        'efficient_x3d_xs': ('EfficientX3d XS', 'Accelerator zoo (mobile CPU)', 'X3D XS 用 pytorchvideo.layers.accelerator 的可部署块重写（Conv3dPwBnAct / Conv3d3x3x3DwBnAct / SE / Swish，deploy 前的形式）', 'pytorchvideo.models.hub.efficient_x3d_xs'),
+        'efficient_x3d_s': ('EfficientX3d S', 'Accelerator zoo (mobile CPU)', '同 efficient_x3d_xs，13 帧输入', 'pytorchvideo.models.hub.efficient_x3d_s'),
+        'slow_r50_detection': ('Slow R50 detection', 'AVA v2.2, 4x16', 'Slow R50 主干（res5 空间步长 1，输出 stride 16）+ RoI 头：时间平均 -> RoIAlign 7x7 -> 7x7 最大池化 -> 线性 80 类 -> Sigmoid；2 个固定框', 'pytorchvideo.models.hub.slow_r50_detection'),
+        'slowfast_r50_detection': ('SlowFast R50 detection', 'AVA v2.2, 8x8', 'SlowFast R50 主干（stride 16）+ 两路各自时间平均后拼接 -> RoIAlign 7x7 -> 最大池化 -> 线性 80 类 -> Sigmoid；2 个固定框', 'pytorchvideo.models.hub.slowfast_r50_detection')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}_tv.s')): continue
+        arch, setting, d0, builder = desc[case]
+        w, x = E.prepare(case); nparam = sum(p.numel() for p in w.m.parameters()) / 1e6
+        cb = os.path.join(D, case, f'{case}_tv_check.bin'); nin = nout = None
+        if os.path.exists(cb):
+            with open(cb, 'rb') as f: f.read(4); nin = struct.unpack('i', f.read(4))[0]; f.seek(8 + nin * 4); nout = struct.unpack('i', f.read(4))[0]
+        wpath = os.path.join(D, case, f'{case}_tv_weights.bin'); wsz = os.path.getsize(wpath) if os.path.exists(wpath) else None
+        t = f'# {case}\n\n'
+        t += f'PyTorchVideo model zoo（{zoo}）的 **{arch}**（{setting}）在 Hwacha 上的一次前向，与 PyTorch 比对。构建：`{builder}`。\n\n'
+        t += f'模型：{d0}。\n\n'
+        t += f'比对内容：{"2 个框各 80 类的 sigmoid 得分" if "detection" in case else "400 类 logits"}，逐元素比对（容差 1e-4 + 1e-2·max\\|ref\\|）' + ('' if 'detection' in case else '，另比对 argmax') + '。\n\n'
+        t += '权重随机（固定种子，未下载 checkpoint；BatchNorm 给随机 running 统计量），输入随机。'
+        shape = 'x'.join(map(str, x.shape))
+        if 'slowfast' in case: t += f' 输入 {shape}：Slow 与 Fast 两段 clip 沿时间轴拼成一个张量（前 T 帧 Slow、后 4T 帧 Fast），网络入口拆开。'
+        else: t += f' 输入 {shape}（帧数为该设置的 frame length，空间 {x.shape[-1]}x{x.shape[-1]} 而非 224）。'
+        notes = []
+        if case.startswith(('c2d', 'i3d', 'slow', 'r2plus1d', 'csn')) or case.startswith('slowfast') or case.startswith('x3d'):
+            notes.append('头部为 224x224 定尺寸的 AvgPool3d（在 /32 后的 7x7 图上即全局平均）换成 AdaptiveAvgPool3d(1)，其余不变' if not case.startswith('x3d') else '`create_x3d` 由 (input_clip_length, input_crop_size) 推出头部池化核，这里按 32x32 构建（hub 的 x3d_* 固定 crop 160 / 224 / 312）')
+        if case.startswith(('csn', 'x3d', 'efficient_x3d')):
+            notes.append('逐通道 3-D 卷积（groups = 通道数）torch-mlir 标为 illegal（5-D 输入的分组 aten.convolution）；导出图把它按时间核的每个 tap 拆成对 B·T 帧的 2-D 逐通道卷积再按时间偏移求和（`DepthwiseConv3d`），与 nn.Conv3d 一致到 1e-7')
+        if case.startswith('mvit'):
+            notes.append('cls token 与位置编码在 forward 里由 nn.Parameter 计算再 torch.cat，torch-mlir 的导入器拒绝（aten.cat 列表里的 Parameter）；eval 下两者都是常量，预先算成 buffer')
+        if 'detection' in case:
+            notes.append('RoIAlign 无 torch-mlir lowering；框固定，按 torchvision CUDA 内核的采样规则（sampling_ratio=0 -> 每 bin ceil(roi/7)² 个双线性采样点，越界一像素内夹到边界）预先算成 (R·49, H·W) 的常量 gather 矩阵，RoI 池化即一次矩阵乘，与 torchvision.ops.RoIAlign 一致到 1e-5')
+        if notes: t += '\n\n**与 PyTorchVideo 的差别**：' + '；'.join(notes) + '。'
+        t += '\n\n## 形状与规模\n\n| | 值 |\n|---|---|\n' + f'| 输入 | {shape}' + (f'（{nin:,} 个 float）' if nin else '') + ' |\n'
+        if nout: t += f'| 输出元素数 | {nout:,} |\n'
+        t += f'| 参数量 | {nparam:.2f}M |\n'
         if wsz: t += f'| 权重 blob | {wsz / 1048576:.0f} MB |\n'
         t += '\n## 文件\n\n' + files_table(case, f'{case}_tv.s', [(f'`{case}_tv_weights.bin.S`', '权重的 `.incbin` 桩（`split_weights.py` 分成 `.weights_lo` / `.weights_hi` 两段）'), (f'`{case}_tv_weights.bin`', f'权重 blob（不入 git，`make gen-{case}` 按固定种子重建）'), (f'`{case}_tv_check.bin`', '输入与 PyTorch 参考输出，host 用 `.incbin` 内嵌'), ('`tv_main.c`', '通用 host：调用 `net`，比对 max\\|diff\\|（分类型输出还比对 argmax）'), ('`hwlib.s`', '卷积 / 池化库内核')] + ([('`HWMLIRFLAGS`', '本 case 需要的 hwacha-mlir 映射选项')] if flags(case) else []))
         t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '_tv.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认（最内维为 lane）"}`。\n\n'
