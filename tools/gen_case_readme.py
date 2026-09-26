@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchvision / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / torchvision / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -781,6 +781,44 @@ elif d == 'tvintf':
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchvision 调用算出，导出前脚本断言两者一致。\n\n'
         t += ('来源：`export_tvi.py` / `intf_ops.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isop else '来源：`export_tvi.py` / `intf_utils.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子。\n\n' if isut else '来源：`export_tvi.py` / `intf_io.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子；像素以 0..255 的 float 进出。\n\n' if isio else '来源：`export_tvi.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机 3x16x16 的 [0, 1] 图像、固定种子。\n\n')
+        t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
+        has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
+        t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认"}`\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
+elif d == 'torchaudio':
+    ef = load(os.path.join(D, 'export_ta.py'), 'ef')
+    docs = 'https://docs.pytorch.org/audio/stable/generated/torchaudio.models.%s.html'
+    tiny = '微型尺寸（特征维 16、2 层、2 个头、前馈 32）'
+    info = {   # case -> (doc entry, what, note)
+        'conformer': ('Conformer', f'Conformer(input_dim 16, 2 头, ffn 32, 2 层, 深度卷积核 7)，{tiny}，输入 12 帧 x 16，输出 (1, 12, 16)', 'Conformer.forward 由 lengths 生成 padding 掩码（数据相关）；全长输入下掩码全 False，导出图直接逐层调用 conformer_layers（key_padding_mask=None）'),
+        'emformer': ('Emformer', 'Emformer(16, 2 头, ffn 32, 2 层, segment 4, 右上下文 2, 左上下文 4, 记忆 1)，输入 12 + 2 帧，输出 (1, 12, 16)', 'torch-mlir 默认的分解表把 aten.zeros / ones（Emformer 的注意力掩码）分解成没有 lowering 的 aten.empty_strided；导出时从分解表里去掉张量构造算子（torch-mlir 直接 lower aten.zeros / ones / full）'),
+        'conv_tasnet': ('ConvTasNet', 'ConvTasNet(2 源, 编码核 4、16 特征, 掩码网络 8/16 特征、2 层 x 1 栈)，输入 64 个采样，输出 (1, 2, 64)', ''),
+        'deepspeech': ('DeepSpeech', 'DeepSpeech(n_feature 16, n_hidden 32, n_class 10)，输入 (1, 1, 8, 16)，输出 (1, 8, 10) 的 log-softmax', ''),
+        'wav2letter': ('Wav2Letter', "Wav2Letter(num_classes 10, input_type='mfcc', num_features 13)：架构固定（250 / 2000 通道的 11 层卷积），输入 13 x 64 的 MFCC，输出 (1, 10, 33)", '架构不可缩小：权重约 2 千万个，导出的 IR 约 190 MB'),
+        'wav2letter_waveform': ('Wav2Letter', "Wav2Letter(input_type='waveform')：多一层核 250、stride 160 的输入卷积，输入 1000 个采样，输出 (1, 10, 4)", '架构不可缩小，IR 约 210 MB'),
+        'hdemucs': ('HDemucs', "HDemucs(2 源, 单声道, channels 4, nfft 64, depth 2)：混合时频域源分离，输入 256 个采样，输出 (1, 2, 1, 256)", 'torch.stft / istft、hann_window 与复数张量都没有 lowering。导出用 HDemucs 的子类替换 _spec / _magnitude / _mask / _ispec：频谱是末维为 (re, im) 的实张量，帧用常量下标 gather、乘加窗的 DFT 矩阵（normalized、center、reflect 填充与 torch.stft 一致），逆变换是加窗的逆 DFT 矩阵乘、overlap-add 矩阵乘和 torch.istft 的窗平方和归一化；权重与参考模型相同（deepcopy），容差 2e-3'),
+        'wav2vec2': ('Wav2Vec2Model', 'wav2vec2_model(...)：3 层卷积特征提取器（8 通道）+ 位置卷积（核 8）+ 2 层 transformer（16 维、2 头），输入 400 个采样，输出 (1, 19, 16)', ''),
+        'wav2vec2_aux': ('Wav2Vec2Model', '同 wav2vec2，aux_num_out=10：带 CTC 输出层，输出 (1, 19, 10)', ''),
+        'wavlm': ('Wav2Vec2Model', 'wavlm_model(...)：wav2vec2 架构加 WavLM 的门控相对位置偏置（8 个桶、最大距离 16），输出 (1, 19, 16)', ''),
+        'hubert_pretrain': ('HuBERTPretrainModel', 'hubert_pretrain_model(...)：wav2vec2 特征提取 + 掩码生成器（mask_prob 0.5、mask_length 2）+ transformer + logit 生成器（10 类、final_dim 8），输入 400 个采样与 19 个标签，输出 [softmax(logit_m) | softmax(logit_u) | 特征惩罚]', 'MaskGenerator 在 forward 里用 torch 的随机数抽掩码，LogitGenerator 用布尔索引取被掩 / 未掩的行（形状数据相关），_compute_logits 用 -inf 填充。导出图：掩码固定为 torch.manual_seed(0) 下的那次抽样（参考也在同一种子下调用），掩码嵌入用 torch.where 写入，logits 对全部帧计算后用常量 one-hot 矩阵选行，-inf 换成 -1e4（softmax 相同，避免选行矩阵乘里的 0·(-inf)）；输出取 softmax 以避免比较 -inf'),
+        'rnnt': ('RNNT', 'emformer_rnnt_model(...)：Emformer 转写器（时间缩减 2、segment 4）+ LSTM 预测器（符号嵌入 8、1 层、LayerNorm）+ 联合网络（10 个符号），输入 20 帧 x 16 与 4 个目标符号，输出联合网络的 (1, 9, 5, 10)', '同 emformer：分解表去掉张量构造算子'),
+        'squim_objective': ('SquimObjective', 'squim_objective_model(feat 16, win 8, d_model 16, 2 头, hidden 16, 1 块, LSTM, chunk 5)：输入 256 个采样，输出 [STOI, PESQ, SI-SDR]', ''),
+        'squim_subjective': ('SquimSubjective', 'SquimSubjective(微型 wav2vec2 作为 SSL 模型, Linear(16, 8) 投影, Predictor(16, 3))（squim_subjective_model 的组装方式）：输入波形与常量参考波形各 400 个采样，输出 MOS 预测 (1,)', ''),
+        'tacotron2': ('Tacotron2', 'Tacotron2(n_mels 8, 12 个符号, 嵌入 / 编码 16, 编码器 2 层核 3 卷积, 解码器 / 注意力 RNN 16, 位置注意力 4 滤波器核 5, prenet 8, postnet 2 层)，teacher forcing：输入 6 个 token，mel (1, 8, 5) 为常量，输出 [mel | mel_postnet | gate | alignments]', '编码器用 pack_padded_sequence（无导出路径），解码器由 lengths 生成 memory 掩码（数据相关），prenet 在 eval 下也做 dropout(p=0.5, training=True)。导出图：编码器的卷积 + LSTM 直接对全长序列计算，memory 掩码固定为全 False，prenet 的 dropout 关闭（参考同样关闭 dropout：否则参考本身不可复现）'),
+        'wavernn': ('WaveRNN', 'WaveRNN(上采样 [2, 2], 16 类, hop 4, 1 个残差块, RNN / FC 16, 核 3, 8 频带, hidden / output 8)：输入 16 个采样与 (1, 1, 8, 6) 的频谱常量，输出每个采样 16 类的 logits (1, 1, 16, 16)', '')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        doc, what, note = info.get(case, (case, '', ''))
+        m, x = ef.build(case); m = m.eval()
+        with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
+        t = f'# {case}\n\n'
+        t += f'torchaudio 的 `torchaudio.models.{doc}` 在 Hwacha 上的一次前向，与 PyTorch 逐元素比对。文档：{docs % doc}\n\n'
+        t += f'用例：{what}。\n\n'
+        if note: t += f'**注意**：{note}。参考值由真正的 torchaudio 前向算出，导出前脚本断言两者一致。\n\n'
+        t += '来源：`export_ta.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机权重与输入、固定种子；页面上的工厂函数构建论文尺寸的模型，远超 Spike 的规模，这里用微型尺寸实例化同一架构。\n\n'
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
