@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / torchvision / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / tafunc / torchvision / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -819,6 +819,60 @@ elif d == 'torchaudio':
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchaudio 前向算出，导出前脚本断言两者一致。\n\n'
         t += '来源：`export_ta.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机权重与输入、固定种子；页面上的工厂函数构建论文尺寸的模型，远超 Spike 的规模，这里用微型尺寸实例化同一架构。\n\n'
+        t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
+        has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
+        t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认"}`\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
+elif d == 'tafunc':
+    ef = load(os.path.join(D, 'export_taf.py'), 'ef')
+    docs = 'https://docs.pytorch.org/audio/stable/generated/torchaudio.transforms.%s.html'
+    sig = '采样率 800、n_fft 32、hop 8 的 128 采样波形（功率谱 17 x 17）'
+    stftnote = 'torch.stft 经 view_as_real 可以导出，但复数的 abs / istft / angle / conj 没有 lowering'
+    istftnote = '逆 STFT 是矩阵乘：帧 = Z @ 加 c_f 权重的逆 DFT 矩阵，乘窗，用 0/1 矩阵 overlap-add，除以窗平方和（torch.istft 的归一化），再裁掉 n_fft/2 与到 length'
+    info = {   # case -> (class, what, note)
+        'spectrogram': ('Spectrogram', f'Spectrogram(n_fft 32, hop 8, power 2)，{sig}', stftnote + '；导出图对 view_as_real(stft) 取 re² + im²'),
+        'spectrogram_complex': ('Spectrogram', 'Spectrogram(power=None)：复数谱，输出 view_as_real 的 (1, 17, 17, 2)', ''),
+        'inverse_spectrogram': ('InverseSpectrogram', 'InverseSpectrogram(n_fft 32, hop 8)：输入复数谱 (1, 17, 17, 2)，输出 128 个采样', 'aten.istft 没有 lowering；' + istftnote),
+        'griffin_lim': ('GriffinLim', 'GriffinLim(n_fft 32, hop 8, n_iter 4, rand_init=False, length 128)：从功率谱重建波形', stftnote + '。导出图按 torchaudio.functional.griffinlim 展开 4 次迭代（动量 0.99/(1+0.99)，相位初始为 1），复数为 (re, im) 对，' + istftnote),
+        'mel_scale': ('MelScale', 'MelScale(8 个 mel 带, 采样率 800, n_stft 17) 作用于功率谱', ''),
+        'inverse_mel_scale': ('InverseMelScale', 'InverseMelScale(n_stft 17, 8 个 mel 带)：从 mel 谱最小二乘反解线性谱', 'aten.linalg_lstsq 没有 lowering；driver gels 给欠定系统的最小范数解，导出图用常量伪逆 Aᵀ(AAᵀ)⁻¹（构造时断言与 lstsq 一致）再 relu'),
+        'mel_spectrogram': ('MelSpectrogram', 'MelSpectrogram(采样率 800, n_fft 32, hop 8, 8 个 mel 带)', stftnote + '；导出图：功率谱 @ 模块的 mel 滤波器组'),
+        'mfcc': ('MFCC', 'MFCC(4 个系数，mel 参数同 mel_spectrogram)', stftnote + '；导出图：功率谱 -> mel 滤波器组 -> 模块的 AmplitudeToDB -> DCT 矩阵'),
+        'lfcc': ('LFCC', 'LFCC(8 个线性滤波器, 4 个系数)', stftnote + '；导出图：功率谱 -> 模块的线性滤波器组 -> AmplitudeToDB -> DCT 矩阵'),
+        'spectral_centroid': ('SpectralCentroid', 'SpectralCentroid(采样率 800, n_fft 32, hop 8)', stftnote + '；导出图：幅度谱 sqrt(re² + im²)，频率加权平均'),
+        'amplitude_to_db': ('AmplitudeToDB', "AmplitudeToDB('power', top_db 80) 作用于功率谱", ''), 'compute_deltas': ('ComputeDeltas', 'ComputeDeltas(win_length 5) 作用于功率谱', ''),
+        'sliding_window_cmn': ('SlidingWindowCmn', 'SlidingWindowCmn(窗 6, 最小窗 2, center, norm_vars) 作用于 (1, 17 帧, 17 维)', ''),
+        'time_stretch': ('TimeStretch', 'TimeStretch(hop 8, n_freq 17, rate 1.25)：相位声码器，复数谱 (1, 17, 17, 2) -> (1, 17, 14, 2)', 'aten.angle 与复数运算没有 lowering；导出图按 torchaudio.functional.phase_vocoder 写实数版：角度用 atan 加象限修正，帧插值用常量 index_select，相位累积 cumsum 用上三角矩阵乘，polar 用 cos / sin'),
+        'frequency_masking': ('FrequencyMasking', 'FrequencyMasking(freq_mask_param 6) 在 seed 0 下的一次抽样', '掩码的起点和宽度在 forward 里随机抽取（数据相关）；掩码固定为 seed 0 下对全 1 张量应用得到的 0/1 模式，导出图乘以该掩码，参考在同一 seed 下调用'),
+        'time_masking': ('TimeMasking', 'TimeMasking(time_mask_param 6) 在 seed 0 下的一次抽样', '同 frequency_masking'),
+        'spec_augment': ('SpecAugment', 'SpecAugment(2 个时间掩码 x 4, 2 个频率掩码 x 4, zero_masking) 在 seed 0 下的一次抽样', '同 frequency_masking（zero_masking=True 使掩码可从全 1 张量读出）'),
+        'add_noise': ('AddNoise', 'AddNoise：常量噪声按 SNR 10 dB 叠加', ''), 'convolve': ('Convolve', "Convolve('full')：与常量 9 点核卷积", ''),
+        'fft_convolve': ('FFTConvolve', "FFTConvolve('full')：与常量 9 点核卷积", 'aten.fft_irfft 没有 lowering；full 模式的 FFT 卷积等于直接卷积，导出图用 torchaudio.functional.convolve'),
+        'deemphasis': ('Deemphasis', 'Deemphasis(0.97)：IIR y[n] = x[n] + 0.97 y[n-1]', 'lfilter 的 Python 实现在 torch.export 下形状出错；导出图用冲激响应矩阵 y = x @ M（M[i, j] = h[j - i]，128 采样内精确），再按 lfilter 的约定截到 [-1, 1]'),
+        'preemphasis': ('Preemphasis', 'Preemphasis(0.97)', ''), 'fade': ('Fade', 'Fade(淡入 32, 淡出 32, linear)', ''), 'vol': ('Vol', "Vol(2.0, 'amplitude')", ''),
+        'mu_law_encoding': ('MuLawEncoding', 'MuLawEncoding(256)：输出的整数转 float', ''), 'mu_law_decoding': ('MuLawDecoding', 'MuLawDecoding(256)：输入为编码值（float 转 long）', ''),
+        'resample': ('Resample', 'Resample(8 -> 6, sinc_interp_hann)', ''), 'resample_kaiser': ('Resample', 'Resample(4 -> 5, sinc_interp_kaiser)', ''),
+        'speed': ('Speed', 'Speed(orig_freq 800, factor 1.25)', ''), 'speed_perturbation': ('SpeedPerturbation', 'SpeedPerturbation(800, [0.9, 1.0, 1.1]) 在 seed 0 下的一次抽样', 'forward 里随机选一个 speeder（数据相关）；导出图用 seed 0 下选中的那个 Speed，参考在同一 seed 下调用'),
+        'pitch_shift': ('PitchShift', 'PitchShift(采样率 800, n_steps 2, n_fft 32, hop 8)', stftnote + '。导出图按 torchaudio.functional.pitch_shift：stft -> 实数版相位声码器（rate 2^(-2/12)）-> 矩阵乘 istft（length round(128/rate)）-> torchaudio.functional.resample（sinc 卷积，可导出）-> 裁到 128'),
+        'loudness': ('Loudness', 'Loudness(采样率 200)：ITU-R BS.1770 响度（LKFS），400 个采样', 'K 加权的两个 biquad 是 lfilter（导出下形状出错）；导出图用两个冲激响应矩阵乘（各自截到 [-1, 1]，与 lfilter 一致），400 ms 块用常量分帧下标，两级门控用掩码均值；阈值 / 对数与 torchaudio.functional.loudness 相同'),
+        'psd': ('PSD', 'PSD()：2 通道复数谱 (2, 17, 17, 2) 与 (17, 17) 的时频掩码 -> (17, 2, 2, 2) 的功率谱密度矩阵', 'aten._conj 没有 lowering；导出图用实部 / 虚部写外积求和（normalize=True 的掩码归一）'),
+        'mvdr': ('MVDR', "MVDR(ref_channel 0, solution 'ref_channel')：PSD -> Souden 权重 -> 波束形成，输出增强谱 (17, 17, 2)", 'MVDR 在 cdouble 下用 linalg.solve；导出图用实数算术：2x2 复矩阵求逆闭式、对角加载、迹归一、conj(w)·X，容差 2e-3'),
+        'souden_mvdr': ('SoudenMVDR', 'SoudenMVDR：常量 psd_s / psd_n -> 权重 -> 波束形成', '同 mvdr 的实数 2x2 复矩阵算术'),
+        'rtf_mvdr': ('RTFMVDR', 'RTFMVDR：常量 RTF（rtf_evd）与 psd_n -> 权重 -> 波束形成', 'aten._linalg_solve_ex 没有 lowering；导出图用实数算术：psd_n⁻¹ rtf、rtfᴴ 归一、参考通道相位对齐'),
+        'rnnt_loss': ('RNNTLoss', 'RNNTLoss(blank 0)：(1, 4, 3, 5) 的 logits、目标 [1, 2]', 'C++ 损失没有导出路径；导出图把 transducer 的 alpha 递推在 4 x 3 格点上展开（fused log-softmax，logaddexp）')}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        cls, what, note = info.get(case, (case, '', ''))
+        m, x = ef.build(case); m = m.eval()
+        with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
+        t = f'# {case}\n\n'
+        t += f'torchaudio 的 `torchaudio.transforms.{cls}` 在 Hwacha 上的一次应用，与 PyTorch 逐元素比对。文档：{docs % cls}\n\n'
+        t += f'用例：{what}。\n\n'
+        if note: t += f'**注意**：{note}。参考值由真正的 torchaudio 变换算出，导出前脚本断言两者一致。\n\n'
+        t += '来源：`export_taf.py` / `taf_lib.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子；复数谱以末维为 (re, im) 的实张量进出。\n\n'
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
