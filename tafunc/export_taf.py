@@ -7,7 +7,8 @@ matrices, targets) are constant buffers, complex spectrograms travel as real ten
 torch.manual_seed(0) (the reference is called under the same seed).
 usage: export_taf.py <name> <mlir_out> <check_out>"""
 import sys, os, math, struct, numpy as np, torch, torch.nn as nn, torch.nn.functional as NF
-import torchaudio.transforms as T, torchaudio.functional as AF
+import torchaudio.transforms as T
+import torchaudio.functional as AF, torchaudio.functional as AF
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import taf_lib as LB
 from torch_mlir import fx
@@ -146,6 +147,38 @@ def build(name):
     # ---- RNN-T loss on a tiny lattice (the C++ loss has no export path): the alpha recursion unrolled
     logits = R(1, 4, 3, 5); targets = torch.tensor([[1, 2]], dtype=torch.int32)
     rcase('rnnt_loss', lambda s, x: LB.rnnt_loss(x[0], [1, 2], 0).reshape(1), lambda s, x: s.m(x, s.t, s.ll, s.tl).reshape(1), logits, lambda: dict(m=T.RNNTLoss(blank=0)), t=targets, ll=torch.tensor([4], dtype=torch.int32), tl=torch.tensor([2], dtype=torch.int32))
+    # torchaudio.functional filters & utilities
+    def lf(s, x): return (x @ s.M).clamp(-1, 1)
+    rcase('lfilter', lf, lambda s, x: AF.lfilter(x, s.a, s.b, clamp=True), wav,
+          lambda: dict(a=torch.tensor([1.0, -0.5]), b=torch.tensor([1.0, 0.0]), M=LB.iir_matrix(lambda w: AF.lfilter(w, torch.tensor([1.0, -0.5], dtype=torch.float64), torch.tensor([1.0, 0.0], dtype=torch.float64), clamp=False), L)))
+    
+    def ff(s, x): y = x @ s.M; return (y.flip(-1) @ s.M).flip(-1).clamp(-1, 1)
+    rcase('filtfilt', ff, lambda s, x: AF.filtfilt(x, s.a, s.b, clamp=True), wav,
+          lambda: dict(a=torch.tensor([1.0, -0.5]), b=torch.tensor([1.0, 0.0]), M=LB.iir_matrix(lambda w: AF.lfilter(w, torch.tensor([1.0, -0.5], dtype=torch.float64), torch.tensor([1.0, 0.0], dtype=torch.float64), clamp=False), L)))
+    
+    def bq(s, x): return (x @ s.M).clamp(-1, 1)
+    SR2 = 8000; fc = 1000.0; Q = 0.707; w_angle = 2 * math.pi * fc / SR2; alpha = math.sin(w_angle) / (2 * Q); cos_w = math.cos(w_angle)
+    b0 = (1 + cos_w) / 2; b1 = -(1 + cos_w); b2 = (1 + cos_w) / 2; a0 = 1 + alpha; a1 = -2 * cos_w; a2 = 1 - alpha
+    wav2 = torch.randn(1, 128)
+    rcase('biquad', bq, lambda s, x: AF.biquad(x, s.b0, s.b1, s.b2, s.a0, s.a1, s.a2), wav2,
+          lambda: dict(b0=b0, b1=b1, b2=b2, a0=a0, a1=a1, a2=a2, M=LB.iir_matrix(lambda w: AF.biquad(w, torch.tensor(b0, dtype=torch.float64), torch.tensor(b1, dtype=torch.float64), torch.tensor(b2, dtype=torch.float64), torch.tensor(a0, dtype=torch.float64), torch.tensor(a1, dtype=torch.float64), torch.tensor(a2, dtype=torch.float64)), 128)))
+    
+    case('melscale_fbanks', lambda s, x: s.m, torch.zeros(1), lambda: dict(m=AF.melscale_fbanks(17, 0.0, 400.0, 8, SR)))
+    case('linear_fbanks', lambda s, x: s.m, torch.zeros(1), lambda: dict(m=AF.linear_fbanks(17, 0.0, 400.0, 8, SR)))
+    
+    def fd(s, x):
+        d = (s.mu_x - s.mu_y).square().sum(); tr = s.sigma_x.diag().sum() + s.sigma_y.diag().sum()
+        P = s.sigma_x @ s.sigma_y
+        # 2x2 eigenvalues: λ = (tr ± √(tr² - 4det)) / 2
+        tr_p = P[0, 0] + P[1, 1]; det_p = P[0, 0] * P[1, 1] - P[0, 1] * P[1, 0]
+        disc = (tr_p * tr_p - 4 * det_p).clamp(min=0.0).sqrt()
+        eig1 = (tr_p + disc) / 2; eig2 = (tr_p - disc) / 2
+        cov_mean = eig1.clamp(min=0.0).sqrt() + eig2.clamp(min=0.0).sqrt()
+        return d + tr - 2 * cov_mean
+    mu_x = torch.tensor([1.0, 2.0]); sigma_x = torch.tensor([[1.0, 0.1], [0.1, 1.0]])
+    mu_y = torch.tensor([1.5, 2.5]); sigma_y = torch.tensor([[0.9, 0.0], [0.0, 1.1]])
+    case('frechet_distance', fd, torch.zeros(1), lambda: dict(mu_x=mu_x, sigma_x=sigma_x, mu_y=mu_y, sigma_y=sigma_y))
+
     if name == '--list': return sorted(C)
     if name not in C: raise SystemExit('unknown case ' + name)
     return C[name]()
@@ -162,3 +195,5 @@ if __name__ == '__main__':
     xf = np.ascontiguousarray(x.numpy()).astype(np.float32).ravel(); yf = np.ascontiguousarray(y.numpy()).astype(np.float32).ravel()
     with open(bin_out, 'wb') as f:
         f.write(struct.pack('i', xf.size)); f.write(xf.tobytes()); f.write(struct.pack('i', yf.size)); f.write(yf.tobytes())
+
+

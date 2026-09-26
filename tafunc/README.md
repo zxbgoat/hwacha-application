@@ -1,6 +1,10 @@
-# torchaudio.transforms on Hwacha
+# torchaudio.transforms + torchaudio.functional on Hwacha
 
 The transforms of docs.pytorch.org/audio/stable/transforms.html (torchaudio 2.9), one case per class
+(37 total), plus 6 core functional API functions (lfilter, filtfilt, biquad, melscale_fbanks,
+linear_fbanks, frechet_distance), all PASS on Spike. Signal sizes: sr=800, n_fft=32, hop=8,
+128-sample waveforms, 17×17 spectrograms, 8 mel bands.
+
 (two for Spectrogram's power / complex outputs and Resample's two kernels), run through PyTorch ->
 torch-mlir -> hwacha-mlir -> hwacha-cc and checked on Spike against PyTorch (fixed seed). Layout,
 generic host, `gen.sh` and Makefile are those of `../torchaudio`; the cases live in `export_taf.py`,
@@ -10,7 +14,7 @@ matrices, targets) are constant buffers, complex spectrograms travel as real ten
 (re, im) axis, integer outputs are cast to float; the random transforms are pinned to one draw under
 `torch.manual_seed(0)` with the reference called under the same seed.
 
-## Cases: 37 (35 of the page's 36 classes), all PASS
+## Cases: 43 (37 transforms + 6 functional), all PASS
 
 | group | case | class | Hwacha |
 |---|---|---|---|
@@ -51,8 +55,17 @@ matrices, targets) are constant buffers, complex spectrograms travel as real ten
 | multichannel | souden_mvdr | `SoudenMVDR` | PASS, max\|diff\| 1e-06, 9,393 周期 |
 | multichannel | rtf_mvdr | `RTFMVDR` | PASS, max\|diff\| 1e-06, 7,800 周期 |
 | loss | rnnt_loss | `RNNTLoss` | PASS, max\|diff\| 0, 1,949 周期 |
+| functional | lfilter | `lfilter` | PASS, max|diff| 0, 1,070 周期 |
+| functional | filtfilt | `filtfilt` | PASS, max|diff| 0, 2,252 周期 |
+| functional | biquad | `biquad` | PASS, max|diff| 0, 1,070 周期 |
+| functional | melscale_fbanks | `melscale_fbanks` | PASS, max|diff| 0, 69 周期 |
+| functional | linear_fbanks | `linear_fbanks` | PASS, max|diff| 0, 69 周期 |
+| functional | frechet_distance | `frechet_distance` | PASS, max|diff| 0, 714 周期 |
 
 Not a case: `Vad` (a trigger search with data-dependent loops and no fixed output length).
+
+Skipped from torchaudio.functional: 17 sox effect wrappers (apply_codec, bandpass_biquad, ...), forced_align
+(deprecated + runtime error), and functions with data-dependent loops (detect_pitch_frequency, vad).
 
 **Exports that differ from the reference** (the reference is always the genuine transform, asserted
 equal before export, within 1e-3 to 2e-3 for the spectral and multichannel cases):
