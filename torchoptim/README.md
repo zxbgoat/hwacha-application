@@ -1,9 +1,9 @@
-# torch.optim on Hwacha
+# torch.optim and torch.nn.init on Hwacha
 
 The interfaces of docs.pytorch.org/docs/2.14/optim.html (torch 2.9): the 16 algorithms (with their
 momentum / Nesterov / AMSGrad / centered / maximize variants), the 15 learning-rate schedulers and the
-weight-averaging utilities (`AveragedModel` with the SWA / EMA average functions, `SWALR`), one case
-per interface, run through PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc and checked on Spike
+weight-averaging utilities (`AveragedModel` with the SWA / EMA average functions, `SWALR`), plus the
+15 initializers of docs.pytorch.org/docs/2.14/nn.init.html (16 cases), one case per interface, run through PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc and checked on Spike
 against PyTorch. Layout, generic host, `gen.sh` and Makefile are those of `../tafunc`; the cases live
 in `export_opt.py`.
 
@@ -20,7 +20,7 @@ the true loss. The weight-averaging cases output `[parameters | averaged paramet
 steps with `AveragedModel.update_parameters` after each (`SWALR` annealing the learning rate to
 `swa_lr` over 3 epochs).
 
-## Cases: 41, all PASS
+## Cases: 57, all PASS
 
 | group | case | interface | Hwacha |
 |---|---|---|---|
@@ -65,6 +65,22 @@ steps with `AveragedModel.update_parameters` after each (`SWALR` annealing the l
 | weight averaging | swa_multi_avg_fn | `swa_utils.get_swa_multi_avg_fn` | PASS, max\|diff\| 0, 4,653 周期 |
 | weight averaging | ema_multi_avg_fn | `swa_utils.get_ema_multi_avg_fn` | PASS, max\|diff\| 0, 4,990 周期 |
 | weight averaging | swalr | `swa_utils.SWALR (+ AveragedModel)` | PASS, max\|diff\| 0, 4,653 周期 |
+| nn.init | calculate_gain | `nn.init.calculate_gain (leaky_relu 0.2, tanh, relu, selu, linear)` | PASS, max\|diff\| 0, 239 周期 |
+| nn.init | constant_ | `nn.init.constant_(0.3)` | PASS, max\|diff\| 0, 69 周期 |
+| nn.init | ones_ | `nn.init.ones_` | PASS, max\|diff\| 0, 68 周期 |
+| nn.init | zeros_ | `nn.init.zeros_` | PASS, max\|diff\| 0, 66 周期 |
+| nn.init | eye_ | `nn.init.eye_` | PASS, max\|diff\| 0, 274 周期 |
+| nn.init | dirac_ | `nn.init.dirac_ (4x2x3x3)` | PASS, max\|diff\| 0, 145 周期 |
+| nn.init | dirac_groups | `nn.init.dirac_(groups=2) (4x2x3)` | PASS, max\|diff\| 0, 141 周期 |
+| nn.init | uniform_ | `nn.init.uniform_(-0.5, 0.5)` | PASS, max\|diff\| 0, 121 周期 |
+| nn.init | normal_ | `nn.init.normal_(0, 0.5)` | PASS, max\|diff\| 0, 121 周期 |
+| nn.init | trunc_normal_ | `nn.init.trunc_normal_(0, 1, -1.5, 1.5)` | PASS, max\|diff\| 0, 121 周期 |
+| nn.init | xavier_uniform_ | `nn.init.xavier_uniform_(gain=1.5)` | PASS, max\|diff\| 0, 121 周期 |
+| nn.init | xavier_normal_ | `nn.init.xavier_normal_` | PASS, max\|diff\| 0, 121 周期 |
+| nn.init | kaiming_uniform_ | `nn.init.kaiming_uniform_(a=0.1, fan_in, leaky_relu)` | PASS, max\|diff\| 0, 121 周期 |
+| nn.init | kaiming_normal_ | `nn.init.kaiming_normal_(fan_out, relu)` | PASS, max\|diff\| 0, 121 周期 |
+| nn.init | sparse_ | `nn.init.sparse_(0.5, std=0.1)` | PASS, max\|diff\| 0, 121 周期 |
+| nn.init | orthogonal_ | `nn.init.orthogonal_(gain=1.5)` | PASS, max\|diff\| 0, 6,047 周期 |
 
 Not cases: the `Optimizer` base-class methods and hooks (`step`, `zero_grad`, `add_param_group`,
 `state_dict` / `load_state_dict` and their pre / post hooks, `register_optimizer_step_pre/post_hook`,
@@ -95,5 +111,12 @@ Python-side bookkeeping, not tensor computations. `Optimizer.step` is what every
   `ys > 1e-10` history-update condition holds on this problem.
 - AveragedModel's first `update_parameters` copies the parameters (`n_averaged == 0`); the averaging
   starts at the second.
+- nn.init: every initializer fills a tensor in place; the case runs it on a copy of the 4x8 input (the
+  shapes `dirac_` needs otherwise) and returns the filled tensor. The random initializers (`uniform_`,
+  `normal_`, `trunc_normal_`, `xavier_*`, `kaiming_*`, `sparse_`) draw under `torch.manual_seed(0)`; the
+  RNG ops have no lowering / the CPU generator is not reproduced on Hwacha, so the seed-0 draw is a
+  constant of the case and the reference redraws it. `dirac_` / `eye_` assign by index: the delta
+  pattern is a constant. `orthogonal_` is the QR of the seed-0 Gaussian (`linalg.qr` has no lowering):
+  Gram-Schmidt on the pinned Gaussian, the column signs fixed by `sign(diag(R))` as torch does.
 - Adam / AdamW / NAdam differ from the reference by up to 3e-6: the bias-corrected step sizes are
   Python floats in the functional implementation and float32 products on Hwacha.

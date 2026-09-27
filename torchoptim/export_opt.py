@@ -287,6 +287,46 @@ def build(name):
     averaged('averaged_model_swa', 'swa'); averaged('averaged_model_ema', 'ema')
     averaged('swa_multi_avg_fn', 'swa'); averaged('ema_multi_avg_fn', 'ema')
     averaged('swalr', 'swa', swalr=True)
+    # ================= torch.nn.init (docs.pytorch.org/docs/2.14/nn.init.html) =================
+    # Every initializer fills a tensor in place; the case runs it on a copy of the input (4x8, or the shapes the
+    # initializer needs) and returns the filled tensor, the reference the same call. The random initializers
+    # draw under torch.manual_seed(0): the RNG ops either have no torch-mlir lowering or the CPU generator is
+    # not reproduced on Hwacha, so the seed-0 draw is a constant of the case (the reference redraws it).
+    import torch.nn.init as I
+    def icase(n, body, ref, x, **b): C[n] = lambda: (Ref(body, ref, None, **b), x)
+    def pinned(fn, shape=(4, 8)):
+        torch.manual_seed(0); t = torch.empty(*shape); fn(t); return t
+    def init_ref(fn):
+        def r(s, x): torch.manual_seed(0); t = x.clone(); fn(t); return t
+        return r
+    XI = torch.randn(4, 8)
+    icase('calculate_gain', lambda s, x: x * I.calculate_gain('leaky_relu', 0.2) + I.calculate_gain('tanh') + I.calculate_gain('relu') + I.calculate_gain('selu') + I.calculate_gain('linear'), lambda s, x: x * I.calculate_gain('leaky_relu', 0.2) + I.calculate_gain('tanh') + I.calculate_gain('relu') + I.calculate_gain('selu') + I.calculate_gain('linear'), XI)
+    icase('constant_', lambda s, x: I.constant_(x.clone(), 0.3), init_ref(lambda t: I.constant_(t, 0.3)), XI)
+    icase('ones_', lambda s, x: I.ones_(x.clone()), init_ref(I.ones_), XI)
+    icase('zeros_', lambda s, x: I.zeros_(x.clone()), init_ref(I.zeros_), XI)
+    icase('eye_', lambda s, x: I.eye_(x.clone()), init_ref(I.eye_), XI)
+    icase('dirac_', lambda s, x: x * 0 + s.d, init_ref(I.dirac_), torch.randn(4, 2, 3, 3), d=I.dirac_(torch.empty(4, 2, 3, 3)))   # the delta pattern (index assignments) as a constant
+    icase('dirac_groups', lambda s, x: x * 0 + s.d, init_ref(lambda t: I.dirac_(t, groups=2)), torch.randn(4, 2, 3), d=I.dirac_(torch.empty(4, 2, 3), groups=2))
+    for n_, fn_ in [('uniform_', lambda t: I.uniform_(t, -0.5, 0.5)), ('normal_', lambda t: I.normal_(t, 0.0, 0.5)), ('trunc_normal_', lambda t: I.trunc_normal_(t, 0.0, 1.0, -1.5, 1.5)),
+                    ('xavier_uniform_', lambda t: I.xavier_uniform_(t, gain=1.5)), ('xavier_normal_', lambda t: I.xavier_normal_(t)), ('kaiming_uniform_', lambda t: I.kaiming_uniform_(t, a=0.1, mode='fan_in', nonlinearity='leaky_relu')),
+                    ('kaiming_normal_', lambda t: I.kaiming_normal_(t, mode='fan_out', nonlinearity='relu')), ('sparse_', lambda t: I.sparse_(t, 0.5, std=0.1))]:
+        icase(n_, (lambda fn_: lambda s, x: x * 0 + s.draw)(fn_), init_ref(fn_), XI, draw=pinned(fn_))
+    # orthogonal_: QR of the seed-0 Gaussian (linalg.qr has no lowering) as Gram-Schmidt on the pinned Gaussian, the
+    # columns' signs fixed by the sign of R's diagonal as torch does (q *= sign(diag(r)))
+    def gram_schmidt_q(A):
+        cols = []
+        for j in range(A.shape[1]):
+            v = A[:, j]
+            for u in cols: v = v - (u @ A[:, j]) * u
+            cols.append(v / v.norm())
+        return torch.stack(cols, 1)
+    def orth_body(s, x):
+        Q = gram_schmidt_q(s.g)                                   # rows < cols: torch works on the transpose (8x4), Q 8x4
+        d = (Q * s.g).sum(0)                                      # diag(R) = q_j . a_j
+        Q = Q * torch.sign(d)[None, :]
+        return x * 0 + 1.5 * Q.t()
+    torch.manual_seed(0); g_ = torch.empty(4, 8).normal_(0, 1).t()   # the flattened (rows, cols) = (4, 8) Gaussian orthogonal_ draws, transposed as it does for rows < cols
+    icase('orthogonal_', orth_body, init_ref(lambda t: I.orthogonal_(t, gain=1.5)), XI, g=g_)
     if name == '--list': return sorted(C)
     if name not in C: raise SystemExit('unknown case ' + name)
     return C[name]()
