@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / tafunc / torchgeometric / torchvision / torchvideo / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / tafunc / torchoptim / torchgeometric / torchvision / torchvideo / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -932,6 +932,32 @@ elif d == 'tafunc':
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchaudio 变换算出，导出前脚本断言两者一致。\n\n'
         t += '来源：`export_taf.py` / `taf_lib.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子；复数谱以末维为 (re, im) 的实张量进出。\n\n'
+        t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
+        has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
+        t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认"}`\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
+elif d == 'torchoptim':
+    sys.path.insert(0, D); ef = load(os.path.join(D, 'export_opt.py'), 'ef')
+    docs = 'https://docs.pytorch.org/docs/2.14/optim.html'
+    body = open(os.path.join(D, 'export_opt.py')).read()
+    iface = {'sgd':'SGD','sgd_momentum':'SGD(momentum=0.9, weight_decay=0.01)','sgd_nesterov':'SGD(momentum=0.9, nesterov=True)','sgd_maximize':'SGD(lr=0.01, maximize=True)','adam':'Adam','adam_amsgrad':'Adam(amsgrad=True, weight_decay=0.01)','adamw':'AdamW(weight_decay=0.01)','adamw_amsgrad':'AdamW(weight_decay=0.01, amsgrad=True)','adamax':'Adamax','adadelta':'Adadelta(lr=1.0)','adagrad':'Adagrad','nadam':'NAdam','radam':'RAdam','rmsprop':'RMSprop(lr=0.01)','rmsprop_centered':'RMSprop(lr=0.01, centered=True, momentum=0.9)','rprop':'Rprop(lr=0.01)','asgd':'ASGD','adafactor':'Adafactor(lr=0.01)','muon':'Muon(lr=0.02)','sparse_adam':'SparseAdam','lbfgs':'LBFGS(lr=0.1, max_iter=3, history_size=4)',
+             'lambda_lr':'lr_scheduler.LambdaLR(lambda e: 0.9 ** e)','multiplicative_lr':'lr_scheduler.MultiplicativeLR(lambda e: 0.9)','step_lr':'lr_scheduler.StepLR(step_size=3, gamma=0.5)','multi_step_lr':'lr_scheduler.MultiStepLR(milestones=[2, 5], gamma=0.5)','constant_lr':'lr_scheduler.ConstantLR(factor=0.5, total_iters=4)','linear_lr':'lr_scheduler.LinearLR(start_factor=0.25, total_iters=4)','exponential_lr':'lr_scheduler.ExponentialLR(gamma=0.8)','polynomial_lr':'lr_scheduler.PolynomialLR(total_iters=6, power=2.0)','cosine_annealing_lr':'lr_scheduler.CosineAnnealingLR(T_max=4, eta_min=0.01)','chained_scheduler':'lr_scheduler.ChainedScheduler([ConstantLR(0.5, 3), ExponentialLR(0.9)])','sequential_lr':'lr_scheduler.SequentialLR([ConstantLR(0.5, 3), ExponentialLR(0.9)], milestones=[3])','cyclic_lr':'lr_scheduler.CyclicLR(base_lr=0.01, max_lr=0.1, step_size_up=3)','one_cycle_lr':'lr_scheduler.OneCycleLR(max_lr=0.1, total_steps=9)','cosine_annealing_warm_restarts':'lr_scheduler.CosineAnnealingWarmRestarts(T_0=3, T_mult=2, eta_min=0.01)','reduce_lr_on_plateau':'lr_scheduler.ReduceLROnPlateau(factor=0.5, patience=0, threshold=0.5)',
+             'averaged_model_swa':'swa_utils.AveragedModel(avg_fn=get_swa_avg_fn())','averaged_model_ema':'swa_utils.AveragedModel(avg_fn=get_ema_avg_fn(0.9))','swa_multi_avg_fn':'swa_utils.AveragedModel(multi_avg_fn=get_swa_multi_avg_fn())','ema_multi_avg_fn':'swa_utils.AveragedModel(multi_avg_fn=get_ema_multi_avg_fn(0.9))','swalr':'swa_utils.SWALR(swa_lr=0.02, anneal_epochs=3, linear) + AveragedModel(SWA)'}
+    notes = {'adafactor': '_single_tensor_adafactor 用 .item() 取参数 RMS 与更新 RMS（torch.export 无法解析），导出图把它们保持为张量', 'rprop': '符号簿记的掩码赋值会 lower 成 tm_tensor.scan，导出图用 torch.where（同 capturable=True 路径的写法）', 'muon': 'Newton-Schulz 正交化在 bfloat16 下进行，RISC-V 工具链不支持（__truncsfbf2），导出图与参考都用 float32；向量参数按 1x16 矩阵给出', 'sparse_adam': '稀疏梯度上的 Adam 更新；稠密问题上每一行都被触及，导出图按 _functional.sparse_adam 的公式稠密书写，参考用 grad.to_sparse() 喂真正的 SparseAdam', 'lbfgs': 'LBFGS.step 按 4 次 closure 调用展开（无线搜索），方向 / 步长 / 历史 / 上一梯度 / 迭代计数跨 step 传递；首次迭代 t = min(1, 1/|g|_1)·lr', 'reduce_lr_on_plateau': '按真实 loss 调度；本用例自身运行得到的学习率序列为常量'}
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        m, x = ef.build(case); m = m.eval(); y = m.reference(x).detach()
+        kind = '优化算法' if case in iface and not iface[case].startswith(('lr_scheduler', 'swa_utils')) else ('学习率调度器' if iface[case].startswith('lr_scheduler') else '权重平均')
+        t = f'# {case}\n\n'
+        t += f'torch.optim 的 `torch.optim.{iface[case]}`（{kind}）在 Hwacha 上的 {"8" if kind != "优化算法" else "4"} 步更新，与 PyTorch 逐元素比对。文档：{docs}\n\n'
+        t += '问题：参数为 4x4 矩阵与 16 维向量（32 个 float 的输入），loss = 1/2 Σ w (p - t)²（w > 0、t 为常量），梯度 w (p - t) 为闭式；导出图只含更新规则'
+        if kind == '优化算法': t += '（调用算法的函数式单张量实现 torch.optim.<algo>.<algo>，即 Optimizer.step 所运行的），参考用真正的 Optimizer 在 nn.Parameter 上 backward。\n\n'
+        elif kind == '学习率调度器': t += '；SGD(lr 0.1) 8 步，每步后调度器 step，调度器算出的学习率序列是用例的常量，参考用真正的 LRScheduler。\n\n'
+        else: t += '；SGD 8 步，每步后 AveragedModel.update_parameters（第一次为复制），输出 [参数 | 平均参数]，参考用真正的 AveragedModel。\n\n'
+        if case in notes: t += f'**注意**：{notes[case]}。导出前脚本断言导出体与参考一致。\n\n'
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
