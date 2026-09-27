@@ -18,6 +18,7 @@ data) that builds with the RISC-V GNU toolchain and runs on Spike.
 | `torchvideo/` | pytorchvideo model zoo: Kinetics-400 (C2D, I3D, Slow, SlowFast R50/R101, CSN, R(2+1)D, X3D XS-L, MViT-B), AVA detection (RoIAlign as a constant gather), EfficientX3d; depthwise Conv3d as 2-D taps | 20 |
 | `torchgeometric/` | torch_geometric.nn (pytorch-geometric.readthedocs.io modules/nn.html): 55 convolutional layers, 26 aggregation operators, attention, normalization, pooling / unpooling, 44 models, KGE models, encodings, functional, dense layers, on one 8-node graph; static self-loop / scatter / int(max) / to_dense_batch / knn-radius replacements for torch.export | 182 |
 | `torchoptim/` | torch.optim (docs 2.14 optim.html): the 16 algorithms and their variants (functional single-tensor updates unrolled on a quadratic), 15 LR schedulers, AveragedModel SWA / EMA and SWALR | 41 |
+| `torchopera/` | the operator sections of torch.html (docs 2.14): Tensors, creation, indexing / slicing / joining, random sampling, pointwise, reduction, comparison, spectral, other, BLAS / LAPACK, foreach — one case per entry incl. the in-place variants | 579 |
 | `deformable/` | Deformable ConvNets (deform conv / PS-RoI ops, DeepLab, R-FCN, Faster R-CNN, FPN, each plain and deformable) | 20 |
 | `rodinia/` | Rodinia 3.1 OpenCL benchmarks compiled directly by hwacha-cc, with bare-metal hosts (16 pass, 3 documented compiler limits, 2 without assembly) | 21 |
 

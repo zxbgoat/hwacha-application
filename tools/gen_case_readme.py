@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / tafunc / torchoptim / torchgeometric / torchvision / torchvideo / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / tafunc / torchopera / torchoptim / torchgeometric / torchvision / torchvideo / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -932,6 +932,35 @@ elif d == 'tafunc':
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchaudio 变换算出，导出前脚本断言两者一致。\n\n'
         t += '来源：`export_taf.py` / `taf_lib.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子；复数谱以末维为 (re, im) 的实张量进出。\n\n'
+        t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
+        has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
+        t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认"}`\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
+elif d == 'torchopera':
+    import json
+    sys.path.insert(0, D); ef = load(os.path.join(D, 'export_op.py'), 'ef')
+    groups = json.load(open(os.path.join(D, '.logs', 'groups.json')))
+    body = open(os.path.join(D, 'export_op.py')).read(); body = body[body.find('def build(name):'):]
+    def def_line(case):
+        m = re.search(r"((?:case|rcase|unary|inplace|binary)\('%s', .*?)(?=; (?:case|rcase|unary|inplace|binary)\('|\n)" % re.escape(case), body)
+        return m.group(1).strip() if m else ''
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        m, x = ef.build(case); m = m.eval()
+        with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
+        line = def_line(case); sec = groups.get(case, '')
+        entry = case if not case.startswith('Tensor.') else case
+        url = 'https://docs.pytorch.org/docs/2.14/generated/torch.%s.html' % entry
+        t = f'# {case}\n\n'
+        t += f'torch 的 `torch.{entry}`（{sec}）在 Hwacha 上的一次调用，与 PyTorch 逐元素比对。文档：{url}\n\n'
+        t += f'定义（`export_op.py`）：\n\n```python\n{line}\n```\n\n'
+        t += '输入为 4x8 随机张量（算子要求时为整数 / 布尔 / 正数 / 有界输入或别的形状）；第二操作数、下标、掩码、权重为常量 buffer，整数 / 布尔结果转为 float，多个结果拉平拼接，in-place 变体作用于输入副本并返回它，复数张量以末维 [re | im] 表示，随机抽样在 seed 0 下抽一次（参考在同一 seed 下抽取）。\n\n'
+        if hasattr(m, 'reference'): t += '**注意**：导出图与 torch 的算子不同（该算子没有 torch-mlir / hwacha-mlir 的 lowering，或 hwacha-cc 没有对应的向量 libm 函数，或输出形状数据相关）；等价的张量写法见 `op_lib.py` 与套件 README 的说明。参考值由真正的 torch 调用算出，导出前脚本断言两者一致。\n\n'
+        bufs = bufs_of(m)
+        if bufs: t += f'常量 buffer：{bufs}\n\n'
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
