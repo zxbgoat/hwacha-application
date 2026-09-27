@@ -16,6 +16,7 @@ data) that builds with the RISC-V GNU toolchain and runs on Spike.
 | `torchaudio/` | the torchaudio 2.9 model classes (Conformer, Emformer, ConvTasNet, DeepSpeech, Wav2Letter, HDemucs, wav2vec2 / WavLM / HuBERT, RNN-T, SQUIM, Tacotron2, WaveRNN) at tiny sizes | 16 |
 | `tafunc/` | torchaudio.transforms (spectral, masking, waveform, multichannel beamforming, RNN-T loss) + torchaudio.functional (IIR filters, filter banks, Fréchet distance) | 43 |
 | `torchvideo/` | pytorchvideo model zoo: Kinetics-400 (C2D, I3D, Slow, SlowFast R50/R101, CSN, R(2+1)D, X3D XS-L, MViT-B), AVA detection (RoIAlign as a constant gather), EfficientX3d; depthwise Conv3d as 2-D taps | 20 |
+| `torchgeometric/` | torch_geometric.nn (pytorch-geometric.readthedocs.io modules/nn.html): 55 convolutional layers, 26 aggregation operators, attention, normalization, pooling / unpooling, 44 models, KGE models, encodings, functional, dense layers, on one 8-node graph; static self-loop / scatter / int(max) / to_dense_batch / knn-radius replacements for torch.export | 182 |
 | `deformable/` | Deformable ConvNets (deform conv / PS-RoI ops, DeepLab, R-FCN, Faster R-CNN, FPN, each plain and deformable) | 20 |
 | `rodinia/` | Rodinia 3.1 OpenCL benchmarks compiled directly by hwacha-cc, with bare-metal hosts (16 pass, 3 documented compiler limits, 2 without assembly) | 21 |
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / tafunc / torchvision / torchvideo / deformable /
+"""Write a README.md into every case directory of torchnn / torchfunc / torchintf / ttmodule / ttmodel / tvintf / torchaudio / tafunc / torchgeometric / torchvision / torchvideo / deformable /
 rodinia / polybench / deepbench / shoc, from the
 export scripts (module structure, shapes, constant buffers), models.txt, HWMLIRFLAGS and the Spike
 result lines in <dir>/.logs/run_full.txt.        usage: gen_case_readme.py <dir> [case ...]"""
@@ -932,6 +932,51 @@ elif d == 'tafunc':
         t += f'用例：{what}。\n\n'
         if note: t += f'**注意**：{note}。参考值由真正的 torchaudio 变换算出，导出前脚本断言两者一致。\n\n'
         t += '来源：`export_taf.py` / `taf_lib.py`（PyTorch -> torch-mlir -> hwacha-mlir -> hwacha-cc），随机输入、固定种子；复数谱以末维为 (re, im) 的实张量进出。\n\n'
+        t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
+        has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
+        t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))
+        t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行\nmake gen-' + case + '      # 从 PyTorch 重新生成\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认"}`\n\n'
+        t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'
+        write(case, t)
+
+elif d == 'torchgeometric':
+    sys.path.insert(0, D); ef = load(os.path.join(D, 'export_tg.py'), 'ef')
+    docs = 'https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html'
+    src = open(os.path.join(D, 'export_tg.py')).read(); body = src[src.find('def build(name):'):]
+    groups = [('conv', 'convolutional layers', '卷积层'), ('aggr', 'aggregation operators', '聚合算子'), ('attention', 'attention', '注意力'), ('norm', 'normalization layers', '归一化层'), ('pool', 'pooling layers', '池化层'), ('unpool', 'unpooling', '反池化'), ('models', 'models', '模型'), ('kge', 'KGE models', 'KGE 模型'), ('encoding', 'encodings', '编码'), ('functional', 'functional', 'functional'), ('dense', 'dense convolutional / pooling layers', '稠密卷积 / 池化层')]
+    marks = [(body.find('# ---- ' + g[1]), g) for g in groups]
+    def group_of(case):
+        m = re.search(r"(?:case|rcase|L|A|NM|PL|M|KG|DN)\('%s'" % re.escape(case), body) or re.search(r"C\['%s'\]" % re.escape(case), body)
+        p_ = m.start() if m else 0; g = groups[0]
+        for pos, gg in marks:
+            if 0 <= pos <= p_: g = gg
+        return g
+    def def_line(case):
+        """the case's defining statement (one line) and the comment of the body it names"""
+        m = re.search(r"^(    (?:case|rcase|L|A|NM|PL|M|KG|DN)\('%s'.*)$" % re.escape(case), body, re.M) or re.search(r"^(    C\['%s'\].*)$" % re.escape(case), body, re.M)
+        line = m.group(1).strip() if m else ''
+        fn = re.match(r"(?:rcase|case)\('[^']+', (\w+),", line)
+        note = ''
+        if fn:
+            dm = re.search(r"    def %s\(s, x\):\s*#\s*(.*)" % fn.group(1), body)
+            if dm: note = dm.group(1).strip()
+        return line, note
+    for case in sorted(os.listdir(D)):
+        if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
+        g = group_of(case); line, note = def_line(case)
+        m, x = ef.build(case); m = m.eval()
+        with torch.no_grad(): y = m.reference(x) if hasattr(m, 'reference') else m(x)
+        cls = re.search(r"G\.(\w+)\(", line) or re.search(r"G\.(\w+)", line); cls = cls.group(1) if cls else case
+        t = f'# {case}\n\n'
+        t += f'torch_geometric 的 `torch_geometric.nn.{cls}`（{g[2]}）在 Hwacha 上的一次调用，与 PyTorch 逐元素比对。文档：{docs}\n\n'
+        t += '用例图：8 个节点、4 维特征、16 条有向边（8 对无向边，无自环），batch 向量分成 2 个各 4 节点的图；边下标、边特征、坐标、batch 等为常量 buffer，随机权重、固定种子，eval 模式。\n\n'
+        t += f'定义（`export_tg.py`）：\n\n```python\n{line}\n```\n\n'
+        if hasattr(m, 'reference'):
+            t += '**注意**：导出图与 PyG 的 forward 不同' + (f'：{note}' if note else '') + '。参考值由真正的 torch_geometric 调用算出（自环 / scatter / 邻域搜索等工具换回原版），导出前脚本断言两者一致。`export_tg.py` 顶部的静态工具替换（自环、scatter、int(max)、to_dense_batch、knn / radius 录制回放）对每个用例都生效，见套件 README。\n\n'
+        else:
+            t += '导出图即 PyG 的 forward（`export_tg.py` 顶部的静态工具替换对每个用例都生效：自环、scatter、int(max)、to_dense_batch、knn / radius 录制回放，见套件 README）。\n\n'
+        bufs = bufs_of(m)
+        if bufs: t += f'常量 buffer：{bufs}\n\n'
         t += '## 形状\n\n| | 形状 |\n|---|---|\n' + f'| 输入 `x` | {shp(x)} |\n| 输出 | {shp(y)} |\n'
         has_lib = os.path.exists(os.path.join(D, case, 'hwlib.s'))
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [('`mod_main.c`', '通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\\|ref\\|），打印 PASS/FAIL'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出（`.incbin` 嵌入）'), ('`HWMLIRFLAGS`', 'hwacha-mlir 的映射选项')] + ([('`hwlib.s`', '库内核')] if has_lib else []))

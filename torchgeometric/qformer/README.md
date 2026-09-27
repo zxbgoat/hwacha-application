@@ -1,0 +1,52 @@
+# qformer
+
+torch_geometric 的 `torch_geometric.nn.QFormer`（注意力）在 Hwacha 上的一次调用，与 PyTorch 逐元素比对。文档：https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html
+
+用例图：8 个节点、4 维特征、16 条有向边（8 对无向边，无自环），batch 向量分成 2 个各 4 节点的图；边下标、边特征、坐标、batch 等为常量 buffer，随机权重、固定种子，eval 模式。
+
+定义（`export_tg.py`）：
+
+```python
+case('qformer', lambda s, x: s.m(x.unsqueeze(0)).squeeze(0), None, lambda: dict(m=G.QFormer(input_dim=F, hidden_dim=8, output_dim=O, num_heads=2, num_layers=1)))
+```
+
+导出图即 PyG 的 forward（`export_tg.py` 顶部的静态工具替换对每个用例都生效：自环、scatter、int(max)、to_dense_batch、knn / radius 录制回放，见套件 README）。
+
+常量 buffer：`ei` 2x16 (int64)
+
+## 形状
+
+| | 形状 |
+|---|---|
+| 输入 `x` | 8x4 |
+| 输出 | 8x6 |
+
+## 文件
+
+| 文件 | 内容 |
+|---|---|
+| `qformer.s` | hwacha-cc 生成的汇编，入口 `net` |
+| `mod_main.c` | 通用 host：从 check.bin 读入输入，调用 `net(x)`，与参考输出比对（容差 1e-3 + 1e-2·max\|ref\|），打印 PASS/FAIL |
+| `qformer_check.bin` | 输入与 PyTorch 参考输出（`.incbin` 嵌入） |
+| `HWMLIRFLAGS` | hwacha-mlir 的映射选项 |
+| `README.md` | 本文件 |
+
+## 编译与运行
+
+```
+make qformer          # 编译 -> qformer/qformer.riscv
+make qformer.spike    # 在 Spike 上运行
+make gen-qformer      # 从 PyTorch 重新生成
+```
+
+hwacha-mlir 映射：`--collapse-all`
+
+## Spike 结果
+
+| 项目 | 值 |
+|---|---|
+| 结果 | PASS |
+| 周期数（rdcycle） | 5,764 |
+| max\|diff\| | 0 |
+| max\|ref\| | 1.16916 |
+
