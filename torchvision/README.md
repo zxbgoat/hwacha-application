@@ -34,12 +34,11 @@ mlir-opt and the torch-mlir venv (`../.tmenv`, symlinked from `/tmp/tmenv`).
 | classification | 80 (all of torchvision 0.24) | logits (1000 classes) + argmax |
 | semantic segmentation | 6: deeplabv3 x3, fcn x2, lraspp | the `out` logits map (1x21xHxW) |
 | object detection | 12: Faster/Mask/Keypoint R-CNN, FCOS, RetinaNet, SSD, SSDlite | the network part: backbone + FPN + heads over every anchor (two-stage models up to the RPN head); the post-processing (score threshold, NMS) has data-dependent shapes that torch.export cannot make static, so it is left to the host |
-| video classification | 7: r3d_18, mc3_18, r2plus1d_18, s3d, swin3d t/s/b | logits (400 classes) on a 1x3xTxHxW clip |
+| video classification | 9: r3d_18, mc3_18, r2plus1d_18, s3d, swin3d t/s/b, mvit_v1_b, mvit_v2_s | logits (400 classes) on a 1x3xTxHxW clip |
 | optical flow | 2: raft_small, raft_large | the last refined flow (1x2xHxW) after `_iters` updates on a 2x3xHxW frame pair |
 
 Not covered: the 12 **quantized** models (torch.export does not take eager-mode quantized modules: the
-packed `Conv2dPackedParamsBase` weights have no `__obj_flatten__`), and **mvit_v1_b / mvit_v2_s** (a
-grouped 3-D convolution that torch-mlir marks illegal, `aten.convolution` with groups on 5-D input).
+packed `Conv2dPackedParamsBase` weights have no `__obj_flatten__`).
 
 Largest cases: regnet_y_128gf and vit_h_14 carry 2.5 GB of weights each and take 7-11 minutes on
 Spike; ssd300_vgg16 (300x300 input) takes 22 minutes. The directory is ~50 GB with the .riscv images.
@@ -70,6 +69,11 @@ The host tolerates inputs up to 256x256 (`in[]` in tv_main.c).
 - Weights over 2 GB (regnet_y_128gf, vit_h_14) exceed the reach of pc-relative addressing, so
   `split_weights.py` puts the first half of the blob in `.weights_lo` before the code and the second
   half in `.weights_hi` after it (`tv.ld`); the host takes its arena start from an absolute word.
+- mvit_v1_b / mvit_v2_s: the pooling attention's depthwise Conv3d (groups = channels) is
+  `aten.convolution` with groups on a 5-D input, which torch-mlir marks illegal; the export splits it
+  along the temporal taps into 2-D depthwise convolutions over the B*T frames and sums them (as in
+  `../torchvideo`). The builders hard-code `spatial_size=(224, 224)` (the positional embedding is sized
+  by the patch grid), so `_mvit` is patched to build the same blocks for the 32x32 clip.
 - swin3d: `torch.roll` with a zero shift on a dim (the temporal window spans the clip) lowers to a
   0-sized slice + concat that bufferizes into an out-of-bounds subview; the export drops zero-shift dims.
 - hwacha-mlir: the stride-2 depthwise conv library kernel was called with pad=K-1 instead of 2, so every

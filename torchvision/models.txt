@@ -104,9 +104,11 @@ retinanet_resnet50_fpn 64 {}
 retinanet_resnet50_fpn_v2 64 {}
 ssd300_vgg16 300 {}
 ssdlite320_mobilenet_v3_large 64 {}
-# video classification: input 1x3xTxHxW (_T frames); mvit_v1_b / mvit_v2_s need a grouped 3-D conv
-# that torch-mlir cannot lower (aten.convolution marked illegal) and are left out
+# video classification: input 1x3xTxHxW (_T frames); mvit_v1_b / mvit_v2_s are built for the 32x32 clip
+# and their depthwise 3-D convolutions (illegal in torch-mlir) run as per-tap 2-D depthwise convolutions
 mc3_18 32 {"_T": 8}
+mvit_v1_b 32 {"_T": 16}
+mvit_v2_s 32 {"_T": 16}
 r2plus1d_18 32 {"_T": 8}
 r3d_18 32 {"_T": 8}
 s3d 64 {"_T": 16}

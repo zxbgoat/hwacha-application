@@ -51,7 +51,31 @@ elif family == 'video':
             if not kept: return x
             return _roll(x, tuple(s_ for s_, _ in kept), tuple(d_ for _, d_ in kept))
         torch.roll = roll_nz
+    if name.startswith('mvit'):
+        # mvit_v1_b / mvit_v2_s hard-code spatial_size=(224, 224) (the positional embedding is sized by the
+        # patch grid); build the same block configuration for the HWxHW clip
+        _mvit = M.video.mvit._mvit
+        def mvit_small(**k): k['spatial_size'] = (HW, HW); return _mvit(**k)
+        M.video.mvit._mvit = mvit_small
     v = M.get_model(name, weights=None, **kw)
+    if name.startswith('mvit'):
+        # the pooling attention's depthwise Conv3d (groups = channels) is aten.convolution with groups on a
+        # 5-D input, which torch-mlir marks illegal; split it along the temporal taps into 2-D depthwise
+        # convolutions over the B*T frames (the temporal padding / stride applied to the frame axis)
+        class DepthwiseConv3d(torch.nn.Module):
+            def __init__(s, c): super().__init__(); s.c = c
+            def forward(s, x):
+                c = s.c; B, C, T, H, W = x.shape; kT = c.kernel_size[0]; sT, sH, sW = c.stride; pT, pH, pW = c.padding
+                xt = torch.nn.functional.pad(x, (0, 0, 0, 0, pT, pT)); To = (T + 2 * pT - kT) // sT + 1; out = None
+                for t in range(kT):
+                    fr = xt[:, :, t:t + sT * (To - 1) + 1:sT].permute(0, 2, 1, 3, 4).reshape(B * To, C, H, W)
+                    y = torch.nn.functional.conv2d(fr, c.weight[:, :, t], None, (sH, sW), (pH, pW), 1, C)
+                    out = y if out is None else out + y
+                out = out.reshape(B, To, C, out.shape[-2], out.shape[-1]).permute(0, 2, 1, 3, 4)
+                return out if c.bias is None else out + c.bias[None, :, None, None, None]
+        for mod in list(v.modules()):
+            for cn, ch in list(mod.named_children()):
+                if isinstance(ch, torch.nn.Conv3d) and ch.groups > 1: setattr(mod, cn, DepthwiseConv3d(ch))
     if name == 's3d':
         # S3D ends in AvgPool3d((2,7,7)), sized for the canonical 16x224x224 clip (7x7 after /32). Use the
         # global average instead (identical there) so the model runs on a 16x64x64 clip.

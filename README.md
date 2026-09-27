@@ -9,7 +9,7 @@ data) that builds with the RISC-V GNU toolchain and runs on Spike.
 | `torchnn/` | single `torch.nn` layers | 121 |
 | `torchfunc/` | `torch.nn.functional` functions | 111 |
 | `torchintf/` | top-level `torch.*` tensor functions: `torch.topk`, the 22 `torch.fft` functions, the 11 `torch.signal.windows`, the 41 `torch.linalg` functions, the 56 `torch.special` functions | 131 |
-| `torchvision/` | torchvision models (classification, segmentation, detection, video, optical flow) | 107 |
+| `torchvision/` | torchvision models (classification, segmentation, detection, video, optical flow) | 109 |
 | `ttmodule/` | the torchtune 0.6 module reference (attention, transformer layers, decoder, ViT, LoRA / DoRA, fusion, losses, kv-cache utilities) | 34 |
 | `ttmodel/` | the torchtune 0.6 model reference: llama2 / code llama / llama3 / 3.1 / 3.2 / 3.3 / 3.2 vision, qwen2 / 2.5, phi3 / 4, mistral, gemma / gemma2, clip, each plain and LoRA, at tiny sizes | 41 |
 | `tvintf/` | torchvision.transforms.v2 image transforms (42, random ones pinned to one draw) torchvision.ops (41: boxes, NMS, losses, RoI operators, deformable convolution, layers) torchvision.utils (7: grids, drawing, flow colouring) and torchvision.io (8: a tensor baseline JPEG codec, PNG modes) | 98 |
