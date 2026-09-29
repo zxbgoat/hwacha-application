@@ -1,0 +1,54 @@
+# yolo26s_sem
+
+Ultralytics YOLO26 `yolo26-sem.yaml` 的 `s` 规模（small，语义分割，检测头 `SemanticSegment`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/semantic
+
+比对内容：P3 级的类别 logits 图（1 x 19 x H/8 x W/8），逐元素比对。
+
+权重随机（固定种子；BatchNorm 给随机的 running 统计量、卷积偏置随机抽取，使前向非退化），输入随机；同一组权重同时用于 PyTorch 参考与 Hwacha 构建。
+
+## 本 case 的特殊处理
+
+- SemanticSegment 在 eval（非 export）下返回 H/8 的 logits；不走 export 路径的 8 倍双线性上采样与 argmax 烘焙。
+
+## 形状与规模
+
+| | 值 |
+|---|---|
+| 输入 | 1x3x64x64（12,288 个 float）|
+| 输出元素数 | 1,216 |
+| 参数量 | 6.5M |
+| 权重 blob | 24 MB |
+| 缩放常数 [depth, width, max_channels] | `[0.50, 0.50, 1024]` |
+
+## 文件
+
+| 文件 | 内容 |
+|---|---|
+| `yolo26s_sem.s` | hwacha-cc 生成的汇编，入口 `net` |
+| `yolo26s_sem_weights.bin.S` | 权重的 `.incbin` 桩，按符号切分 blob；前半段放 `.weights_lo`、后半段放 `.weights_hi`（`split_weights.py`） |
+| `yolo26s_sem_weights.bin` | 权重 blob（不入 git，`make gen-yolo26s_sem` 按固定种子逐字节重建） |
+| `yolo26s_sem_check.bin` | 输入与 PyTorch 参考输出，host 用 `.incbin` 内嵌 |
+| `yolo_main.c` | 通用 host：调用 `net`，比对 max\|diff\|（容差 1e-4 + 1e-2·max\|ref\|）与 argmax（分类输出） |
+| `hwlib.s` | 卷积 / 池化库内核 |
+| `README.md` | 本文件 |
+
+## 编译与运行
+
+```
+make yolo26s_sem          # 编译 -> yolo26s_sem/yolo26s_sem.riscv
+make yolo26s_sem.spike    # 在 Spike 上运行（内存按权重大小自动确定）
+make gen-yolo26s_sem      # 从 PyTorch 重新生成汇编、权重与参考
+```
+
+hwacha-mlir 映射：`默认（最内维为 lane）`。
+
+## Spike 结果
+
+| 项目 | 值 |
+|---|---|
+| 结果 | PASS |
+| 周期数（rdcycle） | 18,048,548 |
+| max\|diff\| | 0 |
+| max\|ref\| | 1.88117 |
+| argmax（硬件 / 参考） | 888 / 888 |
+

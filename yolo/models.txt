@@ -1,0 +1,50 @@
+# Ultralytics YOLO26 (github.com/ultralytics/yolo26; ultralytics/cfg/models/26/*.yaml), one per line:
+#   <case> <input HW>
+# case = yolo26<scale>[_<task>]: the 5 scales n/s/m/l/x of yolo26.yaml (detection), -seg (instance
+# segmentation), -sem (semantic segmentation), -depth, -cls, -pose, -obb, and the P2 / P6 detection variants.
+# 64x64 inputs (P5 = 2x2); the P6 models (stride 64) take 128x128.
+yolo26n 64
+yolo26s 64
+yolo26m 64
+yolo26l 64
+yolo26x 64
+yolo26n_seg 64
+yolo26s_seg 64
+yolo26m_seg 64
+yolo26l_seg 64
+yolo26x_seg 64
+yolo26n_sem 64
+yolo26s_sem 64
+yolo26m_sem 64
+yolo26l_sem 64
+yolo26x_sem 64
+yolo26n_depth 64
+yolo26s_depth 64
+yolo26m_depth 64
+yolo26l_depth 64
+yolo26x_depth 64
+yolo26n_cls 64
+yolo26s_cls 64
+yolo26m_cls 64
+yolo26l_cls 64
+yolo26x_cls 64
+yolo26n_pose 64
+yolo26s_pose 64
+yolo26m_pose 64
+yolo26l_pose 64
+yolo26x_pose 64
+yolo26n_obb 64
+yolo26s_obb 64
+yolo26m_obb 64
+yolo26l_obb 64
+yolo26x_obb 64
+yolo26n_p2 64
+yolo26s_p2 64
+yolo26m_p2 64
+yolo26l_p2 64
+yolo26x_p2 64
+yolo26n_p6 128
+yolo26s_p6 128
+yolo26m_p6 128
+yolo26l_p6 128
+yolo26x_p6 128
