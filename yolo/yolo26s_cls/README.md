@@ -1,6 +1,6 @@
 # yolo26s_cls
 
-Ultralytics YOLO26 `yolo26s-cls.yaml` 的 `s` 规模（small，图像分类，检测头 `Classify`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/classify
+Ultralytics YOLO26 `yolo26s-cls.yaml` `s` 规模（small，图像分类，检测头 `Classify`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/classify
 
 比对内容：1000 类 logits（softmax 之前），逐元素比对并要求 argmax 一致。
 

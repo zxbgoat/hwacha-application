@@ -1,6 +1,6 @@
 # yolo26n_p2
 
-Ultralytics YOLO26 `yolo26n-p2.yaml` 的 `n` 规模（nano，目标检测（P2-P5 四级输出，多一级 stride 4），检测头 `Detect`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/detect
+Ultralytics YOLO26 `yolo26n-p2.yaml` `n` 规模（nano，目标检测（P2-P5 四级输出，多一级 stride 4），检测头 `Detect`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/detect
 
 比对内容：one2one 检测头在全部 anchor（P2-P5 四级）上的解码输出（1 x 84 x anchors），逐元素比对；top-k 选择留给 host。
 

@@ -1,6 +1,6 @@
 # yolo11l_obb
 
-Ultralytics YOLO11 `yolo11l-obb.yaml` 的 `l` 规模（large，旋转框检测，检测头 `OBB`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/obb
+Ultralytics YOLO11 `yolo11l-obb.yaml` `l` 规模（large，旋转框检测，检测头 `OBB`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/obb
 
 比对内容：检测头输出（1 x (4 + 80 + 1 个角度) x anchors），逐元素比对。
 

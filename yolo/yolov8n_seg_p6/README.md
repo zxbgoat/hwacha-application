@@ -1,6 +1,6 @@
 # yolov8n_seg_p6
 
-Ultralytics YOLOv8 `yolov8n-seg-p6.yaml` 的 `n` 规模（nano，实例分割（P3-P6 四级输出），检测头 `Segment`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolov8 ；任务文档：https://docs.ultralytics.com/tasks/segment
+Ultralytics YOLOv8 `yolov8n-seg-p6.yaml` `n` 规模（nano，实例分割（P3-P6 四级输出），检测头 `Segment`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolov8 ；任务文档：https://docs.ultralytics.com/tasks/segment
 
 比对内容：检测头输出（1 x (4 + 80 + 32 个 mask 系数) x anchors，P3-P6 四级）与原型 mask（1 x 32 x H/4 x W/4）拼成一行，逐元素比对。
 

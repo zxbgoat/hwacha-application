@@ -1,6 +1,6 @@
 # yolo26s_p6
 
-Ultralytics YOLO26 `yolo26s-p6.yaml` 的 `s` 规模（small，目标检测（P3-P6 四级输出，多一级 stride 64），检测头 `Detect`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/detect
+Ultralytics YOLO26 `yolo26s-p6.yaml` `s` 规模（small，目标检测（P3-P6 四级输出，多一级 stride 64），检测头 `Detect`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/detect
 
 比对内容：one2one 检测头在全部 anchor（P3-P6 四级）上的解码输出（1 x 84 x anchors），逐元素比对；top-k 选择留给 host。
 

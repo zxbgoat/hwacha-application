@@ -1,6 +1,6 @@
 # yolo11n
 
-Ultralytics YOLO11 `yolo11n.yaml` 的 `n` 规模（nano，目标检测，检测头 `Detect`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/detect
+Ultralytics YOLO11 `yolo11n.yaml` `n` 规模（nano，目标检测，检测头 `Detect`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/detect
 
 比对内容：检测头在全部 anchor 上的解码输出（1 x (4 + 80) x anchors：像素坐标框 + sigmoid 类别分数），逐元素比对；top-k 选择留给 host。
 

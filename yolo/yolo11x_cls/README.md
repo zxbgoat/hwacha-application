@@ -1,6 +1,6 @@
 # yolo11x_cls
 
-Ultralytics YOLO11 `yolo11x-cls.yaml` 的 `x` 规模（xlarge，图像分类，检测头 `Classify`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/classify
+Ultralytics YOLO11 `yolo11x-cls.yaml` `x` 规模（xlarge，图像分类，检测头 `Classify`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/classify
 
 比对内容：1000 类 logits（softmax 之前），逐元素比对并要求 argmax 一致。
 

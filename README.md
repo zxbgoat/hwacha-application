@@ -10,7 +10,7 @@ data) that builds with the RISC-V GNU toolchain and runs on Spike.
 | `torchfunc/` | `torch.nn.functional` functions | 111 |
 | `torchintf/` | top-level `torch.*` tensor functions: `torch.topk`, the 22 `torch.fft` functions, the 11 `torch.signal.windows`, the 41 `torch.linalg` functions, the 56 `torch.special` functions | 131 |
 | `torchvision/` | torchvision models (classification, segmentation, detection, video, optical flow) | 109 |
-| `yolo/` | Ultralytics YOLOv5 (github.com/ultralytics/yolov5; detect + P6), YOLOv8 (.../yolov8), YOLO11 (.../yolo11) and YOLO26 (.../yolo26): the n / s / m / l / x scales of detection, instance segmentation, classification, pose and OBB (v8, 11, 26), the P2 / P6 detection variants (v8, 26, v5-p6), seg-p6 / pose-p6 (v8) and semantic segmentation / depth (26), heads exported over every anchor | 125 |
+| `yolo/` | Ultralytics YOLOv3 (github.com/ultralytics/yolov3; detect, spp, tiny), YOLOv5 (detect + P6), YOLOv8 (.../yolov8), YOLO11 (.../yolo11) and YOLO26 (.../yolo26): the n / s / m / l / x scales of detection, instance segmentation, classification, pose and OBB (v8, 11, 26), the P2 / P6 detection variants (v8, 26, v5-p6), seg-p6 / pose-p6 (v8) and semantic segmentation / depth (26), heads exported over every anchor | 128 |
 | `demo/resnet/` | ResNet-50 image classification on a real photo with the pretrained ImageNet-1K V2 weights: top-5 classes printed on Spike, logits within 5e-6 of PyTorch | 1 |
 | `ttmodule/` | the torchtune 0.6 module reference (attention, transformer layers, decoder, ViT, LoRA / DoRA, fusion, losses, kv-cache utilities) | 34 |
 | `ttmodel/` | the torchtune 0.6 model reference: llama2 / code llama / llama3 / 3.1 / 3.2 / 3.3 / 3.2 vision, qwen2 / 2.5, phi3 / 4, mistral, gemma / gemma2, clip, each plain and LoRA, at tiny sizes | 41 |
@@ -27,5 +27,5 @@ data) that builds with the RISC-V GNU toolchain and runs on Spike.
 Each directory has its own Makefile and README (`make run` builds and runs everything on Spike).
 Toolchain paths default to `/home/tesla/hwacha-compiler` (`ROOT=` overrides).
 
-Not tracked: `.riscv` images and the torchvision / yolo weight blobs (`*_weights.bin`, 21 GB + 14 GB), which
+Not tracked: `.riscv` images and the torchvision / yolo weight blobs (`*_weights.bin`, 21 GB + 15 GB), which
 `make gen-<model>` regenerates deterministically.

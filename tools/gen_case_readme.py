@@ -1108,7 +1108,9 @@ elif d == 'yolo':
         n, hw = l.split()[:2]; models[n] = int(hw)
     # the two families: display name, model page, head classes for the detection tasks, and the two
     # things that differ between them (end2end, DFL)
-    fam = {'yolov5': ('YOLOv5', 'https://github.com/ultralytics/yolov5', 'Detect',
+    fam = {'yolov3': ('YOLOv3', 'https://github.com/ultralytics/yolov3', 'Detect',
+                      'YOLOv3 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
+           'yolov5': ('YOLOv5', 'https://github.com/ultralytics/yolov5', 'Detect',
                       'YOLOv5 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
            'yolov8': ('YOLOv8', 'https://github.com/ultralytics/yolov8', 'Detect / Segment / Pose / OBB',
                       'YOLOv8 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
@@ -1120,6 +1122,8 @@ elif d == 'yolo':
     task_cn = {'': ('目标检测', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
                'p2': ('目标检测（P2-P5 四级输出，多一级 stride 4）', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
                'p6': ('目标检测（P3-P6 四级输出，多一级 stride 64）', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
+               'spp': ('目标检测（SPP 变体：P5 输出前插入 SPP 空间金字塔池化，yolov3.yaml 本身没有）', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
+               'tiny': ('目标检测（tiny 变体：Darknet-53 精简为 7 个卷积 + 2 路输出，stride 16/32）', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
                'seg_p6': ('实例分割（P3-P6 四级输出）', 'Segment', 'https://docs.ultralytics.com/tasks/segment'),
                'pose_p6': ('姿态估计（P3-P6 四级输出）', 'Pose', 'https://docs.ultralytics.com/tasks/pose'),
                'seg': ('实例分割', 'Segment26 | Segment', 'https://docs.ultralytics.com/tasks/segment'),
@@ -1131,6 +1135,8 @@ elif d == 'yolo':
     compare = {'': '检测头在全部 anchor 上的解码输出（1 x (4 + 80) x anchors：像素坐标框 + sigmoid 类别分数），逐元素比对；top-k 选择留给 host',
                'p2': 'one2one 检测头在全部 anchor（P2-P5 四级）上的解码输出（1 x 84 x anchors），逐元素比对；top-k 选择留给 host',
                'p6': 'one2one 检测头在全部 anchor（P3-P6 四级）上的解码输出（1 x 84 x anchors），逐元素比对；top-k 选择留给 host',
+               'spp': '检测头在全部 anchor 上的解码输出（1 x 84 x anchors，P3-P5 三级），逐元素比对；top-k 选择留给 host',
+               'tiny': '检测头在全部 anchor 上的解码输出（1 x 84 x anchors，只有 stride 16 / 32 两级，64x64 输入下 20 个 anchor），逐元素比对；top-k 选择留给 host',
                'seg_p6': '检测头输出（1 x (4 + 80 + 32 个 mask 系数) x anchors，P3-P6 四级）与原型 mask（1 x 32 x H/4 x W/4）拼成一行，逐元素比对',
                'pose_p6': '检测头输出（1 x (4 + nc + 17x3 个关键点值) x anchors，P3-P6 四级，关键点已解码到像素坐标），逐元素比对',
                'seg': '检测头输出（1 x (4 + 80 + 32 个 mask 系数) x anchors）与原型的 mask（1 x 32 x H/4 x W/4）拼成一行，逐元素比对',
@@ -1143,8 +1149,12 @@ elif d == 'yolo':
     scales = {'n': '[0.50, 0.25, 1024]', 's': '[0.50, 0.50, 1024]', 'm': '[0.50, 1.00, 512]', 'l': '[1.00, 1.00, 512]', 'x': '[1.00, 1.50, 512]'}
     MODEL = {'': YT.DetectionModel, 'p2': YT.DetectionModel, 'p6': YT.DetectionModel, 'seg': YT.SegmentationModel,
              'sem': YT.SemanticSegmentationModel, 'depth': YT.DepthModel, 'cls': YT.ClassificationModel,
-             'pose': YT.PoseModel, 'obb': YT.OBBModel, 'seg_p6': YT.SegmentationModel, 'pose_p6': YT.PoseModel}
-    yaml_of = lambda family, scale, task: f'{family}{scale}{"-" + task.replace("_", "-") if task else ""}.yaml'
+             'pose': YT.PoseModel, 'obb': YT.OBBModel, 'seg_p6': YT.SegmentationModel, 'pose_p6': YT.PoseModel,
+             'spp': YT.DetectionModel, 'tiny': YT.DetectionModel}
+    # yolov3's yamls carry no scale (yolov3 / yolov3-spp / yolov3-tiny); the others are <family><scale>[-<task>]
+    def yaml_of(family, scale, task):
+        if family == 'yolov3': return f"yolov3{'-' + task if task else ''}.yaml"
+        return f'{family}{scale}{"-" + task.replace("_", "-") if task else ""}.yaml'
     def nparams(family, scale, task):
         try:
             m = MODEL[task](yaml_of(family, scale, task), verbose=False)
@@ -1153,8 +1163,11 @@ elif d == 'yolo':
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
         mt = re.fullmatch(r'(yolov5|yolov8|yolo11|yolo26)([nsmlx])(?:_(seg|sem|depth|cls|pose|obb|p2|p6|seg_p6|pose_p6))?', case)
-        if not mt: continue
-        family, scale, task = mt.group(1), mt.group(2), mt.group(3) or ''
+        if mt: family, scale, task = mt.group(1), mt.group(2), mt.group(3) or ''
+        else:  # yolov3 / yolov3_spp / yolov3_tiny: no scale letter
+            mt = re.fullmatch(r'yolov3(?:_(spp|tiny))?', case)
+            if not mt: continue
+            family, scale, task = 'yolov3', '', mt.group(1) or ''
         hw = models.get(case, 64); cn, headname, doc = task_cn[task]
         fname, url, heads, end2end = fam[family]; yaml = yaml_of(family, scale, task)
         # 'Segment26 | Segment': the 26 head class first, the v8 / 11 one second
@@ -1169,7 +1182,8 @@ elif d == 'yolo':
             with open(cb, 'rb') as f:
                 f.read(4); nin = struct.unpack('i', f.read(4))[0]; f.seek(8 + nin * 4); nout = struct.unpack('i', f.read(4))[0]
         t = f'# {case}\n\n'
-        t += f'Ultralytics {fname} `{yaml}` 的 `{scale}` 规模（{scale_cn[scale]}，{cn}，检测头 `{headname}`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：{url} ；任务文档：{doc}\n\n'
+        variant = (f'`{scale}` 规模（{scale_cn[scale]}，' if scale else '（') + f'{cn}，检测头 `{headname}`）'
+        t += f'Ultralytics {fname} `{yaml}` {variant}在 Hwacha 上的一次前向，与 PyTorch 比对。模型：{url} ；任务文档：{doc}\n\n'
         t += f'比对内容：{cmp}。\n\n'
         t += '权重随机（固定种子；BatchNorm 给随机的 running 统计量、卷积偏置随机抽取，使前向非退化），输入随机；同一组权重同时用于 PyTorch 参考与 Hwacha 构建。\n\n'
         notes = []
@@ -1179,7 +1193,7 @@ elif d == 'yolo':
                 notes.append('`reg_max=1`，DFL 为恒等：回归分支直接输出 4 个距离，`dist2bbox` 在 anchor 网格上解码成 xyxy 像素坐标。')
             else:
                 notes.append('`reg_max=16`：回归分支输出 16 个 bin 的 logits，DFL 对每个 bin 做 softmax 后求期望得到距离，`dist2bbox` 在 anchor 网格上解码成 xywh 像素坐标。')
-            if family == 'yolov5':
+            if family == 'yolov5':  # v3's stem is 3x3, so only v5 needs --unroll-small=2
                 notes.append('本 case 带 `HWMLIRFLAGS`（`--unroll-small=2`）：v5 的 stem 是 6x6 stride-2 卷积（其余家族是 3x3），逐 tap 完全展开时 hwacha-cc 报 `out of Hwacha registers of class vs (nothing to spill) in net_kernel_2`，`--collapse-all` 也救不回来，`gen.sh` 的重试链落到 `--unroll-small=2`（只展开 2 倍）。')
             notes.append('anchor 网格与 stride 是 `make_anchors` 生成的常量。torch-mlir 的 fx importer 把常量 tensor 经 `tensor.tolist()` 转成 literal，导出脚本改为直接经 numpy 取原始缓冲区（`_tensor_to_numpy`）；Detect 缓存的 anchor 表是 `make_anchors(...).transpose(0, 1)`，非连续，必须先 `ascontiguousarray`，否则常量按转置后的内存布局落盘，每个 anchor 的 x / y 坐标互换（yolo26 首版 max|diff| = 128 即由此而来）。')
         if task.endswith('p6'): notes.append('输入取 128x128：P6 级 stride 64，64x64 输入下 P6 只剩 1x1。')
@@ -1193,7 +1207,8 @@ elif d == 'yolo':
         np_ = nparams(family, scale, task)
         if np_: t += f'| 参数量 | {np_:.1f}M |\n'
         if wsz: t += f'| 权重 blob | {wsz / 1048576:.0f} MB |\n'
-        t += f'| 缩放常数 [depth, width, max_channels] | `{scales[scale]}` |\n'
+        t += (f'| 缩放常数 [depth, width, max_channels] | `{scales[scale]}` |\n' if scale
+              else '| depth_multiple / width_multiple | `1.0 / 1.0`（v3 用这两个常量，没有 compound scaling）|\n')
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [(f'`{case}_weights.bin.S`', '权重的 `.incbin` 桩，按符号切分 blob；前半段放 `.weights_lo`、后半段放 `.weights_hi`（`split_weights.py`）'), (f'`{case}_weights.bin`', f'权重 blob（不入 git，`make gen-{case}` 按固定种子逐字节重建）'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出，host 用 `.incbin` 内嵌'), ('`yolo_main.c`', '通用 host：调用 `net`，比对 max\\|diff\\|（容差 1e-4 + 1e-2·max\\|ref\\|）与 argmax（分类输出）'), ('`hwlib.s`', '卷积 / 池化库内核')] + ([('`HWMLIRFLAGS`', '本 case 需要的 hwacha-mlir 映射选项')] if flags(case) else []))
         t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行（内存按权重大小自动确定）\nmake gen-' + case + '      # 从 PyTorch 重新生成汇编、权重与参考\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认（最内维为 lane）"}`。\n\n'
         t += '## Spike 结果\n\n' + fmt_res(R.get(case)) + '\n'

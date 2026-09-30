@@ -1,6 +1,6 @@
 # yolov8m_cls
 
-Ultralytics YOLOv8 `yolov8m-cls.yaml` 的 `m` 规模（medium，图像分类，检测头 `Classify`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolov8 ；任务文档：https://docs.ultralytics.com/tasks/classify
+Ultralytics YOLOv8 `yolov8m-cls.yaml` `m` 规模（medium，图像分类，检测头 `Classify`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolov8 ；任务文档：https://docs.ultralytics.com/tasks/classify
 
 比对内容：1000 类 logits（softmax 之前），逐元素比对并要求 argmax 一致。
 

@@ -1,6 +1,6 @@
 # yolo26m_depth
 
-Ultralytics YOLO26 `yolo26m-depth.yaml` 的 `m` 规模（medium，深度估计，检测头 `Depth`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/depth
+Ultralytics YOLO26 `yolo26m-depth.yaml` `m` 规模（medium，深度估计，检测头 `Depth`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/depth
 
 比对内容：深度图（1 x 1 x H/4 x W/4，exp 后为正值），逐元素比对。
 

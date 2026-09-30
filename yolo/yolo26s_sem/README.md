@@ -1,6 +1,6 @@
 # yolo26s_sem
 
-Ultralytics YOLO26 `yolo26s-sem.yaml` 的 `s` 规模（small，语义分割，检测头 `SemanticSegment`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/semantic
+Ultralytics YOLO26 `yolo26s-sem.yaml` `s` 规模（small，语义分割，检测头 `SemanticSegment`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：https://docs.ultralytics.com/tasks/semantic
 
 比对内容：P3 级的类别 logits 图（1 x 19 x H/8 x W/8），逐元素比对。
 

@@ -1,6 +1,6 @@
 # yolo11n_pose
 
-Ultralytics YOLO11 `yolo11n-pose.yaml` 的 `n` 规模（nano，姿态估计，检测头 `Pose`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/pose
+Ultralytics YOLO11 `yolo11n-pose.yaml` `n` 规模（nano，姿态估计，检测头 `Pose`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/pose
 
 比对内容：检测头输出（1 x (4 + 80 + 17x3 个关键点值) x anchors，关键点已解码到像素坐标），逐元素比对。
 

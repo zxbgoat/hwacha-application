@@ -134,3 +134,9 @@ yolov5s_p6 128
 yolov5m_p6 128
 yolov5l_p6 128
 yolov5x_p6 128
+# YOLOv3 (github.com/ultralytics/yolov3; cfg/models/v3): the three yamls it ships are yolov3.yaml,
+# yolov3-spp.yaml and yolov3-tiny.yaml -- v3 uses depth_multiple / width_multiple, not scales, so there
+# are no n/s/m/l/x sizes (yolov3n.yaml / yolov3u.yaml are just aliases that check_yaml resolves to yolov3).
+yolov3 64
+yolov3_spp 64
+yolov3_tiny 64

@@ -1,6 +1,6 @@
 # yolov8n_obb
 
-Ultralytics YOLOv8 `yolov8n-obb.yaml` 的 `n` 规模（nano，旋转框检测，检测头 `OBB`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolov8 ；任务文档：https://docs.ultralytics.com/tasks/obb
+Ultralytics YOLOv8 `yolov8n-obb.yaml` `n` 规模（nano，旋转框检测，检测头 `OBB`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolov8 ；任务文档：https://docs.ultralytics.com/tasks/obb
 
 比对内容：检测头输出（1 x (4 + 80 + 1 个角度) x anchors），逐元素比对。
 

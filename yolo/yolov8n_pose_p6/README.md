@@ -1,6 +1,6 @@
 # yolov8n_pose_p6
 
-Ultralytics YOLOv8 `yolov8n-pose-p6.yaml` 的 `n` 规模（nano，姿态估计（P3-P6 四级输出），检测头 `Pose`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolov8 ；任务文档：https://docs.ultralytics.com/tasks/pose
+Ultralytics YOLOv8 `yolov8n-pose-p6.yaml` `n` 规模（nano，姿态估计（P3-P6 四级输出），检测头 `Pose`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolov8 ；任务文档：https://docs.ultralytics.com/tasks/pose
 
 比对内容：检测头输出（1 x (4 + 1 + 17x3 个关键点值) x anchors，P3-P6 四级，关键点已解码到像素坐标），逐元素比对。
 
