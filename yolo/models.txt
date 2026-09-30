@@ -1,7 +1,9 @@
-# Ultralytics YOLO26 (github.com/ultralytics/yolo26; ultralytics/cfg/models/26/*.yaml), one per line:
+# Ultralytics YOLO11 (github.com/ultralytics/yolo11; ultralytics/cfg/models/11/*.yaml) and
+# YOLO26 (github.com/ultralytics/yolo26; ultralytics/cfg/models/26/*.yaml), one per line:
 #   <case> <input HW>
-# case = yolo26<scale>[_<task>]: the 5 scales n/s/m/l/x of yolo26.yaml (detection), -seg (instance
-# segmentation), -sem (semantic segmentation), -depth, -cls, -pose, -obb, and the P2 / P6 detection variants.
+# case = yolo11|yolo26<scale>[_<task>]: the 5 scales n/s/m/l/x of detection, -seg (instance segmentation),
+# -cls, -pose, -obb; yolo26 also has -sem (semantic segmentation), -depth and the P2 / P6 detection variants
+# (yolo11 has none of those three, and is not end2end).
 # 64x64 inputs (P5 = 2x2); the P6 models (stride 64) take 128x128.
 yolo26n 64
 yolo26s 64
@@ -48,3 +50,28 @@ yolo26s_p6 128
 yolo26m_p6 128
 yolo26l_p6 128
 yolo26x_p6 128
+yolo11n 64
+yolo11s 64
+yolo11m 64
+yolo11l 64
+yolo11x 64
+yolo11n_seg 64
+yolo11s_seg 64
+yolo11m_seg 64
+yolo11l_seg 64
+yolo11x_seg 64
+yolo11n_cls 64
+yolo11s_cls 64
+yolo11m_cls 64
+yolo11l_cls 64
+yolo11x_cls 64
+yolo11n_pose 64
+yolo11s_pose 64
+yolo11m_pose 64
+yolo11l_pose 64
+yolo11x_pose 64
+yolo11n_obb 64
+yolo11s_obb 64
+yolo11m_obb 64
+yolo11l_obb 64
+yolo11x_obb 64

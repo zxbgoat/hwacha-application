@@ -1106,19 +1106,26 @@ elif d == 'yolo':
     for l in open(os.path.join(D, 'models.txt')):
         if l.startswith('#') or not l.strip(): continue
         n, hw = l.split()[:2]; models[n] = int(hw)
-    task_cn = {'': ('目标检测', 'yolo26.yaml', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
-               'p2': ('目标检测（P2-P5 四级输出，多一级 stride 4）', 'yolo26-p2.yaml', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
-               'p6': ('目标检测（P3-P6 四级输出，多一级 stride 64）', 'yolo26-p6.yaml', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
-               'seg': ('实例分割', 'yolo26-seg.yaml', 'Segment26', 'https://docs.ultralytics.com/tasks/segment'),
-               'sem': ('语义分割', 'yolo26-sem.yaml', 'SemanticSegment', 'https://docs.ultralytics.com/tasks/semantic'),
-               'depth': ('深度估计', 'yolo26-depth.yaml', 'Depth', 'https://docs.ultralytics.com/tasks/depth'),
-               'cls': ('图像分类', 'yolo26-cls.yaml', 'Classify', 'https://docs.ultralytics.com/tasks/classify'),
-               'pose': ('姿态估计', 'yolo26-pose.yaml', 'Pose26', 'https://docs.ultralytics.com/tasks/pose'),
-               'obb': ('旋转框检测', 'yolo26-obb.yaml', 'OBB26', 'https://docs.ultralytics.com/tasks/obb')}
-    compare = {'': 'NMS-free 的 one2one 检测头在全部 anchor 上的解码输出（1 x (4 + 80) x anchors：xyxy 像素坐标框 + sigmoid 类别分数），逐元素比对；top-k 选择留给 host',
-               'p2': 'NMS-free 的 one2one 检测头在全部 anchor（P2-P5 四级）上的解码输出（1 x 84 x anchors），逐元素比对；top-k 选择留给 host',
-               'p6': 'NMS-free 的 one2one 检测头在全部 anchor（P3-P6 四级）上的解码输出（1 x 84 x anchors），逐元素比对；top-k 选择留给 host',
-               'seg': '检测头输出（1 x (4 + 80 + 32 个 mask 系数) x anchors）与 Proto26 的原型 mask（1 x 32 x H/4 x W/4）拼成一行，逐元素比对',
+    # the two families: display name, model page, head classes for the detection tasks, and the two
+    # things that differ between them (end2end, DFL)
+    fam = {'yolo11': ('YOLO11', 'https://github.com/ultralytics/yolo11', 'Detect / Segment / Pose / OBB',
+                      'YOLO11 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
+           'yolo26': ('YOLO26', 'https://github.com/ultralytics/yolo26', 'Detect / Segment26 / Pose26 / OBB26',
+                      'YOLO26 为 NMS-free（end2end）：推理用 one2one 头。')}
+    # task -> (description, head class(es), doc url); the yaml name is built from the case's family + task
+    task_cn = {'': ('目标检测', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
+               'p2': ('目标检测（P2-P5 四级输出，多一级 stride 4）', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
+               'p6': ('目标检测（P3-P6 四级输出，多一级 stride 64）', 'Detect', 'https://docs.ultralytics.com/tasks/detect'),
+               'seg': ('实例分割', 'Segment26 | Segment', 'https://docs.ultralytics.com/tasks/segment'),
+               'sem': ('语义分割', 'SemanticSegment', 'https://docs.ultralytics.com/tasks/semantic'),
+               'depth': ('深度估计', 'Depth', 'https://docs.ultralytics.com/tasks/depth'),
+               'cls': ('图像分类', 'Classify', 'https://docs.ultralytics.com/tasks/classify'),
+               'pose': ('姿态估计', 'Pose26 | Pose', 'https://docs.ultralytics.com/tasks/pose'),
+               'obb': ('旋转框检测', 'OBB26 | OBB', 'https://docs.ultralytics.com/tasks/obb')}
+    compare = {'': '检测头在全部 anchor 上的解码输出（1 x (4 + 80) x anchors：像素坐标框 + sigmoid 类别分数），逐元素比对；top-k 选择留给 host',
+               'p2': 'one2one 检测头在全部 anchor（P2-P5 四级）上的解码输出（1 x 84 x anchors），逐元素比对；top-k 选择留给 host',
+               'p6': 'one2one 检测头在全部 anchor（P3-P6 四级）上的解码输出（1 x 84 x anchors），逐元素比对；top-k 选择留给 host',
+               'seg': '检测头输出（1 x (4 + 80 + 32 个 mask 系数) x anchors）与原型的 mask（1 x 32 x H/4 x W/4）拼成一行，逐元素比对',
                'sem': 'P3 级的类别 logits 图（1 x 19 x H/8 x W/8），逐元素比对',
                'depth': '深度图（1 x 1 x H/4 x W/4，exp 后为正值），逐元素比对',
                'cls': '1000 类 logits（softmax 之前），逐元素比对并要求 argmax 一致',
@@ -1129,39 +1136,46 @@ elif d == 'yolo':
     MODEL = {'': YT.DetectionModel, 'p2': YT.DetectionModel, 'p6': YT.DetectionModel, 'seg': YT.SegmentationModel,
              'sem': YT.SemanticSegmentationModel, 'depth': YT.DepthModel, 'cls': YT.ClassificationModel,
              'pose': YT.PoseModel, 'obb': YT.OBBModel}
-    def nparams(scale, task):
+    def nparams(family, scale, task):
         try:
-            m = MODEL[task](f'yolo26{scale}{"-" + task if task else ""}.yaml', verbose=False)
+            m = MODEL[task](f'{family}{scale}{"-" + task if task else ""}.yaml', verbose=False)
             return sum(p.numel() for p in m.parameters()) / 1e6
         except Exception: return None
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
-        mt = re.fullmatch(r'yolo26([nsmlx])(?:_(seg|sem|depth|cls|pose|obb|p2|p6))?', case)
+        mt = re.fullmatch(r'(yolo11|yolo26)([nsmlx])(?:_(seg|sem|depth|cls|pose|obb|p2|p6))?', case)
         if not mt: continue
-        scale, task = mt.group(1), mt.group(2) or ''
-        hw = models.get(case, 64); cn, yaml, headname, doc = task_cn[task]
+        family, scale, task = mt.group(1), mt.group(2), mt.group(3) or ''
+        hw = models.get(case, 64); cn, headname, doc = task_cn[task]
+        fname, url, heads, end2end = fam[family]; yaml = f'{family}{scale}{"-" + task if task else ""}.yaml'
+        if task != '': headname = heads if family == 'yolo11' else headname
+        np_ = None
         wpath = os.path.join(D, case, f'{case}_weights.bin'); wsz = os.path.getsize(wpath) if os.path.exists(wpath) else None
         cb = os.path.join(D, case, f'{case}_check.bin'); nin = nout = None
         if os.path.exists(cb):
             with open(cb, 'rb') as f:
                 f.read(4); nin = struct.unpack('i', f.read(4))[0]; f.seek(8 + nin * 4); nout = struct.unpack('i', f.read(4))[0]
         t = f'# {case}\n\n'
-        t += f'Ultralytics YOLO26 `{yaml}` 的 `{scale}` 规模（{scale_cn[scale]}，{cn}，检测头 `{headname}`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo26 ；任务文档：{doc}\n\n'
+        t += f'Ultralytics {fname} `{yaml}` 的 `{scale}` 规模（{scale_cn[scale]}，{cn}，检测头 `{headname}`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：{url} ；任务文档：{doc}\n\n'
         t += f'比对内容：{compare[task]}。\n\n'
         t += '权重随机（固定种子；BatchNorm 给随机的 running 统计量、卷积偏置随机抽取，使前向非退化），输入随机；同一组权重同时用于 PyTorch 参考与 Hwacha 构建。\n\n'
         notes = []
         if task in ('', 'p2', 'p6', 'seg', 'pose', 'obb'):
-            notes.append('YOLO26 为 NMS-free（end2end）：推理用 one2one 头，导出图以 `export=True` 走 Detect 的导出路径并把 `postprocess`（按分数 top-k 选 max_det 个 anchor 再 gather）替换为恒等，网络返回全部 anchor；选择留给 host（与 ../torchvision 的检测 case 一致）。')
-            notes.append('`reg_max=1`，DFL 为恒等：回归分支直接输出 4 个距离，`dist2bbox` 在 anchor 网格上解码成 xyxy 像素坐标；anchor 网格与 stride 是 `make_anchors` 生成的常量。torch-mlir 的 fx importer 把常量 tensor 经 `tensor.tolist()` 转成 literal，导出脚本改为直接经 numpy 取原始缓冲区（`_tensor_to_numpy`）；Detect 缓存的 anchor 表是 `make_anchors(...).transpose(0, 1)`，非连续，必须先 `ascontiguousarray`，否则常量按转置后的内存布局落盘，每个 anchor 的 x / y 坐标互换（首版 max|diff| = 128 即由此而来）。')
+            notes.append(end2end + ' 导出图以 `export=True` 走 Detect 的导出路径，并把 `postprocess`（按分数 top-k 选 max_det 个 anchor 再 gather）替换为恒等，网络返回全部 anchor；选择留给 host（与 ../torchvision 的检测 case 一致）。')
+            if family == 'yolo26':
+                notes.append('`reg_max=1`，DFL 为恒等：回归分支直接输出 4 个距离，`dist2bbox` 在 anchor 网格上解码成 xyxy 像素坐标。')
+            else:
+                notes.append('`reg_max=16`：回归分支输出 16 个 bin 的 logits，DFL 对每个 bin 做 softmax 后求期望得到距离，`dist2bbox` 在 anchor 网格上解码成 xywh 像素坐标。')
+            notes.append('anchor 网格与 stride 是 `make_anchors` 生成的常量。torch-mlir 的 fx importer 把常量 tensor 经 `tensor.tolist()` 转成 literal，导出脚本改为直接经 numpy 取原始缓冲区（`_tensor_to_numpy`）；Detect 缓存的 anchor 表是 `make_anchors(...).transpose(0, 1)`，非连续，必须先 `ascontiguousarray`，否则常量按转置后的内存布局落盘，每个 anchor 的 x / y 坐标互换（yolo26 首版 max|diff| = 128 即由此而来）。')
         if task == 'p6': notes.append('输入取 128x128：P6 级 stride 64，64x64 输入下 P6 只剩 1x1。')
-        if task == 'seg': notes.append('Segment26 返回 `(预测, 原型 mask)` 两个输出，Wrap 把它们各自展平后拼成一行。')
+        if task == 'seg': notes.append(f'{headname} 返回 `(预测, 原型 mask)` 两个输出，Wrap 把它们各自展平后拼成一行。')
         if task == 'cls': notes.append('Classify 在 eval 下返回 `(softmax, logits)`，取 logits 比对（host 还比对 argmax）。')
         if task == 'sem': notes.append('SemanticSegment 在 eval（非 export）下返回 H/8 的 logits；不走 export 路径的 8 倍双线性上采样与 argmax 烘焙。')
         if task == 'depth': notes.append('Depth 头输出 `exp(clamp(out, -4, 5))` 再乘以标定 buffer `cal_a` / `cal_b`（默认恒等）；不走 export 路径的 4 倍上采样。')
         if notes: t += '## 本 case 的特殊处理\n\n' + ''.join(f'- {n}\n' for n in notes) + '\n'
         t += '## 形状与规模\n\n| | 值 |\n|---|---|\n' + (f'| 输入 | 1x3x{hw}x{hw}（{nin:,} 个 float）|\n' if nin else f'| 输入 | 1x3x{hw}x{hw} |\n')
         if nout: t += f'| 输出元素数 | {nout:,} |\n'
-        np_ = nparams(scale, task)
+        np_ = nparams(family, scale, task)
         if np_: t += f'| 参数量 | {np_:.1f}M |\n'
         if wsz: t += f'| 权重 blob | {wsz / 1048576:.0f} MB |\n'
         t += f'| 缩放常数 [depth, width, max_channels] | `{scales[scale]}` |\n'
