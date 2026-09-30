@@ -1108,7 +1108,9 @@ elif d == 'yolo':
         n, hw = l.split()[:2]; models[n] = int(hw)
     # the two families: display name, model page, head classes for the detection tasks, and the two
     # things that differ between them (end2end, DFL)
-    fam = {'yolov8': ('YOLOv8', 'https://github.com/ultralytics/yolov8', 'Detect / Segment / Pose / OBB',
+    fam = {'yolov5': ('YOLOv5', 'https://github.com/ultralytics/yolov5', 'Detect',
+                      'YOLOv5 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
+           'yolov8': ('YOLOv8', 'https://github.com/ultralytics/yolov8', 'Detect / Segment / Pose / OBB',
                       'YOLOv8 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
            'yolo11': ('YOLO11', 'https://github.com/ultralytics/yolo11', 'Detect / Segment / Pose / OBB',
                       'YOLO11 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
@@ -1150,7 +1152,7 @@ elif d == 'yolo':
         except Exception: return None
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
-        mt = re.fullmatch(r'(yolov8|yolo11|yolo26)([nsmlx])(?:_(seg|sem|depth|cls|pose|obb|p2|p6|seg_p6|pose_p6))?', case)
+        mt = re.fullmatch(r'(yolov5|yolov8|yolo11|yolo26)([nsmlx])(?:_(seg|sem|depth|cls|pose|obb|p2|p6|seg_p6|pose_p6))?', case)
         if not mt: continue
         family, scale, task = mt.group(1), mt.group(2), mt.group(3) or ''
         hw = models.get(case, 64); cn, headname, doc = task_cn[task]
@@ -1177,6 +1179,8 @@ elif d == 'yolo':
                 notes.append('`reg_max=1`，DFL 为恒等：回归分支直接输出 4 个距离，`dist2bbox` 在 anchor 网格上解码成 xyxy 像素坐标。')
             else:
                 notes.append('`reg_max=16`：回归分支输出 16 个 bin 的 logits，DFL 对每个 bin 做 softmax 后求期望得到距离，`dist2bbox` 在 anchor 网格上解码成 xywh 像素坐标。')
+            if family == 'yolov5':
+                notes.append('本 case 带 `HWMLIRFLAGS`（`--unroll-small=2`）：v5 的 stem 是 6x6 stride-2 卷积（其余家族是 3x3），逐 tap 完全展开时 hwacha-cc 报 `out of Hwacha registers of class vs (nothing to spill) in net_kernel_2`，`--collapse-all` 也救不回来，`gen.sh` 的重试链落到 `--unroll-small=2`（只展开 2 倍）。')
             notes.append('anchor 网格与 stride 是 `make_anchors` 生成的常量。torch-mlir 的 fx importer 把常量 tensor 经 `tensor.tolist()` 转成 literal，导出脚本改为直接经 numpy 取原始缓冲区（`_tensor_to_numpy`）；Detect 缓存的 anchor 表是 `make_anchors(...).transpose(0, 1)`，非连续，必须先 `ascontiguousarray`，否则常量按转置后的内存布局落盘，每个 anchor 的 x / y 坐标互换（yolo26 首版 max|diff| = 128 即由此而来）。')
         if task.endswith('p6'): notes.append('输入取 128x128：P6 级 stride 64，64x64 输入下 P6 只剩 1x1。')
         if task.startswith('seg'): notes.append(f'{headname} 返回 `(预测, 原型 mask)` 两个输出，Wrap 把它们各自展平后拼成一行。')

@@ -122,3 +122,15 @@ yolov8s_pose_p6 128
 yolov8m_pose_p6 128
 yolov8l_pose_p6 128
 yolov8x_pose_p6 128
+# YOLOv5 (github.com/ultralytics/yolov5; cfg/models/v5): detection only -- yolov5.yaml and the P6 variant
+# (yolov5-p6.yaml, stride 64, 128x128 input).
+yolov5n 64
+yolov5s 64
+yolov5m 64
+yolov5l 64
+yolov5x 64
+yolov5n_p6 128
+yolov5s_p6 128
+yolov5m_p6 128
+yolov5l_p6 128
+yolov5x_p6 128
