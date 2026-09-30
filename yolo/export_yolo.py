@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Export an Ultralytics YOLOv3 / YOLOv5 / YOLOv8 / YOLO11 / YOLO26 model (github.com/ultralytics/yolov3,
-   .../yolov5, .../yolov8, .../yolo11, .../yolo26, built from its yaml with random weights) to
+"""Export an Ultralytics YOLOv3 / YOLOv5 / YOLOv8 / YOLOv10 / YOLO11 / YOLO26 model (github.com/ultralytics/yolov3,
+   .../yolov5, .../yolov8, .../yolov10, .../yolo11, .../yolo26, built from its yaml with random weights) to
    linalg-on-tensors MLIR via torch-mlir, with a PyTorch reference.
    usage: export_yolo.py <case> <out.mlir> <out_check.bin> [HW]
    <case> = yolov3[_spp|_tiny] (Darknet-53 detector; v3 has no n/s/m/l/x scales, only these three yamls),
+            yolov10<scale> (v10Detect, NMS-free; detection only -- the package ships six yolov10{n,s,m,l,b,x} yamls, no task variants),
             yolo26<scale>[_<task>] (tasks: seg/sem/depth/cls/pose/obb/p2/p6),
             yolo11<scale>[_<task>] (tasks: seg/cls/pose/obb; YOLO11 has no sem/depth/p2/p6 and is not end2end),
             yolov8<scale>[_<task>] (tasks: seg/cls/pose/obb/p2/p6/seg_p6/pose_p6; not end2end) or
@@ -41,19 +42,22 @@ HW = int(sys.argv[4]) if len(sys.argv) > 4 else 64
 # seg_p6 / pose_p6); YOLOv5 ships detection only (yolov5.yaml, yolov5-p6.yaml). v5 / v8 / 11 use the package's
 # non-26 head classes (Segment / Pose / OBB) and are not end2end.
 TASKS = {'yolo26': 'seg|sem|depth|cls|pose|obb|p2|p6', 'yolo11': 'seg|cls|pose|obb',
-         'yolov8': 'seg|cls|pose|obb|p2|p6|seg_p6|pose_p6', 'yolov5': 'p6', 'yolov3': 'spp|tiny'}
+         'yolov8': 'seg|cls|pose|obb|p2|p6|seg_p6|pose_p6', 'yolov5': 'p6', 'yolov3': 'spp|tiny',
+         'yolov10': ''}
 # YOLOv3 has no scale letters: its three yamls are yolov3 / yolov3-spp / yolov3-tiny (case yolov3[_spp|_tiny]).
 mt = re.fullmatch(r'yolov3(?:_([a-z0-9_]+))?', name)
 if mt:
     family, scale, task = 'yolov3', '', (mt.group(1) or '')
     assert task in ('', 'spp', 'tiny'), f'{name}: expected yolov3[_spp|_tiny]'
 else:
-    mt = re.fullmatch(r'(yolov5|yolov8|yolo11|yolo26)([nsmlx])(?:_([a-z0-9_]+))?', name)
+    # v10 also ships a 'b' (balanced) yaml; the other families only have n/s/m/l/x (their regex simply
+    # never matches a b case).
+    mt = re.fullmatch(r'(yolov5|yolov8|yolov10|yolo11|yolo26)([nsmlxb])(?:_([a-z0-9_]+))?', name)
     assert mt and mt.group(3) in (None, *TASKS[mt.group(1)].split('|')), \
-        f'{name}: expected yolov3[_spp|_tiny] | yolov5|yolov8|yolo11|yolo26<n|s|m|l|x>[_<task>] (' \
+        f'{name}: expected yolov3[_spp|_tiny] | yolov5|yolov8|yolov10|yolo11|yolo26<n|s|m|l|x|b>[_<task>] (' \
         + ', '.join(f'{k}: {v}' for k, v in TASKS.items()) + ')'
     family, scale, task = mt.group(1), mt.group(2), mt.group(3) or ''
-# yaml name: yolov3[-spp|-tiny].yaml (no scale) vs <family in {v5,v8,11,26}><scale>[-<task>].yaml
+# yaml name: yolov3[-spp|-tiny].yaml (no scale) vs <family in {v5,v8,v10,11,26}><scale>[-<task>].yaml
 if family == 'yolov3': suffix = ('-' + task) if task else ''
 else:                  suffix = scale + (('-' + task.replace('_', '-')) if task else '')
 yaml = f'{family}{suffix}.yaml'
@@ -79,13 +83,15 @@ head = m.model[-1]
 cls_scores = False
 if isinstance(head, H.Detect):
     # The decoded detection output is (B, 4 + nc [+ nm mask coefficients | nk keypoints | 1 angle], anchors)
-    # in pixels and sigmoid class scores. YOLO26 is NMS-free and infers from the one2one branch (end2end);
-    # YOLOv3 / YOLOv8 / YOLO11 / YOLOv5 have no one2one branch, so they infer from one2many. Either way Detect.postprocess (top max_det
-    # anchors by score, a topk+gather) is replaced by the identity: the selection is left to the host, as in
-    # ../torchvision's detection cases, and the exported network returns every anchor. export=True drops the
-    # (predictions, raw dict) tuple of the eval path. Boxes: yolo26 reg_max=1 (no DFL) decodes to xyxy,
-    # yolov3 / yolov5 / yolov8 / yolo11 reg_max=16 run the DFL softmax over the 16 bins and decode to xywh.
-    if head.end2end: head.end2end = True      # yolo26: keep the one2one inference head (no-op otherwise)
+    # in pixels and sigmoid class scores. YOLO26 and YOLOv10 are NMS-free and infer from the one2one branch
+    # (v10's v10Detect is a Detect subclass whose one2one branch exists, so its end2end property is true
+    # without being set); YOLOv3 / YOLOv5 / YOLOv8 / YOLO11 have no one2one branch and infer from one2many.
+    # Either way Detect.postprocess (top max_det anchors by score, a topk+gather) is replaced by the
+    # identity: the selection is left to the host, as in ../torchvision's detection cases, and the exported
+    # network returns every anchor. export=True drops the (predictions, raw dict) tuple of the eval path.
+    # Boxes: yolo26 reg_max=1 (no DFL) decodes to xyxy, v3 / v5 / v8 / v10 / v11 reg_max=16 run the DFL
+    # softmax over the 16 bins and decode to xywh.
+    if head.end2end: head.end2end = True      # yolo26 / v10: keep the one2one inference head (no-op otherwise)
     head.export = True
     H.Detect.postprocess = lambda self, p: p
 elif isinstance(head, H.Classify):

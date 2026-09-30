@@ -140,3 +140,11 @@ yolov5x_p6 128
 yolov3 64
 yolov3_spp 64
 yolov3_tiny 64
+# YOLOv10 (github.com/THU-MIG/yolov10, in ultralytics as cfg/models/v10; six standalone yamls, each with
+# its own scale: n / s / m / l / x / b): detection only, NMS-free (v10Detect has a one2one branch).
+yolov10n 64
+yolov10s 64
+yolov10m 64
+yolov10l 64
+yolov10x 64
+yolov10b 64

@@ -1116,6 +1116,8 @@ elif d == 'yolo':
                       'YOLOv8 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
            'yolo11': ('YOLO11', 'https://github.com/ultralytics/yolo11', 'Detect / Segment / Pose / OBB',
                       'YOLO11 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
+           'yolov10': ('YOLOv10', 'https://github.com/THU-MIG/yolov10', 'v10Detect',
+                       'YOLOv10 为 NMS-free：v10Detect 有 one2one 分支，推理用它（与 YOLO26 同路）。'),
            'yolo26': ('YOLO26', 'https://github.com/ultralytics/yolo26', 'Detect / Segment26 / Pose26 / OBB26',
                       'YOLO26 为 NMS-free（end2end）：推理用 one2one 头。')}
     # task -> (description, head class(es), doc url); the yaml name is built from the case's family + task
@@ -1145,8 +1147,9 @@ elif d == 'yolo':
                'cls': '1000 类 logits（softmax 之前），逐元素比对并要求 argmax 一致',
                'pose': '检测头输出（1 x (4 + 80 + 17x3 个关键点值) x anchors，关键点已解码到像素坐标），逐元素比对',
                'obb': '检测头输出（1 x (4 + 80 + 1 个角度) x anchors），逐元素比对'}
-    scale_cn = {'n': 'nano', 's': 'small', 'm': 'medium', 'l': 'large', 'x': 'xlarge'}
+    scale_cn = {'n': 'nano', 's': 'small', 'm': 'medium', 'l': 'large', 'x': 'xlarge', 'b': 'balanced'}
     scales = {'n': '[0.50, 0.25, 1024]', 's': '[0.50, 0.50, 1024]', 'm': '[0.50, 1.00, 512]', 'l': '[1.00, 1.00, 512]', 'x': '[1.00, 1.50, 512]'}
+    v10_scales = {'n': '[0.33, 0.25, 1024]', 's': '[0.33, 0.50, 1024]', 'm': '[0.67, 0.75, 768]', 'b': '[0.67, 1.00, 512]', 'l': '[1.00, 1.00, 512]', 'x': '[1.00, 1.25, 512]'}
     MODEL = {'': YT.DetectionModel, 'p2': YT.DetectionModel, 'p6': YT.DetectionModel, 'seg': YT.SegmentationModel,
              'sem': YT.SemanticSegmentationModel, 'depth': YT.DepthModel, 'cls': YT.ClassificationModel,
              'pose': YT.PoseModel, 'obb': YT.OBBModel, 'seg_p6': YT.SegmentationModel, 'pose_p6': YT.PoseModel,
@@ -1155,6 +1158,8 @@ elif d == 'yolo':
     def yaml_of(family, scale, task):
         if family == 'yolov3': return f"yolov3{'-' + task if task else ''}.yaml"
         return f'{family}{scale}{"-" + task.replace("_", "-") if task else ""}.yaml'
+    def sc_of(family, scale):
+        return (v10_scales if family == 'yolov10' else scales).get(scale, '')
     def nparams(family, scale, task):
         try:
             m = MODEL[task](yaml_of(family, scale, task), verbose=False)
@@ -1162,7 +1167,7 @@ elif d == 'yolo':
         except Exception: return None
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
-        mt = re.fullmatch(r'(yolov5|yolov8|yolo11|yolo26)([nsmlx])(?:_(seg|sem|depth|cls|pose|obb|p2|p6|seg_p6|pose_p6))?', case)
+        mt = re.fullmatch(r'(yolov5|yolov8|yolov10|yolo11|yolo26)([nsmlxb])(?:_(seg|sem|depth|cls|pose|obb|p2|p6|seg_p6|pose_p6))?', case)
         if mt: family, scale, task = mt.group(1), mt.group(2), mt.group(3) or ''
         else:  # yolov3 / yolov3_spp / yolov3_tiny: no scale letter
             mt = re.fullmatch(r'yolov3(?:_(spp|tiny))?', case)
@@ -1172,7 +1177,9 @@ elif d == 'yolo':
         fname, url, heads, end2end = fam[family]; yaml = yaml_of(family, scale, task)
         # 'Segment26 | Segment': the 26 head class first, the v8 / 11 one second
         if '|' in headname: headname = headname.split(' | ')[0 if family == 'yolo26' else 1]
+        if family == 'yolov10': headname = 'v10Detect'   # v10's head class, a Detect subclass with a one2one branch
         cmp = compare[task]
+        if family == 'yolov10' and task == '': cmp = 'v10Detect 的 one2one 分支在全部 anchor 上的解码输出（1 x (4 + 80) x anchors：xywh 像素坐标框 + sigmoid 类别分数），逐元素比对；top-k 选择留给 host'
         if family == 'yolov8' and task.startswith('pose'): cmp = cmp.replace('4 + 80 + 17x3', '4 + 1 + 17x3').replace('4 + nc + 17x3', '4 + 1 + 17x3')   # yolov8-pose.yaml: nc 1 (person)
         else: cmp = cmp.replace('4 + nc + 17x3', '4 + 80 + 17x3')
         np_ = None
@@ -1207,7 +1214,7 @@ elif d == 'yolo':
         np_ = nparams(family, scale, task)
         if np_: t += f'| 参数量 | {np_:.1f}M |\n'
         if wsz: t += f'| 权重 blob | {wsz / 1048576:.0f} MB |\n'
-        t += (f'| 缩放常数 [depth, width, max_channels] | `{scales[scale]}` |\n' if scale
+        t += (f'| 缩放常数 [depth, width, max_channels] | `{sc_of(family, scale)}` |\n' if scale
               else '| depth_multiple / width_multiple | `1.0 / 1.0`（v3 用这两个常量，没有 compound scaling）|\n')
         t += '\n## 文件\n\n' + files_table(case, f'{case}.s', [(f'`{case}_weights.bin.S`', '权重的 `.incbin` 桩，按符号切分 blob；前半段放 `.weights_lo`、后半段放 `.weights_hi`（`split_weights.py`）'), (f'`{case}_weights.bin`', f'权重 blob（不入 git，`make gen-{case}` 按固定种子逐字节重建）'), (f'`{case}_check.bin`', '输入与 PyTorch 参考输出，host 用 `.incbin` 内嵌'), ('`yolo_main.c`', '通用 host：调用 `net`，比对 max\\|diff\\|（容差 1e-4 + 1e-2·max\\|ref\\|）与 argmax（分类输出）'), ('`hwlib.s`', '卷积 / 池化库内核')] + ([('`HWMLIRFLAGS`', '本 case 需要的 hwacha-mlir 映射选项')] if flags(case) else []))
         t += '\n## 编译与运行\n\n```\nmake ' + case + '          # 编译 -> ' + case + '/' + case + '.riscv\nmake ' + case + '.spike    # 在 Spike 上运行（内存按权重大小自动确定）\nmake gen-' + case + '      # 从 PyTorch 重新生成汇编、权重与参考\n```\n\n' + f'hwacha-mlir 映射：`{flags(case) or "默认（最内维为 lane）"}`。\n\n'
