@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Export an Ultralytics YOLO11 / YOLO26 model (github.com/ultralytics/yolo11, .../yolo26, built from its
-   yaml with random weights) to linalg-on-tensors MLIR via torch-mlir, with a PyTorch reference.
+"""Export an Ultralytics YOLOv8 / YOLO11 / YOLO26 model (github.com/ultralytics/yolov8, .../yolo11, .../yolo26,
+   built from its yaml with random weights) to linalg-on-tensors MLIR via torch-mlir, with a PyTorch reference.
    usage: export_yolo.py <case> <out.mlir> <out_check.bin> [HW]
-   <case> = yolo26<scale>[_<task>] (tasks: seg/sem/depth/cls/pose/obb/p2/p6) or
-            yolo11<scale>[_<task>] (tasks: seg/cls/pose/obb; YOLO11 has no sem/depth/p2/p6 and is not
-            end2end); scale in n/s/m/l/x, no task = detection; HW = input size (default 64)."""
+   <case> = yolo26<scale>[_<task>] (tasks: seg/sem/depth/cls/pose/obb/p2/p6),
+            yolo11<scale>[_<task>] (tasks: seg/cls/pose/obb; YOLO11 has no sem/depth/p2/p6 and is not end2end) or
+            yolov8<scale>[_<task>] (tasks: seg/cls/pose/obb/p2/p6/seg_p6/pose_p6; not end2end);
+            scale in n/s/m/l/x, no task = detection; HW = input size (default 64)."""
 import os, sys, re, struct, numpy as np
 os.environ.setdefault('YOLO_OFFLINE', '1'); os.environ.setdefault('YOLO_VERBOSE', 'false')
 import torch
@@ -32,17 +33,19 @@ exec(_src.replace("np.array(tensor.tolist()).astype(npy_dtype)", "_tensor_to_num
 
 name, out, check = sys.argv[1:4]
 HW = int(sys.argv[4]) if len(sys.argv) > 4 else 64
-# YOLO11's yamls live in cfg/models/11 with the same task suffixes minus sem/depth/p2/p6, and the package
-# ships the v11 head classes (Segment / Pose / OBB, i.e. the non-26 variants).
-TASKS = {'yolo26': 'seg|sem|depth|cls|pose|obb|p2|p6', 'yolo11': 'seg|cls|pose|obb'}
-mt = re.fullmatch(r'(yolo11|yolo26)([nsmlx])(?:_(seg|sem|depth|cls|pose|obb|p2|p6))?', name)
-assert mt and (mt.group(1) != 'yolo11' or mt.group(3) in (None, *TASKS['yolo11'].split('|'))), \
-    f'{name}: expected yolo11|yolo26<n|s|m|l|x>[_<task>] (yolo11: {TASKS["yolo11"]})'
+# The yamls live in cfg/models/{v8,11,26}: YOLO11 has the same task suffixes as YOLO26 minus sem/depth/p2/p6;
+# YOLOv8 additionally has the P6 variants of seg / pose (yolov8-seg-p6.yaml, yolov8-pose-p6.yaml; case task
+# seg_p6 / pose_p6). v8 and 11 use the package's non-26 head classes (Segment / Pose / OBB), not end2end.
+TASKS = {'yolo26': 'seg|sem|depth|cls|pose|obb|p2|p6', 'yolo11': 'seg|cls|pose|obb',
+         'yolov8': 'seg|cls|pose|obb|p2|p6|seg_p6|pose_p6'}
+mt = re.fullmatch(r'(yolov8|yolo11|yolo26)([nsmlx])(?:_([a-z0-9_]+))?', name)
+assert mt and mt.group(3) in (None, *TASKS[mt.group(1)].split('|')), \
+    f'{name}: expected yolov8|yolo11|yolo26<n|s|m|l|x>[_<task>] (' + ', '.join(f'{k}: {v}' for k, v in TASKS.items()) + ')'
 family, scale, task = mt.group(1), mt.group(2), mt.group(3) or ''
-yaml = f'{family}{scale}{"-" + task if task else ""}.yaml'    # cfg/models/11/ for yolo11, cfg/models/26/ for yolo26
+yaml = f'{family}{scale}{"-" + task.replace("_", "-") if task else ""}.yaml'    # resolved inside cfg/models/<family>
 MODEL = {'': T.DetectionModel, 'p2': T.DetectionModel, 'p6': T.DetectionModel, 'seg': T.SegmentationModel,
-         'sem': T.SemanticSegmentationModel, 'depth': T.DepthModel, 'cls': T.ClassificationModel,
-         'pose': T.PoseModel, 'obb': T.OBBModel}[task]
+         'seg_p6': T.SegmentationModel, 'sem': T.SemanticSegmentationModel, 'depth': T.DepthModel,
+         'cls': T.ClassificationModel, 'pose': T.PoseModel, 'pose_p6': T.PoseModel, 'obb': T.OBBModel}[task]
 torch.manual_seed(0)
 m = MODEL(yaml, verbose=False)
 # Untrained BN sits at its zero-mean / unit-var fixed point, which drives the outputs to ~0; give BN random
@@ -62,11 +65,11 @@ cls_scores = False
 if isinstance(head, H.Detect):
     # The decoded detection output is (B, 4 + nc [+ nm mask coefficients | nk keypoints | 1 angle], anchors)
     # in pixels and sigmoid class scores. YOLO26 is NMS-free and infers from the one2one branch (end2end);
-    # YOLO11 has no one2one branch, so it infers from one2many. Either way Detect.postprocess (top max_det
+    # YOLOv8 / YOLO11 have no one2one branch, so they infer from one2many. Either way Detect.postprocess (top max_det
     # anchors by score, a topk+gather) is replaced by the identity: the selection is left to the host, as in
     # ../torchvision's detection cases, and the exported network returns every anchor. export=True drops the
     # (predictions, raw dict) tuple of the eval path. Boxes: yolo26 reg_max=1 (no DFL) decodes to xyxy,
-    # yolo11 reg_max=16 runs the DFL softmax over the 16 bins and decodes to xywh.
+    # yolov8 / yolo11 reg_max=16 run the DFL softmax over the 16 bins and decode to xywh.
     if head.end2end: head.end2end = True      # yolo26: keep the one2one inference head (no-op otherwise)
     head.export = True
     H.Detect.postprocess = lambda self, p: p

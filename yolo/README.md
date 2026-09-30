@@ -1,18 +1,21 @@
-# Ultralytics YOLO11 / YOLO26 on Hwacha
+# Ultralytics YOLOv8 / YOLO11 / YOLO26 on Hwacha
 
-The models of github.com/ultralytics/yolo11 (the `ultralytics` package, `cfg/models/11/*.yaml`) and
-github.com/ultralytics/yolo26 (`cfg/models/26/*.yaml`), built from their yaml with random weights, run
-through PyTorch -> torch-mlir (linalg on tensors) -> hwacha-mlir -> hwacha-cc and checked on Spike against
-PyTorch's own forward (fixed seed). One directory per case, `yolo11|yolo26<scale>[_<task>]`, the 5 scales
-n / s / m / l / x of:
+The models of github.com/ultralytics/yolov8 (the `ultralytics` package, `cfg/models/v8/*.yaml`),
+github.com/ultralytics/yolo11 (`cfg/models/11/*.yaml`) and github.com/ultralytics/yolo26
+(`cfg/models/26/*.yaml`), built from their yaml with random weights, run through PyTorch -> torch-mlir
+(linalg on tensors) -> hwacha-mlir -> hwacha-cc and checked on Spike against PyTorch's own forward (fixed
+seed). One directory per case, `yolov8|yolo11|yolo26<scale>[_<task>]`, the 5 scales n / s / m / l / x of:
 
 | family | tasks | cases |
 |---|---|---|
-| `yolo11` | detection, instance segmentation (`-seg`), classification (`-cls`), pose (`-pose`), oriented detection (`-obb`) | 25 |
+| `yolov8` | detection, instance segmentation (`-seg`), classification (`-cls`), pose (`-pose`), oriented detection (`-obb`), the P2 / P6 detection variants and the P6 variants of seg / pose (`_seg_p6`, `_pose_p6`) | 45 |
+| `yolo11` | detection, `-seg`, `-cls`, `-pose`, `-obb` | 25 |
 | `yolo26` | the same five, plus semantic segmentation (`-sem`), depth (`-depth`) and the P2 / P6 detection variants | 45 |
 
-YOLO11 has no semantic-segmentation, depth or P2 / P6 yaml, and is not end2end. Each `<case>/` is
-self-contained:
+YOLO11 has no semantic-segmentation, depth or P2 / P6 yaml; YOLOv8 has neither sem nor depth but does have
+seg-p6 / pose-p6. Neither v8 nor 11 is end2end (that is a YOLO26 addition). Not covered: the v8 yamls that
+swap in a foreign backbone or need a text encoder (`-cls-resnet50/101`, `-ghost*`, `-rtdetr`, `-world*`,
+`yoloe-*`). Each `<case>/` is self-contained:
 
 | file | what |
 |---|---|
@@ -40,16 +43,18 @@ assembly yet. It needs the hwacha-cc build tree, mlir-opt and the torch-mlir ven
 
 Inputs are 1x3x64x64 (P5 = 2x2; 128x128 for the P6 models, stride 64). The exported network is the eval
 forward with the head in export mode, i.e. what the post-processing consumes, over **every anchor**; every
-output tensor is flattened and concatenated. The two families differ in the detection head: YOLO26
+output tensor is flattened and concatenated. The families differ in the detection head: YOLO26
 (`end2end: True`, `reg_max: 1`) is NMS-free, so the inference head is the one2one branch and there is no DFL;
-YOLO11 has no one2one branch (`end2end: False`) and infers from one2many, with `reg_max: 16` running the DFL
-softmax over the 16 bins. Boxes are xyxy in pixels for yolo26, xywh for yolo11.
+YOLOv8 and YOLO11 have no one2one branch (`end2end: False`) and infer from one2many, with `reg_max: 16`
+running the DFL softmax over the 16 bins. Boxes are xyxy in pixels for yolo26, xywh for yolov8 / yolo11.
+The v8 and 11 heads are the same classes (`Detect` / `Segment` / `Pose` / `OBB`); the families differ in
+the backbone / neck blocks (v8: C2f; 11: C3k2 + C2PSA; 26: C3k2 + C2PSA with the end2end head).
 
-| task | head (yolo26 / yolo11) | output (64x64 input, 84 anchors = 8² + 4² + 2²) |
+| task | head (yolo26 / yolov8+yolo11) | output (64x64 input, 84 anchors = 8² + 4² + 2²) |
 |---|---|---|
 | detection, P2, P6 | `Detect` | (1, anchors, 4 + 80): pixel boxes (`dist2bbox` of the distances with the anchor grid × stride), sigmoid class scores |
-| instance segmentation | `Segment26` / `Segment` | (1, 84, 4 + 80 + 32 mask coefficients) + the prototype masks (1, 32, 16, 16) |
-| pose | `Pose26` / `Pose` | (1, 84, 4 + 80 + 17·3): decoded keypoints `(k·2 + anchor − 0.5) × stride`, sigmoid visibility |
+| instance segmentation (+ P6 for v8) | `Segment26` / `Segment` | (1, 84, 4 + 80 + 32 mask coefficients) + the prototype masks (1, 32, 16, 16) |
+| pose (+ P6 for v8) | `Pose26` / `Pose` | (1, 84, 4 + nc + 17·3): decoded keypoints, sigmoid visibility; `nc` = 80 (yolo26 / yolo11) or 1 (`yolov8-pose.yaml`: person only), so v8 pose has 56 channels |
 | oriented detection | `OBB26` / `OBB` | (1, 84, 4 + 80 + 1): the box distances and the raw angle channel |
 | semantic segmentation (yolo26 only) | `SemanticSegment` | the class logits (1, 19, 8, 8) at stride 8 |
 | depth (yolo26 only) | `Depth` | the calibrated depth map (1, 1, 16, 16) at stride 4, `exp` of the clamped head output |
@@ -74,20 +79,37 @@ detection cases.
   matched to the bit while every box coordinate was off by a multiple of the stride. (The torchvision / video /
   deformable exports only ever lift contiguous parameters, which is why the same patch never bit there.)
 - `ultralytics` is imported with `YOLO_OFFLINE=1`: nothing is downloaded, the models are built from the yaml.
-- No hwacha-mlir / hwacha-cc changes were needed for either family: the C3k2 / C2PSA / SPPF / attention
+- No hwacha-mlir / hwacha-cc changes were needed for any family: the C2f / C3k2 / C2PSA / SPPF / attention
   blocks, the nearest-neighbour upsampling, the bilinear `align_corners=True` upsampling of the depth head,
-  the DFL argmax weights of yolo11 and the head decoding all lower with the existing kernels.
-- YOLO11's head classes are the package's `Segment` / `Pose` / `OBB` (yolo26 uses `Segment26` / `Pose26` /
-  `OBB26`); `export_yolo.py` picks the model class by task and both families go through the same
+  the DFL softmax-expectation of yolov8 / yolo11 and the head decoding all lower with the existing kernels.
+- YOLOv8's and YOLO11's head classes are the package's `Segment` / `Pose` / `OBB` (yolo26 uses `Segment26` /
+  `Pose26` / `OBB26`); `export_yolo.py` picks the model class by task and all families go through the same
   `Detect.postprocess` = identity patch. Their decoding differs and is carried by both the reference and the
-  generated code: keypoints are `(k + anchor)·stride` for yolo11 and `(2k + anchor − 0.5)·stride` for yolo26,
-  and boxes xywh vs xyxy.
+  generated code: keypoints are `(2k + anchor − 0.5)·stride` for yolov8 / yolo11 (`Pose.kpts_decode`) and
+  `(k + anchor)·stride` for yolo26 (`Pose26`), and boxes xywh vs xyxy.
+- Case names use `_` where the yaml uses `-` (`yolov8n_seg_p6` <-> `yolov8n-seg-p6.yaml`); `export_yolo.py`
+  maps the task suffix back to the yaml name.
 
 ## Coverage (2026-09-30)
 
-All 70 cases PASS on Spike (yolo26 max|diff| ≤ 1.7e-5, yolo11 ≤ 1.2e-4; the DFL distances of yolo11 are
-larger in absolute terms, so its tolerance 1e-4 + 1e-2·max|ref| is looser); argmax matches where checked.
-No case needed `HWMLIRFLAGS`. Spike cycles (`rdcycle` around `net`) and weight blob size per scale:
+All 115 cases PASS on Spike (yolo26 max|diff| ≤ 1.7e-5, yolov8 / yolo11 ≤ 1.2e-4; the DFL distances of
+yolov8 / yolo11 are larger in absolute terms, so their tolerance 1e-4 + 1e-2·max|ref| is looser); argmax
+matches where checked. No case needed `HWMLIRFLAGS`. Spike cycles (`rdcycle` around `net`) and weight blob
+size per scale:
+
+### YOLOv8 (45 cases)
+
+| task | outputs | n | s | m | l | x |
+|---|---|---|---|---|---|---|
+| detection | 7,056 | 4.1M / 12 MB | 13.4M / 42 MB | 23.7M / 98 MB | 32.9M / 166 MB | 49.4M / 260 MB |
+| instance segmentation | 17,936 | 5.8M / 13 MB | 19.6M / 45 MB | 37.3M / 104 MB | 56.8M / 175 MB | 86.5M / 274 MB |
+| classification | 1,000 | 2.8M / 10 MB | 7.2M / 24 MB | 15.7M / 65 MB | 29.1M / 143 MB | 42.7M / 219 MB |
+| pose | 4,704 | 4.1M / 12 MB | 13.4M / 44 MB | 23.6M / 101 MB | 32.8M / 169 MB | 49.3M / 265 MB |
+| oriented detection | 7,140 | 4.1M / 12 MB | 13.5M / 43 MB | 23.8M / 101 MB | 33.0M / 170 MB | 49.5M / 265 MB |
+| detection P2 | 28,560 | 4.8M / 12 MB | 14.4M / 41 MB | 25.6M / 95 MB | 36.2M / 163 MB | 53.9M / 254 MB |
+| detection P6 (128x128) | 28,560 | 6.9M / 19 MB | 21.1M / 68 MB | 39.8M / 171 MB | 49.2M / 238 MB | 72.3M / 371 MB |
+| instance segmentation P6 (128x128) | 72,208 | 10.3M / 20 MB | 33.3M / 71 MB | 66.5M / 177 MB | 98.1M / 248 MB | 144.9M / 387 MB |
+| pose P6 (128x128) | 19,040 | 7.0M / 19 MB | 21.2M / 70 MB | 39.7M / 174 MB | 49.1M / 242 MB | 72.2M / 378 MB |
 
 ### YOLO11 (25 cases)
 
@@ -113,6 +135,7 @@ No case needed `HWMLIRFLAGS`. Spike cycles (`rdcycle` around `net`) and weight b
 | detection P2 | 28,560 | 8.3M / 9 MB | 27.2M / 36 MB | 50.9M / 77 MB | 59.9M / 95 MB | 127.8M / 215 MB |
 | detection P6 (128x128) | 28,560 | 12.6M / 14 MB | 42.6M / 58 MB | 86.2M / 116 MB | 100.6M / 142 MB | 214.7M / 320 MB |
 
-The weights total 5.9 GB; the largest case (yolo26x_p6) runs in a few minutes on Spike. Per-case
+The weights total 12 GB (yolov8 6.0 GB, the largest blobs its x-scale P6 cases at 372-388 MB); the largest
+cases run in a few minutes on Spike. Per-case
 result lines are in `.logs/run_full.txt` (`../tools/run_full.sh yolo` regenerates it) and each
 `<case>/README.md` (`../tools/gen_case_readme.py yolo`).

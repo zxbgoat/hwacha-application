@@ -10,7 +10,7 @@ one() {  # one case
   else echo "$n FAIL: $(grep -m1 -oE 'LLVM ERROR[^\n]*|Error[^\n]*|error[^\n]*' .logs/$n.log | head -1)"; fi
 }
 export -f one
-tier() { grep -vE '^#|^$' models.txt | awk '{print $1}' | grep -E "^yolo(26|11)[$1]"; }
+tier() { grep -vE '^#|^$' models.txt | awk '{print $1}' | grep -E "^yolo(v8|26|11)[$1]"; }
 { tier nsm | xargs -P3 -I{} bash -c 'one {}'
   tier l   | xargs -P2 -I{} bash -c 'one {}'
   tier x   | xargs -P1 -I{} bash -c 'one {}'

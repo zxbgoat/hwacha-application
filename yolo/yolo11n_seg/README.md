@@ -1,6 +1,6 @@
 # yolo11n_seg
 
-Ultralytics YOLO11 `yolo11n-seg.yaml` 的 `n` 规模（nano，实例分割，检测头 `Detect / Segment / Pose / OBB`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/segment
+Ultralytics YOLO11 `yolo11n-seg.yaml` 的 `n` 规模（nano，实例分割，检测头 `Segment`）在 Hwacha 上的一次前向，与 PyTorch 比对。模型：https://github.com/ultralytics/yolo11 ；任务文档：https://docs.ultralytics.com/tasks/segment
 
 比对内容：检测头输出（1 x (4 + 80 + 32 个 mask 系数) x anchors）与原型的 mask（1 x 32 x H/4 x W/4）拼成一行，逐元素比对。
 
@@ -11,7 +11,7 @@ Ultralytics YOLO11 `yolo11n-seg.yaml` 的 `n` 规模（nano，实例分割，检
 - YOLO11 不是 end2end（没有 one2one 分支），推理走 one2many 头。 导出图以 `export=True` 走 Detect 的导出路径，并把 `postprocess`（按分数 top-k 选 max_det 个 anchor 再 gather）替换为恒等，网络返回全部 anchor；选择留给 host（与 ../torchvision 的检测 case 一致）。
 - `reg_max=16`：回归分支输出 16 个 bin 的 logits，DFL 对每个 bin 做 softmax 后求期望得到距离，`dist2bbox` 在 anchor 网格上解码成 xywh 像素坐标。
 - anchor 网格与 stride 是 `make_anchors` 生成的常量。torch-mlir 的 fx importer 把常量 tensor 经 `tensor.tolist()` 转成 literal，导出脚本改为直接经 numpy 取原始缓冲区（`_tensor_to_numpy`）；Detect 缓存的 anchor 表是 `make_anchors(...).transpose(0, 1)`，非连续，必须先 `ascontiguousarray`，否则常量按转置后的内存布局落盘，每个 anchor 的 x / y 坐标互换（yolo26 首版 max|diff| = 128 即由此而来）。
-- Detect / Segment / Pose / OBB 返回 `(预测, 原型 mask)` 两个输出，Wrap 把它们各自展平后拼成一行。
+- Segment 返回 `(预测, 原型 mask)` 两个输出，Wrap 把它们各自展平后拼成一行。
 
 ## 形状与规模
 
