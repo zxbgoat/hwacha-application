@@ -1118,6 +1118,8 @@ elif d == 'yolo':
                       'YOLO11 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
            'yolov10': ('YOLOv10', 'https://github.com/THU-MIG/yolov10', 'v10Detect',
                        'YOLOv10 为 NMS-free：v10Detect 有 one2one 分支，推理用它（与 YOLO26 同路）。'),
+           'yolov12': ('YOLOv12', 'https://github.com/sunsmarterjie/yolov12', 'Detect',
+                       'YOLOv12 不是 end2end（没有 one2one 分支），推理走 one2many 头。'),
            'yolo26': ('YOLO26', 'https://github.com/ultralytics/yolo26', 'Detect / Segment26 / Pose26 / OBB26',
                       'YOLO26 为 NMS-free（end2end）：推理用 one2one 头。')}
     # task -> (description, head class(es), doc url); the yaml name is built from the case's family + task
@@ -1160,14 +1162,21 @@ elif d == 'yolo':
         return f'{family}{scale}{"-" + task.replace("_", "-") if task else ""}.yaml'
     def sc_of(family, scale):
         return (v10_scales if family == 'yolov10' else scales).get(scale, '')
+    V12_FORK = os.path.join(ROOT, '.yolov12')   # github.com/sunsmarterjie/yolov12 checkout (ultralytics 8.3.63 fork), see yolo/export_yolo.py
     def nparams(family, scale, task):
         try:
+            if family == 'yolov12':   # built with the fork (its A2C2f differs from upstream's), in a subprocess so the two packages never mix
+                import subprocess
+                r = subprocess.run([sys.executable, '-c', "import sys, os; sys.path.insert(0, %r); os.environ['YOLO_VERBOSE'] = 'false'; import ultralytics.nn.tasks as T; "
+                                    "m = T.DetectionModel(%r, verbose=False); print(sum(p.numel() for p in m.parameters()) / 1e6)" % (V12_FORK, yaml_of(family, scale, task))],
+                                   capture_output=True, text=True)
+                return float(r.stdout.strip().splitlines()[-1])
             m = MODEL[task](yaml_of(family, scale, task), verbose=False)
             return sum(p.numel() for p in m.parameters()) / 1e6
         except Exception: return None
     for case in sorted(os.listdir(D)):
         if not os.path.isfile(os.path.join(D, case, f'{case}.s')): continue
-        mt = re.fullmatch(r'(yolov5|yolov8|yolov10|yolo11|yolo26)([nsmlxb])(?:_(seg|sem|depth|cls|pose|obb|p2|p6|seg_p6|pose_p6))?', case)
+        mt = re.fullmatch(r'(yolov5|yolov8|yolov10|yolov12|yolo11|yolo26)([nsmlxb])(?:_(seg|sem|depth|cls|pose|obb|p2|p6|seg_p6|pose_p6))?', case)
         if mt: family, scale, task = mt.group(1), mt.group(2), mt.group(3) or ''
         else:  # yolov3 / yolov3_spp / yolov3_tiny: no scale letter
             mt = re.fullmatch(r'yolov3(?:_(spp|tiny))?', case)
@@ -1194,6 +1203,7 @@ elif d == 'yolo':
         t += f'比对内容：{cmp}。\n\n'
         t += '权重随机（固定种子；BatchNorm 给随机的 running 统计量、卷积偏置随机抽取，使前向非退化），输入随机；同一组权重同时用于 PyTorch 参考与 Hwacha 构建。\n\n'
         notes = []
+        if family == 'yolov12': notes.append('用 github.com/sunsmarterjie/yolov12 自带的 ultralytics 8.3.63 fork 构建（`../.yolov12`，commit 2abab71，`make gen-` 前需 clone 到该处；fork 还依赖 `thop`）。fork 的 area-attention 块 `AAttn` / `ABlock` / `A2C2f` 与上游 8.4.x 的同名类**不是同一个网络**：fork 是分开的 qk / v 1x1 卷积 + 5x5 逐通道位置编码卷积、l / x 规模 mlp_ratio 1.5；上游改成合并的 qkv 卷积 + 7x7 位置编码、mlp_ratio 1.2（state_dict 都对不上）。因此不用装好的 8.4.165，PyTorch 参考与 Hwacha 构建都来自 fork。')
         if task not in ('cls', 'sem', 'depth'):
             notes.append(end2end + ' 导出图以 `export=True` 走 Detect 的导出路径，并把 `postprocess`（按分数 top-k 选 max_det 个 anchor 再 gather）替换为恒等，网络返回全部 anchor；选择留给 host（与 ../torchvision 的检测 case 一致）。')
             if family == 'yolo26':

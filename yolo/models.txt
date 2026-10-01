@@ -148,3 +148,9 @@ yolov10m 64
 yolov10l 64
 yolov10x 64
 yolov10b 64
+# yolov12 (github.com/sunsmarterjie/yolov12, cfg/models/v12/yolov12.yaml of the fork): detection only
+yolov12n 64
+yolov12s 64
+yolov12m 64
+yolov12l 64
+yolov12x 64

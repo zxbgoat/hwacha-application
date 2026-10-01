@@ -5,6 +5,7 @@
    usage: export_yolo.py <case> <out.mlir> <out_check.bin> [HW]
    <case> = yolov3[_spp|_tiny] (Darknet-53 detector; v3 has no n/s/m/l/x scales, only these three yamls),
             yolov10<scale> (v10Detect, NMS-free; detection only -- the package ships six yolov10{n,s,m,l,b,x} yamls, no task variants),
+            yolov12<scale> (github.com/sunsmarterjie/yolov12: A2C2f area-attention detector, built with the fork at ../.yolov12; detection only),
             yolo26<scale>[_<task>] (tasks: seg/sem/depth/cls/pose/obb/p2/p6),
             yolo11<scale>[_<task>] (tasks: seg/cls/pose/obb; YOLO11 has no sem/depth/p2/p6 and is not end2end),
             yolov8<scale>[_<task>] (tasks: seg/cls/pose/obb/p2/p6/seg_p6/pose_p6; not end2end) or
@@ -12,6 +13,16 @@
             scale in n/s/m/l/x, no task = detection; HW = input size (default 64)."""
 import os, sys, re, struct, numpy as np
 os.environ.setdefault('YOLO_OFFLINE', '1'); os.environ.setdefault('YOLO_VERBOSE', 'false')
+# YOLOv12 (github.com/sunsmarterjie/yolov12) is a fork of ultralytics 8.3.63 whose area-attention blocks differ
+# from the AAttn / ABlock / A2C2f that upstream 8.4.x ships under the same names (separate qk / v convs and a
+# 5x5 positional-encoding conv vs a fused qkv and a 7x7 one; mlp_ratio 1.5 vs 1.2 for the l / x scales), so the
+# yolov12 cases are built with the fork itself: a checkout at ../.yolov12 (commit 2abab71; `git clone --depth 1
+# https://github.com/sunsmarterjie/yolov12 ../.yolov12`) put in front of sys.path before ultralytics is imported.
+if sys.argv[1:2] and sys.argv[1].startswith('yolov12'):
+    _fork = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.yolov12'))
+    assert os.path.isdir(os.path.join(_fork, 'ultralytics')), \
+        f'yolov12 needs the fork checkout: git clone --depth 1 https://github.com/sunsmarterjie/yolov12 {_fork}'
+    sys.path.insert(0, _fork)
 import torch
 from torch_mlir import fx
 import inspect, torch_mlir.extras.fx_importer as _fxi
@@ -43,7 +54,7 @@ HW = int(sys.argv[4]) if len(sys.argv) > 4 else 64
 # non-26 head classes (Segment / Pose / OBB) and are not end2end.
 TASKS = {'yolo26': 'seg|sem|depth|cls|pose|obb|p2|p6', 'yolo11': 'seg|cls|pose|obb',
          'yolov8': 'seg|cls|pose|obb|p2|p6|seg_p6|pose_p6', 'yolov5': 'p6', 'yolov3': 'spp|tiny',
-         'yolov10': ''}
+         'yolov10': '', 'yolov12': ''}
 # YOLOv3 has no scale letters: its three yamls are yolov3 / yolov3-spp / yolov3-tiny (case yolov3[_spp|_tiny]).
 mt = re.fullmatch(r'yolov3(?:_([a-z0-9_]+))?', name)
 if mt:
@@ -52,19 +63,21 @@ if mt:
 else:
     # v10 also ships a 'b' (balanced) yaml; the other families only have n/s/m/l/x (their regex simply
     # never matches a b case).
-    mt = re.fullmatch(r'(yolov5|yolov8|yolov10|yolo11|yolo26)([nsmlxb])(?:_([a-z0-9_]+))?', name)
+    mt = re.fullmatch(r'(yolov5|yolov8|yolov10|yolov12|yolo11|yolo26)([nsmlxb])(?:_([a-z0-9_]+))?', name)
     assert mt and mt.group(3) in (None, *TASKS[mt.group(1)].split('|')), \
-        f'{name}: expected yolov3[_spp|_tiny] | yolov5|yolov8|yolov10|yolo11|yolo26<n|s|m|l|x|b>[_<task>] (' \
+        f'{name}: expected yolov3[_spp|_tiny] | yolov5|yolov8|yolov10|yolov12|yolo11|yolo26<n|s|m|l|x|b>[_<task>] (' \
         + ', '.join(f'{k}: {v}' for k, v in TASKS.items()) + ')'
     family, scale, task = mt.group(1), mt.group(2), mt.group(3) or ''
 # yaml name: yolov3[-spp|-tiny].yaml (no scale) vs <family in {v5,v8,v10,11,26}><scale>[-<task>].yaml
 if family == 'yolov3': suffix = ('-' + task) if task else ''
 else:                  suffix = scale + (('-' + task.replace('_', '-')) if task else '')
 yaml = f'{family}{suffix}.yaml'
-MODEL = {'': T.DetectionModel, 'p2': T.DetectionModel, 'p6': T.DetectionModel, 'spp': T.DetectionModel,
-         'tiny': T.DetectionModel, 'seg': T.SegmentationModel,
-         'seg_p6': T.SegmentationModel, 'sem': T.SemanticSegmentationModel, 'depth': T.DepthModel,
-         'cls': T.ClassificationModel, 'pose': T.PoseModel, 'pose_p6': T.PoseModel, 'obb': T.OBBModel}[task]
+MODEL = {'': 'DetectionModel', 'p2': 'DetectionModel', 'p6': 'DetectionModel', 'spp': 'DetectionModel',
+         'tiny': 'DetectionModel', 'seg': 'SegmentationModel',
+         'seg_p6': 'SegmentationModel', 'sem': 'SemanticSegmentationModel', 'depth': 'DepthModel',
+         'cls': 'ClassificationModel', 'pose': 'PoseModel', 'pose_p6': 'PoseModel', 'obb': 'OBBModel'}[task]
+MODEL = getattr(T, MODEL, None)   # resolved lazily: the yolov12 fork (ultralytics 8.3.63) has no SemanticSegmentationModel / DepthModel
+assert MODEL is not None, f"{yaml}: this ultralytics build has no model class for task {task!r}"
 torch.manual_seed(0)
 m = MODEL(yaml, verbose=False)
 # Untrained BN sits at its zero-mean / unit-var fixed point, which drives the outputs to ~0; give BN random

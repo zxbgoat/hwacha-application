@@ -16,3 +16,5 @@ __pycache__/
 # torchaudio: Wav2Letter has a fixed 23M-parameter architecture, its assembly is 1.4 GB (`make gen-wav2letter` / `make gen-wav2letter_waveform` regenerate it)
 torchaudio/wav2letter/wav2letter.s
 torchaudio/wav2letter_waveform/wav2letter_waveform.s
+# yolov12: checkout of github.com/sunsmarterjie/yolov12 (ultralytics 8.3.63 fork) the yolov12 cases are built with
+.yolov12/

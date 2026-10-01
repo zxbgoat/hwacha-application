@@ -13,7 +13,7 @@ export -f one
 # scale tiers by the letter after the family. The three yolov3 cases have no scale (v3 ships three
 # standalone yamls), so they are their own tier, run with the n/s/m batch (`one` skips existing ones, so
 # re-running the whole list is idempotent).
-tier() { grep -vE '^#|^$' models.txt | awk '{print $1}' | grep -E "^yolo(v3|v5|v8|v10|26|11)[$1]"; }
+tier() { grep -vE '^#|^$' models.txt | awk '{print $1}' | grep -E "^yolo(v3|v5|v8|v10|v12|26|11)[$1]"; }
 tierv3() { grep -E '^yolov3' models.txt | awk '{print $1}'; }
 { tier nsm  | xargs -P3 -I{} bash -c 'one {}'
   tierv3   | xargs -P2 -I{} bash -c 'one {}'
